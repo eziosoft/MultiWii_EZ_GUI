@@ -291,12 +291,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="numberDecimal" />
-
-            <CheckBox
-                android:id="@+id/checkBoxUseOfflineMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/UseOfflineMap" />
 
         </LinearLayout>
     </ScrollView>

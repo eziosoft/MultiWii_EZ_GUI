@@ -53,7 +53,6 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxAltCorrection;
 
 	CheckBox CheckBoxDisableBTonExit;
-	CheckBox CheckBoxUseOfflineMap;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -93,6 +92,7 @@ public class ConfigActivity extends SherlockActivity {
 		}
 	}
 
+	
 	public void SelectBTdevice(View v) {
 		Intent serverIntent = null;
 		serverIntent = new Intent(this, DeviceListActivity.class);
@@ -132,7 +132,6 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForcePolish = (RadioButton) findViewById(R.id.radioForcePolish);
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
-		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
 
 	}
 
@@ -169,7 +168,6 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxConnectOnStart.setChecked(app.ConnectOnStart);
 		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
-		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);
 		MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
@@ -214,7 +212,6 @@ public class ConfigActivity extends SherlockActivity {
 		app.ConnectOnStart = CheckBoxConnectOnStart.isChecked();
 		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
-		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 
 		if (RadioNotForce.isChecked())
 			app.ForceLanguage = "";
