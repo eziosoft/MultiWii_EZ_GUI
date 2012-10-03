@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/MenuGraphsShow" android:title="@string/show" android:showAsAction="always|withText"></item>
+    <item android:id="@+id/MenuGraphsPause" android:title="@string/Pause" android:showAsAction="always|withText"></item>
+    
+
+</menu>

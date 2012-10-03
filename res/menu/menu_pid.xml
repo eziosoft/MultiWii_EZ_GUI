@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:id="@+id/MenuReadPID" android:showAsAction="always|withText" android:title="@string/Read"></item>
+    <item android:id="@+id/MenuSetPID" android:title="@string/Set" android:showAsAction="never|withText"></item><item android:id="@+id/MenuSavePID" android:showAsAction="never|withText" android:title="@string/SavetoEEPROM"></item>
+    <item android:id="@+id/MenuResetPID" android:showAsAction="never|withText" android:title="@string/Reset"></item><item android:id="@+id/menuPIDSave" android:title="@string/SavePIDProfile" android:visible="false"></item>
+    
+    
+
+</menu>

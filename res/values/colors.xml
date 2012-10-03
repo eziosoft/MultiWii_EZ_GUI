@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="tittle">#FFCC00</color>
+    <color name="tittleText">#000000</color>
+    <color name="smalltittle">#CCCC99</color>
+    <color name="smalltittleText">#6A6A5A</color>
+    <color name="descryption">#d6d099</color>
+    <color name="background">#f0e68c</color>
+    <color name="White">#fff</color>
+    <color name="Red">#CC0000</color>
+    <color name="Green">#99FF00</color>
+    <color name="Buttons">#000</color>
+     <color name="ButtonsTextColor">#fff</color>
+
+</resources>

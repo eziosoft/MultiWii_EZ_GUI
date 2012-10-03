@@ -1,0 +1,141 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ezio.multiwii"
+    android:versionCode="33"
+    android:versionName="2.71" >
+
+    <uses-sdk
+        android:maxSdkVersion="16"
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+    <application
+        android:name="App"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="MainMultiWiiActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="unspecified" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".config.DeviceListActivity"
+            android:theme="@style/Theme.Sherlock.Dialog" >
+        </activity>
+        <activity
+            android:name=".radio.RadioActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".dashboard.Dashboard1Activity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".dashboard.Dashboard2Activity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".config.ConfigActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name="LogActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name="GPSActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".motors.MotorsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name="PIDActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name="OtherActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".map.MapActivityMy"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity android:name="WaypointActivity" >
+        </activity>
+        <activity
+            android:name="AboutActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
+        </activity>
+        <activity
+            android:name="CheckBoxesActivity"
+            android:configChanges="orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="ControlActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="AdvancedActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".graph.GraphsActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".graph.SelectToShowActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".frsky.FrskyActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
+        </activity>
+        <activity
+            android:name=".mapoffline.MapOfflineActivityMy"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+</manifest>

@@ -1,0 +1,54 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_connect"
+        android:showAsAction="always|withText"
+        android:title="@string/menu_connect">
+    </item>
+    <item
+        android:id="@+id/menu_connect_frsky"
+        android:showAsAction="always|withText"
+        android:title="@string/Connect_frsky">
+    </item>
+    <item
+        android:id="@+id/menu_disconnect"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_disconnect">
+    </item>
+    <item
+        android:id="@+id/menuOther"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/Other">
+    </item>
+    <item
+        android:id="@+id/menuConfig"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/Config">
+    </item>
+    <item
+        android:id="@+id/menuAdvanced"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/Advanced">
+    </item>
+    <item
+        android:id="@+id/menuDonate"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/Donate">
+    </item>
+    <item
+        android:id="@+id/menu_vote"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_vote">
+    </item>
+    <item
+        android:id="@+id/menuAbout"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/About">
+    </item>
+    <item
+        android:id="@+id/menu_exit"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_exit"/>
+
+</menu>

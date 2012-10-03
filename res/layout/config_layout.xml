@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tittle"
+        android:gravity="center"
+        android:text="@string/Config"
+        android:textColor="@color/tittleText" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/BTDevice"
+                android:textColor="@color/smalltittleText" />
+
+            <Button
+                android:id="@+id/buttonSelectBTDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SelectBTdevice"
+                android:text="@string/SelectBTdevice" />
+
+            <TextView
+                android:id="@+id/textViewMacAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="---"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/buttonSelectBTDeviceFrsky"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SelectFrskyDevice"
+                android:text="@string/SelectBTdeviceFrsky" />
+
+            <TextView
+                android:id="@+id/textViewMacAddressFrsky"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="---"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <CheckBox
+                android:id="@+id/checkBoxConnectOnStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ConnectOnStart" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDisableBTonExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disableBTonExit" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/ProtocolVersion"
+                android:textColor="@color/smalltittleText" />
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/radioButtonProtocol20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="2.0" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonProtocol21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.1" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/RestartInfo" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/RadioMode"
+                android:textColor="@color/smalltittleText" />
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Mode1" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/Mode2" />
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/MagMode"
+                    android:textColor="@color/smalltittleText" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/radioButtonMagMode1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/PointNorth" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonMagMode2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Point_multirotor_front" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pointFrontHelp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/TTS"
+                android:textColor="@color/smalltittleText" />
+
+            <CheckBox
+                android:id="@+id/checkBoxTTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TTS" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/periodicspeaking" />
+
+            <EditText
+                android:id="@+id/editTextPeriodicSpeaking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="20" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/AltCorrection"
+                android:textColor="@color/smalltittleText" />
+
+            <CheckBox
+                android:id="@+id/checkBoxAltCorrection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AltCorrection" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AltCorrectionInfo" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SaveSettingsOnClick"
+                android:text="@string/SaveSettings"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/Language"
+                android:textColor="@color/smalltittleText" />
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/LanguageInfo" />
+
+                <RadioButton
+                    android:id="@+id/RadioDontForce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NotForce" />
+
+                <RadioButton
+                    android:id="@+id/radioForceEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ForceEnglish" />
+
+                <RadioButton
+                    android:id="@+id/radioForceGerman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ForceGerman" />
+
+                <RadioButton
+                    android:id="@+id/radioForceHungarian "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ForceHungarian" />
+
+                <RadioButton
+                    android:id="@+id/radioForcePolish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ForcePolish" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:textColor="@color/smalltittleText" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/VoltageAlarm" />
+
+            <EditText
+                android:id="@+id/editTextVoltageAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
