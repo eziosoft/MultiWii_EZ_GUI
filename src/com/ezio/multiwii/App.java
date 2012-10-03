@@ -45,13 +45,17 @@ public class App extends Application {
 	// debug
 	public boolean GPSfromNet = true;
 	public boolean UseMapPublicAPI = false; // map API
-	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; //put your debug key here
-	
+	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
+																				// your
+																				// debug
+																				// key
+																				// here
+
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
 	public boolean ShowADS = true;
-	//public boolean DataSent = false; // to server
+	// public boolean DataSent = false; // to server
 
 	public long REFRESH_RATE = 100; // this means wait 100ms after everything is
 									// done
@@ -116,7 +120,7 @@ public class App extends Application {
 	public float VoltageAlarm = 0;
 
 	private static String USEOFFLINEMAPS = "USEOFFLINEMAPS";
-	public boolean UseOfflineMaps = true;
+	public boolean UseOfflineMaps = false;
 
 	// graphs
 	public String ACCROLL = "ACC ROLL";
@@ -210,6 +214,7 @@ public class App extends Application {
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 0);
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
+		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 	}
 
 	public void SaveSettings() {
@@ -228,6 +233,7 @@ public class App extends Application {
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
+		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.commit();
 
 		Toast.makeText(getApplicationContext(),

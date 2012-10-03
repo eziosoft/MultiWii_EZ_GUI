@@ -196,5 +196,6 @@
     <string name="TxRSSI">TxRSSI</string>
     <string name="RxRSSI">RxRSSI</string>
     <string name="Connect_frsky">Frsky Connect</string>
+    <string name="UseOfflineMap">Use Offline Map</string>
 
 </resources>
