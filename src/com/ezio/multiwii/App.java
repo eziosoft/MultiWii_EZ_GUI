@@ -116,7 +116,7 @@ public class App extends Application {
 	public float VoltageAlarm = 0;
 
 	private static String USEOFFLINEMAPS = "USEOFFLINEMAPS";
-	public boolean UseOfflineMaps = true;
+	public boolean UseOfflineMaps = false;
 
 	// graphs
 	public String ACCROLL = "ACC ROLL";
@@ -210,6 +210,7 @@ public class App extends Application {
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 0);
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
+		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 	}
 
 	public void SaveSettings() {
@@ -228,6 +229,7 @@ public class App extends Application {
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
+		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.commit();
 
 		Toast.makeText(getApplicationContext(),

@@ -45,14 +45,14 @@
                 android:gravity="center"
                 android:text="---"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <Button
                 android:id="@+id/buttonSelectBTDeviceFrsky"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="SelectFrskyDevice"
                 android:text="@string/SelectBTdeviceFrsky" />
-
+
             <TextView
                 android:id="@+id/textViewMacAddressFrsky"
                 android:layout_width="match_parent"
@@ -272,7 +272,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ForcePolish" />
             </RadioGroup>
-
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,6 +292,11 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <CheckBox
+                android:id="@+id/checkBoxUseOfflineMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/UseOfflineMap" />
         </LinearLayout>
     </ScrollView>
 

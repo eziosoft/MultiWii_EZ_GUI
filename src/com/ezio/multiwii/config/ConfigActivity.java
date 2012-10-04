@@ -44,6 +44,7 @@ public class ConfigActivity extends SherlockActivity {
 	RadioButton MagMode2;
 
 	CheckBox CheckBoxTTS;
+	CheckBox CheckBoxUseOfflineMap;
 
 	TextView MacAddressBTTV;
 	TextView MacAddressBTFrskyTV;
@@ -132,6 +133,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForcePolish = (RadioButton) findViewById(R.id.radioForcePolish);
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
+		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
 
 	}
 
@@ -177,6 +179,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceGerman.setChecked(app.ForceLanguage.equals("de"));
 		RadioForceHungarian.setChecked(app.ForceLanguage.equals("hu"));
 		RadioForcePolish.setChecked(app.ForceLanguage.equals("pl"));
+		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 
 		EditTextPeriodicSpeaking.setText(String
 				.valueOf(app.PeriodicSpeaking / 1000));
@@ -212,6 +215,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.ConnectOnStart = CheckBoxConnectOnStart.isChecked();
 		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
+		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 
 		if (RadioNotForce.isChecked())
 			app.ForceLanguage = "";
