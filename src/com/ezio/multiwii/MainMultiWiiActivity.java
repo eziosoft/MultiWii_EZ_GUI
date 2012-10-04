@@ -171,12 +171,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 				+ String.valueOf(app_ver_code));
 		// Log.d(BT.TAG, "OnResume");
 
-		// autoconnect
-		if (app.ConnectOnStart && !app.bt.Connected) {
-			Connect(app.MacAddress);
-			app.Say(getString(R.string.menu_connect));
-		}
-
 		if (app.bt.Connected) {
 
 			try {

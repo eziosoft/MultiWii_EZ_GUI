@@ -43,8 +43,8 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean GPSfromNet = true;
-	public boolean UseMapPublicAPI = false; // map API
+	public boolean GPSfromNet = false; // false by default
+	public boolean UseMapPublicAPI = true; // map API (true by default)
 	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
 																				// your
 																				// debug
@@ -332,6 +332,14 @@ public class App extends Application {
 			Configuration config = new Configuration();
 			config.locale = locale;
 			getBaseContext().getResources().updateConfiguration(config, null);
+		}
+	}
+
+	public void ConnectionBug() { // autoconnect again when new activity is
+									// started
+		if (ConnectOnStart && !bt.Connected) {
+			bt.Connect(MacAddress);
+			Say(getString(R.string.menu_connect));
 		}
 	}
 

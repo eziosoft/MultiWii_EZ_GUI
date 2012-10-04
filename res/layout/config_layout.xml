@@ -60,12 +60,12 @@
                 android:gravity="center"
                 android:text="---"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxConnectOnStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ConnectOnStart" />
+                android:text="@string/ConnectionBug" />
 
             <CheckBox
                 android:id="@+id/checkBoxDisableBTonExit"

@@ -42,6 +42,7 @@ public class TemplateActivity extends Activity {
 
 											app.mw.ProcessSerialData(app.loggingON);
 
+											app.frsky.ProcessSerialData(false);
 											app.Frequentjobs();
 
 											app.mw.SendRequest();
@@ -55,6 +56,8 @@ public class TemplateActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
+		app.ForceLanguage();
+		app.ConnectionBug();
 		setContentView(R.layout.motor_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 

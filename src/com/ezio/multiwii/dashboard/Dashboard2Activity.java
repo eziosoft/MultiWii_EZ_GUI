@@ -26,36 +26,42 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 public class Dashboard2Activity extends Activity {
-	App					app;
-	Handler				mHandler	= new Handler();
-	Dashboard2View		v;
-	private boolean		killme		= false;
+	App app;
+	Handler mHandler = new Handler();
+	Dashboard2View v;
+	private boolean killme = false;
 
-	private Runnable	update		= new Runnable() {
-										@Override
-										public void run() {
-											app.mw.ProcessSerialData(app.loggingON);
-											app.frsky.ProcessSerialData(false);
-											
-											String state = "";
-											for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
-												if (app.mw.ActiveModes[i]) {
-													state += " " + app.mw.buttonCheckboxLabel[i];
-												}
-											}
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
+			app.mw.ProcessSerialData(app.loggingON);
+			app.frsky.ProcessSerialData(false);
 
-											float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
-											v.Set(app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt,
-													app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, app.mw.head, gforce, state, app.mw.bytevbat,
-													app.mw.pMeterSum, app.mw.intPowerTrigger,app.frsky.TxRSSI,app.frsky.RxRSSI);
-											
-											app.Frequentjobs();
-											app.mw.SendRequest();
-											if (!killme)
-												mHandler.postDelayed(update, app.REFRESH_RATE);
+			String state = "";
+			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
+				if (app.mw.ActiveModes[i]) {
+					state += " " + app.mw.buttonCheckboxLabel[i];
+				}
+			}
 
-										}
-									};
+			float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay
+					* app.mw.ay + app.mw.az * app.mw.az)
+					/ app.mw._1G;
+			v.Set(app.mw.GPS_numSat, app.mw.GPS_distanceToHome,
+					app.mw.GPS_directionToHome, app.mw.GPS_speed,
+					app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude,
+					app.mw.GPS_longitude, app.mw.angy, app.mw.angx,
+					app.mw.head, gforce, state, app.mw.bytevbat,
+					app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI,
+					app.frsky.RxRSSI);
+
+			app.Frequentjobs();
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, app.REFRESH_RATE);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +88,10 @@ public class Dashboard2Activity extends Activity {
 
 	@Override
 	protected void onResume() {
-		super.onResume();
 		app.ForceLanguage();
+		super.onResume();
+
+		app.ConnectionBug();
 
 		app.Say(getString(R.string.dashboard2));
 		mHandler.postDelayed(update, app.REFRESH_RATE);

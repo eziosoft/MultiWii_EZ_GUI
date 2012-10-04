@@ -198,5 +198,6 @@
     <string name="Connect_frsky">Frsky Connect</string>
     <string name="UseOfflineMap">Use Offline Map</string>
     <string name="RefreshRate">Refresh Rate in ms</string>
+    <string name="ConnectionBug">Use when it disconnects when button is pressed</string>
 
 </resources>
