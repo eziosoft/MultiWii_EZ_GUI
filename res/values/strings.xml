@@ -197,5 +197,6 @@
     <string name="RxRSSI">RxRSSI</string>
     <string name="Connect_frsky">Frsky Connect</string>
     <string name="UseOfflineMap">Use Offline Map</string>
+    <string name="RefreshRate">Refresh Rate in ms</string>
 
 </resources>

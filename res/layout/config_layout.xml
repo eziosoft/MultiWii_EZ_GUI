@@ -297,6 +297,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/UseOfflineMap" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/RefreshRate"
+                android:textColor="@color/smalltittleText" />
+
+            <EditText
+                android:id="@+id/editTextRefreshRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
         </LinearLayout>
     </ScrollView>
 

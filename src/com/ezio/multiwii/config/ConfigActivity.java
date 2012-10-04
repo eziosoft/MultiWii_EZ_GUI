@@ -63,6 +63,7 @@ public class ConfigActivity extends SherlockActivity {
 
 	EditText EditTextPeriodicSpeaking;
 	EditText EditTextVoltageAlarm;
+	EditText EditTextRefreshRate;
 
 	private static final int REQUEST_CONNECT_DEVICE_MULTIWII = 1;
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
@@ -93,7 +94,6 @@ public class ConfigActivity extends SherlockActivity {
 		}
 	}
 
-	
 	public void SelectBTdevice(View v) {
 		Intent serverIntent = null;
 		serverIntent = new Intent(this, DeviceListActivity.class);
@@ -134,6 +134,7 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
 		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
+		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
 
 	}
 
@@ -185,6 +186,7 @@ public class ConfigActivity extends SherlockActivity {
 				.valueOf(app.PeriodicSpeaking / 1000));
 
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
+		EditTextRefreshRate.setText(String.valueOf(app.REFRESH_RATE));
 
 		app.Say(getString(R.string.Config));
 	}
@@ -232,6 +234,9 @@ public class ConfigActivity extends SherlockActivity {
 				.getText().toString()) * 1000;
 
 		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText()
+				.toString());
+
+		app.REFRESH_RATE = Long.parseLong(EditTextRefreshRate.getText()
 				.toString());
 
 		app.SaveSettings();
