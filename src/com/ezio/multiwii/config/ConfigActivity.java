@@ -186,7 +186,7 @@ public class ConfigActivity extends SherlockActivity {
 				.valueOf(app.PeriodicSpeaking / 1000));
 
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
-		EditTextRefreshRate.setText(String.valueOf(app.REFRESH_RATE));
+		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 
 		app.Say(getString(R.string.Config));
 	}
@@ -236,7 +236,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText()
 				.toString());
 
-		app.REFRESH_RATE = Long.parseLong(EditTextRefreshRate.getText()
+		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText()
 				.toString());
 
 		app.SaveSettings();

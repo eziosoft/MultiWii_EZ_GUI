@@ -159,7 +159,7 @@ public class ControlActivity extends Activity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Control));
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 	}
 

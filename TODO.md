@@ -69,8 +69,7 @@
 //+ Ukrainian added
 //+ Russian added
 
-//- REFRESH_RATE - make it settable
----
+//+ REFRESH_RATE - make it settable
 //- boxes names and MSP_BOXNAMES - IMPORTANT !!!
 ===
 

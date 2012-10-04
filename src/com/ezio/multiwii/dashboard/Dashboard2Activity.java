@@ -58,7 +58,7 @@ public class Dashboard2Activity extends Activity {
 			app.Frequentjobs();
 			app.mw.SendRequest();
 			if (!killme)
-				mHandler.postDelayed(update, app.REFRESH_RATE);
+				mHandler.postDelayed(update, app.RefreshRate);
 
 		}
 	};
@@ -94,7 +94,7 @@ public class Dashboard2Activity extends Activity {
 		app.ConnectionBug();
 
 		app.Say(getString(R.string.dashboard2));
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 		killme = false;
 
 	}

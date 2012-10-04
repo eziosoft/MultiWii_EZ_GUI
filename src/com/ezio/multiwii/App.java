@@ -57,8 +57,8 @@ public class App extends Application {
 	public boolean ShowADS = true;
 	// public boolean DataSent = false; // to server
 
-	private static String REFRESHRATE;
-	public long REFRESH_RATE = 100; // this means wait 100ms after everything is
+	private static String REFRESHRATE="REFRESHRATE";
+	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
 
 	public BT bt;
@@ -216,7 +216,7 @@ public class App extends Application {
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 0);
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
 		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
-		REFRESH_RATE = prefs.getLong(REFRESHRATE, 100);
+		RefreshRate = prefs.getInt(REFRESHRATE, 100);
 	}
 
 	public void SaveSettings() {
@@ -236,7 +236,7 @@ public class App extends Application {
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
 		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
-		editor.putLong(REFRESHRATE, REFRESH_RATE);
+		editor.putInt(REFRESHRATE, RefreshRate);
 		editor.commit();
 
 		Toast.makeText(getApplicationContext(),

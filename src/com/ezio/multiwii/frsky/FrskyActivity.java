@@ -86,7 +86,7 @@ public class FrskyActivity extends SherlockActivity {
 			// log(app.frsky.lastHubFrameslog);
 
 			if (!killme)
-				mHandler.postDelayed(update, app.REFRESH_RATE);
+				mHandler.postDelayed(update, app.RefreshRate);
 
 		}
 	};
@@ -128,7 +128,7 @@ public class FrskyActivity extends SherlockActivity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Frsky));
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 	}
 

@@ -333,7 +333,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.Frequentjobs();
 			app.mw.SendRequest();
 			if (!killme)
-				mHandler.postDelayed(update, app.REFRESH_RATE);
+				mHandler.postDelayed(update, app.RefreshRate);
 		}
 
 	};

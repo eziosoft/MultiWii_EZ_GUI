@@ -111,7 +111,7 @@ public class RadioActivity extends SherlockActivity {
 											app.Frequentjobs();
 
 											app.mw.SendRequest();
-											if (!killme)mHandler.postDelayed(update, app.REFRESH_RATE);
+											if (!killme)mHandler.postDelayed(update, app.RefreshRate);
 
 										}
 									};
@@ -190,7 +190,7 @@ public class RadioActivity extends SherlockActivity {
 
 		}
 		killme=false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 	}
 
 }

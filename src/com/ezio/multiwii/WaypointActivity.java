@@ -54,7 +54,7 @@ public class WaypointActivity extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 		killme=false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 		// app.Speak(getString(R.string.Map));
 
 	}

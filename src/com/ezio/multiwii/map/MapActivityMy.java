@@ -150,7 +150,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 		app.ForceLanguage();
 		locationManager.requestLocationUpdates(provider, 1000, 1, this);
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 		app.Say(getString(R.string.Map));
 

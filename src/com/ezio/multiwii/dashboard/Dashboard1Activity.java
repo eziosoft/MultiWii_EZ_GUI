@@ -95,7 +95,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 
 												app.mw.SendRequest();
 												if (!killme)
-													mHandler.postDelayed(update, app.REFRESH_RATE);
+													mHandler.postDelayed(update, app.RefreshRate);
 
 											}
 										};
@@ -168,7 +168,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 		super.onResume();
 		app.ForceLanguage();
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 		sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL);
 		locationManager.requestLocationUpdates(provider, 400, 1, this);

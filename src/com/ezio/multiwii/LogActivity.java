@@ -36,7 +36,7 @@ public class LogActivity extends SherlockActivity {
 												
 												app.Frequentjobs();
 												app.mw.SendRequest();
-												mHandler.postDelayed(update, app.REFRESH_RATE);
+												mHandler.postDelayed(update, app.RefreshRate);
 
 											}
 										};
@@ -76,7 +76,7 @@ public class LogActivity extends SherlockActivity {
 	public void StartLoggingOnClick(View v) {
 		app.mw.CreateNewLogFile();
 		app.loggingON = true;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 		
 		Toast.makeText(getApplicationContext(), getString(R.string.Loggingstarted), Toast.LENGTH_LONG).show();
 

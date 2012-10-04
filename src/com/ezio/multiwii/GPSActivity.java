@@ -130,7 +130,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 													app.mw.SendRequest();
 													if (!killme)
-														mHandler.postDelayed(update, app.REFRESH_RATE);
+														mHandler.postDelayed(update, app.RefreshRate);
 
 												}
 											};
@@ -237,7 +237,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		super.onResume();
 		app.ForceLanguage();
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 		locationManager.requestLocationUpdates(provider, 400, 1, this);
 		app.Say(getString(R.string.GPS));
 

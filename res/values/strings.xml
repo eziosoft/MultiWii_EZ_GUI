@@ -197,7 +197,7 @@
     <string name="RxRSSI">RxRSSI</string>
     <string name="Connect_frsky">Frsky Connect</string>
     <string name="UseOfflineMap">Use Offline Map</string>
-    <string name="RefreshRate">Refresh Rate in ms</string>
-    <string name="ConnectionBug">Use when it disconnects when button is pressed</string>
+    <string name="RefreshRate">Refresh Rate in ms (should be >=100)</string>
+    <string name="ConnectionBug">Use when it disconnects when button is pressed (right now only works for dashboard2)</string>
 
 </resources>

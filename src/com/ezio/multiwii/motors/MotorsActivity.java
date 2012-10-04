@@ -115,7 +115,7 @@ public class MotorsActivity extends SherlockActivity {
 											app.Frequentjobs();
 
 											app.mw.SendRequest();
-											if (!killme)mHandler.postDelayed(update, app.REFRESH_RATE);
+											if (!killme)mHandler.postDelayed(update, app.RefreshRate);
 
 										}
 									};
@@ -189,7 +189,7 @@ public class MotorsActivity extends SherlockActivity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Motors));
 		killme=false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 	}
 

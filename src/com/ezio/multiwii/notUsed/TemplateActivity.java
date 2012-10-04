@@ -47,7 +47,7 @@ public class TemplateActivity extends Activity {
 
 											app.mw.SendRequest();
 											if (!killme)
-												mHandler.postDelayed(update, app.REFRESH_RATE);
+												mHandler.postDelayed(update, app.RefreshRate);
 
 										}
 									};
@@ -69,7 +69,7 @@ public class TemplateActivity extends Activity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Motors));
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 	}
 

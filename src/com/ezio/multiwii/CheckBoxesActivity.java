@@ -287,7 +287,7 @@ public class CheckBoxesActivity extends SherlockActivity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.SetCheckboxes));
 		killme = false;
-		mHandler.postDelayed(update, app.REFRESH_RATE);
+		mHandler.postDelayed(update, app.RefreshRate);
 
 	}
 
