@@ -23,6 +23,11 @@ I'm working on this project in my spare time. If you find it usefull and you thi
 
 https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 
+Thank you for donations:
+-wahjudi
+-Han Geesink
+-Der Watz
+
 
 Boring legal stuff
 ------------------
