@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.ezio.multiwii.Waypoint;
-
 import android.util.Log;
+
+import com.ezio.multiwii.Waypoint;
 
 public class MultiWii210 extends MultirotorData {
 
@@ -31,24 +31,32 @@ public class MultiWii210 extends MultirotorData {
 
 		// changes from 2.0//
 		PIDITEMS = 10;
-		CHECKBOXITEMS = 14;
+		CHECKBOXITEMS = 0;
 		byteP = new int[PIDITEMS];
 		byteI = new int[PIDITEMS];
 		byteD = new int[PIDITEMS];
+		buttonCheckboxLabel = new String[0];
+		init();
+		// ////end changes/////////////
+	}
 
-		frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS; // maybe not
-																	// used in
-																	// 2.1
+	private void init() {
+		//frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS; // maybe not
+		// used in
+		// 2.1
+		CHECKBOXITEMS = buttonCheckboxLabel.length;
 		activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
-		buttonCheckboxLabel = new String[] { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER", "LEDMAX", "LLIGHTS",
-				"HEADADJ" };
+//		buttonCheckboxLabel = new String[] { "LEVEL", "BARO", "MAG", "CAMSTAB",
+//				"CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU",
+//				"HEADFREE", "BEEPER", "LEDMAX", "LLIGHTS", "HEADADJ" };
 
+		
+		
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
 		ResetAllChexboxes();
-		// ////end changes/////////////
 	}
 
 	void ResetAllChexboxes() {
@@ -116,183 +124,193 @@ public class MultiWii210 extends MultirotorData {
 		int i;
 		int icmd = (int) (cmd & 0xFF);
 		switch (icmd) {
-			case MSP_IDENT:
-				version = read8();
-				multiType = read8();
-				read8(); // MSP version
-				read32();// capability
-				break;
-			case MSP_STATUS:
-				cycleTime = read16();
-				i2cError = read16();
-				present = read16();
-				mode = read32();
+		case MSP_IDENT:
+			version = read8();
+			multiType = read8();
+			read8(); // MSP version
+			read32();// capability
+			break;
+		case MSP_STATUS:
+			cycleTime = read16();
+			i2cError = read16();
+			present = read16();
+			mode = read32();
 
-				if ((present & 1) > 0)
-					AccPresent = 1;
-				else AccPresent = 0;
+			if ((present & 1) > 0)
+				AccPresent = 1;
+			else
+				AccPresent = 0;
 
-				if ((present & 2) > 0)
-					BaroPresent = 1;
-				else BaroPresent = 0;
+			if ((present & 2) > 0)
+				BaroPresent = 1;
+			else
+				BaroPresent = 0;
 
-				if ((present & 4) > 0)
-					MagPresent = 1;
-				else MagPresent = 0;
+			if ((present & 4) > 0)
+				MagPresent = 1;
+			else
+				MagPresent = 0;
 
-				if ((present & 8) > 0)
-					GPSPresent = 1;
-				else GPSPresent = 0;
+			if ((present & 8) > 0)
+				GPSPresent = 1;
+			else
+				GPSPresent = 0;
 
-				if ((present & 16) > 0)
-					SonarPresent = 1;
-				else SonarPresent = 0;
+			if ((present & 16) > 0)
+				SonarPresent = 1;
+			else
+				SonarPresent = 0;
 
-				for (i = 0; i < CHECKBOXITEMS; i++) {
-					if ((mode & (1 << i)) > 0)
-						ActiveModes[i] = true;
-					else ActiveModes[i] = false;
+			for (i = 0; i < CHECKBOXITEMS; i++) {
+				if ((mode & (1 << i)) > 0)
+					ActiveModes[i] = true;
+				else
+					ActiveModes[i] = false;
+			}
+			break;
+		case MSP_RAW_IMU:
+			ax = read16();
+			ay = read16();
+			az = read16();
+			gx = read16() / 8;
+			gy = read16() / 8;
+			gz = read16() / 8;
+			magx = read16() / 3;
+			magy = read16() / 3;
+			magz = read16() / 3;
+			break;
+		case MSP_SERVO:
+			for (i = 0; i < 8; i++)
+				servo[i] = read16();
+			break;
+		case MSP_MOTOR:
+			for (i = 0; i < 8; i++)
+				mot[i] = read16();
+			break;
+		case MSP_RC:
+			rcRoll = read16();
+			rcPitch = read16();
+			rcYaw = read16();
+			rcThrottle = read16();
+			rcAUX1 = read16();
+			rcAUX2 = read16();
+			rcAUX3 = read16();
+			rcAUX4 = read16();
+			break;
+		case MSP_RAW_GPS:
+			GPS_fix = read8();
+			// println(dataSize);
+			GPS_numSat = read8();
+			GPS_latitude = read32();
+			GPS_longitude = read32();
+			GPS_altitude = read16();
+			GPS_speed = read16();
+			break;
+		case MSP_COMP_GPS:
+			GPS_distanceToHome = read16();
+			GPS_directionToHome = read16();
+			GPS_update = read16();
+			break;
+		case MSP_ATTITUDE:
+			angx = read16() / 10;
+			angy = read16() / 10;
+			head = read16();
+			break;
+		case MSP_ALTITUDE:
+			baro = alt = (float) read32() / 100;
+			break;
+		case MSP_BAT:
+			bytevbat = read8();
+			pMeterSum = read16();
+			break;
+		case MSP_RC_TUNING:
+			byteRC_RATE = read8();
+			byteRC_EXPO = read8();
+			byteRollPitchRate = read8();
+			byteYawRate = read8();
+			byteDynThrPID = read8();
+			byteThrottle_MID = read8();
+			byteThrottle_EXPO = read8();
+			break;
+		case MSP_ACC_CALIBRATION:
+			break;
+		case MSP_MAG_CALIBRATION:
+			break;
+		case MSP_PID:
+			for (i = 0; i < PIDITEMS; i++) {
+				byteP[i] = read8();
+				byteI[i] = read8();
+				byteD[i] = read8();
+			}
+			break;
+		case MSP_BOX:
+
+			for (i = 0; i < CHECKBOXITEMS; i++) {
+				activation[i] = read16();
+				for (int aa = 0; aa < 12; aa++) {
+					if ((activation[i] & (1 << aa)) > 0)
+						Checkbox[i][aa] = true;
+					else
+						Checkbox[i][aa] = false;
 				}
-				break;
-			case MSP_RAW_IMU:
-				ax = read16();
-				ay = read16();
-				az = read16();
-				gx = read16() / 8;
-				gy = read16() / 8;
-				gz = read16() / 8;
-				magx = read16() / 3;
-				magy = read16() / 3;
-				magz = read16() / 3;
-				break;
-			case MSP_SERVO:
-				for (i = 0; i < 8; i++)
-					servo[i] = read16();
-				break;
-			case MSP_MOTOR:
-				for (i = 0; i < 8; i++)
-					mot[i] = read16();
-				break;
-			case MSP_RC:
-				rcRoll = read16();
-				rcPitch = read16();
-				rcYaw = read16();
-				rcThrottle = read16();
-				rcAUX1 = read16();
-				rcAUX2 = read16();
-				rcAUX3 = read16();
-				rcAUX4 = read16();
-				break;
-			case MSP_RAW_GPS:
-				GPS_fix = read8();
-				// println(dataSize);
-				GPS_numSat = read8();
-				GPS_latitude = read32();
-				GPS_longitude = read32();
-				GPS_altitude = read16();
-				GPS_speed = read16();
-				break;
-			case MSP_COMP_GPS:
-				GPS_distanceToHome = read16();
-				GPS_directionToHome = read16();
-				GPS_update = read16();
-				break;
-			case MSP_ATTITUDE:
-				angx = read16() / 10;
-				angy = read16() / 10;
-				head = read16();
-				break;
-			case MSP_ALTITUDE:
-				baro = alt = (float) read32() / 100;
-				break;
-			case MSP_BAT:
-				bytevbat = read8();
-				pMeterSum = read16();
-				break;
-			case MSP_RC_TUNING:
-				byteRC_RATE = read8();
-				byteRC_EXPO = read8();
-				byteRollPitchRate = read8();
-				byteYawRate = read8();
-				byteDynThrPID = read8();
-				byteThrottle_MID = read8();
-				byteThrottle_EXPO = read8();
-				break;
-			case MSP_ACC_CALIBRATION:
-				break;
-			case MSP_MAG_CALIBRATION:
-				break;
-			case MSP_PID:
-				for (i = 0; i < PIDITEMS; i++) {
-					byteP[i] = read8();
-					byteI[i] = read8();
-					byteD[i] = read8();
-				}
-				break;
-			case MSP_BOX:
+			}
+			break;
 
-				for (i = 0; i < CHECKBOXITEMS; i++) {
-					activation[i] = read16();
-					for (int aa = 0; aa < 12; aa++) {
-						if ((activation[i] & (1 << aa)) > 0)
-							Checkbox[i][aa] = true;
-						else Checkbox[i][aa] = false;
-					}
-				}
-				break;
+		case MSP_BOXNAMES:
+			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
+			init();
+			break;
+		case MSP_PIDNAMES:
 
-			case MSP_BOXNAMES:
-				buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
-				break;
-			case MSP_PIDNAMES:
-
-				/* TODO create GUI elements from this message */
-				// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
-				// dataSize));
-				break;
+			/* TODO create GUI elements from this message */
+			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
+			// dataSize));
+			break;
 		case MSP_MISC:
 			intPowerTrigger = read16();
 			break;
-			case MSP_MOTOR_PINS:
-				for (i = 0; i < 8; i++) {
-					byteMP[i] = read8();
-				}
-				break;
-			case MSP_DEBUG:
-				debug1 = read16();
-				debug2 = read16();
-				debug3 = read16();
-				debug4 = read16();
-				break;
+		case MSP_MOTOR_PINS:
+			for (i = 0; i < 8; i++) {
+				byteMP[i] = read8();
+			}
+			break;
+		case MSP_DEBUG:
+			debug1 = read16();
+			debug2 = read16();
+			debug3 = read16();
+			debug4 = read16();
+			break;
 
-			case MSP_WP:
-				Waypoint WP0 = new Waypoint();
-				WP0.No = read8();
-				WP0.Lat = read32();
-				WP0.Lon = read32();
-				WP0.Alt = read16();
-				WP0.Nav = read8();
-				Log.d("aaa", String.valueOf(WP0.No));
-				Log.d("aaa", String.valueOf(WP0.Lat));
-				Log.d("aaa", String.valueOf(WP0.Lon));
-				break;
-			default:
+		case MSP_WP:
+			//TODO
+			Waypoint WP0 = new Waypoint();
+			WP0.No = read8();
+			WP0.Lat = read32();
+			WP0.Lon = read32();
+			WP0.Alt = read16();
+			WP0.Nav = read8();
+			Log.d("aaa", String.valueOf(WP0.No));
+			Log.d("aaa", String.valueOf(WP0.Lat));
+			Log.d("aaa", String.valueOf(WP0.Lon));
+			break;
+		default:
 
 		}
 	}
 
-	int		c_state		= IDLE;
-	byte	c;
-	boolean	err_rcvd	= false;
-	int		offset		= 0, dataSize = 0;
-	byte	checksum	= 0;
-	byte	cmd;
-	byte[]	inBuf		= new byte[256];
-	int		i			= 0;
-	int		p			= 0;
+	int c_state = IDLE;
+	byte c;
+	boolean err_rcvd = false;
+	int offset = 0, dataSize = 0;
+	byte checksum = 0;
+	byte cmd;
+	byte[] inBuf = new byte[256];
+	int i = 0;
+	int p = 0;
 
 	int read32() {
-		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8) + ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
+		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8)
+				+ ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
 	}
 
 	int read16() {
@@ -309,22 +327,17 @@ public class MultiWii210 extends MultirotorData {
 			// Log.d("21",String.valueOf(c));
 			if (c_state == IDLE) {
 				c_state = (c == '$') ? HEADER_START : IDLE;
-			}
-			else if (c_state == HEADER_START) {
+			} else if (c_state == HEADER_START) {
 				c_state = (c == 'M') ? HEADER_M : IDLE;
-			}
-			else if (c_state == HEADER_M) {
+			} else if (c_state == HEADER_M) {
 				if (c == '>') {
 					c_state = HEADER_ARROW;
-				}
-				else if (c == '!') {
+				} else if (c == '!') {
 					c_state = HEADER_ERR;
-				}
-				else {
+				} else {
 					c_state = IDLE;
 				}
-			}
-			else if (c_state == HEADER_ARROW || c_state == HEADER_ERR) {
+			} else if (c_state == HEADER_ARROW || c_state == HEADER_ERR) {
 				/* is this an error message? */
 				err_rcvd = (c_state == HEADER_ERR); /*
 													 * now we are expecting the
@@ -338,30 +351,28 @@ public class MultiWii210 extends MultirotorData {
 				checksum ^= (c & 0xFF);
 				/* the command is to follow */
 				c_state = HEADER_SIZE;
-			}
-			else if (c_state == HEADER_SIZE) {
+			} else if (c_state == HEADER_SIZE) {
 				cmd = (byte) (c & 0xFF);
 				checksum ^= (c & 0xFF);
 				c_state = HEADER_CMD;
-			}
-			else if (c_state == HEADER_CMD && offset < dataSize) {
+			} else if (c_state == HEADER_CMD && offset < dataSize) {
 				checksum ^= (c & 0xFF);
 				inBuf[offset++] = (byte) (c & 0xFF);
-			}
-			else if (c_state == HEADER_CMD && offset >= dataSize) {
+			} else if (c_state == HEADER_CMD && offset >= dataSize) {
 				/* compare calculated and transferred checksum */
 				if ((checksum & 0xFF) == (c & 0xFF)) {
 					if (err_rcvd) {
 						// System.err.println("Copter did not understand request type "+c);
-					}
-					else {
+					} else {
 						/* we got a valid response packet, evaluate it */
 						evaluateCommand(cmd, (int) dataSize);
 					}
-				}
-				else {
-					System.out.println("invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
-					System.out.print("<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
+				} else {
+					System.out.println("invalid checksum for command "
+							+ ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF)
+							+ " expected, got " + (int) (c & 0xFF));
+					System.out.print("<" + (cmd & 0xFF) + " "
+							+ (dataSize & 0xFF) + "> {");
 					for (i = 0; i < dataSize; i++) {
 						if (i != 0) {
 							System.err.print(' ');
@@ -376,19 +387,22 @@ public class MultiWii210 extends MultirotorData {
 		}
 	}
 
-	int	timer1	= 0;
+	int timer1 = 0;
 
 	@Override
 	public void SendRequest() {
 		if (bt.Connected) {
 			int[] requests;
 
-			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE, MSP_ATTITUDE, MSP_DEBUG };
+			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO,
+					MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE,
+					MSP_ATTITUDE, MSP_DEBUG };
 			sendRequestMSP(requestMSP(requests));
 
 			timer1++;
 			if (timer1 > 10) {
-				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
+				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC,
+						MSP_RC_TUNING, MSP_BOXNAMES };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
 			}
@@ -414,7 +428,8 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (intPowerTrigger % 256));
 		payload.add((char) (intPowerTrigger / 256));
 
-		sendRequestMSP(requestMSP(MSP_SET_MISC, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_MISC,
+				payload.toArray(new Character[payload.size()])));
 
 		// MSP_EEPROM_WRITE
 		SendRequestWriteToEEprom();
@@ -441,11 +456,13 @@ public class MultiWii210 extends MultirotorData {
 		sendRequestMSP(requestMSP(MSP_MAG_CALIBRATION));
 	}
 
-	ArrayList<Character>	payload	= new ArrayList<Character>();
+	ArrayList<Character> payload = new ArrayList<Character>();
 
 	@Override
-	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO,
-			float[] confP, float[] confI, float[] confD) {
+	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO,
+			float rollPitchRate, float yawRate, float dynamic_THR_PID,
+			float throttle_MID, float throttle_EXPO, float[] confP,
+			float[] confI, float[] confD) {
 
 		// MSP_SET_RC_TUNING
 		payload = new ArrayList<Character>();
@@ -456,7 +473,8 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (Math.round(dynamic_THR_PID * 100)));
 		payload.add((char) (Math.round(throttle_MID * 100)));
 		payload.add((char) (Math.round(throttle_EXPO * 100)));
-		sendRequestMSP(requestMSP(MSP_SET_RC_TUNING, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_RC_TUNING,
+				payload.toArray(new Character[payload.size()])));
 
 		// MSP_SET_PID
 		payload = new ArrayList<Character>();
@@ -483,7 +501,8 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (byteI[i]));
 			payload.add((char) (byteD[i]));
 		}
-		sendRequestMSP(requestMSP(MSP_SET_PID, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_PID,
+				payload.toArray(new Character[payload.size()])));
 
 	}
 
@@ -500,7 +519,8 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed) {
+	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT,
+			int coordLON, int altitude, int speed) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) GPS_FIX);
 		payload.add((char) numSat);
@@ -520,7 +540,8 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (speed & 0xFF));
 		payload.add((char) ((speed >> 8) & 0xFF));
 
-		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS,
+				payload.toArray(new Character[payload.size()])));
 	}
 
 	@Override
@@ -528,7 +549,8 @@ public class MultiWii210 extends MultirotorData {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) 0);
 
-		sendRequestMSP(requestMSP(MSP_WP, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_WP,
+				payload.toArray(new Character[payload.size()])));
 
 		// TODO
 	}
@@ -543,7 +565,8 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (channels8[i] & 0xFF));
 			payload.add((char) ((channels8[i] >> 8) & 0xFF));
 
-			sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
+			sendRequestMSP(requestMSP(MSP_SET_RAW_RC,
+					payload.toArray(new Character[payload.size()])));
 
 			sendRequestMSP(requestMSP(new int[] { MSP_RC, MSP_STATUS }));
 		}
@@ -570,7 +593,8 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (activation[i] % 256));
 			payload.add((char) (activation[i] / 256));
 		}
-		sendRequestMSP(requestMSP(MSP_SET_BOX, payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_BOX,
+				payload.toArray(new Character[payload.size()])));
 
 	}
 

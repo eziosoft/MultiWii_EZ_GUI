@@ -72,4 +72,5 @@
 //+ REFRESH_RATE - make it settable
 //- boxes names and MSP_BOXNAMES - IMPORTANT !!!
 ===
-
+// -  MSP_PIDNAMES:			/* TODO create GUI elements from this message */
+---			
