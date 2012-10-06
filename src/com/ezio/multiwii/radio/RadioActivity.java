@@ -39,26 +39,26 @@ public class RadioActivity extends SherlockActivity {
 	ProgressBar pb3;
 	ProgressBar pb4;
 
-	TextView AccActiveTV;
-	TextView BaroActiveTV;
-	TextView MagnetoActiveTV;
-	TextView GpsActiveTV;
-	TextView SonarActiveTV;
-
-	TextView LEVELTV; // 1
-	TextView BAROTV; // 2
-	TextView MAGTV; // 3
-	TextView CAMSTABTV; // 4
-	TextView CAMTRIGTV; // 5
-	TextView ARMTV; // 6
-	TextView GPS_HOMETV; // 7
-	TextView GPS_HOLDTV; // 8
-	TextView PASSTHRUTV; // 9
-	TextView HEADFREETV; // 10
-	TextView BEEPERTV; // 11
-	TextView LEDMAXTV; // 12
-	TextView LLIGHTSTV; // 13
-	TextView HEADADJTV; // 14
+//	TextView AccActiveTV;
+//	TextView BaroActiveTV;
+//	TextView MagnetoActiveTV;
+//	TextView GpsActiveTV;
+//	TextView SonarActiveTV;
+//
+//	TextView LEVELTV; // 1
+//	TextView BAROTV; // 2
+//	TextView MAGTV; // 3
+//	TextView CAMSTABTV; // 4
+//	TextView CAMTRIGTV; // 5
+//	TextView ARMTV; // 6
+//	TextView GPS_HOMETV; // 7
+//	TextView GPS_HOLDTV; // 8
+//	TextView PASSTHRUTV; // 9
+//	TextView HEADFREETV; // 10
+//	TextView BEEPERTV; // 11
+//	TextView LEDMAXTV; // 12
+//	TextView LLIGHTSTV; // 13
+//	TextView HEADADJTV; // 14
 
 	Handler mHandler = new Handler();
 
@@ -82,36 +82,92 @@ public class RadioActivity extends SherlockActivity {
 			pb2.setProgress((int) (app.mw.rcAUX2 - 1000));
 			pb3.setProgress((int) (app.mw.rcAUX3 - 1000));
 			pb4.setProgress((int) (app.mw.rcAUX4 - 1000));
+			//
+			// SetTextViewColorOnOFF(app.mw.I2cAccActive, AccActiveTV);
+			// SetTextViewColorOnOFF(app.mw.I2cBaroActive, BaroActiveTV);
+			// SetTextViewColorOnOFF(app.mw.I2cMagnetoActive, MagnetoActiveTV);
+			// SetTextViewColorOnOFF(app.mw.GPSActive, GpsActiveTV);
 
-			SetTextViewColorOnOFF(app.mw.I2cAccActive, AccActiveTV);
-			SetTextViewColorOnOFF(app.mw.I2cBaroActive, BaroActiveTV);
-			SetTextViewColorOnOFF(app.mw.I2cMagnetoActive, MagnetoActiveTV);
-			SetTextViewColorOnOFF(app.mw.GPSActive, GpsActiveTV);
-
-			try {
-				// TODO needs to be changed
-				SetTextViewColorOnOFF(app.mw.ActiveModes[0], LEVELTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[1], BAROTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[2], MAGTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[3], CAMSTABTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[4], CAMTRIGTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[5], ARMTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[6], GPS_HOMETV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[7], GPS_HOLDTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[8], PASSTHRUTV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[9], HEADFREETV);
-				SetTextViewColorOnOFF(app.mw.ActiveModes[10], BEEPERTV);
-				// added in 2.1
-
-				if (app.Protocol > 210) {
-					SetTextViewColorOnOFF(app.mw.ActiveModes[11], LEDMAXTV);
-					SetTextViewColorOnOFF(app.mw.ActiveModes[12], LLIGHTSTV);
-					SetTextViewColorOnOFF(app.mw.ActiveModes[13], HEADADJTV);
-				}
-				// /////////////////////////////////////////////
-			} catch (Exception e) {
-
-			}
+			// if (app.Protocol == 200) {
+			// try {
+			// // TODO needs to be changed
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[0], LEVELTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[1], BAROTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[2], MAGTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[3], CAMSTABTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[4], CAMTRIGTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[5], ARMTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[6], GPS_HOMETV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[7], GPS_HOLDTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[8], PASSTHRUTV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[9], HEADFREETV
+			// );
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[10], BEEPERTV,
+			// );
+			//
+			//
+			// if (app.Protocol > 210) {
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[11], LEDMAXTV,
+			// app.mw.buttonCheckboxLabel[11]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[12],
+			// LLIGHTSTV, app.mw.buttonCheckboxLabel[12]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[13],
+			// HEADADJTV, app.mw.buttonCheckboxLabel[13]);
+			// }
+			// // /////////////////////////////////////////////
+			// } catch (Exception e) {
+			//
+			// }
+			// } else {
+			//
+			// try {
+			// // TODO needs to be changed
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[0], LEVELTV,
+			// app.mw.buttonCheckboxLabel[0]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[1], BAROTV,
+			// app.mw.buttonCheckboxLabel[1]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[2], MAGTV,
+			// app.mw.buttonCheckboxLabel[2]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[3], CAMSTABTV,
+			// app.mw.buttonCheckboxLabel[3]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[4], CAMTRIGTV,
+			// app.mw.buttonCheckboxLabel[4]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[5], ARMTV,
+			// app.mw.buttonCheckboxLabel[5]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[6], GPS_HOMETV,
+			// app.mw.buttonCheckboxLabel[6]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[7], GPS_HOLDTV,
+			// app.mw.buttonCheckboxLabel[7]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[8], PASSTHRUTV,
+			// app.mw.buttonCheckboxLabel[8]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[9], HEADFREETV,
+			// app.mw.buttonCheckboxLabel[9]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[10], BEEPERTV,
+			// app.mw.buttonCheckboxLabel[10]);
+			// // added in 2.1
+			//
+			// if (app.Protocol > 210) {
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[11], LEDMAXTV,
+			// app.mw.buttonCheckboxLabel[11]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[12],
+			// LLIGHTSTV, app.mw.buttonCheckboxLabel[12]);
+			// SetTextViewColorOnOFF(app.mw.ActiveModes[13],
+			// HEADADJTV, app.mw.buttonCheckboxLabel[13]);
+			// }
+			// // /////////////////////////////////////////////
+			// } catch (Exception e) {
+			//
+			// }
+			// }
 			app.Frequentjobs();
 
 			app.mw.SendRequest();
@@ -121,13 +177,27 @@ public class RadioActivity extends SherlockActivity {
 		}
 	};
 
+	private void SetTextViewColorOnOFF(boolean state, TextView TV, String title) {
+		if (state) {
+			TV.setBackgroundColor(getResources().getColor(R.color.Green));
+			TV.setTextColor(Color.BLACK);
+			TV.setText(title);
+		} else {
+			TV.setBackgroundColor(getResources().getColor(R.color.Red));
+			TV.setTextColor(Color.WHITE);
+			TV.setText(title);
+		}
+	}
+
 	private void SetTextViewColorOnOFF(boolean state, TextView TV) {
 		if (state) {
 			TV.setBackgroundColor(getResources().getColor(R.color.Green));
 			TV.setTextColor(Color.BLACK);
+
 		} else {
 			TV.setBackgroundColor(getResources().getColor(R.color.Red));
 			TV.setTextColor(Color.WHITE);
+
 		}
 	}
 
@@ -147,28 +217,29 @@ public class RadioActivity extends SherlockActivity {
 		pb3 = (ProgressBar) findViewById(R.id.progressBar3);
 		pb4 = (ProgressBar) findViewById(R.id.progressBar4);
 
-		AccActiveTV = (TextView) findViewById(R.id.textViewAccActive);
-		BaroActiveTV = (TextView) findViewById(R.id.textViewBaroActive);
-		GpsActiveTV = (TextView) findViewById(R.id.textViewGpsActive);
-		MagnetoActiveTV = (TextView) findViewById(R.id.textViewMagnetoActive);
-		SonarActiveTV = (TextView) findViewById(R.id.TextViewSonarActive);
-
-		SonarActiveTV.setVisibility(View.GONE);
-
-		LEVELTV = (TextView) findViewById(R.id.TextViewLEVEL);
-		BAROTV = (TextView) findViewById(R.id.TextViewBARO);
-		MAGTV = (TextView) findViewById(R.id.TextViewMAG);
-		CAMSTABTV = (TextView) findViewById(R.id.TextViewCAMSTAB);
-		CAMTRIGTV = (TextView) findViewById(R.id.TextViewCAMTRIG);
-		ARMTV = (TextView) findViewById(R.id.TextViewARM);
-		GPS_HOMETV = (TextView) findViewById(R.id.TextViewGPS_HOME);
-		GPS_HOLDTV = (TextView) findViewById(R.id.TextViewGPS_HOLD);
-		PASSTHRUTV = (TextView) findViewById(R.id.TextViewPASSTHRU);
-		HEADFREETV = (TextView) findViewById(R.id.TextViewHEADFREE);
-		BEEPERTV = (TextView) findViewById(R.id.TextViewBEEPER);
-		LEDMAXTV = (TextView) findViewById(R.id.TextViewLEDMAX);
-		LLIGHTSTV = (TextView) findViewById(R.id.TextViewLLIGHTS);
-		HEADADJTV = (TextView) findViewById(R.id.TextViewHEADADJ);
+		// AccActiveTV = (TextView) findViewById(R.id.textViewAccActive);
+		// BaroActiveTV = (TextView) findViewById(R.id.textViewBaroActive);
+		// GpsActiveTV = (TextView) findViewById(R.id.textViewGpsActive);
+		// MagnetoActiveTV = (TextView)
+		// findViewById(R.id.textViewMagnetoActive);
+		// SonarActiveTV = (TextView) findViewById(R.id.TextViewSonarActive);
+		//
+		// SonarActiveTV.setVisibility(View.GONE);
+		//
+		// LEVELTV = (TextView) findViewById(R.id.TextViewLEVEL);
+		// BAROTV = (TextView) findViewById(R.id.TextViewBARO);
+		// MAGTV = (TextView) findViewById(R.id.TextViewMAG);
+		// CAMSTABTV = (TextView) findViewById(R.id.TextViewCAMSTAB);
+		// CAMTRIGTV = (TextView) findViewById(R.id.TextViewCAMTRIG);
+		// ARMTV = (TextView) findViewById(R.id.TextViewARM);
+		// GPS_HOMETV = (TextView) findViewById(R.id.TextViewGPS_HOME);
+		// GPS_HOLDTV = (TextView) findViewById(R.id.TextViewGPS_HOLD);
+		// PASSTHRUTV = (TextView) findViewById(R.id.TextViewPASSTHRU);
+		// HEADFREETV = (TextView) findViewById(R.id.TextViewHEADFREE);
+		// BEEPERTV = (TextView) findViewById(R.id.TextViewBEEPER);
+		// LEDMAXTV = (TextView) findViewById(R.id.TextViewLEDMAX);
+		// LLIGHTSTV = (TextView) findViewById(R.id.TextViewLLIGHTS);
+		// HEADADJTV = (TextView) findViewById(R.id.TextViewHEADADJ);
 
 		app.Say(getString(R.string.RadioMode) + " "
 				+ String.valueOf(app.RadioMode));
@@ -187,13 +258,13 @@ public class RadioActivity extends SherlockActivity {
 		super.onResume();
 		app.ForceLanguage();
 
-		if (app.Protocol > 20) {
-			AccActiveTV.setVisibility(View.GONE);
-			BaroActiveTV.setVisibility(View.GONE);
-			GpsActiveTV.setVisibility(View.GONE);
-			MagnetoActiveTV.setVisibility(View.GONE);
-
-		}
+		// if (app.Protocol > 20) {
+		// AccActiveTV.setVisibility(View.GONE);
+		// BaroActiveTV.setVisibility(View.GONE);
+		// GpsActiveTV.setVisibility(View.GONE);
+		// MagnetoActiveTV.setVisibility(View.GONE);
+		//
+		// }
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 	}

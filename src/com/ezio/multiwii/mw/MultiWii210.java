@@ -41,7 +41,8 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void init() {
-		//frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS; // maybe not
+		// frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS; // maybe
+		// not
 		// used in
 		// 2.1
 		CHECKBOXITEMS = buttonCheckboxLabel.length;
@@ -49,12 +50,11 @@ public class MultiWii210 extends MultirotorData {
 		activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
-//		buttonCheckboxLabel = new String[] { "LEVEL", "BARO", "MAG", "CAMSTAB",
-//				"CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU",
-//				"HEADFREE", "BEEPER", "LEDMAX", "LLIGHTS", "HEADADJ" };
+		// buttonCheckboxLabel = new String[] { "LEVEL", "BARO", "MAG",
+		// "CAMSTAB",
+		// "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU",
+		// "HEADFREE", "BEEPER", "LEDMAX", "LLIGHTS", "HEADADJ" };
 
-		
-		
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
 		ResetAllChexboxes();
 	}
@@ -258,6 +258,10 @@ public class MultiWii210 extends MultirotorData {
 
 		case MSP_BOXNAMES:
 			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
+			Log.d("aaa", new String(inBuf, 0, dataSize));
+			for (String s : buttonCheckboxLabel) {
+				Log.d("aaa", s);
+			}
 			init();
 			break;
 		case MSP_PIDNAMES:
@@ -282,7 +286,7 @@ public class MultiWii210 extends MultirotorData {
 			break;
 
 		case MSP_WP:
-			//TODO
+			// TODO
 			Waypoint WP0 = new Waypoint();
 			WP0.No = read8();
 			WP0.Lat = read32();
@@ -388,6 +392,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	int timer1 = 0;
+	int timer2 = 0;
 
 	@Override
 	public void SendRequest() {
@@ -400,11 +405,23 @@ public class MultiWii210 extends MultirotorData {
 			sendRequestMSP(requestMSP(requests));
 
 			timer1++;
+
 			if (timer1 > 10) {
 				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC,
-						MSP_RC_TUNING, MSP_BOXNAMES };
+						MSP_RC_TUNING };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
+			}
+
+			if (timer2 < 5) {
+				timer2++;
+			} else {
+				if (timer2 != 10) {
+
+					requests = new int[] { MSP_BOXNAMES };
+					sendRequestMSP(requestMSP(requests));
+					timer2 = 10;
+				}
 			}
 
 		}

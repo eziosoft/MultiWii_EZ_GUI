@@ -194,7 +194,7 @@ public class App extends Application {
 
 		frsky = new FrskyProtocol(BTFrsky);
 
-		oldActiveModes = new boolean[mw.CHECKBOXITEMS];
+		oldActiveModes = new boolean[20];// not the best method
 		mw._1G = _1Gtemp;
 
 	}
