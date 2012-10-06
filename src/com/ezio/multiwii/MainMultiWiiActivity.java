@@ -203,6 +203,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		try {
 			mHandler.removeCallbacksAndMessages(null);
 			app.bt.CloseSocket();
+			app.BTFrsky.CloseSocket();
 		}
 
 		catch (Exception e) {
@@ -502,7 +503,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		if (item.getItemId() == R.id.menu_disconnect) {
 			app.Say(getString(R.string.menu_disconnect));
 			app.bt.ConnectionLost = false;
-			app.BTFrsky.CloseSocket();
+			app.BTFrsky.ConnectionLost=false;
 			Close(null);
 			return true;
 		}
