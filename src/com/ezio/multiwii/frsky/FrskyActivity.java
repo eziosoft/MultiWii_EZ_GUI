@@ -74,9 +74,10 @@ public class FrskyActivity extends SherlockActivity {
 			TV.setText("");
 			log("A1=" + String.valueOf(app.frsky.Analog1)+" A2=" + String.valueOf(app.frsky.Analog2)+" "+"HubErr="+String.valueOf(app.frsky.hubErrors));
 			log("Altitude="+String.valueOf(app.frsky.FAltitude));
-			// log("AccX=" + String.valueOf(app.frsky.FAccX));
-			// log("AccY=" + String.valueOf(app.frsky.FAccY));
-			// log("AccZ=" + String.valueOf(app.frsky.FAccZ));
+			log("Heading="+String.valueOf(app.frsky.FHeading));
+			 log("AccX=" + String.valueOf(app.frsky.FAccX));
+			 log("AccY=" + String.valueOf(app.frsky.FAccY));
+			 log("AccZ=" + String.valueOf(app.frsky.FAccZ));
 			// log("Time=" + String.valueOf(app.frsky.FHour) + ":"
 			// + String.valueOf(app.frsky.FMinute) + ":"
 			// + String.valueOf(app.frsky.FSecond));

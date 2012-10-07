@@ -22,13 +22,15 @@ import java.util.List;
 
 import android.util.Log;
 
+import com.ezio.multiwii.helpers.BitConverter;
 import com.ezio.multiwii.mw.BT;
 
 public class FrskyProtocol {
 
 	static final int GPSAltitudeBefore = 0x01;// GPS altitude m S Before”.”
-	static final int GPSAltitudeAfter = 0x01 + 8;// U After “.”
+	static final int GPSAltitudeAfter = 0x09;// U After “.”
 	static final int Temperature1 = 0x02;// Temprature1 °C S 1°C / -30~250°C
+											// //Number of sattelites
 	static final int RPM = 0x03;// RPM RPM U 0~60000
 	static final int FuelLevel = 0x04;// Fuel Level % U 0, 25, 50, 75, 100
 	static final int Temperature2 = 0x05;// Temprature2 °C S 1°C / -30~250
@@ -38,15 +40,17 @@ public class FrskyProtocol {
 	// “.”
 	static final int AltutudeAfter = 0x21;// U After “.”
 	static final int GPSspeedBefore = 0x11;// GPS speed Knots U Before “.”
-	static final int GPSspeedAfter = 0x11 + 8;// U After “.”
-	static final int LongitudeBefore = 0x12;// Longitude dddmm.mmmm Before “.”
-	static final int LongitudeAfter = 0x12 + 8;// After “.”
-	static final int EW = 0x1A + 8;// E/W
+	static final int GPSspeedAfter = 0x19;// U After “.”
+	static final int LongitudeBefore = 0x12;// Longitude dddmm.mmmm Before
+											// “.”
+	static final int LongitudeAfter = 0x1A;// After “.”
+	static final int EW = 0x22;// E/W
 	static final int LatitudeBefore = 0x13;// Latitude ddmm.mmmm Before “.”
-	static final int LatitudeAfter = 0x13 + 8;// U After “.”
-	static final int NS = 0x1B + 8;// N/S U
-	static final int CourseBefore = 0x14;// Course degree U 0~359.99 Before “.”
-	static final int CourseAfter = 0x14 + 8;// After “.”
+	static final int LatitudeAfter = 0x1B;// U After “.”
+	static final int NS = 0x23;// N/S U
+	static final int CourseBefore = 0x14;// Course degree U 0~359.99 Before
+											// “.”
+	static final int CourseAfter = 0x1C;// After “.”
 	static final int Month = 0x15;// Date/Month
 	static final int Year = 0x16;// Year
 	static final int HourMinute = 0x17;// Hour /Minute
@@ -54,17 +58,24 @@ public class FrskyProtocol {
 	static final int AccX = 0x24;// Acc-x S 0.016g / -8g ~ +8g
 	static final int AccY = 0x25;// Acc-y S 0.016g / -8g ~ +8g
 	static final int ACCZ = 0x26;// Acc-z S 0.016g / -8g ~ +8g
-	static final int VoltageBefore = 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v /
+	static final int VoltageBefore = 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v
+											// /
 	// 0~48.0v
 	// Before “.”
 	static final int VoltageAfter = 0x3B;// After “.”
 	static final int Current = 0x28;// Current A U 1A / 0~100A
 
-	public int FAccX = 0;
-	public int FAccY = 0;
-	public int FAccZ = 0;
+	// User defined data IDs
+	static final int ID_Gyro_X = 0x40;
+	static final int ID_Gyro_Y = 0x41;
+	static final int ID_Gyro_Z = 0x42;
+
+	public float FAccX = 0;
+	public float FAccY = 0;
+	public float FAccZ = 0;
 	public int FHour = 0, FMinute = 0, FSecond = 0;
 	public float FAltitude = 0;
+	public int FHeading = 0;
 
 	public int Analog1 = 0;
 	public int Analog2 = 0;
@@ -126,7 +137,8 @@ public class FrskyProtocol {
 
 	}
 
-	private void HubProtocol(int[] frame) {
+	private void HubProtocol(int[] frame) throws Exception {
+
 		switch (frame[1]) {
 		case GPSAltitudeBefore:
 
@@ -136,7 +148,8 @@ public class FrskyProtocol {
 			log("GPSAltitudeAfter", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x01 + 8;// U After “.”
 		case Temperature1:
-			log("Temperature1", getHex(new int[] { frame[2], frame[3] }));
+			log("Temperature1 (Number of sat)", getHex(new int[] { frame[2],
+					frame[3] }));
 			break; // 0x02;// Temprature1 °C S 1°C / -30~250°C
 		case RPM:
 			log("RPM", getHex(new int[] { frame[2], frame[3] }));
@@ -145,17 +158,18 @@ public class FrskyProtocol {
 			log("FuelLevel", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x04;// Fuel Level % U 0, 25, 50, 75, 100
 		case Temperature2:
-			log("Temperature2", getHex(new int[] { frame[2], frame[3] }));
+			log("Temperature2 (Distance to home)", getHex(new int[] { frame[2],
+					frame[3] }));
 			break;// 0x05;// Temprature2 °C S 1°C / -30~250
 		case Volt:
 			log("Volt", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x06;// Volt v 0.01v / 0~4.2v
 		case AltitudeBefore:
-			FAltitude = (float) getInt(frame, 2);
+			FAltitude = (float) getIntFromFrame(frame);
 			log("AltitudeBefore", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x10;// Altitude m S 0.01m / -500~9000m Before “.”
 		case AltutudeAfter:
-			FAltitude += ((float) getInt(frame, 2)) / 100f;
+			FAltitude += ((float) getIntFromFrame(frame)) / 100f;
 			log("AltutudeAfter", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x21;// U After “.”
 		case GPSspeedBefore:
@@ -183,9 +197,11 @@ public class FrskyProtocol {
 			log("NS", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x1B + 8;// N/S U
 		case CourseBefore:
+			FHeading = getIntFromFrame(frame);
 			log("CourseBefore", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x14;// Course degree U 0~359.99 Before “.”
 		case CourseAfter:
+
 			log("CourseAfter", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x14 + 8;// After “.”
 		case Month:
@@ -200,20 +216,19 @@ public class FrskyProtocol {
 			log("HourMinute", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x17;// Hour /Minute
 		case Second:
-			FSecond = getInt(frame, 2);
+			FSecond = getIntFromFrame(frame);
 			log("Second", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x18;// Second
 		case AccX:
-			FAccX = getInt(frame, 2);
+			FAccX = (float) (getIntFromFrame(frame) / 1000f);
 			log("AccX", getHex(new int[] { frame[2], frame[3] }));
-
 			break; // 0x24;// Acc-x S 0.016g / -8g ~ +8g
 		case AccY:
-			FAccY = getInt(frame, 2);
+			FAccY = (float) (getIntFromFrame(frame) / 1000f);
 			log("AccY", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x25;// Acc-y S 0.016g / -8g ~ +8g
 		case ACCZ:
-			FAccZ = getInt(frame, 2);
+			FAccZ = (float) (getIntFromFrame(frame) / 1000f);
 			log("AccZ", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x26;// Acc-z S 0.016g / -8g ~ +8g
 		case VoltageBefore:
@@ -226,6 +241,16 @@ public class FrskyProtocol {
 		case Current:
 			log("Current", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x28;// Current A U 1A / 0~100A
+
+		case ID_Gyro_X:
+			log("ID_Gyro_X", getHex(new int[] { frame[2], frame[3] }));
+			break;
+		case ID_Gyro_Y:
+			log("ID_Gyro_Y", getHex(new int[] { frame[2], frame[3] }));
+			break;
+		case ID_Gyro_Z:
+			log("ID_Gyro_Z", getHex(new int[] { frame[2], frame[3] }));
+			break;
 
 		default:
 			log("error ID", getHex(frame));
@@ -266,26 +291,19 @@ public class FrskyProtocol {
 			f++;
 			if (f > 10)
 				f = 0;
-
 		}
-
 	}
 
-	public int getInt(int[] arr, int off) {
-		return (arr[off] & 0xff) + (arr[off + 1] << 8);
-	} // end of
+	public int getIntFromFrame(int[] frame) {
+		return ((byte) frame[2] & 0xff) + ((byte) frame[2 + 1] << 8);
+
+	}
 
 	void evaluateCommandFE(int[] frame) {
 		Analog1 = frame[2];
 		Analog2 = frame[3];
 		TxRSSI = frame[4];
 		RxRSSI = frame[5] / 2;
-
-		// Log.d("frsky",
-		// getHex(frame) + "   ->  v1=" + String.valueOf(Analog1) + " 21="
-		// + String.valueOf(Analog2) + " lRx="
-		// + String.valueOf(RxRSSI) + " lTx="
-		// + String.valueOf(TxRSSI));
 	}
 
 	ArrayList<Integer> buffor = new ArrayList<Integer>();
@@ -329,7 +347,12 @@ public class FrskyProtocol {
 				buffor.remove(0);
 				buffor.remove(0);
 
-				HubProtocol(hubFrame);
+				try {
+					HubProtocol(hubFrame);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				Log.d("frsky",
 						getHex(frame) + "->bytes " + String.valueOf(validBytes)
