@@ -54,10 +54,10 @@ public class App extends Application {
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
-	public boolean ShowADS = false;
+	public boolean ShowADS = true;
 	// public boolean DataSent = false; // to server
 
-	private static String REFRESHRATE="REFRESHRATE";
+	private static String REFRESHRATE = "REFRESHRATE";
 	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
 
