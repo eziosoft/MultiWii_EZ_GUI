@@ -78,6 +78,8 @@ public class App extends Application {
 
 	public boolean loggingON = false;
 	// ----settings-----
+	public boolean CopyFrskyToMW = true;
+
 	private static String RADIOMODE = "RadioMode";
 	public int RadioMode;
 
@@ -258,6 +260,9 @@ public class App extends Application {
 	}
 
 	public void Frequentjobs() {
+		if (BTFrsky.Connected)
+			FrskyToMW();
+
 		for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
 			if (mw.ActiveModes[i] != oldActiveModes[i]) {
 				String s = "";
@@ -341,6 +346,19 @@ public class App extends Application {
 			bt.Connect(MacAddress);
 			Say(getString(R.string.menu_connect));
 		}
+	}
+
+	private void FrskyToMW() {
+		mw.angx = frsky.frskyHubProtocol.angX;
+		mw.angy = frsky.frskyHubProtocol.angY;
+
+		mw.ax = frsky.frskyHubProtocol.Acc_X;
+		mw.ay = frsky.frskyHubProtocol.Acc_Y;
+		mw.az = frsky.frskyHubProtocol.Acc_Z;
+
+		mw.head = frsky.frskyHubProtocol.Heading;
+		mw.GPS_numSat = frsky.frskyHubProtocol.Temperature_1;
+		mw.alt = frsky.frskyHubProtocol.Altitude;
 	}
 
 }
