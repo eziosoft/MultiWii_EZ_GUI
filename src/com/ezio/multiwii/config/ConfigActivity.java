@@ -55,6 +55,8 @@ public class ConfigActivity extends SherlockActivity {
 
 	CheckBox CheckBoxDisableBTonExit;
 
+	CheckBox CheckBoxCopyFrskyToMW;
+
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
 	RadioButton RadioForceGerman;
@@ -135,6 +137,7 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
 		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
 		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
+		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
 
 	}
 
@@ -171,6 +174,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxConnectOnStart.setChecked(app.ConnectOnStart);
 		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
+		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);
 		MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
@@ -218,6 +222,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
 		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
+		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
 
 		if (RadioNotForce.isChecked())
 			app.ForceLanguage = "";

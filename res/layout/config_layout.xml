@@ -186,14 +186,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/periodicspeaking" />
-
+
             <EditText
                 android:id="@+id/editTextPeriodicSpeaking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="do NOT leave empty"
                 android:inputType="number"
                 android:text="20" >
+
             </EditText>
 
             <TextView
@@ -284,12 +286,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/VoltageAlarm" />
-
+
             <EditText
                 android:id="@+id/editTextVoltageAlarm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="do NOT leave empty"
                 android:inputType="numberDecimal" />
 
             <CheckBox
@@ -304,13 +307,20 @@
                 android:background="@color/smalltittle"
                 android:text="@string/RefreshRate"
                 android:textColor="@color/smalltittleText" />
-
+
             <EditText
                 android:id="@+id/editTextRefreshRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="do NOT leave empty or 0"
                 android:inputType="number" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCopyFrskyToMW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CopyFrskyToMW" />
 
         </LinearLayout>
     </ScrollView>

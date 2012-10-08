@@ -78,7 +78,8 @@ public class App extends Application {
 
 	public boolean loggingON = false;
 	// ----settings-----
-	public boolean CopyFrskyToMW = true;
+	private static String COPYFRSKYTOMW = "COPYFRSKYTOMW";
+	public boolean CopyFrskyToMW;
 
 	private static String RADIOMODE = "RadioMode";
 	public int RadioMode;
@@ -219,6 +220,7 @@ public class App extends Application {
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
 		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 		RefreshRate = prefs.getInt(REFRESHRATE, 100);
+		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, true);
 	}
 
 	public void SaveSettings() {
@@ -239,6 +241,7 @@ public class App extends Application {
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
 		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.putInt(REFRESHRATE, RefreshRate);
+		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
 		editor.commit();
 
 		Toast.makeText(getApplicationContext(),
@@ -260,7 +263,7 @@ public class App extends Application {
 	}
 
 	public void Frequentjobs() {
-		if (BTFrsky.Connected)
+		if (CopyFrskyToMW)
 			FrskyToMW();
 
 		for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
@@ -358,6 +361,7 @@ public class App extends Application {
 
 		mw.head = frsky.frskyHubProtocol.Heading;
 		mw.GPS_numSat = frsky.frskyHubProtocol.Temperature_1;
+		mw.GPS_speed = frsky.frskyHubProtocol.GPS_Speed;
 		mw.alt = frsky.frskyHubProtocol.Altitude;
 	}
 

@@ -14,6 +14,15 @@ public class FrskyHubProtocol {
 	public float Acc_Y = 0;
 	public float Acc_Z = 0;
 	public int Temperature_1 = 0;
+	public int GPS_Speed = 0;
+
+	public float GPS_EW = 0;
+	public float GPS_LongitudeBefore = 0;
+	public float GPS_LongitudeAfter = 0;
+
+	public float GPS_NS = 0;
+	public float GPS_LatitudeBefore = 0;
+	public float GPS_LatitudeAfter = 0;
 
 	// ////////////////EZ-GUI
 	public float angX = 0;
@@ -87,7 +96,6 @@ public class FrskyHubProtocol {
 
 		switch (frame[1]) {
 		case GPSAltitudeBefore:
-
 			log("GPSAltitudeBefore", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x01;// GPS altitude m S Before”.”
 		case GPSAltitudeAfter:
@@ -120,38 +128,45 @@ public class FrskyHubProtocol {
 			break;// 0x10;// Altitude m S 0.01m / -500~9000m Before “.”
 		case AltutudeAfter:
 			Altitude += ((float) getIntFromFrame(frame)) / 100f;
-			log("AltutudeAfter", getHex(new int[] { frame[2], frame[3] }));
+			log("+AltutudeAfter", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x21;// U After “.”
 		case GPSspeedBefore:
-			log("GPSspeedBefore", getHex(new int[] { frame[2], frame[3] }));
+			GPS_Speed = getIntFromFrame(frame);
+			log("+GPSspeedBefore", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x11;// GPS speed Knots U Before “.”
 		case GPSspeedAfter:
 			log("GPSspeedAfter", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x11 + 8;// U After “.”
 		case LongitudeBefore:
-			log("LongitudeBefore", getHex(new int[] { frame[2], frame[3] }));
+			GPS_LongitudeBefore = getIntFromFrame(frame);
+			log("+LongitudeBefore", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x12;// Longitude dddmm.mmmm Before “.”
 		case LongitudeAfter:
-			log("LongitudeAfter", getHex(new int[] { frame[2], frame[3] }));
+			GPS_LongitudeAfter = getIntFromFrame(frame);
+			log("+LongitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x12 + 8;// After “.”
 		case EW:
-			log("EW", getHex(new int[] { frame[2], frame[3] }));
+			GPS_EW = getIntFromFrame(frame);
+			log("+EW", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x1A + 8;// E/W
 		case LatitudeBefore:
-			log("LatitudeBefore", getHex(new int[] { frame[2], frame[3] }));
+			GPS_LatitudeBefore = getIntFromFrame(frame);
+			log("+LatitudeBefore", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x13;// Latitude ddmm.mmmm Before “.”
 		case LatitudeAfter:
-			log("LatitudeAfter", getHex(new int[] { frame[2], frame[3] }));
+			GPS_LatitudeAfter = getIntFromFrame(frame);
+			log("+LatitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x13 + 8;// U After “.”
 		case NS:
-			log("NS", getHex(new int[] { frame[2], frame[3] }));
+			GPS_NS = getIntFromFrame(frame);
+			log("+NS", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x1B + 8;// N/S U
 		case CourseBefore:
 			Heading = getIntFromFrame(frame);
-			log("CourseBefore", String.valueOf(getIntFromFrame(frame)));
+			log("+CourseBefore", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x14;// Course degree U 0~359.99 Before “.”
 		case CourseAfter:
-
+			// not needed
 			log("CourseAfter", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x14 + 8;// After “.”
 		case Month:
@@ -163,23 +178,24 @@ public class FrskyHubProtocol {
 		case HourMinute:
 			Hour = frame[2];
 			Minute = frame[3];
-			log("HourMinute", getHex(new int[] { frame[2], frame[3] }));
+			log("+HourMinute",
+					String.valueOf(frame[2]) + ":" + String.valueOf(frame[3]));
 			break; // 0x17;// Hour /Minute
 		case Second:
 			Second_ = getIntFromFrame(frame);
-			log("Second", getHex(new int[] { frame[2], frame[3] }));
+			log("+Second", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x18;// Second
 		case AccX:
 			Acc_X = (float) (getIntFromFrame(frame));
-			log("AccX", String.valueOf(getIntFromFrame(frame)));
+			log("+AccX", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x24;// Acc-x S 0.016g / -8g ~ +8g
 		case AccY:
 			Acc_Y = (float) (getIntFromFrame(frame));
-			log("AccY", String.valueOf(getIntFromFrame(frame)));
+			log("+AccY", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x25;// Acc-y S 0.016g / -8g ~ +8g
 		case ACCZ:
 			Acc_Z = (float) (getIntFromFrame(frame));
-			log("AccZ", String.valueOf(getIntFromFrame(frame)));
+			log("+AccZ", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x26;// Acc-z S 0.016g / -8g ~ +8g
 		case VoltageBefore:
 			log("VoltageBefore", getHex(new int[] { frame[2], frame[3] }));
@@ -205,11 +221,11 @@ public class FrskyHubProtocol {
 		// ////////my protocol
 		case ID_Ang_X:
 			angX = getIntFromFrame(frame) / 10;
-			log("ID_Ang_X", String.valueOf(getIntFromFrame(frame)));
+			log("+ID_Ang_X", String.valueOf(getIntFromFrame(frame)));
 			break;
 		case ID_Ang_Y:
 			angY = getIntFromFrame(frame) / 10;
-			log("ID_Ang_Y", String.valueOf(getIntFromFrame(frame)));
+			log("+ID_Ang_Y", String.valueOf(getIntFromFrame(frame)));
 			break;
 		// ////////////////////////
 		default:
