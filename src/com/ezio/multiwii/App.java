@@ -362,6 +362,18 @@ public class App extends Application {
 		mw.head = frsky.frskyHubProtocol.Heading;
 		mw.GPS_numSat = frsky.frskyHubProtocol.Temperature_1;
 		mw.GPS_speed = frsky.frskyHubProtocol.GPS_Speed;
+		mw.GPS_latitude = frsky.frskyHubProtocol.GPS_NS
+				* 10
+				* Integer
+						.parseInt(String
+								.valueOf(frsky.frskyHubProtocol.GPS_LatitudeBefore)
+								+ String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeAfter));
+		mw.GPS_longitude = frsky.frskyHubProtocol.GPS_EW
+				* 10
+				* Integer
+						.parseInt(String
+								.valueOf(frsky.frskyHubProtocol.GPS_LongitudeBefore)
+								+ String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeAfter));
 		mw.alt = frsky.frskyHubProtocol.Altitude;
 	}
 

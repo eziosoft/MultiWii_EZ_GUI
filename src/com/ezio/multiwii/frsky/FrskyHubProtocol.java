@@ -16,13 +16,13 @@ public class FrskyHubProtocol {
 	public int Temperature_1 = 0;
 	public int GPS_Speed = 0;
 
-	public float GPS_EW = 0;
-	public float GPS_LongitudeBefore = 0;
-	public float GPS_LongitudeAfter = 0;
+	public int GPS_EW = 0;
+	public int GPS_LongitudeBefore = 0;
+	public int GPS_LongitudeAfter = 0;
 
-	public float GPS_NS = 0;
-	public float GPS_LatitudeBefore = 0;
-	public float GPS_LatitudeAfter = 0;
+	public int GPS_NS = 0;
+	public int GPS_LatitudeBefore = 0;
+	public int GPS_LatitudeAfter = 0;
 
 	// ////////////////EZ-GUI
 	public float angX = 0;
@@ -146,7 +146,7 @@ public class FrskyHubProtocol {
 			log("+LongitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x12 + 8;// After “.”
 		case EW:
-			GPS_EW = getIntFromFrame(frame);
+			GPS_EW = getIntFromFrame(frame)==87 ? -1:1;
 			log("+EW", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x1A + 8;// E/W
 		case LatitudeBefore:
@@ -158,7 +158,7 @@ public class FrskyHubProtocol {
 			log("+LatitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x13 + 8;// U After “.”
 		case NS:
-			GPS_NS = getIntFromFrame(frame);
+			GPS_NS = getIntFromFrame(frame)==78 ? 1:-1;
 			log("+NS", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x1B + 8;// N/S U
 		case CourseBefore:

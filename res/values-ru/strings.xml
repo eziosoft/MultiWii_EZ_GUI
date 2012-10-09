@@ -3,7 +3,7 @@
 <resources>
   <string name="Donators">Я хотел бы поблагодарить этих хороших людей за их пожертвования:  wahjudi, Han Geesink</string>
   <string name="AboutInfo">Благодарю Sebbi, thornton, Adrian, Leon11t за перевод. \nЯ хотел поблагодарить всех разработчиков и тестеров MultiWii прошивки.</string>
-  <string name="app_name">MultiWii AllinOne (Beta)</string>
+
   <string name="menu_settings">Параметры</string>
   <string name="title_activity_main">Активность</string>
   <string name="scanning">поиск устройств...</string>
