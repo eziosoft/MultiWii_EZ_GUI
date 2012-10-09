@@ -102,7 +102,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.multiwii_main_layout);
+		setContentView(R.layout.multiwii_main_layout2);
 
 		app = (App) getApplication();
 
@@ -145,14 +145,11 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 
 		if (app.MacAddress.equals("")) {
-			TVData.setText(getString(R.string.MacNotSet) + "\n\n"
-					+ getString(R.string.Donators));
+			TVData.setText(getString(R.string.MacNotSet));
 		} else {
 			TVData.setText("");
 			if (!app.bt.Connected)
-				TVData.setText(getString(R.string.InfoNotConnected) + "\n\n"
-						+ getString(R.string.Donators));
-
+				TVData.setText(getString(R.string.InfoNotConnected));
 		}
 
 		String app_ver = "";
