@@ -14,16 +14,19 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.Main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,15 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.ezio.multiwii.AboutActivity;
+import com.ezio.multiwii.AdvancedActivity;
+import com.ezio.multiwii.App;
+import com.ezio.multiwii.CheckBoxesActivity;
+import com.ezio.multiwii.GPSActivity;
+import com.ezio.multiwii.LogActivity;
+import com.ezio.multiwii.OtherActivity;
+import com.ezio.multiwii.PIDActivity;
+import com.ezio.multiwii.R;
 import com.ezio.multiwii.config.ConfigActivity;
 import com.ezio.multiwii.dashboard.Dashboard1Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
@@ -47,6 +59,7 @@ import com.ezio.multiwii.radio.RadioActivity;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
+import com.viewpagerindicator.TitlePageIndicator;
 
 public class MainMultiWiiActivity extends SherlockActivity {
 
@@ -58,8 +71,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	private Handler mHandler = new Handler();
 
-	Button ButtonPID;
-	Button ButtonOther;
+	// Button ButtonPID;
+	// Button ButtonOther;
 
 	ActionBarSherlock actionBar;
 
@@ -102,7 +115,24 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.multiwii_main_layout2);
+		setContentView(R.layout.multiwii_main_layout3);
+
+		ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+		MyPagerAdapter adapter = new MyPagerAdapter(this);
+
+		// String[] a = new String[]{"A","b"};
+
+		adapter.SetTitles(new String[] { "Dashboards", "b" });
+		final LayoutInflater inflater = (LayoutInflater) this
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1,
+				(ViewGroup) null, false));
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_2,
+				(ViewGroup) null, false));
+		viewPager.setAdapter(adapter);
+
+		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.titles);
+		titleIndicator.setViewPager(viewPager);
 
 		app = (App) getApplication();
 
@@ -112,8 +142,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		TVData = (TextView) findViewById(R.id.textViewData);
 		TVinfo = (TextView) findViewById(R.id.TextViewInfo);
 
-		ButtonPID = (Button) findViewById(R.id.buttonPID);
-		ButtonOther = (Button) findViewById(R.id.buttonOther);
+		// ButtonPID = (Button) findViewById(R.id.buttonPID);
+		// ButtonOther = (Button) findViewById(R.id.buttonOther);
 
 		if (app.ShowADS)
 			adMobConfig();
@@ -133,16 +163,16 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	@Override
 	public void onResume() {
 		Log.d("aaa", "MAIN ON RESUME");
-		super.onResume();
 		app.ForceLanguage();
+		super.onResume();
 
 		killme = false;
 
-		if (app.Protocol > 200) {
-			ButtonPID.setVisibility(View.VISIBLE);
-		} else {
-			ButtonPID.setVisibility(View.GONE);
-		}
+		// if (app.Protocol > 200) {
+		// ButtonPID.setVisibility(View.VISIBLE);
+		// } else {
+		// ButtonPID.setVisibility(View.GONE);
+		// }
 
 		if (app.MacAddress.equals("")) {
 			TVData.setText(getString(R.string.MacNotSet));
@@ -166,7 +196,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "."
 				+ String.valueOf(app_ver_code));
-		// Log.d(BT.TAG, "OnResume");
 
 		if (app.bt.Connected) {
 
@@ -495,7 +524,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		if (item.getItemId() == R.id.menu_disconnect) {
 			app.Say(getString(R.string.menu_disconnect));
 			app.bt.ConnectionLost = false;
-			app.BTFrsky.ConnectionLost=false;
+			app.BTFrsky.ConnectionLost = false;
 			Close(null);
 			return true;
 		}
