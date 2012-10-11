@@ -3,7 +3,6 @@
 <resources>
   <string name="Donators">Я хотів би подякувати цим хорошим людем за пожертвування:  wahjudi, Han Geesink</string>
   <string name="AboutInfo">Подяка Leon11t за переклад на українську. \nХотіли би подякувати всім розробникам і тестерам MultiWii прошивки.</string>
- 
   <string name="menu_settings">Параметри</string>
   <string name="title_activity_main">Активність</string>
   <string name="scanning">пошук пристроїв...</string>
@@ -183,4 +182,14 @@
   <string name="ALT">ALT</string>
   <string name="HEAD">HEAD</string>
   <string name="Pause">Пауза</string>
+
+  <string name="SelectBTdeviceFrsky">Вибрати Frsky BT</string>
+  <string name="Frsky">Frsky</string>
+  <string name="TxRSSI">TxRSSI</string>
+  <string name="RxRSSI">RxRSSI</string>
+  <string name="Connect_frsky">Frsky Підключено</string>
+  <string name="UseOfflineMap">Використовувати кешовані мапи</string>
+  <string name="RefreshRate">Частота Оновлення в мс (має бути >=100)</string>
+  <string name="ConnectionBug">Використовуйте, коли відключається при натисканні кнопки (наразі працює тільки на Приборці2)</string>
+  <string name="CopyFrskyToMW">Використовувати данні Frsky будь-де</string>
 </resources>
