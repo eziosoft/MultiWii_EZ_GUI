@@ -120,18 +120,21 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
 		MyPagerAdapter adapter = new MyPagerAdapter(this);
 
-		// String[] a = new String[]{"A","b"};
+	
 
-		adapter.SetTitles(new String[] { "Dashboards", "b" });
+		adapter.SetTitles(new String[] { getString(R.string.page1), getString(R.string.page2), getString(R.string.page3) });
 		final LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1,
 				(ViewGroup) null, false));
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_2,
 				(ViewGroup) null, false));
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_3,
+				(ViewGroup) null, false));
+		viewPager.setAdapter(adapter);
 		viewPager.setAdapter(adapter);
 
-		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.titles);
+		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
 		titleIndicator.setViewPager(viewPager);
 
 		app = (App) getApplication();

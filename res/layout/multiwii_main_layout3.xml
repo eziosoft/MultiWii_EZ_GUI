@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/TextViewInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:background="@color/tittle"
+        android:gravity="center"
+        android:text="---"
+        android:textColor="@color/tittleText" />
 
     <com.viewpagerindicator.TitlePageIndicator
-    android:id="@+id/titles"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent" />
-    
+       android:id="@+id/indicator"
+        android:padding="10dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#18FF0000"
+        android:textColor="#AA000000"
+        app:footerColor="#FFAA2222"
+        app:footerLineHeight="1dp"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:selectedColor="#FF000000"
+        app:selectedBold="true"
+        />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="fill_parent"

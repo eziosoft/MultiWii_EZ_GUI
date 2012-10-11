@@ -200,5 +200,10 @@
     <string name="RefreshRate">Refresh Rate in ms (should be >=100)</string>
     <string name="ConnectionBug">Use when it disconnects when button is pressed (right now only works for dashboard2)</string>
     <string name="CopyFrskyToMW">Use data from Frsky everywhere</string>
-   
+
+    <!-- menu -->
+    <string name="page1">Dashboard</string>
+    <string name="page2">MultiWii Settings</string>
+    <string name="page3">EZ-GUI Settings</string>
+
 </resources>
