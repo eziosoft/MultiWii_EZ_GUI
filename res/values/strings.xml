@@ -2,7 +2,6 @@
 
     <!-- DONATIONS -->
     <string name="Donators">I would like to thank these nice people for their donations: wahjudi, Han Geesink</string>
-    <string name="AboutInfo">I\'d like to thank all the developers and the testers of MultiWii firmware.</string>
     <string name="app_name">MultiWii EZ-GUI</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
@@ -203,7 +202,21 @@
 
     <!-- menu -->
     <string name="page1">Dashboard</string>
-    <string name="page2">MultiWii Settings</string>
-    <string name="page3">EZ-GUI Settings</string>
+    <string name="page2">MW Settings</string>
+    <string name="page3">Config</string>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
 
 </resources>

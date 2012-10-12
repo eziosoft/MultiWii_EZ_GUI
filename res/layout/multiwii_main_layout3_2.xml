@@ -11,19 +11,21 @@
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <Button
                 android:id="@+id/button1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="PIDOnClick"
                 android:text="@string/PID" />
-
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="AUXOnClick"
                 android:text="@string/SetCheckboxes" />
 
         </TableRow>
@@ -32,19 +34,21 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <Button
                 android:id="@+id/button3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="OtherOnClick"
                 android:text="@string/Other" />
-
+
             <Button
                 android:id="@+id/button4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="LoggingOnClick"
                 android:text="@string/Logging" />
 
         </TableRow>
@@ -53,12 +57,13 @@
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <Button
                 android:id="@+id/button5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="AdvancedOnClick"
                 android:text="@string/Advanced" />
 
         </TableRow>

@@ -89,8 +89,7 @@
         <activity android:name="WaypointActivity" >
         </activity>
         <activity
-            android:name="AboutActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog" >
+            android:name="AboutActivity">
         </activity>
         <activity
             android:name="CheckBoxesActivity"

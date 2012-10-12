@@ -120,9 +120,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
 		MyPagerAdapter adapter = new MyPagerAdapter(this);
 
-	
-
-		adapter.SetTitles(new String[] { getString(R.string.page1), getString(R.string.page2), getString(R.string.page3) });
+		adapter.SetTitles(new String[] { getString(R.string.page1),
+				getString(R.string.page2), getString(R.string.page3) });
 		final LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1,
@@ -171,12 +170,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		killme = false;
 
-		// if (app.Protocol > 200) {
-		// ButtonPID.setVisibility(View.VISIBLE);
-		// } else {
-		// ButtonPID.setVisibility(View.GONE);
-		// }
-
 		if (app.MacAddress.equals("")) {
 			TVData.setText(getString(R.string.MacNotSet));
 		} else {
@@ -193,7 +186,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app_ver_code = getPackageManager().getPackageInfo(
 					this.getPackageName(), 0).versionCode;
 		} catch (NameNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -384,89 +376,85 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		TVData.append(co + "=" + (wartosc) + "\n");
 	}
 
-	public void RadioButtonOnClick(View v) {
+	// //buttons/////////////////////////////////////
+	public void RadioOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), RadioActivity.class));
 	}
 
 	public void ConfigOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), ConfigActivity.class));
 	}
 
-	public void LogingOnClick(View v) {
+	public void LoggingOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), LogActivity.class));
 	}
 
 	public void GPSOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), GPSActivity.class));
 
 	}
 
 	public void MotorsOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), MotorsActivity.class));
 	}
 
 	public void PIDOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), PIDActivity.class));
 	}
 
 	public void OtherOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), OtherActivity.class));
 	}
 
 	public void FrskyOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), FrskyActivity.class));
 	}
 
-	public void CheckboxesOnClick(View v) {
+	public void AUXOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(),
 				CheckBoxesActivity.class));
 	}
 
-	// public void DashboardOnClick(View v) {
-	//
-	// WindowManager mWindowManager = (WindowManager)
-	// getSystemService(WINDOW_SERVICE);
-	// Display mDisplay = mWindowManager.getDefaultDisplay();
-	//
-	// if (mDisplay.getRotation() == 0) {
-	//
-	// mHandler.removeCallbacksAndMessages(null);
-	// startActivity(new Intent(getApplicationContext(),
-	// Dashboard1Activity.class));
-	// } else {
-	// mHandler.removeCallbacksAndMessages(null);
-	// startActivity(new Intent(getApplicationContext(),
-	// Dashboard2Activity.class));
-	// }
-	// }
-
 	public void Dashboard1OnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(),
 				Dashboard1Activity.class));
 	}
 
 	public void Dashboard2OnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(),
 				Dashboard2Activity.class));
 	}
 
 	public void MapOnClick(View v) {
+		killme = true;
 		if (app.UseOfflineMaps) {
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(),
 					MapOfflineActivityMy.class));
 		} else {
+			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(),
 					MapActivityMy.class));
@@ -474,13 +462,40 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void AboutOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), AboutActivity.class));
 	}
 
 	public void GraphsOnClick(View v) {
+		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), GraphsActivity.class));
+	}
+
+	public void AdvancedOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(),
+				AdvancedActivity.class));
+	}
+
+	public void DonateOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		Intent browserIntent = new Intent(
+				Intent.ACTION_VIEW,
+				Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
+		startActivity(browserIntent);
+	}
+
+	public void RateOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse("market://details?id="
+				+ getApplicationContext().getPackageName()));
+		startActivity(intent);
 	}
 
 	// /////menu////////
@@ -533,19 +548,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 
 		if (item.getItemId() == R.id.menu_vote) {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("market://details?id="
-					+ getApplicationContext().getPackageName()));
-			startActivity(intent);
+			RateOnClick(null);
 
 			return true;
 		}
 
 		if (item.getItemId() == R.id.menuDonate) {
-			Intent browserIntent = new Intent(
-					Intent.ACTION_VIEW,
-					Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
-			startActivity(browserIntent);
+			DonateOnClick(null);
 			return true;
 		}
 
@@ -565,9 +574,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 
 		if (item.getItemId() == R.id.menuAdvanced) {
-			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(),
-					AdvancedActivity.class));
+			AdvancedOnClick(null);
 		}
 		return false;
 	}
