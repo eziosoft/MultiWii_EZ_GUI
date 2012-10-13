@@ -183,4 +183,14 @@
   <string name="ALT">ALT</string>
   <string name="HEAD">HEAD</string>
   <string name="Pause">Пауза</string>
+
+  <string name="SelectBTdeviceFrsky">Выберите Frsky BT</string>
+  <string name="Frsky">Frsky</string>
+  <string name="TxRSSI">TxRSSI</string>
+  <string name="RxRSSI">RxRSSI</string>
+  <string name="Connect_frsky">Frsky Подключено</string>
+  <string name="UseOfflineMap">Использовать кэшированные карты</string>
+  <string name="RefreshRate">Частота обновления в мс (должно быть >=100)</string>
+  <string name="ConnectionBug">Используйте, когда отключается при нажатии кнопки (сейчас работает толька на Приборке2 )</string>
+  <string name="CopyFrskyToMW">Использовать данные Frsky везде</string>
 </resources>
