@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/menu_connect"
-        android:showAsAction="always|withText"
+        android:showAsAction="always"
         android:title="@string/menu_connect">
     </item>
     <item
@@ -18,37 +18,44 @@
     <item
         android:id="@+id/menuOther"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/Other">
+        android:title="@string/Other"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menuConfig"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/Config">
+        android:title="@string/Config"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menuAdvanced"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/Advanced">
+        android:title="@string/Advanced"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menuDonate"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/Donate">
+        android:title="@string/Donate"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_vote"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_vote">
+        android:title="@string/menu_vote"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menuAbout"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/About">
+        android:title="@string/About"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_exit"
+        android:icon="@drawable/shutdown"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="always"
         android:title="@string/menu_exit"/>
 
 </menu>

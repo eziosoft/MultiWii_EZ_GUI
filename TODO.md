@@ -50,27 +50,25 @@
 //- TODO  you can only use comma for separating decimal numbers.
 ---
 
-//>2.50.30
+
 //+ Graphs
 //+ 211 protocol start
 
-//>2.6.31
+
 //+ test Frsky basic support. Hub frames are supported but not decoded yet. MultiWii and Frysky connection are sepateted. Small progress bar above action bar shows TX RSSI.
 //+ dashboard 1 and 2 buttons are back
 //+ gui improvements
 //+ bug fix
 
-//>2.70.32
 //+ frsky hub frames and values are now displayed. Still not decoded. Only altitude is decoded.
 //+ bug fix
 
-//>2.71.33
+
 //+ Frsky TxRSSI and RxRSSI added to dashboard 2
 //+ Ukrainian added
 //+ Russian added
 
 //+ REFRESH_RATE - make it settable
 //- boxes names and MSP_BOXNAMES - IMPORTANT !!!
-===
-// -  MSP_PIDNAMES:			/* TODO create GUI elements from this message */
+// -  MSP_PIDNAMES:			/* TODO create GUI elements from this message */ doesn't always work
 ---			

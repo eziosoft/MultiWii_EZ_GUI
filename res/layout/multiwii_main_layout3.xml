@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:keepScreenOn="true"
     android:orientation="vertical" >
 
     <TextView
@@ -12,33 +13,35 @@
         android:background="@color/tittle"
         android:gravity="center"
         android:text="---"
-        android:textColor="@color/tittleText" />
+        android:textColor="@color/tittleText"
+        android:visibility="gone" />
 
     <com.viewpagerindicator.TitlePageIndicator
         android:id="@+id/indicator"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#18FF0000"
+        android:background="#222"
         android:padding="10dip"
-        android:textColor="#AA000000"
+        android:textColor="#555"
         app:footerColor="#FFAA2222"
         app:footerIndicatorHeight="3dp"
         app:footerIndicatorStyle="underline"
         app:footerLineHeight="1dp"
         app:selectedBold="true"
-        app:selectedColor="#FF000000" />
+        app:selectedColor="#FFF" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@drawable/brushed" >
     </android.support.v4.view.ViewPager>
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

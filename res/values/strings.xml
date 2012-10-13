@@ -64,7 +64,7 @@
     <string name="GPS_latitude">Latitude</string>
     <string name="GPS_longitude">Longitude</string>
     <string name="menu_exit">Exit</string>
-    <string name="menu_connect">MultiWii Connect</string>
+    <string name="menu_connect">MW Connect</string>
     <string name="menu_disconnect">Disconnect</string>
     <string name="SelectBTdevice">Select MultiWii BT</string>
     <string name="LEDMAX">LEDMAX</string>
@@ -205,18 +205,5 @@
     <string name="page2">MW Settings</string>
     <string name="page3">Config</string>
 
-    <style name="ButtonText">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:shadowColor">#000000</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">2</item>
-    </style>
-
+   
 </resources>

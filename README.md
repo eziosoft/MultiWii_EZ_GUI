@@ -14,6 +14,7 @@ Tips
 	*Use GoogleAPI 4.x to compile
 	*This app uses ActionBarSherlock and you have to have it in your workspace. In my workspace it is called library.
 	for more info go here: http://actionbarsherlock.com/usage.html
+	*also viewpagerindicator is used http://viewpagerindicator.com/
  	*App.java class is the main class in this app. Start from here.
  	*to create new activity you can use com.ezio.multiwii.notUsed.TemplateActivity.java as example
 
