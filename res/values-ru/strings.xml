@@ -103,7 +103,7 @@
   <string name="Pitch_Roll">Pitch/Roll</string>
   <string name="AccCalibration">Калибровать Акселерометр</string>
   <string name="MagCalibration">Калибровать Компас</string>
-  <string name="Other">Другие</string>
+  <string name="Other">Калибровка</string>
   <string name="MotorsServos">Mot/Serv</string>
   <string name="PhoneSpeed">Скор.Телефона(см/сек)</string>
   <string name="PhoneNumSat">СпутникиТелефона</string>
