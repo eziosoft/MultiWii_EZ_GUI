@@ -192,7 +192,7 @@
   <string name="ConnectionBug">Використовуйте, коли відключається при натисканні кнопки (наразі працює тільки на Приборці2)</string>
   <string name="CopyFrskyToMW">Використовувати данні Frsky будь-де</string>
 
-  <string name="page1">Прибори</string
+  <string name="page1">Прибори</string>
   <string name="page2">MW Налаштування</string>
   <string name="page3">Конфігурації</string>
 </resources>

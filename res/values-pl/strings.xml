@@ -88,7 +88,7 @@
     <string name="PID">PID</string>
     <string name="Read">Odczytaj</string>
     <string name="Write">Zapisz</string>
-    <string name="Rate">Rate</string>
+    <string name="Rate">Oceń!</string>
     <string name="MID">MID</string>
     <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
@@ -145,7 +145,7 @@
     <string name="About">O programie</string>
     <string name="BatteryLevelIs">Poziom akumulatora to</string>
     <string name="Reconnecting">Połączenie utracone. Ponowne łączenie...</string>
-    <string name="Language">Language</string>
+    <string name="Language">Język</string>
     <string name="LanguageInfo">Niektóre języki nie są wspierane przez domyślny silnik TTS. Dla języka polskiego można użyć Ivona lub e-speak.</string>
     <string name="periodicspeaking">Okresowe mówienie statu w sek. (0 żeby wyłączyć)</string>
     <string name="Control">Kontrola koptera</string>
@@ -158,5 +158,43 @@
     <string name="Advanced">Zaawansowane</string>
     <string name="Dashboard">Konsola</string>
     <string name="PhoneAccuracy">TelDokładność(cm)</string>
+     <string name="SetCheckboxes">AUX</string>
+    <string name="Set">Ustaw chwilowo</string>
+    <string name="SavetoEEPROM">Zapisz do EEPROM(ustaw przed zapisem)</string>
+
+    <!-- GRAPHS VIEW -->
+
+    <string name="Graphs">Wykresy</string>
+    <string name="show">Pokaż</string>
+    <string name="ACCROLL">ACC ROLL</string>
+    <string name="ACCPITCH">ACC PITCH</string>
+    <string name="ACCZ">ACC Z</string>
+    <string name="GYROROLL">GYRO ROLL</string>
+    <string name="GYROPITCH">GYRO PITCH</string>
+    <string name="GYROYAW">GYRO YAW</string>
+    <string name="MAGROLL">MAG ROLL</string>
+    <string name="MAGPITCH">MAG PITCH</string>
+    <string name="MAGYAW">MAG YAW</string>
+    <string name="ALT">ALT</string>
+    <string name="HEAD">HEAD</string>
+    <string name="Pause">Pauza</string>
+
+    <!-- end graphs -->
+
+    <string name="SelectBTdeviceFrsky">Wybierz Frsky BT</string>
+    <string name="Frsky">Frsky</string>
+    <string name="TxRSSI">TxRSSI</string>
+    <string name="RxRSSI">RxRSSI</string>
+    <string name="Connect_frsky">Frsky Połącz</string>
+    <string name="UseOfflineMap">Użyj mapy offline</string>
+    <string name="RefreshRate">Odświerzanie danych w ms (should be >=100)</string>
+    <string name="ConnectionBug">Zaznacz kiedy program rozłącza się przy zmianie widoków (dziala tylko z dashboard2)</string>
+    <string name="CopyFrskyToMW">Używaj danych z Frsky wszędzie</string>
+
+    <!-- menu -->
+    <string name="page1">Konsola</string>
+    <string name="page2">MW Ustawienia</string>
+    <string name="page3">Konfiguracja</string>
+    
 
 </resources>
