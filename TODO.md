@@ -24,7 +24,8 @@
 //+ Some padding (1-2 dp?) around the text in the bottom menu ... it currently touches the blue borders on long text
 //+ The app would be perfect if it were possible to change the AUX channel settings 
 //+killme
-//+map overlay
+- offline map overlay have to be fixed
+===
 //+GUI change
 
 //+Hungarian added
