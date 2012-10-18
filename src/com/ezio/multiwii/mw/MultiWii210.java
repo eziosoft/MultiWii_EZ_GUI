@@ -391,13 +391,25 @@ public class MultiWii210 extends MultirotorData {
 		}
 	}
 
-	int timer1 = 0;
+	int timer1 = 10;
 	int timer2 = 0;
 
 	@Override
 	public void SendRequest() {
 		if (bt.Connected) {
 			int[] requests;
+
+			if (timer2 < 5) {
+				timer2++;
+			} else {
+				if (timer2 != 10) {
+
+					requests = new int[] { MSP_BOXNAMES };
+					sendRequestMSP(requestMSP(requests));
+					timer2 = 10;
+					return;
+				}
+			}
 
 			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO,
 					MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE,
@@ -411,17 +423,6 @@ public class MultiWii210 extends MultirotorData {
 						MSP_RC_TUNING };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
-			}
-
-			if (timer2 < 5) {
-				timer2++;
-			} else {
-				if (timer2 != 10) {
-
-					requests = new int[] { MSP_BOXNAMES };
-					sendRequestMSP(requestMSP(requests));
-					timer2 = 10;
-				}
 			}
 
 		}
