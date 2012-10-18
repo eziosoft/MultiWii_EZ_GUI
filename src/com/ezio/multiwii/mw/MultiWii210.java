@@ -26,6 +26,9 @@ import com.ezio.multiwii.Waypoint;
 
 public class MultiWii210 extends MultirotorData {
 
+	int timer1 = 10; // used to send request every 10 requests
+	int timer2 = 0; // used to send requests once after conection
+
 	public MultiWii210(BT b) {
 		bt = b;
 
@@ -59,7 +62,7 @@ public class MultiWii210 extends MultirotorData {
 		ResetAllChexboxes();
 	}
 
-	void ResetAllChexboxes() {
+	private void ResetAllChexboxes() {
 		for (int i = 0; i < buttonCheckboxLabel.length; i++) {
 			for (int j = 0; j < 12; j++) {
 				Checkbox[i][j] = false;
@@ -111,7 +114,7 @@ public class MultiWii210 extends MultirotorData {
 		return (bf);
 	}
 
-	void sendRequestMSP(List<Byte> msp) {
+	private void sendRequestMSP(List<Byte> msp) {
 		byte[] arr = new byte[msp.size()];
 		int i = 0;
 		for (byte b : msp) {
@@ -312,20 +315,20 @@ public class MultiWii210 extends MultirotorData {
 	int i = 0;
 	int p = 0;
 
-	int read32() {
+	private int read32() {
 		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8)
 				+ ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
 	}
 
-	int read16() {
+	private int read16() {
 		return (inBuf[p++] & 0xff) + ((inBuf[p++]) << 8);
 	}
 
-	int read8() {
+	private int read8() {
 		return inBuf[p++] & 0xff;
 	}
 
-	public void ReadFrame() {
+	private void ReadFrame() {
 		while (bt.available() > 0) {
 			c = (bt.Read());
 			// Log.d("21",String.valueOf(c));
@@ -388,43 +391,6 @@ public class MultiWii210 extends MultirotorData {
 				}
 				c_state = IDLE;
 			}
-		}
-	}
-
-	int timer1 = 10;
-	int timer2 = 0;
-
-	@Override
-	public void SendRequest() {
-		if (bt.Connected) {
-			int[] requests;
-
-			if (timer2 < 5) {
-				timer2++;
-			} else {
-				if (timer2 != 10) {
-
-					requests = new int[] { MSP_BOXNAMES };
-					sendRequestMSP(requestMSP(requests));
-					timer2 = 10;
-					return;
-				}
-			}
-
-			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO,
-					MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE,
-					MSP_ATTITUDE, MSP_DEBUG };
-			sendRequestMSP(requestMSP(requests));
-
-			timer1++;
-
-			if (timer1 > 10) {
-				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC,
-						MSP_RC_TUNING };
-				sendRequestMSP(requestMSP(requests));
-				timer1 = 0;
-			}
-
 		}
 	}
 
@@ -620,6 +586,46 @@ public class MultiWii210 extends MultirotorData {
 	public void SendRequestWriteToEEprom() {
 		// MSP_EEPROM_WRITE
 		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
+	}
+
+	// //Main Request//////////////////////////////////////////////////
+	@Override
+	public void SendRequest() {
+		if (bt.Connected) {
+			int[] requests;
+
+			// this is fired only once////////
+			if (timer2 < 5) {
+				timer2++;
+			} else {
+				if (timer2 != 10) {
+
+					requests = new int[] { MSP_BOXNAMES };
+					sendRequestMSP(requestMSP(requests));
+					timer2 = 10;
+					return;
+				}
+			}
+			// ///////////////////////////////////////
+
+			timer1++;
+			if (timer1 > 10) { // fired every 10 requests
+				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC,
+						MSP_RC_TUNING };
+				sendRequestMSP(requestMSP(requests));
+				timer1 = 0;
+				return;
+			}
+
+			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO,
+					MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE,
+					MSP_ATTITUDE, MSP_DEBUG };
+			sendRequestMSP(requestMSP(requests));
+
+		} else {
+			timer1 = 10;
+			timer2 = 0;
+		}
 	}
 
 }

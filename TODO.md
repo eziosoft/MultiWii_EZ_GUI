@@ -25,7 +25,7 @@
 //+ The app would be perfect if it were possible to change the AUX channel settings 
 //+killme
 - offline map overlay have to be fixed
-===
+---
 //+GUI change
 
 //+Hungarian added
@@ -70,6 +70,6 @@
 //+ Russian added
 
 //+ REFRESH_RATE - make it settable
-//- boxes names and MSP_BOXNAMES - IMPORTANT !!!
-// -  MSP_PIDNAMES:			/* TODO create GUI elements from this message */ doesn't always work
----			
+//+ boxes names and MSP_BOXNAMES - IMPORTANT !!!
+//+  MSP_PIDNAMES:			/* TODO create GUI elements from this message */ doesn't always work
+			
