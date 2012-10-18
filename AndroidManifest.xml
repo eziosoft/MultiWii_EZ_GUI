@@ -86,10 +86,9 @@
             android:name=".map.MapActivityMy"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name="WaypointActivity" >
+        <activity android:name=".notUsed.WaypointActivity" >
         </activity>
-        <activity
-            android:name="AboutActivity">
+        <activity android:name="AboutActivity" >
         </activity>
         <activity
             android:name="CheckBoxesActivity"
@@ -126,6 +125,11 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="RawDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="unspecified" >
         </activity>
     </application>
 

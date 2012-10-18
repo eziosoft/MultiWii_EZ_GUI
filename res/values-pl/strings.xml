@@ -196,5 +196,9 @@
     <string name="page2">MW Ustawienia</string>
     <string name="page3">Konfiguracja</string>
     
+ <!-- end menu -->
 
+    <string name="RawData">Surowe dane</string>
+    
+    
 </resources>

@@ -14,12 +14,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.notUsed;
 
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.ezio.multiwii.App;
 
 public class WaypointActivity extends SherlockActivity {
 	private boolean			killme		= false;

@@ -46,6 +46,7 @@ import com.ezio.multiwii.LogActivity;
 import com.ezio.multiwii.OtherActivity;
 import com.ezio.multiwii.PIDActivity;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.RawDataActivity;
 import com.ezio.multiwii.config.ConfigActivity;
 import com.ezio.multiwii.dashboard.Dashboard1Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
@@ -66,7 +67,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	private boolean killme = false;
 
 	App app;
-	TextView TVData;
+
 	TextView TVinfo;
 
 	private Handler mHandler = new Handler();
@@ -138,14 +139,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		app = (App) getApplication();
 
-		// actionBar = getSherlock();
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-		TVData = (TextView) findViewById(R.id.textViewData);
 		TVinfo = (TextView) findViewById(R.id.TextViewInfo);
-
-		// ButtonPID = (Button) findViewById(R.id.buttonPID);
-		// ButtonOther = (Button) findViewById(R.id.buttonOther);
 
 		if (app.ShowADS)
 			adMobConfig();
@@ -169,14 +165,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		super.onResume();
 
 		killme = false;
-
-		if (app.MacAddress.equals("")) {
-			TVData.setText(getString(R.string.MacNotSet));
-		} else {
-			TVData.setText("");
-			if (!app.bt.Connected)
-				TVData.setText(getString(R.string.InfoNotConnected));
-		}
 
 		String app_ver = "";
 		int app_ver_code = 0;
@@ -268,87 +256,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 			app.mw.ProcessSerialData(app.loggingON);
 
-			TVData.setText("");
-			log("version", app.mw.version);
-			log("multiType", app.mw.MultiTypeName[app.mw.multiType] + "("
-					+ String.valueOf(app.mw.multiType) + ")");
-
-			log("cycleTime", app.mw.cycleTime);
-			log("i2cError", app.mw.i2cError);
-
-			log("gx", app.mw.gx);
-			log("gy", app.mw.gy);
-			log("gz", app.mw.gz);
-
-			log("ax", app.mw.ax);
-			log("ay", app.mw.ay);
-			log("az", app.mw.az);
-
-			log("magx", app.mw.magx);
-			log("magy", app.mw.magy);
-			log("magz", app.mw.magz);
-
-			log("baro", app.mw.baro);
-			log("alt", app.mw.alt);
-			log("head", app.mw.head);
-
-			log("angx", app.mw.angx);
-			log("angy", app.mw.angy);
-			log("bytevbat", app.mw.bytevbat);
-			log("pMeterSum", app.mw.pMeterSum);
-
-			log("nunchukPresent", app.mw.nunchukPresent);
-			log("AccPresent", app.mw.AccPresent);
-			log("BaroPresent", app.mw.BaroPresent);
-			log("MagnetoPresent", app.mw.MagPresent);
-			log("GPSPresent", app.mw.GPSPresent);
-			log("SonarPresent", app.mw.SonarPresent);
-
-			log("present", app.mw.present);
-			log("mode", app.mw.mode);
-			log("levelMode", app.mw.levelMode);
-
-			log("byteThrottle_EXPO", app.mw.byteThrottle_EXPO);
-			log("byteThrottle_MID", app.mw.byteThrottle_MID);
-
-			log("GPS_fix", app.mw.GPS_fix);
-			log("GPS_numSat", app.mw.GPS_numSat);
-			log("GPS_update", app.mw.GPS_update);
-			log("GPS_directionToHome", app.mw.GPS_directionToHome);
-			log("GPS_distanceToHome", app.mw.GPS_distanceToHome);
-			log("GPS_altitude", app.mw.GPS_altitude);
-			log("GPS_speed", app.mw.GPS_speed);
-			log("GPS_latitude", app.mw.GPS_latitude);
-			log("GPS_longitude", app.mw.GPS_longitude);
-
-			log("rcThrottle", app.mw.rcThrottle);
-			log("rcYaw", app.mw.rcYaw);
-			log("rcPitch", app.mw.rcPitch);
-			log("rcRoll", app.mw.rcRoll);
-			log("rcAUX1", app.mw.rcAUX1);
-			log("rcAUX2", app.mw.rcAUX2);
-			log("rcAUX3", app.mw.rcAUX3);
-			log("rcAUX4", app.mw.rcAUX4);
-
-			log("debug1", app.mw.debug1);
-			log("debug2", app.mw.debug2);
-			log("debug3", app.mw.debug3);
-			log("debug4", app.mw.debug4);
-
-			log("MSP_DEBUGMSG", app.mw.DebugMSG);
-
-			for (int i = 0; i < app.mw.mot.length; i++) {
-				log("Motor" + String.valueOf(i + 1), app.mw.mot[i]);
-			}
-
-			for (int i = 0; i < app.mw.PIDITEMS; i++) {
-				log("P=" + String.valueOf(app.mw.byteP[i]) + " I="
-						+ String.valueOf(app.mw.byteI[i]) + " D",
-						app.mw.byteD[i]);
-			}
-
-			log("versionMisMatch", app.mw.versionMisMatch);
-
 			app.frsky.ProcessSerialData(false);
 			setSupportProgress((int) map(app.frsky.TxRSSI, 0, 110, 0, 10000));
 
@@ -364,19 +271,14 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
 
-	private void log(String co, int wartosc) {
-		TVData.append(co + "=" + String.valueOf(wartosc) + "\n");
-	}
-
-	private void log(String co, float wartosc) {
-		TVData.append(co + "=" + String.valueOf(wartosc) + "\n");
-	}
-
-	private void log(String co, String wartosc) {
-		TVData.append(co + "=" + (wartosc) + "\n");
-	}
-
 	// //buttons/////////////////////////////////////
+
+	public void RawDataOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), RawDataActivity.class));
+	}
+
 	public void RadioOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);

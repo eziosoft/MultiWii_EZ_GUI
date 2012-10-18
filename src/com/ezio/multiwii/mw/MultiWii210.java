@@ -22,7 +22,7 @@ import java.util.List;
 
 import android.util.Log;
 
-import com.ezio.multiwii.Waypoint;
+import com.ezio.multiwii.notUsed.Waypoint;
 
 public class MultiWii210 extends MultirotorData {
 
@@ -315,16 +315,16 @@ public class MultiWii210 extends MultirotorData {
 	int i = 0;
 	int p = 0;
 
-	private int read32() {
+	int read32() {
 		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8)
 				+ ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
 	}
 
-	private int read16() {
+	int read16() {
 		return (inBuf[p++] & 0xff) + ((inBuf[p++]) << 8);
 	}
 
-	private int read8() {
+	int read8() {
 		return inBuf[p++] & 0xff;
 	}
 

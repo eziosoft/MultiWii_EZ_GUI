@@ -205,5 +205,8 @@
     <string name="page2">MW Settings</string>
     <string name="page3">Config</string>
 
-   
+    <!-- end menu -->
+
+    <string name="RawData">Raw Data</string>
+
 </resources>
