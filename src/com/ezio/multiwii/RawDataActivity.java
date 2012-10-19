@@ -51,6 +51,8 @@ public class RawDataActivity extends Activity {
 				FlashUpdate.setVisibility(View.VISIBLE);
 			}
 
+			Log.d("aaa", String.valueOf(app.mw.ax));
+			
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);

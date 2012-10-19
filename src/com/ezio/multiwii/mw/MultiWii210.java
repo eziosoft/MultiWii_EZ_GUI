@@ -172,9 +172,14 @@ public class MultiWii210 extends MultirotorData {
 			}
 			break;
 		case MSP_RAW_IMU:
+			
+			
 			ax = read16();
 			ay = read16();
 			az = read16();
+			
+			
+			
 			gx = read16() / 8;
 			gy = read16() / 8;
 			gz = read16() / 8;

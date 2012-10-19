@@ -188,10 +188,6 @@ public class App extends Application {
 		}
 
 		if (Protocol == 210) {
-			mw = new MultiWii210(bt);
-		}
-
-		if (Protocol == 211) {
 			mw = new MultiWii211(bt);
 		}
 
@@ -263,7 +259,7 @@ public class App extends Application {
 	}
 
 	public void Frequentjobs() {
-		if (CopyFrskyToMW)
+		if (CopyFrskyToMW && BTFrsky.Connected)
 			FrskyToMW();
 
 		for (int i = 0; i < mw.CHECKBOXITEMS; i++) {

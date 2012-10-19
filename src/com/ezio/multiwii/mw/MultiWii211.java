@@ -20,7 +20,7 @@ public class MultiWii211 extends MultiWii210 {
 
 	public MultiWii211(BT b) {
 		super(b);
-		EZGUIProtocol = "211";
+		EZGUIProtocol = "211 r1177";
 	}
 
 	@Override
