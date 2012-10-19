@@ -28,6 +28,8 @@ import android.util.Log;
 
 public abstract class MultirotorData {
 
+	public String EZGUIProtocol = "";
+
 	// ////////Protocol 2.0 ////////
 	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI",
 			"GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8",
@@ -83,31 +85,32 @@ public abstract class MultirotorData {
 	/******************************* Multiwii Serial Protocol **********************/
 	final String MSP_HEADER = "$M<";
 
-	static final int MSP_IDENT = 100, MSP_STATUS = 101, MSP_RAW_IMU = 102,
-			MSP_SERVO = 103, MSP_MOTOR = 104, MSP_RC = 105, MSP_RAW_GPS = 106,
-			MSP_COMP_GPS = 107, MSP_ATTITUDE = 108, MSP_ALTITUDE = 109,
-			MSP_BAT = 110, MSP_RC_TUNING = 111, MSP_PID = 112, MSP_BOX = 113,
-			MSP_MISC = 114, MSP_MOTOR_PINS = 115, MSP_BOXNAMES = 116,
-			MSP_PIDNAMES = 117,
+	public static final int MSP_IDENT = 100, MSP_STATUS = 101,
+			MSP_RAW_IMU = 102, MSP_SERVO = 103, MSP_MOTOR = 104, MSP_RC = 105,
+			MSP_RAW_GPS = 106, MSP_COMP_GPS = 107, MSP_ATTITUDE = 108,
+			MSP_ALTITUDE = 109, MSP_BAT = 110, MSP_RC_TUNING = 111,
+			MSP_PID = 112, MSP_BOX = 113, MSP_MISC = 114, MSP_MOTOR_PINS = 115,
+			MSP_BOXNAMES = 116, MSP_PIDNAMES = 117,
 
 			MSP_SET_RAW_RC = 200, MSP_SET_RAW_GPS = 201, MSP_SET_PID = 202,
 			MSP_SET_BOX = 203, MSP_SET_RC_TUNING = 204,
 			MSP_ACC_CALIBRATION = 205, MSP_MAG_CALIBRATION = 206,
-			MSP_SET_MISC = 207, MSP_RESET_CONF = 208,
+			MSP_SET_MISC = 207, MSP_RESET_CONF = 208, MSP_SELECT_SETTING = 210,
+
+			MSP_SPEK_BIND = 240,
 
 			MSP_EEPROM_WRITE = 250,
 
-			MSP_DEBUG = 254, MSP_WP = 118 // out message get a WP, WP# is in the
-											// payload, returns (WP#, lat, lon,
-											// alt, flags) WP#0-home,
-											// WP#16-poshold
-			, MSP_DEBUGMSG = 253;
+			MSP_DEBUGMSG = 253, MSP_DEBUG = 254, MSP_WP_SET = 209,
+			MSP_WP = 118;
 
 	public static final int IDLE = 0, HEADER_START = 1, HEADER_M = 2,
 			HEADER_ARROW = 3, HEADER_SIZE = 4, HEADER_CMD = 5, HEADER_ERR = 6;
 
 	public float alt;
-	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude;
+	public int vario;
+	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude,
+			GPS_ground_course;
 
 	public int present = 0;
 

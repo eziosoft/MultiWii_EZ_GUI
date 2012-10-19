@@ -20,6 +20,7 @@ public class MultiWii211 extends MultiWii210 {
 
 	public MultiWii211(BT b) {
 		super(b);
+		EZGUIProtocol = "211";
 	}
 
 	@Override
@@ -37,6 +38,26 @@ public class MultiWii211 extends MultiWii210 {
 				}
 			}
 			break;
+
+		case MSP_RAW_GPS:
+			if (version == 211) {
+				GPS_fix = read8();
+				GPS_numSat = read8();
+				GPS_latitude = read32();
+				GPS_longitude = read32();
+				GPS_altitude = read16();
+				GPS_speed = read16();
+				GPS_ground_course = read16();
+			}
+			break;
+
+		case MSP_ALTITUDE:
+			if (version == 211) {
+				baro = alt = (float) read32() / 100;
+				vario=read16();
+			}
+			break;
+
 		}
 
 		super.evaluateCommand(cmd, dataSize);

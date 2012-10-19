@@ -69,6 +69,23 @@ public class GraphsActivity extends SherlockActivity {
 					NextLimit = CurentPosition + 5000;
 				}
 
+				// debug
+//				app.mw.ax = rnd.nextFloat();
+//				app.mw.ay = rnd.nextFloat();
+//				app.mw.az = rnd.nextFloat();
+//
+//				app.mw.gx = rnd.nextFloat();
+//				app.mw.gy = rnd.nextFloat();
+//				app.mw.gz = rnd.nextFloat();
+//
+//				app.mw.magx = rnd.nextFloat();
+//				app.mw.magy = rnd.nextFloat();
+//				app.mw.magz = rnd.nextFloat();
+//
+//				app.mw.alt = rnd.nextFloat();
+//				app.mw.head = rnd.nextFloat();
+				// //////
+
 				for (GraphViewSeries s : series) {
 
 					if (s.description.equals(app.ACCROLL))

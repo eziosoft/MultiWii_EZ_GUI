@@ -22,6 +22,7 @@ public class MultiWii200 extends MultirotorData {
 
 	public MultiWii200(BT b) {
 		bt = b;
+		EZGUIProtocol="200";
 	}
 
 	private void log(String co, int wartosc) {

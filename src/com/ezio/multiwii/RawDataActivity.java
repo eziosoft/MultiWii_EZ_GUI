@@ -51,8 +51,6 @@ public class RawDataActivity extends Activity {
 				FlashUpdate.setVisibility(View.VISIBLE);
 			}
 
-			
-
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
@@ -114,6 +112,7 @@ public class RawDataActivity extends Activity {
 		// log("cycleTime", app.mw.cycleTime);
 		// log("i2cError", app.mw.i2cError);
 
+		log("EZ-GUI Protocol", app.mw.EZGUIProtocol);
 		log("gx", app.mw.gx);
 		log("gy", app.mw.gy);
 		log("gz", app.mw.gz);
@@ -128,6 +127,7 @@ public class RawDataActivity extends Activity {
 
 		log("baro", app.mw.baro);
 		log("alt", app.mw.alt);
+		log("vario", app.mw.vario);
 		log("head", app.mw.head);
 
 		log("angx", app.mw.angx);
@@ -158,6 +158,7 @@ public class RawDataActivity extends Activity {
 		log("GPS_speed", app.mw.GPS_speed);
 		log("GPS_latitude", app.mw.GPS_latitude);
 		log("GPS_longitude", app.mw.GPS_longitude);
+		log("GPS_ground_course", app.mw.GPS_ground_course);
 
 		log("rcThrottle", app.mw.rcThrottle);
 		log("rcYaw", app.mw.rcYaw);

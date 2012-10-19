@@ -24,22 +24,22 @@ import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
 
 public class SelectToShowActivity extends SherlockActivity {
-	App			app;
+	App app;
 
-	CheckBox	checkBoxAccRoll;
-	CheckBox	checkBoxAccPitch;
-	CheckBox	checkBoxAccZ;
+	CheckBox checkBoxAccRoll;
+	CheckBox checkBoxAccPitch;
+	CheckBox checkBoxAccZ;
 
-	CheckBox	checkBoxGyroRoll;
-	CheckBox	checkBoxGyroPitch;
-	CheckBox	checkBoxGyroYaw;
+	CheckBox checkBoxGyroRoll;
+	CheckBox checkBoxGyroPitch;
+	CheckBox checkBoxGyroYaw;
 
-	CheckBox	checkBoxMagRoll;
-	CheckBox	checkBoxMagPitch;
-	CheckBox	checkBoxMagYaw;
+	CheckBox checkBoxMagRoll;
+	CheckBox checkBoxMagPitch;
+	CheckBox checkBoxMagYaw;
 
-	CheckBox	checkBoxAlt;
-	CheckBox	checkBoxHead;
+	CheckBox checkBoxAlt;
+	CheckBox checkBoxHead;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +116,10 @@ public class SelectToShowActivity extends SherlockActivity {
 			app.GraphsToShow += app.ALT + ";";
 		if (checkBoxHead.isChecked())
 			app.GraphsToShow += app.HEAD + ";";
+
+		if (app.GraphsToShow.substring(app.GraphsToShow.length() - 1,
+				app.GraphsToShow.length()).equals(";"))
+			app.GraphsToShow=app.GraphsToShow.substring(0, app.GraphsToShow.length() - 1);
 
 		app.SaveSettings();
 

@@ -31,7 +31,7 @@ public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(BT b) {
 		bt = b;
-
+		EZGUIProtocol = "210";
 		// changes from 2.0//
 		PIDITEMS = 10;
 		CHECKBOXITEMS = 0;
@@ -201,13 +201,14 @@ public class MultiWii210 extends MultirotorData {
 			rcAUX4 = read16();
 			break;
 		case MSP_RAW_GPS:
-			GPS_fix = read8();
-			// println(dataSize);
-			GPS_numSat = read8();
-			GPS_latitude = read32();
-			GPS_longitude = read32();
-			GPS_altitude = read16();
-			GPS_speed = read16();
+			if (version == 210) {
+				GPS_fix = read8();
+				GPS_numSat = read8();
+				GPS_latitude = read32();
+				GPS_longitude = read32();
+				GPS_altitude = read16();
+				GPS_speed = read16();
+			}
 			break;
 		case MSP_COMP_GPS:
 			GPS_distanceToHome = read16();
@@ -220,7 +221,9 @@ public class MultiWii210 extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			baro = alt = (float) read32() / 100;
+			if (version == 210) {
+				baro = alt = (float) read32() / 100;
+			}
 			break;
 		case MSP_BAT:
 			bytevbat = read8();

@@ -73,3 +73,5 @@
 //+ boxes names and MSP_BOXNAMES - IMPORTANT !!!
 //+  MSP_PIDNAMES:			/* TODO create GUI elements from this message */ doesn't always work
 			
+//- MSP_SELECT_SETTING
+--
