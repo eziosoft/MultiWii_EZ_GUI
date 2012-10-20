@@ -160,7 +160,7 @@
     <string name="PhoneAccuracy">TelDokładność(cm)</string>
      <string name="SetCheckboxes">AUX</string>
     <string name="Set">Ustaw chwilowo</string>
-    <string name="SavetoEEPROM">Zapisz do EEPROM(ustaw przed zapisem)</string>
+    <string name="SavetoEEPROM">Zapisz do EEPROM</string>
 
     <!-- GRAPHS VIEW -->
 

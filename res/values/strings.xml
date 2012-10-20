@@ -169,7 +169,7 @@
     <string name="PhoneAccuracy">PhoneAccuracy(cm)</string>
     <string name="SetCheckboxes">AUX</string>
     <string name="Set">Set temporary</string>
-    <string name="SavetoEEPROM">Save to EEPROM(set it first)</string>
+    <string name="SavetoEEPROM">Save to EEPROM</string>
 
     <!-- GRAPHS VIEW -->
 
@@ -208,5 +208,7 @@
     <!-- end menu -->
 
     <string name="RawData">Raw Data</string>
+
+    <string name="ShareIt">Share Your Config</string>
 
 </resources>

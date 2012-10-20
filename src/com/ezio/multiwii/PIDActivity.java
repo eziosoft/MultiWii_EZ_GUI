@@ -18,6 +18,7 @@ package com.ezio.multiwii;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -212,6 +213,21 @@ public class PIDActivity extends SherlockActivity {
 
 	}
 
+	void ShareIt() {
+		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+		sharingIntent.setType("text/plain");
+		String shareBody ="";
+		for(int i =0;i<=8;i++)
+		{
+			shareBody+=String.valueOf(P[i])+"\t|\t"+String.valueOf(I[i])+"\t|\t"+String.valueOf(D[i])+"\n";
+		}
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+				"MultiWii PID");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+
+		startActivity(Intent.createChooser(sharingIntent, "Share via"));
+	}
+
 	public void SetOnClick(View v) {
 
 		// Log.d("aaaaa",RATE2PitchRoll.getText().toString());
@@ -272,33 +288,9 @@ public class PIDActivity extends SherlockActivity {
 										confRC_EXPO, rollPitchRate, yawRate,
 										dynamic_THR_PID, throttle_MID,
 										throttle_EXPO, P, I, D);
-								Toast.makeText(getApplicationContext(),
-										getString(R.string.Done),
-										Toast.LENGTH_SHORT).show();
-
-							}
-						})
-				.setNegativeButton(getString(R.string.No),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
-		AlertDialog alert = builder.create();
-		alert.show();
-
-	}
-
-	private void SaveOnClick() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue))
-				.setCancelable(false)
-				.setPositiveButton(getString(R.string.Yes),
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog, int id) {
 
 								app.mw.SendRequestWriteToEEprom();
+
 								Toast.makeText(getApplicationContext(),
 										getString(R.string.Done),
 										Toast.LENGTH_SHORT).show();
@@ -313,7 +305,34 @@ public class PIDActivity extends SherlockActivity {
 						});
 		AlertDialog alert = builder.create();
 		alert.show();
+
 	}
+
+	// private void SaveOnClick() {
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setMessage(getString(R.string.Continue))
+	// .setCancelable(false)
+	// .setPositiveButton(getString(R.string.Yes),
+	// new DialogInterface.OnClickListener() {
+	//
+	// public void onClick(DialogInterface dialog, int id) {
+	//
+	// app.mw.SendRequestWriteToEEprom();
+	// Toast.makeText(getApplicationContext(),
+	// getString(R.string.Done),
+	// Toast.LENGTH_SHORT).show();
+	//
+	// }
+	// })
+	// .setNegativeButton(getString(R.string.No),
+	// new DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int id) {
+	// dialog.cancel();
+	// }
+	// });
+	// AlertDialog alert = builder.create();
+	// alert.show();
+	// }
 
 	private void ShowData() {
 
@@ -384,18 +403,25 @@ public class PIDActivity extends SherlockActivity {
 		}
 
 		if (item.getItemId() == R.id.MenuSavePID) {
-			SaveOnClick();
-			return true;
-		}
-
-		if (item.getItemId() == R.id.MenuSetPID) {
 			SetOnClick(null);
 			return true;
 		}
+
+		// if (item.getItemId() == R.id.MenuSetPID) {
+		// SetOnClick(null);
+		// return true;
+		// }
+
 		if (item.getItemId() == R.id.MenuResetPID) {
 			ResetOnClick(null);
 			return true;
 		}
+
+		if (item.getItemId() == R.id.MenuSharePID) {
+			ShareIt();
+			return true;
+		}
+
 		return false;
 	}
 

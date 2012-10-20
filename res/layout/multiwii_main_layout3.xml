@@ -29,12 +29,13 @@
         app:footerLineHeight="1dp"
         app:selectedBold="true"
         app:selectedColor="#FFF" />
-
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:background="@drawable/brushed" >
+
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>

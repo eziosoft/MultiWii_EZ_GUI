@@ -91,7 +91,7 @@
         <activity android:name="AboutActivity" >
         </activity>
         <activity
-            android:name="CheckBoxesActivity"
+            android:name=".AUXActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
         <activity

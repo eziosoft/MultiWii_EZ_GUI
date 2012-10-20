@@ -38,7 +38,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class CheckBoxesActivity extends SherlockActivity {
+public class AUXActivity extends SherlockActivity {
 
 	App					app;
 	private boolean		killme		= false;
@@ -96,26 +96,9 @@ public class CheckBoxesActivity extends SherlockActivity {
 					}
 				}
 				app.mw.SendRequestSetCheckboxes();
-				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
-
-			}
-		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
-
-	}
-
-	private void SaveOnClick() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int id) {
-
+				
 				app.mw.SendRequestWriteToEEprom();
+				
 				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
 			}
@@ -126,7 +109,27 @@ public class CheckBoxesActivity extends SherlockActivity {
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
+
 	}
+
+//	private void SaveOnClick() {
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+//
+//			public void onClick(DialogInterface dialog, int id) {
+//
+//				app.mw.SendRequestWriteToEEprom();
+//				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
+//
+//			}
+//		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+//			public void onClick(DialogInterface dialog, int id) {
+//				dialog.cancel();
+//			}
+//		});
+//		AlertDialog alert = builder.create();
+//		alert.show();
+//	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -302,7 +305,7 @@ public class CheckBoxesActivity extends SherlockActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_checkboxes, menu);
+		inflater.inflate(R.menu.menu_aux, menu);
 		return true;
 	}
 
@@ -313,20 +316,17 @@ public class CheckBoxesActivity extends SherlockActivity {
 			return true;
 		}
 
-		if (item.getItemId() == R.id.MenuSetCheckbox) {
+//		if (item.getItemId() == R.id.MenuSetCheckbox) {
+//			SetOnClick();
+//			return true;
+//		}
+
+		if (item.getItemId() == R.id.MenuSaveCheckbox) {
 			SetOnClick();
 			return true;
 		}
 
-		if (item.getItemId() == R.id.MenuSaveCheckbox) {
-			SaveOnClick();
-			return true;
-		}
-
-		if (item.getItemId() == R.id.MenuResetCheckbox) {
-			// ResetOnClick(null);
-			return true;
-		}
+	
 		return false;
 	}
 

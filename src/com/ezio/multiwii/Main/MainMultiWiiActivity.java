@@ -40,7 +40,7 @@ import com.actionbarsherlock.view.Window;
 import com.ezio.multiwii.AboutActivity;
 import com.ezio.multiwii.AdvancedActivity;
 import com.ezio.multiwii.App;
-import com.ezio.multiwii.CheckBoxesActivity;
+import com.ezio.multiwii.AUXActivity;
 import com.ezio.multiwii.GPSActivity;
 import com.ezio.multiwii.LogActivity;
 import com.ezio.multiwii.OtherActivity;
@@ -332,7 +332,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(),
-				CheckBoxesActivity.class));
+				AUXActivity.class));
 	}
 
 	public void Dashboard1OnClick(View v) {

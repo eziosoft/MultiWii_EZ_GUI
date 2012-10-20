@@ -2,30 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/MenuReadPID"
+        android:id="@+id/MenuReadCheckbox"
         android:showAsAction="always|withText"
         android:title="@string/Read">
     </item>
     <item
-        android:id="@+id/MenuSetPID"
+        android:id="@+id/MenuSetCheckbox"
         android:showAsAction="never|withText"
         android:title="@string/Set"
         android:visible="false">
     </item>
     <item
-        android:id="@+id/MenuSavePID"
+        android:id="@+id/MenuSaveCheckbox"
         android:showAsAction="never|withText"
         android:title="@string/SavetoEEPROM">
-    </item>
-    <item
-        android:id="@+id/MenuResetPID"
-        android:showAsAction="never|withText"
-        android:title="@string/Reset">
-    </item>
-    <item
-        android:id="@+id/MenuSharePID"
-        android:icon="@drawable/social_share"
-        android:title="@string/ShareIt">
     </item>
 
 </menu>
