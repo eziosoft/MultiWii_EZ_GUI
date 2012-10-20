@@ -54,11 +54,11 @@
   <string name="GPS_directionToHome">Напрямок до Дому</string>
   <string name="GPS_numSat">Супутників</string>
   <string name="GPS_fix">Fix</string>
-  <string name="GPS_update">Оновити</string>
+  <string name="GPS_update">Оновлення</string>
   <string name="StartLogging">Почати Лог</string>
   <string name="Stop_Logging">Зупинити Лог та зберегти у Файл</string>
   <string name="LoggingInfo">Лог збережений тут: /sdcard/MultiWiiLogs</string>
-  <string name="GPS_altitude">Altitude(m)</string>
+  <string name="GPS_altitude">Висота(м)</string>
   <string name="GPS_speed">Швидкість(см/сек)</string>
   <string name="GPS_latitude">Широта</string>
   <string name="GPS_longitude">Довгота</string>
@@ -91,7 +91,7 @@
   <string name="PID">PID</string>
   <string name="Read">Зчитати</string>
   <string name="Write">Записати</string>
-  <string name="Rate">Rate</string>
+  <string name="Rate">Оцінити</string>
   <string name="MID">MID</string>
   <string name="EXPO">EXPO</string>
   <string name="RATE">RATE</string>
@@ -115,7 +115,7 @@
   <string name="RCExpo">RC Expo</string>
   <string name="BattVoltage">Напруга</string>
   <string name="PowerSum">Power Sum</string>
-  <string name="PowerMeterAlarm">Power Meter Alarm</string>
+  <string name="PowerMeterAlarm">Тривога батареї</string>
   <string name="Level">Level</string>
   <string name="Map">Карта</string>
   <string name="Settingssaved">Параметри збережено</string>
@@ -139,7 +139,7 @@
   <string name="ResetALLnotonlyPIDparamstodefault">Скинути ВСІ (не тільки PID) налашт. за замовчуванням?</string>
   <string name="Yes">Так</string>
   <string name="No">Ні</string>
-  <string name="ValuesaresettodefaultPressreadbuttonnow">Значення встановлюється за замовчуванням. Натисніть кнопку Читати зараз.</string>
+  <string name="ValuesaresettodefaultPressreadbuttonnow">Значення встановлені за замовчуванням. Натисніть кнопку Зчитати.</string>
   <string name="Continue">Продовжити?</string>
   <string name="Done">Виконано</string>
   <string name="Started">Почато</string>
@@ -166,9 +166,9 @@
   <string name="PhoneAccuracy">ТочністьТелефону(см)</string>
   <string name="SetCheckboxes">AUX</string>
   <string name="Set">Встановити тимчасово</string>
-  <string name="SavetoEEPROM">Зберегти до EEPROM(встанов. першим)</string>
+  <string name="SavetoEEPROM">Зберегти до EEPROM</string>
   <string name="Graphs">Графіки</string>
-  <string name="show">Показати</string>
+  <string name="show">Показувати</string>
   <string name="ACCROLL">ACC ROLL</string>
   <string name="ACCPITCH">ACC PITCH</string>
   <string name="ACCZ">ACC Z</string>
@@ -186,13 +186,17 @@
   <string name="Frsky">Frsky</string>
   <string name="TxRSSI">TxRSSI</string>
   <string name="RxRSSI">RxRSSI</string>
-  <string name="Connect_frsky">Frsky Підключено</string>
+  <string name="Connect_frsky">Підключ.Frsky</string>
   <string name="UseOfflineMap">Використовувати кешовані мапи</string>
   <string name="RefreshRate">Частота Оновлення в мс (має бути >=100)</string>
-  <string name="ConnectionBug">Використовуйте, коли відключається при натисканні кнопки (наразі працює тільки на Приборці2)</string>
+  <string name="ConnectionBug">Використовуйте, при збоях підключення, коли натискаються кнопки.\nНаразі працює тільки на Приборці2</string>
   <string name="CopyFrskyToMW">Використовувати данні Frsky будь-де</string>
 
   <string name="page1">Прибори</string>
-  <string name="page2">MW Налаштування</string>
+  <string name="page2">MW Настройки</string>
   <string name="page3">Конфігурації</string>
+
+  <string name="RawData">Потік Данних</string>
+  <string name="ShareIt">Поділитись своїми настройками</string>
+   
 </resources>
