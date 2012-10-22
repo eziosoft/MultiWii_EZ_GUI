@@ -34,47 +34,51 @@ import android.view.View;
 
 public class Dashboard2View extends View {
 
-	Context			context;
-	int				ww, hh;
-	Rect			dim				= new Rect();
-	Paint			p;
-	Paint			p1, p3,p4;
+	Context context;
+	int ww, hh;
+	Rect dim = new Rect();
+	Paint p;
+	Paint p1, p3, p4;
 
-	public int		SatNum			= 5;
+	public int SatNum = 5;
 
-	public float	DistanceToHome	= 254;
-	public float	DirectionToHome	= 45;
+	public float DistanceToHome = 254;
+	public float DirectionToHome = 45;
 
-	public float	Speed			= 30;
-	public float	GPSAltitude		= 20;
-	public float	Altitude		= 23;
+	public float Speed = 30;
+	public float GPSAltitude = 20;
+	public float Altitude = 23;
 
-	public float	Lat				= (float) 23.233212, Lon = (float) 32.43214;
-	public float	Pitch			= 10, Roll = 20, Azimuth = 30;
-	public float	Gforce			= 1;
+	public float Lat = (float) 23.233212, Lon = (float) 32.43214;
+	public float Pitch = 10, Roll = 20, Azimuth = 30;
+	public float Gforce = 1;
 
-	public String	State			= "ARM";
+	public String State = "ARM";
 
-	public float	VBat			= 0;
-	public int		PowerSum		= 0;
-	public int		PowerTrigger	= 0;
-	public int		I2CError		= 0;
-	
-	public int TXRSSI=0;
-	public int RXRSSI=0;
+	public float VBat = 0;
+	public int PowerSum = 0;
+	public int PowerTrigger = 0;
+	public int I2CError = 0;
 
-	static int				textSizeSmall	= 20;
-	static int				textSizeMedium	= 40;
-	static int				textSizeBig		= 80;
+	public int TXRSSI = 0;
+	public int RXRSSI = 0;
 
-	NumberFormat	format			= new DecimalFormat("0.############################################################");	// used
-																															// to
-																															// avoid
-																															// scientific
-																															// notation
+	static int textSizeSmall = 20;
+	static int textSizeMedium = 40;
+	static int textSizeBig = 80;
 
-	public void Set(int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll,
-			float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI,int rxRSSI) {
+	NumberFormat format = new DecimalFormat(
+			"0.############################################################"); // used
+																				// to
+																				// avoid
+																				// scientific
+																				// notation
+
+	public void Set(int satNum, float distanceToHome, float directionToHome,
+			float speed, float gpsAltitude, float altitude, float lat,
+			float lon, float pitch, float roll, float azimuth, float gforce,
+			String state, int vbat, int powerSum, int powerTrigger, int txRSSI,
+			int rxRSSI) {
 		SatNum = satNum;
 		DistanceToHome = distanceToHome;
 		DirectionToHome = directionToHome;
@@ -91,8 +95,8 @@ public class Dashboard2View extends View {
 		VBat = (float) (vbat / 10.0);
 		PowerSum = powerSum;
 		PowerTrigger = powerTrigger;
-		TXRSSI=txRSSI;
-		RXRSSI=rxRSSI;
+		TXRSSI = txRSSI;
+		RXRSSI = rxRSSI;
 		this.invalidate();
 
 	}
@@ -114,14 +118,13 @@ public class Dashboard2View extends View {
 		p.setStyle(Style.STROKE);
 		// p.setStrokeWidth(1);
 		p.setTextSize(textSizeSmall);
-		
+
 		p4 = new Paint();
 		p4.setColor(Color.GREEN);
 		p4.setAntiAlias(true);
 		p4.setStyle(Style.FILL);
 		// p.setStrokeWidth(1);
 		p4.setTextSize(textSizeSmall);
-
 
 		p1 = new Paint();
 		p1.setColor(Color.GREEN);
@@ -186,24 +189,26 @@ public class Dashboard2View extends View {
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
 		c.drawText(String.valueOf(GPSAltitude), 0, a, p);
-		
+
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.TxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		c.drawRect(new Rect(0,a,150,a+textSizeSmall), p);
-		c.drawRect(new Rect(0,a,(int) map(TXRSSI,0,110,0,150),a+textSizeSmall), p4);
-		
-		a += textSizeSmall*2;
+		c.drawRect(new Rect(0, a, 150, a + textSizeSmall), p);
+		c.drawRect(new Rect(0, a, (int) map(TXRSSI, 0, 110, 0, 150), a
+				+ textSizeSmall), p4);
+
+		a += textSizeSmall * 2;
 		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.RxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		c.drawRect(new Rect(0,a,150,a+textSizeSmall), p);
-		c.drawRect(new Rect(0,a,(int) map(RXRSSI,0,110,0,150),a+textSizeSmall), p4);
+		c.drawRect(new Rect(0, a, 150, a + textSizeSmall), p);
+		c.drawRect(new Rect(0, a, (int) map(RXRSSI, 0, 110, 0, 150), a
+				+ textSizeSmall), p4);
 
 		a = hh - textSizeMedium;
 		p.setTextSize(textSizeSmall);
@@ -211,73 +216,99 @@ public class Dashboard2View extends View {
 
 		a = hh;
 		p.setTextSize(textSizeMedium);
-		c.drawText(format.format(Lat / Math.pow(10, 7)) + " x " + format.format(Lon / Math.pow(10, 7)), 0, a, p);
+		c.drawText(
+				format.format(Lat / Math.pow(10, 7)) + " x "
+						+ format.format(Lon / Math.pow(10, 7)), 0, a, p);
 
 		// //////////////////////////////
 		a = hh - textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Azimuth), ww - p.measureText(context.getString(R.string.Azimuth)), a, p);
+		c.drawText(context.getString(R.string.Azimuth),
+				ww - p.measureText(context.getString(R.string.Azimuth)), a, p);
 
 		a = hh;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(Azimuth), ww - p.measureText(String.valueOf(Azimuth)), a, p);
+		c.drawText(String.valueOf(Azimuth),
+				ww - p.measureText(String.valueOf(Azimuth)), a, p);
 
 		a -= textSizeMedium + textSizeSmall;
 		p.setTextSize(textSizeMedium);
-		c.drawText(Integer.toString((int) Pitch), ww - p.measureText(Integer.toString((int) Pitch)), a, p);
+		c.drawText(Integer.toString((int) Pitch),
+				ww - p.measureText(Integer.toString((int) Pitch)), a, p);
 
 		a -= textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Pitch), ww - p.measureText(context.getString(R.string.Pitch)), a, p);
+		c.drawText(context.getString(R.string.Pitch),
+				ww - p.measureText(context.getString(R.string.Pitch)), a, p);
 
 		a -= textSizeSmall;
 		p.setTextSize(textSizeMedium);
-		c.drawText(Integer.toString((int) Roll), ww - p.measureText(Integer.toString((int) Roll)), a, p);
+		c.drawText(Integer.toString((int) Roll),
+				ww - p.measureText(Integer.toString((int) Roll)), a, p);
 
 		a -= textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Roll), ww - p.measureText(context.getString(R.string.Roll)), a, p);
+		c.drawText(context.getString(R.string.Roll),
+				ww - p.measureText(context.getString(R.string.Roll)), a, p);
 
 		a -= textSizeSmall;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.format("%.2f", Altitude), ww - p.measureText(String.format("%.2f", Altitude)), a, p);
+		c.drawText(String.format("%.2f", Altitude),
+				ww - p.measureText(String.format("%.2f", Altitude)), a, p);
 
 		a -= textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_altitude), ww - p.measureText(context.getString(R.string.GPS_altitude)), a, p);
+		c.drawText(context.getString(R.string.GPS_altitude),
+				ww - p.measureText(context.getString(R.string.GPS_altitude)),
+				a, p);
 
 		a -= textSizeSmall;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.format("%.2f", Gforce), ww - p.measureText(String.format("%.2f", Gforce)), a, p);
+		c.drawText(String.format("%.2f", Gforce),
+				ww - p.measureText(String.format("%.2f", Gforce)), a, p);
 
 		a -= textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.gforce), ww - p.measureText(context.getString(R.string.gforce)), a, p);
+		c.drawText(context.getString(R.string.gforce),
+				ww - p.measureText(context.getString(R.string.gforce)), a, p);
 
 		a = 0;
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.state), ww - p.measureText(context.getString(R.string.state)), a, p);
+		c.drawText(context.getString(R.string.state),
+				ww - p.measureText(context.getString(R.string.state)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(State), ww - p.measureText(String.valueOf(State)), a, p);
+		c.drawText(String.valueOf(State),
+				ww - p.measureText(String.valueOf(State)), a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Battery), ww - p.measureText(context.getString(R.string.Battery)), a, p);
+		c.drawText(context.getString(R.string.Battery),
+				ww - p.measureText(context.getString(R.string.Battery)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(VBat), ww - p.measureText(String.valueOf(VBat)), a, p);
+		c.drawText(String.valueOf(VBat),
+				ww - p.measureText(String.valueOf(VBat)), a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.PowerSumPowerTrigger), ww - p.measureText(context.getString(R.string.PowerSumPowerTrigger)), a, p);
+		c.drawText(
+				context.getString(R.string.PowerSumPowerTrigger),
+				ww
+						- p.measureText(context
+								.getString(R.string.PowerSumPowerTrigger)), a,
+				p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p);
+		c.drawText(
+				String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger),
+				ww
+						- p.measureText(String.valueOf(PowerSum) + "/"
+								+ String.valueOf(PowerTrigger)), a, p);
 
 		float x1, y1, x2, y2;
 		x1 = (float) (200 * Math.sin((-Roll - 90) * Math.PI / 180)) + ww / 2;
@@ -383,14 +414,15 @@ public class Dashboard2View extends View {
 		c.drawLine(ww / 2 - 10, hh / 2, ww / 2 - 30, hh / 2, p1);
 		c.drawLine(ww / 2 + 10, hh / 2, ww / 2 + 30, hh / 2, p1);
 
-		RectF r = new RectF(ww / 2 - 200, hh / 2 - 200, ww / 2 + 200, hh / 2 + 200);
+		RectF r = new RectF(ww / 2 - 200, hh / 2 - 200, ww / 2 + 200,
+				hh / 2 + 200);
 		// c.drawRect(r, p);
 		c.drawArc(r, Roll - 45, -90, false, p1);
 		// c.drawArc(oval, startAngle, sweepAngle, useCenter, paint)
 		c.drawLine(ww / 2, hh / 2 - 200, ww / 2, hh / 2 - 230, p1);
 
 	}
-	
+
 	float map(float x, float in_min, float in_max, float out_min, float out_max) {
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
