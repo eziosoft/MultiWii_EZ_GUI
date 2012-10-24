@@ -143,7 +143,7 @@
     <!-- new -->
     <string name="Started">Uruchomiono</string>
     <string name="About">O programie</string>
-    <string name="BatteryLevelIs">Poziom akumulatora to</string>
+    <string name="BatteryLevelIs">Napięcie akumulatora to</string>
     <string name="Reconnecting">Połączenie utracone. Ponowne łączenie...</string>
     <string name="Language">Język</string>
     <string name="LanguageInfo">Niektóre języki nie są wspierane przez domyślny silnik TTS. Dla języka polskiego można użyć Ivona lub e-speak.</string>

@@ -16,6 +16,8 @@
  */
 package com.ezio.multiwii.mw;
 
+import java.util.ArrayList;
+
 public class MultiWii211 extends MultiWii210 {
 
 	public MultiWii211(BT b) {
@@ -29,6 +31,48 @@ public class MultiWii211 extends MultiWii210 {
 		int i;
 		int icmd = (int) (cmd & 0xFF);
 		switch (icmd) {
+
+		case MSP_STATUS:
+			if (version == 211) {
+				cycleTime = read16();
+				i2cError = read16();
+				present = read16();
+				mode = read32();
+				confSetting = read8();
+
+				if ((present & 1) > 0)
+					AccPresent = 1;
+				else
+					AccPresent = 0;
+
+				if ((present & 2) > 0)
+					BaroPresent = 1;
+				else
+					BaroPresent = 0;
+
+				if ((present & 4) > 0)
+					MagPresent = 1;
+				else
+					MagPresent = 0;
+
+				if ((present & 8) > 0)
+					GPSPresent = 1;
+				else
+					GPSPresent = 0;
+
+				if ((present & 16) > 0)
+					SonarPresent = 1;
+				else
+					SonarPresent = 0;
+
+				for (i = 0; i < CHECKBOXITEMS; i++) {
+					if ((mode & (1 << i)) > 0)
+						ActiveModes[i] = true;
+					else
+						ActiveModes[i] = false;
+				}
+			}
+			break;
 
 		case MSP_DEBUGMSG:
 			while (dataSize-- > 0) {
@@ -54,13 +98,30 @@ public class MultiWii211 extends MultiWii210 {
 		case MSP_ALTITUDE:
 			if (version == 211) {
 				baro = alt = (float) read32() / 100;
-				vario=read16();
+				vario = read16();
 			}
 			break;
 
 		}
 
 		super.evaluateCommand(cmd, dataSize);
+	}
+
+	@Override
+	public void SendRequestSelectSetting(int setting) {
+		{
+			payload = new ArrayList<Character>();
+			payload.add((char) setting);
+			sendRequestMSP(requestMSP(MSP_SELECT_SETTING,
+					payload.toArray(new Character[payload.size()])));
+		}
+		super.SendRequestSelectSetting(setting);
+	}
+
+	@Override
+	public void SendRequestSPEK_BIND() {
+		sendRequestMSP(requestMSP(MSP_SPEK_BIND));
+		super.SendRequestSPEK_BIND();
 	}
 
 	// TODO add MSP_DEBUGMSG in Request

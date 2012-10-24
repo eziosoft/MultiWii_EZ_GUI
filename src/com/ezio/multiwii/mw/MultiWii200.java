@@ -22,7 +22,7 @@ public class MultiWii200 extends MultirotorData {
 
 	public MultiWii200(BT b) {
 		bt = b;
-		EZGUIProtocol="200";
+		EZGUIProtocol = "200";
 	}
 
 	private void log(String co, int wartosc) {
@@ -100,19 +100,24 @@ public class MultiWii200 extends MultirotorData {
 
 				if ((present & 1) > 0)
 					nunchukPresent = 1;
-				else nunchukPresent = 0;
+				else
+					nunchukPresent = 0;
 				if ((present & 2) > 0)
 					AccPresent = 1;
-				else AccPresent = 0;
+				else
+					AccPresent = 0;
 				if ((present & 4) > 0)
 					BaroPresent = 1;
-				else BaroPresent = 0;
+				else
+					BaroPresent = 0;
 				if ((present & 8) > 0)
 					MagPresent = 1;
-				else MagPresent = 0;
+				else
+					MagPresent = 0;
 				if ((present & 16) > 0)
 					GPSPresent = 1;
-				else GPSPresent = 0;
+				else
+					GPSPresent = 0;
 
 				I2cAccActive = ((mode & 1) > 0);
 				I2cBaroActive = ((mode & 2) > 0);
@@ -126,8 +131,7 @@ public class MultiWii200 extends MultirotorData {
 															// item xxx
 					if (((activation2[i]) & (1 << 7)) > 0) {
 						ActiveModes[i] = true;
-					}
-					else {
+					} else {
 						ActiveModes[i] = false;
 					}
 				}
@@ -188,14 +192,17 @@ public class MultiWii200 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO,
-			float[] confP, float[] confI, float[] confD) {
+	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO,
+			float rollPitchRate, float yawRate, float dynamic_THR_PID,
+			float throttle_MID, float throttle_EXPO, float[] confP,
+			float[] confI, float[] confD) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed) {
+	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT,
+			int coordLON, int altitude, int speed) {
 		// not supported
 
 	}
@@ -225,18 +232,28 @@ public class MultiWii200 extends MultirotorData {
 	@Override
 	public void SendRequestGetCheckboxes() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void SendRequestSetCheckboxes() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void SendRequestWriteToEEprom() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void SendRequestSelectSetting(int setting) {
+		// not supported
+	}
+
+	@Override
+	public void SendRequestSPEK_BIND() {
+		// not supported
 	}
 }

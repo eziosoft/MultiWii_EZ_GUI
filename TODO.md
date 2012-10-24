@@ -73,5 +73,17 @@
 //+ boxes names and MSP_BOXNAMES - IMPORTANT !!!
 //+  MSP_PIDNAMES:			/* TODO create GUI elements from this message */ doesn't always work
 			
-//- MSP_SELECT_SETTING
+//+ MSP_SELECT_SETTING
+add button
+---
+
+//- screen resolution - dashboard 2
 --
+
+//	if ((multiCapability & 1) > 0) {
+//				//TODO show  button 
+--- 
+//			}
+
+// SendRequestSPEK_BIND button needed
+---

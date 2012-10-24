@@ -96,13 +96,8 @@ public abstract class MultirotorData {
 			MSP_SET_BOX = 203, MSP_SET_RC_TUNING = 204,
 			MSP_ACC_CALIBRATION = 205, MSP_MAG_CALIBRATION = 206,
 			MSP_SET_MISC = 207, MSP_RESET_CONF = 208, MSP_SELECT_SETTING = 210,
-
-			MSP_SPEK_BIND = 240,
-
-			MSP_EEPROM_WRITE = 250,
-
-			MSP_DEBUGMSG = 253, MSP_DEBUG = 254, MSP_WP_SET = 209,
-			MSP_WP = 118;
+			MSP_SPEK_BIND = 240, MSP_EEPROM_WRITE = 250, MSP_DEBUGMSG = 253,
+			MSP_DEBUG = 254, MSP_WP_SET = 209, MSP_WP = 118;
 
 	public static final int IDLE = 0, HEADER_START = 1, HEADER_M = 2,
 			HEADER_ARROW = 3, HEADER_SIZE = 4, HEADER_CMD = 5, HEADER_ERR = 6;
@@ -133,6 +128,9 @@ public abstract class MultirotorData {
 
 	// //Protocol 2.11///////////////////////////////////////
 	public String DebugMSG;
+	int multiCapability = 0; // Bitflags stating what capabilities are/are not
+								// present in the compiled code.
+	int confSetting = 0;
 	// end 2.11//////////////////////////
 
 	public FileAccess FA;
@@ -173,6 +171,10 @@ public abstract class MultirotorData {
 	public abstract void SendRequestSetRawRC(int[] channels8);
 
 	public abstract void SendRequestWriteToEEprom();
+
+	public abstract void SendRequestSelectSetting(int setting);
+
+	public abstract void SendRequestSPEK_BIND();
 
 	// ///////////////////////////////////////////////
 

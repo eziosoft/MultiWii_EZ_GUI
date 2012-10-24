@@ -147,7 +147,7 @@
     <!-- new -->
     <string name="Started">Started</string>
     <string name="About">About</string>
-    <string name="BatteryLevelIs">Battery Level Is</string>
+    <string name="BatteryLevelIs">Battery voltage is</string>
     <string name="Reconnecting">Connection lost. Reconnecting</string>
     <string name="Language">Language</string>
     <string name="NotForce">Not Force</string>

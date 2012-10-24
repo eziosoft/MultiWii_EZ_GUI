@@ -71,7 +71,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	// send msp without payload
-	private List<Byte> requestMSP(int msp) {
+	public List<Byte> requestMSP(int msp) {
 		return requestMSP(msp, null);
 	}
 
@@ -85,7 +85,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	// send msp with payload
-	private List<Byte> requestMSP(int msp, Character[] payload) {
+	public List<Byte> requestMSP(int msp, Character[] payload) {
 		if (msp < 0) {
 			return null;
 		}
@@ -114,7 +114,7 @@ public class MultiWii210 extends MultirotorData {
 		return (bf);
 	}
 
-	private void sendRequestMSP(List<Byte> msp) {
+	public void sendRequestMSP(List<Byte> msp) {
 		byte[] arr = new byte[msp.size()];
 		int i = 0;
 		for (byte b : msp) {
@@ -131,55 +131,59 @@ public class MultiWii210 extends MultirotorData {
 			version = read8();
 			multiType = read8();
 			read8(); // MSP version
-			read32();// capability
-			break;
-		case MSP_STATUS:
-			cycleTime = read16();
-			i2cError = read16();
-			present = read16();
-			mode = read32();
 
-			if ((present & 1) > 0)
-				AccPresent = 1;
-			else
-				AccPresent = 0;
-
-			if ((present & 2) > 0)
-				BaroPresent = 1;
-			else
-				BaroPresent = 0;
-
-			if ((present & 4) > 0)
-				MagPresent = 1;
-			else
-				MagPresent = 0;
-
-			if ((present & 8) > 0)
-				GPSPresent = 1;
-			else
-				GPSPresent = 0;
-
-			if ((present & 16) > 0)
-				SonarPresent = 1;
-			else
-				SonarPresent = 0;
-
-			for (i = 0; i < CHECKBOXITEMS; i++) {
-				if ((mode & (1 << i)) > 0)
-					ActiveModes[i] = true;
-				else
-					ActiveModes[i] = false;
+			multiCapability = read32();// capability
+			if ((multiCapability & 1) > 0) {
+				// TODO
 			}
 			break;
+		case MSP_STATUS:
+			if (version == 210) {
+				cycleTime = read16();
+				i2cError = read16();
+				present = read16();
+				mode = read32();
+
+				if ((present & 1) > 0)
+					AccPresent = 1;
+				else
+					AccPresent = 0;
+
+				if ((present & 2) > 0)
+					BaroPresent = 1;
+				else
+					BaroPresent = 0;
+
+				if ((present & 4) > 0)
+					MagPresent = 1;
+				else
+					MagPresent = 0;
+
+				if ((present & 8) > 0)
+					GPSPresent = 1;
+				else
+					GPSPresent = 0;
+
+				if ((present & 16) > 0)
+					SonarPresent = 1;
+				else
+					SonarPresent = 0;
+
+				for (i = 0; i < CHECKBOXITEMS; i++) {
+					if ((mode & (1 << i)) > 0)
+						ActiveModes[i] = true;
+					else
+						ActiveModes[i] = false;
+				}
+			}
+			break;
+
 		case MSP_RAW_IMU:
-			
-			
+
 			ax = read16();
 			ay = read16();
 			az = read16();
-			
-			
-			
+
 			gx = read16() / 8;
 			gy = read16() / 8;
 			gz = read16() / 8;
@@ -634,6 +638,18 @@ public class MultiWii210 extends MultirotorData {
 			timer1 = 10;
 			timer2 = 0;
 		}
+	}
+
+	@Override
+	public void SendRequestSelectSetting(int setting) {
+		//211
+
+	}
+
+	@Override
+	public void SendRequestSPEK_BIND() {
+		// 211
+		
 	}
 
 }
