@@ -20,11 +20,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.ezio.multiwii.helpers.FileAccess;
-import com.google.android.maps.GeoPoint;
-
 import android.os.Environment;
 import android.util.Log;
+
+import com.ezio.multiwii.helpers.FileAccess;
+import com.ezio.multiwii.notUsed.Waypoint;
+import com.google.android.maps.GeoPoint;
 
 public abstract class MultirotorData {
 
@@ -175,6 +176,8 @@ public abstract class MultirotorData {
 	public abstract void SendRequestSelectSetting(int setting);
 
 	public abstract void SendRequestSPEK_BIND();
+	
+	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
 
 	// ///////////////////////////////////////////////
 

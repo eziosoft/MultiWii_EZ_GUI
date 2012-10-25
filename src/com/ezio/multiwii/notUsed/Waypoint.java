@@ -18,9 +18,13 @@ package com.ezio.multiwii.notUsed;
 
 public class Waypoint {
 
-	public int	No=0, Lat=0, Lon=0, Alt=0, Nav=0;
+	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, NavFlag = 0;
 
-	public Waypoint() {
+	public Waypoint(int number, int lat, int lon, int alt, int navFlag) {
+
 	}
 
+	public Waypoint() {
+
+	}
 }

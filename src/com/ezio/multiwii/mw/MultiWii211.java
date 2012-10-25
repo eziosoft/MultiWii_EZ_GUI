@@ -18,6 +18,8 @@ package com.ezio.multiwii.mw;
 
 import java.util.ArrayList;
 
+import com.ezio.multiwii.notUsed.Waypoint;
+
 public class MultiWii211 extends MultiWii210 {
 
 	public MultiWii211(BT b) {
@@ -115,13 +117,49 @@ public class MultiWii211 extends MultiWii210 {
 			sendRequestMSP(requestMSP(MSP_SELECT_SETTING,
 					payload.toArray(new Character[payload.size()])));
 		}
-		super.SendRequestSelectSetting(setting);
+		// super.SendRequestSelectSetting(setting);
 	}
 
 	@Override
 	public void SendRequestSPEK_BIND() {
 		sendRequestMSP(requestMSP(MSP_SPEK_BIND));
-		super.SendRequestSPEK_BIND();
+		// super.SendRequestSPEK_BIND();
+	}
+
+	@Override
+	public void SendRequestMSP_SET_WP(Waypoint w) {
+		// params are:
+		// 1 octet: always 0 for the moment, ie WP 0 = HOME POS
+		// 4 octets: LAT
+		// 4 octets: LON
+		// 4 octets: altitude (not used for the moment, no need to set it)
+		// 1 octets: nav flag (not used for the moment, no need to set it)
+		//
+
+		ArrayList<Character> payload = new ArrayList<Character>();
+		payload.add((char) w.Number);
+		payload.add((char) (w.Lat & 0xFF));
+		payload.add((char) ((w.Lat >> 8) & 0xFF));
+		payload.add((char) ((w.Lat >> 16) & 0xFF));
+		payload.add((char) ((w.Lat >> 24) & 0xFF));
+
+		payload.add((char) (w.Lon & 0xFF));
+		payload.add((char) ((w.Lon >> 8) & 0xFF));
+		payload.add((char) ((w.Lon >> 16) & 0xFF));
+		payload.add((char) ((w.Lon >> 24) & 0xFF));
+
+		payload.add((char) (w.Alt & 0xFF));
+		payload.add((char) ((w.Alt >> 8) & 0xFF));
+		payload.add((char) ((w.Alt >> 16) & 0xFF));
+		payload.add((char) ((w.Alt >> 24) & 0xFF));
+
+		payload.add((char) w.NavFlag);
+
+		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS,
+				payload.toArray(new Character[payload.size()])));
+
+		// TODO Auto-generated method stub
+		// super.SendRequestMSP_SET_WP(waypoint);
 	}
 
 	// TODO add MSP_DEBUGMSG in Request

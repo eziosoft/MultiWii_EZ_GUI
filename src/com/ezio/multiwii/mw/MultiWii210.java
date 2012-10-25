@@ -303,12 +303,12 @@ public class MultiWii210 extends MultirotorData {
 		case MSP_WP:
 			// TODO
 			Waypoint WP0 = new Waypoint();
-			WP0.No = read8();
+			WP0.Number = read8();
 			WP0.Lat = read32();
 			WP0.Lon = read32();
 			WP0.Alt = read16();
-			WP0.Nav = read8();
-			Log.d("aaa", String.valueOf(WP0.No));
+			WP0.NavFlag = read8();
+			Log.d("aaa", String.valueOf(WP0.Number));
 			Log.d("aaa", String.valueOf(WP0.Lat));
 			Log.d("aaa", String.valueOf(WP0.Lon));
 			break;
@@ -642,14 +642,20 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void SendRequestSelectSetting(int setting) {
-		//211
+		// 211
 
 	}
 
 	@Override
 	public void SendRequestSPEK_BIND() {
 		// 211
-		
+
+	}
+
+	@Override
+	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
+		// 211
+
 	}
 
 }

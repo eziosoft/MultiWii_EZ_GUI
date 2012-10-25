@@ -16,6 +16,8 @@
  */
 package com.ezio.multiwii.mw;
 
+import com.ezio.multiwii.notUsed.Waypoint;
+
 import android.util.Log;
 
 public class MultiWii200 extends MultirotorData {
@@ -255,5 +257,11 @@ public class MultiWii200 extends MultirotorData {
 	@Override
 	public void SendRequestSPEK_BIND() {
 		// not supported
+	}
+
+	@Override
+	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
+		// not supported
+		
 	}
 }
