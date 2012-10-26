@@ -39,101 +39,104 @@ import android.widget.TextView;
 
 public class GPSActivity extends SherlockActivity implements LocationListener {
 
-	private boolean			killme			= false;
+	private boolean killme = false;
 
-	App						app;
-	Handler					mHandler		= new Handler();
+	App app;
+	Handler mHandler = new Handler();
 
-	TextView				GPS_distanceToHomeTV;
-	TextView				GPS_directionToHomeTV;
-	TextView				GPS_numSatTV;
-	TextView				GPS_fixTV;
-	TextView				GPS_updateTV;
+	TextView GPS_distanceToHomeTV;
+	TextView GPS_directionToHomeTV;
+	TextView GPS_numSatTV;
+	TextView GPS_fixTV;
+	TextView GPS_updateTV;
 
-	TextView				GPS_altitudeTV;
-	TextView				GPS_speedTV;
-	TextView				GPS_latitudeTV;
-	TextView				GPS_longitudeTV;
+	TextView GPS_altitudeTV;
+	TextView GPS_speedTV;
+	TextView GPS_latitudeTV;
+	TextView GPS_longitudeTV;
 
-	TextView				PhoneLatitudeTV;
-	TextView				PhoneLongtitudeTV;
-	TextView				PhoneAltitudeTV;
-	TextView				PhoneSpeedTV;
-	TextView				PhoneNumSatTV;
-	TextView				DeclinationTV;
-	TextView				PhoneAccuracyTV;
+	TextView PhoneLatitudeTV;
+	TextView PhoneLongtitudeTV;
+	TextView PhoneAltitudeTV;
+	TextView PhoneSpeedTV;
+	TextView PhoneNumSatTV;
+	TextView DeclinationTV;
+	TextView PhoneAccuracyTV;
 
-	Button					InjectGPSButton;
+	Button InjectGPSButton;
 
-	int						PhoneNumSat		= 0;
-	double					PhoneLatitude	= 0;
-	double					PhoneLongitude	= 0;
-	double					PhoneAltitude	= 0;
-	double					PhoneSpeed		= 0;
-	int						PhoneFix		= 0;
-	float					PhoneAccuracy	= 0;
-	double					Declination		= 0;
+	int PhoneNumSat = 0;
+	double PhoneLatitude = 0;
+	double PhoneLongitude = 0;
+	double PhoneAltitude = 0;
+	double PhoneSpeed = 0;
+	int PhoneFix = 0;
+	float PhoneAccuracy = 0;
+	double Declination = 0;
 
-	private LocationManager	locationManager;
-	private String			provider;
-	GeomagneticField		geoField;
+	private LocationManager locationManager;
+	private String provider;
+	GeomagneticField geoField;
 
-	boolean					Injecting		= false;
+	boolean Injecting = false;
 
-	private Runnable		update			= new Runnable() {
-												@Override
-												public void run() {
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-													{
-														app.mw.ProcessSerialData(app.loggingON);
+			{
+				app.mw.ProcessSerialData(app.loggingON);
 
-														float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
-														float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
+				float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
+				float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
 
-														GPS_distanceToHomeTV.setText(String.valueOf(app.mw.GPS_distanceToHome));
-														GPS_directionToHomeTV.setText(String.valueOf(app.mw.GPS_directionToHome));
-														GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
-														GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
-														GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
+				GPS_distanceToHomeTV.setText(String
+						.valueOf(app.mw.GPS_distanceToHome));
+				GPS_directionToHomeTV.setText(String
+						.valueOf(app.mw.GPS_directionToHome));
+				GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
+				GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
+				// GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
 
-														if (app.mw.GPS_update % 2 == 0) {
-															GPS_updateTV.setBackgroundColor(Color.GREEN);
+				if (app.mw.GPS_update % 2 == 0) {
+					GPS_updateTV.setBackgroundColor(Color.GREEN);
+				} else {
+					GPS_updateTV.setBackgroundColor(Color.TRANSPARENT);
+				}
 
-														}
-														else {
-															GPS_updateTV.setBackgroundColor(Color.BLACK);
-														}
+				GPS_altitudeTV.setText(String.valueOf(app.mw.GPS_altitude));
+				GPS_speedTV.setText(String.valueOf(app.mw.GPS_speed));
 
-														GPS_altitudeTV.setText(String.valueOf(app.mw.GPS_altitude));
-														GPS_speedTV.setText(String.valueOf(app.mw.GPS_speed));
+				// GPS_latitudeTV.setText(String.valueOf(app.mw.GPS_latitude));
+				// GPS_longitudeTV.setText(String.valueOf(app.mw.GPS_longitude));
 
-														// GPS_latitudeTV.setText(String.valueOf(app.mw.GPS_latitude));
-														// GPS_longitudeTV.setText(String.valueOf(app.mw.GPS_longitude));
+				GPS_latitudeTV.setText(String.valueOf(lat));
+				GPS_longitudeTV.setText(String.valueOf(lon));
 
-														GPS_latitudeTV.setText(String.valueOf(lat));
-														GPS_longitudeTV.setText(String.valueOf(lon));
+				PhoneLatitudeTV.setText(String.valueOf((float) PhoneLatitude));
+				PhoneLongtitudeTV.setText(String
+						.valueOf((float) PhoneLongitude));
+				PhoneAltitudeTV.setText(String.valueOf((int) PhoneAltitude));
+				PhoneSpeedTV.setText(String.valueOf(PhoneSpeed));
+				PhoneNumSatTV.setText(String.valueOf(PhoneNumSat));
+				PhoneAccuracyTV.setText(String.valueOf(PhoneAccuracy));
+			}
 
-														PhoneLatitudeTV.setText(String.valueOf((float) PhoneLatitude));
-														PhoneLongtitudeTV.setText(String.valueOf((float) PhoneLongitude));
-														PhoneAltitudeTV.setText(String.valueOf((int) PhoneAltitude));
-														PhoneSpeedTV.setText(String.valueOf(PhoneSpeed));
-														PhoneNumSatTV.setText(String.valueOf(PhoneNumSat));
-														PhoneAccuracyTV.setText(String.valueOf(PhoneAccuracy));
-													}
+			app.Frequentjobs();
 
-													app.Frequentjobs();
+			if (Injecting)
 
-													if (Injecting)
+				app.mw.SendRequestGPSinject21((byte) PhoneFix,
+						(byte) PhoneNumSat, (int) (PhoneLatitude * 1e7),
+						(int) (PhoneLongitude * 1e7), (int) PhoneAltitude,
+						(int) PhoneSpeed);
 
-														app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
-																(int) PhoneAltitude, (int) PhoneSpeed);
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, app.RefreshRate);
 
-													app.mw.SendRequest();
-													if (!killme)
-														mHandler.postDelayed(update, app.RefreshRate);
-
-												}
-											};
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -175,12 +178,14 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		provider = locationManager.getBestProvider(criteria, false);
 		Location location = locationManager.getLastKnownLocation(provider);
 		if (location != null) {
-			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(
-					location.getAltitude()).floatValue(), System.currentTimeMillis());
+			geoField = new GeomagneticField(Double.valueOf(
+					location.getLatitude()).floatValue(), Double.valueOf(
+					location.getLongitude()).floatValue(), Double.valueOf(
+					location.getAltitude()).floatValue(),
+					System.currentTimeMillis());
 			// PhoneLatitudeTV.setText(String.valueOf(location.getLatitude()));
 			// PhoneLongtitudeTV.setText(String.valueOf(location.getLongitude()));
-		}
-		else {
+		} else {
 			// PhoneLatitudeTV.setText("Provider not available");
 			// PhoneLongtitudeTV.setText("Provider not available");
 
@@ -250,10 +255,12 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		PhoneLongitude = location.getLongitude();
 		PhoneAltitude = location.getAltitude();
 		PhoneSpeed = location.getSpeed() * 100f;
-		PhoneAccuracy=location.getAccuracy()*100f;
+		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(
-				location.getAltitude()).floatValue(), System.currentTimeMillis());
+		geoField = new GeomagneticField(Double.valueOf(location.getLatitude())
+				.floatValue(), Double.valueOf(location.getLongitude())
+				.floatValue(), Double.valueOf(location.getAltitude())
+				.floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
 
 		DeclinationTV.setText(String.valueOf(Declination));
