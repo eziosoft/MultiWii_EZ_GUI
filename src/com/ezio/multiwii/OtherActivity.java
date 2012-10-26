@@ -21,6 +21,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class OtherActivity extends SherlockActivity {
@@ -29,6 +30,8 @@ public class OtherActivity extends SherlockActivity {
 
 	EditText EditTextPowerMeterAlarm;
 	EditText EditTextSelectSettings;
+
+	Button ButtonRxBIND;
 
 	public void MagCalibrationOnClick(View v) {
 		app.mw.SendRequestMagCalibration();
@@ -62,6 +65,7 @@ public class OtherActivity extends SherlockActivity {
 
 		EditTextPowerMeterAlarm = (EditText) findViewById(R.id.editTextPowerMeterAlarm);
 		EditTextSelectSettings = (EditText) findViewById(R.id.editTextSelectSettingNumber);
+		ButtonRxBIND = (Button) findViewById(R.id.buttonRXBIND);
 
 	}
 
@@ -93,6 +97,12 @@ public class OtherActivity extends SherlockActivity {
 		EditTextPowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
 		EditTextSelectSettings.setText(String.valueOf(app.mw.confSetting));
 
+		if ((app.mw.multiCapability & 1) > 0) {
+			ButtonRxBIND.setVisibility(Button.VISIBLE);
+		} else {
+			ButtonRxBIND.setVisibility(Button.GONE);
+		}
+
 	}
 
 	public void WritePowerMeterAlarmOnClick(View v) {
@@ -103,6 +113,10 @@ public class OtherActivity extends SherlockActivity {
 	public void WriteSelectSettingOnClick(View v) {
 		app.mw.SendRequestSelectSetting(Integer.parseInt(EditTextSelectSettings
 				.getText().toString()));
+	}
+
+	public void RXBINDOnClick(View v) {
+		app.mw.SendRequestSPEK_BIND();
 	}
 
 }
