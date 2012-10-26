@@ -129,9 +129,9 @@ public abstract class MultirotorData {
 
 	// //Protocol 2.11///////////////////////////////////////
 	public String DebugMSG;
-	int multiCapability = 0; // Bitflags stating what capabilities are/are not
+	public int multiCapability = 0; // Bitflags stating what capabilities are/are not
 								// present in the compiled code.
-	int confSetting = 0;
+	public int confSetting = 0;
 	// end 2.11//////////////////////////
 
 	public FileAccess FA;

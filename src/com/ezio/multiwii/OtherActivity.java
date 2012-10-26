@@ -24,10 +24,11 @@ import android.view.View;
 import android.widget.EditText;
 
 public class OtherActivity extends SherlockActivity {
-	App			app;
+	App app;
 	// Handler mHandler = new Handler();
 
-	EditText	PowerMeterAlarm;
+	EditText EditTextPowerMeterAlarm;
+	EditText EditTextSelectSettings;
 
 	public void MagCalibrationOnClick(View v) {
 		app.mw.SendRequestMagCalibration();
@@ -59,7 +60,8 @@ public class OtherActivity extends SherlockActivity {
 
 		app = (App) getApplication();
 
-		PowerMeterAlarm = (EditText) findViewById(R.id.editTextPowerMeterAlarm);
+		EditTextPowerMeterAlarm = (EditText) findViewById(R.id.editTextPowerMeterAlarm);
+		EditTextSelectSettings = (EditText) findViewById(R.id.editTextSelectSettingNumber);
 
 	}
 
@@ -81,20 +83,26 @@ public class OtherActivity extends SherlockActivity {
 		app.mw.SendRequestGetMisc();
 		try {
 			Thread.sleep(300);
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		app.mw.ProcessSerialData(false);
 
-		PowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
+		EditTextPowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
+		EditTextSelectSettings.setText(String.valueOf(app.mw.confSetting));
 
 	}
 
 	public void WritePowerMeterAlarmOnClick(View v) {
-		app.mw.SendRequestSetandSaveMISC(Integer.parseInt(PowerMeterAlarm.getText().toString()));
+		app.mw.SendRequestSetandSaveMISC(Integer
+				.parseInt(EditTextPowerMeterAlarm.getText().toString()));
+	}
+
+	public void WriteSelectSettingOnClick(View v) {
+		app.mw.SendRequestSelectSetting(Integer.parseInt(EditTextSelectSettings
+				.getText().toString()));
 	}
 
 }

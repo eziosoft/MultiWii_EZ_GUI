@@ -32,7 +32,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/PowerMeterAlarm" />
-
+
             <EditText
                 android:id="@+id/editTextPowerMeterAlarm"
                 android:layout_width="0dp"
@@ -55,20 +55,43 @@
 
                 <requestFocus />
             </EditText>
-
+
             <Button
                 android:id="@+id/button3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:onClick="WritePowerMeterAlarmOnClick"
                 android:text="@string/Write" />
-
         </TableRow>
-
+
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/SelectSetting" />
+
+            <EditText
+                android:id="@+id/editTextSelectSettingNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="WriteSelectSettingOnClick"
+                android:text="@string/Write" />
 
         </TableRow>
 

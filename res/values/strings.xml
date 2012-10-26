@@ -211,4 +211,6 @@
 
     <string name="ShareIt">Share Your Config</string>
 
+    <string name="SelectSetting">Select Setting</string>
+
 </resources>

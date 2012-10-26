@@ -52,7 +52,7 @@ public class RawDataActivity extends Activity {
 			}
 
 			Log.d("aaa", String.valueOf(app.mw.ax));
-			
+
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
@@ -187,6 +187,8 @@ public class RawDataActivity extends Activity {
 					+ String.valueOf(app.mw.byteI[i]) + " D", app.mw.byteD[i]);
 		}
 
+		log("confSetting", app.mw.confSetting);
+		log("multiCapability",app.mw.multiCapability);
 		log("versionMisMatch", app.mw.versionMisMatch);
 
 	}
