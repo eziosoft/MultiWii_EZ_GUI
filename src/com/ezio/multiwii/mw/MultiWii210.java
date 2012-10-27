@@ -26,12 +26,10 @@ import com.ezio.multiwii.notUsed.Waypoint;
 
 public class MultiWii210 extends MultirotorData {
 
-	
-
 	public MultiWii210(BT b) {
-		 timer1 = 10; // used to send request every 10 requests
-		 timer2 = 0; // used to send requests once after conection
-		
+		timer1 = 10; // used to send request every 10 requests
+		timer2 = 0; // used to send requests once after conection
+
 		bt = b;
 		EZGUIProtocol = "210";
 		// changes from 2.0//
@@ -304,15 +302,18 @@ public class MultiWii210 extends MultirotorData {
 
 		case MSP_WP:
 			// TODO
-			Waypoint WP0 = new Waypoint();
-			WP0.Number = read8();
-			WP0.Lat = read32();
-			WP0.Lon = read32();
-			WP0.Alt = read16();
-			WP0.NavFlag = read8();
-			Log.d("aaa", String.valueOf(WP0.Number));
-			Log.d("aaa", String.valueOf(WP0.Lat));
-			Log.d("aaa", String.valueOf(WP0.Lon));
+			Waypoint WP = new Waypoint();
+			WP.Number = read8();
+			WP.Lat = read32();
+			WP.Lon = read32();
+			WP.Alt = read16();
+			WP.NavFlag = read8();
+
+			Waypoints[WP.Number].Lat = WP.Lat;
+			Waypoints[WP.Number].Lon = WP.Lon;
+			Waypoints[WP.Number].Alt = WP.Alt;
+			Waypoints[WP.Number].NavFlag = WP.NavFlag;
+
 			break;
 		default:
 
@@ -542,17 +543,6 @@ public class MultiWii210 extends MultirotorData {
 				payload.toArray(new Character[payload.size()])));
 	}
 
-	@Override
-	public void SendRequestGetWayPoints() {
-		ArrayList<Character> payload = new ArrayList<Character>();
-		payload.add((char) 0);
-
-		sendRequestMSP(requestMSP(MSP_WP,
-				payload.toArray(new Character[payload.size()])));
-
-		// TODO
-	}
-
 	/**
 	 * 0rcRoll 1rcPitch 2rcYaw 3rcThrottle 4rcAUX1 5rcAUX2 6rcAUX3 7rcAUX4
 	 */
@@ -657,6 +647,16 @@ public class MultiWii210 extends MultirotorData {
 	@Override
 	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
 		// 211
+
+	}
+
+	@Override
+	public void SendRequestGetWayPoint(int Number) {
+		ArrayList<Character> payload = new ArrayList<Character>();
+		payload.add((char) Number);
+
+		sendRequestMSP(requestMSP(MSP_WP,
+				payload.toArray(new Character[payload.size()])));
 
 	}
 

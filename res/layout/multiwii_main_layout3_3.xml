@@ -90,6 +90,19 @@
                         android:layout_weight="1"
                         android:src="@drawable/logo" />
                 </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" ><Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="TestOnClick"
+                        android:text="Button" />
+
+                </TableRow>
+
             </TableLayout>
         </LinearLayout>
     </ScrollView>

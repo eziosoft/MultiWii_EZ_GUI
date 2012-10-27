@@ -123,6 +123,8 @@ public abstract class MultirotorData {
 	int byteMP[] = new int[8]; // Motor // Pins. // Varies // by // multiType //
 								// and // Arduino // model // (pro // Mini, //
 								// // Mega, // etc).
+	
+	public Waypoint[] Waypoints = new Waypoint[16];
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////end 2.10///////////
@@ -167,7 +169,7 @@ public abstract class MultirotorData {
 	public abstract void SendRequestGPSinject21(byte GPS_FIX, byte numSat,
 			int coordLAT, int coordLON, int altitude, int speed);
 
-	public abstract void SendRequestGetWayPoints();
+	public abstract void SendRequestGetWayPoint(int Number);
 
 	public abstract void SendRequestSetRawRC(int[] channels8);
 

@@ -14,57 +14,95 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.ezio.multiwii.notUsed;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.App;
+import com.ezio.multiwii.R;
 
-public class WaypointActivity extends SherlockActivity {
-	private boolean			killme		= false;
-	
-	App					app;
-	Handler				mHandler	= new Handler();
+public class WaypointActivity extends Activity {
 
-	private Runnable	update		= new Runnable() {
-										@Override
-										public void run() {
+	TextView TVData;
+	TextView TVMWInfo;
 
-											app.mw.ProcessSerialData(app.loggingON);
+	private boolean killme = false;
 
-											app.Frequentjobs();
+	App app;
+	Handler mHandler = new Handler();
 
-											;
-											if (!killme)mHandler.postDelayed(update, 1000);
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-										}
-									};
+			app.mw.ProcessSerialData(app.loggingON);
+
+			app.frsky.ProcessSerialData(false);
+			app.Frequentjobs();
+
+			TVData.setText("");
+			displayWPs();
+
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, app.RefreshRate);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.maplayout);
-
 		app = (App) getApplication();
+		app.ForceLanguage();
+		app.ConnectionBug();
+		setContentView(R.layout.waypoint_layout);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+		TVData = (TextView) findViewById(R.id.textViewData);
+		TVMWInfo = (TextView) findViewById(R.id.textViewMWInfo);
+
+	}
+
+	public void GetWPOnClick(View v) {
+		app.mw.SendRequestGetWayPoint(0);
+	}
+	
+	public void SetWPOnClick(View v) {
+		Waypoint w = new Waypoint(0,1,2,3,4);
+		app.mw.SendRequestMSP_SET_WP(w);
+	}
+
+	void displayWPs() {
+		for (Waypoint w : app.mw.Waypoints) {
+			TVData.append(String.valueOf(w.Number) + " : "
+					+ String.valueOf(w.Lat) + " x " + String.valueOf(w.Lon)
+					+ " (" + String.valueOf(w.Alt) + ","
+					+ String.valueOf(w.NavFlag) + ")\n");
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		killme=false;
+		app.ForceLanguage();
+		// app.Say(getString(R.string.Motors));
+		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-		// app.Speak(getString(R.string.Map));
 
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		killme=true;
 		mHandler.removeCallbacks(null);
+		killme = true;
 	}
 
 }

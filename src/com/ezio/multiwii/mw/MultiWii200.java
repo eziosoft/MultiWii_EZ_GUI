@@ -222,11 +222,6 @@ public class MultiWii200 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGetWayPoints() {
-		// not supported
-	}
-
-	@Override
 	public void SendRequestSetRawRC(int[] channels8) {
 		// not supported
 	}
@@ -262,6 +257,11 @@ public class MultiWii200 extends MultirotorData {
 	@Override
 	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
 		// not supported
-		
+
+	}
+
+	@Override
+	public void SendRequestGetWayPoint(int Number) {
+		// not supported
 	}
 }

@@ -56,6 +56,7 @@ import com.ezio.multiwii.map.MapActivityMy;
 import com.ezio.multiwii.mapoffline.MapOfflineActivityMy;
 import com.ezio.multiwii.motors.MotorsActivity;
 import com.ezio.multiwii.mw.BT;
+import com.ezio.multiwii.notUsed.WaypointActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -71,9 +72,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	TextView TVinfo;
 
 	private Handler mHandler = new Handler();
-
-	// Button ButtonPID;
-	// Button ButtonOther;
 
 	ActionBarSherlock actionBar;
 
@@ -331,8 +329,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void AUXOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(),
-				AUXActivity.class));
+		startActivity(new Intent(getApplicationContext(), AUXActivity.class));
 	}
 
 	public void Dashboard1OnClick(View v) {
@@ -398,6 +395,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		intent.setData(Uri.parse("market://details?id="
 				+ getApplicationContext().getPackageName()));
 		startActivity(intent);
+	}
+
+	public void TestOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(),
+				WaypointActivity.class));
 	}
 
 	// /////menu////////
