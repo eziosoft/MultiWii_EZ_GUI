@@ -17,6 +17,8 @@
 package com.ezio.multiwii;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -114,7 +116,6 @@ public class RawDataActivity extends Activity {
 		// log("cycleTime", app.mw.cycleTime);
 		// log("i2cError", app.mw.i2cError);
 
-		log("EZ-GUI Protocol", app.mw.EZGUIProtocol);
 		log("gx", app.mw.gx);
 		log("gy", app.mw.gy);
 		log("gz", app.mw.gz);
@@ -188,9 +189,40 @@ public class RawDataActivity extends Activity {
 		}
 
 		log("confSetting", app.mw.confSetting);
-		log("multiCapability",app.mw.multiCapability);
-		log("versionMisMatch", app.mw.versionMisMatch);
+		log("multiCapability", app.mw.multiCapability);
 
+		log("---", 0);
+
+		log("EZ-Gui Protocol", app.mw.EZGUIProtocol);
+
+		String app_ver = "";
+		int app_ver_code = 0;
+		try {
+			app_ver = getPackageManager().getPackageInfo(this.getPackageName(),
+					0).versionName;
+			app_ver_code = getPackageManager().getPackageInfo(
+					this.getPackageName(), 0).versionCode;
+		} catch (NameNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		log("App version", getString(R.string.app_name) + " " + app_ver + "."
+				+ String.valueOf(app_ver_code));
+
+		log("versionMisMatch", app.mw.versionMisMatch);
+		log("1G", app.mw._1G);
+		log("CHECKBOXITEMS", app.mw.CHECKBOXITEMS);
+		log("PIDITEMS", app.mw.PIDITEMS);
+		log("timer1", app.mw.timer1);
+		log("timer2", app.mw.timer2);
+		log("bt.Connected", String.valueOf(app.mw.bt.Connected));
+		log("bt.ConnectionLost", String.valueOf(app.mw.bt.ConnectionLost));
+		log("bt.ReconnectTry", String.valueOf(app.mw.bt.ReconnectTry));
+		
+		for (String s : app.mw.buttonCheckboxLabel) {
+			log("buttonCheckboxLabel", s);
+	
+		}
+		
 	}
 
 	private void log(String co, int wartosc) {
@@ -203,6 +235,23 @@ public class RawDataActivity extends Activity {
 
 	private void log(String co, String wartosc) {
 		TVData.append(co + "=" + (wartosc) + "\n");
+	}
+
+	void ShareIt() {
+		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+		sharingIntent.setType("text/plain");
+		String shareBody = TVMWInfo.getText().toString() + "\n\n"
+				+ TVData.getText().toString();
+
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+				"MultiWii Raw Data");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+
+		startActivity(Intent.createChooser(sharingIntent, "Share via"));
+	}
+
+	public void SendOnClick(View v) {
+		ShareIt();
 	}
 
 }

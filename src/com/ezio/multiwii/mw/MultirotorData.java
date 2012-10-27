@@ -62,7 +62,7 @@ public abstract class MultirotorData {
 	public int nunchukPresent, AccPresent, BaroPresent, MagPresent, GPSPresent,
 			levelMode;
 
-	public float time1, time2;
+	public float timer1, timer2;
 	public int cycleTime, i2cError;
 	public int activation1[] = new int[CHECKBOXITEMS];
 	public int activation2[] = new int[CHECKBOXITEMS];
