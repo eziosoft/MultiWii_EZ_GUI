@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import com.ezio.multiwii.notUsed.Waypoint;
+import com.ezio.multiwii.waypoints.Waypoint;
 
 public class MultiWii211 extends MultiWii210 {
 

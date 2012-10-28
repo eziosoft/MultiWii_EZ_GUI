@@ -86,7 +86,7 @@
             android:name=".map.MapActivityMy"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name=".notUsed.WaypointActivity" >
+        <activity android:name=".waypoints.WaypointActivity" >
         </activity>
         <activity android:name="AboutActivity" >
         </activity>

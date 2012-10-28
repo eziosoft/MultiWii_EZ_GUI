@@ -16,7 +16,7 @@
  */
 package com.ezio.multiwii.mw;
 
-import com.ezio.multiwii.notUsed.Waypoint;
+import com.ezio.multiwii.waypoints.Waypoint;
 
 import android.util.Log;
 

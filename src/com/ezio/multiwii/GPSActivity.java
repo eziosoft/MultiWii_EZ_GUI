@@ -223,9 +223,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	}
 
 	public void InjectGPSOnClick(View v) {
-
 		Injecting = true;
-
 	}
 
 	@Override

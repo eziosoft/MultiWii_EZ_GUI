@@ -22,7 +22,7 @@ import java.util.List;
 
 import android.util.Log;
 
-import com.ezio.multiwii.notUsed.Waypoint;
+import com.ezio.multiwii.waypoints.Waypoint;
 
 public class MultiWii210 extends MultirotorData {
 
