@@ -314,6 +314,13 @@ public class MultiWii210 extends MultirotorData {
 			Waypoints[WP.Number].Alt = WP.Alt;
 			Waypoints[WP.Number].NavFlag = WP.NavFlag;
 
+			Log.d("aaa",
+					"MSP_WP (get) " + String.valueOf(WP.Number) + "  "
+							+ String.valueOf(WP.Lat) + "x"
+							+ String.valueOf(WP.Lon) + " "
+							+ String.valueOf(WP.Alt) + " "
+							+ String.valueOf(WP.NavFlag));
+
 			break;
 		default:
 
@@ -657,6 +664,8 @@ public class MultiWii210 extends MultirotorData {
 
 		sendRequestMSP(requestMSP(MSP_WP,
 				payload.toArray(new Character[payload.size()])));
+
+		Log.d("aaa", "MSP_WP (SendRequestGetWayPoint) " + String.valueOf(Number));
 
 	}
 

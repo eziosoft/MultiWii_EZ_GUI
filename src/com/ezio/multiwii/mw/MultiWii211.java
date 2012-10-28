@@ -18,6 +18,8 @@ package com.ezio.multiwii.mw;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.ezio.multiwii.notUsed.Waypoint;
 
 public class MultiWii211 extends MultiWii210 {
@@ -155,8 +157,14 @@ public class MultiWii211 extends MultiWii210 {
 
 		payload.add((char) w.NavFlag);
 
-		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS,
+		sendRequestMSP(requestMSP(MSP_SET_WP,
 				payload.toArray(new Character[payload.size()])));
+
+		Log.d("aaa",
+				"MSP_SET_WP " + String.valueOf(w.Number) + "  "
+						+ String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon)
+						+ " " + String.valueOf(w.Alt) + " "
+						+ String.valueOf(w.NavFlag));
 
 		// TODO Auto-generated method stub
 		// super.SendRequestMSP_SET_WP(waypoint);

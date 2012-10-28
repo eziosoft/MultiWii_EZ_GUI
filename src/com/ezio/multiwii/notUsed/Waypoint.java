@@ -21,6 +21,11 @@ public class Waypoint {
 	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, NavFlag = 0;
 
 	public Waypoint(int number, int lat, int lon, int alt, int navFlag) {
+		Number = number;
+		Lat = lat;
+		Lon = lon;
+		Alt = alt;
+		NavFlag = navFlag;
 
 	}
 

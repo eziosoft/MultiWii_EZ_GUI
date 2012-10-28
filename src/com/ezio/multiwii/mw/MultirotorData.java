@@ -98,7 +98,7 @@ public abstract class MultirotorData {
 			MSP_ACC_CALIBRATION = 205, MSP_MAG_CALIBRATION = 206,
 			MSP_SET_MISC = 207, MSP_RESET_CONF = 208, MSP_SELECT_SETTING = 210,
 			MSP_SPEK_BIND = 240, MSP_EEPROM_WRITE = 250, MSP_DEBUGMSG = 253,
-			MSP_DEBUG = 254, MSP_WP_SET = 209, MSP_WP = 118;
+			MSP_DEBUG = 254, MSP_SET_WP = 209, MSP_WP = 118;
 
 	public static final int IDLE = 0, HEADER_START = 1, HEADER_M = 2,
 			HEADER_ARROW = 3, HEADER_SIZE = 4, HEADER_CMD = 5, HEADER_ERR = 6;
@@ -123,16 +123,21 @@ public abstract class MultirotorData {
 	int byteMP[] = new int[8]; // Motor // Pins. // Varies // by // multiType //
 								// and // Arduino // model // (pro // Mini, //
 								// // Mega, // etc).
-	
-	public Waypoint[] Waypoints = new Waypoint[16];
+
+	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(),
+			new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(),
+			new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(),
+			new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(),
+			new Waypoint(), new Waypoint() };
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////end 2.10///////////
 
 	// //Protocol 2.11///////////////////////////////////////
 	public String DebugMSG;
-	public int multiCapability = 0; // Bitflags stating what capabilities are/are not
-								// present in the compiled code.
+	public int multiCapability = 0; // Bitflags stating what capabilities
+									// are/are not
+	// present in the compiled code.
 	public int confSetting = 0;
 	// end 2.11//////////////////////////
 
@@ -178,7 +183,7 @@ public abstract class MultirotorData {
 	public abstract void SendRequestSelectSetting(int setting);
 
 	public abstract void SendRequestSPEK_BIND();
-	
+
 	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
 
 	// ///////////////////////////////////////////////

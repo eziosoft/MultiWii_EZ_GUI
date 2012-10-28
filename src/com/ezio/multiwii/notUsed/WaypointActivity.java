@@ -75,8 +75,8 @@ public class WaypointActivity extends Activity {
 	}
 	
 	public void SetWPOnClick(View v) {
-		Waypoint w = new Waypoint(0,1,2,3,4);
-		app.mw.SendRequestMSP_SET_WP(w);
+	
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0,1,2,3,4));
 	}
 
 	void displayWPs() {
