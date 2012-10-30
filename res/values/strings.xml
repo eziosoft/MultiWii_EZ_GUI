@@ -214,5 +214,6 @@
     <string name="SelectSetting">Select Setting</string>
 
     <string name="RXBIND">RX BIND</string>
+    <string name="FollowMe">Follow Me</string>
 
 </resources>

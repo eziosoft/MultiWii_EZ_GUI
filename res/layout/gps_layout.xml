@@ -417,18 +417,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
                 android:background="@color/smalltittle" />
-
+
             <CheckBox
-                android:id="@+id/checkBox1"
+                android:id="@+id/checkBoxFollowMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
-
-            <Button
-                android:id="@+id/buttonInjectGPS"
+                android:text="@string/FollowMe" />
+
+            <CheckBox
+                android:id="@+id/checkBoxInjectGPS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="InjectGPSOnClick"
                 android:text="Inject GPS  (#define GPS_FROM_OSD has to be uncomented)" />
         </LinearLayout>
     </ScrollView>

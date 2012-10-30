@@ -18,9 +18,6 @@ package com.ezio.multiwii;
 
 import java.util.Iterator;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.GeomagneticField;
@@ -35,7 +32,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockActivity;
 
 public class GPSActivity extends SherlockActivity implements LocationListener {
 
@@ -63,7 +63,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	TextView DeclinationTV;
 	TextView PhoneAccuracyTV;
 
-	Button InjectGPSButton;
+	CheckBox CheckBoxInjectGPS;
+	CheckBox CheckBoxFollowMe;
 
 	int PhoneNumSat = 0;
 	double PhoneLatitude = 0;
@@ -77,8 +78,6 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
 	GeomagneticField geoField;
-
-	boolean Injecting = false;
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -124,13 +123,6 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 			app.Frequentjobs();
 
-			if (Injecting)
-
-				app.mw.SendRequestGPSinject21((byte) PhoneFix,
-						(byte) PhoneNumSat, (int) (PhoneLatitude * 1e7),
-						(int) (PhoneLongitude * 1e7), (int) PhoneAltitude,
-						(int) PhoneSpeed);
-
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
@@ -164,11 +156,13 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		PhoneNumSatTV = (TextView) findViewById(R.id.textViewPhoneNumSat);
 		PhoneAccuracyTV = (TextView) findViewById(R.id.textViewPhoneAccuracy);
 
-		InjectGPSButton = (Button) findViewById(R.id.buttonInjectGPS);
+		CheckBoxInjectGPS = (CheckBox) findViewById(R.id.checkBoxInjectGPS);
+		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
 
 		if (!app.AdvancedFunctions) {
-			InjectGPSButton.setVisibility(View.GONE);
+			CheckBoxInjectGPS.setVisibility(View.GONE);
+			CheckBoxFollowMe.setVisibility(View.GONE);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -219,11 +213,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	}
 
 	public void SHOWHIDDENOncLick(View v) {
-		InjectGPSButton.setVisibility(View.VISIBLE);
-	}
-
-	public void InjectGPSOnClick(View v) {
-		Injecting = true;
+		CheckBoxInjectGPS.setVisibility(View.VISIBLE);
+		CheckBoxFollowMe.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -262,6 +253,11 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		Declination = geoField.getDeclination();
 
 		DeclinationTV.setText(String.valueOf(Declination));
+
+		if (CheckBoxInjectGPS.isChecked())
+			app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat,
+					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
+					(int) PhoneAltitude, (int) PhoneSpeed);
 
 	}
 
