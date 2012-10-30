@@ -412,6 +412,18 @@
             <!-- </com.google.android.maps.MapView> -->
             <!-- android:apiKey="0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ" do android market/> -->
 
+            <View
+                android:id="@+id/View01"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:background="@color/smalltittle" />
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CheckBox" />
+
             <Button
                 android:id="@+id/buttonInjectGPS"
                 android:layout_width="wrap_content"

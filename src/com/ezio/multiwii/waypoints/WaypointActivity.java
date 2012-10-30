@@ -165,7 +165,7 @@ public class WaypointActivity extends Activity implements LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		String s = "Lat: " + String.valueOf(PhoneLatitude) + " Lon:"
+		String s = "Phone Lat: " + String.valueOf(PhoneLatitude) + " Lon:"
 				+ String.valueOf(PhoneLongitude);
 		s += "\nLat: " + String.valueOf((int) (PhoneLatitude * 1e7)) + " Lon:"
 				+ String.valueOf((int) (PhoneLongitude * 1e7));

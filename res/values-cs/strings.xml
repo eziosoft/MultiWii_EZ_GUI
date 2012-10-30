@@ -7,10 +7,10 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="scanning">hledám zařízení...</string>
     <string name="select_device">vyberte zařízení k připojení</string>
-    <string name="none_paired">Žídné zařizení nebylo zpárováno</string>
+    <string name="none_paired">Žádné zařizení nebylo zpárováno</string>
     <string name="none_found">Zařízení nenalezeno</string>
-    <string name="title_paired_devices">Zpárována zařízení</string>
-    <string name="title_other_devices">Jiní dostupná zařízení</string>
+    <string name="title_paired_devices">Zpárováná zařízení</string>
+    <string name="title_other_devices">Jiná dostupná zařízení</string>
     <string name="button_scan">Hledej zařízení</string>
     <string name="StickView">Náhled pák</string>
     <string name="Data">Data</string>
@@ -31,12 +31,12 @@
     <string name="MagMode">Mag Mode</string>
     <string name="PointNorth">Směr sever</string>
     <string name="Point_multirotor_front">Směr předku kopteru</string>
-    <string name="AccActive">AccAktivní</string>
-    <string name="BaroActive">BaroAktivní</string>
+    <string name="AccActive">Acc Aktivní</string>
+    <string name="BaroActive">Baro Aktivní</string>
     <string name="MagnetoActive">MagnetoAktivní</string>
-    <string name="GPSActive">GPSAktivní</string>
-    <string name="PhoneMag">Kompas telefonu</string>
-    <string name="PitchRollCircleView">Pitch Roll Circle View</string>
+    <string name="GPSActive">GPS Aktivní</string>
+    <string name="PhoneMag">Kompas tel.</string>
+    <string name="PitchRollCircleView">Kruhový náhled Stoup/Náklon</string>
     <string name="LEVEL">LEVEL</string>
     <string name="BARO">BARO</string>
     <string name="MAG">MAG</string>
@@ -48,13 +48,13 @@
     <string name="PASSTHRU">PASSTHRU</string>
     <string name="HEADFREE">HEADFREE</string>
     <string name="BEEPER">BEEPER</string>
-    <string name="pointFrontHelp">Směr předku copteru porovnává data z kompasu telefonu a kopteru. Ukazuje směr predeku kopteru.</string>
+    <string name="pointFrontHelp">Směr předku copteru porovnává data z kompasu telefonu a kopteru. Ukazuje směr předeku kopteru.</string>
     <string name="TTS">Mluvení</string>
     <string name="GPS">GPS</string>
     <string name="GPS_distanceToHome">Vzdálenost domů (cm)</string>
     <string name="GPS_directionToHome">Směr domů</string>
     <string name="GPS_numSat">Počet sat.</string>
-    <string name="GPS_fix">Fix</string>
+    <string name="GPS_fix">Fixace</string>
     <string name="GPS_update">Aktualizace</string>
     <string name="StartLogging">Začít logovat</string>
     <string name="Stop_Logging">Ukonči logování a ulož do souboru</string>
@@ -64,7 +64,7 @@
     <string name="GPS_latitude">Zem. šířka</string>
     <string name="GPS_longitude">Zem. délka</string>
     <string name="menu_exit">Odejít</string>
-    <string name="menu_connect">MW připojit</string>
+    <string name="menu_connect">Připoj MW</string>
     <string name="menu_disconnect">Odpojit</string>
     <string name="SelectBTdevice">Vyber MultiWii BT</string>
     <string name="LEDMAX">LEDMAX</string>
@@ -84,38 +84,38 @@
     <string name="Servos">Serva</string>
     <string name="AltCorrection">Korekce výšky</string>
     <string name="AltCorrectionInfo">Nastav výšku na 0 když armuješ.</string>
-    <string name="Yaw">Yaw</string>
-    <string name="Alt">Alt</string>
+    <string name="Yaw">Otočení</string>
+    <string name="Alt">Výška</string>
     <string name="Pos">Pos Hold</string>
     <string name="PosR">Pos Hold Rate</string>
     <string name="NavR">Nav Rate</string>
     <string name="PID">PID</string>
     <string name="Read">Načíst</string>
     <string name="Write">Zapsat</string>
-    <string name="Rate">Rate</string>
+    <string name="Rate">Ohodnoť aplikaci</string>
     <string name="MID">MID</string>
     <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
-    <string name="TPA">Thr PID attenuation</string>
+    <string name="TPA">Útlum Thr PID</string>
     <string name="Reset">Reset</string>
     <string name="Throttle">Plyn</string>
     <string name="Pitch_Roll">Stoupaní/Náklon</string>
-    <string name="AccCalibration">AccKalibrace</string>
-    <string name="MagCalibration">MagKalibrace</string>
-    <string name="Other">Jiný</string>
+    <string name="AccCalibration">Kalibrace ACC</string>
+    <string name="MagCalibration">Kalibrace MAG</string>
+    <string name="Other">Ostatní</string>
     <string name="MotorsServos">Mot/Serv</string>
     <string name="PhoneSpeed">Rychlost telefonu(cm/s)</string>
     <string name="PhoneNumSat">PočSat telefonu </string>
     <string name="SavePIDProfile">Ulož profil PID</string>
     <string name="dashboard2">Přist. deska 2</string>
     <string name="disableBTonExit">Vypni BT po odchodu</string>
-    <string name="Declination">MAG_DEKLINACE</string>
+    <string name="Declination">Mag Deklinace</string>
     <string name="ThrMid">Thr Mid</string>
     <string name="ThrExpo">Thr Expo</string>
     <string name="RCRate">RC Rate</string>
     <string name="RCExpo">RC Expo</string>
     <string name="BattVoltage">Napětí Bat</string>
-    <string name="PowerSum">Power Sum</string>
+    <string name="PowerSum">Proud</string>
     <string name="PowerMeterAlarm">Alarm nízkého napětí</string>
     <string name="Level">Level</string>
     <string name="Map">Mapa</string>
@@ -133,7 +133,7 @@
     <string name="gforce">Síla G</string>
     <string name="state">Stav</string>
     <string name="Battery">Baterie(V)</string>
-    <string name="PowerSumPowerTrigger">PowerSum/PowerTrigger</string>
+    <string name="PowerSumPowerTrigger">Proud/Sepnutí</string>
     <string name="Donate">Daruj</string>
     <string name="Loggingstarted">Logování spuštěno</string>
     <string name="Loggingstopedandsaved">Logování zastaveno a uloženo</string>
@@ -146,7 +146,7 @@
 
     <!-- new -->
     <string name="Started">Spuštěno</string>
-    <string name="About">O</string>
+    <string name="About">O aplikaci</string>
     <string name="BatteryLevelIs">Úroveň baterie je</string>
     <string name="Reconnecting">Připojení ztraceno, připojuji</string>
     <string name="Language">Jazyk</string>
@@ -198,13 +198,20 @@
     <string name="Connect_frsky">Připoj Frsky</string>
     <string name="UseOfflineMap">Použíj mapy offline</string>
     <string name="RefreshRate">Obnovovací frekvence v ms (měla by být >=100)</string>
-    <string name="ConnectionBug">Use when it disconnects when button is pressed (right now only works for dashboard2)</string>
+    <string name="ConnectionBug">Použi v případě odpojovaní když zmáčknes tlačítko (zatím funguje jen pro Přís. desku 2 )</string>
     <string name="CopyFrskyToMW">Použíj data z Frsky všude</string>
 
     <!-- menu -->
-    <string name="page1">Přist. deska</string>
+    <string name="page1">Hlavní nabídka</string>
     <string name="page2">Nastavení MW</string>
     <string name="page3">Konfigurace</string>
+    
+    <!-- end menu -->
+    
+    <string name="RawData">Surová data</string>
+    <string name="ShareIt">Sdílej své nastavení</string>
+    <string name="SelectSetting">Výběr nastavení</string>
+    <string name="RXBIND">Spárovaní RX</string>
 
    
 </resources>
