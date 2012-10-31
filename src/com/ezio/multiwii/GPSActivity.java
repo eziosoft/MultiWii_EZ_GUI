@@ -255,10 +255,19 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 		DeclinationTV.setText(String.valueOf(Declination));
 
-		if (CheckBoxInjectGPS.isChecked())
+		if (CheckBoxInjectGPS.isChecked()) {
 			app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat,
 					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
 					(int) PhoneAltitude, (int) PhoneSpeed);
+
+			if (InjectGPSBlinkFlag) {
+				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
+			} else {
+				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
+			}
+
+			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
+		}
 
 		if (CheckBoxFollowMe.isChecked()) {
 			app.mw.SendRequestMSP_SET_WP(new Waypoint(0,
@@ -271,14 +280,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 				CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT);
 			}
 
-			if (InjectGPSBlinkFlag) {
-				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
-			} else {
-				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
-			}
-
 			FollowMeBlinkFlag = !FollowMeBlinkFlag;
-			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
 		}
 
 	}
