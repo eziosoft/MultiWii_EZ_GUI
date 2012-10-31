@@ -36,6 +36,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.ezio.multiwii.waypoints.Waypoint;
 
 public class GPSActivity extends SherlockActivity implements LocationListener {
 
@@ -78,6 +79,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
 	GeomagneticField geoField;
+
+	private boolean FollowMeBlinkFlag = false, InjectGPSBlinkFlag = false;
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -200,13 +203,11 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 						GpsSatellite oSat = (GpsSatellite) it.next();
 						if (oSat.usedInFix())
 							PhoneNumSat++;
-
 					}
 
 				}
 				if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
 					PhoneFix = 1;
-
 			}
 		});
 
@@ -258,6 +259,27 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 			app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat,
 					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
 					(int) PhoneAltitude, (int) PhoneSpeed);
+
+		if (CheckBoxFollowMe.isChecked()) {
+			app.mw.SendRequestMSP_SET_WP(new Waypoint(0,
+					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
+					0, 0));
+
+			if (FollowMeBlinkFlag) {
+				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);
+			} else {
+				CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT);
+			}
+
+			if (InjectGPSBlinkFlag) {
+				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
+			} else {
+				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
+			}
+
+			FollowMeBlinkFlag = !FollowMeBlinkFlag;
+			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
+		}
 
 	}
 

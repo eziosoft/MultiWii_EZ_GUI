@@ -35,7 +35,6 @@ import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.mw.MultiWii200;
-import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultiWii211;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.google.android.maps.GeoPoint;
@@ -43,7 +42,7 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean GPSfromNet = true; // false by default
+	public boolean GPSfromNet = false; // false by default
 	public boolean UseMapPublicAPI = true; // map API (true by default)
 	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
 																				// your

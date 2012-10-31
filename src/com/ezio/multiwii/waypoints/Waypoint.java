@@ -16,6 +16,8 @@
  */
 package com.ezio.multiwii.waypoints;
 
+import org.osmdroid.util.GeoPoint;
+
 public class Waypoint {
 
 	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, NavFlag = 0;
@@ -29,7 +31,20 @@ public class Waypoint {
 
 	}
 
+	public Waypoint(int number, GeoPoint geopoint, int navFlag) {
+		Number = number;
+		Lat = geopoint.getLatitudeE6() * 10;
+		Lon = geopoint.getLongitudeE6() * 10;
+		Alt = geopoint.getAltitude();
+		NavFlag = navFlag;
+	}
+
 	public Waypoint() {
+
+	}
+
+	public GeoPoint getGeoPoint() {
+		return new GeoPoint(Lat / 10, Lon / 10, Alt);
 
 	}
 }
