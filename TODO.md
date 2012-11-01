@@ -77,3 +77,6 @@
 
 //- screen resolution - dashboard 2
 --
+
+showing the channels values in radio section not only positions
+//

@@ -40,26 +40,33 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class AUXActivity extends SherlockActivity {
 
-	App					app;
-	private boolean		killme		= false;
+	App app;
+	private boolean killme = false;
 
-	Handler				mHandler	= new Handler();
+	Handler mHandler = new Handler();
 
-	private Runnable	update		= new Runnable() {
-										@Override
-										public void run() {
+	TextView TextViewInfo;
 
-											app.mw.ProcessSerialData(app.loggingON);
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-											SetActiveStates();
-											app.Frequentjobs();
+			app.mw.ProcessSerialData(app.loggingON);
 
-											app.mw.SendRequest();
-											if (!killme)
-												mHandler.postDelayed(update, 500);
+			SetActiveStates();
+			app.Frequentjobs();
 
-										}
-									};
+			TextViewInfo.setText("Aux1:" + String.valueOf((int) app.mw.rcAUX1)
+					+ " Aux2:" + String.valueOf((int) app.mw.rcAUX2) + " Aux3:"
+					+ String.valueOf((int) app.mw.rcAUX3) + " Aux4:"
+					+ String.valueOf((int) app.mw.rcAUX4));
+
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, 500);
+
+		}
+	};
 
 	void SetAllChexboxes() {
 		for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
@@ -73,8 +80,7 @@ public class AUXActivity extends SherlockActivity {
 		app.mw.SendRequestGetCheckboxes();
 		try {
 			Thread.sleep(300);
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
@@ -86,50 +92,61 @@ public class AUXActivity extends SherlockActivity {
 
 	void SetOnClick() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+		builder.setMessage(getString(R.string.Continue))
+				.setCancelable(false)
+				.setPositiveButton(getString(R.string.Yes),
+						new DialogInterface.OnClickListener() {
 
-			public void onClick(DialogInterface dialog, int id) {
+							public void onClick(DialogInterface dialog, int id) {
 
-				for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
-					for (int j = 0; j < 12; j++) {
-						app.mw.Checkbox[i][j] = GetCheckbox(i * 100 + j);
-					}
-				}
-				app.mw.SendRequestSetCheckboxes();
-				
-				app.mw.SendRequestWriteToEEprom();
-				
-				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
+								for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
+									for (int j = 0; j < 12; j++) {
+										app.mw.Checkbox[i][j] = GetCheckbox(i
+												* 100 + j);
+									}
+								}
+								app.mw.SendRequestSetCheckboxes();
 
-			}
-		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
+								app.mw.SendRequestWriteToEEprom();
+
+								Toast.makeText(getApplicationContext(),
+										getString(R.string.Done),
+										Toast.LENGTH_SHORT).show();
+
+							}
+						})
+				.setNegativeButton(getString(R.string.No),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
 		AlertDialog alert = builder.create();
 		alert.show();
 
 	}
 
-//	private void SaveOnClick() {
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
-//
-//			public void onClick(DialogInterface dialog, int id) {
-//
-//				app.mw.SendRequestWriteToEEprom();
-//				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
-//
-//			}
-//		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int id) {
-//				dialog.cancel();
-//			}
-//		});
-//		AlertDialog alert = builder.create();
-//		alert.show();
-//	}
+	// private void SaveOnClick() {
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes),
+	// new DialogInterface.OnClickListener() {
+	//
+	// public void onClick(DialogInterface dialog, int id) {
+	//
+	// app.mw.SendRequestWriteToEEprom();
+	// Toast.makeText(getApplicationContext(), getString(R.string.Done),
+	// Toast.LENGTH_SHORT).show();
+	//
+	// }
+	// }).setNegativeButton(getString(R.string.No), new
+	// DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int id) {
+	// dialog.cancel();
+	// }
+	// });
+	// AlertDialog alert = builder.create();
+	// alert.show();
+	// }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +155,7 @@ public class AUXActivity extends SherlockActivity {
 		app = (App) getApplication();
 
 		CreateGUI();
+
 	}
 
 	private void SetCheckbox(int ID, Boolean checked) {
@@ -158,8 +176,7 @@ public class AUXActivity extends SherlockActivity {
 		TextView t = (TextView) findViewById(ID);
 		if (active) {
 			t.setBackgroundColor(Color.GREEN);
-		}
-		else {
+		} else {
 			t.setBackgroundColor(getResources().getColor(R.color.tittle));
 		}
 	}
@@ -171,10 +188,13 @@ public class AUXActivity extends SherlockActivity {
 	}
 
 	void CreateGUI() {
+		TextViewInfo = new TextView(this);
+
 		HorizontalScrollView s1 = new HorizontalScrollView(this);
 		ScrollView s2 = new ScrollView(this);
 
 		LinearLayout l = new LinearLayout(this);
+
 		TableLayout t = new TableLayout(this);
 
 		// adding tittles
@@ -267,8 +287,7 @@ public class AUXActivity extends SherlockActivity {
 
 				if (i % 4 == 0) {
 					c.setVisibility(View.INVISIBLE);
-				}
-				else {
+				} else {
 					ID++;
 					c.setId(ID);
 					// c.setText(String.valueOf(ID));
@@ -278,10 +297,17 @@ public class AUXActivity extends SherlockActivity {
 			t.addView(r);
 
 		}
+
+		// l.addView(TextViewInfo);
 		l.addView(t);
 		s2.addView(l);
 		s1.addView(s2);
-		setContentView(s1);
+
+		LinearLayout a = new LinearLayout(this);
+		a.setOrientation(LinearLayout.VERTICAL);
+		a.addView(TextViewInfo);
+		a.addView(s1);
+		setContentView(a);
 	}
 
 	@Override
@@ -316,17 +342,16 @@ public class AUXActivity extends SherlockActivity {
 			return true;
 		}
 
-//		if (item.getItemId() == R.id.MenuSetCheckbox) {
-//			SetOnClick();
-//			return true;
-//		}
+		// if (item.getItemId() == R.id.MenuSetCheckbox) {
+		// SetOnClick();
+		// return true;
+		// }
 
 		if (item.getItemId() == R.id.MenuSaveCheckbox) {
 			SetOnClick();
 			return true;
 		}
 
-	
 		return false;
 	}
 
