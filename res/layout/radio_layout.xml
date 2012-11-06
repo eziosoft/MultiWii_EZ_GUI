@@ -142,7 +142,17 @@
 
                 </TableRow>
             </TableLayout>
+
+            <TextView
+                android:id="@+id/textViewRadioInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--" />
+
         </LinearLayout>
+
+     
+
     </ScrollView>
 
 </LinearLayout>
