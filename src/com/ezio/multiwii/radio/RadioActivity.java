@@ -40,8 +40,6 @@ public class RadioActivity extends SherlockActivity {
 	ProgressBar pb4;
 
 	TextView TextViewRadioInfo;
-	
-
 
 	Handler mHandler = new Handler();
 
@@ -65,7 +63,20 @@ public class RadioActivity extends SherlockActivity {
 			pb2.setProgress((int) (app.mw.rcAUX2 - 1000));
 			pb3.setProgress((int) (app.mw.rcAUX3 - 1000));
 			pb4.setProgress((int) (app.mw.rcAUX4 - 1000));
-	
+
+			String a = "Throttle:" + String.valueOf(app.mw.rcThrottle);
+			a += "\nYaw:" + String.valueOf(app.mw.rcYaw);
+
+			a += "\nRoll:" + String.valueOf(app.mw.rcRoll);
+			a += "\nPitch:" + String.valueOf(app.mw.rcPitch);
+
+			a += "\nAUX1:" + String.valueOf(app.mw.rcAUX1);
+			a += "\nAUX2:" + String.valueOf(app.mw.rcAUX2);
+			a += "\nAUX3:" + String.valueOf(app.mw.rcAUX3);
+			a += "\nAUX4:" + String.valueOf(app.mw.rcAUX4);
+
+			TextViewRadioInfo.setText(a);
+
 			app.Frequentjobs();
 
 			app.mw.SendRequest();
@@ -115,7 +126,7 @@ public class RadioActivity extends SherlockActivity {
 		pb3 = (ProgressBar) findViewById(R.id.progressBar3);
 		pb4 = (ProgressBar) findViewById(R.id.progressBar4);
 
-	TextViewRadioInfo = findViewById(R.id.textviewRadioInfo);
+		TextViewRadioInfo = (TextView) findViewById(R.id.textViewRadioInfo);
 
 		app.Say(getString(R.string.RadioMode) + " "
 				+ String.valueOf(app.RadioMode));
