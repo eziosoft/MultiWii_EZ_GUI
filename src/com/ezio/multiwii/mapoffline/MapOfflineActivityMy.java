@@ -71,7 +71,12 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10,
 					app.mw.GPS_longitude / 10);
-			CenterLocation(g);
+
+			if (app.mw.GPS_fix == 1) {
+				CenterLocation(g);
+			} else {
+				CenterLocation(GYou);
+			}
 
 			GeoPoint gHome = new GeoPoint(app.mw.HomePosition.getLatitudeE6(),
 					app.mw.HomePosition.getLongitudeE6());
@@ -165,7 +170,6 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 		GYou = new GeoPoint((int) (location.getLatitude() * 1e6),
 				(int) (location.getLongitude() * 1e6));
 
-	
 		// Log.d("aaa", String.valueOf(location.getLatitude()));
 
 	}

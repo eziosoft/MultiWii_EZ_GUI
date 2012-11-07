@@ -44,7 +44,7 @@ class MapCirclesOverlay extends Overlay {
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
 		mPaint.setStrokeWidth(2);
 		mPaint.setTextSize(20);
-		mPaint.setAlpha(70);
+		//mPaint.setAlpha(70);
 
 		mPaint1.setDither(true);
 		mPaint1.setAntiAlias(false);
@@ -54,7 +54,7 @@ class MapCirclesOverlay extends Overlay {
 		// mPaint1.setStrokeCap(Paint.Cap.ROUND);
 		mPaint1.setStrokeWidth(2);
 		mPaint1.setTextSize(30);
-		mPaint1.setAlpha(50);
+		//mPaint1.setAlpha(50);
 
 	}
 

@@ -45,17 +45,17 @@ class MapOfflineCirclesOverlay extends Overlay {
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
 		mPaint.setStrokeWidth(2);
 		mPaint.setTextSize(20);
-		mPaint.setAlpha(70);
+		//mPaint.setAlpha(70);
 
 		mPaint1.setDither(true);
 		mPaint1.setAntiAlias(false);
-		mPaint1.setColor(Color.YELLOW);
-		mPaint1.setStyle(Paint.Style.STROKE);
+		mPaint1.setColor(Color.BLUE);
+		mPaint1.setStyle(Paint.Style.FILL_AND_STROKE);
 		// mPaint1.setStrokeJoin(Paint.Join.ROUND);
 		// mPaint1.setStrokeCap(Paint.Cap.ROUND);
 		mPaint1.setStrokeWidth(2);
 		mPaint1.setTextSize(30);
-		mPaint1.setAlpha(50);
+		//mPaint1.setAlpha(20);
 
 	}
 

@@ -74,7 +74,12 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10,
 					app.mw.GPS_longitude / 10);
-			CenterLocation(g);
+			
+			if (app.mw.GPS_fix == 1) {
+				CenterLocation(g);
+			} else {
+				CenterLocation(GYou);
+			}
 
 			copter.Set(g, map((int) app.mw.head, 180, -180, 0, 360),
 					app.mw.HomePosition, app.mw.bytevbat, app.mw.pMeterSum,
