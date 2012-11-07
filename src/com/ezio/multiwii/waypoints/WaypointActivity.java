@@ -121,12 +121,15 @@ public class WaypointActivity extends Activity implements LocationListener {
 	}
 
 	public void GetWPOnClick(View v) {
-		app.mw.SendRequestGetWayPoint(0);
+		for (int i = 0; i < 16; i++) {
+			app.mw.SendRequestGetWayPoint(i);
+		}
 	}
 
 	public void SetWPOnClick(View v) {
 
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, 1, 2, 3, 4));
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0,
+				(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
 	}
 
 	void displayWPs() {

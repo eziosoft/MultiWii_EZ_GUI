@@ -67,6 +67,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	CheckBox CheckBoxInjectGPS;
 	CheckBox CheckBoxFollowMe;
 
+	TextView FollowMeInfoTV;
+
 	int PhoneNumSat = 0;
 	double PhoneLatitude = 0;
 	double PhoneLongitude = 0;
@@ -86,47 +88,51 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		@Override
 		public void run() {
 
-			{
-				app.mw.ProcessSerialData(app.loggingON);
+			app.mw.ProcessSerialData(app.loggingON);
 
-				float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
-				float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
+			float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
+			float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
 
-				GPS_distanceToHomeTV.setText(String
-						.valueOf(app.mw.GPS_distanceToHome));
-				GPS_directionToHomeTV.setText(String
-						.valueOf(app.mw.GPS_directionToHome));
-				GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
-				GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
-				// GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
+			GPS_distanceToHomeTV.setText(String
+					.valueOf(app.mw.GPS_distanceToHome));
+			GPS_directionToHomeTV.setText(String
+					.valueOf(app.mw.GPS_directionToHome));
+			GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
+			GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
+			// GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
 
-				if (app.mw.GPS_update % 2 == 0) {
-					GPS_updateTV.setBackgroundColor(Color.GREEN);
-				} else {
-					GPS_updateTV.setBackgroundColor(Color.TRANSPARENT);
-				}
-
-				GPS_altitudeTV.setText(String.valueOf(app.mw.GPS_altitude));
-				GPS_speedTV.setText(String.valueOf(app.mw.GPS_speed));
-
-				// GPS_latitudeTV.setText(String.valueOf(app.mw.GPS_latitude));
-				// GPS_longitudeTV.setText(String.valueOf(app.mw.GPS_longitude));
-
-				GPS_latitudeTV.setText(String.valueOf(lat));
-				GPS_longitudeTV.setText(String.valueOf(lon));
-
-				PhoneLatitudeTV.setText(String.valueOf((float) PhoneLatitude));
-				PhoneLongtitudeTV.setText(String
-						.valueOf((float) PhoneLongitude));
-				PhoneAltitudeTV.setText(String.valueOf((int) PhoneAltitude));
-				PhoneSpeedTV.setText(String.valueOf(PhoneSpeed));
-				PhoneNumSatTV.setText(String.valueOf(PhoneNumSat));
-				PhoneAccuracyTV.setText(String.valueOf(PhoneAccuracy));
+			if (app.mw.GPS_update % 2 == 0) {
+				GPS_updateTV.setBackgroundColor(Color.GREEN);
+			} else {
+				GPS_updateTV.setBackgroundColor(Color.TRANSPARENT);
 			}
+
+			GPS_altitudeTV.setText(String.valueOf(app.mw.GPS_altitude));
+			GPS_speedTV.setText(String.valueOf(app.mw.GPS_speed));
+
+			GPS_latitudeTV.setText(String.valueOf(lat));
+			GPS_longitudeTV.setText(String.valueOf(lon));
+
+			PhoneLatitudeTV.setText(String.valueOf((float) PhoneLatitude));
+			PhoneLongtitudeTV.setText(String.valueOf((float) PhoneLongitude));
+			PhoneAltitudeTV.setText(String.valueOf((int) PhoneAltitude));
+			PhoneSpeedTV.setText(String.valueOf(PhoneSpeed));
+			PhoneNumSatTV.setText(String.valueOf(PhoneNumSat));
+			PhoneAccuracyTV.setText(String.valueOf(PhoneAccuracy));
+
+			FollowMeInfoTV.setText("WayPointsDebug:\n");
+			Waypoint w = app.mw.Waypoints[0];
+			// for (Waypoint w : app.mw.Waypoints) {
+			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:"
+					+ String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon)
+					+ " Alt:" + String.valueOf(w.Alt) + " NavFlag:"
+					+ String.valueOf(w.NavFlag) + "\n");
+			// }
 
 			app.Frequentjobs();
 
 			app.mw.SendRequest();
+			app.mw.SendRequestGetWayPoint(0);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -162,10 +168,12 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		CheckBoxInjectGPS = (CheckBox) findViewById(R.id.checkBoxInjectGPS);
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
+		FollowMeInfoTV = (TextView) findViewById(R.id.textViewFollowMeInfo);
 
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
 			CheckBoxFollowMe.setVisibility(View.GONE);
+			FollowMeInfoTV.setVisibility(View.GONE);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -216,6 +224,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 	public void SHOWHIDDENOncLick(View v) {
 		CheckBoxInjectGPS.setVisibility(View.VISIBLE);
 		CheckBoxFollowMe.setVisibility(View.VISIBLE);
+		FollowMeInfoTV.setVisibility(View.VISIBLE);
 	}
 
 	@Override

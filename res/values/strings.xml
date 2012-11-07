@@ -214,6 +214,6 @@
     <string name="SelectSetting">Select Setting</string>
 
     <string name="RXBIND">RX BIND</string>
-    <string name="FollowMe">Follow Me (not tested!  must be used with #define USE_MSP_WP)</string>
+    <string name="FollowMe">Follow Me (not tested!  must be used with #define USE_MSP_WP) blinks when phone position is send to MW</string>
 
 </resources>
