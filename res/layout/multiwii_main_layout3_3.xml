@@ -100,7 +100,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:onClick="TestOnClick"
-                        android:text="Waypoints debug" />
+                        android:text="Waypoints debug"
+                        android:visibility="gone" />
 
                 </TableRow>
 
