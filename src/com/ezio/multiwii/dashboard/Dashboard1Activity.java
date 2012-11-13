@@ -77,7 +77,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 												pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
 
 												if (app.MagMode == 1) {
-													compass.SetHeading(app.mw.head);
+													compass.SetHeading(-app.mw.head);
 													compass.SetText("N");
 
 												}
