@@ -56,10 +56,7 @@ public class AUXActivity extends SherlockActivity {
 			SetActiveStates();
 			app.Frequentjobs();
 
-			TextViewInfo.setText("Aux1:" + String.valueOf((int) app.mw.rcAUX1)
-					+ " Aux2:" + String.valueOf((int) app.mw.rcAUX2) + " Aux3:"
-					+ String.valueOf((int) app.mw.rcAUX3) + " Aux4:"
-					+ String.valueOf((int) app.mw.rcAUX4));
+			TextViewInfo.setText("Aux1:" + GetTextValueOfAux(app.mw.rcAUX1) + " " + String.valueOf((int) app.mw.rcAUX1) + " Aux2:" + GetTextValueOfAux(app.mw.rcAUX2) + " " + String.valueOf((int) app.mw.rcAUX2) + " Aux3:" + GetTextValueOfAux(app.mw.rcAUX3) + " " + String.valueOf((int) app.mw.rcAUX3) + " Aux4:" + GetTextValueOfAux(app.mw.rcAUX4) + " " + String.valueOf((int) app.mw.rcAUX4));
 
 			app.mw.SendRequest();
 			if (!killme)
@@ -67,6 +64,16 @@ public class AUXActivity extends SherlockActivity {
 
 		}
 	};
+
+	private String GetTextValueOfAux(float rcAux) {
+		if (rcAux > 1600)
+			return "H";
+		if (rcAux < 1400)
+			return "L";
+		if (rcAux >= 1400 && rcAux <= 1600)
+			return "M";
+		return null;
+	}
 
 	void SetAllChexboxes() {
 		for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
@@ -92,35 +99,27 @@ public class AUXActivity extends SherlockActivity {
 
 	void SetOnClick() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue))
-				.setCancelable(false)
-				.setPositiveButton(getString(R.string.Yes),
-						new DialogInterface.OnClickListener() {
+		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
-							public void onClick(DialogInterface dialog, int id) {
+			public void onClick(DialogInterface dialog, int id) {
 
-								for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
-									for (int j = 0; j < 12; j++) {
-										app.mw.Checkbox[i][j] = GetCheckbox(i
-												* 100 + j);
-									}
-								}
-								app.mw.SendRequestSetCheckboxes();
+				for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
+					for (int j = 0; j < 12; j++) {
+						app.mw.Checkbox[i][j] = GetCheckbox(i * 100 + j);
+					}
+				}
+				app.mw.SendRequestSetCheckboxes();
 
-								app.mw.SendRequestWriteToEEprom();
+				app.mw.SendRequestWriteToEEprom();
 
-								Toast.makeText(getApplicationContext(),
-										getString(R.string.Done),
-										Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
-							}
-						})
-				.setNegativeButton(getString(R.string.No),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+			}
+		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
 		AlertDialog alert = builder.create();
 		alert.show();
 
