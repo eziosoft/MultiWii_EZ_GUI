@@ -142,8 +142,7 @@ public class App extends Application {
 	public String HEAD = "HEAD";
 
 	private static String GRAPHSTOSHOW = "GRAPHSTOSHOW";
-	public String GraphsToShow = ACCROLL + ";" + ACCZ + ";" + ALT + ";"
-			+ GYROPITCH;
+	public String GraphsToShow = ACCROLL + ";" + ACCZ + ";" + ALT + ";" + GYROPITCH;
 
 	// graphs end
 
@@ -171,8 +170,7 @@ public class App extends Application {
 
 		// for testing
 		if (GPSfromNet || !UseMapPublicAPI) {
-			Toast.makeText(getApplicationContext(), "Debug version",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Debug version", Toast.LENGTH_LONG).show();
 			Say("Debug version");
 			mw.GPS_longitude = 23654111;
 			mw.GPS_latitude = 488547500;
@@ -211,11 +209,11 @@ public class App extends Application {
 		_1Gtemp = prefs.getInt(G1, 256);
 		ForceLanguage = prefs.getString(FORCELANGUAGE, "");
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
-		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 0);
+		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 9.9f);
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
 		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 		RefreshRate = prefs.getInt(REFRESHRATE, 100);
-		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, true);
+		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, false);
 	}
 
 	public void SaveSettings() {
@@ -239,8 +237,7 @@ public class App extends Application {
 		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
 		editor.commit();
 
-		Toast.makeText(getApplicationContext(),
-				getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
 		Say(getString(R.string.Settingssaved));
 	}
 
@@ -274,10 +271,8 @@ public class App extends Application {
 				if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
 					mw.AltCorrection = mw.alt;
 					soundManager.playSound(1);
-					mw.HomePosition = new GeoPoint(mw.GPS_latitude / 10,
-							mw.GPS_longitude / 10);
-					mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay
-							+ mw.az * mw.az);
+					mw.HomePosition = new GeoPoint(mw.GPS_latitude / 10, mw.GPS_longitude / 10);
+					mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
 				}
 
 				if (!AltCorrection)
@@ -286,16 +281,14 @@ public class App extends Application {
 			oldActiveModes[i] = mw.ActiveModes[i];
 
 			// && bt.Connected
-			if (PeriodicSpeaking > 0 && bt.Connected
-					&& timer1 < System.currentTimeMillis()) {
+			if (PeriodicSpeaking > 0 && bt.Connected && timer1 < System.currentTimeMillis()) {
 				timer1 = System.currentTimeMillis() + PeriodicSpeaking;
-				Say(getString(R.string.BatteryLevelIs) + " "
-						+ String.valueOf((float) (mw.bytevbat / 10f)));
+				if (mw.bytevbat > 10) {
+					Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)));
+				}
 			}
 
-			if (VoltageAlarm > 0 && bt.Connected
-					&& timer2 < System.currentTimeMillis()
-					&& (float) (mw.bytevbat / 10f) < VoltageAlarm) {
+			if (mw.bytevbat > 10 && VoltageAlarm > 0 && bt.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
 				timer2 = System.currentTimeMillis() + timer2Freq;
 				soundManager.playSound(0);
 			}
@@ -312,10 +305,8 @@ public class App extends Application {
 
 	private void playSound() {
 		try {
-			Uri notification = RingtoneManager
-					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-					notification);
+			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
 			r.play();
 		} catch (Exception e) {
 		}
@@ -357,18 +348,8 @@ public class App extends Application {
 		mw.head = frsky.frskyHubProtocol.Heading;
 		mw.GPS_numSat = frsky.frskyHubProtocol.Temperature_1;
 		mw.GPS_speed = frsky.frskyHubProtocol.GPS_Speed;
-		mw.GPS_latitude = frsky.frskyHubProtocol.GPS_NS
-				* 10
-				* Integer
-						.parseInt(String
-								.valueOf(frsky.frskyHubProtocol.GPS_LatitudeBefore)
-								+ String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeAfter));
-		mw.GPS_longitude = frsky.frskyHubProtocol.GPS_EW
-				* 10
-				* Integer
-						.parseInt(String
-								.valueOf(frsky.frskyHubProtocol.GPS_LongitudeBefore)
-								+ String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeAfter));
+		mw.GPS_latitude = frsky.frskyHubProtocol.GPS_NS * 10 * Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeBefore) + String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeAfter));
+		mw.GPS_longitude = frsky.frskyHubProtocol.GPS_EW * 10 * Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeBefore) + String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeAfter));
 		mw.alt = frsky.frskyHubProtocol.Altitude;
 	}
 
