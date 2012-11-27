@@ -4,4 +4,12 @@
     <dimen name="padding_medium">8dp</dimen>
     <dimen name="padding_large">16dp</dimen>
 
+    <!-- used for dashboard2 -->
+    <dimen name="textSizeSmall">10sp</dimen>
+    <dimen name="textSizeMedium">25sp</dimen>
+    <dimen name="textSizeBig">40sp</dimen>
+    <dimen name="HorizonCircleSize">100sp</dimen>
+    <dimen name="AngleIndicatorLenght">10sp</dimen>
+    <dimen name="AngleIndicatorLenghtLong">10sp</dimen>
+
 </resources>
