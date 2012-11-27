@@ -26,12 +26,14 @@ import android.view.View;
 
 public class PitchRollView extends View {
 
-	private Paint	paint	= new Paint();
-	private Paint	paint1	= new Paint();
+	private Paint paint = new Paint();
+	private Paint paint1 = new Paint();
 
-	private float	ang;
+	private float ang;
 
-	int				color	= Color.YELLOW;
+	int color = Color.YELLOW;
+
+	static float scaledDensity = 0;
 
 	public void SetAngle(float angle) {
 		ang = angle;
@@ -53,6 +55,7 @@ public class PitchRollView extends View {
 	private void init() {
 
 		SetColor(color);
+		scaledDensity = getResources().getDisplayMetrics().scaledDensity;
 	}
 
 	public void SetColor(int c) {
@@ -60,16 +63,16 @@ public class PitchRollView extends View {
 		paint.setAntiAlias(true);
 		paint.setColor(color);
 		paint.setStyle(Paint.Style.STROKE);
-		paint.setStrokeWidth(3);
-		
+		paint.setStrokeWidth(2*scaledDensity);
+
 		paint1.setAntiAlias(true);
 		paint1.setColor(Color.YELLOW);
 		paint1.setStyle(Paint.Style.FILL_AND_STROKE);
 		paint1.setStrokeWidth(1);
-		paint1.setTextSize(30);
+		paint1.setTextSize(30*scaledDensity);
 	}
 
-	int	hh, ww;
+	int hh, ww;
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -89,7 +92,7 @@ public class PitchRollView extends View {
 		// canvas.drawPath(mPath, mPaint);
 		canvas.drawLine(-ww / 2, 0, ww / 2, 0, paint);
 		canvas.drawOval(new RectF(-hh / 2, -hh / 2, hh / 2, hh / 2), paint);
-		canvas.drawText(String.valueOf(ang), 0-paint1.measureText(String.valueOf(ang))/2, 0, paint1);
+		canvas.drawText(String.valueOf(ang), 0 - paint1.measureText(String.valueOf(ang)) / 2, 0, paint1);
 	}
 
 	@Override

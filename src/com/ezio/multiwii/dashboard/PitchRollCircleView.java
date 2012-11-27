@@ -24,19 +24,21 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class PitchRollCircleView extends View {
-	private Paint	paint1	= new Paint();
-	private Paint	paint2	= new Paint();
+	private Paint paint1 = new Paint();
+	private Paint paint2 = new Paint();
 
-	public float	x, y;
-	int				color	= Color.GREEN;
-	int				hh		= 80, ww = 80;
+	public float x, y;
+	int color = Color.GREEN;
+	int hh = 80, ww = 80;
+
+	static float scaledDensity = 0;
 
 	public void SetRollPitch(float Roll, float Pitch) {
 		x = Roll;
 		y = Pitch;
 
 		invalidate();
-		
+
 		setMinimumHeight(80);
 		setMinimumWidth(80);
 	}
@@ -45,6 +47,7 @@ public class PitchRollCircleView extends View {
 		super(context);
 
 		init();
+
 	}
 
 	public PitchRollCircleView(Context context, AttributeSet attrs) {
@@ -56,6 +59,8 @@ public class PitchRollCircleView extends View {
 	private void init() {
 
 		SetColor(color);
+
+		scaledDensity = getResources().getDisplayMetrics().scaledDensity;
 	}
 
 	public void SetColor(int c) {
@@ -67,7 +72,7 @@ public class PitchRollCircleView extends View {
 		paint1.setAntiAlias(true);
 		paint1.setColor(color);
 		paint1.setStyle(Paint.Style.STROKE);
-		paint1.setStrokeWidth(3);
+		paint1.setStrokeWidth(2f*scaledDensity);
 	}
 
 	@Override
@@ -84,10 +89,10 @@ public class PitchRollCircleView extends View {
 
 		canvas.drawColor(Color.TRANSPARENT);
 
-		canvas.drawCircle(ww / 2, hh / 2, hh / 2 - 2, paint1);
-		canvas.drawCircle(ww / 2, hh / 2, 25, paint1);
-		canvas.drawLine(ww / 2, hh / 2, ww / 2 + x*2, hh / 2 - y*2, paint1);
-		canvas.drawCircle(ww / 2 + x*2, hh / 2 - y*2, 20, paint2);
+		canvas.drawCircle(ww / 2, hh / 2, hh / 2 - 2 * scaledDensity, paint1);
+		canvas.drawCircle(ww / 2, hh / 2, 25 * scaledDensity, paint1);
+		canvas.drawLine(ww / 2, hh / 2, ww / 2 + x * 2 * scaledDensity, hh / 2 - y * 2, paint1);
+		canvas.drawCircle(ww / 2 + x * 2 * scaledDensity, hh / 2 - y * 2 * scaledDensity, 20 * scaledDensity, paint2);
 	}
 
 	@Override
