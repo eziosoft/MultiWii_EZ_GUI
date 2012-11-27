@@ -53,7 +53,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
 	CopterOverlay copter;
-	MapCirclesOverlay circles = new MapCirclesOverlay();
+	MapCirclesOverlay circles;
 
 	private boolean killme = false;
 
@@ -72,18 +72,15 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 				// simulation
 			}
 
-			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10,
-					app.mw.GPS_longitude / 10);
-			
+			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
+
 			if (app.mw.GPS_fix == 1) {
 				CenterLocation(g);
 			} else {
 				CenterLocation(GYou);
 			}
 
-			copter.Set(g, map((int) app.mw.head, 180, -180, 0, 360),
-					app.mw.HomePosition, app.mw.bytevbat, app.mw.pMeterSum,
-					app.mw.intPowerTrigger);
+			copter.Set(g, map((int) app.mw.head, 180, -180, 0, 360), app.mw.HomePosition, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger);
 			circles.Set(app.mw.HomePosition, GYou);
 			mapView.postInvalidate();
 
@@ -110,12 +107,10 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 		app = (App) getApplication();
 
 		if (app.UseMapPublicAPI) {
-			mapView = new MapView(this,
-					app.MapAPIKeyPublic);
+			mapView = new MapView(this, app.MapAPIKeyPublic);
 		} else {
 
-			mapView = new MapView(this,
-					app.MapAPIKeyDebug);
+			mapView = new MapView(this, app.MapAPIKeyDebug);
 		}
 
 		mapView.setClickable(true);
@@ -125,6 +120,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		copter = new CopterOverlay(getApplicationContext());
+		circles = new MapCirclesOverlay(getApplicationContext());
 
 		mapView.setBuiltInZoomControls(true);
 		myMapController = mapView.getController();
@@ -179,10 +175,8 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		GYou = new GeoPoint((int) (location.getLatitude() * 1e6),
-				(int) (location.getLongitude() * 1e6));
+		GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
-	
 		// Log.d("aaa", String.valueOf(location.getLatitude()));
 
 	}

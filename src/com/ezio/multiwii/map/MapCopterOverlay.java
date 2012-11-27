@@ -35,51 +35,58 @@ import com.google.android.maps.Projection;
 
 class CopterOverlay extends Overlay {
 
-	private Context			context;
-	private Projection		projection;
-	GeoPoint				GCopter			= new GeoPoint(0, 0);
-	GeoPoint				GHome			= new GeoPoint(0, 0);
-	float					Azimuth			= 45;
+	private Context context;
+	private Projection projection;
+	GeoPoint GCopter = new GeoPoint(0, 0);
+	GeoPoint GHome = new GeoPoint(0, 0);
+	float Azimuth = 45;
 
-	Paint					mPaint1			= new Paint();
-	Paint					mPaint2			= new Paint();
-	Paint					mPaint3			= new Paint();
-	Paint					p				= new Paint();
+	Paint mPaint1 = new Paint();
+	Paint mPaint2 = new Paint();
+	Paint mPaint3 = new Paint();
+	Paint p = new Paint();
 
-	Point					p1				= new Point();
-	Point					p2				= new Point();
+	Point p1 = new Point();
+	Point p2 = new Point();
 
-	private List<GeoPoint>	points			= new ArrayList<GeoPoint>();
-	private int				pointsCount		= 20;
+	private List<GeoPoint> points = new ArrayList<GeoPoint>();
+	private int pointsCount = 20;
 
-	static int				textSizeSmall	= 25;
-	static int				textSizeMedium	= 50;
+	static int textSizeSmall = 25;
+	static int textSizeMedium = 50;
 
-	public float			VBat			= 0;
-	public int				PowerSum		= 0;
-	public int				PowerTrigger	= 0;
+	public float VBat = 0;
+	public int PowerSum = 0;
+	public int PowerTrigger = 0;
+
+	float scaledDensity = 0;
 
 	public CopterOverlay(Context context) {
 
 		this.context = context;
+		scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+
+		textSizeSmall = context.getResources().getDimensionPixelSize(R.dimen.textSizeSmall);
+		textSizeMedium = context.getResources().getDimensionPixelSize(R.dimen.textSizeMedium);
+
 		mPaint1.setDither(true);
 		mPaint1.setColor(Color.RED);
 		mPaint1.setStyle(Paint.Style.FILL_AND_STROKE);
 		mPaint1.setStrokeJoin(Paint.Join.ROUND);
 		mPaint1.setStrokeCap(Paint.Cap.ROUND);
-		mPaint1.setStrokeWidth(2);
+		mPaint1.setStrokeWidth(1 * scaledDensity);
 		// mPaint1.setShadowLayer(5, 10, 10, Color.GRAY);
 
 		mPaint2.setColor(Color.YELLOW);
-		mPaint2.setTextSize(40);
+		mPaint2.setTextSize(30 * scaledDensity);
 
 		mPaint3.setColor(Color.YELLOW);
 		mPaint3.setStyle(Paint.Style.STROKE);
-		mPaint3.setStrokeWidth(2);
+		mPaint3.setStrokeWidth(1 * scaledDensity);
 
 		p.setColor(Color.YELLOW);
-		p.setTextSize(20);
-		p.setShadowLayer(8, 0, 0, Color.BLACK);
+		p.setTextSize(20 * scaledDensity);
+		p.setShadowLayer(8 * scaledDensity, 0, 0, Color.BLACK);
 
 	}
 
@@ -109,14 +116,14 @@ class CopterOverlay extends Overlay {
 		projection.toPixels(GCopter, p1);
 		projection.toPixels(GHome, p2);
 
-		float x1 = (float) ((20 * Math.sin((Azimuth) * Math.PI / 180)) + p1.x);
-		float y1 = (float) ((20 * Math.cos((Azimuth) * Math.PI / 180)) + p1.y);
+		float x1 = (float) ((20 * scaledDensity * Math.sin((Azimuth) * Math.PI / 180)) + p1.x);
+		float y1 = (float) ((20 * scaledDensity * Math.cos((Azimuth) * Math.PI / 180)) + p1.y);
 
-		canvas.drawCircle(p1.x, p1.y, 20, mPaint1);
-		canvas.drawCircle(x1, y1, 5, mPaint2);
+		 canvas.drawCircle(p1.x, p1.y, 20*scaledDensity, mPaint1);
+		 canvas.drawCircle(x1, y1, 5, mPaint2);
 
-		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5, mPaint2);
-		canvas.drawCircle(p2.x, p2.y, 20, mPaint3);
+		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5 * scaledDensity, mPaint2);
+		canvas.drawCircle(p2.x, p2.y, 20 * scaledDensity, mPaint3);
 
 		if (points.size() > 2) {
 			Path path = new Path();

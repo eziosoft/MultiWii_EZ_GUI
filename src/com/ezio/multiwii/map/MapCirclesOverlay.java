@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii.map;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -28,13 +29,18 @@ import com.google.android.maps.Projection;
 
 class MapCirclesOverlay extends Overlay {
 
-	private Projection	projection;
-	GeoPoint			GHome	= new GeoPoint(0, 0);
-	GeoPoint			GYou	= new GeoPoint(0, 0);
-	Paint				mPaint	= new Paint();
-	Paint				mPaint1	= new Paint();
+	private Context context;
+	private Projection projection;
+	GeoPoint GHome = new GeoPoint(0, 0);
+	GeoPoint GYou = new GeoPoint(0, 0);
+	Paint mPaint = new Paint();
+	Paint mPaint1 = new Paint();
 
-	public MapCirclesOverlay() {
+	float scaledDensity = 0;
+
+	public MapCirclesOverlay(Context context) {
+		this.context = context;
+		scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
 
 		mPaint.setDither(true);
 		mPaint.setAntiAlias(false);
@@ -42,9 +48,9 @@ class MapCirclesOverlay extends Overlay {
 		mPaint.setStyle(Paint.Style.STROKE);
 		mPaint.setStrokeJoin(Paint.Join.ROUND);
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
-		mPaint.setStrokeWidth(2);
-		mPaint.setTextSize(20);
-		//mPaint.setAlpha(70);
+		mPaint.setStrokeWidth(1.5f*scaledDensity);
+		mPaint.setTextSize(10*scaledDensity);
+		// mPaint.setAlpha(70);
 
 		mPaint1.setDither(true);
 		mPaint1.setAntiAlias(false);
@@ -52,9 +58,9 @@ class MapCirclesOverlay extends Overlay {
 		mPaint1.setStyle(Paint.Style.STROKE);
 		// mPaint1.setStrokeJoin(Paint.Join.ROUND);
 		// mPaint1.setStrokeCap(Paint.Cap.ROUND);
-		mPaint1.setStrokeWidth(2);
-		mPaint1.setTextSize(30);
-		//mPaint1.setAlpha(50);
+		mPaint1.setStrokeWidth(1.5f*scaledDensity);
+		mPaint1.setTextSize(20*scaledDensity);
+		// mPaint1.setAlpha(50);
 
 	}
 
@@ -80,9 +86,9 @@ class MapCirclesOverlay extends Overlay {
 				canvas.drawText(String.valueOf(i), p1.x + metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6), p1.y, mPaint);
 			}
 		}
-		
+
 		projection.toPixels(GYou, p1);
-		
+
 		canvas.drawText("You", p1.x, p1.y, mPaint1);
 		canvas.drawCircle(p1.x, p1.y, 5, mPaint1);
 	}
