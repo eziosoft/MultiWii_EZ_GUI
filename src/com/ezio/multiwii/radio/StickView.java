@@ -25,13 +25,15 @@ import android.view.View;
 
 public class StickView extends View {
 
-	public float	x, y;
-	int				hh, ww;
+	public float x, y;
+	int hh, ww;
 
-	Paint			paint	= new Paint();
-	Paint			paint1	= new Paint();
-	Paint			paint2	= new Paint();
-	Paint			paint3	= new Paint();
+	Paint paint = new Paint();
+	Paint paint1 = new Paint();
+	Paint paint2 = new Paint();
+	Paint paint3 = new Paint();
+
+	float scaledDensity = 0;
 
 	public float InputX(float x) {
 		float a = map(x, 0, ww, 1000, 2000);
@@ -91,6 +93,8 @@ public class StickView extends View {
 		paint3.setColor(Color.YELLOW);
 		paint3.setStyle(Paint.Style.FILL);
 
+		scaledDensity = getResources().getDisplayMetrics().scaledDensity;
+
 	}
 
 	@Override
@@ -112,15 +116,15 @@ public class StickView extends View {
 		canvas.drawLine(0, hh / 2, ww, hh / 2, paint3);
 		canvas.drawLine(ww / 2, 0, ww / 2, hh, paint3);
 
-		canvas.drawCircle(ww / 2, hh / 2, 10, paint1);
+		canvas.drawCircle(ww / 2, hh / 2, 5*scaledDensity, paint1);
 
-		canvas.drawLine(ww / 2 - 10, hh / 2, x - 30, y, paint1);
-		canvas.drawLine(ww / 2 + 10, hh / 2, x + 30, y, paint1);
+		canvas.drawLine(ww / 2 - 5*scaledDensity, hh / 2, x - 15*scaledDensity, y, paint1);
+		canvas.drawLine(ww / 2 + 5*scaledDensity, hh / 2, x + 15*scaledDensity, y, paint1);
 
-		canvas.drawLine(ww / 2, hh / 2 - 10, x, y - 30, paint1);
-		canvas.drawLine(ww / 2, hh / 2 + 10, x, y + 30, paint1);
+		canvas.drawLine(ww / 2, hh / 2 - 5*scaledDensity, x, y - 15*scaledDensity, paint1);
+		canvas.drawLine(ww / 2, hh / 2 + 5*scaledDensity, x, y + 15*scaledDensity, paint1);
 
-		canvas.drawCircle(x, y, 30, paint);
+		canvas.drawCircle(x, y, 15*scaledDensity, paint);
 
 	}
 
