@@ -72,7 +72,7 @@ public class PitchRollCircleView extends View {
 		paint1.setAntiAlias(true);
 		paint1.setColor(color);
 		paint1.setStyle(Paint.Style.STROKE);
-		paint1.setStrokeWidth(2f*scaledDensity);
+		paint1.setStrokeWidth(2f * scaledDensity);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class PitchRollCircleView extends View {
 
 		canvas.drawCircle(ww / 2, hh / 2, hh / 2 - 2 * scaledDensity, paint1);
 		canvas.drawCircle(ww / 2, hh / 2, 25 * scaledDensity, paint1);
-		canvas.drawLine(ww / 2, hh / 2, ww / 2 + x * 2 * scaledDensity, hh / 2 - y * 2, paint1);
+		canvas.drawLine(ww / 2, hh / 2, ww / 2 + x * 2 * scaledDensity, hh / 2 - y * 2 * scaledDensity, paint1);
 		canvas.drawCircle(ww / 2 + x * 2 * scaledDensity, hh / 2 - y * 2 * scaledDensity, 20 * scaledDensity, paint2);
 	}
 

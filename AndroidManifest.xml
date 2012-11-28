@@ -4,7 +4,6 @@
     android:versionName="2.85" >
 
     <uses-sdk
-        android:maxSdkVersion="16"
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 

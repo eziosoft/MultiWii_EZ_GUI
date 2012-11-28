@@ -28,6 +28,8 @@ import android.graphics.Point;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.mw.MultiWii210;
+import com.ezio.multiwii.mw.MultirotorData;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -39,7 +41,6 @@ class CopterOverlay extends Overlay {
 	private Projection projection;
 	GeoPoint GCopter = new GeoPoint(0, 0);
 	GeoPoint GHome = new GeoPoint(0, 0);
-	float Azimuth = 45;
 
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
@@ -55,11 +56,30 @@ class CopterOverlay extends Overlay {
 	static int textSizeSmall = 25;
 	static int textSizeMedium = 50;
 
+	float scaledDensity = 0;
+
+	public int SatNum = 5;
+
+	public float DistanceToHome = 254;
+	public float DirectionToHome = 45;
+
+	public float Speed = 30;
+	public float GPSAltitude = 20;
+	public float Altitude = 23;
+
+	public float Lat = (float) 23.233212, Lon = (float) 32.43214;
+	public float Pitch = 10, Roll = 20, Azimuth = 30;
+	public float Gforce = 1;
+
+	public String State = "ARM";
+
 	public float VBat = 0;
 	public int PowerSum = 0;
 	public int PowerTrigger = 0;
+	public int I2CError = 0;
 
-	float scaledDensity = 0;
+	public int TXRSSI = 0;
+	public int RXRSSI = 0;
 
 	public CopterOverlay(Context context) {
 
@@ -90,21 +110,35 @@ class CopterOverlay extends Overlay {
 
 	}
 
-	public void Set(GeoPoint copter, float azimuth, GeoPoint home, int vbat, int powerSum, int powerTrigger) {
+	public void Set(GeoPoint copter, GeoPoint home, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 
 		GCopter = copter;
 		GHome = home;
+
+		SatNum = satNum;
+		DistanceToHome = distanceToHome;
+		DirectionToHome = directionToHome;
+		Speed = speed;
+		GPSAltitude = gpsAltitude;
+		Altitude = altitude;
+		Lat = lat;
+		Lon = lon;
+		Pitch = pitch;
+		Roll = roll;
 		Azimuth = azimuth;
+		Gforce = gforce;
+		State = state;
+		VBat = (float) (vbat / 10.0);
+		PowerSum = powerSum;
+		PowerTrigger = powerTrigger;
+		TXRSSI = txRSSI;
+		RXRSSI = rxRSSI;
 
 		points.add(copter);
 
 		if (points.size() > pointsCount) {
 			points.remove(0);
 		}
-
-		VBat = (float) (vbat / 10.0);
-		PowerSum = powerSum;
-		PowerTrigger = powerTrigger;
 
 	}
 
@@ -119,8 +153,8 @@ class CopterOverlay extends Overlay {
 		float x1 = (float) ((20 * scaledDensity * Math.sin((Azimuth) * Math.PI / 180)) + p1.x);
 		float y1 = (float) ((20 * scaledDensity * Math.cos((Azimuth) * Math.PI / 180)) + p1.y);
 
-		 canvas.drawCircle(p1.x, p1.y, 20*scaledDensity, mPaint1);
-		 canvas.drawCircle(x1, y1, 5, mPaint2);
+		canvas.drawCircle(p1.x, p1.y, 20 * scaledDensity, mPaint1);
+		canvas.drawCircle(x1, y1, 5, mPaint2);
 
 		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5 * scaledDensity, mPaint2);
 		canvas.drawCircle(p2.x, p2.y, 20 * scaledDensity, mPaint3);
@@ -143,19 +177,26 @@ class CopterOverlay extends Overlay {
 
 		int a = textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		canvas.drawText(context.getString(R.string.Battery), 0, a, p);
-
+		canvas.drawText(context.getString(R.string.GPS_numSat), 0, a, p);
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		canvas.drawText(String.valueOf(VBat), 0, a, p);
+		canvas.drawText(String.valueOf(SatNum), 0, a, p);
 
+		
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		canvas.drawText(context.getString(R.string.PowerSumPowerTrigger), 0, a, p);
-
+		canvas.drawText(context.getString(R.string.Baro), 0, a, p);
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		canvas.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, p);
+		canvas.drawText("GPS:"+String.valueOf(GPSAltitude)+"  Baro:"+String.valueOf(Altitude), 0, a, p);
+		
+		a += textSizeSmall;
+		p.setTextSize(textSizeSmall);
+		canvas.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
+		a += textSizeMedium;
+		p.setTextSize(textSizeMedium);
+		canvas.drawText(String.valueOf(DistanceToHome), 0, a, p);
+		
 
 	}
 
