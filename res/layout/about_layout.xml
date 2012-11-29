@@ -3,29 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:src="@drawable/icon" />
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:text="Copyright  (c) 2012  Bartosz Szczygiel (eziosoft) "
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:gravity="left"
+        android:text="This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details." />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Libraries:
+       ActionBarSherlock 
+       ViewPagerIndicator"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

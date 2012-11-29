@@ -34,6 +34,15 @@
                         android:text="@string/Config" />
                 </TableRow>
 
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/InfoDonate"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/White" />
+
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"

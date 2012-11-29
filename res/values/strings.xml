@@ -216,4 +216,6 @@
     <string name="RXBIND">RX BIND</string>
     <string name="FollowMe">Follow Me (not tested!  must be used with #define USE_MSP_WP) blinks when phone position is send to MW</string>
 
+    
+    <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
 </resources>

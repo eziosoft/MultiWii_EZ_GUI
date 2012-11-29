@@ -197,6 +197,24 @@ class CopterOverlay extends Overlay {
 		p.setTextSize(textSizeMedium);
 		canvas.drawText(String.valueOf(DistanceToHome), 0, a, p);
 		
+		if(VBat>0)
+		{
+			a += textSizeSmall;
+			p.setTextSize(textSizeSmall);
+			canvas.drawText(context.getString(R.string.BattVoltage), 0, a, p);
+			a += textSizeMedium;
+			p.setTextSize(textSizeMedium);
+			canvas.drawText(String.valueOf(VBat), 0, a, p);
+			
+			a += textSizeSmall;
+			p.setTextSize(textSizeSmall);
+			canvas.drawText(context.getString(R.string.PowerSumPowerTrigger), 0, a, p);
+			a += textSizeMedium;
+			p.setTextSize(textSizeMedium);
+			canvas.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, p);
+			
+		}
+		
 
 	}
 
