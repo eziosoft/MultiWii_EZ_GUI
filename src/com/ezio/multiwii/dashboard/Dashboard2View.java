@@ -166,69 +166,87 @@ public class Dashboard2View extends View {
 
 		int a = textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Satellites), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.Satellites), 0, a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(SatNum), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(String.valueOf(SatNum), 0, a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(DistanceToHome), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(String.valueOf(DistanceToHome), 0, a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_directionToHome), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.GPS_directionToHome), 0, a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(DirectionToHome), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(String.valueOf(DirectionToHome), 0, a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_speed), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.GPS_speed), 0, a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(Speed), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(String.valueOf(Speed), 0, a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_altitude), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.GPS_altitude), 0, a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(GPSAltitude), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(String.valueOf(GPSAltitude), 0, a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.TxRSSI), 0, a, p);
+		if (TXRSSI > 0)
+			c.drawText(context.getString(R.string.TxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
-		c.drawRect(new Rect(0, a, (int) map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+		if (TXRSSI > 0)
+			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
+		if (TXRSSI > 0)
+			c.drawRect(new Rect(0, a, (int) map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
 		a += textSizeSmall * 2;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.RxRSSI), 0, a, p);
+		if (TXRSSI > 0)
+			c.drawText(context.getString(R.string.RxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
-		c.drawRect(new Rect(0, a, (int) map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+		if (TXRSSI > 0)
+			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
+		if (TXRSSI > 0)
+			c.drawRect(new Rect(0, a, (int) map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
 		a = hh - textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.LatxLon), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(context.getString(R.string.LatxLon), 0, a, p);
 
 		a = hh;
 		p.setTextSize(textSizeMedium);
-		c.drawText(format.format(Lat / Math.pow(10, 7)) + " x " + format.format(Lon / Math.pow(10, 7)), 0, a, p);
+		if (SatNum > 0)
+			c.drawText(format.format(Lat / Math.pow(10, 7)) + " x " + format.format(Lon / Math.pow(10, 7)), 0, a, p);
 
 		// //////////////////////////////
 		a = hh - textSizeMedium;
@@ -282,19 +300,23 @@ public class Dashboard2View extends View {
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Battery), ww - p.measureText(context.getString(R.string.Battery)), a, p);
+		if (VBat > 0)
+			c.drawText(context.getString(R.string.Battery), ww - p.measureText(context.getString(R.string.Battery)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(VBat), ww - p.measureText(String.valueOf(VBat)), a, p);
+		if (VBat > 0)
+			c.drawText(String.valueOf(VBat), ww - p.measureText(String.valueOf(VBat)), a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.PowerSumPowerTrigger), ww - p.measureText(context.getString(R.string.PowerSumPowerTrigger)), a, p);
+		if (VBat > 0)
+			c.drawText(context.getString(R.string.PowerSumPowerTrigger), ww - p.measureText(context.getString(R.string.PowerSumPowerTrigger)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p);
+		if (VBat > 0)
+			c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p);
 
 		// horyzon lines
 		float x1, y1, x2, y2;
