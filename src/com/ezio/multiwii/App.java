@@ -175,6 +175,8 @@ public class App extends Application {
 			mw.GPS_longitude = 23654111;
 			mw.GPS_latitude = 488547500;
 		}
+		
+		soundManager.playSound(2);
 
 	}
 
@@ -255,7 +257,7 @@ public class App extends Application {
 	}
 
 	public void Frequentjobs() {
-		if (CopyFrskyToMW && BTFrsky.Connected)
+		if (CopyFrskyToMW && BTFrsky.Connected && !bt.Connected)
 			FrskyToMW();
 
 		for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
@@ -263,9 +265,11 @@ public class App extends Application {
 				String s = "";
 				if (mw.ActiveModes[i]) {
 					s = getString(R.string.isON);
+					soundManager.playSound(2);
 				} else {
 					s = getString(R.string.isOFF);
 				}
+			
 				Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
 
 				if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
@@ -316,6 +320,7 @@ public class App extends Application {
 		soundManager = new SoundManager(getApplicationContext());
 		soundManager.addSound(0, R.raw.alarma);
 		soundManager.addSound(1, R.raw.alert1);
+		soundManager.addSound(2, R.raw.blip);
 	}
 
 	public void ForceLanguage() {
