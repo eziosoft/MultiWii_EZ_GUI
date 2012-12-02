@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:gravity="center"
         android:text="@string/Other"
         android:textColor="@color/tittleText" />
-
+
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:layout_margin="5dp"
         android:onClick="AccCalibrationOnClick"
         android:text="@string/AccCalibration" />
-
+
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
@@ -64,19 +64,19 @@
                 android:onClick="WritePowerMeterAlarmOnClick"
                 android:text="@string/Write" />
         </TableRow>
-
+
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/SelectSetting" />
-
+
             <EditText
                 android:id="@+id/editTextSelectSettingNumber"
                 android:layout_width="0dp"
@@ -84,7 +84,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal" />
-
+
             <Button
                 android:id="@+id/button4"
                 android:layout_width="0dp"
@@ -92,20 +92,21 @@
                 android:layout_weight="1"
                 android:onClick="WriteSelectSettingOnClick"
                 android:text="@string/Write" />
-
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+
             <Button
                 android:id="@+id/buttonRXBIND"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:onClick="RXBINDOnClick"
-                android:text="@string/RXBIND" />
+                android:text="@string/RXBIND"
+                android:visibility="visible" />
 
         </TableRow>
 
@@ -113,7 +114,31 @@
             android:id="@+id/tableRow4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/editTextSerialBoudRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:text="9600"
+                android:visibility="gone" />
         </TableRow>
     </TableLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Enable Frsky (used with proMini and moddified MW version. It sets serial port baudrate to 9600 and starts Frsky Hub emulation)" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SetSerialBoudRateOnClick"
+        android:text="Enable FrSky" />
 
 </LinearLayout>

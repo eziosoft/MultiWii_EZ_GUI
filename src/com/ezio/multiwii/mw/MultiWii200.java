@@ -264,4 +264,16 @@ public class MultiWii200 extends MultirotorData {
 	public void SendRequestGetWayPoint(int Number) {
 		// not supported
 	}
+
+	@Override
+	public void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate) {
+		// not supported
+		
+	}
+
+	@Override
+	public void SendRequestMSP_ENABLE_FRSKY() {
+		// TODO Auto-generated method stub
+		
+	}
 }

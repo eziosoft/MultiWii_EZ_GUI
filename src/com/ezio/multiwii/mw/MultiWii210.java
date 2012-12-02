@@ -314,12 +314,7 @@ public class MultiWii210 extends MultirotorData {
 			Waypoints[WP.Number].Alt = WP.Alt;
 			Waypoints[WP.Number].NavFlag = WP.NavFlag;
 
-			Log.d("aaa",
-					"MSP_WP (get) " + String.valueOf(WP.Number) + "  "
-							+ String.valueOf(WP.Lat) + "x"
-							+ String.valueOf(WP.Lon) + " "
-							+ String.valueOf(WP.Alt) + " "
-							+ String.valueOf(WP.NavFlag));
+			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
 
 			break;
 		default:
@@ -338,8 +333,7 @@ public class MultiWii210 extends MultirotorData {
 	int p = 0;
 
 	int read32() {
-		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8)
-				+ ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
+		return (inBuf[p++] & 0xff) + ((inBuf[p++] & 0xff) << 8) + ((inBuf[p++] & 0xff) << 16) + ((inBuf[p++] & 0xff) << 24);
 	}
 
 	int read16() {
@@ -397,11 +391,8 @@ public class MultiWii210 extends MultirotorData {
 						evaluateCommand(cmd, (int) dataSize);
 					}
 				} else {
-					System.out.println("invalid checksum for command "
-							+ ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF)
-							+ " expected, got " + (int) (c & 0xFF));
-					System.out.print("<" + (cmd & 0xFF) + " "
-							+ (dataSize & 0xFF) + "> {");
+					System.out.println("invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
+					System.out.print("<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
 					for (i = 0; i < dataSize; i++) {
 						if (i != 0) {
 							System.err.print(' ');
@@ -434,8 +425,7 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (intPowerTrigger % 256));
 		payload.add((char) (intPowerTrigger / 256));
 
-		sendRequestMSP(requestMSP(MSP_SET_MISC,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_MISC, payload.toArray(new Character[payload.size()])));
 
 		// MSP_EEPROM_WRITE
 		SendRequestWriteToEEprom();
@@ -465,10 +455,7 @@ public class MultiWii210 extends MultirotorData {
 	ArrayList<Character> payload = new ArrayList<Character>();
 
 	@Override
-	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO,
-			float rollPitchRate, float yawRate, float dynamic_THR_PID,
-			float throttle_MID, float throttle_EXPO, float[] confP,
-			float[] confI, float[] confD) {
+	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD) {
 
 		// MSP_SET_RC_TUNING
 		payload = new ArrayList<Character>();
@@ -479,8 +466,7 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (Math.round(dynamic_THR_PID * 100)));
 		payload.add((char) (Math.round(throttle_MID * 100)));
 		payload.add((char) (Math.round(throttle_EXPO * 100)));
-		sendRequestMSP(requestMSP(MSP_SET_RC_TUNING,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_RC_TUNING, payload.toArray(new Character[payload.size()])));
 
 		// MSP_SET_PID
 		payload = new ArrayList<Character>();
@@ -507,8 +493,7 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (byteI[i]));
 			payload.add((char) (byteD[i]));
 		}
-		sendRequestMSP(requestMSP(MSP_SET_PID,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_PID, payload.toArray(new Character[payload.size()])));
 
 	}
 
@@ -525,8 +510,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT,
-			int coordLON, int altitude, int speed) {
+	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) GPS_FIX);
 		payload.add((char) numSat);
@@ -546,8 +530,7 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (speed & 0xFF));
 		payload.add((char) ((speed >> 8) & 0xFF));
 
-		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_RAW_GPS, payload.toArray(new Character[payload.size()])));
 	}
 
 	/**
@@ -560,8 +543,7 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (channels8[i] & 0xFF));
 			payload.add((char) ((channels8[i] >> 8) & 0xFF));
 
-			sendRequestMSP(requestMSP(MSP_SET_RAW_RC,
-					payload.toArray(new Character[payload.size()])));
+			sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
 
 			sendRequestMSP(requestMSP(new int[] { MSP_RC, MSP_STATUS }));
 		}
@@ -588,8 +570,7 @@ public class MultiWii210 extends MultirotorData {
 			payload.add((char) (activation[i] % 256));
 			payload.add((char) (activation[i] / 256));
 		}
-		sendRequestMSP(requestMSP(MSP_SET_BOX,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_SET_BOX, payload.toArray(new Character[payload.size()])));
 
 	}
 
@@ -621,16 +602,13 @@ public class MultiWii210 extends MultirotorData {
 
 			timer1++;
 			if (timer1 > 10) { // fired every 10 requests
-				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC,
-						MSP_RC_TUNING };
+				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
 				return;
 			}
 
-			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO,
-					MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE,
-					MSP_ATTITUDE, MSP_DEBUG };
+			requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE, MSP_ATTITUDE, MSP_DEBUG };
 			sendRequestMSP(requestMSP(requests));
 
 		} else {
@@ -662,11 +640,33 @@ public class MultiWii210 extends MultirotorData {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) Number);
 
-		sendRequestMSP(requestMSP(MSP_WP,
-				payload.toArray(new Character[payload.size()])));
+		sendRequestMSP(requestMSP(MSP_WP, payload.toArray(new Character[payload.size()])));
 
 		Log.d("aaa", "MSP_WP (SendRequestGetWayPoint) " + String.valueOf(Number));
 
 	}
+
+	// ////////Extra functions/////////////////
+	@Override
+	public void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate) {
+		ArrayList<Character> payload = new ArrayList<Character>();
+
+		payload.add((char) (baudRate & 0xFF));
+		payload.add((char) ((baudRate >> 8) & 0xFF));
+		payload.add((char) ((baudRate >> 16) & 0xFF));
+		payload.add((char) ((baudRate >> 24) & 0xFF));
+
+		sendRequestMSP(requestMSP(MSP_SET_SERIAL_BAUDRATE, payload.toArray(new Character[payload.size()])));
+
+		Log.d("aaa", "MSP_SET_SERIAL_BAUDRATE " + String.valueOf(baudRate));
+	}
+
+	@Override
+	public void SendRequestMSP_ENABLE_FRSKY() {
+		sendRequestMSP(requestMSP(MSP_ENABLE_FRSKY));
+		Log.d("aaa", "MSP_ENABLE_FRSKY");
+
+	}
+	// ///////////End of Extra Functions////////////
 
 }

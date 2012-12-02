@@ -71,7 +71,8 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 											public void run() {
 
 												app.mw.ProcessSerialData(app.loggingON);
-
+												app.frsky.ProcessSerialData(false);
+												
 												PRVp.SetAngle(app.mw.angy);
 												PRVr.SetAngle(app.mw.angx);
 												pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
@@ -87,7 +88,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 
 												}
 
-												baro.setText(String.valueOf(app.mw.baro));
+												baro.setText(String.valueOf(app.mw.alt));
 												BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
 												PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
 

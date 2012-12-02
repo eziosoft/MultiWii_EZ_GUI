@@ -168,7 +168,7 @@
     <string name="Dashboard">Dashboard</string>
     <string name="PhoneAccuracy">PhoneAccuracy(cm)</string>
     <string name="SetCheckboxes">AUX</string>
-    <string name="Set">Set temporary</string>
+    <string name="Set">Set</string>
     <string name="SavetoEEPROM">Save to EEPROM</string>
 
     <!-- GRAPHS VIEW -->

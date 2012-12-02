@@ -15,6 +15,7 @@ public class FrskyHubProtocol {
 	public float Acc_Z = 0;
 	public int Temperature_1 = 0;
 	public int GPS_Speed = 0;
+	public float Voltage = 0;
 
 	public int GPS_EW = 0;
 	public int GPS_LongitudeBefore = 0;
@@ -103,8 +104,7 @@ public class FrskyHubProtocol {
 			break; // 0x01 + 8;// U After “.”
 		case Temperature1:
 			Temperature_1 = getIntFromFrame(frame);
-			log("+Temperature1 (Number of sat)",
-					String.valueOf(getIntFromFrame(frame)));
+			log("+Temperature1 (Number of sat)", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x02;// Temprature1 °C S 1°C / -30~250°C
 		case RPM:
 			log("+RPM", String.valueOf(getIntFromFrame(frame)));// getHex(new
@@ -116,8 +116,7 @@ public class FrskyHubProtocol {
 			log("FuelLevel", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x04;// Fuel Level % U 0, 25, 50, 75, 100
 		case Temperature2:
-			log("+Temperature2 (Distance to home)",
-					String.valueOf(getIntFromFrame(frame)));
+			log("+Temperature2 (Distance to home)", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x05;// Temprature2 °C S 1°C / -30~250
 		case Volt:
 			log("Volt", getHex(new int[] { frame[2], frame[3] }));
@@ -146,7 +145,7 @@ public class FrskyHubProtocol {
 			log("+LongitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x12 + 8;// After “.”
 		case EW:
-			GPS_EW = getIntFromFrame(frame)==87 ? -1:1;
+			GPS_EW = getIntFromFrame(frame) == 87 ? -1 : 1;
 			log("+EW", String.valueOf(getIntFromFrame(frame)));
 			break; // 0x1A + 8;// E/W
 		case LatitudeBefore:
@@ -158,7 +157,7 @@ public class FrskyHubProtocol {
 			log("+LatitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x13 + 8;// U After “.”
 		case NS:
-			GPS_NS = getIntFromFrame(frame)==78 ? 1:-1;
+			GPS_NS = getIntFromFrame(frame) == 78 ? 1 : -1;
 			log("+NS", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x1B + 8;// N/S U
 		case CourseBefore:
@@ -178,8 +177,7 @@ public class FrskyHubProtocol {
 		case HourMinute:
 			Hour = frame[2];
 			Minute = frame[3];
-			log("+HourMinute",
-					String.valueOf(frame[2]) + ":" + String.valueOf(frame[3]));
+			log("+HourMinute", String.valueOf(frame[2]) + ":" + String.valueOf(frame[3]));
 			break; // 0x17;// Hour /Minute
 		case Second:
 			Second_ = getIntFromFrame(frame);
@@ -198,10 +196,16 @@ public class FrskyHubProtocol {
 			log("+AccZ", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x26;// Acc-z S 0.016g / -8g ~ +8g
 		case VoltageBefore:
+			// TODO
+			Voltage = getIntFromFrame(frame);
 			log("VoltageBefore", getHex(new int[] { frame[2], frame[3] }));
 			break;// 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v / 0~48.0v
 		// Before “.”
 		case VoltageAfter:
+			// TODO
+			Voltage += getIntFromFrame(frame) / 100f;
+			Voltage = Voltage / 110 * 21;
+
 			log("VoltageAfter", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x3B;// After “.”
 		case Current:
@@ -248,8 +252,7 @@ public class FrskyHubProtocol {
 		}
 		final StringBuilder hex = new StringBuilder(2 * raw.length);
 		for (final int b : raw) {
-			hex.append(HEXES.charAt((b & 0xF0) >> 4)).append(
-					HEXES.charAt((b & 0x0F)));
+			hex.append(HEXES.charAt((b & 0xF0) >> 4)).append(HEXES.charAt((b & 0x0F)));
 		}
 		return hex.toString();
 	}
@@ -260,8 +263,7 @@ public class FrskyHubProtocol {
 		}
 		final StringBuilder hex = new StringBuilder(2 * raw.length);
 		for (final Object b : raw) {
-			hex.append(HEXES.charAt(((Integer) b & 0xF0) >> 4)).append(
-					HEXES.charAt(((Integer) b & 0x0F)));
+			hex.append(HEXES.charAt(((Integer) b & 0xF0) >> 4)).append(HEXES.charAt(((Integer) b & 0x0F)));
 		}
 		return hex.toString();
 	}

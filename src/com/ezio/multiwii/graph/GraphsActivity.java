@@ -57,6 +57,7 @@ public class GraphsActivity extends SherlockActivity {
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
+			app.frsky.ProcessSerialData(false);
 			app.Frequentjobs();
 
 			if (!pause) {

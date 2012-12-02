@@ -30,30 +30,9 @@ public class OtherActivity extends SherlockActivity {
 
 	EditText EditTextPowerMeterAlarm;
 	EditText EditTextSelectSettings;
+	EditText EditTextSetSerialBoudRate;
 
 	Button ButtonRxBIND;
-
-	public void MagCalibrationOnClick(View v) {
-		app.mw.SendRequestMagCalibration();
-	}
-
-	public void AccCalibrationOnClick(View v) {
-		app.mw.SendRequestAccCalibration();
-	}
-
-	// private Runnable update = new Runnable() {
-	// @Override
-	// public void run() {
-	//
-	// {
-	// app.mw.ProcessSerialData(app.loggingON);
-	//
-	// }
-	//
-	// mHandler.postDelayed(update, App.REFRESH_RATE);
-	//
-	// }
-	// };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +45,8 @@ public class OtherActivity extends SherlockActivity {
 		EditTextPowerMeterAlarm = (EditText) findViewById(R.id.editTextPowerMeterAlarm);
 		EditTextSelectSettings = (EditText) findViewById(R.id.editTextSelectSettingNumber);
 		ButtonRxBIND = (Button) findViewById(R.id.buttonRXBIND);
+
+		EditTextSetSerialBoudRate = (EditText) findViewById(R.id.editTextSerialBoudRate);
 
 	}
 
@@ -105,18 +86,31 @@ public class OtherActivity extends SherlockActivity {
 
 	}
 
+	public void MagCalibrationOnClick(View v) {
+		app.mw.SendRequestMagCalibration();
+	}
+
+	public void AccCalibrationOnClick(View v) {
+		app.mw.SendRequestAccCalibration();
+	}
+
 	public void WritePowerMeterAlarmOnClick(View v) {
-		app.mw.SendRequestSetandSaveMISC(Integer
-				.parseInt(EditTextPowerMeterAlarm.getText().toString()));
+		app.mw.SendRequestSetandSaveMISC(Integer.parseInt(EditTextPowerMeterAlarm.getText().toString()));
 	}
 
 	public void WriteSelectSettingOnClick(View v) {
-		app.mw.SendRequestSelectSetting(Integer.parseInt(EditTextSelectSettings
-				.getText().toString()));
+		app.mw.SendRequestSelectSetting(Integer.parseInt(EditTextSelectSettings.getText().toString()));
 	}
 
 	public void RXBINDOnClick(View v) {
 		app.mw.SendRequestSPEK_BIND();
+	}
+
+	public void SetSerialBoudRateOnClick(View v) {
+		app.mw.SendRequestMSP_ENABLE_FRSKY();
+		// app.mw.SendRequestMSP_SET_SERIAL_BAUDRATE(Integer.parseInt(EditTextSetSerialBoudRate.getText().toString()));
+		app.mw.SendRequestMSP_SET_SERIAL_BAUDRATE(9600);
+		app.bt.CloseSocket();
 	}
 
 }

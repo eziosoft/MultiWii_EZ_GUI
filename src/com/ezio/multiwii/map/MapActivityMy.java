@@ -64,6 +64,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
+			app.frsky.ProcessSerialData(false);
 
 			if (app.GPSfromNet) {
 				app.mw.GPS_latitude += random.nextInt(200) - 50;// for
