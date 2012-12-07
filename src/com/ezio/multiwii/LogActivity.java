@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,21 +26,21 @@ import com.actionbarsherlock.app.SherlockActivity;
 
 public class LogActivity extends SherlockActivity {
 
-	App					app;
-	Handler				mHandler		= new Handler();
+	App app;
+	Handler mHandler = new Handler();
 
-	private Runnable	update			= new Runnable() {
-											@Override
-											public void run() {
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-												app.mw.ProcessSerialData(app.loggingON);
-												
-												app.Frequentjobs();
-												app.mw.SendRequest();
-												mHandler.postDelayed(update, app.RefreshRate);
+			app.mw.ProcessSerialData(app.loggingON);
 
-											}
-										};
+			app.Frequentjobs();
+			app.mw.SendRequest();
+			mHandler.postDelayed(update, app.RefreshRate);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,20 +74,24 @@ public class LogActivity extends SherlockActivity {
 		app.ForceLanguage();
 	}
 
+	public void ConvertToKMLOnClick(View v) {
+		Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.eziosoft.multiwii.kmlconverter");
+		startActivity(LaunchIntent);
+	}
+
 	public void StartLoggingOnClick(View v) {
 		app.mw.CreateNewLogFile();
 		app.loggingON = true;
 		mHandler.postDelayed(update, app.RefreshRate);
-		
-		Toast.makeText(getApplicationContext(), getString(R.string.Loggingstarted), Toast.LENGTH_LONG).show();
 
+		Toast.makeText(getApplicationContext(), getString(R.string.Loggingstarted), Toast.LENGTH_LONG).show();
 
 	}
 
 	public void StopLoggingOnClick(View v) {
 		app.loggingON = false;
 		app.mw.CloseLoggingFile();
-		
+
 		Toast.makeText(getApplicationContext(), getString(R.string.Loggingstopedandsaved), Toast.LENGTH_LONG).show();
 
 	}

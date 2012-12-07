@@ -218,4 +218,7 @@
 
     
     <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
+
+    
+    <string name="convertToKML">Convert to KML (Google Earth)</string>
 </resources>
