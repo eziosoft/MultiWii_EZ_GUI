@@ -17,6 +17,7 @@
 package com.ezio.multiwii;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -75,8 +76,14 @@ public class LogActivity extends SherlockActivity {
 	}
 
 	public void ConvertToKMLOnClick(View v) {
-		Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.eziosoft.multiwii.kmlconverter");
-		startActivity(LaunchIntent);
+		try {
+			Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.eziosoft.multiwii.kmlconverter");
+			startActivity(LaunchIntent);
+		} catch (Exception e) {
+			Intent goToMarket = null;
+			goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.eziosoft.multiwii.kmlconverter"));
+			startActivity(goToMarket);
+		}
 	}
 
 	public void StartLoggingOnClick(View v) {
