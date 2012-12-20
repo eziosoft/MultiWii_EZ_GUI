@@ -17,10 +17,11 @@
 package com.ezio.multiwii;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class AboutActivity extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
+
+public class AboutActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

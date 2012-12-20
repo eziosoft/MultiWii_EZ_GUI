@@ -130,6 +130,7 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
+        <activity android:name="InfoActivity" android:theme="@style/Sherlock.__Theme.Dialog"></activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

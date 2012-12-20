@@ -125,6 +125,12 @@ public class App extends Application {
 	private static String USEOFFLINEMAPS = "USEOFFLINEMAPS";
 	public boolean UseOfflineMaps = false;
 
+	private static String APPSTARTCOUNTER = "APPSTARTCOUNTER";
+	public int AppStartCounter = 0;
+	
+	private static String DONATEBUTTONPRESSED = "DONATEBUTTONPRESSED";
+	public int DonateButtonPressed=0;
+
 	// graphs
 	public String ACCROLL = "ACC ROLL";
 	public String ACCPITCH = "ACC PITCH";
@@ -175,7 +181,7 @@ public class App extends Application {
 			mw.GPS_longitude = 23654111;
 			mw.GPS_latitude = 488547500;
 		}
-		
+
 		soundManager.playSound(2);
 
 	}
@@ -216,6 +222,8 @@ public class App extends Application {
 		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 		RefreshRate = prefs.getInt(REFRESHRATE, 100);
 		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, false);
+		AppStartCounter = prefs.getInt(APPSTARTCOUNTER, 0);
+		DonateButtonPressed=prefs.getInt(DONATEBUTTONPRESSED, 0);
 	}
 
 	public void SaveSettings() {
@@ -237,6 +245,8 @@ public class App extends Application {
 		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.putInt(REFRESHRATE, RefreshRate);
 		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
+		editor.putInt(APPSTARTCOUNTER, AppStartCounter);
+		editor.putInt(DONATEBUTTONPRESSED, DonateButtonPressed);
 		editor.commit();
 
 		Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
@@ -269,7 +279,7 @@ public class App extends Application {
 				} else {
 					s = getString(R.string.isOFF);
 				}
-			
+
 				Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
 
 				if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
@@ -356,8 +366,8 @@ public class App extends Application {
 		mw.GPS_latitude = frsky.frskyHubProtocol.GPS_NS * 10 * Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeBefore) + String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeAfter));
 		mw.GPS_longitude = frsky.frskyHubProtocol.GPS_EW * 10 * Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeBefore) + String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeAfter));
 		mw.alt = frsky.frskyHubProtocol.Altitude;
-		
-		mw.bytevbat = (byte)frsky.frskyHubProtocol.Voltage;
+
+		mw.bytevbat = (byte) frsky.frskyHubProtocol.Voltage;
 	}
 
 }

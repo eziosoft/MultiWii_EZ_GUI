@@ -33,7 +33,7 @@ public class TemplateActivity extends Activity {
 
 	private boolean		killme		= false;
 
-	App					app;
+	App app;
 	Handler				mHandler	= new Handler();
 
 	private Runnable	update		= new Runnable() {

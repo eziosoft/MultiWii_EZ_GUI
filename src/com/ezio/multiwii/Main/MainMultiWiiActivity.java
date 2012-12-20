@@ -42,6 +42,7 @@ import com.ezio.multiwii.AdvancedActivity;
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.AUXActivity;
 import com.ezio.multiwii.GPSActivity;
+import com.ezio.multiwii.InfoActivity;
 import com.ezio.multiwii.LogActivity;
 import com.ezio.multiwii.OtherActivity;
 import com.ezio.multiwii.PIDActivity;
@@ -143,6 +144,16 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (app.ShowADS)
 			adMobConfig();
+		
+		if(app.AppStartCounter%10==0 && app.DonateButtonPressed==0)
+		{
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), InfoActivity.class));
+		}
+		
+		app.AppStartCounter++;
+		app.SaveSettings();
 
 	}
 

@@ -102,10 +102,7 @@ public class RawDataActivity extends Activity {
 	}
 
 	private void displayData() {
-		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n"
-				+ "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n"
-				+ "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n"
-				+ "i2cError:" + String.valueOf(app.mw.i2cError));
+		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError));
 
 		TVData.setText("");
 		// log("version", app.mw.version);
@@ -184,8 +181,7 @@ public class RawDataActivity extends Activity {
 		}
 
 		for (int i = 0; i < app.mw.PIDITEMS; i++) {
-			log("P=" + String.valueOf(app.mw.byteP[i]) + " I="
-					+ String.valueOf(app.mw.byteI[i]) + " D", app.mw.byteD[i]);
+			log("P=" + String.valueOf(app.mw.byteP[i]) + " I=" + String.valueOf(app.mw.byteI[i]) + " D", app.mw.byteD[i]);
 		}
 
 		log("confSetting", app.mw.confSetting);
@@ -198,15 +194,12 @@ public class RawDataActivity extends Activity {
 		String app_ver = "";
 		int app_ver_code = 0;
 		try {
-			app_ver = getPackageManager().getPackageInfo(this.getPackageName(),
-					0).versionName;
-			app_ver_code = getPackageManager().getPackageInfo(
-					this.getPackageName(), 0).versionCode;
+			app_ver = getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+			app_ver_code = getPackageManager().getPackageInfo(this.getPackageName(), 0).versionCode;
 		} catch (NameNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		log("App version", getString(R.string.app_name) + " " + app_ver + "."
-				+ String.valueOf(app_ver_code));
+		log("App version", getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		log("versionMisMatch", app.mw.versionMisMatch);
 		log("1G", app.mw._1G);
@@ -217,12 +210,14 @@ public class RawDataActivity extends Activity {
 		log("bt.Connected", String.valueOf(app.mw.bt.Connected));
 		log("bt.ConnectionLost", String.valueOf(app.mw.bt.ConnectionLost));
 		log("bt.ReconnectTry", String.valueOf(app.mw.bt.ReconnectTry));
-		
+		log("AppStartCounter", String.valueOf(app.AppStartCounter));
+		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
+
 		for (String s : app.mw.buttonCheckboxLabel) {
 			log("buttonCheckboxLabel", s);
-	
+
 		}
-		
+
 	}
 
 	private void log(String co, int wartosc) {
@@ -240,11 +235,9 @@ public class RawDataActivity extends Activity {
 	void ShareIt() {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody = TVMWInfo.getText().toString() + "\n\n"
-				+ TVData.getText().toString();
+		String shareBody = TVMWInfo.getText().toString() + "\n\n" + TVData.getText().toString();
 
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-				"MultiWii Raw Data");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MultiWii Raw Data");
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 
 		startActivity(Intent.createChooser(sharingIntent, "Share via"));
