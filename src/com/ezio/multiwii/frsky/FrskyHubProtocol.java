@@ -202,7 +202,7 @@ public class FrskyHubProtocol {
 		case VoltageBefore:
 			// TODO
 			v1 = getIntFromFrame(frame)*100;
-			log("VoltageBefore",  String.valueOf(Voltage));
+			log("+VoltageBefore",  String.valueOf(Voltage));
 			break;// 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v / 0~48.0v
 		// Before “.”
 		case VoltageAfter:
@@ -210,7 +210,7 @@ public class FrskyHubProtocol {
 			v2=getIntFromFrame(frame)*10-5;
 			Voltage = (v1+v2)/110f*21f;
 						
-			log("VoltageAfter", String.valueOf(Voltage));
+			log("+VoltageAfter", String.valueOf(Voltage));
 			break; // 0x3B;// After “.”
 		case Current:
 			log("Current", getHex(new int[] { frame[2], frame[3] }));
