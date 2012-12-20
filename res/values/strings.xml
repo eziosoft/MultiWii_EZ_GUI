@@ -221,4 +221,7 @@
 
     
     <string name="convertToKML">Convert to KML (Google Earth)</string>
+
+    
+    <string name="infoDonate">I have spent and will spend many, many hours of my free time to build and extend this program, so if you like and use MultiWii EZ-GUI, please consider donating. This will keep me interested in extending the program.</string>
 </resources>

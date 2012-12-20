@@ -17,6 +17,10 @@ public class FrskyHubProtocol {
 	public int GPS_Speed = 0;
 	public float Voltage = 0;
 
+	
+	private float v1=0, v2=0;
+	private float AltitudeTemp = 0;
+
 	public int GPS_EW = 0;
 	public int GPS_LongitudeBefore = 0;
 	public int GPS_LongitudeAfter = 0;
@@ -122,12 +126,12 @@ public class FrskyHubProtocol {
 			log("Volt", getHex(new int[] { frame[2], frame[3] }));
 			break; // 0x06;// Volt v 0.01v / 0~4.2v
 		case AltitudeBefore:
-			Altitude = (float) getIntFromFrame(frame);
-			log("AltitudeBefore", getHex(new int[] { frame[2], frame[3] }));
+			AltitudeTemp = (float) getIntFromFrame(frame);
+			log("+AltitudeBefore", String.valueOf(Altitude));
 			break;// 0x10;// Altitude m S 0.01m / -500~9000m Before “.”
 		case AltutudeAfter:
-			Altitude += ((float) getIntFromFrame(frame)) / 100f;
-			log("+AltutudeAfter", getHex(new int[] { frame[2], frame[3] }));
+			Altitude = AltitudeTemp + ((float) getIntFromFrame(frame)) / 100f;
+			log("+AltutudeAfter", String.valueOf(Altitude));
 			break;// 0x21;// U After “.”
 		case GPSspeedBefore:
 			GPS_Speed = getIntFromFrame(frame);
@@ -197,16 +201,16 @@ public class FrskyHubProtocol {
 			break;// 0x26;// Acc-z S 0.016g / -8g ~ +8g
 		case VoltageBefore:
 			// TODO
-			Voltage = getIntFromFrame(frame);
-			log("VoltageBefore", getHex(new int[] { frame[2], frame[3] }));
+			v1 = getIntFromFrame(frame)*100;
+			log("VoltageBefore",  String.valueOf(Voltage));
 			break;// 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v / 0~48.0v
 		// Before “.”
 		case VoltageAfter:
 			// TODO
-			Voltage += getIntFromFrame(frame) / 100f;
-			Voltage = Voltage / 110 * 21;
-
-			log("VoltageAfter", getHex(new int[] { frame[2], frame[3] }));
+			v2=getIntFromFrame(frame)*10-5;
+			Voltage = (v1+v2)/110f*21f;
+						
+			log("VoltageAfter", String.valueOf(Voltage));
 			break; // 0x3B;// After “.”
 		case Current:
 			log("Current", getHex(new int[] { frame[2], frame[3] }));
