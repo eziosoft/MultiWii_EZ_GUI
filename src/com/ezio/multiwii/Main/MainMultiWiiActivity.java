@@ -120,16 +120,11 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
 		MyPagerAdapter adapter = new MyPagerAdapter(this);
 
-		adapter.SetTitles(new String[] { getString(R.string.page1),
-				getString(R.string.page2), getString(R.string.page3) });
-		final LayoutInflater inflater = (LayoutInflater) this
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1,
-				(ViewGroup) null, false));
-		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_2,
-				(ViewGroup) null, false));
-		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_3,
-				(ViewGroup) null, false));
+		adapter.SetTitles(new String[] { getString(R.string.page1), getString(R.string.page2), getString(R.string.page3) });
+		final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1, (ViewGroup) null, false));
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_2, (ViewGroup) null, false));
+		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_3, (ViewGroup) null, false));
 		viewPager.setAdapter(adapter);
 		viewPager.setAdapter(adapter);
 
@@ -144,16 +139,23 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (app.ShowADS)
 			adMobConfig();
-		
-		if(app.AppStartCounter%10==0 && app.DonateButtonPressed==0)
-		{
+
+		// if(app.AppStartCounter%10==0 && app.DonateButtonPressed==0)
+		// {
+		// killme = true;
+		// mHandler.removeCallbacksAndMessages(null);
+		// startActivity(new Intent(getApplicationContext(),
+		// InfoActivity.class));
+		// }
+
+		if (app.AppStartCounter == 0) {
 			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(), InfoActivity.class));
 		}
-		
+
 		app.AppStartCounter++;
-		app.SaveSettings();
+		app.SaveSettings(true);
 
 	}
 
@@ -178,16 +180,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		String app_ver = "";
 		int app_ver_code = 0;
 		try {
-			app_ver = getPackageManager().getPackageInfo(this.getPackageName(),
-					0).versionName;
-			app_ver_code = getPackageManager().getPackageInfo(
-					this.getPackageName(), 0).versionCode;
+			app_ver = getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+			app_ver_code = getPackageManager().getPackageInfo(this.getPackageName(), 0).versionCode;
 		} catch (NameNotFoundException e1) {
 			e1.printStackTrace();
 		}
 
-		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "."
-				+ String.valueOf(app_ver_code));
+		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		if (app.bt.Connected) {
 
@@ -230,10 +229,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.bt.Connect(app.MacAddress);
 			app.Say(getString(R.string.menu_connect));
 		} else {
-			Toast.makeText(
-					getApplicationContext(),
-					"Wrong MAC address. Go to Config and select correct device",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
 		}
 		try {
 			mHandler.removeCallbacksAndMessages(null);
@@ -247,10 +243,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.BTFrsky.Connect(app.MacAddressFrsky);
 			app.Say(getString(R.string.Connect_frsky));
 		} else {
-			Toast.makeText(
-					getApplicationContext(),
-					"Wrong MAC address. Go to Config and select correct device",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
 		}
 		try {
 			mHandler.removeCallbacksAndMessages(null);
@@ -346,28 +339,24 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void Dashboard1OnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(),
-				Dashboard1Activity.class));
+		startActivity(new Intent(getApplicationContext(), Dashboard1Activity.class));
 	}
 
 	public void Dashboard2OnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(),
-				Dashboard2Activity.class));
+		startActivity(new Intent(getApplicationContext(), Dashboard2Activity.class));
 	}
 
 	public void MapOnClick(View v) {
 		killme = true;
 		if (app.UseOfflineMaps) {
 			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(),
-					MapOfflineActivityMy.class));
+			startActivity(new Intent(getApplicationContext(), MapOfflineActivityMy.class));
 		} else {
 			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(),
-					MapActivityMy.class));
+			startActivity(new Intent(getApplicationContext(), MapActivityMy.class));
 		}
 	}
 
@@ -386,16 +375,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void AdvancedOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(),
-				AdvancedActivity.class));
+		startActivity(new Intent(getApplicationContext(), AdvancedActivity.class));
 	}
 
 	public void DonateOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		Intent browserIntent = new Intent(
-				Intent.ACTION_VIEW,
-				Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
 		startActivity(browserIntent);
 	}
 
@@ -403,16 +389,14 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse("market://details?id="
-				+ getApplicationContext().getPackageName()));
+		intent.setData(Uri.parse("market://details?id=" + getApplicationContext().getPackageName()));
 		startActivity(intent);
 	}
 
 	public void TestOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(),
-				WaypointActivity.class));
+		startActivity(new Intent(getApplicationContext(), WaypointActivity.class));
 	}
 
 	// /////menu////////

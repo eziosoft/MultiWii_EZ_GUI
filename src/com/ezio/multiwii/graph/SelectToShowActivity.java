@@ -121,7 +121,7 @@ public class SelectToShowActivity extends SherlockActivity {
 				app.GraphsToShow.length()).equals(";"))
 			app.GraphsToShow=app.GraphsToShow.substring(0, app.GraphsToShow.length() - 1);
 
-		app.SaveSettings();
+		app.SaveSettings(false);
 
 	}
 

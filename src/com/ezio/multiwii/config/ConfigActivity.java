@@ -244,7 +244,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText()
 				.toString());
 
-		app.SaveSettings();
+		app.SaveSettings(false);
 
 		app.SelectProtocol();
 

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="@string/infoDonate"
+        android:text="@string/infoDonateXmas"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="DonateOnClick"
-        android:text="@string/Donate" />
+        android:text="@string/Donate"
+        android:visibility="gone" />
 
 </LinearLayout>

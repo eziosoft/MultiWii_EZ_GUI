@@ -127,9 +127,9 @@ public class App extends Application {
 
 	private static String APPSTARTCOUNTER = "APPSTARTCOUNTER";
 	public int AppStartCounter = 0;
-	
+
 	private static String DONATEBUTTONPRESSED = "DONATEBUTTONPRESSED";
-	public int DonateButtonPressed=0;
+	public int DonateButtonPressed = 0;
 
 	// graphs
 	public String ACCROLL = "ACC ROLL";
@@ -223,10 +223,10 @@ public class App extends Application {
 		RefreshRate = prefs.getInt(REFRESHRATE, 100);
 		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, false);
 		AppStartCounter = prefs.getInt(APPSTARTCOUNTER, 0);
-		DonateButtonPressed=prefs.getInt(DONATEBUTTONPRESSED, 0);
+		DonateButtonPressed = prefs.getInt(DONATEBUTTONPRESSED, 0);
 	}
 
-	public void SaveSettings() {
+	public void SaveSettings(boolean quiet) {
 		editor.putInt(RADIOMODE, RadioMode);
 		editor.putInt(PROTOCOL, Protocol);
 		editor.putInt(MAGMODE, MagMode);
@@ -249,8 +249,10 @@ public class App extends Application {
 		editor.putInt(DONATEBUTTONPRESSED, DonateButtonPressed);
 		editor.commit();
 
-		Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
-		Say(getString(R.string.Settingssaved));
+		if (!quiet) {
+			Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
+			Say(getString(R.string.Settingssaved));
+		}
 	}
 
 	@Override
