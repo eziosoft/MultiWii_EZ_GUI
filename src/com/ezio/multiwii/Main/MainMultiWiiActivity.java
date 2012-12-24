@@ -140,15 +140,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		if (app.ShowADS)
 			adMobConfig();
 
-		// if(app.AppStartCounter%10==0 && app.DonateButtonPressed==0)
-		// {
-		// killme = true;
-		// mHandler.removeCallbacksAndMessages(null);
-		// startActivity(new Intent(getApplicationContext(),
-		// InfoActivity.class));
-		// }
-
-		if (app.AppStartCounter == 0) {
+		if (app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0) {
 			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(), InfoActivity.class));

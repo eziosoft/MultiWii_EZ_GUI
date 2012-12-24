@@ -26,7 +26,7 @@ public class MultiWii211 extends MultiWii210 {
 
 	public MultiWii211(BT b) {
 		super(b);
-		EZGUIProtocol = "211 r1240";
+		EZGUIProtocol = "213 r1295";
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class MultiWii211 extends MultiWii210 {
 		switch (icmd) {
 
 		case MSP_STATUS:
-			if (version == 211) {
+			if (version >= 211) {
 				cycleTime = read16();
 				i2cError = read16();
 				present = read16();
@@ -88,7 +88,7 @@ public class MultiWii211 extends MultiWii210 {
 			break;
 
 		case MSP_RAW_GPS:
-			if (version == 211) {
+			if (version >= 211) {
 				GPS_fix = read8();
 				GPS_numSat = read8();
 				GPS_latitude = read32();
@@ -100,7 +100,7 @@ public class MultiWii211 extends MultiWii210 {
 			break;
 
 		case MSP_ALTITUDE:
-			if (version == 211) {
+			if (version >= 211) {
 				baro = alt = (float) read32() / 100;
 				vario = read16();
 			}
