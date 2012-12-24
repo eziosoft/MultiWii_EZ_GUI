@@ -1,6 +1,5 @@
 package com.ezio.multiwii.graph;
 
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.ezio.multiwii.graph.GraphViewSeries.GraphViewSeriesStyle;
 
 /**
  * GraphView is a Android View for creating zoomable and scrollable graphs.
@@ -63,7 +64,6 @@ abstract public class GraphView extends LinearLayout {
 			float width = getWidth() - 1;
 			double maxY = getMaxY();
 			double minY = getMinY();
-			double diffY = maxY - minY;
 			double maxX = getMaxX(false);
 			double minX = getMinX(false);
 			double diffX = maxX - minX;
@@ -81,7 +81,7 @@ abstract public class GraphView extends LinearLayout {
 			paint.setTextAlign(Align.LEFT);
 			int vers = verlabels.length - 1;
 			for (int i = 0; i < verlabels.length; i++) {
-				paint.setColor(Color.DKGRAY);
+				paint.setColor(graphViewStyle.getGridColor());
 				float y = ((graphheight / vers) * i) + border;
 				canvas.drawLine(horstart, y, width, y, paint);
 			}
@@ -89,7 +89,7 @@ abstract public class GraphView extends LinearLayout {
 			// horizontal labels + lines
 			int hors = horlabels.length - 1;
 			for (int i = 0; i < horlabels.length; i++) {
-				paint.setColor(Color.DKGRAY);
+				paint.setColor(graphViewStyle.getGridColor());
 				float x = ((graphwidth / hors) * i) + horstart;
 				canvas.drawLine(x, height - border, x, border, paint);
 				paint.setTextAlign(Align.CENTER);
@@ -97,24 +97,27 @@ abstract public class GraphView extends LinearLayout {
 					paint.setTextAlign(Align.RIGHT);
 				if (i==0)
 					paint.setTextAlign(Align.LEFT);
-				paint.setColor(Color.BLACK);
+				paint.setColor(graphViewStyle.getHorizontalLabelsColor());
 				canvas.drawText(horlabels[i], x, height - 4, paint);
 			}
 
 			paint.setTextAlign(Align.CENTER);
 			canvas.drawText(title, (graphwidth / 2) + horstart, border - 4, paint);
 
-			if (maxY != minY) {
-				paint.setStrokeCap(Paint.Cap.ROUND);
-
-				for (int i=0; i<graphSeries.size(); i++) {
-					paint.setStrokeWidth(graphSeries.get(i).style.thickness);
-					paint.setColor(graphSeries.get(i).style.color);
-					drawSeries(canvas, _values(i), graphwidth, graphheight, border, minX, minY, diffX, diffY, horstart);
-				}
-
-				if (showLegend) drawLegend(canvas, height, width);
+			if (maxY == minY) {
+				// if min/max is the same, fake it so that we can render a line
+				maxY = maxY*1.05d;
+				minY = minY*0.95d;
 			}
+
+			double diffY = maxY - minY;
+			paint.setStrokeCap(Paint.Cap.ROUND);
+
+			for (int i=0; i<graphSeries.size(); i++) {
+				drawSeries(canvas, _values(i), graphwidth, graphheight, border, minX, minY, diffX, diffY, horstart, graphSeries.get(i).style);
+			}
+
+			if (showLegend) drawLegend(canvas, height, width);
 		}
 
 		private void onMoveGesture(float f) {
@@ -224,7 +227,7 @@ abstract public class GraphView extends LinearLayout {
 			int vers = verlabels.length - 1;
 			for (int i = 0; i < verlabels.length; i++) {
 				float y = ((graphheight / vers) * i) + border;
-				paint.setColor(Color.BLACK);
+				paint.setColor(graphViewStyle.getVerticalLabelsColor());
 				canvas.drawText(verlabels[i], 0, y, paint);
 			}
 		}
@@ -240,7 +243,7 @@ abstract public class GraphView extends LinearLayout {
 	private final View viewVerLabels;
 	private ScaleGestureDetector scaleDetector;
 	private boolean scalable;
-	private NumberFormat numberformatter;
+	private final NumberFormat[] numberformatter = new NumberFormat[2];
 	private final List<GraphViewSeries> graphSeries;
 	private boolean showLegend = false;
 	private float legendWidth = 120;
@@ -248,6 +251,7 @@ abstract public class GraphView extends LinearLayout {
 	private boolean manualYAxis;
 	private double manualMaxYValue;
 	private double manualMinYValue;
+	private GraphViewStyle graphViewStyle;
 
 	/**
 	 *
@@ -263,12 +267,22 @@ abstract public class GraphView extends LinearLayout {
 		else
 			this.title = title;
 
+		graphViewStyle = new GraphViewStyle();
+
 		paint = new Paint();
 		graphSeries = new ArrayList<GraphViewSeries>();
 
 		viewVerLabels = new VerLabelsView(context);
 		addView(viewVerLabels);
 		addView(new GraphViewContentView(context), new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1));
+	}
+
+	public GraphViewStyle getGraphViewStyle() {
+		return graphViewStyle;
+	}
+
+	public void setGraphViewStyle(GraphViewStyle style) {
+		graphViewStyle = style;
 	}
 
 	private GraphViewData[] _values(int idxSeries) {
@@ -336,7 +350,7 @@ abstract public class GraphView extends LinearLayout {
 		}
 	}
 
-	abstract public void drawSeries(Canvas canvas, GraphViewData[] values, float graphwidth, float graphheight, float border, double minX, double minY, double diffX, double diffY, float horstart);
+	abstract public void drawSeries(Canvas canvas, GraphViewData[] values, float graphwidth, float graphheight, float border, double minX, double minY, double diffX, double diffY, float horstart, GraphViewSeriesStyle style);
 
 	/**
 	 * formats the label
@@ -346,23 +360,24 @@ abstract public class GraphView extends LinearLayout {
 	 * @return value to display
 	 */
 	protected String formatLabel(double value, boolean isValueX) {
-		if (numberformatter == null) {
-			numberformatter = NumberFormat.getNumberInstance();
-			double highestvalue = getMaxY();
-			double lowestvalue = getMinY();
+		int i = isValueX ? 1 : 0;
+		if (numberformatter[i] == null) {
+			numberformatter[i] = NumberFormat.getNumberInstance();
+			double highestvalue = isValueX ? getMaxX(false) : getMaxY();
+			double lowestvalue = isValueX ? getMinX(false) : getMinY();
 			if (highestvalue - lowestvalue < 0.1) {
-				numberformatter.setMaximumFractionDigits(6);
+				numberformatter[i].setMaximumFractionDigits(6);
 			} else if (highestvalue - lowestvalue < 1) {
-				numberformatter.setMaximumFractionDigits(4);
+				numberformatter[i].setMaximumFractionDigits(4);
 			} else if (highestvalue - lowestvalue < 20) {
-				numberformatter.setMaximumFractionDigits(3);
+				numberformatter[i].setMaximumFractionDigits(3);
 			} else if (highestvalue - lowestvalue < 100) {
-				numberformatter.setMaximumFractionDigits(1);
+				numberformatter[i].setMaximumFractionDigits(1);
 			} else {
-				numberformatter.setMaximumFractionDigits(0);
+				numberformatter[i].setMaximumFractionDigits(0);
 			}
 		}
-		return numberformatter.format(value);
+		return numberformatter[i].format(value);
 	}
 
 	private String[] generateHorlabels(float graphwidth) {
@@ -381,6 +396,12 @@ abstract public class GraphView extends LinearLayout {
 		String[] labels = new String[numLabels+1];
 		double min = getMinY();
 		double max = getMaxY();
+		if (max == min) {
+			// if min/max is the same, fake it so that we can render a line
+			max = max*1.05d;
+			min = min*0.95d;
+		}
+
 		for (int i=0; i<=numLabels; i++) {
 			labels[numLabels-i] = formatLabel(min + ((max-min)*i/numLabels), false);
 		}
@@ -413,10 +434,14 @@ abstract public class GraphView extends LinearLayout {
 			if (graphSeries.size() > 0)
 			{
 				GraphViewData[] values = graphSeries.get(0).values;
-				highest = values[values.length-1].valueX;
-				for (int i=1; i<graphSeries.size(); i++) {
-					values = graphSeries.get(i).values;
-					highest = Math.max(highest, values[values.length-1].valueX);
+				if (values.length == 0) {
+					highest = 0;
+				} else {
+					highest = values[values.length-1].valueX;
+					for (int i=1; i<graphSeries.size(); i++) {
+						values = graphSeries.get(i).values;
+						highest = Math.max(highest, values[values.length-1].valueX);
+					}
 				}
 			}
 			return highest;
@@ -462,10 +487,14 @@ abstract public class GraphView extends LinearLayout {
 			if (graphSeries.size() > 0)
 			{
 				GraphViewData[] values = graphSeries.get(0).values;
-				lowest = values[0].valueX;
-				for (int i=1; i<graphSeries.size(); i++) {
-					values = graphSeries.get(i).values;
-					lowest = Math.min(lowest, values[0].valueX);
+				if (values.length == 0) {
+					lowest = 0;
+				} else {
+					lowest = values[0].valueX;
+					for (int i=1; i<graphSeries.size(); i++) {
+						values = graphSeries.get(i).values;
+						lowest = Math.min(lowest, values[0].valueX);
+					}
 				}
 			}
 			return lowest;
@@ -504,7 +533,8 @@ abstract public class GraphView extends LinearLayout {
 	public void redrawAll() {
 		verlabels = null;
 		horlabels = null;
-		numberformatter = null;
+		numberformatter[0] = null;
+		numberformatter[1] = null;
 		invalidate();
 		viewVerLabels.invalidate();
 	}
