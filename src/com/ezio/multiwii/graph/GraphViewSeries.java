@@ -20,14 +20,17 @@ public class GraphViewSeries {
 		public GraphViewSeriesStyle() {
 			super();
 		}
+
 		public GraphViewSeriesStyle(int color, int thickness) {
 			super();
 			this.color = color;
 			this.thickness = thickness;
 		}
+
 		public void setValueDependentColor(ValueDependentColor valueDependentColor) {
 			this.valueDependentColor = valueDependentColor;
 		}
+
 		public ValueDependentColor getValueDependentColor() {
 			return valueDependentColor;
 		}
@@ -56,6 +59,7 @@ public class GraphViewSeries {
 
 	/**
 	 * this graphview will be redrawn if data changes
+	 * 
 	 * @param graphView
 	 */
 	public void addGraphView(GraphView graphView) {
@@ -64,12 +68,20 @@ public class GraphViewSeries {
 
 	/**
 	 * add one data to current data
-	 * @param value the new data to append
-	 * @param scrollToEnd true => graphview will scroll to the end (maxX)
+	 * 
+	 * @param value
+	 *            the new data to append
+	 * @param scrollToEnd
+	 *            true => graphview will scroll to the end (maxX)
 	 */
-	@TargetApi(9)
+	// @TargetApi(9)
 	public void appendData(GraphViewData value, boolean scrollToEnd) {
-		GraphViewData[] newValues = Arrays.copyOf(values, values.length+1);
+		// GraphViewData[] newValues = Arrays.copyOf(values, values.length + 1);
+
+		GraphViewData[] newValues = new GraphViewData[values.length + 1];
+		int offset = values.length;
+		System.arraycopy(values, 0, newValues, 0, offset);
+
 		newValues[values.length] = value;
 		values = newValues;
 		for (GraphView g : graphViews) {
@@ -80,9 +92,10 @@ public class GraphViewSeries {
 	}
 
 	/**
-	 * clears the current data and set the new.
-	 * redraws the graphview(s)
-	 * @param values new data
+	 * clears the current data and set the new. redraws the graphview(s)
+	 * 
+	 * @param values
+	 *            new data
 	 */
 	public void resetData(GraphViewData[] values) {
 		this.values = values;
