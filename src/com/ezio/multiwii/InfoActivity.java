@@ -1,13 +1,12 @@
 package com.ezio.multiwii;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
-public class InfoActivity extends SherlockActivity {
+public class InfoActivity extends Activity {
 
 	App app;
 

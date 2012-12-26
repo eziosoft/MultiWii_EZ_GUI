@@ -143,7 +143,9 @@ public class Dashboard2View extends View {
 		p.setStyle(Style.STROKE);
 		// p.setStrokeWidth(1);
 		p.setTextSize(textSizeSmall);
-		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ALIEEB__.TTF"));//octin sports free.ttf"));
+		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));// octin
+																							// sports
+																							// free.ttf"));
 
 		// progressbar fill
 		p4 = new Paint();
@@ -219,7 +221,7 @@ public class Dashboard2View extends View {
 		super.onDraw(c);
 
 		// debug
-		if (true) {
+		if (false) {
 			SatNum = 5;
 			DistanceToHome = 254;
 			DirectionToHome = 45;
@@ -528,9 +530,9 @@ public class Dashboard2View extends View {
 		if (Azimuth != 0)
 			drawCompass(c, ww / 3, hh - 12 * scaledDensity, ww / 3, 10, 80, (int) Azimuth);
 		if (Altitude != 0)
-			drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 10, 80, (int) Altitude);
+			drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 2, 10, (int) Altitude);
 		if (SatNum > 0)
-			drawVertical(c, ww / 3, hh / 3, hh / 3, 10, 80, (int) Speed);
+			drawVertical(c, ww / 3, hh / 3, hh / 3, 2, 10, (int) Speed);
 
 	}
 
