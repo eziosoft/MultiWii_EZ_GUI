@@ -30,6 +30,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
+import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 
 public class Dashboard2View extends View {
@@ -38,7 +40,7 @@ public class Dashboard2View extends View {
 	int ww, hh;
 	Rect dim = new Rect();
 	Paint p;
-	Paint p1, p3, p4;
+	Paint p1, p3, p4, pgrid;
 
 	public int SatNum = 5;
 
@@ -126,27 +128,41 @@ public class Dashboard2View extends View {
 		AngleIndicatorLenghtLong = getResources().getDimensionPixelSize(R.dimen.AngleIndicatorLenghtLong);
 		scaledDensity = getResources().getDisplayMetrics().scaledDensity;
 
+		// grid
+		pgrid = new Paint();
+		pgrid.setColor(Color.CYAN);
+		pgrid.setAntiAlias(true);
+		pgrid.setStyle(Style.STROKE);
+		pgrid.setStrokeWidth(0);
+		pgrid.setAlpha(30);
+
+		// text
 		p = new Paint();
-		p.setColor(Color.GREEN);
+		p.setColor(Color.CYAN);
 		p.setAntiAlias(true);
 		p.setStyle(Style.STROKE);
 		// p.setStrokeWidth(1);
 		p.setTextSize(textSizeSmall);
+		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ALIEEB__.TTF"));//octin sports free.ttf"));
 
+		// progressbar fill
 		p4 = new Paint();
-		p4.setColor(Color.GREEN);
+		p4.setColor(Color.CYAN);
 		p4.setAntiAlias(true);
 		p4.setStyle(Style.FILL);
-		// p.setStrokeWidth(1);
 		p4.setTextSize(textSizeSmall);
+		p4.setAlpha(150);
 
+		// line
 		p1 = new Paint();
 		p1.setColor(Color.GREEN);
 		p1.setAntiAlias(true);
 		p1.setStyle(Style.STROKE);
 		p1.setStrokeWidth(2f * scaledDensity);
 		p1.setTextSize(textSizeSmall);
+		p1.setAlpha(150);
 
+		// dashed line center
 		p3 = new Paint();
 		p3.setColor(Color.GREEN);
 		p3.setAntiAlias(true);
@@ -154,7 +170,47 @@ public class Dashboard2View extends View {
 		p3.setStrokeWidth(2f * scaledDensity);
 		p3.setTextSize(textSizeSmall);
 		p3.setPathEffect(new DashPathEffect(new float[] { 10 * scaledDensity, 20 * scaledDensity }, 0));
+		p3.setAlpha(150);
+
 		this.setBackgroundColor(Color.BLACK);
+
+	}
+
+	void drawCompass(Canvas c, float x, float y, float wight, int step, int range, int value) {
+
+		value = value - range / 2 + step;
+		p.setTextSize(textSizeSmall);
+		for (float i = 0 + step; i <= range - step; i++) {
+			if (value % step == 0) {
+				String t = String.valueOf((int) value);
+				c.drawText(t, (x + i * wight / range - p.measureText(t) / 2), y, p);
+				c.drawLine((x + i * wight / range), y, (x + i * wight / range), (y + 10 * scaledDensity), p);
+			}
+
+			value++;
+		}
+
+		c.drawRect(x, (y - textSizeSmall), (x + wight), (y + 10 * scaledDensity), p);
+		c.drawLine((x + wight / 2), (y - textSizeSmall), (x + wight / 2), (y + 10 * scaledDensity), p);
+
+	}
+
+	void drawVertical(Canvas c, float x, float y, float heigh, int step, int range, int value) {
+
+		value = value - range / 2 + step;
+		p.setTextSize(textSizeSmall);
+		for (float i = 0 + step; i <= range - step; i++) {
+			if (value % step == 0) {
+				String t = String.valueOf((int) value);
+				c.drawText(t, x - p.measureText(t) / 2, (y + i * heigh / range), p);
+				c.drawLine(x - 10 * scaledDensity, (y + i * heigh / range), (x + 10 * scaledDensity), (y + i * heigh / range), p);
+			}
+
+			value++;
+		}
+
+		c.drawRect((x - textSizeSmall), y, (x + 10 * scaledDensity), (y + heigh), p);
+		c.drawLine((x - textSizeSmall), (y + heigh / 2), (x + 10 * scaledDensity), (y + heigh / 2), p);
 
 	}
 
@@ -162,7 +218,38 @@ public class Dashboard2View extends View {
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
 
-		// c.drawRect(0, 0, ww - 1, hh - 1, p);
+		// debug
+		if (true) {
+			SatNum = 5;
+			DistanceToHome = 254;
+			DirectionToHome = 45;
+			Speed = 30;
+			GPSAltitude = 20;
+			Altitude = 23;
+			Lat = 238233212f;
+			Lon = 32343214f;
+			Pitch = 10;
+			Roll = 20;
+			Azimuth = 67;
+			Gforce = 1;
+			TXRSSI = 50;
+			RXRSSI = 80;
+			VBat = 11.3f;
+			State = "LEVEL BARO MAG GPS HOLD";
+
+		}
+
+		// grid
+		if (true) {
+			for (int i = 0; i <= ww; i += ww / 10) {
+				c.drawLine(i, 0, i, hh, pgrid);
+			}
+
+			for (int i = 0; i <= hh; i += hh / 10) {
+				c.drawLine(0, i, ww, i, pgrid);
+			}
+		}
+		// end grid
 
 		int a = textSizeSmall;
 		p.setTextSize(textSizeSmall);
@@ -216,46 +303,55 @@ public class Dashboard2View extends View {
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawText(context.getString(R.string.TxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
 		a += textSizeSmall * 2;
 		p.setTextSize(textSizeSmall);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawText(context.getString(R.string.RxRSSI), 0, a, p);
 
 		a += 5;
 		p.setTextSize(textSizeMedium);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
-		if (TXRSSI > 0)
+		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
-		a = hh - textSizeMedium;
-		p.setTextSize(textSizeSmall);
-		if (SatNum > 0)
-			c.drawText(context.getString(R.string.LatxLon), 0, a, p);
+		if (SatNum > 0) {
+			a = hh;
+			p.setTextSize(textSizeMedium);
+			c.drawText(format.format(Lat / Math.pow(10, 7)), 0, a, p);
 
-		a = hh;
-		p.setTextSize(textSizeMedium);
-		if (SatNum > 0)
-			c.drawText(format.format(Lat / Math.pow(10, 7)) + " x " + format.format(Lon / Math.pow(10, 7)), 0, a, p);
+			a -= textSizeMedium;
+			p.setTextSize(textSizeSmall);
+			c.drawText(context.getString(R.string.GPS_latitude), 0, a, p);
 
+			a -= textSizeSmall;
+			p.setTextSize(textSizeMedium);
+			c.drawText(format.format(Lon / Math.pow(10, 7)), 0, a, p);
+
+			a -= textSizeMedium;
+			p.setTextSize(textSizeSmall);
+			c.drawText(context.getString(R.string.GPS_longitude), 0, a, p);
+		}
 		// //////////////////////////////
 		a = hh - textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.Azimuth), ww - p.measureText(context.getString(R.string.Azimuth)), a, p);
+		if (Azimuth != 0)
+			c.drawText(context.getString(R.string.Azimuth), ww - p.measureText(context.getString(R.string.Azimuth)), a, p);
 
 		a = hh;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(Azimuth), ww - p.measureText(String.valueOf(Azimuth)), a, p);
+		if (Azimuth != 0)
+			c.drawText(String.valueOf(Azimuth), ww - p.measureText(String.valueOf(Azimuth)), a, p);
 
 		a -= textSizeMedium + textSizeSmall;
 		p.setTextSize(textSizeMedium);
@@ -275,11 +371,13 @@ public class Dashboard2View extends View {
 
 		a -= textSizeSmall;
 		p.setTextSize(textSizeMedium);
-		c.drawText(String.format("%.2f", Altitude), ww - p.measureText(String.format("%.2f", Altitude)), a, p);
+		if (Altitude != 0)
+			c.drawText(String.format("%.2f", Altitude), ww - p.measureText(String.format("%.2f", Altitude)), a, p);
 
 		a -= textSizeMedium;
 		p.setTextSize(textSizeSmall);
-		c.drawText(context.getString(R.string.GPS_altitude), ww - p.measureText(context.getString(R.string.GPS_altitude)), a, p);
+		if (Altitude != 0)
+			c.drawText(context.getString(R.string.GPS_altitude), ww - p.measureText(context.getString(R.string.GPS_altitude)), a, p);
 
 		a -= textSizeSmall;
 		p.setTextSize(textSizeMedium);
@@ -300,22 +398,22 @@ public class Dashboard2View extends View {
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		if (VBat > 0)
+		if (VBat != 0)
 			c.drawText(context.getString(R.string.Battery), ww - p.measureText(context.getString(R.string.Battery)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		if (VBat > 0)
+		if (VBat != 0)
 			c.drawText(String.valueOf(VBat), ww - p.measureText(String.valueOf(VBat)), a, p);
 
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
-		if (VBat > 0)
+		if (VBat != 0)
 			c.drawText(context.getString(R.string.PowerSumPowerTrigger), ww - p.measureText(context.getString(R.string.PowerSumPowerTrigger)), a, p);
 
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		if (VBat > 0)
+		if (VBat != 0)
 			c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p);
 
 		// horyzon lines
@@ -418,16 +516,21 @@ public class Dashboard2View extends View {
 
 		c.drawLine(x1, y1, x2, y2, p1);
 
-		c.drawCircle(ww / 2, hh / 2, 10 * scaledDensity, p1);
-		c.drawLine(ww / 2, hh / 2 - 10 * scaledDensity, ww / 2, hh / 2 - 30 * scaledDensity, p1);
-		c.drawLine(ww / 2 - 10 * scaledDensity, hh / 2, ww / 2 - 30 * scaledDensity, hh / 2, p1);
-		c.drawLine(ww / 2 + 10 * scaledDensity, hh / 2, ww / 2 + 30 * scaledDensity, hh / 2, p1);
+		c.drawCircle(ww / 2, hh / 2, 5 * scaledDensity, p1);
+		c.drawLine(ww / 2, hh / 2 - 5 * scaledDensity, ww / 2, hh / 2 - 15 * scaledDensity, p1);
+		c.drawLine(ww / 2 - 5 * scaledDensity, hh / 2, ww / 2 - 15 * scaledDensity, hh / 2, p1);
+		c.drawLine(ww / 2 + 5 * scaledDensity, hh / 2, ww / 2 + 15 * scaledDensity, hh / 2, p1);
 
 		RectF r = new RectF(ww / 2 - HorizonCircleSize * scale, hh / 2 - HorizonCircleSize * scale, ww / 2 + HorizonCircleSize * scale, hh / 2 + HorizonCircleSize * scale);
-		// c.drawRect(r, p);
 		c.drawArc(r, Roll - 45, -90, false, p1);
-		// c.drawArc(oval, startAngle, sweepAngle, useCenter, paint)
 		c.drawLine(ww / 2, hh / 2 - HorizonCircleSize * scale, ww / 2, hh / 2 - (HorizonCircleSize + AngleIndicatorLenghtLong) * scale, p1);
+
+		if (Azimuth != 0)
+			drawCompass(c, ww / 3, hh - 12 * scaledDensity, ww / 3, 10, 80, (int) Azimuth);
+		if (Altitude != 0)
+			drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 10, 80, (int) Altitude);
+		if (SatNum > 0)
+			drawVertical(c, ww / 3, hh / 3, hh / 3, 10, 80, (int) Speed);
 
 	}
 

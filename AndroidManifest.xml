@@ -4,8 +4,7 @@
     android:versionName="2.93" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="8" android:targetSdkVersion="15"/>
 
     <application
         android:name="App"
