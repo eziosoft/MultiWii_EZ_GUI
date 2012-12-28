@@ -188,7 +188,7 @@ class CopterOverlay extends Overlay {
 		canvas.drawText(context.getString(R.string.Baro), 0, a, p);
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		canvas.drawText("GPS:"+String.valueOf(GPSAltitude)+"  Baro:"+String.valueOf(Altitude), 0, a, p);
+		canvas.drawText("GPS:"+String.valueOf(GPSAltitude)+"  Baro:"+String.format("%.2f",Altitude), 0, a, p);
 		
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
