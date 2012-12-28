@@ -88,7 +88,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 
 												}
 
-												baro.setText(String.valueOf(app.mw.alt));
+												baro.setText(String.format("%.2f",app.mw.alt));
 												BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
 												PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
 
