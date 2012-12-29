@@ -82,9 +82,18 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 			GeoPoint gHome = new GeoPoint(app.mw.HomePosition.getLatitudeE6(),
 					app.mw.HomePosition.getLongitudeE6());
 
-			copter.Set(g, (int) map((int) app.mw.head, 180, -180, 0, 360),
-					gHome, app.mw.bytevbat, app.mw.pMeterSum,
-					app.mw.intPowerTrigger);
+			
+			String state = "";
+			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
+				if (app.mw.ActiveModes[i]) {
+					state += " " + app.mw.buttonCheckboxLabel[i];
+				}
+			}
+
+			float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
+
+			copter.Set(g, gHome, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+				
 
 			circles.Set(gHome, GYou);
 			mapView.postInvalidate();

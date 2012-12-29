@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.Typeface;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.R.string;
@@ -107,6 +108,7 @@ class CopterOverlay extends Overlay {
 		p.setColor(Color.YELLOW);
 		p.setTextSize(20 * scaledDensity);
 		p.setShadowLayer(8 * scaledDensity, 0, 0, Color.BLACK);
+		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
 
 	}
 
@@ -182,39 +184,36 @@ class CopterOverlay extends Overlay {
 		p.setTextSize(textSizeMedium);
 		canvas.drawText(String.valueOf(SatNum), 0, a, p);
 
-		
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
 		canvas.drawText(context.getString(R.string.Baro), 0, a, p);
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
-		canvas.drawText("GPS:"+String.valueOf(GPSAltitude)+"  Baro:"+String.format("%.2f",Altitude), 0, a, p);
-		
+		canvas.drawText("GPS:" + String.valueOf(GPSAltitude) + "  Baro:" + String.format("%.2f", Altitude), 0, a, p);
+
 		a += textSizeSmall;
 		p.setTextSize(textSizeSmall);
 		canvas.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
 		a += textSizeMedium;
 		p.setTextSize(textSizeMedium);
 		canvas.drawText(String.valueOf(DistanceToHome), 0, a, p);
-		
-		if(VBat>0)
-		{
+
+		if (VBat > 0) {
 			a += textSizeSmall;
 			p.setTextSize(textSizeSmall);
 			canvas.drawText(context.getString(R.string.BattVoltage), 0, a, p);
 			a += textSizeMedium;
 			p.setTextSize(textSizeMedium);
 			canvas.drawText(String.valueOf(VBat), 0, a, p);
-			
+
 			a += textSizeSmall;
 			p.setTextSize(textSizeSmall);
 			canvas.drawText(context.getString(R.string.PowerSumPowerTrigger), 0, a, p);
 			a += textSizeMedium;
 			p.setTextSize(textSizeMedium);
 			canvas.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, p);
-			
+
 		}
-		
 
 	}
 
