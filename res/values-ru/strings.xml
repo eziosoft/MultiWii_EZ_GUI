@@ -198,4 +198,12 @@
 
   <string name="RawData">Поток Данных</string>
   <string name="ShareIt">Отправить свои настройки</string>
+   <string name="SelectSetting">Выбрать настройки</string>
+  <string name="RXBIND">RX BIND</string>
+  <string name="FollowMe">Follow Me (Не тестировано! Должен использоваться с #define USE_MSP_WP) моргает когда телефон отсылает данные в MW</string>
+  <string name="InfoDonate">Вы нашли эту программу полезной? Поддержите разработчика, не жалейте несколько баксов!</string>
+  <string name="convertToKML">Конвертировать в KML (Google Earth)</string>
+  <string name="infoDonate">Я потратил и буду тратить, много своего свободного времени, поэтому если вам нравится MultiWii EZ-GUI, не жалейте несколько долларов для меня. Это заинтересует меня не покидать проект.</string>
+  <string name="Debug">Дебаг</string>
+  <string name="Later">Позже</string>
 </resources>
