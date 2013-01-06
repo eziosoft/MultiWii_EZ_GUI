@@ -17,17 +17,18 @@ public class FrskyHubProtocol {
 	public int GPS_Speed = 0;
 	public float Voltage = 0;
 
-	
-	private float v1=0, v2=0;
+	private float v1 = 0, v2 = 0;
 	private float AltitudeTemp = 0;
 
 	public int GPS_EW = 0;
 	public int GPS_LongitudeBefore = 0;
 	public int GPS_LongitudeAfter = 0;
+	public long GPS_Longtitude = 0;
 
 	public int GPS_NS = 0;
 	public int GPS_LatitudeBefore = 0;
 	public int GPS_LatitudeAfter = 0;
+	public long GPS_Latitude = 0;
 
 	// ////////////////EZ-GUI
 	public float angX = 0;
@@ -201,15 +202,15 @@ public class FrskyHubProtocol {
 			break;// 0x26;// Acc-z S 0.016g / -8g ~ +8g
 		case VoltageBefore:
 			// TODO
-			v1 = getIntFromFrame(frame)*100;
-			log("+VoltageBefore",  String.valueOf(Voltage));
+			v1 = getIntFromFrame(frame) * 100;
+			log("+VoltageBefore", String.valueOf(Voltage));
 			break;// 0x3A;// ﹡Voltage (Ampere Sensor) v U 0.5v / 0~48.0v
 		// Before “.”
 		case VoltageAfter:
 			// TODO
-			v2=getIntFromFrame(frame)*10-5;
-			Voltage = (v1+v2)/110f*21f;
-						
+			v2 = getIntFromFrame(frame) * 10 - 5;
+			Voltage = (v1 + v2) / 110f * 21f;
+
 			log("+VoltageAfter", String.valueOf(Voltage));
 			break; // 0x3B;// After “.”
 		case Current:

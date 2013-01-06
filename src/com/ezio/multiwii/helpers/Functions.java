@@ -2,6 +2,10 @@ package com.ezio.multiwii.helpers;
 
 public class Functions {
 
+	long ConcatInt(int x, int y) {
+		return (int) ((x * Math.pow(10, numberOfDigits(y))) + y);
+	}
+
 	public static float map(float x, float in_min, float in_max, float out_min, float out_max) {
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
