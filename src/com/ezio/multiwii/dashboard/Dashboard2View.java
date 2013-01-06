@@ -310,9 +310,10 @@ public class Dashboard2View extends View {
 		a += 5;
 		p.setTextSize(textSizeMedium);
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
+			c.drawRect(0, a, (int) (80 * scaledDensity), a + textSizeSmall, p);
+
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) Functions.map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+			c.drawRect(0, a, (int) Functions.map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall, p4);
 
 		a += textSizeSmall * 2;
 		p.setTextSize(textSizeSmall);
@@ -322,9 +323,9 @@ public class Dashboard2View extends View {
 		a += 5;
 		p.setTextSize(textSizeMedium);
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
+			c.drawRect(0, a, (int) (80 * scaledDensity), a + textSizeSmall, p);
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) Functions.map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+			c.drawRect(0, a, (int) Functions.map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall, p4);
 
 		if (SatNum > 0) {
 			a = hh;
@@ -524,6 +525,7 @@ public class Dashboard2View extends View {
 
 		RectF r = new RectF(ww / 2 - HorizonCircleSize * scale, hh / 2 - HorizonCircleSize * scale, ww / 2 + HorizonCircleSize * scale, hh / 2 + HorizonCircleSize * scale);
 		c.drawArc(r, Roll - 45, -90, false, p1);
+
 		c.drawLine(ww / 2, hh / 2 - HorizonCircleSize * scale, ww / 2, hh / 2 - (HorizonCircleSize + AngleIndicatorLenghtLong) * scale, p1);
 
 		if (Azimuth != 0)
