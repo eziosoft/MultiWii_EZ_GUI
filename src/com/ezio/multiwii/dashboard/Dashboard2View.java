@@ -19,9 +19,6 @@ package com.ezio.multiwii.dashboard;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.string;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,8 +28,10 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
+
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.Functions;
 
 public class Dashboard2View extends View {
 
@@ -313,7 +312,7 @@ public class Dashboard2View extends View {
 		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+			c.drawRect(new Rect(0, a, (int) Functions.map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
 		a += textSizeSmall * 2;
 		p.setTextSize(textSizeSmall);
@@ -325,7 +324,7 @@ public class Dashboard2View extends View {
 		if (TXRSSI != 0)
 			c.drawRect(new Rect(0, a, (int) (80 * scaledDensity), a + textSizeSmall), p);
 		if (TXRSSI != 0)
-			c.drawRect(new Rect(0, a, (int) map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
+			c.drawRect(new Rect(0, a, (int) Functions.map(RXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall), p4);
 
 		if (SatNum > 0) {
 			a = hh;
@@ -534,10 +533,6 @@ public class Dashboard2View extends View {
 		if (SatNum > 0)
 			drawVertical(c, ww / 3, hh / 3, hh / 3, 2, 10, (int) Speed);
 
-	}
-
-	float map(float x, float in_min, float in_max, float out_min, float out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
 
 }

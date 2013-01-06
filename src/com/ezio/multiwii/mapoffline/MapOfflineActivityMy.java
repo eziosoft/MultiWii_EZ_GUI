@@ -35,7 +35,7 @@ import android.view.WindowManager;
 
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.notUsed.HttpCli;
+import com.ezio.multiwii.helpers.Functions;
 
 public class MapOfflineActivityMy extends Activity implements LocationListener {
 
@@ -92,7 +92,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 			float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
 
-			copter.Set(g, gHome, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+			copter.Set(g, gHome, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 				
 
 			circles.Set(gHome, GYou);
@@ -107,9 +107,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 		}
 	};
 
-	int map(int x, int in_min, int in_max, int out_min, int out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-	}
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

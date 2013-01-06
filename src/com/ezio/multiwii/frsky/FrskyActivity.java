@@ -44,10 +44,7 @@ public class FrskyActivity extends SherlockActivity {
 	TextView TxdBTV;
 	TextView RxdBTV;
 
-	float map(float x, float in_min, float in_max, float out_min, float out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-	}
-
+	
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {

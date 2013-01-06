@@ -29,8 +29,7 @@ import android.view.WindowManager;
 
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.string;
-import com.ezio.multiwii.notUsed.HttpCli;
+import com.ezio.multiwii.helpers.Functions;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -89,9 +88,13 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 			}
 
 			float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
-      //public void Set(GeoPoint copter, GeoPoint home, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
+			// public void Set(GeoPoint copter, GeoPoint home, int satNum, float
+			// distanceToHome, float directionToHome, float speed, float
+			// gpsAltitude, float altitude, float lat, float lon, float pitch,
+			// float roll, float azimuth, float gforce, String state, int vbat,
+			// int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 
-			copter.Set(g, app.mw.HomePosition, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+			copter.Set(g, app.mw.HomePosition, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 			mapView.postInvalidate();
 
 			app.Frequentjobs();
@@ -104,10 +107,6 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 		}
 	};
-
-	int map(int x, int in_min, int in_max, int out_min, int out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

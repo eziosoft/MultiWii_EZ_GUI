@@ -37,10 +37,10 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.ezio.multiwii.AUXActivity;
 import com.ezio.multiwii.AboutActivity;
 import com.ezio.multiwii.AdvancedActivity;
 import com.ezio.multiwii.App;
-import com.ezio.multiwii.AUXActivity;
 import com.ezio.multiwii.GPSActivity;
 import com.ezio.multiwii.InfoActivity;
 import com.ezio.multiwii.LogActivity;
@@ -53,6 +53,7 @@ import com.ezio.multiwii.dashboard.Dashboard1Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
 import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.graph.GraphsActivity;
+import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.map.MapActivityMy;
 import com.ezio.multiwii.mapoffline.MapOfflineActivityMy;
 import com.ezio.multiwii.motors.MotorsActivity;
@@ -251,7 +252,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.mw.ProcessSerialData(app.loggingON);
 
 			app.frsky.ProcessSerialData(false);
-			setSupportProgress((int) map(app.frsky.TxRSSI, 0, 110, 0, 10000));
+			setSupportProgress((int) Functions.map(app.frsky.TxRSSI, 0, 110, 0, 10000));
 
 			app.Frequentjobs();
 			app.mw.SendRequest();
@@ -260,10 +261,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 
 	};
-
-	float map(float x, float in_min, float in_max, float out_min, float out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-	}
 
 	// //buttons/////////////////////////////////////
 

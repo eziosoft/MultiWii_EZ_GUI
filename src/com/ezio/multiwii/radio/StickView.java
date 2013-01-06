@@ -23,6 +23,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.ezio.multiwii.helpers.Functions;
+
 public class StickView extends View {
 
 	public float x, y;
@@ -36,7 +38,7 @@ public class StickView extends View {
 	float scaledDensity = 0;
 
 	public float InputX(float x) {
-		float a = map(x, 0, ww, 1000, 2000);
+		float a = Functions.map(x, 0, ww, 1000, 2000);
 		if (a > 2000)
 			a = 2000;
 		if (a < 1000)
@@ -45,17 +47,13 @@ public class StickView extends View {
 	}
 
 	public float InputY(float y) {
-		float a = map(hh - y, 0, ww, 1000, 2000);
+		float a = Functions.map(hh - y, 0, ww, 1000, 2000);
 		if (a > 2000)
 			a = 2000;
 		if (a < 1000)
 			a = 1000;
 		return a;
 
-	}
-
-	float map(float x, float in_min, float in_max, float out_min, float out_max) {
-		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
 
 	public void SetPosition(float xx, float yy) {
@@ -116,15 +114,15 @@ public class StickView extends View {
 		canvas.drawLine(0, hh / 2, ww, hh / 2, paint3);
 		canvas.drawLine(ww / 2, 0, ww / 2, hh, paint3);
 
-		canvas.drawCircle(ww / 2, hh / 2, 5*scaledDensity, paint1);
+		canvas.drawCircle(ww / 2, hh / 2, 5 * scaledDensity, paint1);
 
-		canvas.drawLine(ww / 2 - 5*scaledDensity, hh / 2, x - 15*scaledDensity, y, paint1);
-		canvas.drawLine(ww / 2 + 5*scaledDensity, hh / 2, x + 15*scaledDensity, y, paint1);
+		canvas.drawLine(ww / 2 - 5 * scaledDensity, hh / 2, x - 15 * scaledDensity, y, paint1);
+		canvas.drawLine(ww / 2 + 5 * scaledDensity, hh / 2, x + 15 * scaledDensity, y, paint1);
 
-		canvas.drawLine(ww / 2, hh / 2 - 5*scaledDensity, x, y - 15*scaledDensity, paint1);
-		canvas.drawLine(ww / 2, hh / 2 + 5*scaledDensity, x, y + 15*scaledDensity, paint1);
+		canvas.drawLine(ww / 2, hh / 2 - 5 * scaledDensity, x, y - 15 * scaledDensity, paint1);
+		canvas.drawLine(ww / 2, hh / 2 + 5 * scaledDensity, x, y + 15 * scaledDensity, paint1);
 
-		canvas.drawCircle(x, y, 15*scaledDensity, paint);
+		canvas.drawCircle(x, y, 15 * scaledDensity, paint);
 
 	}
 
