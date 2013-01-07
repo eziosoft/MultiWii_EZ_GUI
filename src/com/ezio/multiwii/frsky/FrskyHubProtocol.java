@@ -3,6 +3,8 @@ package com.ezio.multiwii.frsky;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.ezio.multiwii.helpers.Functions;
+
 import android.util.Log;
 
 public class FrskyHubProtocol {
@@ -147,6 +149,9 @@ public class FrskyHubProtocol {
 			break; // 0x12;// Longitude dddmm.mmmm Before “.”
 		case LongitudeAfter:
 			GPS_LongitudeAfter = getIntFromFrame(frame);
+
+			GPS_Longtitude = 10 * Functions.ConcatInt(GPS_LongitudeBefore, GPS_LongitudeAfter);
+
 			log("+LongitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x12 + 8;// After “.”
 		case EW:
@@ -159,6 +164,9 @@ public class FrskyHubProtocol {
 			break; // 0x13;// Latitude ddmm.mmmm Before “.”
 		case LatitudeAfter:
 			GPS_LatitudeAfter = getIntFromFrame(frame);
+
+			GPS_Latitude = 10 * Functions.ConcatInt(GPS_LatitudeBefore, GPS_LatitudeAfter);
+
 			log("+LatitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x13 + 8;// U After “.”
 		case NS:
