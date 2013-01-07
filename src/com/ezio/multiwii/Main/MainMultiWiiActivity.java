@@ -232,7 +232,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void ConnectFrsky(String MacAddress) {
-		if (!app.MacAddress.equals("")) {
+		if (!app.MacAddressFrsky.equals("")) {
 			app.BTFrsky.Connect(app.MacAddressFrsky);
 			app.Say(getString(R.string.Connect_frsky));
 		} else {
