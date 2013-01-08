@@ -68,12 +68,15 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 				// simulation
 				app.mw.GPS_longitude += random.nextInt(100) - 50;// for
 				// simulation
+				app.mw.GPS_fix=1;
+				
+				app.mw.head++;
 			}
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10,
 					app.mw.GPS_longitude / 10);
 
-			if (app.mw.GPS_fix == 1) {
+			if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat>0) {
 				CenterLocation(g);
 			} else {
 				CenterLocation(GYou);
