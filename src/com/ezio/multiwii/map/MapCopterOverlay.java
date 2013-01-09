@@ -20,17 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
 
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.string;
-import com.ezio.multiwii.mw.MultiWii210;
-import com.ezio.multiwii.mw.MultirotorData;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -82,6 +82,9 @@ class CopterOverlay extends Overlay {
 	public int TXRSSI = 0;
 	public int RXRSSI = 0;
 
+	Bitmap bmp;
+	float scaleBMP = 0.2f;
+
 	public CopterOverlay(Context context) {
 
 		this.context = context;
@@ -105,10 +108,12 @@ class CopterOverlay extends Overlay {
 		mPaint3.setStyle(Paint.Style.STROKE);
 		mPaint3.setStrokeWidth(1 * scaledDensity);
 
-		p.setColor(Color.YELLOW);
+		p.setColor(Color.CYAN);
 		p.setTextSize(20 * scaledDensity);
-		p.setShadowLayer(8 * scaledDensity, 0, 0, Color.BLACK);
+		p.setShadowLayer(8, 0, 0, Color.BLACK);
 		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
+
+		bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.m);
 
 	}
 
@@ -152,11 +157,24 @@ class CopterOverlay extends Overlay {
 		projection.toPixels(GCopter, p1);
 		projection.toPixels(GHome, p2);
 
-		float x1 = (float) ((20 * scaledDensity * Math.sin((Azimuth) * Math.PI / 180)) + p1.x);
-		float y1 = (float) ((20 * scaledDensity * Math.cos((Azimuth) * Math.PI / 180)) + p1.y);
+		// draw copter
+		Matrix matrix = new Matrix();
 
-		canvas.drawCircle(p1.x, p1.y, 20 * scaledDensity, mPaint1);
-		canvas.drawCircle(x1, y1, 5, mPaint2);
+		matrix.preRotate(-Azimuth + 180, p1.x, p1.y);
+		matrix.preTranslate(p1.x - bmp.getWidth() / 2 * scaleBMP, p1.y - bmp.getHeight() / 2 * scaleBMP);
+		matrix.preScale(scaleBMP, scaleBMP);
+
+		canvas.drawBitmap(bmp, matrix, p);
+
+		// float x1 = (float) ((20 * Math.sin((Azimuth) * Math.PI / 180)) +
+		// p1.x);
+		// float y1 = (float) ((20 * Math.cos((Azimuth) * Math.PI / 180)) +
+		// p1.y);
+
+		// canvas.drawCircle(p1.x, p1.y, 20, mPaint1);
+		// canvas.drawCircle(x1, y1, 5, mPaint2);
+
+		// end copter
 
 		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5 * scaledDensity, mPaint2);
 		canvas.drawCircle(p2.x, p2.y, 20 * scaledDensity, mPaint3);

@@ -68,8 +68,8 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 				// simulation
 				app.mw.GPS_longitude += random.nextInt(100) - 50;// for
 				// simulation
-				app.mw.GPS_fix=1;
-				
+				app.mw.GPS_fix = 1;
+
 				app.mw.head++;
 			}
 

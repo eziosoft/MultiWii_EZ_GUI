@@ -44,7 +44,7 @@ public class App extends Application {
 	// debug
 	public boolean GPSfromNet = true; // false by default
 	public boolean UseMapPublicAPI = true; // map API (true by default)
-	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
+	public String MapAPIKeyDebug = ""; // put
 																				// your
 																				// debug
 																				// key
