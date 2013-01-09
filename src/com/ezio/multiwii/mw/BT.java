@@ -233,7 +233,7 @@ public class BT {
 					Toast.LENGTH_LONG).show();
 			// app.Speak("Disconnected");
 
-		} catch (IOException e2) {
+		} catch (Exception e2) {
 			Log.e(TAG, "ON PAUSE: Unable to close socket.", e2);
 		}
 
