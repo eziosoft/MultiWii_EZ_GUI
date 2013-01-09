@@ -83,6 +83,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 				} else {
 					CenterLocation(GYou);
 				}
+				centerStep = 0;
 			}
 			centerStep++;
 

@@ -85,6 +85,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 				} else {
 					CenterLocation(GYou);
 				}
+				centerStep = 0;
 			}
 			centerStep++;
 
