@@ -58,6 +58,8 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 	private GeoPoint GYou = new GeoPoint(0, 0);
 
+	private int centerStep = 0;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
@@ -77,11 +79,14 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
-				CenterLocation(g);
-			} else {
-				CenterLocation(GYou);
+			if (centerStep >= 3) {
+				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
+					CenterLocation(g);
+				} else {
+					CenterLocation(GYou);
+				}
 			}
+			centerStep++;
 
 			String state = "";
 			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {

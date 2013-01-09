@@ -56,6 +56,8 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 	private GeoPoint GYou = new GeoPoint(0, 0);
 
+	private int centerStep = 0;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
@@ -73,19 +75,19 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 				app.mw.head++;
 			}
 
-			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10,
-					app.mw.GPS_longitude / 10);
+			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat>0) {
-				CenterLocation(g);
-			} else {
-				CenterLocation(GYou);
+			if (centerStep >= 3) {
+				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
+					CenterLocation(g);
+				} else {
+					CenterLocation(GYou);
+				}
 			}
+			centerStep++;
 
-			GeoPoint gHome = new GeoPoint(app.mw.HomePosition.getLatitudeE6(),
-					app.mw.HomePosition.getLongitudeE6());
+			GeoPoint gHome = new GeoPoint(app.mw.HomePosition.getLatitudeE6(), app.mw.HomePosition.getLongitudeE6());
 
-			
 			String state = "";
 			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
 				if (app.mw.ActiveModes[i]) {
@@ -96,7 +98,6 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 			float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax + app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
 
 			copter.Set(g, gHome, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
-				
 
 			circles.Set(gHome, GYou);
 			mapView.postInvalidate();
@@ -109,8 +110,6 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 		}
 	};
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -178,8 +177,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		GYou = new GeoPoint((int) (location.getLatitude() * 1e6),
-				(int) (location.getLongitude() * 1e6));
+		GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 		// Log.d("aaa", String.valueOf(location.getLatitude()));
 
