@@ -31,6 +31,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ezio.multiwii.frsky.FrskyProtocol;
+import com.ezio.multiwii.helpers.Notifications;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.BT;
@@ -45,10 +46,10 @@ public class App extends Application {
 	public boolean GPSfromNet = false; // false by default
 	public boolean UseMapPublicAPI = true; // map API (true by default)
 	public String MapAPIKeyDebug = ""; // put
-																				// your
-																				// debug
-																				// key
-																				// here
+										// your
+										// debug
+										// key
+										// here
 
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
@@ -152,6 +153,8 @@ public class App extends Application {
 
 	// graphs end
 
+	Notifications notifications;
+
 	@Override
 	public void onCreate() {
 
@@ -183,6 +186,8 @@ public class App extends Application {
 		}
 
 		soundManager.playSound(2);
+
+		notifications = new Notifications(getApplicationContext());
 
 	}
 
@@ -326,6 +331,10 @@ public class App extends Application {
 			r.play();
 		} catch (Exception e) {
 		}
+	}
+
+	public void displayNotification(String title, String text, int Id) {
+		notifications.displayNotification(title, text, Id);
 	}
 
 	private void prepareSounds() {

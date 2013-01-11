@@ -63,6 +63,7 @@ public class Dashboard2Activity extends Activity {
 		v = new Dashboard2View(getApplicationContext());
 		setContentView(v);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 	}
 
 	@Override

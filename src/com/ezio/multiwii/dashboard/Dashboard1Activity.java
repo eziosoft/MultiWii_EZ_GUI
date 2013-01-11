@@ -41,65 +41,64 @@ import android.widget.TextView;
 
 public class Dashboard1Activity extends Activity implements SensorEventListener, LocationListener {
 
-	private boolean			killme		= false;
+	private boolean killme = false;
 
-	App						app;
-	PitchRollView			PRVp;
-	PitchRollView			PRVr;
-	CompassView				compass;
-	CompassView				myCompass;
-	PitchRollCircleView		pitchRollCircle;
-	TextView				baro;
+	App app;
+	PitchRollView PRVp;
+	PitchRollView PRVr;
+	CompassView compass;
+	CompassView myCompass;
+	PitchRollCircleView pitchRollCircle;
+	TextView baro;
 
-	TextView				BattVoltageTV;
-	TextView				PowerSumTV;
+	TextView BattVoltageTV;
+	TextView PowerSumTV;
 
-	Handler					mHandler	= new Handler();
+	Handler mHandler = new Handler();
 
-	private SensorManager	sensorManager;
-	private float			myAzimuth	= 0;
-	private float			myPitch		= 0;
-	private float			myRoll		= 0;
+	private SensorManager sensorManager;
+	private float myAzimuth = 0;
+	private float myPitch = 0;
+	private float myRoll = 0;
 
-	GeomagneticField		geoField;
-	double					declination	= 0;
-	private LocationManager	locationManager;
-	private String			provider;
+	GeomagneticField geoField;
+	double declination = 0;
+	private LocationManager locationManager;
+	private String provider;
 
-	private Runnable		update		= new Runnable() {
-											@Override
-											public void run() {
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-												app.mw.ProcessSerialData(app.loggingON);
-												app.frsky.ProcessSerialData(false);
-												
-												PRVp.SetAngle(app.mw.angy);
-												PRVr.SetAngle(app.mw.angx);
-												pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
+			app.mw.ProcessSerialData(app.loggingON);
+			app.frsky.ProcessSerialData(false);
 
-												if (app.MagMode == 1) {
-													compass.SetHeading(-app.mw.head);
-													compass.SetText("N");
+			PRVp.SetAngle(app.mw.angy);
+			PRVr.SetAngle(app.mw.angx);
+			pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
 
-												}
-												else {
-													compass.SetHeading(myAzimuth - app.mw.head);
-													compass.SetText("FRONT");
+			if (app.MagMode == 1) {
+				compass.SetHeading(-app.mw.head);
+				compass.SetText("N");
 
-												}
+			} else {
+				compass.SetHeading(myAzimuth - app.mw.head);
+				compass.SetText("FRONT");
 
-												baro.setText(String.format("%.2f",app.mw.alt));
-												BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
-												PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
+			}
 
-												app.Frequentjobs();
+			baro.setText(String.format("%.2f", app.mw.alt));
+			BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
+			PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
 
-												app.mw.SendRequest();
-												if (!killme)
-													mHandler.postDelayed(update, app.RefreshRate);
+			app.Frequentjobs();
 
-											}
-										};
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, app.RefreshRate);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,11 +137,9 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 		if (location != null) {
 			Log.d("aaa", String.valueOf(location.getLatitude()));
 			Log.d("aaa", String.valueOf(location.getLongitude()));
-			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(
-					location.getAltitude()).floatValue(), System.currentTimeMillis());
+			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			declination = geoField.getDeclination();
-		}
-		else {
+		} else {
 			Log.d("aaa", "Provider not available");
 			// PhoneLongtitudeTV.setText("Provider not available");
 		}
@@ -196,8 +193,7 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 
 	@Override
 	public void onLocationChanged(Location location) {
-		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(
-				location.getAltitude()).floatValue(), System.currentTimeMillis());
+		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		declination = geoField.getDeclination();
 		Log.d("aaa", String.valueOf(geoField.getDeclination()));
 	}
