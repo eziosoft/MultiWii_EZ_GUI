@@ -39,7 +39,7 @@ public class Dashboard2View extends View {
 	int ww, hh;
 	Rect dim = new Rect();
 	Paint p;
-	Paint p1, p3, p4, pgrid;
+	Paint p1, p3, p4, pgrid, p2;
 
 	public int SatNum = 5;
 
@@ -140,15 +140,20 @@ public class Dashboard2View extends View {
 		p.setColor(Color.CYAN);
 		p.setAntiAlias(true);
 		p.setStyle(Style.STROKE);
-		// p.setStrokeWidth(1);
 		p.setTextSize(textSizeSmall);
-		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));// octin
-																							// sports
-																							// free.ttf"));
+		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
+
+		// digits
+		p2 = new Paint();
+		p2.setColor(Color.YELLOW);
+		p2.setAntiAlias(true);
+		p2.setStyle(Style.STROKE);
+		p2.setTextSize(textSizeMedium);
+		p2.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/digital7.ttf"));
 
 		// progressbar fill
 		p4 = new Paint();
-		p4.setColor(Color.CYAN);
+		p4.setColor(Color.YELLOW);
 		p4.setAntiAlias(true);
 		p4.setStyle(Style.FILL);
 		p4.setTextSize(textSizeSmall);
@@ -220,7 +225,7 @@ public class Dashboard2View extends View {
 		super.onDraw(c);
 
 		// debug
-		if (false) {
+		if (true) {
 			SatNum = 5;
 			DistanceToHome = 254;
 			DirectionToHome = 45;
@@ -253,62 +258,50 @@ public class Dashboard2View extends View {
 		// end grid
 
 		int a = textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (SatNum > 0)
 			c.drawText(context.getString(R.string.Satellites), 0, a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (SatNum > 0)
-			c.drawText(String.valueOf(SatNum), 0, a, p);
+			c.drawText(String.valueOf(SatNum), 0, a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (SatNum > 0)
 			c.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (SatNum > 0)
-			c.drawText(String.valueOf(DistanceToHome), 0, a, p);
+			c.drawText(String.valueOf(DistanceToHome), 0, a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (SatNum > 0)
 			c.drawText(context.getString(R.string.GPS_directionToHome), 0, a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (SatNum > 0)
-			c.drawText(String.valueOf(DirectionToHome), 0, a, p);
+			c.drawText(String.valueOf(DirectionToHome), 0, a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (SatNum > 0)
 			c.drawText(context.getString(R.string.GPS_speed), 0, a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (SatNum > 0)
-			c.drawText(String.valueOf(Speed), 0, a, p);
+			c.drawText(String.valueOf(Speed), 0, a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (SatNum > 0)
 			c.drawText(context.getString(R.string.GPS_altitude), 0, a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (SatNum > 0)
-			c.drawText(String.valueOf(GPSAltitude), 0, a, p);
+			c.drawText(String.valueOf(GPSAltitude), 0, a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (TXRSSI != 0)
 			c.drawText(context.getString(R.string.TxRSSI), 0, a, p);
 
 		a += 5;
-		p.setTextSize(textSizeMedium);
 		if (TXRSSI != 0)
 			c.drawRect(0, a, (int) (80 * scaledDensity), a + textSizeSmall, p);
 
@@ -316,12 +309,10 @@ public class Dashboard2View extends View {
 			c.drawRect(0, a, (int) Functions.map(TXRSSI, 0, 110, 0, 80 * scaledDensity), a + textSizeSmall, p4);
 
 		a += textSizeSmall * 2;
-		p.setTextSize(textSizeSmall);
 		if (TXRSSI != 0)
 			c.drawText(context.getString(R.string.RxRSSI), 0, a, p);
 
 		a += 5;
-		p.setTextSize(textSizeMedium);
 		if (TXRSSI != 0)
 			c.drawRect(0, a, (int) (80 * scaledDensity), a + textSizeSmall, p);
 		if (TXRSSI != 0)
@@ -329,94 +320,74 @@ public class Dashboard2View extends View {
 
 		if (SatNum > 0) {
 			a = hh;
-			p.setTextSize(textSizeMedium);
-			c.drawText(format.format(Lat / Math.pow(10, 7)), 0, a, p);
+			c.drawText(format.format(Lat / Math.pow(10, 7)), 0, a, p2);
 
 			a -= textSizeMedium;
-			p.setTextSize(textSizeSmall);
 			c.drawText(context.getString(R.string.GPS_latitude), 0, a, p);
 
 			a -= textSizeSmall;
-			p.setTextSize(textSizeMedium);
-			c.drawText(format.format(Lon / Math.pow(10, 7)), 0, a, p);
+			c.drawText(format.format(Lon / Math.pow(10, 7)), 0, a, p2);
 
 			a -= textSizeMedium;
-			p.setTextSize(textSizeSmall);
 			c.drawText(context.getString(R.string.GPS_longitude), 0, a, p);
 		}
 		// //////////////////////////////
 		a = hh - textSizeMedium;
-		p.setTextSize(textSizeSmall);
 		if (Azimuth != 0)
 			c.drawText(context.getString(R.string.Azimuth), ww - p.measureText(context.getString(R.string.Azimuth)), a, p);
 
 		a = hh;
-		p.setTextSize(textSizeMedium);
 		if (Azimuth != 0)
-			c.drawText(String.valueOf(Azimuth), ww - p.measureText(String.valueOf(Azimuth)), a, p);
+			c.drawText(String.valueOf(Azimuth), ww - p2.measureText(String.valueOf(Azimuth)), a, p2);
 
 		a -= textSizeMedium + textSizeSmall;
-		p.setTextSize(textSizeMedium);
-		c.drawText(Integer.toString((int) Pitch), ww - p.measureText(Integer.toString((int) Pitch)), a, p);
+		c.drawText(Integer.toString((int) Pitch), ww - p2.measureText(Integer.toString((int) Pitch)), a, p2);
 
 		a -= textSizeMedium;
-		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.Pitch), ww - p.measureText(context.getString(R.string.Pitch)), a, p);
 
 		a -= textSizeSmall;
-		p.setTextSize(textSizeMedium);
-		c.drawText(Integer.toString((int) Roll), ww - p.measureText(Integer.toString((int) Roll)), a, p);
+		c.drawText(Integer.toString((int) Roll), ww - p2.measureText(Integer.toString((int) Roll)), a, p2);
 
 		a -= textSizeMedium;
-		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.Roll), ww - p.measureText(context.getString(R.string.Roll)), a, p);
 
 		a -= textSizeSmall;
-		p.setTextSize(textSizeMedium);
 		if (Altitude != 0)
-			c.drawText(String.format("%.2f", Altitude), ww - p.measureText(String.format("%.2f", Altitude)), a, p);
+			c.drawText(String.format("%.2f", Altitude), ww - p2.measureText(String.format("%.2f", Altitude)), a, p2);
 
 		a -= textSizeMedium;
-		p.setTextSize(textSizeSmall);
 		if (Altitude != 0)
 			c.drawText(context.getString(R.string.GPS_altitude), ww - p.measureText(context.getString(R.string.GPS_altitude)), a, p);
 
 		a -= textSizeSmall;
-		p.setTextSize(textSizeMedium);
-		c.drawText(String.format("%.2f", Gforce), ww - p.measureText(String.format("%.2f", Gforce)), a, p);
+		c.drawText(String.format("%.2f", Gforce), ww - p2.measureText(String.format("%.2f", Gforce)), a, p2);
 
 		a -= textSizeMedium;
-		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.gforce), ww - p.measureText(context.getString(R.string.gforce)), a, p);
 
 		a = 0;
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		c.drawText(context.getString(R.string.state), ww - p.measureText(context.getString(R.string.state)), a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		c.drawText(String.valueOf(State), ww - p.measureText(String.valueOf(State)), a, p);
+		c.drawText(String.valueOf(State), ww - p2.measureText(String.valueOf(State)), a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (VBat != 0)
 			c.drawText(context.getString(R.string.Battery), ww - p.measureText(context.getString(R.string.Battery)), a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (VBat != 0)
-			c.drawText(String.valueOf(VBat), ww - p.measureText(String.valueOf(VBat)), a, p);
+			c.drawText(String.valueOf(VBat), ww - p2.measureText(String.valueOf(VBat)), a, p2);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
 		if (VBat != 0)
 			c.drawText(context.getString(R.string.PowerSumPowerTrigger), ww - p.measureText(context.getString(R.string.PowerSumPowerTrigger)), a, p);
 
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
 		if (VBat != 0)
-			c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p);
+			c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p2.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p2);
 
 		// horyzon lines
 		float x1, y1, x2, y2;
