@@ -72,9 +72,16 @@ public class App extends Application {
 	public TTS tts;
 	public SoundManager soundManager;
 
+	// variables used in FrequentJobs
 	private boolean[] oldActiveModes;
-	private long timer1 = 0;
-	private long timer2 = 0, timer2Freq = 8000;
+	private long timer1 = 0; // Say battery level every xx seconds;
+								// PeriodicSpeaking is the frequency in ms
+	private long timer2 = 0;
+	int timer2Freq = 8000;// bip when low battery
+	private long timer3 = 0;
+	int timer3Freq = 1000; // timer every 1sek
+	private long timer4 = 0;
+	int timer4Freq = 5000; // timer every 5sek
 
 	public boolean loggingON = false;
 	// ----settings-----
@@ -154,6 +161,8 @@ public class App extends Application {
 	// graphs end
 
 	Notifications notifications;
+
+	private int tempLastI2CErrorCount = 0;
 
 	@Override
 	public void onCreate() {
@@ -274,54 +283,79 @@ public class App extends Application {
 	}
 
 	public void Frequentjobs() {
+
+		// Copy data from FrSky
 		if (CopyFrskyToMW && BTFrsky.Connected && !bt.Connected)
 			FrskyToMW();
 
-		for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
-			if (mw.ActiveModes[i] != oldActiveModes[i]) {
-				String s = "";
-				if (mw.ActiveModes[i]) {
-					s = getString(R.string.isON);
-					soundManager.playSound(2);
-				} else {
-					s = getString(R.string.isOFF);
-				}
-
-				Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
-
-				if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
-					mw.AltCorrection = mw.alt;
-					soundManager.playSound(1);
-					mw.HomePosition = new GeoPoint(mw.GPS_latitude / 10, mw.GPS_longitude / 10);
-					mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
-				}
-
-				if (!AltCorrection)
-					mw.AltCorrection = 0;
-			}
-			oldActiveModes[i] = mw.ActiveModes[i];
-
-			// && bt.Connected
-			if (PeriodicSpeaking > 0 && bt.Connected && timer1 < System.currentTimeMillis()) {
-				timer1 = System.currentTimeMillis() + PeriodicSpeaking;
-				if (mw.bytevbat > 10) {
-					Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)));
-				}
-			}
-
-			if (mw.bytevbat > 10 && VoltageAlarm > 0 && bt.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
-				timer2 = System.currentTimeMillis() + timer2Freq;
-				soundManager.playSound(0);
+		// Say battery level every xx seconds
+		if (PeriodicSpeaking > 0 && bt.Connected && timer1 < System.currentTimeMillis()) {
+			timer1 = System.currentTimeMillis() + PeriodicSpeaking;
+			if (mw.bytevbat > 10) {
+				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)));
 			}
 		}
 
-		if (bt.ConnectionLost) {
-			if (bt.ReconnectTry < 1) {
-				tts.Speak(getString(R.string.Reconnecting));
-				bt.Connect(MacAddress);
-				bt.ReconnectTry++;
-			}
+		// bip when low battery
+		if (mw.bytevbat > 10 && VoltageAlarm > 0 && bt.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
+			timer2 = System.currentTimeMillis() + timer2Freq;
+			soundManager.playSound(0);
 		}
+
+		// ===================timer every 1sek===============================
+		if (timer3 < System.currentTimeMillis()) {
+			timer3 = System.currentTimeMillis() + timer3Freq;
+
+			// Notifications
+			if (mw.i2cError != tempLastI2CErrorCount) {
+				displayNotification(getString(R.string.Warning), "I2C Error=" + String.valueOf(mw.i2cError), 1);
+				tempLastI2CErrorCount = mw.i2cError;
+			}
+
+			// Checkboxes speaking; ON OFF
+			for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
+				if (mw.ActiveModes[i] != oldActiveModes[i]) {
+					String s = "";
+					if (mw.ActiveModes[i]) {
+						s = getString(R.string.isON);
+						soundManager.playSound(2);
+					} else {
+						s = getString(R.string.isOFF);
+					}
+
+					Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
+
+					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
+						mw.AltCorrection = mw.alt;
+						soundManager.playSound(1);
+						mw.HomePosition = new GeoPoint(mw.GPS_latitude / 10, mw.GPS_longitude / 10);
+						mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
+					}
+
+					if (!AltCorrection)
+						mw.AltCorrection = 0;
+				}
+				oldActiveModes[i] = mw.ActiveModes[i];
+			}
+
+		}
+		// --------------------END timer every 1sek---------------------------
+
+		// ===================timer every 5sek===============================
+		if (timer4 < System.currentTimeMillis()) {
+			timer4 = System.currentTimeMillis() + timer4Freq;
+
+			// Reconecting
+			if (bt.ConnectionLost) {
+				if (bt.ReconnectTry < 1) {
+					tts.Speak(getString(R.string.Reconnecting));
+					bt.Connect(MacAddress);
+					bt.ReconnectTry++;
+				}
+			}
+
+		}
+		// --------------------END timer every 5sek---------------------------
 	}
 
 	private void playSound() {

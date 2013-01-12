@@ -29,6 +29,6 @@ public class Notifications {
 		mBuilder.setOnlyAlertOnce(false);
 		mBuilder.setTicker(title + ":" + text);
 
-		mNotificationManager.notify(1, mBuilder.build());
+		mNotificationManager.notify(Id, mBuilder.build());
 	}
 }
