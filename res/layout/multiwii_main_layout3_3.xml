@@ -110,7 +110,7 @@
                         android:layout_gravity="bottom"
                         android:onClick="TestOnClick"
                         android:text="Waypoints debug"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                 </TableRow>
 

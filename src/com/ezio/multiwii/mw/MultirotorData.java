@@ -115,7 +115,7 @@ public abstract class MultirotorData {
 
 	public FileAccess FA;
 	public float AltCorrection = 0;
-	public GeoPoint HomePosition = new GeoPoint(0, 0);
+	
 	public int _1G = 256;
 
 	public abstract void ProcessSerialData(boolean appLogging);
@@ -155,9 +155,8 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
 
 	public abstract void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate);
-	
+
 	public abstract void SendRequestMSP_ENABLE_FRSKY();
-	
 
 	// ///////////////////////////////////////////////
 

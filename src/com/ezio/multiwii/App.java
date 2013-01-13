@@ -328,7 +328,6 @@ public class App extends Application {
 					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
 						mw.AltCorrection = mw.alt;
 						soundManager.playSound(1);
-						mw.HomePosition = new GeoPoint(mw.GPS_latitude / 10, mw.GPS_longitude / 10);
 						mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
 					}
 
@@ -353,6 +352,9 @@ public class App extends Application {
 					bt.ReconnectTry++;
 				}
 			}
+
+			// update Home position
+			mw.SendRequestGetWayPoint(0);
 
 		}
 		// --------------------END timer every 5sek---------------------------

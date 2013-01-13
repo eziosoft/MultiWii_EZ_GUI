@@ -18,7 +18,6 @@
 package com.ezio.multiwii.waypoints;
 
 import java.util.Iterator;
-
 import android.app.Activity;
 import android.content.Context;
 import android.location.Criteria;
@@ -128,16 +127,12 @@ public class WaypointActivity extends Activity implements LocationListener {
 
 	public void SetWPOnClick(View v) {
 
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0,
-				(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
 	}
 
 	void displayWPs() {
 		for (Waypoint w : app.mw.Waypoints) {
-			TVData.append("No:" + String.valueOf(w.Number) + " Lat:"
-					+ String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon)
-					+ " Alt:" + String.valueOf(w.Alt) + " NavFlag:"
-					+ String.valueOf(w.NavFlag) + "\n");
+			TVData.append("WP#" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 		}
 	}
 
@@ -168,10 +163,8 @@ public class WaypointActivity extends Activity implements LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		String s = "Phone Lat: " + String.valueOf(PhoneLatitude) + " Lon:"
-				+ String.valueOf(PhoneLongitude);
-		s += "\nLat: " + String.valueOf((int) (PhoneLatitude * 1e7)) + " Lon:"
-				+ String.valueOf((int) (PhoneLongitude * 1e7));
+		String s = "Phone Lat: " + String.valueOf(PhoneLatitude) + " Lon:" + String.valueOf(PhoneLongitude);
+		s += "\nLat: " + String.valueOf((int) (PhoneLatitude * 1e7)) + " Lon:" + String.valueOf((int) (PhoneLongitude * 1e7));
 		TVMWInfo.setText(s);
 	}
 

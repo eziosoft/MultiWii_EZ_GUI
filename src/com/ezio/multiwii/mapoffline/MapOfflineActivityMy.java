@@ -87,7 +87,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 			}
 			centerStep++;
 
-			GeoPoint gHome = new GeoPoint(app.mw.HomePosition.getLatitudeE6(), app.mw.HomePosition.getLongitudeE6());
+			GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
 
 			String state = "";
 			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
