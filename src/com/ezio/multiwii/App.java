@@ -43,7 +43,7 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean D = false; //debug
+	public boolean D = false; // debug
 	public String TAG = "EZGUI";
 	public String MapAPIKeyDebug = ""; // put
 										// your
@@ -160,7 +160,7 @@ public class App extends Application {
 
 	// graphs end
 
-	Notifications notifications;
+	public Notifications notifications;
 
 	private int tempLastI2CErrorCount = 0;
 
@@ -308,7 +308,7 @@ public class App extends Application {
 
 			// Notifications
 			if (mw.i2cError != tempLastI2CErrorCount) {
-				displayNotification(getString(R.string.Warning), "I2C Error=" + String.valueOf(mw.i2cError), 1);
+				notifications.displayNotification(getString(R.string.Warning), "I2C Error=" + String.valueOf(mw.i2cError), true, 1, false);
 				tempLastI2CErrorCount = mw.i2cError;
 			}
 
@@ -356,6 +356,19 @@ public class App extends Application {
 			// update Home position
 			mw.SendRequestGetWayPoint(0);
 
+			String t = new String();
+			if (mw.BaroPresent == 1)
+				t += "BARO ";
+			if (mw.GPSPresent == 1)
+				t += "GPS ";
+			if (mw.SonarPresent == 1)
+				t += "SONAR ";
+			if (mw.MagPresent == 1)
+				t += "MAG ";
+			if (mw.AccPresent == 1)
+				t += "ACC";
+			notifications.displayNotification("Status", t, false, 99, true);
+
 		}
 		// --------------------END timer every 5sek---------------------------
 	}
@@ -367,10 +380,6 @@ public class App extends Application {
 			r.play();
 		} catch (Exception e) {
 		}
-	}
-
-	public void displayNotification(String title, String text, int Id) {
-		notifications.displayNotification(title, text, Id);
 	}
 
 	private void prepareSounds() {

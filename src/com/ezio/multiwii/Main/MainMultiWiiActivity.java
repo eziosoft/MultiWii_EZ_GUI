@@ -258,11 +258,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
-			
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
-		
-		
 
 	};
 
@@ -406,6 +404,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			if (app.DisableBTonExit) {
 
 				app.bt.BTDisable();
+
+				app.notifications.Cancel(99);
 			}
 
 			app.mw.CloseLoggingFile();

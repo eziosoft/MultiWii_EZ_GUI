@@ -20,15 +20,21 @@ public class Notifications {
 		this.context = context;
 	}
 
-	public void displayNotification(String title, String text, int Id) {
+	public void displayNotification(String title, String text, boolean Sound, int Id, boolean isPresistant) {
 		if (Id == 0) {
 			Id = rnd.nextInt();
 		}
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.icon).setContentTitle(title).setContentText(text);
-		mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-		mBuilder.setOnlyAlertOnce(false);
+		if (Sound)
+			mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+		// mBuilder.setOnlyAlertOnce(false);
 		mBuilder.setTicker(title + ":" + text);
-
+		mBuilder.setOngoing(isPresistant);
+		mBuilder.setAutoCancel(true);
 		mNotificationManager.notify(Id, mBuilder.build());
+	}
+
+	public void Cancel(int Id) {
+		mNotificationManager.cancel(Id);
 	}
 }
