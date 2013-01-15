@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -123,6 +124,8 @@ public class GraphsActivity extends SherlockActivity {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, 100);
+			
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};

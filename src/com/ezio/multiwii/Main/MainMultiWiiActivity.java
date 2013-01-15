@@ -258,7 +258,11 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
+			
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 		}
+		
+		
 
 	};
 

@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class LogActivity extends SherlockActivity {
 			app.Frequentjobs();
 			app.mw.SendRequest();
 			mHandler.postDelayed(update, app.RefreshRate);
+
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};

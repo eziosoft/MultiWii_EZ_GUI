@@ -43,8 +43,10 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean GPSfromNet = false; // false by default
-	public boolean UseMapPublicAPI = true; // map API (true by default)
+	public boolean D = true;
+	public String TAG = "EZGUI";
+	// public boolean GPSfromNet = false; // false by default
+	// public boolean UseMapPublicAPI = true; // map API (true by default)
 	public String MapAPIKeyDebug = ""; // put
 										// your
 										// debug
@@ -187,7 +189,7 @@ public class App extends Application {
 		Say(getString(R.string.Started));
 
 		// for testing
-		if (GPSfromNet || !UseMapPublicAPI) {
+		if (D) {
 			Toast.makeText(getApplicationContext(), "Debug version", Toast.LENGTH_LONG).show();
 			Say("Debug version");
 			mw.GPS_longitude = 23654111;

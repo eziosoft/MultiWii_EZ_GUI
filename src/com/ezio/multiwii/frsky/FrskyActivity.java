@@ -21,6 +21,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -89,6 +90,8 @@ public class FrskyActivity extends SherlockActivity {
 
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
+			
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};

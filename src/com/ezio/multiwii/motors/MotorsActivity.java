@@ -20,6 +20,7 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -117,6 +118,7 @@ public class MotorsActivity extends SherlockActivity {
 											app.mw.SendRequest();
 											if (!killme)mHandler.postDelayed(update, app.RefreshRate);
 
+											Log.d(app.TAG, "loop "+this.getClass().getName());
 										}
 									};
 

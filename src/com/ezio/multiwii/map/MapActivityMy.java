@@ -25,6 +25,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.ezio.multiwii.App;
@@ -67,7 +68,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
 
-			if (app.GPSfromNet) {
+			if (app.D) {
 				app.mw.GPS_latitude += random.nextInt(200) - 50;// for
 				// simulation
 				app.mw.GPS_longitude += random.nextInt(100) - 50;// for
@@ -112,8 +113,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 			if (!killme)
 				mHandler.postDelayed(update, 1000);
 
-			// Log.d("aaa", "aaa");
-
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 		}
 	};
 
@@ -124,7 +124,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 		app = (App) getApplication();
 
-		if (app.UseMapPublicAPI) {
+		if (!app.D) {
 			mapView = new MapView(this, app.MapAPIKeyPublic);
 		} else {
 
@@ -147,7 +147,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
-		if (!app.GPSfromNet)
+		if (!app.D)
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = locationManager.getBestProvider(criteria, false);
 		// Location location = locationManager.getLastKnownLocation(provider);

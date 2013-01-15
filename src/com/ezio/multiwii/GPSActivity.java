@@ -30,6 +30,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -94,10 +95,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 			float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
 			float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
 
-			GPS_distanceToHomeTV.setText(String
-					.valueOf(app.mw.GPS_distanceToHome));
-			GPS_directionToHomeTV.setText(String
-					.valueOf(app.mw.GPS_directionToHome));
+			GPS_distanceToHomeTV.setText(String.valueOf(app.mw.GPS_distanceToHome));
+			GPS_directionToHomeTV.setText(String.valueOf(app.mw.GPS_directionToHome));
 			GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
 			GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
 			// GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
@@ -124,10 +123,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 			FollowMeInfoTV.setText("WayPointsDebug:\n");
 			Waypoint w = app.mw.Waypoints[0];
 			// for (Waypoint w : app.mw.Waypoints) {
-			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:"
-					+ String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon)
-					+ " Alt:" + String.valueOf(w.Alt) + " NavFlag:"
-					+ String.valueOf(w.NavFlag) + "\n");
+			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 			// }
 
 			app.Frequentjobs();
@@ -136,6 +132,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 			app.mw.SendRequestGetWayPoint(0);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
+
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
@@ -179,16 +177,12 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
-		if (!app.GPSfromNet)
+		if (!app.D)
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = locationManager.getBestProvider(criteria, false);
 		Location location = locationManager.getLastKnownLocation(provider);
 		if (location != null) {
-			geoField = new GeomagneticField(Double.valueOf(
-					location.getLatitude()).floatValue(), Double.valueOf(
-					location.getLongitude()).floatValue(), Double.valueOf(
-					location.getAltitude()).floatValue(),
-					System.currentTimeMillis());
+			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			// PhoneLatitudeTV.setText(String.valueOf(location.getLatitude()));
 			// PhoneLongtitudeTV.setText(String.valueOf(location.getLongitude()));
 		} else {
@@ -257,18 +251,13 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		geoField = new GeomagneticField(Double.valueOf(location.getLatitude())
-				.floatValue(), Double.valueOf(location.getLongitude())
-				.floatValue(), Double.valueOf(location.getAltitude())
-				.floatValue(), System.currentTimeMillis());
+		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
 
 		DeclinationTV.setText(String.valueOf(Declination));
 
 		if (CheckBoxInjectGPS.isChecked()) {
-			app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat,
-					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
-					(int) PhoneAltitude, (int) PhoneSpeed);
+			app.mw.SendRequestGPSinject21((byte) PhoneFix, (byte) PhoneNumSat, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), (int) PhoneAltitude, (int) PhoneSpeed);
 
 			if (InjectGPSBlinkFlag) {
 				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
@@ -280,9 +269,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		}
 
 		if (CheckBoxFollowMe.isChecked()) {
-			app.mw.SendRequestMSP_SET_WP(new Waypoint(0,
-					(int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7),
-					0, 0));
+			app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
 
 			if (FollowMeBlinkFlag) {
 				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);

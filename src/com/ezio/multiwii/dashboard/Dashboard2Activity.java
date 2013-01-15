@@ -23,6 +23,7 @@ import com.ezio.multiwii.R.string;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 
 public class Dashboard2Activity extends Activity {
@@ -51,6 +52,8 @@ public class Dashboard2Activity extends Activity {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
+			
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};

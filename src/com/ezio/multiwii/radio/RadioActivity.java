@@ -19,6 +19,7 @@ package com.ezio.multiwii.radio;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -83,6 +84,8 @@ public class RadioActivity extends SherlockActivity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
+			Log.d(app.TAG, "loop "+this.getClass().getName());
+			
 		}
 	};
 

@@ -29,6 +29,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -73,6 +74,8 @@ public class WaypointActivity extends Activity implements LocationListener {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
+			
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};
@@ -91,7 +94,7 @@ public class WaypointActivity extends Activity implements LocationListener {
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
-		if (!app.GPSfromNet)
+		if (!app.D)
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = locationManager.getBestProvider(criteria, false);
 		// Location location = locationManager.getLastKnownLocation(provider);

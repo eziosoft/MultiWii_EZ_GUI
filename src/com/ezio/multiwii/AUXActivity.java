@@ -60,7 +60,8 @@ public class AUXActivity extends SherlockActivity {
 
 			app.mw.SendRequest();
 			if (!killme)
-				mHandler.postDelayed(update, 500);
+				mHandler.postDelayed(update, app.RefreshRate);
+			Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};
