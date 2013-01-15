@@ -36,6 +36,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.Paint.Style;
 
 import com.ezio.multiwii.R;
 
@@ -48,7 +49,8 @@ class MapOfflineCopterOverlay extends Overlay {
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
 	Paint mPaint3 = new Paint();
-	Paint p = new Paint();
+	Paint mPaint0 = new Paint();
+	Paint mPaint4 = new Paint();
 
 	Point p1 = new Point();
 	Point p2 = new Point();
@@ -105,12 +107,21 @@ class MapOfflineCopterOverlay extends Overlay {
 		mPaint3.setStyle(Paint.Style.STROKE);
 		mPaint3.setStrokeWidth(2);
 
-		p.setColor(Color.CYAN);
-		p.setTextSize(20);
-		p.setShadowLayer(8, 0, 0, Color.BLACK);
-		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));// octin
+		mPaint0.setColor(Color.CYAN);
+		mPaint0.setTextSize(20);
+		mPaint0.setShadowLayer(8, 0, 0, Color.BLACK);
+		mPaint0.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));// octin
 		// sports
 		// free.ttf"));
+
+		// digits
+		mPaint4 = new Paint();
+		mPaint4.setColor(Color.CYAN);
+		mPaint4.setAntiAlias(true);
+		mPaint4.setStyle(Style.STROKE);
+		mPaint4.setTextSize(textSizeMedium);
+		mPaint4.setShadowLayer(8, 0, 0, Color.BLACK);
+		mPaint4.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
 
 		textSizeSmall = context.getResources().getDimensionPixelSize(R.dimen.textSizeSmall);
 		textSizeMedium = context.getResources().getDimensionPixelSize(R.dimen.textSizeMedium);
@@ -118,7 +129,7 @@ class MapOfflineCopterOverlay extends Overlay {
 		// getResources().getDimensionPixelSize(R.dimen.textSizeBig);
 
 		bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.m);
-		
+
 		scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
 	}
 
@@ -154,7 +165,6 @@ class MapOfflineCopterOverlay extends Overlay {
 		PowerSum = powerSum;
 		PowerTrigger = powerTrigger;
 
-	
 	}
 
 	public void draw(Canvas canvas, MapView mapv, boolean shadow) {
@@ -167,27 +177,24 @@ class MapOfflineCopterOverlay extends Overlay {
 		projection.toPixels(GCopter, p1);
 		projection.toPixels(GHome, p2);
 
-		
-		//draw copter
+		// draw copter
 		Matrix matrix = new Matrix();
 
 		matrix.preRotate(-Azimuth + 180, p1.x, p1.y);
 		matrix.preTranslate(p1.x - bmp.getWidth() / 2 * scaleBMP, p1.y - bmp.getHeight() / 2 * scaleBMP);
 		matrix.preScale(scaleBMP, scaleBMP);
 
-		canvas.drawBitmap(bmp, matrix, p);
-	
+		canvas.drawBitmap(bmp, matrix, mPaint0);
+
 		// float x1 = (float) ((20 * Math.sin((Azimuth) * Math.PI / 180)) +
 		// p1.x);
 		// float y1 = (float) ((20 * Math.cos((Azimuth) * Math.PI / 180)) +
 		// p1.y);
 
-		//canvas.drawCircle(p1.x, p1.y, 20, mPaint1);
-		//canvas.drawCircle(x1, y1, 5, mPaint2);
-		
-		//end copter
+		// canvas.drawCircle(p1.x, p1.y, 20, mPaint1);
+		// canvas.drawCircle(x1, y1, 5, mPaint2);
 
-	
+		// end copter
 
 		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5, mPaint2);
 		canvas.drawCircle(p2.x, p2.y, 20, mPaint3);
@@ -210,40 +217,40 @@ class MapOfflineCopterOverlay extends Overlay {
 
 		// /
 		int a = textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		DrawStaticText(context.getString(R.string.GPS_numSat), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeSmall);
+		DrawStaticText(context.getString(R.string.GPS_numSat), 0, a, mPaint0, boundingBox, canvas);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		DrawStaticText(String.valueOf(SatNum), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeMedium);
+		DrawStaticText(String.valueOf(SatNum), 0, a, mPaint4, boundingBox, canvas);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		DrawStaticText(context.getString(R.string.Baro), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeSmall);
+		DrawStaticText(context.getString(R.string.Baro), 0, a, mPaint0, boundingBox, canvas);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		DrawStaticText("GPS:" + String.valueOf(GPSAltitude) + "  Baro:" + String.format("%.2f", Altitude), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeMedium);
+		DrawStaticText("GPS:" + String.valueOf(GPSAltitude) + "  Baro:" + String.format("%.2f", Altitude), 0, a, mPaint4, boundingBox, canvas);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		DrawStaticText(context.getString(R.string.GPS_distanceToHome), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeSmall);
+		DrawStaticText(context.getString(R.string.GPS_distanceToHome), 0, a, mPaint0, boundingBox, canvas);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		DrawStaticText(String.valueOf(DistanceToHome), 0, a, p, boundingBox, canvas);
+		mPaint0.setTextSize(textSizeMedium);
+		DrawStaticText(String.valueOf(DistanceToHome), 0, a, mPaint4, boundingBox, canvas);
 
 		if (VBat > 0) {
 			a += textSizeSmall;
-			p.setTextSize(textSizeSmall);
-			DrawStaticText(context.getString(R.string.BattVoltage), 0, a, p, boundingBox, canvas);
+			mPaint0.setTextSize(textSizeSmall);
+			DrawStaticText(context.getString(R.string.BattVoltage), 0, a, mPaint0, boundingBox, canvas);
 			a += textSizeMedium;
-			p.setTextSize(textSizeMedium);
-			DrawStaticText(String.valueOf(VBat), 0, a, p, boundingBox, canvas);
+			mPaint0.setTextSize(textSizeMedium);
+			DrawStaticText(String.valueOf(VBat), 0, a, mPaint4, boundingBox, canvas);
 
 			a += textSizeSmall;
-			p.setTextSize(textSizeSmall);
-			DrawStaticText(context.getString(R.string.PowerSumPowerTrigger), 0, a, p, boundingBox, canvas);
+			mPaint0.setTextSize(textSizeSmall);
+			DrawStaticText(context.getString(R.string.PowerSumPowerTrigger), 0, a, mPaint0, boundingBox, canvas);
 			a += textSizeMedium;
-			p.setTextSize(textSizeMedium);
-			DrawStaticText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, p, boundingBox, canvas);
+			mPaint0.setTextSize(textSizeMedium);
+			DrawStaticText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, mPaint4, boundingBox, canvas);
 
 		}
 

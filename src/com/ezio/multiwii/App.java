@@ -43,10 +43,8 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean D = true;
+	public boolean D = false; //debug
 	public String TAG = "EZGUI";
-	// public boolean GPSfromNet = false; // false by default
-	// public boolean UseMapPublicAPI = true; // map API (true by default)
 	public String MapAPIKeyDebug = ""; // put
 										// your
 										// debug

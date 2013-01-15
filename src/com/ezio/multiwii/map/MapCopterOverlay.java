@@ -29,6 +29,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.Paint.Style;
 
 import com.ezio.multiwii.R;
 import com.google.android.maps.GeoPoint;
@@ -46,7 +47,8 @@ class CopterOverlay extends Overlay {
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
 	Paint mPaint3 = new Paint();
-	Paint p = new Paint();
+	Paint mPaint0 = new Paint();
+	Paint mPaint4 = new Paint();
 
 	Point p1 = new Point();
 	Point p2 = new Point();
@@ -108,10 +110,19 @@ class CopterOverlay extends Overlay {
 		mPaint3.setStyle(Paint.Style.STROKE);
 		mPaint3.setStrokeWidth(1 * scaledDensity);
 
-		p.setColor(Color.CYAN);
-		p.setTextSize(20 * scaledDensity);
-		p.setShadowLayer(8, 0, 0, Color.BLACK);
-		p.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
+		mPaint0.setColor(Color.CYAN);
+		mPaint0.setTextSize(20 * scaledDensity);
+		mPaint0.setShadowLayer(8, 0, 0, Color.BLACK);
+		mPaint0.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
+
+		// digits
+		mPaint4 = new Paint();
+		mPaint4.setColor(Color.RED);
+		mPaint4.setAntiAlias(true);
+		mPaint4.setStyle(Style.STROKE);
+		mPaint4.setTextSize(textSizeMedium);
+		mPaint4.setShadowLayer(8, 0, 0, Color.BLACK);
+		mPaint4.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/gunplay.ttf"));
 
 		bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.m);
 
@@ -164,7 +175,7 @@ class CopterOverlay extends Overlay {
 		matrix.preTranslate(p1.x - bmp.getWidth() / 2 * scaleBMP, p1.y - bmp.getHeight() / 2 * scaleBMP);
 		matrix.preScale(scaleBMP, scaleBMP);
 
-		canvas.drawBitmap(bmp, matrix, p);
+		canvas.drawBitmap(bmp, matrix, mPaint0);
 
 		// float x1 = (float) ((20 * Math.sin((Azimuth) * Math.PI / 180)) +
 		// p1.x);
@@ -196,40 +207,40 @@ class CopterOverlay extends Overlay {
 		}
 
 		int a = textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		canvas.drawText(context.getString(R.string.GPS_numSat), 0, a, p);
+		mPaint0.setTextSize(textSizeSmall);
+		canvas.drawText(context.getString(R.string.GPS_numSat), 0, a, mPaint0);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		canvas.drawText(String.valueOf(SatNum), 0, a, p);
+		mPaint0.setTextSize(textSizeMedium);
+		canvas.drawText(String.valueOf(SatNum), 0, a, mPaint4);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		canvas.drawText(context.getString(R.string.Baro), 0, a, p);
+		mPaint0.setTextSize(textSizeSmall);
+		canvas.drawText(context.getString(R.string.Baro), 0, a, mPaint0);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		canvas.drawText("GPS:" + String.valueOf(GPSAltitude) + "  Baro:" + String.format("%.2f", Altitude), 0, a, p);
+		mPaint0.setTextSize(textSizeMedium);
+		canvas.drawText("GPS:" + String.valueOf(GPSAltitude) + "  Baro:" + String.format("%.2f", Altitude), 0, a, mPaint4);
 
 		a += textSizeSmall;
-		p.setTextSize(textSizeSmall);
-		canvas.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, p);
+		mPaint0.setTextSize(textSizeSmall);
+		canvas.drawText(context.getString(R.string.GPS_distanceToHome), 0, a, mPaint0);
 		a += textSizeMedium;
-		p.setTextSize(textSizeMedium);
-		canvas.drawText(String.valueOf(DistanceToHome), 0, a, p);
+		mPaint0.setTextSize(textSizeMedium);
+		canvas.drawText(String.valueOf(DistanceToHome), 0, a, mPaint4);
 
 		if (VBat > 0) {
 			a += textSizeSmall;
-			p.setTextSize(textSizeSmall);
-			canvas.drawText(context.getString(R.string.BattVoltage), 0, a, p);
+			mPaint0.setTextSize(textSizeSmall);
+			canvas.drawText(context.getString(R.string.BattVoltage), 0, a, mPaint0);
 			a += textSizeMedium;
-			p.setTextSize(textSizeMedium);
-			canvas.drawText(String.valueOf(VBat), 0, a, p);
+			mPaint0.setTextSize(textSizeMedium);
+			canvas.drawText(String.valueOf(VBat), 0, a, mPaint4);
 
 			a += textSizeSmall;
-			p.setTextSize(textSizeSmall);
-			canvas.drawText(context.getString(R.string.PowerSumPowerTrigger), 0, a, p);
+			mPaint0.setTextSize(textSizeSmall);
+			canvas.drawText(context.getString(R.string.PowerSumPowerTrigger), 0, a, mPaint0);
 			a += textSizeMedium;
-			p.setTextSize(textSizeMedium);
-			canvas.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, p);
+			mPaint0.setTextSize(textSizeMedium);
+			canvas.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, mPaint4);
 
 		}
 
