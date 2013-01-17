@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RawDataActivity extends Activity {
 	private boolean killme = false;
@@ -57,7 +58,7 @@ public class RawDataActivity extends Activity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 	};
 
@@ -246,4 +247,15 @@ public class RawDataActivity extends Activity {
 		ShareIt();
 	}
 
+	public void EnableDebugOnClick(View v) {
+		app.D = true;
+		// for testing
+		if (app.D) {
+			Toast.makeText(getApplicationContext(), "Debug version", Toast.LENGTH_LONG).show();
+			app.Say("Debug version");
+			app.mw.GPS_longitude = 23654111;
+			app.mw.GPS_latitude = 488547500;
+		}
+
+	}
 }

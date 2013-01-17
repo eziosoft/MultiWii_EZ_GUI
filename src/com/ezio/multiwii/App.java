@@ -43,7 +43,7 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean D = true; // debug
+	public boolean D = false; // debug
 	public String TAG = "EZGUI";
 	public String MapAPIKeyDebug = ""; // put
 										// your
@@ -185,14 +185,6 @@ public class App extends Application {
 		prepareSounds();
 
 		Say(getString(R.string.Started));
-
-		// for testing
-		if (D) {
-			Toast.makeText(getApplicationContext(), "Debug version", Toast.LENGTH_LONG).show();
-			Say("Debug version");
-			mw.GPS_longitude = 23654111;
-			mw.GPS_latitude = 488547500;
-		}
 
 		soundManager.playSound(2);
 
