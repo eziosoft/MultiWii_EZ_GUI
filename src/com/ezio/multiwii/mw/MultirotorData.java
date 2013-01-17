@@ -100,7 +100,7 @@ public abstract class MultirotorData {
 								// and // Arduino // model // (pro // Mini, //
 								// // Mega, // etc).
 
-	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
+	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////////
 	// //////////end 2.10///////////
@@ -115,7 +115,7 @@ public abstract class MultirotorData {
 
 	public FileAccess FA;
 	public float AltCorrection = 0;
-	
+
 	public int _1G = 256;
 
 	public abstract void ProcessSerialData(boolean appLogging);

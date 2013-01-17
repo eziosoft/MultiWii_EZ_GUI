@@ -53,6 +53,7 @@ class MapOfflineCopterOverlay extends Overlay {
 	private Projection projection;
 	GeoPoint GCopter = new GeoPoint(0, 0);
 	GeoPoint GHome = new GeoPoint(0, 0);
+	GeoPoint GPositionHold = new GeoPoint(0, 0);
 
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
@@ -60,8 +61,9 @@ class MapOfflineCopterOverlay extends Overlay {
 	Paint mPaint0 = new Paint();
 	Paint mPaint4 = new Paint();
 
-	Point p1 = new Point();
-	Point p2 = new Point();
+	Point p1 = new Point();// copter
+	Point p2 = new Point();// home
+	Point p3 = new Point();// position hold
 
 	private List<GeoPoint> points = new ArrayList<GeoPoint>();
 	private int pointsCount = 20;
@@ -95,7 +97,7 @@ class MapOfflineCopterOverlay extends Overlay {
 	public int RXRSSI = 0;
 
 	Bitmap bmp;
-	float scaleBMP = 0.2f;
+	float scaleBMP = 0.15f;
 
 	public MapOfflineCopterOverlay(Context context) {
 		super(context);
@@ -108,7 +110,7 @@ class MapOfflineCopterOverlay extends Overlay {
 		mPaint1.setStrokeWidth(2);
 		// mPaint1.setShadowLayer(5, 10, 10, Color.GRAY);
 
-		mPaint2.setColor(Color.YELLOW);
+		mPaint2.setColor(Color.RED);
 		mPaint2.setTextSize(40);
 
 		mPaint3.setColor(Color.YELLOW);
@@ -147,9 +149,10 @@ class MapOfflineCopterOverlay extends Overlay {
 		return super.onDoubleTap(e, mapView);
 	}
 
-	public void Set(GeoPoint copter, GeoPoint home, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
+	public void Set(GeoPoint copter, GeoPoint home, GeoPoint positionHold, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 		GCopter = copter;
 		GHome = home;
+		GPositionHold = positionHold;
 
 		SatNum = satNum;
 		DistanceToHome = distanceToHome;
@@ -190,6 +193,7 @@ class MapOfflineCopterOverlay extends Overlay {
 
 		projection.toPixels(GCopter, p1);
 		projection.toPixels(GHome, p2);
+		projection.toPixels(GPositionHold, p3);
 
 		// draw copter
 		Matrix matrix = new Matrix();
@@ -212,6 +216,9 @@ class MapOfflineCopterOverlay extends Overlay {
 
 		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5, mPaint2);
 		canvas.drawCircle(p2.x, p2.y, 20, mPaint3);
+
+		canvas.drawText("P", p3.x - mPaint2.measureText("P") / 2, p3.y + mPaint2.getTextSize() / 2 - 5, mPaint2);
+		canvas.drawCircle(p3.x, p3.y, 20, mPaint3);
 
 		if (points.size() > 2) {
 			Path path = new Path();

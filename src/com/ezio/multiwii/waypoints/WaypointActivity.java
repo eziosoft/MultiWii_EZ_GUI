@@ -105,6 +105,9 @@ public class WaypointActivity extends Activity {
 		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0));
 		app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
 		app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
+		
+		app.mw.Waypoints[16].Lat = (int) (SelectedLatitude * 10+100);
+		app.mw.Waypoints[16].Lon = (int) (SelectedLongitude * 10+100);
 	}
 
 	void displayWPs() {
