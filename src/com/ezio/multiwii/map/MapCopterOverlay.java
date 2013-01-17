@@ -117,7 +117,7 @@ class CopterOverlay extends Overlay {
 
 		// digits
 		mPaint4 = new Paint();
-		mPaint4.setColor(Color.RED);
+		mPaint4.setColor(Color.CYAN);
 		mPaint4.setAntiAlias(true);
 		mPaint4.setStyle(Style.STROKE);
 		mPaint4.setTextSize(textSizeMedium);

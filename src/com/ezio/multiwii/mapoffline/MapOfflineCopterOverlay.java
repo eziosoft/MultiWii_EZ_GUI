@@ -25,20 +25,28 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 import org.osmdroid.views.overlay.Overlay;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.Paint.Style;
+import android.view.MotionEvent;
+import android.widget.Toast;
 
+import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.radio.RadioActivity;
+import com.ezio.multiwii.waypoints.Waypoint;
+import com.ezio.multiwii.waypoints.WaypointActivity;
 
 class MapOfflineCopterOverlay extends Overlay {
 	private Context context;
@@ -131,6 +139,12 @@ class MapOfflineCopterOverlay extends Overlay {
 		bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.m);
 
 		scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+	}
+
+	@Override
+	public boolean onDoubleTap(MotionEvent e, MapView mapView) {
+		// TODO Auto-generated method stub
+		return super.onDoubleTap(e, mapView);
 	}
 
 	public void Set(GeoPoint copter, GeoPoint home, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
@@ -263,5 +277,22 @@ class MapOfflineCopterOverlay extends Overlay {
 
 	public static int metersToRadius(float meters, MapView map, double latitude) {
 		return (int) (map.getProjection().metersToEquatorPixels(meters) * (1 / Math.cos(Math.toRadians(latitude))));
+	}
+
+	@Override
+	public boolean onLongPress(MotionEvent e, MapView mapView) {
+
+		long Lat = projection.fromPixels(e.getX(), e.getY()).getLatitudeE6();
+		long Lon = projection.fromPixels(e.getX(), e.getY()).getLongitudeE6();
+
+		Toast.makeText(context, String.valueOf(Lat) + "x" + String.valueOf(Lon), Toast.LENGTH_LONG).show();
+
+		Intent i = new Intent(context, WaypointActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		i.putExtra("LAT", Lat);
+		i.putExtra("LON", Lon);
+		context.startActivity(i);
+
+		return super.onLongPress(e, mapView);
 	}
 }

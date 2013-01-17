@@ -37,22 +37,14 @@ import android.widget.TextView;
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
 
-public class WaypointActivity extends Activity implements LocationListener {
+public class WaypointActivity extends Activity {
 
 	int PhoneNumSat = 0;
-	double PhoneLatitude = 0;
-	double PhoneLongitude = 0;
-	double PhoneAltitude = 0;
-	double PhoneSpeed = 0;
-	int PhoneFix = 0;
-	float PhoneAccuracy = 0;
-	double Declination = 0;
+	double SelectedLatitude = 0;
+	double SelectedLongitude = 0;
 
 	TextView TVData;
 	TextView TVMWInfo;
-
-	private LocationManager locationManager;
-	private String provider;
 
 	private boolean killme = false;
 
@@ -74,8 +66,8 @@ public class WaypointActivity extends Activity implements LocationListener {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
-			
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
@@ -92,33 +84,13 @@ public class WaypointActivity extends Activity implements LocationListener {
 		TVData = (TextView) findViewById(R.id.textViewData);
 		TVMWInfo = (TextView) findViewById(R.id.textViewMWInfo);
 
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		if (!app.D)
-			criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		provider = locationManager.getBestProvider(criteria, false);
-		// Location location = locationManager.getLastKnownLocation(provider);
-		locationManager.addGpsStatusListener(new Listener() {
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			SelectedLatitude = extras.getLong("LAT");
+			SelectedLongitude = extras.getLong("LON");
 
-			@Override
-			public void onGpsStatusChanged(int event) {
-				if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
-					GpsStatus status = locationManager.getGpsStatus(null);
-					Iterable<GpsSatellite> sats = status.getSatellites();
-					Iterator<GpsSatellite> it = sats.iterator();
-
-					PhoneNumSat = 0;
-					while (it.hasNext()) {
-
-						GpsSatellite oSat = (GpsSatellite) it.next();
-						if (oSat.usedInFix())
-							PhoneNumSat++;
-					}
-				}
-				if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
-					PhoneFix = 1;
-			}
-		});
+			TVMWInfo.setText(getString(R.string.GPS_latitude) + ":" + String.valueOf(SelectedLatitude / 1e6) + "\n" + getString(R.string.GPS_longitude) + ":" + String.valueOf(SelectedLongitude / 1e6));
+		}
 
 	}
 
@@ -130,7 +102,9 @@ public class WaypointActivity extends Activity implements LocationListener {
 
 	public void SetWPOnClick(View v) {
 
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0));
+		app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
+		app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
 	}
 
 	void displayWPs() {
@@ -146,7 +120,6 @@ public class WaypointActivity extends Activity implements LocationListener {
 		// app.Say(getString(R.string.Motors));
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
 
 	}
 
@@ -155,37 +128,6 @@ public class WaypointActivity extends Activity implements LocationListener {
 		super.onPause();
 		mHandler.removeCallbacks(null);
 		killme = true;
-		locationManager.removeUpdates(this);
-	}
-
-	@Override
-	public void onLocationChanged(Location location) {
-		PhoneLatitude = location.getLatitude();
-		PhoneLongitude = location.getLongitude();
-		PhoneAltitude = location.getAltitude();
-		PhoneSpeed = location.getSpeed() * 100f;
-		PhoneAccuracy = location.getAccuracy() * 100f;
-
-		String s = "Phone Lat: " + String.valueOf(PhoneLatitude) + " Lon:" + String.valueOf(PhoneLongitude);
-		s += "\nLat: " + String.valueOf((int) (PhoneLatitude * 1e7)) + " Lon:" + String.valueOf((int) (PhoneLongitude * 1e7));
-		TVMWInfo.setText(s);
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
 
 	}
 

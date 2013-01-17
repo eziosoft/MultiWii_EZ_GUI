@@ -43,7 +43,7 @@ import com.google.android.maps.GeoPoint;
 public class App extends Application {
 
 	// debug
-	public boolean D = false; // debug
+	public boolean D = true; // debug
 	public String TAG = "EZGUI";
 	public String MapAPIKeyDebug = ""; // put
 										// your
@@ -367,7 +367,7 @@ public class App extends Application {
 				t += "MAG ";
 			if (mw.AccPresent == 1)
 				t += "ACC";
-			notifications.displayNotification("Status", t, false, 99, true);
+			notifications.displayNotification("Status", t, false, 99, false);
 
 		}
 		// --------------------END timer every 5sek---------------------------

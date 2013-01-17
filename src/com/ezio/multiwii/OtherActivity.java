@@ -78,11 +78,11 @@ public class OtherActivity extends SherlockActivity {
 		EditTextPowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
 		EditTextSelectSettings.setText(String.valueOf(app.mw.confSetting));
 
-		if ((app.mw.multiCapability & 1) > 0) {
-			ButtonRxBIND.setVisibility(Button.VISIBLE);
-		} else {
-			ButtonRxBIND.setVisibility(Button.GONE);
-		}
+//		if ((app.mw.multiCapability & 1) > 0) {
+//			ButtonRxBIND.setVisibility(Button.VISIBLE);
+//		} else {
+//			ButtonRxBIND.setVisibility(Button.GONE);
+//		}
 
 	}
 
