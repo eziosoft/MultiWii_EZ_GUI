@@ -1,14 +1,24 @@
 Running in: C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI
-1270 resources found
+1235 resources found
 
 Not generating usage matrices. If you would like them, create a directory named 'resource-matrices' in the base of your project.
 
-127 unused resources were found:
+117 unused resources were found:
+color     : Buttons
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\colors.xml
+color     : ButtonsTextColor
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\colors.xml
 color     : background
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\colors.xml
 color     : descryption
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\colors.xml
+dimen     : padding_large
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-large\dimens.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\dimens.xml
 dimen     : padding_medium
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-large\dimens.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\dimens.xml
+dimen     : padding_small
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-large\dimens.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\dimens.xml
 drawable  : btn_default_normal
@@ -29,11 +39,8 @@ drawable  : custom_button_pink
 drawable  : custom_button_red
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\drawable\custom_button_red.xml
 id        : Button01
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\waypoint_layout.xml
-id        : Button02
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
 id        : TableRow01
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
@@ -70,7 +77,6 @@ id        : TextView01
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\raw_data_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\waypoint_layout.xml
 id        : TextView02
@@ -113,39 +119,8 @@ id        : TextView10
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
 id        : TextView11
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-id        : TextViewARM
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewBARO
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewBEEPER
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewCAMSTAB
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewCAMTRIG
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewGPS_HOLD
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewGPS_HOME
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewHEADADJ
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewHEADFREE
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewLEDMAX
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewLEVEL
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewLLIGHTS
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewMAG
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewPASSTHRU
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : TextViewSonarActive
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : View01
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : View02
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
 id        : button1
@@ -169,7 +144,6 @@ id        : button2
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\raw_data_layout.xml
 id        : button3
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_2.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
@@ -181,27 +155,16 @@ id        : button4
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
 id        : button5
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_2.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
 id        : button6
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
 id        : button7
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
 id        : button8
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_2.xml
-id        : buttonGPS
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
-id        : buttonMap
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
-id        : buttonOther
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
-id        : buttonPID
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
 id        : buttonSelectBTDevice
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
 id        : buttonSelectBTDeviceFrsky
@@ -222,13 +185,9 @@ id        : editText8
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
 id        : editText9
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
-id        : horizontalScrollView1
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
 id        : imageView1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\about_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
-id        : linearLayoutDataMain
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
 id        : scrollView1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\advanced_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
@@ -237,14 +196,12 @@ id        : scrollView1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\graph_show_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_2.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\raw_data_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\waypoint_layout.xml
 id        : tableRow1
@@ -259,17 +216,13 @@ id        : tableRow1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow10
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow11
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow12
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow13
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
 id        : tableRow14
@@ -286,7 +239,6 @@ id        : tableRow2
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow3
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\frsky_layout.xml
@@ -298,7 +250,6 @@ id        : tableRow3
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow4
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\frsky_layout.xml
@@ -310,7 +261,6 @@ id        : tableRow4
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow5
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
@@ -318,28 +268,23 @@ id        : tableRow5
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_1.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout3_3.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow6
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow7
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow8
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRow9
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : tableRowGPS_directionToHome
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
 id        : textView1
@@ -356,7 +301,6 @@ id        : textView1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\waypoint_layout.xml
 id        : textView10
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
@@ -374,11 +318,9 @@ id        : textView2
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\frsky_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\waypoint_layout.xml
 id        : textView3
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
@@ -389,7 +331,6 @@ id        : textView3
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\other_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : textView4
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
@@ -397,7 +338,6 @@ id        : textView4
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\motor_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : textView5
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\dashboard1_layout.xml
@@ -419,25 +359,9 @@ id        : textView8
 id        : textView9
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\config_layout.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\pid.xml
-id        : textViewAccActive
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : textViewBaroActive
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : textViewGpsActive
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-id        : textViewMagnetoActive
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
 id        : view1
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\gps_layout.xml
-layout    : check_boxes_layout
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\check_boxes_layout.xml
-layout    : multiwii_main_layout
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\multiwii_main_layout.xml
-layout    : radio_layout_old
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\layout\radio_layout_old.xml
-string    : AboutInfo
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
-string    : ConnectOnStart
+string    : ARM
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
@@ -445,12 +369,57 @@ string    : ConnectOnStart
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
-string    : Dashboard
+string    : AccActive
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : BARO
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : BEEPER
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : BaroActive
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : CAMSTAB
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : CAMTRIG
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : ConnectOnStart
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : Dashboard
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
 string    : Data
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
@@ -460,12 +429,7 @@ string    : Data
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
-string    : Donators
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
-string    : EXPO
+string    : GPSActive
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
@@ -473,9 +437,63 @@ string    : EXPO
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
-string    : ForceCzech
+string    : GPS_HOLD
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
-string    : LatxLon
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : GPS_HOME
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : HEADADJ
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : HEADFREE
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : LEDMAX
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : LEVEL
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : LLIGHTS
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : MAG
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
@@ -491,7 +509,31 @@ string    : MID
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : MagnetoActive
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : Menu
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
 string    : MotorsServos
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : PASSTHRU
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
@@ -508,6 +550,14 @@ string    : Pitch_Roll
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
 string    : SavePIDProfile
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-pl\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
+    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
+string    : SonarActive
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-cs\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-de\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
