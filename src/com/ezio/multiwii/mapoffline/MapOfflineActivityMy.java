@@ -51,7 +51,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 	private String provider;
 
 	MapOfflineCopterOverlay copter;
-	// MapOfflineCirclesOverlay circles;
+	MapOfflineCirclesOverlay circles;
 
 	private boolean killme = false;
 
@@ -102,7 +102,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
-			// circles.Set(gHome, GYou);
+			circles.Set(gHome, GYou);
 			mapView.postInvalidate();
 
 			app.Frequentjobs();
@@ -145,11 +145,11 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = locationManager.getBestProvider(criteria, false);
 
-		// circles = new MapOfflineCirclesOverlay(getApplicationContext());
+		circles = new MapOfflineCirclesOverlay(getApplicationContext());
 		copter = new MapOfflineCopterOverlay(getApplicationContext());
 
 		mapView.getOverlays().add(copter);
-		// mapView.getOverlays().add(circles);
+		mapView.getOverlays().add(circles);
 
 	}
 
@@ -182,9 +182,6 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
-
-		// Log.d("aaa", String.valueOf(location.getLatitude()));
-
 	}
 
 	@Override

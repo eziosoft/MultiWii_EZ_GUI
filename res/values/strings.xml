@@ -223,4 +223,13 @@ And again merry christmas, and a prosperous new flying year!</string>
 
     
     <string name="Warning">Warning</string>
+
+    
+    <string name="SelectedPosition">Selected Position</string>
+
+    
+    <string name="SetAsHome">Set as Home</string>
+
+    
+    <string name="Waypoints">Waypoints</string>
 </resources>

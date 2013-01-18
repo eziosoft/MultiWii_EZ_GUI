@@ -20,17 +20,31 @@
             android:layout_height="wrap_content"
             android:background="@color/tittle"
             android:gravity="center"
-            android:text="@string/RawData"
+            android:text="@string/Waypoints"
             android:textColor="@color/tittleText" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SelectedPosition" />
+
+    <TextView
         android:id="@+id/textViewMWInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
+        android:text="---"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/Button01"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="SetWPOnClick"
+        android:text="@string/SetAsHome" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -43,10 +57,16 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Debug" />
+
+            <TextView
                 android:id="@+id/textViewData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="---" />
 
             <Button
                 android:id="@+id/button1"
@@ -58,13 +78,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/Button01"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="SetWPOnClick"
-        android:text="Set WP0" />
 
 </LinearLayout>
