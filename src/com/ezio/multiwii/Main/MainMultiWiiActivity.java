@@ -80,35 +80,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	AdView adView;
 	public static final String MY_PUBLISHER_ID = "a15030365bc09b4";
 
-	private void adMobConfig() {
-		// request TEST ads to avoid being disabled for clicking your own ads
-		AdRequest adRequest = new AdRequest();
-
-		// test mode on EMULATOR
-		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-
-		// test mode on DEVICE (this example code must be replaced with your
-		// device uniquq ID)
-
-		adRequest.addTestDevice("5A831EB94F5A7B11BB055E09E217A0DE");
-
-		// create a Banner Ad
-		adView = new AdView(this, AdSize.BANNER, MY_PUBLISHER_ID);
-
-		// call the main layout from xml
-		LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linearLayoutData);
-
-		// add the Banner Ad to our main layout
-		mainLayout.addView(adView);
-		// mainLayout.addView(TVData);
-
-		// Initiate a request to load an ad in TEST mode. The test mode will
-		// work only on emulators and your specific test device, the users will
-		// get real ads.
-		adView.loadAd(adRequest);
-
-	}
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -137,9 +108,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 		TVinfo = (TextView) findViewById(R.id.TextViewInfo);
-
-		if (app.ShowADS)
-			adMobConfig();
 
 		if (app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0) {
 			killme = true;

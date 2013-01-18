@@ -70,7 +70,6 @@
     <string name="MacNotSet">Najpierw idź do konfiguracji i wybierz swój kopter.\n\nMoże działać lub nie, może zniszczyć świat albo cokolwiek.\nUżywaj na własną odpowiedzialność.</string>
     <string name="InfoNotConnected">\n\nMoże działać lub nie, może zniszczyć swiat albo cokolwiek.\nUżywaj na własną odpowiedzialność.\n Jeżeli lubisz tą aplikację kup mi piwo.</string>
     <string name="BTDevice">Urządzenie Bluetooth</string>
-    <string name="ConnectOnStart">Łącz przy starcie aplikacji</string>
     <string name="menu_vote">Oceń!</string>
     <string name="PhoneLatitude">Tel Szerokość</string>
     <string name="PhoneLongitude">Tel Długość</string>
@@ -90,7 +89,6 @@
     <string name="Write">Zapisz</string>
     <string name="Rate">Oceń!</string>
     <string name="MID">MID</string>
-    <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Resetuj</string>
@@ -124,7 +122,7 @@
     <string name="Connected">"Połączono!"</string>
     <string name="Disconnected">Rozłączono</string>
     <string name="Satellites">Satelity</string>
-    <string name="LatxLon">Szer x Dł</string>
+    
     <string name="Azimuth">Azumut</string>
     <string name="gforce">G-Force</string>
     <string name="state">Stan</string>
@@ -156,9 +154,8 @@
     <string name="VoltageAlarm">Uruchom alarm poniżej napięcia:</string>
     <string name="AdvancedWarning">Ta sekcja zawiera niebezpieczne i nie do końca przetestowane funkcje. Używaj tylko jeśli wiecz co robisz. \nUŻYWAJ OSTROŻNIE\n\n!ROBISZ TO NA WŁASNĄ ODPOWIEDZIALNOŚĆ!</string>
     <string name="Advanced">Zaawansowane</string>
-    <string name="Dashboard">Konsola</string>
     <string name="PhoneAccuracy">TelDokładność(cm)</string>
-     <string name="SetCheckboxes">AUX</string>
+    <string name="SetCheckboxes">AUX</string>
     <string name="Set">Ustaw chwilowo</string>
     <string name="SavetoEEPROM">Zapisz do EEPROM</string>
 
@@ -195,10 +192,9 @@
     <string name="page1">Konsola</string>
     <string name="page2">MW Ustawienia</string>
     <string name="page3">Konfiguracja</string>
-    
- <!-- end menu -->
+
+    <!-- end menu -->
 
     <string name="RawData">Surowe dane</string>
-    
-    
+
 </resources>

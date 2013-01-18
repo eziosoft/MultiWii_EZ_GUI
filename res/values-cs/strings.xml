@@ -1,7 +1,6 @@
 <resources>
 
     <!-- DONATIONS -->
-    <string name="Donators">Rád bych poděkoval všem tšmto lidem za dary: wahjudi, Han Geesink</string>
     <string name="app_name">MultiWii EZ-GUI</string>
     <string name="menu_settings">Nastavení</string>
     <string name="title_activity_main">MainActivity</string>
@@ -74,7 +73,6 @@
     <string name="MacNotSet">Nejdříve bež do nastavení a vyber BT zařízení\n\nMožná bude fungovat, možná ne, možná zníčí svět.\nPožití jen na vlastní nebezpečí!!!\n\n Jestli se ti tato aplikace líbí kup mi pivo (Daruj).</string>
     <string name="InfoNotConnected">\n\nMožná bude fungovat, možná ne, možná zníčí svět.\nPožití jen na vlastní nebezpečí!!!\n Jestli se ti tato aplikace líbí kup mi pivo (Daruj).</string>
     <string name="BTDevice">Zařízení Bluetooth</string>
-    <string name="ConnectOnStart">Připoj se, když se aplikace spustí</string>
     <string name="menu_vote">Ohodnoť!</string>
     <string name="PhoneLatitude">Zem. šířka telefonu</string>
     <string name="PhoneLongitude">Zem. délka telefonu</string>
@@ -94,7 +92,6 @@
     <string name="Write">Zapsat</string>
     <string name="Rate">Ohodnoť aplikaci</string>
     <string name="MID">MID</string>
-    <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Útlum Thr PID</string>
     <string name="Reset">Reset</string>
@@ -128,7 +125,7 @@
     <string name="Connected">"Spojeno!"</string>
     <string name="Disconnected">Odpojeno</string>
     <string name="Satellites">Satelity</string>
-    <string name="LatxLon">Zem šíř x dél</string>
+    
     <string name="Azimuth">Azimut</string>
     <string name="gforce">Síla G</string>
     <string name="state">Stav</string>
@@ -155,7 +152,6 @@
     <string name="ForceGerman">Němčina</string>
     <string name="ForceHungarian">"Maďarština"</string>
     <string name="ForcePolish">Polština</string>
-    <string name="ForceCzech">Čeština</string>
     <string name="LanguageInfo">Některé jazyky nejsou podporovány systémem predčítaní.</string>
     <string name="periodicspeaking">Interval mluvení (s). 0 pro vypnutí.</string>
     <string name="Control">Ovládení Kopteru</string>
@@ -166,7 +162,6 @@
     <string name="VoltageAlarm">Zační pípat když napětí je pod:</string>
     <string name="AdvancedWarning">Tato sekce obsahuje nebezpečné a ne příliž otestovane funkce. Používej to jen když víš co děláš. \nPoužívej velmi opatrně!\n\n!Na vlastní nebezpečí!</string>
     <string name="Advanced">Rozšířené</string>
-    <string name="Dashboard">Přist. deska</string>
     <string name="PhoneAccuracy">Přesnost telefonu(cm)</string>
     <string name="SetCheckboxes">AUX</string>
     <string name="Set">Nastav dočasně</string>
@@ -205,13 +200,12 @@
     <string name="page1">Hlavní nabídka</string>
     <string name="page2">Nastavení MW</string>
     <string name="page3">Konfigurace</string>
-    
+
     <!-- end menu -->
-    
+
     <string name="RawData">Surová data</string>
     <string name="ShareIt">Sdílej své nastavení</string>
     <string name="SelectSetting">Výběr nastavení</string>
     <string name="RXBIND">Spárovaní RX</string>
 
-   
 </resources>

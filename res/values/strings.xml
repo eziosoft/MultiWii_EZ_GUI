@@ -1,7 +1,6 @@
 <resources>
 
     <!-- DONATIONS -->
-    <string name="Donators">I would like to thank these nice people for their donations: wahjudi, Han Geesink</string>
     <string name="app_name">MultiWii EZ-GUI</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
@@ -94,7 +93,6 @@
     <string name="Write">Write</string>
     <string name="Rate">Rate</string>
     <string name="MID">MID</string>
-    <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
@@ -128,8 +126,7 @@
     <string name="Connected">"Connected!"</string>
     <string name="Disconnected">Disconnected</string>
     <string name="Satellites">Satellites</string>
-    <string name="LatxLon">Lat x Lon</string>
-    <string name="Azimuth">Azimuth</string>
+        <string name="Azimuth">Azimuth</string>
     <string name="gforce">G-Force</string>
     <string name="state">State</string>
     <string name="Battery">Battery(V)</string>
@@ -220,25 +217,12 @@ Hope everyone gets lots of lipos and motors under their trees!
 And again merry christmas, and a prosperous new flying year!</string>
     <string name="Debug">Debug</string>
     <string name="Later">Not now</string>
-
-    
     <string name="Warning">Warning</string>
-
-    
     <string name="SelectedPosition">Selected Position</string>
-
-    
     <string name="SetAsHome">Set as Home</string>
-
-    
     <string name="Waypoints">Waypoints</string>
-
-    
     <string name="LowVoltageAlarm">Low Voltage Alarm</string>
-
-    
     <string name="RadioModeInfo">This is used only to display correctly radio sticks in Radio view</string>
-
-    
     <string name="MagModeInfo">Changes behaviour of compass arrow in Dasboard 1</string>
+
 </resources>

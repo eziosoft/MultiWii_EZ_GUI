@@ -74,7 +74,6 @@
     <string name="MacNotSet">Először lépj a beállításokba és válassz Bluetooth eszközt\n\n\nCsak saját felelősségre használd!!!\n\n Ha tetszik az alkalmazás, vegyél nekem egy sört (Támogatás).</string>
     <string name="InfoNotConnected">\n\n\nCsak saját felelősségre használd!!!\n Ha tetszik az alkalmazás, vegyél nekem egy sör! (Támogatás).</string>
     <string name="BTDevice">Bluetooth eszköz</string>
-    <string name="ConnectOnStart">Csatlakozás az alkalmazás indításakor</string>
     <string name="menu_vote">Értékeld!</string>
     <string name="PhoneLatitude">Telefon szélesség</string>
     <string name="PhoneLongitude">Telefon hosszúság</string>
@@ -94,7 +93,6 @@
     <string name="Write">Ír</string>
     <string name="Rate">Rate</string>
     <string name="MID">MID</string>
-    <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
@@ -128,7 +126,7 @@
     <string name="Connected">"Kapcsolódva!"</string>
     <string name="Disconnected">Szétkapcsolva</string>
     <string name="Satellites">Műholdak</string>
-    <string name="LatxLon">Lat x Lon</string>
+  
     <string name="Azimuth">Azimuth</string>
     <string name="gforce">G-Erő</string>
     <string name="state">Állapot</string>
@@ -165,7 +163,6 @@
     <string name="VoltageAlarm">Hangjelzés ha a feszültség alacsonyabb mint:</string>
     <string name="AdvancedWarning">Ez a szekció kísérleti, veszélyes funkciókat tartalmaz. Csak akkor használd ha érted mit csinálsz. \nKÜLÖNÖS FIGYELEMMEL HASZNÁLD!\n\n!CSAK SAJÁT FELELŐSSÉGRE!</string>
     <string name="Advanced">Haladó</string>
-    <string name="Dashboard">Műszerfal</string>
     <string name="PhoneAccuracy">Telefon pontosság(cm)</string>
     <string name="SetCheckboxes">AUX</string>
     <string name="Set">Ideiglenes beállítás</string>
@@ -208,11 +205,8 @@
     <!-- end menu -->
 
     <string name="RawData">Szenzor adatok</string>
-
     <string name="ShareIt">A konfigurációd megosztása</string>
-
     <string name="SelectSetting">nBeállítás kiválasztása</string>
-
     <string name="RXBIND">RX PÁROSÍTÁS</string>
     <string name="FollowMe">Follow Me (nincs tesztelve!  csak #define USE_MSP_WP konfiggal használható) vilog ha a telefon pozíciót átküldi a Multiwii-nek MW</string>
 

@@ -1,6 +1,5 @@
 <resources>
 
-   
     <string name="menu_settings">Einstellungen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="scanning">Nach Geräten suchen...</string>
@@ -72,7 +71,6 @@
     <string name="MacNotSet">Bitte die Einstellungen öffnen und ein Bluetooth Gerät auswählen.\n\nFunktioniert hoffentlich, könnte die Welt vernichten, egal.\nBenutzung auf eigene Gefahr.</string>
     <string name="InfoNotConnected">\n\nFunktioniert hoffentlich, könnte die Welt vernichten, egal.\nBenutzung auf eigene Gefahr. \n Gefällt dir die App? Ich würde mich über Trinkgeld (Spende) freuen.</string>
     <string name="BTDevice">Bluetooth Gerät</string>
-    <string name="ConnectOnStart">Automatisch verbinden, wenn die Anwendung aufgerufen wird</string>
     <string name="menu_vote">App bewerten!</string>
     <string name="PhoneLatitude">Breitengrad (Phone)</string>
     <string name="PhoneLongitude">Längengrad (Phone)</string>
@@ -92,7 +90,6 @@
     <string name="Write">Speichern</string>
     <string name="Rate">Rate</string>
     <string name="MID">MID</string>
-    <string name="EXPO">EXPO</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
@@ -126,7 +123,7 @@
     <string name="Connected">Verbunden</string>
     <string name="Disconnected">Verbindung getrennt</string>
     <string name="Satellites">Satelliten</string>
-    <string name="LatxLon">Lat x Lon</string>
+    
     <string name="Azimuth">Azimut</string>
     <string name="gforce">Beschleunigung</string>
     <string name="state">Flugmodus</string>
@@ -147,6 +144,5 @@
     <string name="Über">About</string>
     <string name="BatteryLevelIs">Battery Level Is</string>
     <string name="Reconnecting">Connection lost. Reconnecting</string>
-    <string name="AboutInfo">Thanks to Sebbi and thornton</string>
 
 </resources>
