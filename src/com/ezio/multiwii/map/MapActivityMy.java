@@ -104,7 +104,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 			// float roll, float azimuth, float gforce, String state, int vbat,
 			// int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 
-			copter.Set(g, app.mw.Waypoints[0].getGeoPoint(), app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+			copter.Set(g, app.mw.Waypoints[0].getGeoPoint(), app.mw.Waypoints[16].getGeoPoint(), app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 			mapView.postInvalidate();
 
 			app.Frequentjobs();
@@ -113,7 +113,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 			if (!killme)
 				mHandler.postDelayed(update, 1000);
 
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 	};
 

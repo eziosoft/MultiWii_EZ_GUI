@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -30,8 +31,11 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.Paint.Style;
+import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -44,14 +48,17 @@ class CopterOverlay extends Overlay {
 	GeoPoint GCopter = new GeoPoint(0, 0);
 	GeoPoint GHome = new GeoPoint(0, 0);
 
+	GeoPoint GPositionHold = new GeoPoint(0, 0);
+
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
 	Paint mPaint3 = new Paint();
 	Paint mPaint0 = new Paint();
 	Paint mPaint4 = new Paint();
 
-	Point p1 = new Point();
-	Point p2 = new Point();
+	Point p1 = new Point();// copter
+	Point p2 = new Point();// home
+	Point p3 = new Point();// position hold
 
 	private List<GeoPoint> points = new ArrayList<GeoPoint>();
 	private int pointsCount = 20;
@@ -128,10 +135,11 @@ class CopterOverlay extends Overlay {
 
 	}
 
-	public void Set(GeoPoint copter, GeoPoint home, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
+	public void Set(GeoPoint copter, GeoPoint home, GeoPoint positionHold, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 
 		GCopter = copter;
 		GHome = home;
+		GPositionHold = positionHold;
 
 		SatNum = satNum;
 		DistanceToHome = distanceToHome;
@@ -167,6 +175,7 @@ class CopterOverlay extends Overlay {
 
 		projection.toPixels(GCopter, p1);
 		projection.toPixels(GHome, p2);
+		projection.toPixels(GPositionHold, p3);
 
 		// draw copter
 		Matrix matrix = new Matrix();
@@ -189,6 +198,9 @@ class CopterOverlay extends Overlay {
 
 		canvas.drawText("H", p2.x - mPaint2.measureText("H") / 2, p2.y + mPaint2.getTextSize() / 2 - 5 * scaledDensity, mPaint2);
 		canvas.drawCircle(p2.x, p2.y, 20 * scaledDensity, mPaint3);
+
+		canvas.drawText("P", p3.x - mPaint2.measureText("P") / 2, p3.y + mPaint2.getTextSize() / 2 - 5, mPaint2);
+		canvas.drawCircle(p3.x, p3.y, 20, mPaint3);
 
 		if (points.size() > 2) {
 			Path path = new Path();
@@ -244,6 +256,22 @@ class CopterOverlay extends Overlay {
 
 		}
 
+	}
+
+	@Override
+	public boolean onTap(GeoPoint arg0, MapView arg1) {
+		long Lat = arg0.getLatitudeE6();
+		long Lon = arg0.getLongitudeE6();
+
+		Toast.makeText(context, String.valueOf(Lat) + "x" + String.valueOf(Lon), Toast.LENGTH_LONG).show();
+
+		Intent i = new Intent(context, WaypointActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		i.putExtra("LAT", Lat);
+		i.putExtra("LON", Lon);
+		context.startActivity(i);
+
+		return super.onTap(arg0, arg1);
 	}
 
 	public static int metersToRadius(float meters, MapView map, double latitude) {
