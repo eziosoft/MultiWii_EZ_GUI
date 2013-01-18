@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">MultiWii EZ-GUI</string>
-    <string name="menu_settings">Settings</string>
     <string name="scanning">scanning for devices...</string>
     <string name="select_device">select a device to connect</string>
     <string name="none_paired">No devices have been paired</string>
@@ -9,9 +8,6 @@
     <string name="title_paired_devices">Paired Devices</string>
     <string name="title_other_devices">Other Available Devices</string>
     <string name="button_scan">Scan for devices</string>
-    <string name="StickView">Stick View</string>
-    <string name="Data">Data</string>
-    <string name="Menu">Menu</string>
     <string name="Radio">Radio</string>
     <string name="PitchRoll">Dashboard 1</string>
     <string name="Pitch">Pitch</string>
@@ -28,23 +24,8 @@
     <string name="MagMode">Mag Mode</string>
     <string name="PointNorth">Point North</string>
     <string name="Point_multirotor_front">Point multirotor front</string>
-    <string name="AccActive">AccActive</string>
-    <string name="BaroActive">BaroActive</string>
-    <string name="MagnetoActive">MagnetoActive</string>
-    <string name="GPSActive">GPSActive</string>
     <string name="PhoneMag">PhoneMag</string>
     <string name="PitchRollCircleView">Pitch Roll Circle View</string>
-    <string name="LEVEL">LEVEL</string>
-    <string name="BARO">BARO</string>
-    <string name="MAG">MAG</string>
-    <string name="CAMSTAB">CAMSTAB</string>
-    <string name="CAMTRIG">CAMTRIG</string>
-    <string name="ARM">ARM</string>
-    <string name="GPS_HOME">GPS HOME</string>
-    <string name="GPS_HOLD">GPS HOLD</string>
-    <string name="PASSTHRU">PASSTHRU</string>
-    <string name="HEADFREE">HEADFREE</string>
-    <string name="BEEPER">BEEPER</string>
     <string name="pointFrontHelp">Point multirotor front compares the compass readings from the phone and multicopter. Indicates the copter forward regardless of the location of the phone.</string>
     <string name="TTS">Text to speach</string>
     <string name="GPS">GPS</string>
@@ -64,14 +45,9 @@
     <string name="menu_connect">MW Connect</string>
     <string name="menu_disconnect">Disconnect</string>
     <string name="SelectBTdevice">Select MultiWii BT</string>
-    <string name="LEDMAX">LEDMAX</string>
-    <string name="LLIGHTS">LLIGHTS</string>
-    <string name="HEADADJ">HEADADJ</string>
-    <string name="SonarActive">SonarActive</string>
     <string name="MacNotSet">Go to Config and select your bluetooth device first\n\nMay work, may not, may destroy the world or whatever.\nUse at your own risk!\n\n If you like this app buy me a beer (Donate).</string>
     <string name="InfoNotConnected">\n\nMay work, may not, may destroy the world or whatever.\nUse at your own risk.\n If you like this app buy me a beer (Donate).</string>
     <string name="BTDevice">Bluetooth device</string>
-    <string name="ConnectOnStart">Connect when application starts</string>
     <string name="menu_vote">Rate it!</string>
     <string name="PhoneLatitude">PhoneLatitude</string>
     <string name="PhoneLongitude">PhoneLongitude</string>
@@ -90,22 +66,17 @@
     <string name="Read">Read</string>
     <string name="Write">Write</string>
     <string name="Rate">Rate</string>
-    <string name="MID">MID</string>
     <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
-    <string name="Throttle">Throttle</string>
-    <string name="Pitch_Roll">Pitch/Roll</string>
     <string name="AccCalibration">AccCalibration</string>
     <string name="MagCalibration">MagCalibration</string>
     <string name="Other">Other</string>
-    <string name="MotorsServos">Mot/Serv</string>
     <string name="PhoneSpeed">PhoneSpeed(cm/s)</string>
     <string name="PhoneNumSat">PhoneNumSat</string>
-    <string name="SavePIDProfile">Save PID Profile</string>
     <string name="dashboard2">Dashboard 2</string>
     <string name="disableBTonExit">Disable BT on exit</string>
-    <string name="Declination">MAG_DECLINATION</string>
+    <string name="Declination">Magnetic declination</string>
     <string name="ThrMid">Thr Mid</string>
     <string name="ThrExpo">Thr Expo</string>
     <string name="RCRate">RC Rate</string>
@@ -138,8 +109,6 @@
     <string name="ValuesaresettodefaultPressreadbuttonnow">Values are set to default. Press read button now.</string>
     <string name="Continue">Continue?</string>
     <string name="Done">Done</string>
-
-    <!-- new -->
     <string name="Started">Started</string>
     <string name="About">About</string>
     <string name="BatteryLevelIs">Battery voltage is</string>
@@ -160,7 +129,6 @@
     <string name="VoltageAlarm">Start beeping when voltage is below:</string>
     <string name="AdvancedWarning">This section contains dangerous and not very well tested features. Use it only when you know what you are doing. \nMUST BE USED WITH EXTREME CAUTION!\n\n!USE AT YOUR OWN RISK!</string>
     <string name="Advanced">Advanced</string>
-    <string name="Dashboard">Dashboard</string>
     <string name="PhoneAccuracy">PhoneAccuracy(cm)</string>
     <string name="SetCheckboxes">AUX</string>
     <string name="Set">Set</string>
@@ -210,9 +178,6 @@
     <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
     <string name="convertToKML">Convert to KML (Google Earth)</string>
     <string name="infoDonate">I have spent and will spend many, many hours of my free time to build and extend this program, so if you like and use MultiWii EZ-GUI, please consider donating. This will keep me interested in extending the program.</string>
-    <string name="infoDonateXmas">Merry Christmas and a Happy New Year to all pilots!
-Hope everyone gets lots of lipos and motors under their trees! 
-And again merry christmas, and a prosperous new flying year!</string>
     <string name="Debug">Debug</string>
     <string name="Later">Not now</string>
     <string name="Warning">Warning</string>

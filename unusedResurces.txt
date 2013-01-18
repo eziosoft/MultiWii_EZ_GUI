@@ -597,7 +597,6 @@ string    : title_activity_main
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-hu\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-ru\strings.xml
     C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values-uk\strings.xml
-    C:\Users\eee\Desktop\quadro\MultiWii_EZ_GUI\res\values\strings.xml
 
 If any of the above resources are used, please submit your project as a test case so this application can be improved.
 

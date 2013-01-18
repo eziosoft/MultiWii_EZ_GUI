@@ -41,7 +41,7 @@
     <string name="MAG">MAG</string>
     <string name="CAMSTAB">CAMSTAB</string>
     <string name="CAMTRIG">CAMTRIG</string>
-    <string name="ARM">ARM</string>
+  
     <string name="GPS_HOME">GPS HOME</string>
     <string name="GPS_HOLD">GPS HOLD</string>
     <string name="PASSTHRU">PASSTHRU</string>
