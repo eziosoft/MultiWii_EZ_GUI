@@ -74,20 +74,20 @@ class MapOfflineCirclesOverlay extends Overlay {
 
 		projection.toPixels(GHome, p1);
 
-		int distance = 2;
-		for (int i = distance; i <= 10; i += distance) {
-			if (metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6) > 0) {
-				canvas.drawCircle(p1.x, p1.y,
-						metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6),
-						mPaint);
-				canvas.drawText(
-						String.valueOf(i),
-						p1.x
-								+ metersToRadius(i, mapv,
-										GHome.getLatitudeE6() / 1e6), p1.y,
-						mPaint);
-			}
-		}
+//		int distance = 2;
+//		for (int i = distance; i <= 10; i += distance) {
+//			if (metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6) > 0) {
+//				canvas.drawCircle(p1.x, p1.y,
+//						metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6),
+//						mPaint);
+//				canvas.drawText(
+//						String.valueOf(i),
+//						p1.x
+//								+ metersToRadius(i, mapv,
+//										GHome.getLatitudeE6() / 1e6), p1.y,
+//						mPaint);
+//			}
+//		}
 
 		projection.toPixels(GYou, p1);
 
