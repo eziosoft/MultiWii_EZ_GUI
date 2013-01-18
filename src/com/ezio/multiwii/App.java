@@ -347,6 +347,8 @@ public class App extends Application {
 
 			// update Home position
 			mw.SendRequestGetWayPoint(0);
+			//update Position hold 
+			mw.SendRequestGetWayPoint(16);
 
 			String t = new String();
 			if (mw.BaroPresent == 1)

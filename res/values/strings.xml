@@ -232,4 +232,13 @@ And again merry christmas, and a prosperous new flying year!</string>
 
     
     <string name="Waypoints">Waypoints</string>
+
+    
+    <string name="LowVoltageAlarm">Low Voltage Alarm</string>
+
+    
+    <string name="RadioModeInfo">This is used only to display correctly radio sticks in Radio view</string>
+
+    
+    <string name="MagModeInfo">Changes behaviour of compass arrow in Dasboard 1</string>
 </resources>

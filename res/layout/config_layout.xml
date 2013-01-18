@@ -60,18 +60,49 @@
                 android:gravity="center"
                 android:text="---"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxConnectOnStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ConnectionBug" />
+                android:text="@string/ConnectionBug"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCopyFrskyToMW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CopyFrskyToMW" />
 
             <CheckBox
                 android:id="@+id/checkBoxDisableBTonExit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/disableBTonExit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/RefreshRate"
+                android:textColor="@color/smalltittleText" />
+
+            <EditText
+                android:id="@+id/editTextRefreshRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="do NOT leave empty or 0"
+                android:inputType="number" >
+
+                <requestFocus />
+            </EditText>
+
+            <CheckBox
+                android:id="@+id/checkBoxUseOfflineMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/UseOfflineMap" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -86,6 +117,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/RestartInfo" />
+
                 <RadioButton
                     android:id="@+id/radioButtonProtocol20"
                     android:layout_width="wrap_content"
@@ -98,13 +135,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2.1" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/RestartInfo" />
             </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/LowVoltageAlarm"
+                android:textColor="@color/smalltittleText" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/VoltageAlarm" />
+
+            <EditText
+                android:id="@+id/editTextVoltageAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="do NOT leave empty"
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -118,6 +170,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/RadioModeInfo" />
 
                 <RadioButton
                     android:id="@+id/radioButton1"
@@ -146,6 +204,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MagModeInfo" />
+
                 <RadioButton
                     android:id="@+id/radioButtonMagMode1"
                     android:layout_width="wrap_content"
@@ -168,6 +232,26 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/AltCorrection"
+                android:textColor="@color/smalltittleText" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AltCorrectionInfo" />
+
+            <CheckBox
+                android:id="@+id/checkBoxAltCorrection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AltCorrection" />
+
+            <TextView
                 android:id="@+id/TextView02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/periodicspeaking" />
-
+
             <EditText
                 android:id="@+id/editTextPeriodicSpeaking"
                 android:layout_width="match_parent"
@@ -195,28 +279,7 @@
                 android:hint="do NOT leave empty"
                 android:inputType="number"
                 android:text="20" >
-
             </EditText>
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/AltCorrection"
-                android:textColor="@color/smalltittleText" />
-
-            <CheckBox
-                android:id="@+id/checkBoxAltCorrection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AltCorrection" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AltCorrectionInfo" />
 
             <Button
                 android:id="@+id/button1"
@@ -274,55 +337,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ForcePolish" />
             </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:textColor="@color/smalltittleText" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/VoltageAlarm" />
-
-            <EditText
-                android:id="@+id/editTextVoltageAlarm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty"
-                android:inputType="numberDecimal" />
-
-            <CheckBox
-                android:id="@+id/checkBoxUseOfflineMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/UseOfflineMap" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/RefreshRate"
-                android:textColor="@color/smalltittleText" />
-
-            <EditText
-                android:id="@+id/editTextRefreshRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty or 0"
-                android:inputType="number" />
-
-            <CheckBox
-                android:id="@+id/checkBoxCopyFrskyToMW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CopyFrskyToMW" />
-
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

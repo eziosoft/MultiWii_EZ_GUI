@@ -103,16 +103,19 @@ public class WaypointActivity extends Activity {
 	public void SetWPOnClick(View v) {
 
 		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0));
-		app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
-		app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
-		
-		app.mw.Waypoints[16].Lat = (int) (SelectedLatitude * 10+100);
-		app.mw.Waypoints[16].Lon = (int) (SelectedLongitude * 10+100);
+
+		if (app.D) {
+			app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
+			app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
+
+			app.mw.Waypoints[16].Lat = (int) (SelectedLatitude * 10 + 100);
+			app.mw.Waypoints[16].Lon = (int) (SelectedLongitude * 10 + 100);
+		}
 	}
 
 	void displayWPs() {
 		for (Waypoint w : app.mw.Waypoints) {
-			TVData.append("WP#" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
+			TVData.append("WP#" + String.valueOf(w.Number) + " " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 		}
 	}
 
