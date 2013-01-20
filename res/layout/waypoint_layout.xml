@@ -7,12 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <View
-            android:id="@+id/UpdateFlash"
-            android:layout_width="52dp"
-            android:layout_height="match_parent"
-            android:background="#0F0" />
 
         <TextView
             android:id="@+id/TextView01"
@@ -41,7 +35,7 @@
     <Button
         android:id="@+id/Button01"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SetWPOnClick"
         android:text="@string/SetAsHome" />
@@ -74,7 +68,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="GetWPOnClick"
-                android:text="Get WP0" />
+                android:text="Get WP0"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

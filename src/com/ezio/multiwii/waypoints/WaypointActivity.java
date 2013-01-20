@@ -17,6 +17,8 @@
 
 package com.ezio.multiwii.waypoints;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Iterator;
 import android.app.Activity;
 import android.content.Context;
@@ -45,6 +47,12 @@ public class WaypointActivity extends Activity {
 
 	TextView TVData;
 	TextView TVMWInfo;
+
+	NumberFormat format = new DecimalFormat("0.############################################################"); // used
+	// to
+	// avoid
+	// scientific
+	// notation
 
 	private boolean killme = false;
 
@@ -89,7 +97,7 @@ public class WaypointActivity extends Activity {
 			SelectedLatitude = extras.getLong("LAT");
 			SelectedLongitude = extras.getLong("LON");
 
-			TVMWInfo.setText(getString(R.string.GPS_latitude) + ":" + String.valueOf(SelectedLatitude / 1e6) + "\n" + getString(R.string.GPS_longitude) + ":" + String.valueOf(SelectedLongitude / 1e6));
+			TVMWInfo.setText(getString(R.string.GPS_latitude) + ":" + format.format(SelectedLatitude / 1e6) + "\n" + getString(R.string.GPS_longitude) + ":" + format.format(SelectedLongitude / 1e6));
 		}
 
 	}
@@ -114,9 +122,16 @@ public class WaypointActivity extends Activity {
 	}
 
 	void displayWPs() {
-		for (Waypoint w : app.mw.Waypoints) {
-			TVData.append("WP#" + String.valueOf(w.Number) + " " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
-		}
+		// for (Waypoint w : app.mw.Waypoints) {
+		// TVData.append("WP#" + String.valueOf(w.Number) + " " +
+		// String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " Alt:" +
+		// String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) +
+		// "\n");
+		// }
+
+		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[0].Number) + " " + String.valueOf(app.mw.Waypoints[0].Lat) + "x" + String.valueOf(app.mw.Waypoints[0].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[0].Alt) + " NavFlag:" + String.valueOf(app.mw.Waypoints[0].NavFlag) + "\n");
+		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[16].Number) + " " + String.valueOf(app.mw.Waypoints[16].Lat) + "x" + String.valueOf(app.mw.Waypoints[16].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[16].Alt) + " NavFlag:" + String.valueOf(app.mw.Waypoints[16].NavFlag) + "\n");
+
 	}
 
 	@Override

@@ -84,7 +84,7 @@
             android:name=".map.MapActivityMy"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name=".waypoints.WaypointActivity" >
+        <activity android:name=".waypoints.WaypointActivity" android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity android:name="AboutActivity" >
         </activity>
