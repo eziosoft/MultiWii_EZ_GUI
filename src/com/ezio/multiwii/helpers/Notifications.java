@@ -31,7 +31,11 @@ public class Notifications {
 		mBuilder.setTicker(title + ":" + text);
 		mBuilder.setOngoing(isPresistant);
 		mBuilder.setAutoCancel(true);
-		mNotificationManager.notify(Id, mBuilder.build());
+		try {
+			mNotificationManager.notify(Id, mBuilder.build());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	public void Cancel(int Id) {

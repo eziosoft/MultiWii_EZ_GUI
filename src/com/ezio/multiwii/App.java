@@ -362,6 +362,7 @@ public class App extends Application {
 			if (mw.AccPresent == 1)
 				t += "ACC";
 			notifications.displayNotification("Status", t, false, 99, false);
+			
 
 		}
 		// --------------------END timer every 5sek---------------------------

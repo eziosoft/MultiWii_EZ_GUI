@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.notUsed.ComunityMap;
 
 public class WaypointActivity extends Activity {
 
@@ -150,6 +151,12 @@ public class WaypointActivity extends Activity {
 		mHandler.removeCallbacks(null);
 		killme = true;
 
+	}
+	
+	
+	public void ComunityMapOnClick(View v)
+	{
+		ComunityMap comunityMap= new ComunityMap(SelectedLatitude/ 1e6,SelectedLongitude/ 1e6,"testNick");
 	}
 
 }

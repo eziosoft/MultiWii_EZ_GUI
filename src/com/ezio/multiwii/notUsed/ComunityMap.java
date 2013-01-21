@@ -28,6 +28,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -35,9 +37,28 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class HttpCli extends AsyncTask {
+public class ComunityMap extends AsyncTask {
 
+	
+	public ComunityMap(double selectedLatitude, double selectedLongitude, String nick)
+	{
+		NumberFormat format = new DecimalFormat("0.############################################################"); // used
+		// to
+		// avoid
+
+		String data= format.format(selectedLatitude)+";"+format.format(selectedLongitude)+";"+nick;
+		
+		try {
+			executeHttpGet(data);
+			Log.d("aaa","Added to comunity map");
+		} catch (Exception e) {
+			Log.d("aaa","Comunity map error "+e.getMessage());
+			
+		}
+	}
+	
 	private void executeHttpGet(String data) throws Exception {
 		BufferedReader in = null;
 		try {
