@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -77,8 +78,7 @@ public class ConfigActivity extends SherlockActivity {
 		case REQUEST_CONNECT_DEVICE_MULTIWII:
 			// When DeviceListActivity returns with a device to connect
 			if (resultCode == Activity.RESULT_OK) {
-				String address = data.getExtras().getString(
-						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddress = address;
 				MacAddressBTTV.setText("MAC:" + app.MacAddress);
 			}
@@ -87,8 +87,7 @@ public class ConfigActivity extends SherlockActivity {
 		case REQUEST_CONNECT_DEVICE_FRSKY:
 			// When DeviceListActivity returns with a device to connect
 			if (resultCode == Activity.RESULT_OK) {
-				String address = data.getExtras().getString(
-						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddressFrsky = address;
 				MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
 			}
@@ -186,13 +185,15 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForcePolish.setChecked(app.ForceLanguage.equals("pl"));
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 
-		EditTextPeriodicSpeaking.setText(String
-				.valueOf(app.PeriodicSpeaking / 1000));
+		EditTextPeriodicSpeaking.setText(String.valueOf(app.PeriodicSpeaking / 1000));
 
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 
 		app.Say(getString(R.string.Config));
+
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 	}
 
 	public void SaveSettingsOnClick(View v) {
@@ -235,14 +236,11 @@ public class ConfigActivity extends SherlockActivity {
 		if (RadioForcePolish.isChecked())
 			app.ForceLanguage = "pl";
 
-		app.PeriodicSpeaking = Integer.parseInt(EditTextPeriodicSpeaking
-				.getText().toString()) * 1000;
+		app.PeriodicSpeaking = Integer.parseInt(EditTextPeriodicSpeaking.getText().toString()) * 1000;
 
-		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText()
-				.toString());
+		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText().toString());
 
-		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText()
-				.toString());
+		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText().toString());
 
 		app.SaveSettings(false);
 
