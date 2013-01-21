@@ -3,11 +3,14 @@ package com.ezio.multiwii.helpers;
 import java.util.Random;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.Main.MainMultiWiiActivity;
 
 public class Notifications {
 
@@ -31,11 +34,12 @@ public class Notifications {
 		mBuilder.setTicker(title + ":" + text);
 		mBuilder.setOngoing(isPresistant);
 		mBuilder.setAutoCancel(true);
-		try {
-			mNotificationManager.notify(Id, mBuilder.build());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
+		Intent notificationIntent = new Intent(context, MainMultiWiiActivity.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(contentIntent);
+
+		mNotificationManager.notify(Id, mBuilder.build());
 	}
 
 	public void Cancel(int Id) {
