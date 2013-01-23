@@ -349,8 +349,18 @@ public class App extends Application {
 
 			// update Home position
 			mw.SendRequestGetWayPoint(0);
-			// update Position hold
-			mw.SendRequestGetWayPoint(16);
+
+			for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
+				if (mw.buttonCheckboxLabel[i].equals("GPS HOLD")) {
+					if (mw.ActiveModes[i]) {
+						// update Position hold
+						mw.SendRequestGetWayPoint(16);
+					} else {
+						mw.Waypoints[16].Lat = 0;
+						mw.Waypoints[16].Lon = 0;
+					}
+				}
+			}
 
 			String t = new String();
 			if (mw.BaroPresent == 1)
