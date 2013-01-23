@@ -41,24 +41,24 @@ import android.util.Log;
 
 public class ComunityMap extends AsyncTask {
 
-	
-	public ComunityMap(double selectedLatitude, double selectedLongitude, String nick)
-	{
-		NumberFormat format = new DecimalFormat("0.############################################################"); // used
-		// to
-		// avoid
+	NumberFormat format = new DecimalFormat("0.############################################################");
 
-		String data= format.format(selectedLatitude)+";"+format.format(selectedLongitude)+";"+nick;
-		
+	public ComunityMap() {
+
+	}
+
+	public void send(double selectedLatitude, double selectedLongitude, String nick) {
+
+		String data = format.format(selectedLatitude / 1e6) + ";" + format.format(selectedLongitude / 1e6) + ";" + nick;
 		try {
-			executeHttpGet(data);
-			Log.d("aaa","Added to comunity map");
+			execute(data);
+			Log.d("aaa", "Added to comunity map");
 		} catch (Exception e) {
-			Log.d("aaa","Comunity map error "+e.getMessage());
-			
+			Log.d("aaa", "Comunity map error " + e.getMessage());
+
 		}
 	}
-	
+
 	private void executeHttpGet(String data) throws Exception {
 		BufferedReader in = null;
 		try {
@@ -66,8 +66,7 @@ public class ComunityMap extends AsyncTask {
 			HttpGet request = new HttpGet();
 			request.setURI(new URI("http://ezio.ovh.org/multiwii.php?a=" + data));
 			HttpResponse response = client.execute(request);
-			in = new BufferedReader(new InputStreamReader(response.getEntity()
-					.getContent()));
+			in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 			StringBuffer sb = new StringBuffer("");
 			String line = "";
 			String NL = System.getProperty("line.separator");
@@ -81,7 +80,7 @@ public class ComunityMap extends AsyncTask {
 			if (in != null) {
 				try {
 					in.close();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

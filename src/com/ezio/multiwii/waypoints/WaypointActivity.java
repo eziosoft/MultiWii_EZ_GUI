@@ -156,7 +156,8 @@ public class WaypointActivity extends Activity {
 	
 	public void ComunityMapOnClick(View v)
 	{
-		ComunityMap comunityMap= new ComunityMap(SelectedLatitude/ 1e6,SelectedLongitude/ 1e6,"testNick");
+		ComunityMap comunityMap= new ComunityMap();
+		comunityMap.send(SelectedLatitude, SelectedLongitude, "test");
 	}
 
 }

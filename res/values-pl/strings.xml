@@ -30,7 +30,7 @@
   <string name="pointFrontHelp">Wskazuje realne ustawienie modelu bez względu na ustawienie telefonu dzięki różnicy we wskazaniach kompasu telefonu i modelu.</string>
   <string name="TTS">Text to speach</string>
   <string name="GPS">GPS</string>
-  <string name="GPS_distanceToHome">Odległość do domu(cm)</string>
+  <string name="GPS_distanceToHome">Odległość do domu(m)</string>
   <string name="GPS_directionToHome">Kierunek do domu</string>
   <string name="GPS_numSat">Ilość satelit</string>
   <string name="GPS_fix">Fix</string>

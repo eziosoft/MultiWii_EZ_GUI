@@ -50,7 +50,7 @@
   <string name="pointFrontHelp">Point multirotor front compares the compass readings from the phone and multicopter. Indicates the copter forward regardless of the location of the phone.</string>
   <string name="TTS">Синтезатор речи</string>
   <string name="GPS">GPS</string>
-  <string name="GPS_distanceToHome">Расст.доДома(см)</string>
+  <string name="GPS_distanceToHome">Расст.доДома(м)</string>
   <string name="GPS_directionToHome">Направление к Дому</string>
   <string name="GPS_numSat">Спутники</string>
   <string name="GPS_fix">Fix</string>

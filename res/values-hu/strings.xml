@@ -51,7 +51,7 @@
     <string name="pointFrontHelp">A "multirotor felé mutat" beállítás során az iránytű a multirotor irányát mutatja a telefonhoz képest</string>
     <string name="TTS">TSzöveg kimondás</string>
     <string name="GPS">GPS</string>
-    <string name="GPS_distanceToHome">Home távolsága(cm)</string>
+    <string name="GPS_distanceToHome">Home távolsága(m)</string>
     <string name="GPS_directionToHome">Home iránya</string>
     <string name="GPS_numSat">NumSat</string>
     <string name="GPS_fix">Fix</string>

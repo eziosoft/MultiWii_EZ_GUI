@@ -171,8 +171,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
-			CheckBoxFollowMe.setVisibility(View.GONE);
-			FollowMeInfoTV.setVisibility(View.GONE);
+			//CheckBoxFollowMe.setVisibility(View.GONE);
+			//FollowMeInfoTV.setVisibility(View.GONE);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
