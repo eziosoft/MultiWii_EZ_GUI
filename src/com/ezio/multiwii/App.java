@@ -54,7 +54,6 @@ public class App extends Application {
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
-	
 	// public boolean DataSent = false; // to server
 
 	private static String REFRESHRATE = "REFRESHRATE";
@@ -317,9 +316,12 @@ public class App extends Application {
 
 					Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
 
+					if (mw.buttonCheckboxLabel[i].equals("ARM")) {
+						soundManager.playSound(1);
+					}
+
 					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
 						mw.AltCorrection = mw.alt;
-						soundManager.playSound(1);
 						mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
 					}
 
@@ -347,7 +349,7 @@ public class App extends Application {
 
 			// update Home position
 			mw.SendRequestGetWayPoint(0);
-			//update Position hold 
+			// update Position hold
 			mw.SendRequestGetWayPoint(16);
 
 			String t = new String();
@@ -362,7 +364,6 @@ public class App extends Application {
 			if (mw.AccPresent == 1)
 				t += "ACC";
 			notifications.displayNotification("Status", t, false, 99, false);
-			
 
 		}
 		// --------------------END timer every 5sek---------------------------
