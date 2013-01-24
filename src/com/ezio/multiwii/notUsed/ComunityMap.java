@@ -25,7 +25,6 @@ package com.ezio.multiwii.notUsed;
  }
  */
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -36,15 +35,18 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class ComunityMap extends AsyncTask {
 
 	NumberFormat format = new DecimalFormat("0.############################################################");
+	Context context;
 
-	public ComunityMap() {
-
+	public ComunityMap(Context context) {
+		this.context = context;
 	}
 
 	public void send(double selectedLatitude, double selectedLongitude, String nick) {
@@ -53,8 +55,10 @@ public class ComunityMap extends AsyncTask {
 		try {
 			execute(data);
 			Log.d("aaa", "Added to comunity map");
+			Toast.makeText(context, "Point added to map", Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
 			Log.d("aaa", "Comunity map error " + e.getMessage());
+			Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
 
 		}
 	}

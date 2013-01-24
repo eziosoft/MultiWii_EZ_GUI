@@ -21,7 +21,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -34,9 +37,11 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ezio.multiwii.App;
+import com.ezio.multiwii.ControlActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.notUsed.ComunityMap;
 
@@ -152,12 +157,36 @@ public class WaypointActivity extends Activity {
 		killme = true;
 
 	}
-	
-	
-	public void ComunityMapOnClick(View v)
-	{
-		ComunityMap comunityMap= new ComunityMap();
-		comunityMap.send(SelectedLatitude, SelectedLongitude, "test");
+
+	public void ComunityMapOnClick(View v) {
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Comunity map");
+		alert.setMessage("Enter your nickname. Without spaces and special characters.");
+
+		// Set an EditText view to get user input
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String value = input.getText().toString();
+
+				ComunityMap comunityMap = new ComunityMap(getApplicationContext());
+				comunityMap.send(SelectedLatitude, SelectedLongitude, value.replaceAll("[-+.^:,<>] ",""));
+
+			}
+		});
+
+		alert.setNegativeButton(getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+
+		alert.show();
+
 	}
 
 }

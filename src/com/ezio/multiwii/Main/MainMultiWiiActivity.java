@@ -358,6 +358,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		startActivity(new Intent(getApplicationContext(), WaypointActivity.class));
 	}
 
+	public void CommunityMapOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://maps.google.com/maps?q=http:%2F%2Fezio.ovh.org%2Fkml2.php&hl=pl&sll=48.856612,2.366095&sspn=0.015614,0.042272&t=h&z=3")));
+	}
+
 	// /////menu////////
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

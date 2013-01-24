@@ -34,11 +34,19 @@
 
     <Button
         android:id="@+id/Button01"
-        style="?android:attr/buttonStyleSmall"
+        style="android:buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SetWPOnClick"
         android:text="@string/SetAsHome" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="ComunityMapOnClick"
+        android:text="@string/AddToCommunityMap"
+        android:visibility="visible" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -70,14 +78,6 @@
                 android:onClick="GetWPOnClick"
                 android:text="Get WP0"
                 android:visibility="gone" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="ComunityMapOnClick"
-                android:text="Button"
-                android:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>

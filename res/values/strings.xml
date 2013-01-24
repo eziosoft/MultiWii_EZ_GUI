@@ -187,5 +187,7 @@
     <string name="LowVoltageAlarm">Low Voltage Alarm</string>
     <string name="RadioModeInfo">This is used only to display correctly radio sticks in Radio view</string>
     <string name="MagModeInfo">Changes behaviour of compass arrow in Dasboard 1</string>
+    <string name="CommunityMap">Community Map</string>
+    <string name="AddToCommunityMap">Add To Community Map</string>
 
 </resources>
