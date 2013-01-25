@@ -24,18 +24,12 @@ I'm working on this project in my spare time. If you find it usefull and you thi
 
 https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
 
-Thank you for donations:
--wahjudi
--Han Geesink
--Der Watz
--ScottY6
--Dellow
 
 
 Boring legal stuff
 ------------------
     MultiWii EZ-GUI
-    Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
+    Copyright (C) <2013>  Bartosz Szczygiel (eziosoft)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
