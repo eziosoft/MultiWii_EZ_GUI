@@ -156,8 +156,8 @@ public class WaypointActivity extends Activity {
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-		alert.setTitle("Comunity map");
-		alert.setMessage("Enter your nickname.");
+		alert.setTitle(getString(R.string.CommunityMap));
+		alert.setMessage(getString(R.string.EnterYourNick));
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
@@ -190,8 +190,8 @@ public class WaypointActivity extends Activity {
 	private void getDescryption() {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-		alert.setTitle("Comunity map");
-		alert.setMessage("Enter descryption.");
+		alert.setTitle(getString(R.string.CommunityMap));
+		alert.setMessage(getString(R.string.EnterDescryption));
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
