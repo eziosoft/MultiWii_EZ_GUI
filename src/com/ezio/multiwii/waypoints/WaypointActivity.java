@@ -19,19 +19,10 @@ package com.ezio.multiwii.waypoints;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Iterator;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Criteria;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
-import android.location.GpsStatus.Listener;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -41,9 +32,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ezio.multiwii.App;
-import com.ezio.multiwii.ControlActivity;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.notUsed.ComunityMap;
 
 public class WaypointActivity extends Activity {
 
@@ -125,6 +114,8 @@ public class WaypointActivity extends Activity {
 			app.mw.Waypoints[16].Lat = (int) (SelectedLatitude * 10 + 100);
 			app.mw.Waypoints[16].Lon = (int) (SelectedLongitude * 10 + 100);
 		}
+
+		finish();
 	}
 
 	void displayWPs() {
@@ -158,12 +149,15 @@ public class WaypointActivity extends Activity {
 
 	}
 
+	String nick = "";
+	String descryption = "";
+
 	public void ComunityMapOnClick(View v) {
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("Comunity map");
-		alert.setMessage("Enter your nickname. Without spaces and special characters.");
+		alert.setMessage("Enter your nickname.");
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
@@ -171,10 +165,46 @@ public class WaypointActivity extends Activity {
 
 		alert.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				String value = input.getText().toString();
+				nick = input.getText().toString();
+
+				// ComunityMap comunityMap = new
+				// ComunityMap(getApplicationContext());
+				//
+				// comunityMap.send(SelectedLatitude, SelectedLongitude,value);
+
+				getDescryption();
+
+			}
+		});
+
+		alert.setNegativeButton(getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+
+		alert.show();
+
+	}
+
+	private void getDescryption() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Comunity map");
+		alert.setMessage("Enter descryption.");
+
+		// Set an EditText view to get user input
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				descryption = input.getText().toString();
 
 				ComunityMap comunityMap = new ComunityMap(getApplicationContext());
-				comunityMap.send(SelectedLatitude, SelectedLongitude, value.replaceAll("[-+.^:,<>] ",""));
+
+				comunityMap.send(SelectedLatitude, SelectedLongitude, nick, descryption);
+				finish();
 
 			}
 		});

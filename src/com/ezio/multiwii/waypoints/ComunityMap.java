@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii.notUsed;
+package com.ezio.multiwii.waypoints;
 
 /*
  * 	if (app.DataSent == false) {
@@ -35,6 +35,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ezio.multiwii.helpers.MyBase64;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -49,9 +51,9 @@ public class ComunityMap extends AsyncTask {
 		this.context = context;
 	}
 
-	public void send(double selectedLatitude, double selectedLongitude, String nick) {
+	public void send(double selectedLatitude, double selectedLongitude, String nick, String description) {
 
-		String data = format.format(selectedLatitude / 1e6) + ";" + format.format(selectedLongitude / 1e6) + ";" + nick;
+		String data = format.format(selectedLatitude / 1e6) + ";" + format.format(selectedLongitude / 1e6) + ";" + MyBase64.encode(nick.getBytes()) + ";" + MyBase64.encode(description.getBytes());
 		try {
 			execute(data);
 			Log.d("aaa", "Added to comunity map");
