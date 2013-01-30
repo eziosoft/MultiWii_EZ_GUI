@@ -4,7 +4,8 @@
     android:versionName="3.01" >
 
     <uses-sdk
-        android:minSdkVersion="8" android:targetSdkVersion="15"/>
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
 
     <application
         android:name="App"
@@ -13,10 +14,6 @@
         android:theme="@style/AppTheme" >
         <uses-library android:name="com.google.android.maps" />
 
-        <activity
-            android:name="com.google.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" >
-        </activity>
         <activity
             android:name=".Main.MainMultiWiiActivity"
             android:configChanges="orientation|screenSize"
@@ -84,7 +81,9 @@
             android:name=".map.MapActivityMy"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name=".waypoints.WaypointActivity" android:theme="@android:style/Theme.Dialog">
+        <activity
+            android:name=".waypoints.WaypointActivity"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity android:name="AboutActivity" >
         </activity>
@@ -129,7 +128,10 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
-        <activity android:name="InfoActivity" android:theme="@android:style/Theme.Dialog"></activity>
+        <activity
+            android:name="InfoActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

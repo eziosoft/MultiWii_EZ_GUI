@@ -27,7 +27,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,9 +59,6 @@ import com.ezio.multiwii.motors.MotorsActivity;
 import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class MainMultiWiiActivity extends SherlockActivity {
@@ -77,7 +73,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	ActionBarSherlock actionBar;
 
-	AdView adView;
 	public static final String MY_PUBLISHER_ID = "a15030365bc09b4";
 
 	/** Called when the activity is first created. */
@@ -122,10 +117,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	@Override
 	protected void onDestroy() {
-		Close(null);
-		if (adView != null) {
-			adView.destroy();
-		}
 		super.onDestroy();
 
 	}
