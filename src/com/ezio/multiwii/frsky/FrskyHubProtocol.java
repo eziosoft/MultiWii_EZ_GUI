@@ -150,7 +150,7 @@ public class FrskyHubProtocol {
 		case LongitudeAfter:
 			GPS_LongitudeAfter = getIntFromFrame(frame);
 
-			GPS_Longtitude = 10 * Functions.ConcatInt(GPS_LongitudeBefore, GPS_LongitudeAfter);
+			GPS_Longtitude = GPS_EW * 10 * Functions.ConcatInt(GPS_LongitudeBefore, GPS_LongitudeAfter);
 
 			log("+LongitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x12 + 8;// After “.”
@@ -165,7 +165,7 @@ public class FrskyHubProtocol {
 		case LatitudeAfter:
 			GPS_LatitudeAfter = getIntFromFrame(frame);
 
-			GPS_Latitude = 10 * Functions.ConcatInt(GPS_LatitudeBefore, GPS_LatitudeAfter);
+			GPS_Latitude = GPS_NS * 10 * Functions.ConcatInt(GPS_LatitudeBefore, GPS_LatitudeAfter);
 
 			log("+LatitudeAfter", String.valueOf(getIntFromFrame(frame)));
 			break;// 0x13 + 8;// U After “.”
