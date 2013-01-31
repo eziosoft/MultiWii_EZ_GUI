@@ -191,7 +191,7 @@ public class WaypointActivity extends Activity {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle(getString(R.string.CommunityMap));
-		alert.setMessage(getString(R.string.EnterDescryption));
+		alert.setMessage(getString(R.string.EnterDescription));
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);

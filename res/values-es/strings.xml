@@ -180,5 +180,5 @@
   <string name="CommunityMap">Mapa de la comunidad</string>
   <string name="AddToCommunityMap">Agregar al mapa de la comunidad</string>
   <string name="EnterYourNick">Introduzca su apodo</string>
-  <string name="EnterDescryption">Entrar descripción</string>
+  <string name="EnterDescription">Entrar descripción</string>
 </resources>

@@ -190,6 +190,6 @@
   <string name="CommunityMap">Карта сообщества</string>
   <string name="AddToCommunityMap">Добавиться в сообщество на карте</string>
   <string name="EnterYourNick">Введите ваш ник</string>
-  <string name="EnterDescryption">Введите описание</string>
+  <string name="EnterDescription">Введите описание</string>
 
 </resources>

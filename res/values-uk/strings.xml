@@ -190,6 +190,6 @@
   <string name="CommunityMap">Мапа общини</string>
   <string name="AddToCommunityMap">Добавитись до Мапи общини</string>
   <string name="EnterYourNick">Введіть ваш Нік</string>
-  <string name="EnterDescryption">Введіть опис</string>
+  <string name="EnterDescription">Введіть опис</string>
 
  </resources>

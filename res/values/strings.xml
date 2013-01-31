@@ -190,6 +190,6 @@
     <string name="CommunityMap">Community Map</string>
     <string name="AddToCommunityMap">Add To Community Map</string>
     <string name="EnterYourNick">Enter your nick</string>
-    <string name="EnterDescryption">Enter description</string>
+    <string name="EnterDescription">Enter description</string>
 
 </resources>
