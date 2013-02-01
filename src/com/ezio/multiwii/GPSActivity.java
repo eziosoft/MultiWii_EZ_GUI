@@ -124,6 +124,10 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 			Waypoint w = app.mw.Waypoints[0];
 			// for (Waypoint w : app.mw.Waypoints) {
 			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
+
+			w = app.mw.Waypoints[16];
+			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
+
 			// }
 
 			app.Frequentjobs();
@@ -171,8 +175,8 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
-			//CheckBoxFollowMe.setVisibility(View.GONE);
-			//FollowMeInfoTV.setVisibility(View.GONE);
+			// CheckBoxFollowMe.setVisibility(View.GONE);
+			// FollowMeInfoTV.setVisibility(View.GONE);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -269,7 +273,11 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		}
 
 		if (CheckBoxFollowMe.isChecked()) {
+
+			// TODO needs more work here
 			app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
+			app.mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (PhoneLatitude * 1e7), (int) (PhoneLongitude * 1e7), 0, 0));
+			//
 
 			if (FollowMeBlinkFlag) {
 				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);
