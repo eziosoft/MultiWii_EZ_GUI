@@ -177,4 +177,9 @@
   <string name="LowVoltageAlarm">Alarm niskiego napięcia</string>
   <string name="RadioModeInfo">Używane tylko do poprawnego wyświetlania drążków w zakładce Radio</string>
   <string name="MagModeInfo">Zmienia zachowanie strzałki kompasu na Panelu 1</string>
+  <string name="CommunityMap">Mapa Wspólnoty</string>
+  <string name="AddToCommunityMap">Dodaj do mapy wspólnoty</string>
+  <string name="EnterYourNick">Podaj Twój nick</string>
+  <string name="EnterDescription">Podaj opis</string>
+  <string name="SetAsPositionHold">Ustaw jako Position Hold</string>
 </resources>

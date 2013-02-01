@@ -370,10 +370,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 				app.bt.BTDisable();
 
-				app.notifications.Cancel(99);
 			}
 
 			app.mw.CloseLoggingFile();
+			app.notifications.Cancel(99);
 			Close(null);
 			System.exit(0);
 			return true;

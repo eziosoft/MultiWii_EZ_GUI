@@ -237,7 +237,7 @@ public class GPSActivity extends SherlockActivity implements LocationListener {
 		app.ForceLanguage();
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
+		locationManager.requestLocationUpdates(provider, 0, 0, this);
 		app.Say(getString(R.string.GPS));
 
 	}
