@@ -37,8 +37,16 @@
         style="android:buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="SetWPOnClick"
+        android:onClick="SetWPHomeOnClick"
         android:text="@string/SetAsHome" />
+
+    <Button
+        android:id="@+id/Button02"
+        style="android:buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SetWPPositionHoldOnClick"
+        android:text="@string/SetAsPositionHold" />
 
     <Button
         android:id="@+id/button2"

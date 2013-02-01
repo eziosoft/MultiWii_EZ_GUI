@@ -191,5 +191,6 @@
     <string name="AddToCommunityMap">Add To Community Map</string>
     <string name="EnterYourNick">Enter your nick</string>
     <string name="EnterDescription">Enter description</string>
+    <string name="SetAsPositionHold">Set As Position Hold</string>
 
 </resources>
