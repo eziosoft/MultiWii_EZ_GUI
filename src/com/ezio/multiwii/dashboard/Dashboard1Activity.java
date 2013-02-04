@@ -66,13 +66,19 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 		@Override
 		public void run() {
 
-			myAzimuth=(float) (-sensors.GetYaw+declination);
-			
+			myAzimuth = (float) (sensors.GetYaw + declination);
+
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
 
+			if (app.D) {
+				app.mw.angy = sensors.GetPitch;
+				app.mw.angx = (sensors.GetRoll);
+			}
+
 			PRVp.SetAngle(app.mw.angy);
 			PRVr.SetAngle(app.mw.angx);
+
 			pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
 
 			if (app.MagMode == 1) {
@@ -83,7 +89,6 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 				compass.SetHeading(myAzimuth - app.mw.head);
 				compass.SetText("FRONT");
 			}
-
 
 			myCompass.SetHeading(myAzimuth);
 
@@ -97,7 +102,8 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			if(app.D) Log.d(app.TAG, "loop " + this.getClass().getName());
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
