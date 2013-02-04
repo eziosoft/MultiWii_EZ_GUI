@@ -16,19 +16,10 @@
  */
 package com.ezio.multiwii.dashboard;
 
-import com.ezio.multiwii.App;
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.GeomagneticField;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -39,7 +30,11 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
-public class Dashboard1Activity extends Activity implements SensorEventListener, LocationListener {
+import com.ezio.multiwii.App;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.Sensors;
+
+public class Dashboard1Activity extends Activity implements LocationListener {
 
 	private boolean killme = false;
 
@@ -57,19 +52,22 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 	Handler mHandler = new Handler();
 
 	private SensorManager sensorManager;
-	private float myAzimuth = 0;
-	private float myPitch = 0;
-	private float myRoll = 0;
 
 	GeomagneticField geoField;
 	double declination = 0;
 	private LocationManager locationManager;
 	private String provider;
 
+	// //////////////////////
+	Sensors sensors;
+	float myAzimuth = 0;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
 
+			myAzimuth=(float) (-sensors.GetYaw+declination);
+			
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
 
@@ -79,13 +77,15 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 
 			if (app.MagMode == 1) {
 				compass.SetHeading(-app.mw.head);
-				compass.SetText("N");
+				compass.SetText("");
 
 			} else {
 				compass.SetHeading(myAzimuth - app.mw.head);
 				compass.SetText("FRONT");
-
 			}
+
+
+			myCompass.SetHeading(myAzimuth);
 
 			baro.setText(String.format("%.2f", app.mw.alt));
 			BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
@@ -96,8 +96,8 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
-			
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+
+			if(app.D) Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
@@ -146,10 +146,13 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 			// PhoneLongtitudeTV.setText("Provider not available");
 		}
 
+		sensors = new Sensors(getApplicationContext());
+
 	}
 
 	@Override
 	protected void onDestroy() {
+		sensors.stop();
 		super.onDestroy();
 	}
 
@@ -158,7 +161,8 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
-		sensorManager.unregisterListener(this);
+
+		sensors.stop();
 		locationManager.removeUpdates(this);
 
 	}
@@ -170,34 +174,18 @@ public class Dashboard1Activity extends Activity implements SensorEventListener,
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
-		sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL);
+		sensors.start();
 		locationManager.requestLocationUpdates(provider, 400, 1, this);
 		app.Say(getString(R.string.PitchRoll));
 
 	}
 
 	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		myAzimuth = Math.round(event.values[0]);
-		myPitch = Math.round(event.values[1]);
-		myRoll = Math.round(event.values[2]);
-
-		myAzimuth += declination;
-		// Log.d("aaa", String.valueOf(geoField.getDeclination()));
-
-		myCompass.SetHeading(myAzimuth);
-	}
-
-	@Override
 	public void onLocationChanged(Location location) {
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		declination = geoField.getDeclination();
-		Log.d("aaa", String.valueOf(geoField.getDeclination()));
+		if (app.D)
+			Log.d("aaa", "geoField.getDeclination())=" + String.valueOf(geoField.getDeclination()));
 	}
 
 	@Override
