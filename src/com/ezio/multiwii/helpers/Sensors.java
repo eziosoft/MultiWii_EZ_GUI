@@ -5,8 +5,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
+import android.util.Log;
 
-public class Sensors implements SensorEventListener {
+public class Sensors implements SensorEventListener, LocationListener {
 	/* sensor data */
 	SensorManager m_sensorManager;
 	float[] m_lastMagFields = new float[3];;
@@ -31,8 +35,8 @@ public class Sensors implements SensorEventListener {
 	}
 
 	private void registerListeners() {
-		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_FASTEST);
-		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST);
+		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_GAME);
+		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
 	}
 
 	private void unregisterListeners() {
@@ -63,28 +67,66 @@ public class Sensors implements SensorEventListener {
 		computeOrientation();
 	}
 
+	LowPassFilter filterYaw = new LowPassFilter(0.05f);
+	LowPassFilter filterPitch = new LowPassFilter(0.05f);
+	LowPassFilter filterRoll = new LowPassFilter(0.05f);
+
 	private void computeOrientation() {
 		if (SensorManager.getRotationMatrix(m_rotationMatrix, null, m_lastAccels, m_lastMagFields)) {
 			SensorManager.getOrientation(m_rotationMatrix, m_orientation);
 
-			/*
-			 * [0] : yaw, rotation around z axis [1] : pitch, rotation around x
-			 * axis [2] : roll, rotation around y axis
-			 */
 			float yaw = (float) Math.toDegrees(m_orientation[0]);
 			float pitch = (float) Math.toDegrees(m_orientation[1]);
 			float roll = (float) Math.toDegrees(m_orientation[2]);
 
-			GetYaw = yaw;
-			GetPitch = pitch;
-			GetRoll = roll;
-			// TextView rt = (TextView) findViewById(R.id.roll);
-			// TextView pt = (TextView) findViewById(R.id.pitch);
-			// TextView yt = (TextView) findViewById(R.id.yaw);
-			// yt.setText("azi z: " + m_lastYaw);
-			// pt.setText("pitch x: " + m_lastPitch);
-			// rt.setText("roll y: " + m_lastRoll);
+			GetYaw = filterYaw.lowPass(yaw);
+			GetPitch = filterPitch.lowPass(pitch);
+			GetRoll = filterRoll.lowPass(roll);
+
 		}
 	}
 
+	public class LowPassFilter {
+		/*
+		 * time smoothing constant for low-pass filter 0 ≤ alpha ≤ 1 ; a smaller
+		 * value basically means more smoothing See:
+		 * http://en.wikipedia.org/wiki
+		 * /Low-pass_filter#Discrete-time_realization
+		 */
+		float ALPHA = 0f;
+		float lastOutput = 0;
+
+		public LowPassFilter(float ALPHA) {
+			this.ALPHA = ALPHA;
+		}
+
+		protected float lowPass(float input) {
+			lastOutput = lastOutput + ALPHA * (input - lastOutput);
+			return lastOutput;
+		}
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+
+	}
 }
