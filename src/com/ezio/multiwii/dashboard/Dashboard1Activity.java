@@ -17,14 +17,7 @@
 package com.ezio.multiwii.dashboard;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
-import android.hardware.GeomagneticField;
-import android.hardware.SensorManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,7 +27,7 @@ import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.helpers.Sensors;
 
-public class Dashboard1Activity extends Activity implements LocationListener {
+public class Dashboard1Activity extends Activity implements Sensors.Listener {
 
 	private boolean killme = false;
 
@@ -51,14 +44,6 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 
 	Handler mHandler = new Handler();
 
-	private SensorManager sensorManager;
-
-	GeomagneticField geoField;
-	double declination = 0;
-	private LocationManager locationManager;
-	private String provider;
-
-	// //////////////////////
 	Sensors sensors;
 	float myAzimuth = 0;
 
@@ -66,15 +51,8 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 		@Override
 		public void run() {
 
-			myAzimuth = (float) (sensors.GetYaw + declination);
-
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
-
-			if (app.D) {
-				app.mw.angy = sensors.GetPitch;
-				app.mw.angx = (sensors.GetRoll);
-			}
 
 			PRVp.SetAngle(app.mw.angy);
 			PRVr.SetAngle(app.mw.angx);
@@ -135,23 +113,6 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 		BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
 		PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
 
-		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		// criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-		provider = locationManager.getBestProvider(criteria, false);
-		Location location = locationManager.getLastKnownLocation(provider);
-		if (location != null) {
-			Log.d("aaa", String.valueOf(location.getLatitude()));
-			Log.d("aaa", String.valueOf(location.getLongitude()));
-			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
-			declination = geoField.getDeclination();
-		} else {
-			Log.d("aaa", "Provider not available");
-			// PhoneLongtitudeTV.setText("Provider not available");
-		}
-
 		sensors = new Sensors(getApplicationContext());
 
 	}
@@ -167,9 +128,7 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
-
 		sensors.stop();
-		locationManager.removeUpdates(this);
 
 	}
 
@@ -181,31 +140,18 @@ public class Dashboard1Activity extends Activity implements LocationListener {
 		mHandler.postDelayed(update, app.RefreshRate);
 
 		sensors.start();
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
+		sensors.registerListener(this);
 		app.Say(getString(R.string.PitchRoll));
 
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {
-		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
-		declination = geoField.getDeclination();
-		if (app.D)
-			Log.d("aaa", "geoField.getDeclination())=" + String.valueOf(geoField.getDeclination()));
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
+	public void onSensorsStateChange() {
+		myAzimuth = (float) (sensors.GetHeading);
+		if (app.D) {
+			app.mw.angy = sensors.GetPitch;
+			app.mw.angx = sensors.GetRoll;
+		}
 
 	}
 

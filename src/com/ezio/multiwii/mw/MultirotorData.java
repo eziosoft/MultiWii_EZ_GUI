@@ -25,7 +25,6 @@ import android.util.Log;
 
 import com.ezio.multiwii.helpers.FileAccess;
 import com.ezio.multiwii.waypoints.Waypoint;
-import com.google.android.maps.GeoPoint;
 
 public abstract class MultirotorData {
 
