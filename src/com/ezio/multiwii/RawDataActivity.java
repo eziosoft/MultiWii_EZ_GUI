@@ -102,17 +102,22 @@ public class RawDataActivity extends Activity {
 	}
 
 	private void displayData() {
-		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError));
+
+		String t = new String();
+		if (app.mw.BaroPresent == 1)
+			t += "BARO ";
+		if (app.mw.GPSPresent == 1)
+			t += "GPS ";
+		if (app.mw.SonarPresent == 1)
+			t += "SONAR ";
+		if (app.mw.MagPresent == 1)
+			t += "MAG ";
+		if (app.mw.AccPresent == 1)
+			t += "ACC";
+		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError) + "\n" + t);
 
 		TVData.setText("");
-		// log("version", app.mw.version);
-		// log("multiType",
-		// app.mw.MultiTypeName[app.mw.multiType] + "("
-		// + String.valueOf(app.mw.multiType) + ")");
-		//
-		// log("cycleTime", app.mw.cycleTime);
-		// log("i2cError", app.mw.i2cError);
-
+	
 		log("gx", app.mw.gx);
 		log("gy", app.mw.gy);
 		log("gz", app.mw.gz);

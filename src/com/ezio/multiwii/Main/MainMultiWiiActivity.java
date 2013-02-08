@@ -367,11 +367,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
 			if (app.DisableBTonExit) {
-
 				app.bt.BTDisable();
-
 			}
 
+			app.sensors.stop();
 			app.mw.CloseLoggingFile();
 			app.notifications.Cancel(99);
 			Close(null);

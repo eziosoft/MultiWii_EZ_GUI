@@ -58,8 +58,6 @@ public class GPSActivity extends SherlockActivity {
 
 	TextView FollowMeInfoTV;
 
-	private boolean InjectGPSBlinkFlag = false;
-
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
@@ -96,18 +94,18 @@ public class GPSActivity extends SherlockActivity {
 			PhoneAccuracyTV.setText(String.valueOf(app.sensors.PhoneAccuracy));
 			DeclinationTV.setText(String.valueOf(app.sensors.Declination));
 
-			if (app.FollowMeBlinkFlag) {
-				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);
-			} else {
-				CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT);
-			}
 			FollowMeInfoTV.setText("WayPointsDebug:\n");
 			Waypoint w = app.mw.Waypoints[0];
 			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 			w = app.mw.Waypoints[16];
 			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 
-			if (InjectGPSBlinkFlag) {
+			if (app.FollowMeBlinkFlag) {
+				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);
+			} else {
+				CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT);
+			}
+			if (app.InjectGPSBlinkFlag) {
 				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
 			} else {
 				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
@@ -158,8 +156,6 @@ public class GPSActivity extends SherlockActivity {
 
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
-			// CheckBoxFollowMe.setVisibility(View.GONE);
-			// FollowMeInfoTV.setVisibility(View.GONE);
 		}
 
 	}
@@ -174,9 +170,7 @@ public class GPSActivity extends SherlockActivity {
 	protected void onPause() {
 		super.onPause();
 		mHandler.removeCallbacks(update);
-		app.sensors.stop();
 		killme = true;
-
 	}
 
 	@Override
@@ -185,7 +179,10 @@ public class GPSActivity extends SherlockActivity {
 		app.ForceLanguage();
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-		app.sensors.start();
+
+		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
+		CheckBoxInjectGPS.setChecked(app.InjectGPSEnable);
+
 		app.Say(getString(R.string.GPS));
 
 	}

@@ -198,6 +198,7 @@ public class App extends Application implements Sensors.Listener {
 
 		sensors = new Sensors(getApplicationContext());
 		sensors.registerListener(this);
+		sensors.start();
 
 	}
 
@@ -272,7 +273,7 @@ public class App extends Application implements Sensors.Listener {
 
 	@Override
 	public void onTerminate() {
-		// Speak("bye");
+		sensors.stop();
 		mw.CloseLoggingFile();
 		super.onTerminate();
 
@@ -373,16 +374,20 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			String t = new String();
-			if (mw.BaroPresent == 1)
-				t += "BARO ";
-			if (mw.GPSPresent == 1)
-				t += "GPS ";
-			if (mw.SonarPresent == 1)
-				t += "SONAR ";
-			if (mw.MagPresent == 1)
-				t += "MAG ";
-			if (mw.AccPresent == 1)
-				t += "ACC";
+			// if (mw.BaroPresent == 1)
+			// t += "BARO ";
+			// if (mw.GPSPresent == 1)
+			// t += "GPS ";
+			// if (mw.SonarPresent == 1)
+			// t += "SONAR ";
+			// if (mw.MagPresent == 1)
+			// t += "MAG ";
+			// if (mw.AccPresent == 1)
+			// t += "ACC";
+			if (FollowMeEnable)
+				t += getString(R.string.Follow_Me) + ";";
+			if (InjectGPSEnable)
+				t += "InjectGPS";
 			notifications.displayNotification("Status", t, false, 99, false);
 
 		}
@@ -457,7 +462,7 @@ public class App extends Application implements Sensors.Listener {
 	}
 
 	@Override
-	public void onSensorsStateChangeGPS() {
+	public void onSensorsStateGPSLocationChange() {
 		if (FollowMeEnable) {
 			// TODO needs more work here
 			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), 0, 0));
@@ -469,6 +474,12 @@ public class App extends Application implements Sensors.Listener {
 			mw.SendRequestGPSinject21((byte) sensors.PhoneFix, (byte) sensors.PhoneNumSat, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), (int) sensors.PhoneAltitude, (int) sensors.PhoneSpeed);
 			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
 		}
+
+	}
+
+	@Override
+	public void onSensorsStateGPSStatusChange() {
+		// TODO Auto-generated method stub
 
 	}
 

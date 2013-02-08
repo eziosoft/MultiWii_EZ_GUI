@@ -124,8 +124,6 @@ public class Dashboard1Activity extends Activity {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
-		app.sensors.stop();
-
 	}
 
 	@Override
@@ -134,9 +132,6 @@ public class Dashboard1Activity extends Activity {
 		app.ForceLanguage();
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-
-		app.sensors.start();
-
 		app.Say(getString(R.string.PitchRoll));
 
 	}

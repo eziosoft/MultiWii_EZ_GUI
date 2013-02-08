@@ -22,8 +22,8 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public interface Listener {
 		public void onSensorsStateChangeMagAcc();
-
-		public void onSensorsStateChangeGPS();
+		public void onSensorsStateGPSLocationChange();
+		public void onSensorsStateGPSStatusChange();
 	}
 
 	public void registerListener(Listener listener) {
@@ -93,7 +93,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 					PhoneFix = 1;
 
 				if (mListener != null)
-					mListener.onSensorsStateChangeGPS();
+					mListener.onSensorsStateGPSStatusChange();
 			}
 		});
 
@@ -194,7 +194,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		Declination = geoField.getDeclination();
 
 		if (mListener != null)
-			mListener.onSensorsStateChangeGPS();
+			mListener.onSensorsStateGPSLocationChange();
 	}
 
 	@Override
