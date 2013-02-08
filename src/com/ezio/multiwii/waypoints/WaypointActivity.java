@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class WaypointActivity extends Activity {
 
 	TextView TVData;
 	TextView TVMWInfo;
+	CheckBox CheckBoxFollowMe;
 
 	NumberFormat format = new DecimalFormat("0.############################################################"); // used
 	// to
@@ -94,6 +96,8 @@ public class WaypointActivity extends Activity {
 
 			TVMWInfo.setText(getString(R.string.GPS_latitude) + ":" + format.format(SelectedLatitude / 1e6) + "\n" + getString(R.string.GPS_longitude) + ":" + format.format(SelectedLongitude / 1e6));
 		}
+
+		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
 
 	}
 
@@ -150,6 +154,8 @@ public class WaypointActivity extends Activity {
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
+		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
+
 	}
 
 	@Override
@@ -157,6 +163,11 @@ public class WaypointActivity extends Activity {
 		super.onPause();
 		mHandler.removeCallbacks(null);
 		killme = true;
+
+	}
+
+	public void FollowMeCheckBoxOnClick(View v) {
+		app.FollowMeEnable = CheckBoxFollowMe.isChecked();
 
 	}
 

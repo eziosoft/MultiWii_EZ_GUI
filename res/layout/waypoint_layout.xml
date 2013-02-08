@@ -52,6 +52,13 @@
                 android:onClick="SetWPPositionHoldOnClick"
                 android:text="@string/SetAsPositionHold" />
 
+            <CheckBox
+                android:id="@+id/checkBoxFollowMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="FollowMeCheckBoxOnClick"
+                android:text="@string/FollowMe" />
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"

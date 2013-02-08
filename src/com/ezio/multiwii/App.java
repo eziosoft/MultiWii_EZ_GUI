@@ -66,10 +66,10 @@ public class App extends Application implements Sensors.Listener {
 	public MultirotorData mw;
 	public Sensors sensors;
 
-	boolean FollowMeEnable = false;
-	boolean FollowMeBlinkFlag = false;
-	boolean InjectGPSEnable = false;
-	boolean InjectGPSBlinkFlag = false;
+	public boolean FollowMeEnable = false;
+	public boolean FollowMeBlinkFlag = false;
+	public boolean InjectGPSEnable = false;
+	public boolean InjectGPSBlinkFlag = false;
 
 	public FrskyProtocol frsky;
 
