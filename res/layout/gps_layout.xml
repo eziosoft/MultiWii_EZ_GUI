@@ -422,6 +422,7 @@
                 android:id="@+id/checkBoxFollowMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="FollowMeCheckBoxOnClick"
                 android:text="@string/FollowMe" />
 
             <TextView
@@ -440,7 +441,9 @@
                 android:id="@+id/checkBoxInjectGPS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="InjectGPSCheckBoxOnClick"
                 android:text="Inject GPS  (#define GPS_FROM_OSD has to be uncomented)" />
+
         </LinearLayout>
     </ScrollView>
 

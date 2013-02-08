@@ -21,7 +21,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 	private Listener mListener = null;
 
 	public interface Listener {
-		public void onSensorsStateChange();
+		public void onSensorsStateChangeMagAcc();
+
+		public void onSensorsStateChangeGPS();
 	}
 
 	public void registerListener(Listener listener) {
@@ -32,14 +34,14 @@ public class Sensors implements SensorEventListener, LocationListener {
 	private String provider;
 	GeomagneticField geoField;
 
-	int PhoneNumSat = 0;
-	double PhoneLatitude = 0;
-	double PhoneLongitude = 0;
-	double PhoneAltitude = 0;
-	double PhoneSpeed = 0;
-	int PhoneFix = 0;
-	float PhoneAccuracy = 0;
-	float Declination = 0;
+	public int PhoneNumSat = 0;
+	public double PhoneLatitude = 0;
+	public double PhoneLongitude = 0;
+	public double PhoneAltitude = 0;
+	public double PhoneSpeed = 0;
+	public int PhoneFix = 0;
+	public float PhoneAccuracy = 0;
+	public float Declination = 0;
 
 	SensorManager m_sensorManager;
 	float[] m_lastMagFields = new float[3];;
@@ -55,10 +57,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public Sensors(Context context) {
 		this.context = context;
-		start();
-	}
 
-	public void start() {
 		m_sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
@@ -69,6 +68,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		Location location = locationManager.getLastKnownLocation(provider);
 		if (location != null) {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
+			Declination = geoField.getDeclination();
 		}
 
 		locationManager.addGpsStatusListener(new GpsStatus.Listener() {
@@ -91,8 +91,15 @@ public class Sensors implements SensorEventListener, LocationListener {
 				}
 				if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
 					PhoneFix = 1;
+
+				if (mListener != null)
+					mListener.onSensorsStateChangeGPS();
 			}
 		});
+
+	}
+
+	public void start() {
 
 		registerListeners();
 
@@ -150,7 +157,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 			GetRoll = filterRoll.lowPass(roll);
 
 			if (mListener != null)
-				mListener.onSensorsStateChange();
+				mListener.onSensorsStateChangeMagAcc();
 
 		}
 	}
@@ -185,6 +192,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
+
+		if (mListener != null)
+			mListener.onSensorsStateChangeGPS();
 	}
 
 	@Override

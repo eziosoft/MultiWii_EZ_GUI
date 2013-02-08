@@ -32,15 +32,16 @@ import android.widget.Toast;
 
 import com.ezio.multiwii.frsky.FrskyProtocol;
 import com.ezio.multiwii.helpers.Notifications;
+import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.mw.MultiWii200;
 import com.ezio.multiwii.mw.MultiWii211;
 import com.ezio.multiwii.mw.MultirotorData;
-import com.google.android.maps.GeoPoint;
+import com.ezio.multiwii.waypoints.Waypoint;
 
-public class App extends Application {
+public class App extends Application implements Sensors.Listener {
 
 	// debug
 	public boolean D = false; // debug
@@ -63,6 +64,12 @@ public class App extends Application {
 	public BT bt;
 	public BT BTFrsky;
 	public MultirotorData mw;
+	public Sensors sensors;
+
+	boolean FollowMeEnable = false;
+	boolean FollowMeBlinkFlag = false;
+	boolean InjectGPSEnable = false;
+	boolean InjectGPSBlinkFlag = false;
 
 	public FrskyProtocol frsky;
 
@@ -188,6 +195,9 @@ public class App extends Application {
 		soundManager.playSound(2);
 
 		notifications = new Notifications(getApplicationContext());
+
+		sensors = new Sensors(getApplicationContext());
+		sensors.registerListener(this);
 
 	}
 
@@ -438,6 +448,28 @@ public class App extends Application {
 		mw.alt = frsky.frskyHubProtocol.Altitude;
 
 		mw.bytevbat = (byte) frsky.frskyHubProtocol.Voltage;
+	}
+
+	@Override
+	public void onSensorsStateChangeMagAcc() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onSensorsStateChangeGPS() {
+		if (FollowMeEnable) {
+			// TODO needs more work here
+			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), 0, 0));
+			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), 0, 0));
+			FollowMeBlinkFlag = !FollowMeBlinkFlag;
+		}
+
+		if (InjectGPSEnable) {
+			mw.SendRequestGPSinject21((byte) sensors.PhoneFix, (byte) sensors.PhoneNumSat, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), (int) sensors.PhoneAltitude, (int) sensors.PhoneSpeed);
+			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
+		}
+
 	}
 
 }

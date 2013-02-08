@@ -25,9 +25,8 @@ import android.widget.TextView;
 
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.helpers.Sensors;
 
-public class Dashboard1Activity extends Activity implements Sensors.Listener {
+public class Dashboard1Activity extends Activity {
 
 	private boolean killme = false;
 
@@ -44,7 +43,6 @@ public class Dashboard1Activity extends Activity implements Sensors.Listener {
 
 	Handler mHandler = new Handler();
 
-	Sensors sensors;
 	float myAzimuth = 0;
 
 	private Runnable update = new Runnable() {
@@ -53,6 +51,12 @@ public class Dashboard1Activity extends Activity implements Sensors.Listener {
 
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
+
+			myAzimuth = (float) (app.sensors.GetHeading);
+			if (app.D) {
+				app.mw.angy = app.sensors.GetPitch;
+				app.mw.angx = app.sensors.GetRoll;
+			}
 
 			PRVp.SetAngle(app.mw.angy);
 			PRVr.SetAngle(app.mw.angx);
@@ -113,14 +117,6 @@ public class Dashboard1Activity extends Activity implements Sensors.Listener {
 		BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
 		PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
 
-		sensors = new Sensors(getApplicationContext());
-
-	}
-
-	@Override
-	protected void onDestroy() {
-		sensors.stop();
-		super.onDestroy();
 	}
 
 	@Override
@@ -128,7 +124,7 @@ public class Dashboard1Activity extends Activity implements Sensors.Listener {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
-		sensors.stop();
+		app.sensors.stop();
 
 	}
 
@@ -139,19 +135,9 @@ public class Dashboard1Activity extends Activity implements Sensors.Listener {
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
-		sensors.start();
-		sensors.registerListener(this);
+		app.sensors.start();
+
 		app.Say(getString(R.string.PitchRoll));
-
-	}
-
-	@Override
-	public void onSensorsStateChange() {
-		myAzimuth = (float) (sensors.GetHeading);
-		if (app.D) {
-			app.mw.angy = sensors.GetPitch;
-			app.mw.angx = sensors.GetRoll;
-		}
 
 	}
 
