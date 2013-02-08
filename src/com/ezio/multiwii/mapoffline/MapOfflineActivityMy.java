@@ -24,11 +24,6 @@ import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,7 +33,7 @@ import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.helpers.Functions;
 
-public class MapOfflineActivityMy extends Activity implements LocationListener {
+public class MapOfflineActivityMy extends Activity {
 
 	Random random = new Random(); // for test
 
@@ -47,15 +42,11 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 	MapView mapView;
 	private MapController myMapController;
-	private LocationManager locationManager;
-	private String provider;
 
 	MapOfflineCopterOverlay copter;
 	MapOfflineCirclesOverlay circles;
 
 	private boolean killme = false;
-
-	private GeoPoint GYou = new GeoPoint(0, 0);
 
 	private int centerStep = 0;
 
@@ -82,7 +73,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 					CenterLocation(g);
 				} else {
-					CenterLocation(GYou);
+					CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
 				}
 				centerStep = 0;
 			}
@@ -102,7 +93,7 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 
 			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
-			circles.Set(gHome, GYou);
+			circles.Set(gHome, app.sensors.geopointOfflineMapCurrentPosition);
 			mapView.postInvalidate();
 
 			app.Frequentjobs();
@@ -139,12 +130,6 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 		myMapController.setZoom(mapView.getMaxZoomLevel());
 		// myMapController.setZoom(19);
 
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		if (!app.D)
-			criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		provider = locationManager.getBestProvider(criteria, false);
-
 		circles = new MapOfflineCirclesOverlay(getApplicationContext());
 		copter = new MapOfflineCopterOverlay(getApplicationContext());
 
@@ -161,45 +146,16 @@ public class MapOfflineActivityMy extends Activity implements LocationListener {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		locationManager.requestLocationUpdates(provider, 1000, 1, this);
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
-
 		app.Say(getString(R.string.Map));
-
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-
-		locationManager.removeUpdates(this);
 		killme = true;
 		mHandler.removeCallbacks(null);
-
-	}
-
-	@Override
-	public void onLocationChanged(Location location) {
-		GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
-	}
-
-	@Override
-	public void onProviderDisabled(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

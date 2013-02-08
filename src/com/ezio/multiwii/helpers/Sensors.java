@@ -1,6 +1,24 @@
+/*  MultiWii EZ-GUI
+    Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.ezio.multiwii.helpers;
 
 import java.util.Iterator;
+
+import com.google.android.maps.GeoPoint;
 
 import android.content.Context;
 import android.hardware.GeomagneticField;
@@ -22,7 +40,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public interface Listener {
 		public void onSensorsStateChangeMagAcc();
+
 		public void onSensorsStateGPSLocationChange();
+
 		public void onSensorsStateGPSStatusChange();
 	}
 
@@ -42,6 +62,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 	public int PhoneFix = 0;
 	public float PhoneAccuracy = 0;
 	public float Declination = 0;
+
+	public org.osmdroid.util.GeoPoint geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint(0, 0);
+	public com.google.android.maps.GeoPoint geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint(0, 0);
 
 	SensorManager m_sensorManager;
 	float[] m_lastMagFields = new float[3];;
@@ -69,6 +92,8 @@ public class Sensors implements SensorEventListener, LocationListener {
 		if (location != null) {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			Declination = geoField.getDeclination();
+			geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+			geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 		}
 
 		locationManager.addGpsStatusListener(new GpsStatus.Listener() {
@@ -189,6 +214,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 		PhoneAltitude = location.getAltitude();
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
+
+		geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+		geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();

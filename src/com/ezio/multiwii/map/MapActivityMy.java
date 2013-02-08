@@ -36,7 +36,7 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
-public class MapActivityMy extends MapActivity implements LocationListener {
+public class MapActivityMy extends MapActivity {
 
 	// keys
 	// String apiKey = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // debug
@@ -50,14 +50,10 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 	MapView mapView;
 	private MapController myMapController;
 	// MyLocationOverlay myLocationOverlay;
-	private LocationManager locationManager;
-	private String provider;
 	CopterOverlay copter;
 	MapCirclesOverlay circles;
 
 	private boolean killme = false;
-
-	private GeoPoint GYou = new GeoPoint(0, 0);
 
 	private int centerStep = 0;
 
@@ -84,7 +80,7 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 					CenterLocation(g);
 				} else {
-					CenterLocation(GYou);
+					CenterLocation(app.sensors.geopointOnlineMapCurrentPosition);
 				}
 				centerStep = 0;
 			}
@@ -145,15 +141,6 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 		mapView.setSatellite(true);
 		myMapController.setZoom(mapView.getMaxZoomLevel());
 
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		if (!app.D)
-			criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		provider = locationManager.getBestProvider(criteria, false);
-		// Location location = locationManager.getLastKnownLocation(provider);
-		// GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int)
-		// (location.getLongitude() * 1e6));
-
 		mapView.getOverlays().add(copter);
 		mapView.getOverlays().add(circles);
 
@@ -167,7 +154,6 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		locationManager.requestLocationUpdates(provider, 1000, 1, this);
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
@@ -178,8 +164,6 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// myLocationOverlay.disableMyLocation();
-		locationManager.removeUpdates(this);
 		killme = true;
 		mHandler.removeCallbacks(null);
 
@@ -189,32 +173,6 @@ public class MapActivityMy extends MapActivity implements LocationListener {
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void onLocationChanged(Location location) {
-		GYou = new GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
-
-		// Log.d("aaa", String.valueOf(location.getLatitude()));
-
-	}
-
-	@Override
-	public void onProviderDisabled(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
