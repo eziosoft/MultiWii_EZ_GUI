@@ -52,10 +52,10 @@ public class Dashboard1Activity extends Activity {
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
 
-			myAzimuth = (float) (app.sensors.GetHeading);
+			myAzimuth = (float) (app.sensors.Heading);
 			if (app.D) {
-				app.mw.angy = app.sensors.GetPitch;
-				app.mw.angx = app.sensors.GetRoll;
+				app.mw.angy = app.sensors.Pitch;
+				app.mw.angx = app.sensors.Roll;
 			}
 
 			PRVp.SetAngle(app.mw.angy);
@@ -72,7 +72,7 @@ public class Dashboard1Activity extends Activity {
 				compass.SetText("FRONT");
 			}
 
-			myCompass.SetHeading(myAzimuth);
+			myCompass.SetHeading(-myAzimuth);
 
 			baro.setText(String.format("%.2f", app.mw.alt));
 			BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));

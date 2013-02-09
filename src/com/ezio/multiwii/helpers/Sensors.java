@@ -38,17 +38,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	private Listener mListener = null;
 
-	public interface Listener {
-		public void onSensorsStateChangeMagAcc();
-
-		public void onSensorsStateGPSLocationChange();
-
-		public void onSensorsStateGPSStatusChange();
-	}
-
-	public void registerListener(Listener listener) {
-		mListener = listener;
-	}
+	LowPassFilter filterYaw = new LowPassFilter(0.03f);
+	LowPassFilter filterPitch = new LowPassFilter(0.03f);
+	LowPassFilter filterRoll = new LowPassFilter(0.03f);
 
 	private LocationManager locationManager;
 	private String provider;
@@ -72,11 +64,23 @@ public class Sensors implements SensorEventListener, LocationListener {
 	private float[] m_rotationMatrix = new float[16];
 	private float[] m_orientation = new float[4];
 
-	public float GetPitch = 0.f;
-	public float GetHeading = 0.f;
-	public float GetRoll = 0.f;
+	public float Pitch = 0.f;
+	public float Heading = 0.f;
+	public float Roll = 0.f;
 
 	private Context context;
+
+	public interface Listener {
+		public void onSensorsStateChangeMagAcc();
+
+		public void onSensorsStateGPSLocationChange();
+
+		public void onSensorsStateGPSStatusChange();
+	}
+
+	public void registerListener(Listener listener) {
+		mListener = listener;
+	}
 
 	public Sensors(Context context) {
 		this.context = context;
@@ -165,10 +169,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 		computeOrientation();
 	}
 
-	LowPassFilter filterYaw = new LowPassFilter(0.05f);
-	LowPassFilter filterPitch = new LowPassFilter(0.05f);
-	LowPassFilter filterRoll = new LowPassFilter(0.05f);
-
 	private void computeOrientation() {
 		if (SensorManager.getRotationMatrix(m_rotationMatrix, null, m_lastAccels, m_lastMagFields)) {
 			SensorManager.getOrientation(m_rotationMatrix, m_orientation);
@@ -177,9 +177,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 			float pitch = (float) Math.toDegrees(m_orientation[1]);
 			float roll = (float) Math.toDegrees(m_orientation[2]);
 
-			GetHeading = filterYaw.lowPass(yaw);
-			GetPitch = filterPitch.lowPass(pitch);
-			GetRoll = filterRoll.lowPass(roll);
+			Heading = filterYaw.lowPass(yaw);
+			Pitch = filterPitch.lowPass(pitch);
+			Roll = filterRoll.lowPass(roll);
 
 			if (mListener != null)
 				mListener.onSensorsStateChangeMagAcc();

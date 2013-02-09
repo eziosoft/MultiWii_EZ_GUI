@@ -58,6 +58,9 @@ public class GPSActivity extends SherlockActivity {
 
 	TextView FollowMeInfoTV;
 
+	TextView PhoneHeadingTV;
+	TextView HeadingTV;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
@@ -93,6 +96,8 @@ public class GPSActivity extends SherlockActivity {
 			PhoneNumSatTV.setText(String.valueOf(app.sensors.PhoneNumSat));
 			PhoneAccuracyTV.setText(String.valueOf(app.sensors.PhoneAccuracy));
 			DeclinationTV.setText(String.valueOf(app.sensors.Declination));
+			PhoneHeadingTV.setText(String.valueOf(app.sensors.Heading));
+			HeadingTV.setText(String.valueOf(app.mw.head));
 
 			FollowMeInfoTV.setText("WayPointsDebug:\n");
 			Waypoint w = app.mw.Waypoints[0];
@@ -153,6 +158,8 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
 		FollowMeInfoTV = (TextView) findViewById(R.id.textViewFollowMeInfo);
+		PhoneHeadingTV = (TextView) findViewById(R.id.TextViewPhoneHead);
+		HeadingTV = (TextView) findViewById(R.id.TextViewHeading);
 
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);

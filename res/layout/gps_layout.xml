@@ -236,6 +236,30 @@
                         android:text="---"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
                 </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/TextView12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/HEAD"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/TextViewHeading"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="---"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </TableRow>
+
             </TableLayout>
 
             <!-- <com.google.android.maps.MapView -->
@@ -391,6 +415,26 @@
 
                     <TextView
                         android:id="@+id/textViewDeclination"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="---" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/TableRow03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/TextView13"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/PhoneMag" />
+
+                    <TextView
+                        android:id="@+id/TextViewPhoneHead"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
