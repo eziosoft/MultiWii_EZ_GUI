@@ -198,6 +198,8 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate);
 
 	public abstract void SendRequestMSP_ENABLE_FRSKY();
+	
+	public abstract void SendRequestMSP_SET_HEAD(int heading);
 
 	// ///////////////////////////////////////////////
 
