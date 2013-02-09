@@ -40,11 +40,12 @@ public abstract class MultirotorData {
 	public int byteRC_RATE, byteRC_EXPO, byteRollPitchRate, byteYawRate, byteDynThrPID;
 	public int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
 
-	public int version, versionMisMatch;
+	public int version, versionMisMatch ;
 	public float gx, gy, gz, ax, ay, az, magx, magy, magz, baro, head, angx, angy, debug1, debug2, debug3, debug4;
 	public int GPS_distanceToHome, GPS_directionToHome;
 	public int GPS_numSat, GPS_fix, GPS_update;
 	public int init_com, graph_on, pMeterSum = 0, intPowerTrigger = 0, bytevbat = 0;
+	public int rssi;
 
 	public float mot[] = new float[8];
 	public float servo[] = new float[8];
@@ -73,15 +74,56 @@ public abstract class MultirotorData {
 	/******************************* Multiwii Serial Protocol **********************/
 	final String MSP_HEADER = "$M<";
 
-	public static final int MSP_IDENT = 100, MSP_STATUS = 101, MSP_RAW_IMU = 102, MSP_SERVO = 103, MSP_MOTOR = 104, MSP_RC = 105, MSP_RAW_GPS = 106, MSP_COMP_GPS = 107, MSP_ATTITUDE = 108, MSP_ALTITUDE = 109, MSP_BAT = 110, MSP_RC_TUNING = 111, MSP_PID = 112, MSP_BOX = 113, MSP_MISC = 114, MSP_MOTOR_PINS = 115, MSP_BOXNAMES = 116, MSP_PIDNAMES = 117,
+	public static final int MSP_IDENT = 100;
+	public static final int MSP_STATUS = 101;
+	public static final int MSP_RAW_IMU = 102;
+	public static final int MSP_SERVO = 103;
+	public static final int MSP_MOTOR = 104;
+	public static final int MSP_RC = 105;
+	public static final int MSP_RAW_GPS = 106;
+	public static final int MSP_COMP_GPS = 107;
+	public static final int MSP_ATTITUDE = 108;
+	public static final int MSP_ALTITUDE = 109;
+	public static final int MSP_ANALOG = 110;
+	public static final int MSP_RC_TUNING = 111;
+	public static final int MSP_PID = 112;
+	public static final int MSP_BOX = 113;
+	public static final int MSP_MISC = 114;
+	public static final int MSP_MOTOR_PINS = 115;
+	public static final int MSP_BOXNAMES = 116;
+	public static final int MSP_PIDNAMES = 117;
+	public static final int MSP_WP = 118;
+	public static final int MSP_BOXIDS = 119;
 
-	MSP_SET_RAW_RC = 200, MSP_SET_RAW_GPS = 201, MSP_SET_PID = 202, MSP_SET_BOX = 203, MSP_SET_RC_TUNING = 204, MSP_ACC_CALIBRATION = 205, MSP_MAG_CALIBRATION = 206, MSP_SET_MISC = 207, MSP_RESET_CONF = 208, MSP_SELECT_SETTING = 210, MSP_SPEK_BIND = 240, MSP_EEPROM_WRITE = 250, MSP_DEBUGMSG = 253, MSP_DEBUG = 254, MSP_SET_WP = 209, MSP_WP = 118, MSP_SET_SERIAL_BAUDRATE = 199, MSP_ENABLE_FRSKY = 198, MSP_SET_HEAD = 211; // rate
+	public static final int MSP_SET_RAW_RC = 200;
+	public static final int MSP_SET_RAW_GPS = 201;
+	public static final int MSP_SET_PID = 202;
+	public static final int MSP_SET_BOX = 203;
+	public static final int MSP_SET_RC_TUNING = 204;
+	public static final int MSP_ACC_CALIBRATION = 205;
+	public static final int MSP_MAG_CALIBRATION = 206;
+	public static final int MSP_SET_MISC = 207;
+	public static final int MSP_RESET_CONF = 208;
+	public static final int MSP_SET_WP = 209;
+	public static final int MSP_SELECT_SETTING = 210;
+	public static final int MSP_SET_HEAD = 211; // rate
+
+	public static final int MSP_BIND = 240;
+
+	public static final int MSP_EEPROM_WRITE = 250;
+
+	public static final int MSP_DEBUGMSG = 253;
+	public static final int MSP_DEBUG = 254;
+
+	public static final int MSP_SET_SERIAL_BAUDRATE = 199;
+	public static final int MSP_ENABLE_FRSKY = 198;
 
 	public static final int IDLE = 0, HEADER_START = 1, HEADER_M = 2, HEADER_ARROW = 3, HEADER_SIZE = 4, HEADER_CMD = 5, HEADER_ERR = 6;
 
 	public float alt;
 	public int vario;
 	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, GPS_ground_course;
+	public int MSPversion;
 
 	public int present = 0;
 
@@ -149,7 +191,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestSelectSetting(int setting);
 
-	public abstract void SendRequestSPEK_BIND();
+	public abstract void SendRequestBIND();
 
 	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
 

@@ -37,7 +37,7 @@ import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.mw.MultiWii200;
-import com.ezio.multiwii.mw.MultiWii211;
+import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
 
@@ -209,7 +209,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (Protocol == 210) {
-			mw = new MultiWii211(bt);
+			mw = new MultiWii210(bt);
 		}
 
 		frsky = new FrskyProtocol(BTFrsky);

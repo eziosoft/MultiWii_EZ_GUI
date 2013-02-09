@@ -27,11 +27,13 @@ import com.ezio.multiwii.waypoints.Waypoint;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(BT b) {
+		EZGUIProtocol = "213 r1295";
+
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after conection
 
 		bt = b;
-		EZGUIProtocol = "210";
+
 		// changes from 2.0//
 		PIDITEMS = 10;
 		CHECKBOXITEMS = 0;
@@ -44,20 +46,11 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void init() {
-		// frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS; // maybe
-		// not
-		// used in
-		// 2.1
 		CHECKBOXITEMS = buttonCheckboxLabel.length;
 		activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
-		// buttonCheckboxLabel = new String[] { "LEVEL", "BARO", "MAG",
-		// "CAMSTAB",
-		// "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU",
-		// "HEADFREE", "BEEPER", "LEDMAX", "LLIGHTS", "HEADADJ" };
-
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
 		ResetAllChexboxes();
 	}
@@ -95,8 +88,6 @@ public class MultiWii210 extends MultirotorData {
 		}
 
 		byte checksum = 0;
-		// byte pl_size = (byte)((payload != null ? int(payload.length) :
-		// 0)&0xFF);
 		byte pl_size = (byte) ((payload != null ? (int) (payload.length) : 0) & 0xFF);
 		bf.add(pl_size);
 		checksum ^= (pl_size & 0xFF);
@@ -130,51 +121,50 @@ public class MultiWii210 extends MultirotorData {
 		case MSP_IDENT:
 			version = read8();
 			multiType = read8();
-			read8(); // MSP version
-
+			MSPversion = read8(); // MSP version
 			multiCapability = read32();// capability
 			if ((multiCapability & 1) > 0) {
 				// TODO
 			}
 			break;
 		case MSP_STATUS:
-			if (version == 210) {
-				cycleTime = read16();
-				i2cError = read16();
-				present = read16();
-				mode = read32();
+			cycleTime = read16();
+			i2cError = read16();
+			present = read16();
+			mode = read32();
+			confSetting = read8();
 
-				if ((present & 1) > 0)
-					AccPresent = 1;
+			if ((present & 1) > 0)
+				AccPresent = 1;
+			else
+				AccPresent = 0;
+
+			if ((present & 2) > 0)
+				BaroPresent = 1;
+			else
+				BaroPresent = 0;
+
+			if ((present & 4) > 0)
+				MagPresent = 1;
+			else
+				MagPresent = 0;
+
+			if ((present & 8) > 0)
+				GPSPresent = 1;
+			else
+				GPSPresent = 0;
+
+			if ((present & 16) > 0)
+				SonarPresent = 1;
+			else
+				SonarPresent = 0;
+
+			for (i = 0; i < CHECKBOXITEMS; i++) {
+				if ((mode & (1 << i)) > 0)
+					ActiveModes[i] = true;
 				else
-					AccPresent = 0;
+					ActiveModes[i] = false;
 
-				if ((present & 2) > 0)
-					BaroPresent = 1;
-				else
-					BaroPresent = 0;
-
-				if ((present & 4) > 0)
-					MagPresent = 1;
-				else
-					MagPresent = 0;
-
-				if ((present & 8) > 0)
-					GPSPresent = 1;
-				else
-					GPSPresent = 0;
-
-				if ((present & 16) > 0)
-					SonarPresent = 1;
-				else
-					SonarPresent = 0;
-
-				for (i = 0; i < CHECKBOXITEMS; i++) {
-					if ((mode & (1 << i)) > 0)
-						ActiveModes[i] = true;
-					else
-						ActiveModes[i] = false;
-				}
 			}
 			break;
 
@@ -210,14 +200,13 @@ public class MultiWii210 extends MultirotorData {
 			rcAUX4 = read16();
 			break;
 		case MSP_RAW_GPS:
-			if (version == 210) {
-				GPS_fix = read8();
-				GPS_numSat = read8();
-				GPS_latitude = read32();
-				GPS_longitude = read32();
-				GPS_altitude = read16();
-				GPS_speed = read16();
-			}
+			GPS_fix = read8();
+			GPS_numSat = read8();
+			GPS_latitude = read32();
+			GPS_longitude = read32();
+			GPS_altitude = read16();
+			GPS_speed = read16();
+			GPS_ground_course = read16();
 			break;
 		case MSP_COMP_GPS:
 			GPS_distanceToHome = read16();
@@ -230,13 +219,13 @@ public class MultiWii210 extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			if (version == 210) {
-				baro = alt = (float) read32() / 100;
-			}
+			baro = alt = (float) read32() / 100;
+			vario = read16();
 			break;
-		case MSP_BAT:
+		case MSP_ANALOG:
 			bytevbat = read8();
 			pMeterSum = read16();
+			rssi = read16();
 			break;
 		case MSP_RC_TUNING:
 			byteRC_RATE = read8();
@@ -280,7 +269,6 @@ public class MultiWii210 extends MultirotorData {
 			init();
 			break;
 		case MSP_PIDNAMES:
-
 			/* TODO create GUI elements from this message */
 			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
 			// dataSize));
@@ -299,9 +287,15 @@ public class MultiWii210 extends MultirotorData {
 			debug3 = read16();
 			debug4 = read16();
 			break;
-
+		case MSP_DEBUGMSG:
+			while (dataSize-- > 0) {
+				char c = (char) read8();
+				if (c != 0) {
+					DebugMSG += c;
+				}
+			}
+			break;
 		case MSP_WP:
-			// TODO
 			Waypoint WP = new Waypoint();
 			WP.Number = read8();
 			WP.Lat = read32();
@@ -602,7 +596,7 @@ public class MultiWii210 extends MultirotorData {
 
 			timer1++;
 			if (timer1 > 10) { // fired every 10 requests
-				requests = new int[] { MSP_BAT, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
+				requests = new int[] { MSP_ANALOG, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
 				return;
@@ -615,24 +609,6 @@ public class MultiWii210 extends MultirotorData {
 			timer1 = 10;
 			timer2 = 0;
 		}
-	}
-
-	@Override
-	public void SendRequestSelectSetting(int setting) {
-		// 211
-
-	}
-
-	@Override
-	public void SendRequestSPEK_BIND() {
-		// 211
-
-	}
-
-	@Override
-	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
-		// 211
-
 	}
 
 	@Override
@@ -667,6 +643,60 @@ public class MultiWii210 extends MultirotorData {
 		Log.d("aaa", "MSP_ENABLE_FRSKY");
 
 	}
+
 	// ///////////End of Extra Functions////////////
+
+	@Override
+	public void SendRequestSelectSetting(int setting) {
+		{
+			payload = new ArrayList<Character>();
+			payload.add((char) setting);
+			sendRequestMSP(requestMSP(MSP_SELECT_SETTING, payload.toArray(new Character[payload.size()])));
+		}
+		// super.SendRequestSelectSetting(setting);
+	}
+
+	@Override
+	public void SendRequestBIND() {
+		sendRequestMSP(requestMSP(MSP_BIND));
+		// super.SendRequestSPEK_BIND();
+	}
+
+	@Override
+	public void SendRequestMSP_SET_WP(Waypoint w) {
+		// params are:
+		// 1 octet: always 0 for the moment, ie WP 0 = HOME POS
+		// 4 octets: LAT
+		// 4 octets: LON
+		// 4 octets: altitude (not used for the moment, no need to set it)
+		// 1 octets: nav flag (not used for the moment, no need to set it)
+		//
+
+		ArrayList<Character> payload = new ArrayList<Character>();
+		payload.add((char) w.Number);
+		payload.add((char) (w.Lat & 0xFF));
+		payload.add((char) ((w.Lat >> 8) & 0xFF));
+		payload.add((char) ((w.Lat >> 16) & 0xFF));
+		payload.add((char) ((w.Lat >> 24) & 0xFF));
+
+		payload.add((char) (w.Lon & 0xFF));
+		payload.add((char) ((w.Lon >> 8) & 0xFF));
+		payload.add((char) ((w.Lon >> 16) & 0xFF));
+		payload.add((char) ((w.Lon >> 24) & 0xFF));
+
+		payload.add((char) (w.Alt & 0xFF));
+		payload.add((char) ((w.Alt >> 8) & 0xFF));
+		payload.add((char) ((w.Alt >> 16) & 0xFF));
+		payload.add((char) ((w.Alt >> 24) & 0xFF));
+
+		payload.add((char) w.NavFlag);
+
+		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
+
+		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Alt) + " " + String.valueOf(w.NavFlag));
+
+		// TODO Auto-generated method stub
+		// super.SendRequestMSP_SET_WP(waypoint);
+	}
 
 }

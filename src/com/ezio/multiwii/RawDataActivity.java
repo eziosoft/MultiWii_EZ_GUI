@@ -114,10 +114,10 @@ public class RawDataActivity extends Activity {
 			t += "MAG ";
 		if (app.mw.AccPresent == 1)
 			t += "ACC";
-		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError) + "\n" + t);
+		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError) + "\n" + t + "\n MSP_ver:" + String.valueOf(app.mw.MSPversion));
 
 		TVData.setText("");
-	
+
 		log("gx", app.mw.gx);
 		log("gy", app.mw.gy);
 		log("gz", app.mw.gz);
@@ -191,6 +191,8 @@ public class RawDataActivity extends Activity {
 
 		log("confSetting", app.mw.confSetting);
 		log("multiCapability", app.mw.multiCapability);
+
+		log("rssi", app.mw.rssi);
 
 		log("---", 0);
 

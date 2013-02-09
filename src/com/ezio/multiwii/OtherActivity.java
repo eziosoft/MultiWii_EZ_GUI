@@ -103,7 +103,7 @@ public class OtherActivity extends SherlockActivity {
 	}
 
 	public void RXBINDOnClick(View v) {
-		app.mw.SendRequestSPEK_BIND();
+		app.mw.SendRequestBIND();
 	}
 
 	public void SetSerialBoudRateOnClick(View v) {

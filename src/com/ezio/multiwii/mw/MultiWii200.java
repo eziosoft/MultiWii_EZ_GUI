@@ -250,7 +250,7 @@ public class MultiWii200 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestSPEK_BIND() {
+	public void SendRequestBIND() {
 		// not supported
 	}
 
