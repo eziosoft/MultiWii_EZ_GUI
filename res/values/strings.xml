@@ -193,4 +193,5 @@
     <string name="EnterDescription">Enter description</string>
     <string name="SetAsPositionHold">Set As Position Hold</string>
 	<string name="Follow_Me">FollowMe</string>
+	<string name="Follow_Heading">FollowHeading</string>
 </resources>

@@ -55,6 +55,7 @@ public class GPSActivity extends SherlockActivity {
 
 	CheckBox CheckBoxInjectGPS;
 	CheckBox CheckBoxFollowMe;
+	CheckBox CheckBoxFollowHeading;
 
 	TextView FollowMeInfoTV;
 
@@ -115,6 +116,11 @@ public class GPSActivity extends SherlockActivity {
 			} else {
 				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
 			}
+			if (app.FollowHeadingBlinkFlag) {
+				CheckBoxFollowHeading.setBackgroundColor(Color.GREEN);
+			} else {
+				CheckBoxFollowHeading.setBackgroundColor(Color.TRANSPARENT);
+			}
 
 			app.Frequentjobs();
 
@@ -156,13 +162,14 @@ public class GPSActivity extends SherlockActivity {
 
 		CheckBoxInjectGPS = (CheckBox) findViewById(R.id.checkBoxInjectGPS);
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
+		CheckBoxFollowHeading=(CheckBox)findViewById(R.id.checkBoxFollowHeading);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
 		FollowMeInfoTV = (TextView) findViewById(R.id.textViewFollowMeInfo);
 		PhoneHeadingTV = (TextView) findViewById(R.id.TextViewPhoneHead);
 		HeadingTV = (TextView) findViewById(R.id.TextViewHeading);
-
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
+			CheckBoxFollowHeading.setVisibility(View.GONE);
 		}
 
 	}
@@ -171,6 +178,7 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxInjectGPS.setVisibility(View.VISIBLE);
 		CheckBoxFollowMe.setVisibility(View.VISIBLE);
 		FollowMeInfoTV.setVisibility(View.VISIBLE);
+		CheckBoxFollowHeading.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -200,6 +208,11 @@ public class GPSActivity extends SherlockActivity {
 
 	public void InjectGPSCheckBoxOnClick(View v) {
 		app.InjectGPSEnable = CheckBoxInjectGPS.isChecked();
+	}
+	
+	public void FollowHeadingCheckBoxOnClick(View v)
+	{
+		app.FollowHeading=CheckBoxFollowHeading.isChecked();
 	}
 
 }

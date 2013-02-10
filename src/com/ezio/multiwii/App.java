@@ -70,6 +70,8 @@ public class App extends Application implements Sensors.Listener {
 	public boolean FollowMeBlinkFlag = false;
 	public boolean InjectGPSEnable = false;
 	public boolean InjectGPSBlinkFlag = false;
+	public boolean FollowHeading = false;
+	public boolean FollowHeadingBlinkFlag = false;
 
 	public FrskyProtocol frsky;
 
@@ -342,6 +344,12 @@ public class App extends Application implements Sensors.Listener {
 				oldActiveModes[i] = mw.ActiveModes[i];
 			}
 
+			// followHeading
+			if (FollowHeading) {
+				mw.SendRequestMSP_SET_HEAD((int) sensors.Heading);
+				FollowHeadingBlinkFlag = !FollowHeadingBlinkFlag;
+			}
+
 		}
 		// --------------------END timer every 1sek---------------------------
 
@@ -374,20 +382,12 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			String t = new String();
-			// if (mw.BaroPresent == 1)
-			// t += "BARO ";
-			// if (mw.GPSPresent == 1)
-			// t += "GPS ";
-			// if (mw.SonarPresent == 1)
-			// t += "SONAR ";
-			// if (mw.MagPresent == 1)
-			// t += "MAG ";
-			// if (mw.AccPresent == 1)
-			// t += "ACC";
 			if (FollowMeEnable)
 				t += getString(R.string.Follow_Me) + ";";
 			if (InjectGPSEnable)
 				t += "InjectGPS";
+			if (FollowHeading)
+				t += getString(R.string.Follow_Heading) + ";";
 			notifications.displayNotification("Status", t, false, 99, false);
 
 		}

@@ -488,6 +488,13 @@
                 android:onClick="InjectGPSCheckBoxOnClick"
                 android:text="Inject GPS  (#define GPS_FROM_OSD has to be uncomented)" />
 
+            <CheckBox
+                android:id="@+id/checkBoxFollowHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="FollowHeadingCheckBoxOnClick"
+                android:text="@string/Follow_Heading" />
+
         </LinearLayout>
     </ScrollView>
 

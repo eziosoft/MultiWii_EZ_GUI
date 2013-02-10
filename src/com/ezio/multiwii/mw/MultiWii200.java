@@ -276,4 +276,10 @@ public class MultiWii200 extends MultirotorData {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void SendRequestMSP_SET_HEAD(int heading) {
+		// not supported
+		
+	}
 }
