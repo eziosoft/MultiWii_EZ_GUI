@@ -72,7 +72,7 @@ public class Dashboard1Activity extends Activity {
 				compass.SetText("FRONT");
 			}
 
-			myCompass.SetHeading(-myAzimuth);
+			myCompass.SetHeading(myAzimuth);
 
 			baro.setText(String.format("%.2f", app.mw.alt));
 			BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
