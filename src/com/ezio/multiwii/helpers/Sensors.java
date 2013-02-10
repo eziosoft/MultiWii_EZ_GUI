@@ -173,7 +173,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		if (SensorManager.getRotationMatrix(m_rotationMatrix, null, m_lastAccels, m_lastMagFields)) {
 			SensorManager.getOrientation(m_rotationMatrix, m_orientation);
 
-			float yaw = (float) (Math.toDegrees(m_orientation[0]) + Declination);
+			float yaw = (float) -(Math.toDegrees(m_orientation[0]) + Declination);
 			float pitch = (float) Math.toDegrees(m_orientation[1]);
 			float roll = (float) Math.toDegrees(m_orientation[2]);
 
