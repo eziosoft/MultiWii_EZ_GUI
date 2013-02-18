@@ -94,7 +94,7 @@ public class MapOfflineActivityMy extends Activity {
 			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
 			//circles.Set(gHome, app.sensors.geopointOfflineMapCurrentPosition);
-			circles.Set(gHome, app.sensors.getNextPredictedLocationOfflineMap());
+			circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 			mapView.postInvalidate();
 
 			app.Frequentjobs();
