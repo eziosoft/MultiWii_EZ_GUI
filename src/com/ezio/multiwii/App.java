@@ -46,7 +46,7 @@ public class App extends Application implements Sensors.Listener {
 	// debug
 	public boolean D = false; // debug
 	public String TAG = "EZGUI";
-	public String MapAPIKeyDebug = ""; // put
+	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
 										// your
 										// debug
 										// key
@@ -465,8 +465,15 @@ public class App extends Application implements Sensors.Listener {
 	public void onSensorsStateGPSLocationChange() {
 		if (FollowMeEnable) {
 			// TODO needs more work here
-			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), 0, 0));
-			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), 0, 0));
+			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.geopointOfflineMapCurrentPosition.getLatitudeE6() * 10), (int) (sensors.getNextPredictedLocationOfflineMap().getLongitudeE6() * 10), 0, 0));
+			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.geopointOfflineMapCurrentPosition.getLatitudeE6() * 10), (int) (sensors.getNextPredictedLocationOfflineMap().getLongitudeE6() * 10), 0, 0));
+
+			// mw.SendRequestMSP_SET_WP(new Waypoint(0, (int)
+			// (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude *
+			// 1e7), 0, 0));
+			// mw.SendRequestMSP_SET_WP(new Waypoint(16, (int)
+			// (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude *
+			// 1e7), 0, 0));
 			FollowMeBlinkFlag = !FollowMeBlinkFlag;
 		}
 

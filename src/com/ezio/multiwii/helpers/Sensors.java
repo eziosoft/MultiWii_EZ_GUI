@@ -18,7 +18,7 @@ package com.ezio.multiwii.helpers;
 
 import java.util.Iterator;
 
-import com.google.android.maps.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 
 import android.content.Context;
 import android.hardware.GeomagneticField;
@@ -37,6 +37,8 @@ import android.os.Bundle;
 public class Sensors implements SensorEventListener, LocationListener {
 
 	private Listener mListener = null;
+
+	Location location, oldLocation;
 
 	LowPassFilter filterYaw = new LowPassFilter(0.03f);
 	LowPassFilter filterPitch = new LowPassFilter(0.03f);
@@ -92,39 +94,42 @@ public class Sensors implements SensorEventListener, LocationListener {
 		// if (!app.D)
 		criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = locationManager.getBestProvider(criteria, false);
-		Location location = locationManager.getLastKnownLocation(provider);
+		location = locationManager.getLastKnownLocation(provider);
 		if (location != null) {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			Declination = geoField.getDeclination();
 			geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 			geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+
+			oldLocation = location;
+
 		}
 
-		locationManager.addGpsStatusListener(new GpsStatus.Listener() {
-
-			@Override
-			public void onGpsStatusChanged(int event) {
-				if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
-					GpsStatus status = locationManager.getGpsStatus(null);
-					Iterable<GpsSatellite> sats = status.getSatellites();
-					Iterator<GpsSatellite> it = sats.iterator();
-
-					PhoneNumSat = 0;
-					while (it.hasNext()) {
-
-						GpsSatellite oSat = (GpsSatellite) it.next();
-						if (oSat.usedInFix())
-							PhoneNumSat++;
-					}
-
-				}
-				if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
-					PhoneFix = 1;
-
-				if (mListener != null)
-					mListener.onSensorsStateGPSStatusChange();
-			}
-		});
+		// locationManager.addGpsStatusListener(new GpsStatus.Listener() {
+		//
+		// @Override
+		// public void onGpsStatusChanged(int event) {
+		// if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
+		// GpsStatus status = locationManager.getGpsStatus(null);
+		// Iterable<GpsSatellite> sats = status.getSatellites();
+		// Iterator<GpsSatellite> it = sats.iterator();
+		//
+		// PhoneNumSat = 0;
+		// while (it.hasNext()) {
+		//
+		// GpsSatellite oSat = (GpsSatellite) it.next();
+		// if (oSat.usedInFix())
+		// PhoneNumSat++;
+		// }
+		//
+		// }
+		// if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
+		// PhoneFix = 1;
+		//
+		// if (mListener != null)
+		// mListener.onSensorsStateGPSStatusChange();
+		// }
+		// });
 
 	}
 
@@ -202,9 +207,8 @@ public class Sensors implements SensorEventListener, LocationListener {
 		}
 
 		protected float lowPass(float input) {
-			if(Math.abs(input-lastOutput)>170)
-			{
-				lastOutput=input;
+			if (Math.abs(input - lastOutput) > 170) {
+				lastOutput = input;
 				return lastOutput;
 			}
 			lastOutput = lastOutput + ALPHA * (input - lastOutput);
@@ -214,6 +218,10 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
+
+		oldLocation = this.location;
+		this.location = location;
+
 		PhoneLatitude = location.getLatitude();
 		PhoneLongitude = location.getLongitude();
 		PhoneAltitude = location.getAltitude();
@@ -225,6 +233,8 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
+
+		PhoneNumSat = (Integer) location.getExtras().get("satellites");
 
 		if (mListener != null)
 			mListener.onSensorsStateGPSLocationChange();
@@ -248,4 +258,51 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	}
 
+	public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
+
+		// float[] results = new float[3];
+		//
+		// Location.distanceBetween(location.getAltitude(),
+		// location.getLongitude(), oldLocation.getAltitude(),
+		// oldLocation.getLongitude(), results);
+		//
+		// float distance = results[0]; //in m
+		// float bearing=0;
+		// if(distance>3)
+		// {
+		// bearing=results[2];
+		// }else
+		// {
+		// bearing=results[1];
+		// }
+
+		double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
+		double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
+		return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
+
+	}
+
+	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
+
+		// float[] results = new float[3];
+		//
+		// Location.distanceBetween(location.getAltitude(),
+		// location.getLongitude(), oldLocation.getAltitude(),
+		// oldLocation.getLongitude(), results);
+		//
+		// float distance = results[0]; //in m
+		// float bearing=0;
+		// if(distance>3)
+		// {
+		// bearing=results[2];
+		// }else
+		// {
+		// bearing=results[1];
+		// }
+
+		int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
+		int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);
+		return new com.google.android.maps.GeoPoint(lat, lon);
+
+	}
 }

@@ -84,7 +84,7 @@ public class RadioActivity extends SherlockActivity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+			if(app.D)	Log.d(app.TAG, "loop "+this.getClass().getName());
 			
 		}
 	};

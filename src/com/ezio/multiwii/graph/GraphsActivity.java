@@ -125,7 +125,7 @@ public class GraphsActivity extends SherlockActivity {
 			if (!killme)
 				mHandler.postDelayed(update, 100);
 			
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+			if(app.D)	Log.d(app.TAG, "loop "+this.getClass().getName());
 
 		}
 	};

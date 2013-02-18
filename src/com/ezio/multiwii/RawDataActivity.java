@@ -58,7 +58,7 @@ public class RawDataActivity extends Activity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			Log.d(app.TAG, "loop " + this.getClass().getName());
+			if(app.D)	Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 	};
 

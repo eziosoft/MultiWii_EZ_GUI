@@ -27,7 +27,7 @@ import com.ezio.multiwii.waypoints.Waypoint;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(BT b) {
-		EZGUIProtocol = "213 r1295";
+		EZGUIProtocol = "213 r1337";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after conection
