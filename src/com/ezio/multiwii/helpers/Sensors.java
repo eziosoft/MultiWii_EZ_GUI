@@ -275,11 +275,13 @@ public class Sensors implements SensorEventListener, LocationListener {
 		// {
 		// bearing=results[1];
 		// }
+		if (location != null) {
+			double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
+			double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
 
-		double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
-		double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
-		return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
-
+			return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
+		} else
+			return new org.osmdroid.util.GeoPoint(0, 0);
 	}
 
 	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
@@ -299,10 +301,12 @@ public class Sensors implements SensorEventListener, LocationListener {
 		// {
 		// bearing=results[1];
 		// }
-
-		int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
-		int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);
-		return new com.google.android.maps.GeoPoint(lat, lon);
+		if (location != null) {
+			int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
+			int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);
+			return new com.google.android.maps.GeoPoint(lat, lon);
+		} else
+			return new com.google.android.maps.GeoPoint(0, 0);
 
 	}
 }
