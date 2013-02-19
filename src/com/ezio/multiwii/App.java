@@ -31,6 +31,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ezio.multiwii.frsky.FrskyProtocol;
+import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.helpers.Notifications;
 import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
@@ -47,10 +48,10 @@ public class App extends Application implements Sensors.Listener {
 	public boolean D = false; // debug
 	public String TAG = "EZGUI";
 	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
-										// your
-										// debug
-										// key
-										// here
+	// your
+	// debug
+	// key
+	// here
 
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
@@ -287,6 +288,11 @@ public class App extends Application implements Sensors.Listener {
 	}
 
 	public void Frequentjobs() {
+
+		// rssi
+		if (!BTFrsky.Connected && bt.Connected) {
+			frsky.TxRSSI = Functions.map(mw.rssi, 0, 1024, 0, 110);
+		}
 
 		// Copy data from FrSky
 		if (CopyFrskyToMW && BTFrsky.Connected && !bt.Connected)

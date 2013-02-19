@@ -36,7 +36,7 @@ class MapOfflineCirclesOverlay extends Overlay {
 	Paint mPaint = new Paint();
 	Paint mPaint1 = new Paint();
 	Paint mPaint2 = new Paint();
-	float heading=0;
+	float heading = 0;
 
 	public MapOfflineCirclesOverlay(Context context) {
 		super(context);
@@ -48,7 +48,7 @@ class MapOfflineCirclesOverlay extends Overlay {
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
 		mPaint.setStrokeWidth(2);
 		mPaint.setTextSize(20);
-		//mPaint.setAlpha(70);
+		// mPaint.setAlpha(70);
 
 		mPaint1.setDither(true);
 		mPaint1.setAntiAlias(false);
@@ -58,8 +58,8 @@ class MapOfflineCirclesOverlay extends Overlay {
 		// mPaint1.setStrokeCap(Paint.Cap.ROUND);
 		mPaint1.setStrokeWidth(2);
 		mPaint1.setTextSize(30);
-		//mPaint1.setAlpha(20);
-		
+		// mPaint1.setAlpha(20);
+
 		mPaint2.setDither(true);
 		mPaint2.setAntiAlias(false);
 		mPaint2.setColor(Color.GREEN);
@@ -73,9 +73,9 @@ class MapOfflineCirclesOverlay extends Overlay {
 	}
 
 	public void Set(float heading, GeoPoint gyou) {
-		
+
 		GYou = gyou;
-		this.heading=heading;
+		this.heading = heading;
 
 	}
 
@@ -87,35 +87,33 @@ class MapOfflineCirclesOverlay extends Overlay {
 		Point p1 = new Point();
 
 		projection.toPixels(GHome, p1);
-		
-		
 
-//		int distance = 2;
-//		for (int i = distance; i <= 10; i += distance) {
-//			if (metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6) > 0) {
-//				canvas.drawCircle(p1.x, p1.y,
-//						metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6),
-//						mPaint);
-//				canvas.drawText(
-//						String.valueOf(i),
-//						p1.x
-//								+ metersToRadius(i, mapv,
-//										GHome.getLatitudeE6() / 1e6), p1.y,
-//						mPaint);
-//			}
-//		}
+		// int distance = 2;
+		// for (int i = distance; i <= 10; i += distance) {
+		// if (metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6) > 0) {
+		// canvas.drawCircle(p1.x, p1.y,
+		// metersToRadius(i, mapv, GHome.getLatitudeE6() / 1e6),
+		// mPaint);
+		// canvas.drawText(
+		// String.valueOf(i),
+		// p1.x
+		// + metersToRadius(i, mapv,
+		// GHome.getLatitudeE6() / 1e6), p1.y,
+		// mPaint);
+		// }
+		// }
 
 		projection.toPixels(GYou, p1);
 
 		canvas.drawText("You", p1.x, p1.y, mPaint1);
 		canvas.drawCircle(p1.x, p1.y, 5, mPaint1);
-		
-		RectF r = new RectF(p1.x-50, p1.y-50, p1.x+50, p1.y+50);
-		canvas.drawArc(r, heading-110, 40, true, mPaint2);
+
+		// heading of the phone, need more work with screen rotation
+		// RectF r = new RectF(p1.x-50, p1.y-50, p1.x+50, p1.y+50);
+		// canvas.drawArc(r, heading-110, 40, true, mPaint2);
 	}
 
 	public static int metersToRadius(float meters, MapView map, double latitude) {
-		return (int) (map.getProjection().metersToEquatorPixels(meters) * (1 / Math
-				.cos(Math.toRadians(latitude))));
+		return (int) (map.getProjection().metersToEquatorPixels(meters) * (1 / Math.cos(Math.toRadians(latitude))));
 	}
 }
