@@ -234,6 +234,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
 
+		if(location.getExtras()!=null)
 		PhoneNumSat = (Integer) location.getExtras().get("satellites");
 
 		if (mListener != null)

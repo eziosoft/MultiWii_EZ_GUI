@@ -19,7 +19,6 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
@@ -38,7 +37,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Profile" />
-
                 </TableRow>
 
                 <TableRow
@@ -55,12 +53,16 @@
 
                     <Button
                         android:id="@+id/button4"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:onClick="LoadProfilePIDOnClick"
                         android:text="@string/Load" />
 
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
                 </TableRow>
 
                 <TableRow
@@ -120,7 +122,7 @@
                         android:gravity="center"
                         android:text="D"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="0dp"
@@ -129,7 +131,6 @@
                         android:gravity="center"
                         android:text="@string/RATE"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
-
                 </TableRow>
 
                 <TableRow
@@ -699,7 +700,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-
+
                 <Button
                     android:id="@+id/button1"
                     android:layout_width="0dp"
@@ -708,7 +709,7 @@
                     android:onClick="ReadOnClick"
                     android:text="@string/Read"
                     android:visibility="gone" />
-
+
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="0dp"
@@ -717,7 +718,7 @@
                     android:onClick="ResetOnClick"
                     android:text="@string/Reset"
                     android:visibility="gone" />
-
+
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="0dp"
@@ -726,7 +727,6 @@
                     android:onClick="WriteOnClick"
                     android:text="@string/Write"
                     android:visibility="gone" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

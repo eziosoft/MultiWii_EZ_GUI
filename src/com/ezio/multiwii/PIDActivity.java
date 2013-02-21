@@ -26,10 +26,13 @@ import java.util.Properties;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -229,16 +232,34 @@ public class PIDActivity extends SherlockActivity {
 	}
 
 	void ShareIt() {
-		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-		sharingIntent.setType("text/plain");
-		String shareBody = "";
-		for (int i = 0; i <= 8; i++) {
-			shareBody += String.valueOf(P[i]) + "\t|\t" + String.valueOf(I[i]) + "\t|\t" + String.valueOf(D[i]) + "\n";
-		}
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MultiWii PID");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 
-		startActivity(Intent.createChooser(sharingIntent, "Share via"));
+		try {
+
+			Log.d("aaa", "File to send:" + Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
+			File myFile = new File(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
+			MimeTypeMap mime = MimeTypeMap.getSingleton();
+			String ext = myFile.getName().substring(myFile.getName().lastIndexOf(".") + 1);
+			String type = mime.getMimeTypeFromExtension(ext);
+			Intent sharingIntent = new Intent("android.intent.action.SEND");
+			sharingIntent.setType("*/*");
+			sharingIntent.putExtra("android.intent.extra.STREAM", Uri.fromFile(myFile));
+			startActivity(Intent.createChooser(sharingIntent, "Share using"));
+		} catch (Exception e) {
+			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
+		// Intent sharingIntent = new
+		// Intent(android.content.Intent.ACTION_SEND);
+		// sharingIntent.setType("text/plain");
+		// String shareBody = "";
+		// for (int i = 0; i <= 8; i++) {
+		// shareBody += String.valueOf(P[i]) + "\t|\t" + String.valueOf(I[i]) +
+		// "\t|\t" + String.valueOf(D[i]) + "\n";
+		// }
+		// sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+		// "MultiWii PID");
+		// sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+		//
+		// startActivity(Intent.createChooser(sharingIntent, "Share via"));
 	}
 
 	public void SetOnClick(View v) {
@@ -306,7 +327,8 @@ public class PIDActivity extends SherlockActivity {
 
 	public void LoadProfilePIDOnClick(View v) {
 		try {
-			readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
+			if (spinnerProfile.getCount() > 0)
+				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
