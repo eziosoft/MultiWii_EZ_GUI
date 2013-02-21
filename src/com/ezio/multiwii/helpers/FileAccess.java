@@ -16,8 +16,10 @@
  */
 package com.ezio.multiwii.helpers;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -26,11 +28,36 @@ import android.util.Log;
 
 public class FileAccess {
 
-	String			fileName;
-	File			file;
-	File			root;
-	FileWriter		filewriter;
-	BufferedWriter	out;
+	String fileName;
+	File file;
+	File root;
+	FileWriter filewriter;
+	BufferedWriter out;
+
+	public static String ReadFile(String fileName) {
+		File sdcard = Environment.getExternalStorageDirectory();
+
+		// Get the text file
+		File file = new File(sdcard, fileName);
+
+		// Read text from file
+		StringBuilder text = new StringBuilder();
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String line;
+
+			while ((line = br.readLine()) != null) {
+				text.append(line);
+				text.append('\n');
+			}
+		} catch (IOException e) {
+			// You'll need to add proper error handling here
+		}
+
+		// Set the text
+		return text.toString();
+	}
 
 	public FileAccess(String fileName) {
 
@@ -41,8 +68,7 @@ public class FileAccess {
 			filewriter = new FileWriter(file);
 			out = new BufferedWriter(filewriter);
 			Log.d("plik", "fileAccess OK");
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Log.d("plik", "fileAccess ERR");
 			// Toast.makeText(context, "Can't write to file",
@@ -57,8 +83,7 @@ public class FileAccess {
 			try {
 				out.append(s + "\n");
 				Log.d("plik", "write OK");
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				Log.d("plik", "fileAccess ERR");
 				// Toast.makeText(context, "Can't write to file",
@@ -72,8 +97,7 @@ public class FileAccess {
 		try {
 			out.close();
 			Log.d("plik", "close OK");
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Log.d("plik", "fileAccess ERR");
 			// Toast.makeText(context, "Can't close the file",

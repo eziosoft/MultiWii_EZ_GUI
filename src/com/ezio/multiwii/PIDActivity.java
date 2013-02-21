@@ -16,13 +16,23 @@
  */
 package com.ezio.multiwii;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
+import java.util.Properties;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.ActionBarSherlock;
@@ -78,13 +88,14 @@ public class PIDActivity extends SherlockActivity {
 
 	EditText TPA;
 
+	Spinner spinnerProfile;
+
 	// used for write
 	float[] P;
 	float[] I;
 	float[] D;
 
-	float confRC_RATE = 0, confRC_EXPO = 0, rollPitchRate = 0, yawRate = 0,
-			dynamic_THR_PID = 0, throttle_MID = 0, throttle_EXPO = 0;
+	float confRC_RATE = 0, confRC_EXPO = 0, rollPitchRate = 0, yawRate = 0, dynamic_THR_PID = 0, throttle_MID = 0, throttle_EXPO = 0;
 
 	// ///
 
@@ -142,6 +153,20 @@ public class PIDActivity extends SherlockActivity {
 
 		TPA = (EditText) findViewById(R.id.editTextTPA);
 
+		File sdCardRoot = Environment.getExternalStorageDirectory();
+		File yourDir = new File(sdCardRoot, "MultiWiiLogs");
+		ArrayList<String> l = new ArrayList<String>();
+
+		for (File f : yourDir.listFiles()) {
+			if (f.isFile())
+				if (f.getName().contains("mwi"))
+					l.add(f.getName());
+		}
+		spinnerProfile = (Spinner) findViewById(R.id.spinnerProfile);
+		ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, l);
+
+		spinnerProfile.setAdapter(aa);
+
 	}
 
 	@Override
@@ -154,8 +179,7 @@ public class PIDActivity extends SherlockActivity {
 		super.onResume();
 		app.ForceLanguage();
 		app.Say(getString(R.string.PID));
-		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 		while (app.bt.available() > 0) {
 			app.mw.ProcessSerialData(false);
@@ -180,34 +204,25 @@ public class PIDActivity extends SherlockActivity {
 	public void ResetOnClick(View v) {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(
-				getString(R.string.ResetALLnotonlyPIDparamstodefault))
-				.setCancelable(false)
-				.setPositiveButton(getString(R.string.Yes),
-						new DialogInterface.OnClickListener() {
+		builder.setMessage(getString(R.string.ResetALLnotonlyPIDparamstodefault)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
-							public void onClick(DialogInterface dialog, int id) {
+			public void onClick(DialogInterface dialog, int id) {
 
-								app.mw.SendRequestResetSettings();
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								ReadOnClick(null);
-								Toast.makeText(
-										getApplicationContext(),
-										getString(R.string.ValuesaresettodefaultPressreadbuttonnow),
-										Toast.LENGTH_LONG).show();
+				app.mw.SendRequestResetSettings();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				ReadOnClick(null);
+				Toast.makeText(getApplicationContext(), getString(R.string.ValuesaresettodefaultPressreadbuttonnow), Toast.LENGTH_LONG).show();
 
-							}
-						})
-				.setNegativeButton(getString(R.string.No),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+			}
+		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
 		AlertDialog alert = builder.create();
 		alert.show();
 
@@ -216,13 +231,11 @@ public class PIDActivity extends SherlockActivity {
 	void ShareIt() {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody ="";
-		for(int i =0;i<=8;i++)
-		{
-			shareBody+=String.valueOf(P[i])+"\t|\t"+String.valueOf(I[i])+"\t|\t"+String.valueOf(D[i])+"\n";
+		String shareBody = "";
+		for (int i = 0; i <= 8; i++) {
+			shareBody += String.valueOf(P[i]) + "\t|\t" + String.valueOf(I[i]) + "\t|\t" + String.valueOf(D[i]) + "\n";
 		}
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-				"MultiWii PID");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MultiWii PID");
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 
 		startActivity(Intent.createChooser(sharingIntent, "Share via"));
@@ -231,20 +244,13 @@ public class PIDActivity extends SherlockActivity {
 	public void SetOnClick(View v) {
 
 		// Log.d("aaaaa",RATE2PitchRoll.getText().toString());
-		confRC_RATE = Float.parseFloat(RATE2PitchRoll.getText().toString()
-				.replace(",", "."));
-		confRC_EXPO = Float.parseFloat(EXPOPitchRoll.getText().toString()
-				.replace(",", "."));
-		rollPitchRate = Float.parseFloat(RatePitchRoll1.getText().toString()
-				.replace(",", "."));
-		yawRate = Float.parseFloat(RateYaw.getText().toString()
-				.replace(",", "."));
-		dynamic_THR_PID = Float.parseFloat(TPA.getText().toString()
-				.replace(",", "."));
-		throttle_MID = Float.parseFloat(MIDThrottle.getText().toString()
-				.replace(",", "."));
-		throttle_EXPO = Float.parseFloat(EXPOThrottle.getText().toString()
-				.replace(",", "."));
+		confRC_RATE = Float.parseFloat(RATE2PitchRoll.getText().toString().replace(",", "."));
+		confRC_EXPO = Float.parseFloat(EXPOPitchRoll.getText().toString().replace(",", "."));
+		rollPitchRate = Float.parseFloat(RatePitchRoll1.getText().toString().replace(",", "."));
+		yawRate = Float.parseFloat(RateYaw.getText().toString().replace(",", "."));
+		dynamic_THR_PID = Float.parseFloat(TPA.getText().toString().replace(",", "."));
+		throttle_MID = Float.parseFloat(MIDThrottle.getText().toString().replace(",", "."));
+		throttle_EXPO = Float.parseFloat(EXPOThrottle.getText().toString().replace(",", "."));
 
 		P[0] = Float.parseFloat(P1.getText().toString().replace(",", "."));
 		P[1] = Float.parseFloat(P2.getText().toString().replace(",", "."));
@@ -277,62 +283,97 @@ public class PIDActivity extends SherlockActivity {
 		D[8] = Float.parseFloat(D9.getText().toString().replace(",", "."));
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue))
-				.setCancelable(false)
-				.setPositiveButton(getString(R.string.Yes),
-						new DialogInterface.OnClickListener() {
+		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
-							public void onClick(DialogInterface dialog, int id) {
+			public void onClick(DialogInterface dialog, int id) {
 
-								app.mw.SendRequestSetPID(confRC_RATE,
-										confRC_EXPO, rollPitchRate, yawRate,
-										dynamic_THR_PID, throttle_MID,
-										throttle_EXPO, P, I, D);
+				app.mw.SendRequestSetPID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
 
-								app.mw.SendRequestWriteToEEprom();
+				app.mw.SendRequestWriteToEEprom();
 
-								Toast.makeText(getApplicationContext(),
-										getString(R.string.Done),
-										Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
-							}
-						})
-				.setNegativeButton(getString(R.string.No),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+			}
+		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
 		AlertDialog alert = builder.create();
 		alert.show();
 
 	}
 
-	// private void SaveOnClick() {
-	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	// builder.setMessage(getString(R.string.Continue))
-	// .setCancelable(false)
-	// .setPositiveButton(getString(R.string.Yes),
-	// new DialogInterface.OnClickListener() {
-	//
-	// public void onClick(DialogInterface dialog, int id) {
-	//
-	// app.mw.SendRequestWriteToEEprom();
-	// Toast.makeText(getApplicationContext(),
-	// getString(R.string.Done),
-	// Toast.LENGTH_SHORT).show();
-	//
-	// }
-	// })
-	// .setNegativeButton(getString(R.string.No),
-	// new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int id) {
-	// dialog.cancel();
-	// }
-	// });
-	// AlertDialog alert = builder.create();
-	// alert.show();
-	// }
+	public void LoadProfilePIDOnClick(View v) {
+		try {
+			readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void readFromXML(String fileName) throws InvalidPropertiesFormatException, IOException {
+
+		File sdcard = Environment.getExternalStorageDirectory();
+		File file = new File(sdcard, fileName);
+		Properties properties = new Properties();
+		FileInputStream fis = new FileInputStream(file);
+		properties.loadFromXML(fis);
+
+		for (int i = 0; i < app.mw.PIDITEMS; i++) {
+			P[i] = Float.parseFloat(properties.getProperty("pid." + i + ".p"));
+			I[i] = Float.parseFloat(properties.getProperty("pid." + i + ".i"));
+			D[i] = Float.parseFloat(properties.getProperty("pid." + i + ".d"));
+		}
+
+		P1.setText(String.format("%.1f", P[0]));
+		P2.setText(String.format("%.1f", P[1]));
+		P3.setText(String.format("%.1f", P[2]));
+		P4.setText(String.format("%.1f", P[3]));
+		P5.setText(String.format("%.2f", P[4]));
+		P6.setText(String.format("%.1f", P[5]));
+		P7.setText(String.format("%.1f", P[6]));
+		P8.setText(String.format("%.1f", P[7]));
+		P9.setText(String.format("%.1f", P[8]));
+
+		I1.setText(String.format("%.3f", I[0]));
+		I2.setText(String.format("%.3f", I[1]));
+		I3.setText(String.format("%.3f", I[2]));
+		I4.setText(String.format("%.3f", I[3]));
+		I5.setText(String.format("%.1f", I[4]));
+		I6.setText(String.format("%.2f", I[5]));
+		I7.setText(String.format("%.2f", I[6]));
+		I8.setText(String.format("%.3f", I[7]));
+		I9.setText(String.format("%.3f", I[8]));
+
+		D1.setText(String.format("%.0f", D[0]));
+		D2.setText(String.format("%.0f", D[1]));
+		D3.setText(String.format("%.0f", D[2]));
+		D4.setText(String.format("%.0f", D[3]));
+		D5.setText(String.format("%.0f", D[4]));
+		D6.setText(String.format("%.3f", D[5]));
+		D7.setText(String.format("%.3f", D[6]));
+		D8.setText(String.format("%.0f", D[7]));
+		D9.setText(String.format("%.3f", D[8]));
+
+		RatePitchRoll1.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
+		RatePitchRoll2.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
+
+		RateYaw.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.yaw.rate"))));
+
+		MIDThrottle.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.mid"))));
+		EXPOThrottle.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.expo"))));
+
+		RATE2PitchRoll.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rate"))));
+		EXPOPitchRoll.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.expo"))));
+
+		TPA.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.rate"))));
+
+	}
 
 	private void ShowData() {
 
@@ -346,7 +387,7 @@ public class PIDActivity extends SherlockActivity {
 		P8.setText(String.format("%.1f", (float) app.mw.byteP[7] / 10.0));
 		P9.setText(String.format("%.1f", (float) app.mw.byteP[8] / 10.0));
 
-		I1.setText(String.format("%.3f", (float) app.mw.byteI[0] / 1000.0));
+		I1.setText(String.format("%.3f", (float) I[0] / 1000.0));
 		I2.setText(String.format("%.3f", (float) app.mw.byteI[1] / 1000.0));
 		I3.setText(String.format("%.3f", (float) app.mw.byteI[2] / 1000.0));
 		I4.setText(String.format("%.3f", (float) app.mw.byteI[3] / 1000.0));
@@ -366,23 +407,16 @@ public class PIDActivity extends SherlockActivity {
 		D8.setText(String.format("%.0f", (float) app.mw.byteD[7]));
 		D9.setText(String.format("%.3f", (float) app.mw.byteD[8]));
 
-		RatePitchRoll1.setText(String.format("%.2f",
-				(float) app.mw.byteRollPitchRate / 100.0));
-		RatePitchRoll2.setText(String.format("%.2f",
-				(float) app.mw.byteRollPitchRate / 100.0));
+		RatePitchRoll1.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
+		RatePitchRoll2.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
 
-		RateYaw.setText(String.format("%.2f",
-				(float) app.mw.byteYawRate / 100.0));
+		RateYaw.setText(String.format("%.2f", (float) app.mw.byteYawRate / 100.0));
 
-		MIDThrottle.setText(String.format("%.2f",
-				(float) app.mw.byteThrottle_MID / 100.0));
-		EXPOThrottle.setText(String.format("%.2f",
-				(float) app.mw.byteThrottle_EXPO / 100.0));
+		MIDThrottle.setText(String.format("%.2f", (float) app.mw.byteThrottle_MID / 100.0));
+		EXPOThrottle.setText(String.format("%.2f", (float) app.mw.byteThrottle_EXPO / 100.0));
 
-		RATE2PitchRoll.setText(String.format("%.2f",
-				(float) app.mw.byteRC_RATE / 100.0));
-		EXPOPitchRoll.setText(String.format("%.2f",
-				(float) app.mw.byteRC_EXPO / 100.0));
+		RATE2PitchRoll.setText(String.format("%.2f", (float) app.mw.byteRC_RATE / 100.0));
+		EXPOPitchRoll.setText(String.format("%.2f", (float) app.mw.byteRC_EXPO / 100.0));
 
 		TPA.setText(String.format("%.2f", (float) app.mw.byteDynThrPID / 100.0));
 	}
@@ -406,11 +440,6 @@ public class PIDActivity extends SherlockActivity {
 			SetOnClick(null);
 			return true;
 		}
-
-		// if (item.getItemId() == R.id.MenuSetPID) {
-		// SetOnClick(null);
-		// return true;
-		// }
 
 		if (item.getItemId() == R.id.MenuResetPID) {
 			ResetOnClick(null);
