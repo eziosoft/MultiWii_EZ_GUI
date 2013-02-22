@@ -43,8 +43,7 @@ public class BT {
 	// Well known SPP UUID (will *probably* map to
 	// RFCOMM channel 1 (default) if not in use);
 	// see comments in onResume().
-	private static final UUID MY_UUID = UUID
-			.fromString("00001101-0000-1000-8000-00805F9B34FB");
+	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	// ==> hardcode your server's MAC address here <==
 	public String address = "";
@@ -68,9 +67,7 @@ public class BT {
 
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter == null) {
-			Toast.makeText(context,
-					context.getString(R.string.Bluetoothisnotavailable),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getString(R.string.Bluetoothisnotavailable), Toast.LENGTH_LONG).show();
 			// finish();
 			return;
 		}
@@ -89,7 +86,12 @@ public class BT {
 	}
 
 	public void BTDisable() {
-		mBluetoothAdapter.disable();
+		try {
+			mBluetoothAdapter.disable();
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	public void GetRemoteDevice(String MAC) {
@@ -99,8 +101,7 @@ public class BT {
 
 		}
 
-		Toast.makeText(context, context.getString(R.string.Connecting),
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(context, context.getString(R.string.Connecting), Toast.LENGTH_LONG).show();
 		// app.Speak("Connecting");
 
 		address = MAC;
@@ -125,9 +126,7 @@ public class BT {
 			btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
 		} catch (IOException e) {
 			Log.e(TAG, "ON RESUME: Socket creation failed.", e);
-			Toast.makeText(context,
-					context.getString(R.string.Unabletoconnect),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
 		}
 
 		// Discovery may be going on, e.g., if you're running a
@@ -141,24 +140,20 @@ public class BT {
 
 	public void Connect(String MAC) {
 
-		
-
 		// Blocking connect, for a simple client nothing else can
 		// happen until a successful connection is made, so we
 		// don't care if it blocks.
 
 		if (mBluetoothAdapter.isEnabled()) {
 			try {
-				
+
 				GetRemoteDevice(MAC);
 				btSocket.connect();
 				Connected = true;
 				ConnectionLost = false;
 				ReconnectTry = 0;
-				Log.d(TAG,
-						"BT connection established, data transfer link open.");
-				Toast.makeText(context, context.getString(R.string.Connected),
-						Toast.LENGTH_LONG).show();
+				Log.d(TAG, "BT connection established, data transfer link open.");
+				Toast.makeText(context, context.getString(R.string.Connected), Toast.LENGTH_LONG).show();
 
 				// app.Speak("Connected");
 
@@ -167,15 +162,11 @@ public class BT {
 					btSocket.close();
 					Connected = false;
 					ConnectionLost = true;
-					Toast.makeText(context,
-							context.getString(R.string.Unabletoconnect),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
 					// app.Speak("Unable to connect");
 
 				} catch (IOException e2) {
-					Log.e(TAG,
-							"ON RESUME: Unable to close socket during connection failure",
-							e2);
+					Log.e(TAG, "ON RESUME: Unable to close socket during connection failure", e2);
 
 				}
 			}
@@ -229,8 +220,7 @@ public class BT {
 			btSocket.close();
 			Connected = false;
 
-			Toast.makeText(context, context.getString(R.string.Disconnected),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getString(R.string.Disconnected), Toast.LENGTH_LONG).show();
 			// app.Speak("Disconnected");
 
 		} catch (Exception e2) {
@@ -261,8 +251,7 @@ public class BT {
 			e.printStackTrace();
 			Log.e(TAG, "Read error ", e);
 		}
-		return (b[0] & 0xff) + ((b[1] & 0xff) << 8) + ((b[2] & 0xff) << 16)
-				+ ((b[3] & 0xff) << 24);
+		return (b[0] & 0xff) + ((b[1] & 0xff) << 8) + ((b[2] & 0xff) << 16) + ((b[3] & 0xff) << 24);
 	}
 
 	public int Read16() {
