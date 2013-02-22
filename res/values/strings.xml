@@ -195,6 +195,6 @@
     <string name="Follow_Me">FollowMe</string>
     <string name="Follow_Heading">FollowHeading</string>
     <string name="Load">Load</string>
-    <string name="Profile">Profile:</string>
+    <string name="Profile">Profile: (compatibile with MultiWiiConf; put the files in to /sdcard/MultiWiiLogs)</string>
 
 </resources>

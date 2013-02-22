@@ -105,31 +105,31 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 		}
 
-		// locationManager.addGpsStatusListener(new GpsStatus.Listener() {
-		//
-		// @Override
-		// public void onGpsStatusChanged(int event) {
-		// if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
-		// GpsStatus status = locationManager.getGpsStatus(null);
-		// Iterable<GpsSatellite> sats = status.getSatellites();
-		// Iterator<GpsSatellite> it = sats.iterator();
-		//
-		// PhoneNumSat = 0;
-		// while (it.hasNext()) {
-		//
-		// GpsSatellite oSat = (GpsSatellite) it.next();
-		// if (oSat.usedInFix())
-		// PhoneNumSat++;
-		// }
-		//
-		// }
-		// if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
-		// PhoneFix = 1;
-		//
-		// if (mListener != null)
-		// mListener.onSensorsStateGPSStatusChange();
-		// }
-		// });
+		locationManager.addGpsStatusListener(new GpsStatus.Listener() {
+
+			@Override
+			public void onGpsStatusChanged(int event) {
+				if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
+					GpsStatus status = locationManager.getGpsStatus(null);
+					Iterable<GpsSatellite> sats = status.getSatellites();
+					Iterator<GpsSatellite> it = sats.iterator();
+
+					PhoneNumSat = 0;
+					while (it.hasNext()) {
+
+						GpsSatellite oSat = (GpsSatellite) it.next();
+						if (oSat.usedInFix())
+							PhoneNumSat++;
+					}
+
+				}
+				if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
+					PhoneFix = 1;
+
+				if (mListener != null)
+					mListener.onSensorsStateGPSStatusChange();
+			}
+		});
 
 	}
 
@@ -234,8 +234,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
 
-		if(location.getExtras()!=null)
-		PhoneNumSat = (Integer) location.getExtras().get("satellites");
+		// this is proper way but it doesn't work on some phones
+		// if(location.getExtras()!=null)
+		// PhoneNumSat = (Integer) location.getExtras().get("satellites");
 
 		if (mListener != null)
 			mListener.onSensorsStateGPSLocationChange();
