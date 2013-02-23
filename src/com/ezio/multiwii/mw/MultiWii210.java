@@ -27,7 +27,7 @@ import com.ezio.multiwii.waypoints.Waypoint;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(BT b) {
-		EZGUIProtocol = "213 r1337";
+		EZGUIProtocol = "213 r1349";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after conection
@@ -300,13 +300,17 @@ public class MultiWii210 extends MultirotorData {
 			WP.Number = read8();
 			WP.Lat = read32();
 			WP.Lon = read32();
-			WP.Alt = read16();
+			WP.Alt = read32();
+			WP.Heading = read16();
+			WP.TimeToStay = read16();
 			WP.NavFlag = read8();
 
-			Waypoints[WP.Number].Lat = WP.Lat;
-			Waypoints[WP.Number].Lon = WP.Lon;
-			Waypoints[WP.Number].Alt = WP.Alt;
-			Waypoints[WP.Number].NavFlag = WP.NavFlag;
+			Waypoints[WP.Number] = WP;
+
+			// Waypoints[WP.Number].Lat = WP.Lat;
+			// Waypoints[WP.Number].Lon = WP.Lon;
+			// Waypoints[WP.Number].Alt = WP.Alt;
+			// Waypoints[WP.Number].NavFlag = WP.NavFlag;
 
 			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
 
@@ -385,8 +389,8 @@ public class MultiWii210 extends MultirotorData {
 						evaluateCommand(cmd, (int) dataSize);
 					}
 				} else {
-					System.out.println("invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
-					System.out.print("<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
+					Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
+					Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
 					for (i = 0; i < dataSize; i++) {
 						if (i != 0) {
 							System.err.print(' ');
@@ -661,13 +665,13 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_SET_WP(Waypoint w) {
-		// params are:
-		// 1 octet: always 0 for the moment, ie WP 0 = HOME POS
-		// 4 octets: LAT
-		// 4 octets: LON
-		// 4 octets: altitude (not used for the moment, no need to set it)
-		// 1 octets: nav flag (not used for the moment, no need to set it)
-		//
+		// uint8_t wp_no = read8(); //get the wp number
+		// lat = read32();
+		// lon = read32();
+		// alt = read32(); // to set altitude (cm)
+		// read16(); // future: to set heading (deg)
+		// read16(); // future: to set time to stay (ms)
+		// read8(); // future: to set nav flag
 
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) w.Number);
@@ -686,6 +690,12 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) ((w.Alt >> 16) & 0xFF));
 		payload.add((char) ((w.Alt >> 24) & 0xFF));
 
+		payload.add((char) (w.Heading & 0xFF));
+		payload.add((char) ((w.Heading >> 8) & 0xFF));
+
+		payload.add((char) (w.TimeToStay & 0xFF));
+		payload.add((char) ((w.TimeToStay >> 8) & 0xFF));
+
 		payload.add((char) w.NavFlag);
 
 		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
@@ -699,7 +709,8 @@ public class MultiWii210 extends MultirotorData {
 	@Override
 	public void SendRequestMSP_SET_HEAD(int heading) {
 		payload = new ArrayList<Character>();
-		payload.add((char) heading);
+		payload.add((char) (heading & 0xFF));
+		payload.add((char) ((heading >> 8) & 0xFF));
 		sendRequestMSP(requestMSP(MSP_SET_HEAD, payload.toArray(new Character[payload.size()])));
 
 	}

@@ -156,21 +156,31 @@ public class PIDActivity extends SherlockActivity {
 
 		TPA = (EditText) findViewById(R.id.editTextTPA);
 
-		File sdCardRoot = Environment.getExternalStorageDirectory();
-		File yourDir = new File(sdCardRoot, "MultiWiiLogs");
-		ArrayList<String> l = new ArrayList<String>();
-
-		if (yourDir.listFiles() != null) {
-			for (File f : yourDir.listFiles()) {
-				if (f.isFile())
-					if (f.getName().contains("mwi"))
-						l.add(f.getName());
-			}
+		File folder = new File(Environment.getExternalStorageDirectory() + "/MultiWiiLogs");
+		boolean success = false;
+		if (!folder.exists()) {
+			success = folder.mkdir();
+		} else {
+			success = true;
 		}
-		spinnerProfile = (Spinner) findViewById(R.id.spinnerProfile);
-		ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, l);
 
-		spinnerProfile.setAdapter(aa);
+		if (success) {
+			File sdCardRoot = Environment.getExternalStorageDirectory();
+			File yourDir = new File(sdCardRoot, "MultiWiiLogs");
+			ArrayList<String> l = new ArrayList<String>();
+
+			if (yourDir.listFiles() != null) {
+				for (File f : yourDir.listFiles()) {
+					if (f.isFile())
+						if (f.getName().contains("mwi"))
+							l.add(f.getName());
+				}
+			}
+			spinnerProfile = (Spinner) findViewById(R.id.spinnerProfile);
+			ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, l);
+
+			spinnerProfile.setAdapter(aa);
+		}
 
 	}
 

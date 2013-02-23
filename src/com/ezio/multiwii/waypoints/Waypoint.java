@@ -20,22 +20,51 @@ import com.google.android.maps.GeoPoint;
 
 public class Waypoint {
 
-	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, NavFlag = 0;
+	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, Heading = 0, TimeToStay = 0, NavFlag = 0;
 
-	public Waypoint(int number, int lat, int lon, int alt, int navFlag) {
+	/**
+	 * 
+	 * @param number
+	 * @param lat
+	 * @param lon
+	 * @param alt
+	 *            altitude (cm)
+	 * @param heading
+	 *            heading (deg)
+	 * @param timeToStay
+	 *            time to stay (ms)
+	 * @param navFlag
+	 */
+	public Waypoint(int number, int lat, int lon, int alt, int heading, int timeToStay, int navFlag) {
 		Number = number;
 		Lat = lat;
 		Lon = lon;
-		Alt = alt;
+		Alt = alt; // to set altitude (cm)
+		Heading = heading;// future: to set heading (deg)
+		TimeToStay = timeToStay;// future: to set time to stay (ms)
 		NavFlag = navFlag;
 
 	}
 
-	public Waypoint(int number, GeoPoint geopoint, int alt, int navFlag) {
+	/**
+	 * 
+	 * @param number
+	 * @param lat
+	 * @param lon
+	 * @param alt
+	 *            altitude (cm)
+	 * @param heading
+	 *            heading (deg)
+	 * @param timeToStay
+	 *            time to stay (ms)
+	 * @param navFlag
+	 */
+	public Waypoint(int number, GeoPoint geopoint, int alt, int heading, int timeToStay, int navFlag) {
 		Number = number;
 		Lat = geopoint.getLatitudeE6() * 10;
 		Lon = geopoint.getLongitudeE6() * 10;
-		// Alt = geopoint.getAltitude();
+		Heading = heading;
+		TimeToStay = timeToStay;
 		Alt = alt;
 		NavFlag = navFlag;
 	}
