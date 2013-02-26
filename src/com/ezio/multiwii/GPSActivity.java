@@ -125,7 +125,7 @@ public class GPSActivity extends SherlockActivity {
 			app.Frequentjobs();
 
 			app.mw.SendRequest();
-			app.mw.SendRequestGetWayPoint(0);
+			//app.mw.SendRequestGetWayPoint(0);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 

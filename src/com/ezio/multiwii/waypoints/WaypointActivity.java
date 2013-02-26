@@ -108,8 +108,8 @@ public class WaypointActivity extends Activity {
 	}
 
 	public void SetWPHomeOnClick(View v) {
-
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0));
+		// TODO alt and heading need to be added
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0, 0, 0));
 
 		if (app.D) {
 			app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
@@ -121,8 +121,8 @@ public class WaypointActivity extends Activity {
 	}
 
 	public void SetWPPositionHoldOnClick(View v) {
-
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0));
+		// TODO alt and heading need to be added
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0, 0, 0));
 
 		if (app.D) {
 

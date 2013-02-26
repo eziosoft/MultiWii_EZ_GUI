@@ -16,6 +16,9 @@
  */
 package com.ezio.multiwii;
 
+import it.sephiroth.android.wheel.view.Wheel;
+import it.sephiroth.android.wheel.view.Wheel.OnScrollListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,18 +27,24 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.SyncStateContract.Helpers;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.ActionBarSherlock;
@@ -43,6 +52,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.ezio.multiwii.helpers.Functions;
 
 public class PIDActivity extends SherlockActivity {
 
@@ -259,19 +269,7 @@ public class PIDActivity extends SherlockActivity {
 		} catch (Exception e) {
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
-		// Intent sharingIntent = new
-		// Intent(android.content.Intent.ACTION_SEND);
-		// sharingIntent.setType("text/plain");
-		// String shareBody = "";
-		// for (int i = 0; i <= 8; i++) {
-		// shareBody += String.valueOf(P[i]) + "\t|\t" + String.valueOf(I[i]) +
-		// "\t|\t" + String.valueOf(D[i]) + "\n";
-		// }
-		// sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-		// "MultiWii PID");
-		// sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-		//
-		// startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
 	}
 
 	public void SetOnClick(View v) {
@@ -454,6 +452,78 @@ public class PIDActivity extends SherlockActivity {
 
 		TPA.setText(String.format("%.2f", (float) app.mw.byteDynThrPID / 100.0));
 	}
+
+	// ////////////////////////dialog
+
+	public void TVOnClick5(View v) {
+		CustomDialog(v, 5);
+	}
+
+	public void TVOnClick20(View v) {
+		CustomDialog(v, 20);
+	}
+
+	public void TVOnClick25(View v) {
+		CustomDialog(v, 25);
+	}
+
+	void CustomDialog(final View v, final float maxValue) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.your_dialog_root_element));
+
+		Wheel w = (Wheel) layout.findViewById(R.id.wheel1);
+		
+
+		final TextView tv = (TextView) layout.findViewById(R.id.text);
+
+		w.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStarted(Wheel view, float value, int roundValue) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onScrollFinished(Wheel view, float value, int roundValue) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onScroll(Wheel view, float value, int roundValue) {
+				float v;
+				v = Functions.map(value, -1, 1, 0, maxValue);
+				tv.setText(String.valueOf(v));
+
+			}
+		});
+
+		alertDialogBuilder.setView(layout);
+		alertDialogBuilder.setCancelable(false);
+		alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				((EditText) v).setText(String.valueOf(tv.getText().toString()));
+			}
+		});
+		alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+
+				dialog.cancel();
+			}
+		});
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+		w.setValue(Functions.map(Float.parseFloat(((EditText) v).getText().toString().replace(",", ".")), 0f, maxValue,-1f, 1f), false);
+	}
+
+	// /////////////////end dialog
 
 	// /////menu////////
 	@Override

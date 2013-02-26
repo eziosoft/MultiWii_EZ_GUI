@@ -154,7 +154,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" />
 
                     <EditText
                         android:id="@+id/I1"
@@ -203,7 +204,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" />
 
                     <EditText
                         android:id="@+id/I2"
@@ -253,7 +255,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" />
 
                     <EditText
                         android:id="@+id/I3"
@@ -301,7 +304,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" />
 
                     <EditText
                         android:id="@+id/I4"
@@ -349,7 +353,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick5" />
 
                     <EditText
                         android:id="@+id/I5"
@@ -398,7 +403,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick25" />
 
                     <EditText
                         android:id="@+id/I6"
@@ -447,7 +453,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick25" />
 
                     <EditText
                         android:id="@+id/I7"
@@ -496,7 +503,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" >
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" >
+
                     </EditText>
 
                     <EditText
@@ -546,7 +555,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:onClick="TVOnClick20" />
 
                     <EditText
                         android:id="@+id/I9"

@@ -16,10 +16,14 @@
  */
 package com.ezio.multiwii.dashboard;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -34,6 +38,9 @@ import com.ezio.multiwii.R;
 import com.ezio.multiwii.helpers.Functions;
 
 public class Dashboard2View extends View {
+
+	boolean saveToSD = false;
+	Bitmap toDisk;
 
 	Context context;
 	int ww, hh;
@@ -223,6 +230,11 @@ public class Dashboard2View extends View {
 	@Override
 	protected void onDraw(Canvas c) {
 		super.onDraw(c);
+
+		if (saveToSD) {
+			toDisk = Bitmap.createBitmap(ww, hh, Bitmap.Config.ARGB_8888);
+			c.setBitmap(toDisk);
+		}
 
 		// debug
 		if (false) {
@@ -505,6 +517,15 @@ public class Dashboard2View extends View {
 			drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 2, 10, (int) Altitude);
 		if (SatNum > 0)
 			drawVertical(c, ww / 3, hh / 3, hh / 3, 2, 10, (int) Speed);
+
+		if (saveToSD) {
+			try {
+				toDisk.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File("/mnt/sdcard/arun.jpg")));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
