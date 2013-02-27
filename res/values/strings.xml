@@ -196,5 +196,7 @@
     <string name="Follow_Heading">FollowHeading</string>
     <string name="Load">Load</string>
     <string name="Profile">Profile: (compatibile with MultiWiiConf; put the files in to /sdcard/MultiWiiLogs)</string>
+    <string name="Save">Save</string>
+    <string name="EnterFileName">Enter file name</string>
 
 </resources>

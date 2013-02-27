@@ -21,8 +21,10 @@ import it.sephiroth.android.wheel.view.Wheel.OnScrollListener;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
@@ -33,7 +35,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.SyncStateContract.Helpers;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -89,17 +89,17 @@ public class PIDActivity extends SherlockActivity {
 	EditText I8;
 	EditText I9;
 
-	EditText RatePitchRoll1;
-	EditText RatePitchRoll2;
-	EditText RateYaw;
+	EditText RollPitchRate;
+	EditText RollPitchRate2;
+	EditText YawRate;
 
-	EditText MIDThrottle;
-	EditText EXPOThrottle;
+	EditText ThrottleMid;
+	EditText ThrottleExpo;
 
-	EditText RATE2PitchRoll;
-	EditText EXPOPitchRoll;
+	EditText RcRate;
+	EditText RcExpo;
 
-	EditText TPA;
+	EditText ThrottleRate;
 
 	Spinner spinnerProfile;
 
@@ -115,7 +115,7 @@ public class PIDActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pid);
+		setContentView(R.layout.pid_layout);
 
 		app = (App) getApplication();
 		actionBar = getSherlock();
@@ -154,18 +154,23 @@ public class PIDActivity extends SherlockActivity {
 		I8 = (EditText) findViewById(R.id.I8);
 		I9 = (EditText) findViewById(R.id.I9);
 
-		RatePitchRoll1 = (EditText) findViewById(R.id.editTextRatePitchRoll1);
-		RatePitchRoll2 = (EditText) findViewById(R.id.editTextRatePitchRoll2);
-		RateYaw = (EditText) findViewById(R.id.editTextRateYaw);
+		RollPitchRate = (EditText) findViewById(R.id.editTextRatePitchRoll1);
+		RollPitchRate2 = (EditText) findViewById(R.id.editTextRatePitchRoll2);
+		YawRate = (EditText) findViewById(R.id.editTextRateYaw);
 
-		MIDThrottle = (EditText) findViewById(R.id.editTextMIDThrottle);
-		EXPOThrottle = (EditText) findViewById(R.id.editTextEXPOThrottle);
+		ThrottleMid = (EditText) findViewById(R.id.editTextMIDThrottle);
+		ThrottleExpo = (EditText) findViewById(R.id.editTextEXPOThrottle);
 
-		RATE2PitchRoll = (EditText) findViewById(R.id.editTextRate2PitchRoll);
-		EXPOPitchRoll = (EditText) findViewById(R.id.editTextEXPOPitchRoll);
+		RcRate = (EditText) findViewById(R.id.editTextRate2PitchRoll);
+		RcExpo = (EditText) findViewById(R.id.editTextEXPOPitchRoll);
 
-		TPA = (EditText) findViewById(R.id.editTextTPA);
+		ThrottleRate = (EditText) findViewById(R.id.editTextTPA);
 
+		loadProfileFiles();
+
+	}
+
+	private void loadProfileFiles() {
 		File folder = new File(Environment.getExternalStorageDirectory() + "/MultiWiiLogs");
 		boolean success = false;
 		if (!folder.exists()) {
@@ -191,7 +196,6 @@ public class PIDActivity extends SherlockActivity {
 
 			spinnerProfile.setAdapter(aa);
 		}
-
 	}
 
 	@Override
@@ -275,13 +279,13 @@ public class PIDActivity extends SherlockActivity {
 	public void SetOnClick(View v) {
 
 		// Log.d("aaaaa",RATE2PitchRoll.getText().toString());
-		confRC_RATE = Float.parseFloat(RATE2PitchRoll.getText().toString().replace(",", "."));
-		confRC_EXPO = Float.parseFloat(EXPOPitchRoll.getText().toString().replace(",", "."));
-		rollPitchRate = Float.parseFloat(RatePitchRoll1.getText().toString().replace(",", "."));
-		yawRate = Float.parseFloat(RateYaw.getText().toString().replace(",", "."));
-		dynamic_THR_PID = Float.parseFloat(TPA.getText().toString().replace(",", "."));
-		throttle_MID = Float.parseFloat(MIDThrottle.getText().toString().replace(",", "."));
-		throttle_EXPO = Float.parseFloat(EXPOThrottle.getText().toString().replace(",", "."));
+		confRC_RATE = Float.parseFloat(RcRate.getText().toString().replace(",", "."));
+		confRC_EXPO = Float.parseFloat(RcExpo.getText().toString().replace(",", "."));
+		rollPitchRate = Float.parseFloat(RollPitchRate.getText().toString().replace(",", "."));
+		yawRate = Float.parseFloat(YawRate.getText().toString().replace(",", "."));
+		dynamic_THR_PID = Float.parseFloat(ThrottleRate.getText().toString().replace(",", "."));
+		throttle_MID = Float.parseFloat(ThrottleMid.getText().toString().replace(",", "."));
+		throttle_EXPO = Float.parseFloat(ThrottleExpo.getText().toString().replace(",", "."));
 
 		P[0] = Float.parseFloat(P1.getText().toString().replace(",", "."));
 		P[1] = Float.parseFloat(P2.getText().toString().replace(",", "."));
@@ -392,18 +396,18 @@ public class PIDActivity extends SherlockActivity {
 		D8.setText(String.format("%.0f", D[7]));
 		D9.setText(String.format("%.3f", D[8]));
 
-		RatePitchRoll1.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
-		RatePitchRoll2.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
+		RollPitchRate.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
+		RollPitchRate2.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rollpitch.rate"))));
 
-		RateYaw.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.yaw.rate"))));
+		YawRate.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.yaw.rate"))));
 
-		MIDThrottle.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.mid"))));
-		EXPOThrottle.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.expo"))));
+		ThrottleMid.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.mid"))));
+		ThrottleExpo.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.expo"))));
 
-		RATE2PitchRoll.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rate"))));
-		EXPOPitchRoll.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.expo"))));
+		RcRate.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.rate"))));
+		RcExpo.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.expo"))));
 
-		TPA.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.rate"))));
+		ThrottleRate.setText(String.format("%.2f", Float.valueOf(properties.getProperty("rc.throttle.rate"))));
 
 	}
 
@@ -439,18 +443,123 @@ public class PIDActivity extends SherlockActivity {
 		D8.setText(String.format("%.0f", (float) app.mw.byteD[7]));
 		D9.setText(String.format("%.3f", (float) app.mw.byteD[8]));
 
-		RatePitchRoll1.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
-		RatePitchRoll2.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
+		RollPitchRate.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
+		RollPitchRate2.setText(String.format("%.2f", (float) app.mw.byteRollPitchRate / 100.0));
 
-		RateYaw.setText(String.format("%.2f", (float) app.mw.byteYawRate / 100.0));
+		YawRate.setText(String.format("%.2f", (float) app.mw.byteYawRate / 100.0));
 
-		MIDThrottle.setText(String.format("%.2f", (float) app.mw.byteThrottle_MID / 100.0));
-		EXPOThrottle.setText(String.format("%.2f", (float) app.mw.byteThrottle_EXPO / 100.0));
+		ThrottleMid.setText(String.format("%.2f", (float) app.mw.byteThrottle_MID / 100.0));
+		ThrottleExpo.setText(String.format("%.2f", (float) app.mw.byteThrottle_EXPO / 100.0));
 
-		RATE2PitchRoll.setText(String.format("%.2f", (float) app.mw.byteRC_RATE / 100.0));
-		EXPOPitchRoll.setText(String.format("%.2f", (float) app.mw.byteRC_EXPO / 100.0));
+		RcRate.setText(String.format("%.2f", (float) app.mw.byteRC_RATE / 100.0));
+		RcExpo.setText(String.format("%.2f", (float) app.mw.byteRC_EXPO / 100.0));
 
-		TPA.setText(String.format("%.2f", (float) app.mw.byteDynThrPID / 100.0));
+		ThrottleRate.setText(String.format("%.2f", (float) app.mw.byteDynThrPID / 100.0));
+	}
+
+	public void SaveProfileOnClick(View v) {
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle(getString(R.string.EnterFileName));
+		alert.setMessage(getString(R.string.Profile));
+
+		// Set an EditText view to get user input
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton(getString(R.string.Save), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+
+				try {
+					SaveToXml(input.getText().toString());
+				} catch (InvalidPropertiesFormatException e) {
+
+					e.printStackTrace();
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+
+				loadProfileFiles();
+
+			}
+		});
+
+		alert.setNegativeButton(getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+
+		alert.show();
+
+	}
+
+	private void SaveToXml(String fileName) throws InvalidPropertiesFormatException, IOException {
+		// TODO
+
+		confRC_RATE = Float.parseFloat(RcRate.getText().toString().replace(",", "."));
+		confRC_EXPO = Float.parseFloat(RcExpo.getText().toString().replace(",", "."));
+		rollPitchRate = Float.parseFloat(RollPitchRate.getText().toString().replace(",", "."));
+		yawRate = Float.parseFloat(YawRate.getText().toString().replace(",", "."));
+		dynamic_THR_PID = Float.parseFloat(ThrottleRate.getText().toString().replace(",", "."));
+		throttle_MID = Float.parseFloat(ThrottleMid.getText().toString().replace(",", "."));
+		throttle_EXPO = Float.parseFloat(ThrottleExpo.getText().toString().replace(",", "."));
+
+		P[0] = Float.parseFloat(P1.getText().toString().replace(",", "."));
+		P[1] = Float.parseFloat(P2.getText().toString().replace(",", "."));
+		P[2] = Float.parseFloat(P3.getText().toString().replace(",", "."));
+		P[3] = Float.parseFloat(P4.getText().toString().replace(",", "."));
+		P[4] = Float.parseFloat(P5.getText().toString().replace(",", "."));
+		P[5] = Float.parseFloat(P6.getText().toString().replace(",", "."));
+		P[6] = Float.parseFloat(P7.getText().toString().replace(",", "."));
+		P[7] = Float.parseFloat(P8.getText().toString().replace(",", "."));
+		P[8] = Float.parseFloat(P9.getText().toString().replace(",", "."));
+
+		I[0] = Float.parseFloat(I1.getText().toString().replace(",", "."));
+		I[1] = Float.parseFloat(I2.getText().toString().replace(",", "."));
+		I[2] = Float.parseFloat(I3.getText().toString().replace(",", "."));
+		I[3] = Float.parseFloat(I4.getText().toString().replace(",", "."));
+		I[4] = Float.parseFloat(I5.getText().toString().replace(",", "."));
+		I[5] = Float.parseFloat(I6.getText().toString().replace(",", "."));
+		I[6] = Float.parseFloat(I7.getText().toString().replace(",", "."));
+		I[7] = Float.parseFloat(I8.getText().toString().replace(",", "."));
+		I[8] = Float.parseFloat(I9.getText().toString().replace(",", "."));
+
+		D[0] = Float.parseFloat(D1.getText().toString().replace(",", "."));
+		D[1] = Float.parseFloat(D2.getText().toString().replace(",", "."));
+		D[2] = Float.parseFloat(D3.getText().toString().replace(",", "."));
+		D[3] = Float.parseFloat(D4.getText().toString().replace(",", "."));
+		D[4] = Float.parseFloat(D5.getText().toString().replace(",", "."));
+		D[5] = Float.parseFloat(D6.getText().toString().replace(",", "."));
+		D[6] = Float.parseFloat(D7.getText().toString().replace(",", "."));
+		D[7] = Float.parseFloat(D8.getText().toString().replace(",", "."));
+		D[8] = Float.parseFloat(D9.getText().toString().replace(",", "."));
+
+		File sdcard = Environment.getExternalStorageDirectory();
+		File file = new File(sdcard, "/MultiWiiLogs/" + fileName + ".mwi");
+		Properties properties = new Properties();
+		FileOutputStream fos = new FileOutputStream(file);
+
+		for (int i = 0; i < app.mw.PIDITEMS; i++) {
+			properties.setProperty("pid." + i + ".p", String.valueOf(P[i]).replace(",", "."));
+			properties.setProperty("pid." + i + ".i", String.valueOf(I[i]).replace(",", "."));
+			properties.setProperty("pid." + i + ".d", String.valueOf(D[i]).replace(",", "."));
+		}
+
+		properties.setProperty("rc.rollpitch.rate", RollPitchRate.getText().toString().replace(",", "."));
+		properties.setProperty("rc.yaw.rate", YawRate.getText().toString().replace(",", "."));
+		properties.setProperty("rc.throttle.mid", ThrottleMid.getText().toString().replace(",", "."));
+		properties.setProperty("rc.throttle.expo", ThrottleExpo.getText().toString().replace(",", "."));
+		properties.setProperty("rc.rate", RcRate.getText().toString().replace(",", "."));
+		properties.setProperty("rc.expo", RcExpo.getText().toString().replace(",", "."));
+		properties.setProperty("rc.throttle.rate", ThrottleRate.getText().toString().replace(",", "."));
+
+		properties.storeToXML(fos, new Date().toString());
+
+		Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_SHORT).show();
+
 	}
 
 	// ////////////////////////dialog
@@ -462,7 +571,7 @@ public class PIDActivity extends SherlockActivity {
 	public void TVOnClick2_50(View v) {
 		CustomDialog(v, 2.5f);
 	}
-	
+
 	public void TVOnClick1(View v) {
 		CustomDialog(v, 1);
 	}
@@ -478,7 +587,7 @@ public class PIDActivity extends SherlockActivity {
 	public void TVOnClick25(View v) {
 		CustomDialog(v, 25);
 	}
-	
+
 	public void TVOnClick100(View v) {
 		CustomDialog(v, 100);
 	}
