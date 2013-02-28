@@ -17,6 +17,9 @@
 
 package com.ezio.multiwii.waypoints;
 
+import it.sephiroth.android.wheel.view.Wheel;
+import it.sephiroth.android.wheel.view.Wheel.OnScrollListener;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -34,6 +37,7 @@ import android.widget.TextView;
 
 import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.Functions;
 
 public class WaypointActivity extends Activity {
 
@@ -44,6 +48,9 @@ public class WaypointActivity extends Activity {
 	TextView TVData;
 	TextView TVMWInfo;
 	CheckBox CheckBoxFollowMe;
+
+	EditText EditTextAltitude;
+	Wheel WheelAltitude;
 
 	NumberFormat format = new DecimalFormat("0.############################################################"); // used
 	// to
@@ -89,6 +96,10 @@ public class WaypointActivity extends Activity {
 		TVData = (TextView) findViewById(R.id.textViewData);
 		TVMWInfo = (TextView) findViewById(R.id.textViewMWInfo);
 
+		EditTextAltitude = (EditText) findViewById(R.id.editTextAltitude);
+
+		WheelAltitude = (Wheel) findViewById(R.id.wheelAltitude);
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			SelectedLatitude = extras.getLong("LAT");
@@ -98,6 +109,28 @@ public class WaypointActivity extends Activity {
 		}
 
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
+		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
+
+		WheelAltitude.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStarted(Wheel view, float value, int roundValue) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onScrollFinished(Wheel view, float value, int roundValue) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onScroll(Wheel view, float value, int roundValue) {
+				EditTextAltitude.setText(String.valueOf((int) Math.abs(Functions.map(value, -1, 1, -10000, 10000))));
+
+			}
+		});
 
 	}
 
@@ -109,7 +142,9 @@ public class WaypointActivity extends Activity {
 
 	public void SetWPHomeOnClick(View v) {
 		// TODO alt and heading need to be added
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0, 0, 0));
+
+		int alt = Integer.parseInt(EditTextAltitude.getText().toString());
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), alt, 0, 0, 0));
 
 		if (app.D) {
 			app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
@@ -122,7 +157,10 @@ public class WaypointActivity extends Activity {
 
 	public void SetWPPositionHoldOnClick(View v) {
 		// TODO alt and heading need to be added
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), 0, 0, 0, 0));
+
+		int alt = Integer.parseInt(EditTextAltitude.getText().toString());
+
+		app.mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), alt, 0, 0, 0));
 
 		if (app.D) {
 

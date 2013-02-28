@@ -57,6 +57,8 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxDisableBTonExit;
 
 	CheckBox CheckBoxCopyFrskyToMW;
+	
+	CheckBox CheckBoxReverseRollDirection;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -137,6 +139,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
 		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
 		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
+		CheckBoxReverseRollDirection=(CheckBox)findViewById(R.id.checkBoxReverseRollDirection);
 
 	}
 
@@ -174,7 +177,10 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
-
+		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
+		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
+		
+		
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);
 		MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
 
@@ -183,7 +189,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceGerman.setChecked(app.ForceLanguage.equals("de"));
 		RadioForceHungarian.setChecked(app.ForceLanguage.equals("hu"));
 		RadioForcePolish.setChecked(app.ForceLanguage.equals("pl"));
-		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
+		
 
 		EditTextPeriodicSpeaking.setText(String.valueOf(app.PeriodicSpeaking / 1000));
 
@@ -224,6 +230,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
 		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
+		app.ReverseRoll=CheckBoxReverseRollDirection.isChecked();
 
 		if (RadioNotForce.isChecked())
 			app.ForceLanguage = "";

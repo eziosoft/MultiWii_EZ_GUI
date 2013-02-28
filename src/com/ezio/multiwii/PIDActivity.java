@@ -188,7 +188,7 @@ public class PIDActivity extends SherlockActivity {
 				for (File f : yourDir.listFiles()) {
 					if (f.isFile())
 						if (f.getName().contains("mwi"))
-							l.add(f.getName());
+							l.add(f.getName().replace(".mwi",""));
 				}
 			}
 			spinnerProfile = (Spinner) findViewById(R.id.spinnerProfile);
@@ -263,9 +263,11 @@ public class PIDActivity extends SherlockActivity {
 
 			Log.d("aaa", "File to send:" + Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
 			File myFile = new File(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
-			MimeTypeMap mime = MimeTypeMap.getSingleton();
-			String ext = myFile.getName().substring(myFile.getName().lastIndexOf(".") + 1);
-			String type = mime.getMimeTypeFromExtension(ext);
+			// MimeTypeMap mime = MimeTypeMap.getSingleton();
+			// String ext =
+			// myFile.getName().substring(myFile.getName().lastIndexOf(".") +
+			// 1);
+			// String type = mime.getMimeTypeFromExtension(ext);
 			Intent sharingIntent = new Intent("android.intent.action.SEND");
 			sharingIntent.setType("*/*");
 			sharingIntent.putExtra("android.intent.extra.STREAM", Uri.fromFile(myFile));
@@ -342,7 +344,7 @@ public class PIDActivity extends SherlockActivity {
 	public void LoadProfilePIDOnClick(View v) {
 		try {
 			if (spinnerProfile.getCount() > 0)
-				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString());
+				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString()+".mwi");
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -462,10 +464,11 @@ public class PIDActivity extends SherlockActivity {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle(getString(R.string.EnterFileName));
-		alert.setMessage(getString(R.string.Profile));
+		// alert.setMessage(getString(R.string.Profile));
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
+		input.setText(spinnerProfile.getSelectedItem().toString());
 		alert.setView(input);
 
 		alert.setPositiveButton(getString(R.string.Save), new DialogInterface.OnClickListener() {
@@ -497,7 +500,6 @@ public class PIDActivity extends SherlockActivity {
 	}
 
 	private void SaveToXml(String fileName) throws InvalidPropertiesFormatException, IOException {
-		// TODO
 
 		confRC_RATE = Float.parseFloat(RcRate.getText().toString().replace(",", "."));
 		confRC_EXPO = Float.parseFloat(RcExpo.getText().toString().replace(",", "."));

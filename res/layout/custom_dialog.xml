@@ -17,7 +17,7 @@
         android:id="@+id/wheel1"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:numRotations="6"
-        app:ticks="28" />
+        app:numRotations="10"
+        app:ticks="30" />
 
 </LinearLayout>

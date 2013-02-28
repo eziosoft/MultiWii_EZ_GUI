@@ -148,6 +148,9 @@ public class App extends Application implements Sensors.Listener {
 	private static String DONATEBUTTONPRESSED = "DONATEBUTTONPRESSED";
 	public int DonateButtonPressed = 0;
 
+	private static String REVERSEROLL = "REVERSEROLL";
+	public boolean ReverseRoll = false;
+
 	// graphs
 	public String ACCROLL = "ACC ROLL";
 	public String ACCPITCH = "ACC PITCH";
@@ -243,6 +246,7 @@ public class App extends Application implements Sensors.Listener {
 		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, false);
 		AppStartCounter = prefs.getInt(APPSTARTCOUNTER, 0);
 		DonateButtonPressed = prefs.getInt(DONATEBUTTONPRESSED, 0);
+		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 	}
 
 	public void SaveSettings(boolean quiet) {
@@ -266,6 +270,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
 		editor.putInt(APPSTARTCOUNTER, AppStartCounter);
 		editor.putInt(DONATEBUTTONPRESSED, DonateButtonPressed);
+		editor.putBoolean(REVERSEROLL, ReverseRoll);
 		editor.commit();
 
 		if (!quiet) {

@@ -41,6 +41,7 @@ public class Dashboard2View extends View {
 
 	boolean saveToSD = false;
 	Bitmap toDisk;
+	long frameCounter = 0;
 
 	Context context;
 	int ww, hh;
@@ -520,7 +521,9 @@ public class Dashboard2View extends View {
 
 		if (saveToSD) {
 			try {
-				toDisk.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File("/mnt/sdcard/arun.jpg")));
+				toDisk.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File("/mnt/sdcard/" + String.valueOf(frameCounter) + ".jpg")));
+				frameCounter++;
+				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

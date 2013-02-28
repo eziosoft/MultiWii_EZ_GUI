@@ -36,6 +36,39 @@
                 android:text="---"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tittle"
+                android:gravity="center"
+                android:textColor="@color/tittleText" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SetAltitude"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editTextAltitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="0" >
+
+                <requestFocus />
+            </EditText>
+
+            <it.sephiroth.android.wheel.view.Wheel
+                android:id="@+id/wheelAltitude"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                app:numRotations="10"
+                app:ticks="30" />
+
             <Button
                 android:id="@+id/Button01"
                 style="android:buttonStyle"

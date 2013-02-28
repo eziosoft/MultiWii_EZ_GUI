@@ -337,6 +337,20 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ForcePolish" />
             </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/dashboard2"
+                android:textColor="@color/smalltittleText" />
+
+            <CheckBox
+                android:id="@+id/checkBoxReverseRollDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ReverseRollDirection" />
+
         </LinearLayout>
 
     </ScrollView>
