@@ -124,11 +124,11 @@
   <string name="periodicspeaking">intervalo de hablando periódico  (s). 0 para desactivar.</string>
   <string name="Control">Control del helicóptero</string>
   <string name="Caution">PRECAUCIÓN</string>
-  <string name="ControlWarning">Esta función permite controlar su multicopter. Todo puede salir mal (es decir. alguien llamarle). Por favor, recuerde que el rango de BT es muy corto. utilizarse con extrema precaución! \n #define RCSERIAL debe ser línea. \n # definir a prueba de fallos debe ser commentado  tipo \"multiwii\" para confirmar.</string>
+  <string name="ControlWarning">Esta función permite controlar su multicopter. Todo puede salir mal (es decir. alguien llamarle). Por favor, recuerde que el rango de BT es muy corto. \utilizarse con extrema precaución! \n #define RCSERIAL debe ser línea. \n # definir a prueba de fallos debe ser commentado \ tipo \"multiwii\" para confirmar.</string>
   <string name="OK">OK</string>
   <string name="Cancel">Cancelar</string>
   <string name="VoltageAlarm">Empezar a sonar cuando el voltaje está por debajo de:</string>
-  <string name="AdvancedWarning">Esta sección contiene características peligrosas y no muy bien probados. Utilícelo sólo cuando usted sabe lo que está haciendo. utilizarse con extrema precaución! \USO BAJO SU PROPIO RIESGO!</string>
+  <string name="AdvancedWarning">Esta sección contiene características peligrosas y no muy bien probados. Utilícelo sólo cuando usted sabe lo que está haciendo. \utilizarse con extrema precaución! \USO BAJO SU PROPIO RIESGO!</string>
   <string name="Advanced">Avanzado</string>
   <string name="PhoneAccuracy">Precisión del teléfono (cm)</string>
   <string name="SetCheckboxes">AUX</string>
