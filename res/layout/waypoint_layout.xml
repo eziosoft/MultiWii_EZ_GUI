@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ezio.multiwii"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/com.ezio.multiwii">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/TextView01"
@@ -44,30 +45,35 @@
                 android:gravity="center"
                 android:textColor="@color/tittleText" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/SetAltitude"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextAltitude"
+            <LinearLayout
+                android:id="@+id/SetAltitudeGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:text="0" >
+                android:orientation="vertical" >
 
-                <requestFocus />
-            </EditText>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/SetAltitude"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="visible" />
 
-            <it.sephiroth.android.wheel.view.Wheel
-                android:id="@+id/wheelAltitude"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                app:numRotations="10"
-                app:ticks="30" />
+                <EditText
+                    android:id="@+id/editTextAltitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="0"
+                    android:visibility="visible" />
+
+                <SeekBar
+                    android:id="@+id/seekBarAltitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/Button01"

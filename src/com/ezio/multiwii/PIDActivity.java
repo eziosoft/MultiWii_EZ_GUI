@@ -16,9 +16,6 @@
  */
 package com.ezio.multiwii;
 
-import it.sephiroth.android.wheel.view.Wheel;
-import it.sephiroth.android.wheel.view.Wheel.OnScrollListener;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,9 +37,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -188,7 +186,7 @@ public class PIDActivity extends SherlockActivity {
 				for (File f : yourDir.listFiles()) {
 					if (f.isFile())
 						if (f.getName().contains("mwi"))
-							l.add(f.getName().replace(".mwi",""));
+							l.add(f.getName().replace(".mwi", ""));
 				}
 			}
 			spinnerProfile = (Spinner) findViewById(R.id.spinnerProfile);
@@ -344,7 +342,7 @@ public class PIDActivity extends SherlockActivity {
 	public void LoadProfilePIDOnClick(View v) {
 		try {
 			if (spinnerProfile.getCount() > 0)
-				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString()+".mwi");
+				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString() + ".mwi");
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -425,7 +423,7 @@ public class PIDActivity extends SherlockActivity {
 		P8.setText(String.format("%.1f", (float) app.mw.byteP[7] / 10.0));
 		P9.setText(String.format("%.1f", (float) app.mw.byteP[8] / 10.0));
 
-		I1.setText(String.format("%.3f", (float) I[0] / 1000.0));
+		I1.setText(String.format("%.3f", (float) app.mw.byteI[0] / 1000.0));
 		I2.setText(String.format("%.3f", (float) app.mw.byteI[1] / 1000.0));
 		I3.setText(String.format("%.3f", (float) app.mw.byteI[2] / 1000.0));
 		I4.setText(String.format("%.3f", (float) app.mw.byteI[3] / 1000.0));
@@ -468,7 +466,9 @@ public class PIDActivity extends SherlockActivity {
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
-		input.setText(spinnerProfile.getSelectedItem().toString());
+		if (spinnerProfile.getCount() > 0) {
+			input.setText(spinnerProfile.getSelectedItem().toString());
+		}
 		alert.setView(input);
 
 		alert.setPositiveButton(getString(R.string.Save), new DialogInterface.OnClickListener() {
@@ -600,31 +600,34 @@ public class PIDActivity extends SherlockActivity {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.your_dialog_root_element));
 
-		Wheel w = (Wheel) layout.findViewById(R.id.wheel1);
-		w.setValue(Functions.map(Float.parseFloat(((EditText) v).getText().toString().replace(",", ".")), 0f, maxValue, -1f, 1f), false);
+		SeekBar seekbar = (SeekBar) layout.findViewById(R.id.seekBarCustomDialog);
+		seekbar.setMax(1000);
+		seekbar.setProgress((int) Functions.map(Float.parseFloat(((EditText) v).getText().toString().replace(",", ".")), 0f, maxValue, 0f, 1000f));
 
 		final TextView tv = (TextView) layout.findViewById(R.id.text);
 
-		w.setOnScrollListener(new OnScrollListener() {
+		tv.setText(((EditText) v).getText().toString());
+
+		seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
-			public void onScrollStarted(Wheel view, float value, int roundValue) {
+			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onScrollFinished(Wheel view, float value, int roundValue) {
+			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onScroll(Wheel view, float value, int roundValue) {
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				// TODO Auto-generated method stub
 				float v;
-				v = Functions.map(value, -1, 1, 0, maxValue);
+				v = Functions.map(progress, 0, 1000, 0, maxValue);
 				tv.setText(String.valueOf(v));
-
 			}
 		});
 

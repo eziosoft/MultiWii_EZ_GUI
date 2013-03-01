@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.waypoints.Waypoint;
@@ -125,7 +126,7 @@ public class GPSActivity extends SherlockActivity {
 			app.Frequentjobs();
 
 			app.mw.SendRequest();
-			//app.mw.SendRequestGetWayPoint(0);
+			// app.mw.SendRequestGetWayPoint(0);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -162,7 +163,7 @@ public class GPSActivity extends SherlockActivity {
 
 		CheckBoxInjectGPS = (CheckBox) findViewById(R.id.checkBoxInjectGPS);
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
-		CheckBoxFollowHeading=(CheckBox)findViewById(R.id.checkBoxFollowHeading);
+		CheckBoxFollowHeading = (CheckBox) findViewById(R.id.checkBoxFollowHeading);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
 		FollowMeInfoTV = (TextView) findViewById(R.id.textViewFollowMeInfo);
 		PhoneHeadingTV = (TextView) findViewById(R.id.TextViewPhoneHead);
@@ -179,6 +180,10 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxFollowMe.setVisibility(View.VISIBLE);
 		FollowMeInfoTV.setVisibility(View.VISIBLE);
 		CheckBoxFollowHeading.setVisibility(View.VISIBLE);
+
+		app.AdvancedFunctions = true;
+		
+		Toast.makeText(getApplicationContext(),"Not tested features activated", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -209,10 +214,9 @@ public class GPSActivity extends SherlockActivity {
 	public void InjectGPSCheckBoxOnClick(View v) {
 		app.InjectGPSEnable = CheckBoxInjectGPS.isChecked();
 	}
-	
-	public void FollowHeadingCheckBoxOnClick(View v)
-	{
-		app.FollowHeading=CheckBoxFollowHeading.isChecked();
+
+	public void FollowHeadingCheckBoxOnClick(View v) {
+		app.FollowHeading = CheckBoxFollowHeading.isChecked();
 	}
 
 }

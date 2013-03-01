@@ -17,9 +17,6 @@
 
 package com.ezio.multiwii.waypoints;
 
-import it.sephiroth.android.wheel.view.Wheel;
-import it.sephiroth.android.wheel.view.Wheel.OnScrollListener;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -33,6 +30,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.ezio.multiwii.App;
@@ -50,7 +50,7 @@ public class WaypointActivity extends Activity {
 	CheckBox CheckBoxFollowMe;
 
 	EditText EditTextAltitude;
-	Wheel WheelAltitude;
+	SeekBar SeekBarAltitude;
 
 	NumberFormat format = new DecimalFormat("0.############################################################"); // used
 	// to
@@ -98,7 +98,8 @@ public class WaypointActivity extends Activity {
 
 		EditTextAltitude = (EditText) findViewById(R.id.editTextAltitude);
 
-		WheelAltitude = (Wheel) findViewById(R.id.wheelAltitude);
+		SeekBarAltitude = (SeekBar) findViewById(R.id.seekBarAltitude);
+		SeekBarAltitude.setMax(10000);
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -111,26 +112,31 @@ public class WaypointActivity extends Activity {
 		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
 		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
 
-		WheelAltitude.setOnScrollListener(new OnScrollListener() {
+		SeekBarAltitude.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
-			public void onScrollStarted(Wheel view, float value, int roundValue) {
+			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onScrollFinished(Wheel view, float value, int roundValue) {
+			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onScroll(Wheel view, float value, int roundValue) {
-				EditTextAltitude.setText(String.valueOf((int) Math.abs(Functions.map(value, -1, 1, -10000, 10000))));
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				EditTextAltitude.setText(String.valueOf(progress));
 
 			}
 		});
+
+		if (!app.AdvancedFunctions) {
+			LinearLayout l = (LinearLayout) findViewById(R.id.SetAltitudeGroup);
+			l.setVisibility(View.GONE);
+		}
 
 	}
 
