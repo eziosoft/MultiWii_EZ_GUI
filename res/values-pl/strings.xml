@@ -183,4 +183,11 @@
   <string name="EnterDescription">Podaj opis</string>
   <string name="SetAsPositionHold">Ustaw jako Position Hold</string>
   <string name="Follow_Me">LećZaMną</string>
+  <string name="Follow_Heading">FollowHeading</string>
+  <string name="Load">Załaduj</string>
+  <string name="Profile">Profil: (kompatybilne z MultiWiiConf, umieść pliki w /sdcard/MultiWiiLogs)</string>
+  <string name="Save">Zapisz</string>
+  <string name="EnterFileName">Wpisz nazwę pliku</string>
+  <string name="ReverseRollDirection">Odwróć roll na panelu 2</string>
+  <string name="SetAltitude">Ustaw wysokość w cm:</string>
 </resources>
