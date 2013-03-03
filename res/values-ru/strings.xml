@@ -191,5 +191,14 @@
   <string name="AddToCommunityMap">Добавиться в сообщество на карте</string>
   <string name="EnterYourNick">Введите ваш ник</string>
   <string name="EnterDescription">Введите описание</string>
+  <string name="SetAsPositionHold">Установ как Position Hold </string>
+  <string name="Follow_Me">FollowMe</string>
+ 	<string name="Follow_Heading">FollowHeading</string>
+ 	<string name="Load">Загруз</string>
+ 	<string name="Profile">Профиль: (совместим из MultiWiiConf; положите файл настроек. /sdcard/MultiWiiLogs)</string>
+ 	<string name="Save">Сохран</string>
+ 	<string name="EnterFileName">Введите имя файла</string>
+  <string name="ReverseRollDirection">Реверсировать направление Roll</string>
+ 	<string name="SetAltitude">Установить высоту в см:</string>
 
 </resources>
