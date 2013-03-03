@@ -191,5 +191,14 @@
   <string name="AddToCommunityMap">Добавитись до Мапи общини</string>
   <string name="EnterYourNick">Введіть ваш Нік</string>
   <string name="EnterDescription">Введіть опис</string>
+  <string name="SetAsPositionHold">Встанов як Position Hold </string>
+  <string name="Follow_Me">FollowMe</string>
+  <string name="Follow_Heading">FollowHeading</string>
+  <string name="Load">Завантаж</string>
+  <string name="Profile">Профіль: (сумісний із MultiWiiConf; покладіть файл налаштув. /sdcard/MultiWiiLogs)</string>
+  <string name="Save">Зберег</string>
+  <string name="EnterFileName">Введіть ім\'я файлу</string>
+  <string name="ReverseRollDirection">Реверсувати напрямок Roll</string>
+  <string name="SetAltitude">Встановити висоту в см:</string>
 
  </resources>
