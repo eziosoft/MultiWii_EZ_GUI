@@ -311,7 +311,7 @@ public class App extends Application implements Sensors.Listener {
 			}
 		}
 
-		// bip when low battery
+		// beep when low battery
 		if (mw.bytevbat > 10 && VoltageAlarm > 0 && bt.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
 			timer2 = System.currentTimeMillis() + timer2Freq;
 			soundManager.playSound(0);
@@ -396,9 +396,9 @@ public class App extends Application implements Sensors.Listener {
 			if (FollowMeEnable)
 				t += getString(R.string.Follow_Me) + ";";
 			if (InjectGPSEnable)
-				t += "InjectGPS";
+				t += "InjectGPS" + ";";
 			if (FollowHeading)
-				t += getString(R.string.Follow_Heading) + ";";
+				t += getString(R.string.Follow_Heading);
 			notifications.displayNotification("Status", t, false, 99, false);
 
 		}
@@ -455,12 +455,6 @@ public class App extends Application implements Sensors.Listener {
 		mw.GPS_latitude = (int) frsky.frskyHubProtocol.GPS_Latitude;
 		mw.GPS_longitude = (int) frsky.frskyHubProtocol.GPS_Longtitude;
 
-		// mw.GPS_latitude = frsky.frskyHubProtocol.GPS_NS * 10 *
-		// Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeBefore)
-		// + String.valueOf(frsky.frskyHubProtocol.GPS_LatitudeAfter));
-		// mw.GPS_longitude = frsky.frskyHubProtocol.GPS_EW * 10 *
-		// Integer.parseInt(String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeBefore)
-		// + String.valueOf(frsky.frskyHubProtocol.GPS_LongitudeAfter));
 		mw.alt = frsky.frskyHubProtocol.Altitude;
 
 		mw.bytevbat = (byte) frsky.frskyHubProtocol.Voltage;
@@ -468,8 +462,6 @@ public class App extends Application implements Sensors.Listener {
 
 	@Override
 	public void onSensorsStateChangeMagAcc() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -479,12 +471,6 @@ public class App extends Application implements Sensors.Listener {
 			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.geopointOfflineMapCurrentPosition.getLatitudeE6() * 10), (int) (sensors.getNextPredictedLocationOfflineMap().getLongitudeE6() * 10), 0, 0, 0, 0));
 			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.geopointOfflineMapCurrentPosition.getLatitudeE6() * 10), (int) (sensors.getNextPredictedLocationOfflineMap().getLongitudeE6() * 10), 0, 0, 0, 0));
 
-			// mw.SendRequestMSP_SET_WP(new Waypoint(0, (int)
-			// (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude *
-			// 1e7), 0, 0));
-			// mw.SendRequestMSP_SET_WP(new Waypoint(16, (int)
-			// (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude *
-			// 1e7), 0, 0));
 			FollowMeBlinkFlag = !FollowMeBlinkFlag;
 		}
 
@@ -497,7 +483,6 @@ public class App extends Application implements Sensors.Listener {
 
 	@Override
 	public void onSensorsStateGPSStatusChange() {
-		// TODO Auto-generated method stub
 
 	}
 
