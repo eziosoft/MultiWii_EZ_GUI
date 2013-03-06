@@ -702,8 +702,6 @@ public class MultiWii210 extends MultirotorData {
 
 		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Alt) + " " + String.valueOf(w.NavFlag));
 
-		// TODO Auto-generated method stub
-		// super.SendRequestMSP_SET_WP(waypoint);
 	}
 
 	@Override
