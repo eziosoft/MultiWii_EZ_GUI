@@ -19,6 +19,7 @@ package com.ezio.multiwii.Main;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,6 +113,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		app.AppStartCounter++;
 		app.SaveSettings(true);
+		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 	}
 
