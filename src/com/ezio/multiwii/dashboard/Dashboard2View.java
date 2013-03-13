@@ -32,6 +32,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.ezio.multiwii.R;
@@ -72,8 +73,6 @@ public class Dashboard2View extends View {
 	public int TXRSSI = 0;
 	public int RXRSSI = 0;
 
-	private static float scale = 1f; // not used
-
 	static int textSizeSmall = 0;
 	static int textSizeMedium = 0;
 	static int textSizeBig = 0;
@@ -82,6 +81,8 @@ public class Dashboard2View extends View {
 	static int AngleIndicatorLenght = 10;
 	static int AngleIndicatorLenghtLong = 20;
 	float scaledDensity = 0;
+	float scale = 1;
+
 	NumberFormat format = new DecimalFormat("0.############################################################"); // used
 																												// to
 																												// avoid
@@ -115,21 +116,19 @@ public class Dashboard2View extends View {
 		super(context);
 
 		this.context = context;
-		// Display display = ((WindowManager) getContext().getSystemService(
-		// Context.WINDOW_SERVICE)).getDefaultDisplay();
 
+		setColorsAndFonts();
+
+	}
+
+	private void setColorsAndFonts() {
 		getWindowVisibleDisplayFrame(dim);
 		ww = dim.width();
 		hh = dim.height();
 
-		scale = 1;
-		// textSizeSmall = (int) (20 * scale);
-		// textSizeMedium = (int) (40 * scale);
-		// textSizeBig = (int) (80 * scale);
-
-		textSizeSmall = getResources().getDimensionPixelSize(R.dimen.textSizeSmall);
-		textSizeMedium = getResources().getDimensionPixelSize(R.dimen.textSizeMedium);
-		textSizeBig = getResources().getDimensionPixelSize(R.dimen.textSizeBig);
+		textSizeSmall = (int) (getResources().getDimensionPixelSize(R.dimen.textSizeSmall) * scale);
+		textSizeMedium = (int) (getResources().getDimensionPixelSize(R.dimen.textSizeMedium) * scale);
+		textSizeBig = (int) (getResources().getDimensionPixelSize(R.dimen.textSizeBig) * scale);
 		HorizonCircleSize = getResources().getDimensionPixelSize(R.dimen.HorizonCircleSize);
 		AngleIndicatorLenght = getResources().getDimensionPixelSize(R.dimen.AngleIndicatorLenght);
 		AngleIndicatorLenghtLong = getResources().getDimensionPixelSize(R.dimen.AngleIndicatorLenghtLong);
@@ -187,7 +186,6 @@ public class Dashboard2View extends View {
 		p3.setAlpha(150);
 
 		this.setBackgroundColor(Color.BLACK);
-
 	}
 
 	void drawCompass(Canvas c, float x, float y, float wight, int step, int range, int value) {
@@ -404,101 +402,101 @@ public class Dashboard2View extends View {
 
 		// horyzon lines
 		float x1, y1, x2, y2;
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 90) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 90) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 90) * Math.PI / 180)) + ww / 2;
+		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 90) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
-		x2 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 270) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 270) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 270) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 270) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
 		c.drawLine(x1, y1, x2, y2, p1);
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 45) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 45) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 45) * Math.PI / 180)) + ww / 2;
+		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 45) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
-		x2 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 315) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 315) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 315) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 315) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
 		c.drawLine(x1, y1, x2, y2, p3);
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 135) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 135) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 135) * Math.PI / 180)) + ww / 2;
+		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 135) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
-		x2 = (float) (HorizonCircleSize * scale * Math.sin((-Roll - 225) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * scale * Math.cos((-Roll - 225) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 225) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 225) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
 
 		c.drawLine(x1, y1, x2, y2, p3);
 
 		// ////
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
 
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * scale * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * scale * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p1);
-
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
 
 		c.drawLine(x1, y1, x2, y2, p1);
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
 
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
 
 		c.drawLine(x1, y1, x2, y2, p3);
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
 
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
 
 		c.drawLine(x1, y1, x2, y2, p3);
 
-		x1 = (float) (HorizonCircleSize * scale * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * scale * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
 
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * scale * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
+
+		c.drawLine(x1, y1, x2, y2, p3);
+
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
+
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
+
+		c.drawLine(x1, y1, x2, y2, p1);
+
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
+
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
+
+		c.drawLine(x1, y1, x2, y2, p3);
+
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
+
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
+
+		c.drawLine(x1, y1, x2, y2, p3);
+
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
+
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
+
+		c.drawLine(x1, y1, x2, y2, p3);
+
+		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
+		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
+
+		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
+		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
 
 		c.drawLine(x1, y1, x2, y2, p1);
 
@@ -507,10 +505,10 @@ public class Dashboard2View extends View {
 		c.drawLine(ww / 2 - 5 * scaledDensity, hh / 2, ww / 2 - 15 * scaledDensity, hh / 2, p1);
 		c.drawLine(ww / 2 + 5 * scaledDensity, hh / 2, ww / 2 + 15 * scaledDensity, hh / 2, p1);
 
-		RectF r = new RectF(ww / 2 - HorizonCircleSize * scale, hh / 2 - HorizonCircleSize * scale, ww / 2 + HorizonCircleSize * scale, hh / 2 + HorizonCircleSize * scale);
+		RectF r = new RectF(ww / 2 - HorizonCircleSize, hh / 2 - HorizonCircleSize, ww / 2 + HorizonCircleSize, hh / 2 + HorizonCircleSize);
 		c.drawArc(r, Roll - 45, -90, false, p1);
 
-		c.drawLine(ww / 2, hh / 2 - HorizonCircleSize * scale, ww / 2, hh / 2 - (HorizonCircleSize + AngleIndicatorLenghtLong) * scale, p1);
+		c.drawLine(ww / 2, hh / 2 - HorizonCircleSize, ww / 2, hh / 2 - (HorizonCircleSize + AngleIndicatorLenghtLong), p1);
 
 		if (Azimuth != 0)
 			drawCompass(c, ww / 3, hh - 12 * scaledDensity, ww / 3, 10, 80, (int) Azimuth);
@@ -523,12 +521,25 @@ public class Dashboard2View extends View {
 			try {
 				toDisk.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(new File("/mnt/sdcard/" + String.valueOf(frameCounter) + ".jpg")));
 				frameCounter++;
-				
+
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+
+		scale += 0.1f;
+		if (scale > 2)
+			scale = 1;
+
+		setColorsAndFonts();
+
+		return super.onTouchEvent(event);
 
 	}
 
