@@ -93,7 +93,8 @@ public class MapOfflineActivityMy extends Activity {
 
 			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), gforce, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
-			//circles.Set(gHome, app.sensors.geopointOfflineMapCurrentPosition);
+			// circles.Set(gHome,
+			// app.sensors.geopointOfflineMapCurrentPosition);
 			circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 			mapView.postInvalidate();
 
@@ -103,7 +104,8 @@ public class MapOfflineActivityMy extends Activity {
 			if (!killme)
 				mHandler.postDelayed(update, 1000);
 
-		if(app.D)	Log.d(app.TAG, "loop " + this.getClass().getName());
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 	};
 
@@ -128,7 +130,7 @@ public class MapOfflineActivityMy extends Activity {
 		mapView.setBuiltInZoomControls(true);
 		myMapController = mapView.getController();
 
-		myMapController.setZoom(mapView.getMaxZoomLevel());
+		myMapController.setZoom(app.MapZoomLevel);
 		// myMapController.setZoom(19);
 
 		circles = new MapOfflineCirclesOverlay(getApplicationContext());
@@ -157,6 +159,8 @@ public class MapOfflineActivityMy extends Activity {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(null);
+		app.MapZoomLevel = mapView.getZoomLevel();
+		app.SaveSettings(true);
 	}
 
 }

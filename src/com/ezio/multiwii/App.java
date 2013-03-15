@@ -150,6 +150,10 @@ public class App extends Application implements Sensors.Listener {
 
 	private static String REVERSEROLL = "REVERSEROLL";
 	public boolean ReverseRoll = false;
+	
+	private static String MAPZOOMLEVEL = "MAPZOOMLEVEL";
+	public int MapZoomLevel = 9;
+	
 
 	// graphs
 	public String ACCROLL = "ACC ROLL";
@@ -247,6 +251,7 @@ public class App extends Application implements Sensors.Listener {
 		AppStartCounter = prefs.getInt(APPSTARTCOUNTER, 0);
 		DonateButtonPressed = prefs.getInt(DONATEBUTTONPRESSED, 0);
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
+		MapZoomLevel = prefs.getInt(MAPZOOMLEVEL, 9);
 	}
 
 	public void SaveSettings(boolean quiet) {
@@ -271,6 +276,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putInt(APPSTARTCOUNTER, AppStartCounter);
 		editor.putInt(DONATEBUTTONPRESSED, DonateButtonPressed);
 		editor.putBoolean(REVERSEROLL, ReverseRoll);
+		editor.putInt(MAPZOOMLEVEL, MapZoomLevel);
 		editor.commit();
 
 		if (!quiet) {

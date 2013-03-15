@@ -105,7 +105,8 @@ public class MapActivityMy extends MapActivity {
 			if (!killme)
 				mHandler.postDelayed(update, 1000);
 
-			if(app.D)	Log.d(app.TAG, "loop " + this.getClass().getName());
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 	};
 
@@ -135,7 +136,7 @@ public class MapActivityMy extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 		myMapController = mapView.getController();
 		mapView.setSatellite(true);
-		myMapController.setZoom(mapView.getMaxZoomLevel());
+		myMapController.setZoom(app.MapZoomLevel);
 
 		mapView.getOverlays().add(copter);
 		mapView.getOverlays().add(circles);
@@ -162,6 +163,8 @@ public class MapActivityMy extends MapActivity {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(null);
+		app.MapZoomLevel = mapView.getZoomLevel();
+		app.SaveSettings(true);
 
 	}
 
