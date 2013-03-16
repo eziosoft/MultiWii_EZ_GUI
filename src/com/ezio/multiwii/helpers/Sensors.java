@@ -18,8 +18,6 @@ package com.ezio.multiwii.helpers;
 
 import java.util.Iterator;
 
-import org.osmdroid.util.GeoPoint;
-
 import android.content.Context;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
@@ -244,42 +242,23 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
-
-		// float[] results = new float[3];
-		//
-		// Location.distanceBetween(location.getAltitude(),
-		// location.getLongitude(), oldLocation.getAltitude(),
-		// oldLocation.getLongitude(), results);
-		//
-		// float distance = results[0]; //in m
-		// float bearing=0;
-		// if(distance>3)
-		// {
-		// bearing=results[2];
-		// }else
-		// {
-		// bearing=results[1];
-		// }
 		if (location != null) {
-			double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
-			double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
+//			double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
+//			double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
 
 			return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
 		} else
@@ -287,22 +266,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 	}
 
 	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
-
-		// float[] results = new float[3];
-		//
-		// Location.distanceBetween(location.getAltitude(),
-		// location.getLongitude(), oldLocation.getAltitude(),
-		// oldLocation.getLongitude(), results);
-		//
-		// float distance = results[0]; //in m
-		// float bearing=0;
-		// if(distance>3)
-		// {
-		// bearing=results[2];
-		// }else
-		// {
-		// bearing=results[1];
-		// }
 		if (location != null) {
 			int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
 			int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);

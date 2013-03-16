@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.log;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +25,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.layout;
+import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.app.App;
 
 public class LogActivity extends SherlockActivity {
 

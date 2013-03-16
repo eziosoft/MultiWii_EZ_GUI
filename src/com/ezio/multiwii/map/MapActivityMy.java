@@ -18,18 +18,13 @@ package com.ezio.multiwii.map;
 
 import java.util.Random;
 
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;

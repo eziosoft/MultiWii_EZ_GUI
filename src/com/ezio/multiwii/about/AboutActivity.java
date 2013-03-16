@@ -14,12 +14,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.about;
 
 
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.layout;
 
 public class AboutActivity extends SherlockActivity {
 

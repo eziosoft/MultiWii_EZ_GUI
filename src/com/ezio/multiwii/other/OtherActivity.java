@@ -14,15 +14,19 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.other;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.id;
+import com.ezio.multiwii.R.layout;
+import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.app.App;
 
 public class OtherActivity extends SherlockActivity {
 	App app;
@@ -36,7 +40,6 @@ public class OtherActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.other_layout);
 
@@ -59,7 +62,6 @@ public class OtherActivity extends SherlockActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		app.ForceLanguage();
 		// mHandler.postDelayed(update, App.REFRESH_RATE);
@@ -69,7 +71,7 @@ public class OtherActivity extends SherlockActivity {
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
@@ -78,11 +80,11 @@ public class OtherActivity extends SherlockActivity {
 		EditTextPowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
 		EditTextSelectSettings.setText(String.valueOf(app.mw.confSetting));
 
-//		if ((app.mw.multiCapability & 1) > 0) {
-//			ButtonRxBIND.setVisibility(Button.VISIBLE);
-//		} else {
-//			ButtonRxBIND.setVisibility(Button.GONE);
-//		}
+		// if ((app.mw.multiCapability & 1) > 0) {
+		// ButtonRxBIND.setVisibility(Button.VISIBLE);
+		// } else {
+		// ButtonRxBIND.setVisibility(Button.GONE);
+		// }
 
 	}
 

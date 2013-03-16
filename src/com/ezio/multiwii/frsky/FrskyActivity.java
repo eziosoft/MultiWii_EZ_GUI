@@ -16,9 +16,6 @@
  */
 package com.ezio.multiwii.frsky;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,8 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class FrskyActivity extends SherlockActivity {
 

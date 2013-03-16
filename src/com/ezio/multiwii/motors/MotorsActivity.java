@@ -25,8 +25,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class MotorsActivity extends SherlockActivity {
 	

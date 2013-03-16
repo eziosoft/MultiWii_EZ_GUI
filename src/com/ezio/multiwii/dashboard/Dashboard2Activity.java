@@ -16,15 +16,14 @@
  */
 package com.ezio.multiwii.dashboard;
 
-import com.ezio.multiwii.App;
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.string;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
+
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class Dashboard2Activity extends Activity {
 	App app;

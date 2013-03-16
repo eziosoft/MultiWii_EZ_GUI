@@ -25,7 +25,6 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 import org.osmdroid.views.overlay.Overlay;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -42,10 +41,7 @@ import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.radio.RadioActivity;
-import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 
 class MapOfflineCopterOverlay extends Overlay {
@@ -145,7 +141,7 @@ class MapOfflineCopterOverlay extends Overlay {
 
 	@Override
 	public boolean onDoubleTap(MotionEvent e, MapView mapView) {
-		// TODO Auto-generated method stub
+
 		return super.onDoubleTap(e, mapView);
 	}
 

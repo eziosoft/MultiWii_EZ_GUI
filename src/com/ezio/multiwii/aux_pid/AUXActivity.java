@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.aux_pid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,6 +37,12 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.color;
+import com.ezio.multiwii.R.id;
+import com.ezio.multiwii.R.menu;
+import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.app.App;
 
 public class AUXActivity extends SherlockActivity {
 

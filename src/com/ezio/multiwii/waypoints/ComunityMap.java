@@ -35,12 +35,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.ezio.multiwii.helpers.MyBase64;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.ezio.multiwii.helpers.MyBase64;
 
 public class ComunityMap extends AsyncTask {
 
@@ -98,7 +98,7 @@ public class ComunityMap extends AsyncTask {
 		try {
 			executeHttpGet((String) params[0]);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return null;

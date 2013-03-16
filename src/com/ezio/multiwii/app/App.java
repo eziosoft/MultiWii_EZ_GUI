@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.ezio.multiwii;
+package com.ezio.multiwii.app;
 
 import java.util.Locale;
 
@@ -30,6 +30,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.raw;
+import com.ezio.multiwii.R.string;
 import com.ezio.multiwii.frsky.FrskyProtocol;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.helpers.Notifications;
@@ -411,14 +414,16 @@ public class App extends Application implements Sensors.Listener {
 		// --------------------END timer every 5sek---------------------------
 	}
 
-	private void playSound() {
-		try {
-			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-			r.play();
-		} catch (Exception e) {
-		}
-	}
+	// private void playSound() {
+	// try {
+	// Uri notification =
+	// RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+	// Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
+	// notification);
+	// r.play();
+	// } catch (Exception e) {
+	// }
+	// }
 
 	private void prepareSounds() {
 		soundManager = new SoundManager(getApplicationContext());

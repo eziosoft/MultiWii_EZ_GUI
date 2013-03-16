@@ -23,8 +23,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class Dashboard1Activity extends Activity {
 

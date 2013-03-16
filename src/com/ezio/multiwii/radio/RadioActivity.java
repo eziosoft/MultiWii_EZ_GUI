@@ -16,17 +16,15 @@
  */
 package com.ezio.multiwii.radio;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class RadioActivity extends SherlockActivity {
 
@@ -84,38 +82,40 @@ public class RadioActivity extends SherlockActivity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			if(app.D)	Log.d(app.TAG, "loop "+this.getClass().getName());
-			
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
+
 		}
 	};
 
-	private void SetTextViewColorOnOFF(boolean state, TextView TV, String title) {
-		if (state) {
-			TV.setBackgroundColor(getResources().getColor(R.color.Green));
-			TV.setTextColor(Color.BLACK);
-			TV.setText(title);
-		} else {
-			TV.setBackgroundColor(getResources().getColor(R.color.Red));
-			TV.setTextColor(Color.WHITE);
-			TV.setText(title);
-		}
-	}
-
-	private void SetTextViewColorOnOFF(boolean state, TextView TV) {
-		if (state) {
-			TV.setBackgroundColor(getResources().getColor(R.color.Green));
-			TV.setTextColor(Color.BLACK);
-
-		} else {
-			TV.setBackgroundColor(getResources().getColor(R.color.Red));
-			TV.setTextColor(Color.WHITE);
-
-		}
-	}
+	// private void SetTextViewColorOnOFF(boolean state, TextView TV, String
+	// title) {
+	// if (state) {
+	// TV.setBackgroundColor(getResources().getColor(R.color.Green));
+	// TV.setTextColor(Color.BLACK);
+	// TV.setText(title);
+	// } else {
+	// TV.setBackgroundColor(getResources().getColor(R.color.Red));
+	// TV.setTextColor(Color.WHITE);
+	// TV.setText(title);
+	// }
+	// }
+	//
+	// private void SetTextViewColorOnOFF(boolean state, TextView TV) {
+	// if (state) {
+	// TV.setBackgroundColor(getResources().getColor(R.color.Green));
+	// TV.setTextColor(Color.BLACK);
+	//
+	// } else {
+	// TV.setBackgroundColor(getResources().getColor(R.color.Red));
+	// TV.setTextColor(Color.WHITE);
+	//
+	// }
+	// }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.radio_layout);
 
@@ -131,8 +131,7 @@ public class RadioActivity extends SherlockActivity {
 
 		TextViewRadioInfo = (TextView) findViewById(R.id.textViewRadioInfo);
 
-		app.Say(getString(R.string.RadioMode) + " "
-				+ String.valueOf(app.RadioMode));
+		app.Say(getString(R.string.RadioMode) + " " + String.valueOf(app.RadioMode));
 
 	}
 

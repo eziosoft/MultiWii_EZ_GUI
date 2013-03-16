@@ -18,11 +18,6 @@ package com.ezio.multiwii.config;
 
 import java.util.Set;
 
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
-
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -41,6 +36,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.ezio.multiwii.R;
 
 /**
  * This Activity appears as a dialog. It lists any paired devices and

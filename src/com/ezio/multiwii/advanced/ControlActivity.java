@@ -14,8 +14,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.advanced;
 
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.id;
+import com.ezio.multiwii.R.layout;
+import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.radio.StickView;
 
 import android.app.Activity;

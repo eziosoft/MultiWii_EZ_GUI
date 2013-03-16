@@ -35,9 +35,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.helpers.Functions;
+import com.ezio.multiwii.app.App;
 
 public class WaypointActivity extends Activity {
 
@@ -116,13 +115,11 @@ public class WaypointActivity extends Activity {
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
 
 			}
 

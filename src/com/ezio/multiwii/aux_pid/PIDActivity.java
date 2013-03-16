@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii;
+package com.ezio.multiwii.aux_pid;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,6 +50,12 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.R.id;
+import com.ezio.multiwii.R.layout;
+import com.ezio.multiwii.R.menu;
+import com.ezio.multiwii.R.string;
+import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 
 public class PIDActivity extends SherlockActivity {
@@ -344,10 +350,10 @@ public class PIDActivity extends SherlockActivity {
 			if (spinnerProfile.getCount() > 0)
 				readFromXML("/MultiWiiLogs/" + spinnerProfile.getSelectedItem().toString() + ".mwi");
 		} catch (InvalidPropertiesFormatException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
@@ -612,19 +618,16 @@ public class PIDActivity extends SherlockActivity {
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				// TODO Auto-generated method stub
 				float v;
 				v = Functions.map(progress, 0, 1000, 0, maxValue);
 				tv.setText(String.valueOf(v));

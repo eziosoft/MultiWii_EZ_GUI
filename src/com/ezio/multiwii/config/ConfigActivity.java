@@ -28,8 +28,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.mw.BT;
 
 public class ConfigActivity extends SherlockActivity {

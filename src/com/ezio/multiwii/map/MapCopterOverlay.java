@@ -27,11 +27,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.graphics.Paint.Style;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;

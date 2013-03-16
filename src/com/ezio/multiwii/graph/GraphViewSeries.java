@@ -1,10 +1,7 @@
 package com.ezio.multiwii.graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import android.annotation.TargetApi;
 
 import com.ezio.multiwii.graph.GraphView.GraphViewData;
 

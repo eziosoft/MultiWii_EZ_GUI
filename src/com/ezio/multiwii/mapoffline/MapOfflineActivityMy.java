@@ -29,8 +29,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 
 public class MapOfflineActivityMy extends Activity {

@@ -69,7 +69,7 @@ public class FileAccess {
 			out = new BufferedWriter(filewriter);
 			Log.d("plik", "fileAccess OK");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			Log.d("plik", "fileAccess ERR");
 			// Toast.makeText(context, "Can't write to file",
 			// Toast.LENGTH_LONG).show();
@@ -84,7 +84,7 @@ public class FileAccess {
 				out.append(s + "\n");
 				Log.d("plik", "write OK");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				Log.d("plik", "fileAccess ERR");
 				// Toast.makeText(context, "Can't write to file",
 				// Toast.LENGTH_LONG).show();
@@ -98,7 +98,7 @@ public class FileAccess {
 			out.close();
 			Log.d("plik", "close OK");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			Log.d("plik", "fileAccess ERR");
 			// Toast.makeText(context, "Can't close the file",
 			// Toast.LENGTH_LONG).show();

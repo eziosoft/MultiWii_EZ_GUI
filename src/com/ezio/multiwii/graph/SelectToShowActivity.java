@@ -20,8 +20,8 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.ezio.multiwii.App;
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class SelectToShowActivity extends SherlockActivity {
 	App app;
