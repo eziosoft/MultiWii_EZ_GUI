@@ -31,6 +31,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Looper;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
@@ -258,17 +260,98 @@ class CopterOverlay extends Overlay {
 	}
 
 	@Override
+	public boolean onTouchEvent(MotionEvent event, MapView arg1) {
+		handleLongPress(event);
+		return super.onTouchEvent(event, arg1);
+	}
+
+	private boolean isPotentialLongPress;
+
+	private void handleLongPress(final MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			// A new touch has been detected
+
+			new Thread(new Runnable() {
+				public void run() {
+					Looper.prepare();
+					if (isLongPressDetected()) {
+						// We have a longpress! Perform your action here
+
+						long Lat = projection.fromPixels((int) event.getX(), (int) event.getY()).getLatitudeE6();
+						long Lon = projection.fromPixels((int) event.getX(), (int) event.getY()).getLongitudeE6();
+
+						Toast.makeText(context, String.valueOf(Lat) + "x" + String.valueOf(Lon), Toast.LENGTH_LONG).show();
+
+						Intent i = new Intent(context, WaypointActivity.class);
+						i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						i.putExtra("LAT", Lat);
+						i.putExtra("LON", Lon);
+						context.startActivity(i);
+					}
+				}
+			}).start();
+		} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			/*
+			 * Only MotionEvent.ACTION_MOVE could potentially be regarded as
+			 * part of a longpress, as this event is trigged by the finger
+			 * moving slightly on the device screen. Any other events causes us
+			 * to cancel this events status as a potential longpress.
+			 */
+			if (event.getHistorySize() < 1)
+				return; // First call, no history
+
+			// Get difference in position since previous move event
+			float diffX = event.getX() - event.getHistoricalX(event.getHistorySize() - 1);
+			float diffY = event.getY() - event.getHistoricalY(event.getHistorySize() - 1);
+
+			/*
+			 * If position has moved substatially, this is not a long press but
+			 * probably a drag action
+			 */
+			if (Math.abs(diffX) > 0.5f || Math.abs(diffY) > 0.5f) {
+				isPotentialLongPress = false;
+			}
+		} else {
+			// This motion is something else, and thus not part of a longpress
+			isPotentialLongPress = false;
+		}
+	}
+
+	/**
+	 * Loops for an amount of time while checking if the state of the
+	 * isPotentialLongPress variable has changed. If it has, this is regarded as
+	 * if the longpress has been canceled. Else it is regarded as a longpress.
+	 */
+	public boolean isLongPressDetected() {
+		isPotentialLongPress = true;
+		try {
+			for (int i = 0; i < (50); i++) {
+				Thread.sleep(10);
+				if (!isPotentialLongPress) {
+					return false;
+				}
+			}
+			return true;
+		} catch (InterruptedException e) {
+			return false;
+		} finally {
+			isPotentialLongPress = false;
+		}
+	}
+
+	@Override
 	public boolean onTap(GeoPoint arg0, MapView arg1) {
-		long Lat = arg0.getLatitudeE6();
-		long Lon = arg0.getLongitudeE6();
-
-		Toast.makeText(context, String.valueOf(Lat) + "x" + String.valueOf(Lon), Toast.LENGTH_LONG).show();
-
-		Intent i = new Intent(context, WaypointActivity.class);
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		i.putExtra("LAT", Lat);
-		i.putExtra("LON", Lon);
-		context.startActivity(i);
+		// long Lat = arg0.getLatitudeE6();
+		// long Lon = arg0.getLongitudeE6();
+		//
+		// Toast.makeText(context, String.valueOf(Lat) + "x" +
+		// String.valueOf(Lon), Toast.LENGTH_LONG).show();
+		//
+		// Intent i = new Intent(context, WaypointActivity.class);
+		// i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		// i.putExtra("LAT", Lat);
+		// i.putExtra("LON", Lon);
+		// context.startActivity(i);
 
 		return super.onTap(arg0, arg1);
 	}

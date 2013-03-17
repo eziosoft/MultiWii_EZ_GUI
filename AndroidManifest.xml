@@ -8,7 +8,7 @@
         android:targetSdkVersion="17"/>
 
     <application
-        android:name="App"
+        android:name=".app.App"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -53,12 +53,12 @@
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name="LogActivity"
+            android:name=".log.LogActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name="GPSActivity"
+            android:name=".gps.GPSActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
@@ -68,12 +68,12 @@
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name="PIDActivity"
+            android:name=".aux_pid.PIDActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name="OtherActivity"
+            android:name=".other.OtherActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
@@ -85,19 +85,19 @@
             android:name=".waypoints.WaypointActivity"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
-        <activity android:name="AboutActivity" >
+        <activity android:name=".about.AboutActivity" >
         </activity>
         <activity
             android:name="com.ezio.multiwii.aux_pid.AUXActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
         <activity
-            android:name="ControlActivity"
+            android:name=".advanced.ControlActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="AdvancedActivity"
+            android:name=".advanced.AdvancedActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
@@ -124,12 +124,12 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:name="RawDataActivity"
+            android:name=".raw.RawDataActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name="InfoActivity"
+            android:name=".about.InfoActivity"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
