@@ -66,8 +66,8 @@
   <string name="PID">PID</string>
   <string name="Read">Auslesen</string>
   <string name="Write">Speichern</string>
-  <string name="Rate">Rate</string>
-  <string name="RATE">RATE</string>
+  <string name="Rate">Bewerten</string>
+  <string name="RATE">Bewerten</string>
   <string name="TPA">Gas PID Abschwächung</string>
   <string name="Reset">Reset</string>
   <string name="AccCalibration">Acc kalibrieren</string>

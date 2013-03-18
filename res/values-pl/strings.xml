@@ -190,4 +190,5 @@
   <string name="EnterFileName">Wpisz nazwę pliku</string>
   <string name="ReverseRollDirection">Odwróć roll na panelu 2</string>
   <string name="SetAltitude">Ustaw wysokość w cm:</string>
+  <string name="MapCenterPeriod">Okres centrowania mapy</string>
 </resources>
