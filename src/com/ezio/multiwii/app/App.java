@@ -153,10 +153,12 @@ public class App extends Application implements Sensors.Listener {
 
 	private static String REVERSEROLL = "REVERSEROLL";
 	public boolean ReverseRoll = false;
-	
+
 	private static String MAPZOOMLEVEL = "MAPZOOMLEVEL";
 	public int MapZoomLevel = 9;
-	
+
+	private static String MAPCENTERPERIOD = "MAPCENTERPERIOD";
+	public int MapCenterPeriod = 3;
 
 	// graphs
 	public String ACCROLL = "ACC ROLL";
@@ -255,6 +257,7 @@ public class App extends Application implements Sensors.Listener {
 		DonateButtonPressed = prefs.getInt(DONATEBUTTONPRESSED, 0);
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 		MapZoomLevel = prefs.getInt(MAPZOOMLEVEL, 9);
+		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
 	}
 
 	public void SaveSettings(boolean quiet) {
@@ -280,6 +283,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putInt(DONATEBUTTONPRESSED, DonateButtonPressed);
 		editor.putBoolean(REVERSEROLL, ReverseRoll);
 		editor.putInt(MAPZOOMLEVEL, MapZoomLevel);
+		editor.putInt(MAPCENTERPERIOD, MapCenterPeriod);
 		editor.commit();
 
 		if (!quiet) {

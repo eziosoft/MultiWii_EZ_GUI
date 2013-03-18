@@ -200,5 +200,6 @@
     <string name="EnterFileName">Enter file name</string>
     <string name="ReverseRollDirection">Reverse roll direction</string>
     <string name="SetAltitude">Set altitude in cm:</string>
+    <string name="MapCenterPeriod">Map center period</string>
 
 </resources>

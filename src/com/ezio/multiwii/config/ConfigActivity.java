@@ -57,7 +57,7 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxDisableBTonExit;
 
 	CheckBox CheckBoxCopyFrskyToMW;
-	
+
 	CheckBox CheckBoxReverseRollDirection;
 
 	RadioButton RadioNotForce;
@@ -69,6 +69,7 @@ public class ConfigActivity extends SherlockActivity {
 	EditText EditTextPeriodicSpeaking;
 	EditText EditTextVoltageAlarm;
 	EditText EditTextRefreshRate;
+	EditText EditTextMapCenterPeriod;
 
 	private static final int REQUEST_CONNECT_DEVICE_MULTIWII = 1;
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
@@ -139,7 +140,8 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
 		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
 		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
-		CheckBoxReverseRollDirection=(CheckBox)findViewById(R.id.checkBoxReverseRollDirection);
+		CheckBoxReverseRollDirection = (CheckBox) findViewById(R.id.checkBoxReverseRollDirection);
+		EditTextMapCenterPeriod = (EditText) findViewById(R.id.EditTextMapCenterPeriod);
 
 	}
 
@@ -179,8 +181,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
-		
-		
+
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);
 		MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
 
@@ -189,12 +190,12 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceGerman.setChecked(app.ForceLanguage.equals("de"));
 		RadioForceHungarian.setChecked(app.ForceLanguage.equals("hu"));
 		RadioForcePolish.setChecked(app.ForceLanguage.equals("pl"));
-		
 
 		EditTextPeriodicSpeaking.setText(String.valueOf(app.PeriodicSpeaking / 1000));
 
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
+		EditTextMapCenterPeriod.setText(String.valueOf(app.MapCenterPeriod));
 
 		app.Say(getString(R.string.Config));
 
@@ -230,7 +231,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
 		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
-		app.ReverseRoll=CheckBoxReverseRollDirection.isChecked();
+		app.ReverseRoll = CheckBoxReverseRollDirection.isChecked();
 
 		if (RadioNotForce.isChecked())
 			app.ForceLanguage = "";
@@ -244,10 +245,9 @@ public class ConfigActivity extends SherlockActivity {
 			app.ForceLanguage = "pl";
 
 		app.PeriodicSpeaking = Integer.parseInt(EditTextPeriodicSpeaking.getText().toString()) * 1000;
-
 		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText().toString());
-
 		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText().toString());
+		app.MapCenterPeriod = Integer.parseInt(EditTextMapCenterPeriod.getText().toString());
 
 		app.SaveSettings(false);
 

@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="do NOT leave empty or 0"
+                android:hint="do NOT leave empty or 0 - default 100"
                 android:inputType="number" >
 
                 <requestFocus />
@@ -103,6 +103,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/UseOfflineMap" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/MapCenterPeriod"
+                android:textColor="@color/smalltittleText" />
+
+            <EditText
+                android:id="@+id/EditTextMapCenterPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="do NOT leave empty or 0 - default 3"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView3"

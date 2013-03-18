@@ -71,7 +71,7 @@ public class MapActivityMy extends MapActivity {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			if (centerStep >= 3) {
+			if (centerStep >= app.MapCenterPeriod) {
 				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 					CenterLocation(g);
 				} else {
