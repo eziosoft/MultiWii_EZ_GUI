@@ -61,7 +61,7 @@ public class Dashboard2View extends View {
 
 	public float Lat = (float) 23.233212, Lon = (float) 32.43214;
 	public float Pitch = 10, Roll = 20, Azimuth = 30;
-	public float Gforce = 1;
+	public float VerticalSpeed = 1;
 
 	public String State = "ARM";
 
@@ -89,7 +89,7 @@ public class Dashboard2View extends View {
 																												// scientific
 																												// notation
 
-	public void Set(int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
+	public void Set(int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float verticalSpeed, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 		SatNum = satNum;
 		DistanceToHome = distanceToHome;
 		DirectionToHome = directionToHome;
@@ -101,7 +101,7 @@ public class Dashboard2View extends View {
 		Pitch = pitch;
 		Roll = roll;
 		Azimuth = azimuth;
-		Gforce = gforce;
+		VerticalSpeed = verticalSpeed;
 		State = state;
 		VBat = (float) (vbat / 10.0);
 		PowerSum = powerSum;
@@ -248,7 +248,7 @@ public class Dashboard2View extends View {
 			Pitch = 10;
 			Roll = 20;
 			Azimuth = 67;
-			Gforce = 1;
+			VerticalSpeed = 0;
 			TXRSSI = 50;
 			RXRSSI = 80;
 			VBat = 11.3f;
@@ -372,10 +372,10 @@ public class Dashboard2View extends View {
 			c.drawText(context.getString(R.string.GPS_altitude), ww - p.measureText(context.getString(R.string.GPS_altitude)), a, p);
 
 		a -= textSizeSmall;
-		c.drawText(String.format("%.2f", Gforce), ww - p2.measureText(String.format("%.2f", Gforce)), a, p2);
+		c.drawText(String.format("%.2f", VerticalSpeed), ww - p2.measureText(String.format("%.2f", VerticalSpeed)), a, p2);
 
 		a -= textSizeMedium;
-		c.drawText(context.getString(R.string.gforce), ww - p.measureText(context.getString(R.string.gforce)), a, p);
+		c.drawText(context.getString(R.string.VerticalSpeed), ww - p.measureText(context.getString(R.string.VerticalSpeed)), a, p);
 
 		a = 0;
 		a += textSizeSmall;

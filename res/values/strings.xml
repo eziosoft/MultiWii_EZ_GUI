@@ -27,7 +27,7 @@
     <string name="PhoneMag">PhoneMag</string>
     <string name="PitchRollCircleView">Pitch Roll Circle View</string>
     <string name="pointFrontHelp">Point multirotor front compares the compass readings from the phone and multicopter. Indicates the copter forward regardless of the location of the phone.</string>
-    <string name="TTS">Text to speach</string>
+    <string name="TTS">Text to speech</string>
     <string name="GPS">GPS</string>
     <string name="GPS_distanceToHome">Distance to Home(m)</string>
     <string name="GPS_directionToHome">Direction to Home</string>
@@ -201,5 +201,6 @@
     <string name="ReverseRollDirection">Reverse roll direction</string>
     <string name="SetAltitude">Set altitude in cm:</string>
     <string name="MapCenterPeriod">Map center period</string>
+    <string name="VerticalSpeed">Vertical speed</string>
 
 </resources>
