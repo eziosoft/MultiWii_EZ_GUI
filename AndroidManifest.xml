@@ -43,7 +43,6 @@
         <activity
             android:name=".dashboard.Dashboard2Activity"
             android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="false"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>

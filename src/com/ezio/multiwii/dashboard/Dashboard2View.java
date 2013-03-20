@@ -83,6 +83,8 @@ public class Dashboard2View extends View {
 	float scaledDensity = 0;
 	float scale = 1;
 
+	HorizonClass horizon;
+
 	NumberFormat format = new DecimalFormat("0.############################################################"); // used
 																												// to
 																												// avoid
@@ -108,17 +110,15 @@ public class Dashboard2View extends View {
 		PowerTrigger = powerTrigger;
 		TXRSSI = txRSSI;
 		RXRSSI = rxRSSI;
+		horizon.Set((int) pitch, (int) roll);
 		this.invalidate();
 
 	}
 
 	public Dashboard2View(Context context) {
 		super(context);
-
 		this.context = context;
-
 		setColorsAndFonts();
-
 	}
 
 	private void setColorsAndFonts() {
@@ -186,6 +186,9 @@ public class Dashboard2View extends View {
 		p3.setAlpha(150);
 
 		this.setBackgroundColor(Color.BLACK);
+
+		horizon = new HorizonClass(context, null);
+		horizon.onSizeChanged(hh, hh);
 	}
 
 	void drawCompass(Canvas c, float x, float y, float wight, int step, int range, int value) {
@@ -198,7 +201,6 @@ public class Dashboard2View extends View {
 				c.drawText(t, (x + i * wight / range - p.measureText(t) / 2), y, p);
 				c.drawLine((x + i * wight / range), y, (x + i * wight / range), (y + 10 * scaledDensity), p);
 			}
-
 			value++;
 		}
 
@@ -208,7 +210,6 @@ public class Dashboard2View extends View {
 	}
 
 	void drawVertical(Canvas c, float x, float y, float heigh, int step, int range, int value) {
-
 		value = value - range / 2 + step;
 		p.setTextSize(textSizeSmall);
 		for (float i = 0 + step; i <= range - step; i++) {
@@ -236,7 +237,7 @@ public class Dashboard2View extends View {
 		}
 
 		// debug
-		if (false) {
+		if (true) {
 			SatNum = 5;
 			DistanceToHome = 254;
 			DirectionToHome = 45;
@@ -252,7 +253,8 @@ public class Dashboard2View extends View {
 			TXRSSI = 50;
 			RXRSSI = 80;
 			VBat = 11.3f;
-			State = "LEVEL BARO MAG GPS HOLD";
+			State = "LEVEL GPS HOLD";
+			horizon.Set(15, 35);
 
 		}
 
@@ -267,6 +269,8 @@ public class Dashboard2View extends View {
 			}
 		}
 		// end grid
+
+		horizon.Draw(c, (ww - hh) / 2, 0);
 
 		int a = textSizeSmall;
 		if (SatNum > 0)
@@ -400,122 +404,177 @@ public class Dashboard2View extends View {
 		if (VBat != 0)
 			c.drawText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), ww - p2.measureText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger)), a, p2);
 
-		// horyzon lines
-		float x1, y1, x2, y2;
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 90) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 90) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 270) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 270) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		c.drawLine(x1, y1, x2, y2, p1);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 45) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 45) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 315) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 315) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 135) * Math.PI / 180)) + ww / 2;
-		y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 135) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 225) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 225) * Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		// ////
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) * Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p1);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p1);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p3);
-
-		x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
-		y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
-
-		x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
-		y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) * Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
-
-		c.drawLine(x1, y1, x2, y2, p1);
-
-		c.drawCircle(ww / 2, hh / 2, 5 * scaledDensity, p1);
-		c.drawLine(ww / 2, hh / 2 - 5 * scaledDensity, ww / 2, hh / 2 - 15 * scaledDensity, p1);
-		c.drawLine(ww / 2 - 5 * scaledDensity, hh / 2, ww / 2 - 15 * scaledDensity, hh / 2, p1);
-		c.drawLine(ww / 2 + 5 * scaledDensity, hh / 2, ww / 2 + 15 * scaledDensity, hh / 2, p1);
-
-		RectF r = new RectF(ww / 2 - HorizonCircleSize, hh / 2 - HorizonCircleSize, ww / 2 + HorizonCircleSize, hh / 2 + HorizonCircleSize);
-		c.drawArc(r, Roll - 45, -90, false, p1);
-
-		c.drawLine(ww / 2, hh / 2 - HorizonCircleSize, ww / 2, hh / 2 - (HorizonCircleSize + AngleIndicatorLenghtLong), p1);
-
-		if (Azimuth != 0)
-			drawCompass(c, ww / 3, hh - 12 * scaledDensity, ww / 3, 10, 80, (int) Azimuth);
-		if (Altitude != 0)
-			drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 2, 10, (int) Altitude);
-		if (SatNum > 0)
-			drawVertical(c, ww / 3, hh / 3, hh / 3, 2, 10, (int) Speed);
+		// ////////// horyzon lines
+		// float x1, y1, x2, y2;
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 90) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 90) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 270) * Math.PI /
+		// 180)) + ww / 2;
+		// y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 270) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// c.drawLine(x1, y1, x2, y2, p1);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 45) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 45) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 315) * Math.PI /
+		// 180)) + ww / 2;
+		// y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 315) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll - 135) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 135) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// x2 = (float) (HorizonCircleSize * Math.sin((-Roll - 225) * Math.PI /
+		// 180)) + ww / 2;
+		// y2 = (float) ((float) ((HorizonCircleSize * Math.cos((-Roll - 225) *
+		// Math.PI / 180)) + hh / 2) - (Pitch) / 35 * 200 / 2);
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// // ////
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 180) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 180) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) *
+		// Math.sin((-Roll + 180) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenghtLong) *
+		// Math.cos((-Roll + 180) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p1);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 190) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 190) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 190) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 190) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 200) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 200) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 200) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 200) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 210) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 210) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 210) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 210) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 225) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 225) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 225) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 225) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p1);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 170) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 170) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 170) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 170) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 160) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 160) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 160) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 160) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 150) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 150) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 150) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 150) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p3);
+		//
+		// x1 = (float) (HorizonCircleSize * Math.sin((-Roll + 135) * Math.PI /
+		// 180)) + ww / 2;
+		// y1 = (float) (HorizonCircleSize * Math.cos((-Roll + 135) * Math.PI /
+		// 180)) + hh / 2;
+		//
+		// x2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.sin((-Roll + 135) * Math.PI / 180)) + ww / 2;
+		// y2 = (float) ((HorizonCircleSize - AngleIndicatorLenght) *
+		// Math.cos((-Roll + 135) * Math.PI / 180)) + hh / 2;
+		//
+		// c.drawLine(x1, y1, x2, y2, p1);
+		//
+		// c.drawCircle(ww / 2, hh / 2, 5 * scaledDensity, p1);
+		// c.drawLine(ww / 2, hh / 2 - 5 * scaledDensity, ww / 2, hh / 2 - 15 *
+		// scaledDensity, p1);
+		// c.drawLine(ww / 2 - 5 * scaledDensity, hh / 2, ww / 2 - 15 *
+		// scaledDensity, hh / 2, p1);
+		// c.drawLine(ww / 2 + 5 * scaledDensity, hh / 2, ww / 2 + 15 *
+		// scaledDensity, hh / 2, p1);
+		//
+		// RectF r = new RectF(ww / 2 - HorizonCircleSize, hh / 2 -
+		// HorizonCircleSize, ww / 2 + HorizonCircleSize, hh / 2 +
+		// HorizonCircleSize);
+		// c.drawArc(r, Roll - 45, -90, false, p1);
+		//
+		// c.drawLine(ww / 2, hh / 2 - HorizonCircleSize, ww / 2, hh / 2 -
+		// (HorizonCircleSize + AngleIndicatorLenghtLong), p1);
+		//
+		// if (Azimuth != 0)
+		// drawCompass(c, ww / 3, hh - 12 * scaledDensity, ww / 3, 10, 80, (int)
+		// Azimuth);
+		// if (Altitude != 0)
+		// drawVertical(c, 2 * ww / 3, hh / 3, hh / 3, 2, 10, (int) Altitude);
+		// if (SatNum > 0)
+		// drawVertical(c, ww / 3, hh / 3, hh / 3, 2, 10, (int) Speed);
 
 		if (saveToSD) {
 			try {
