@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/com/ezio/multiwii/helpers/Functions.java=UTF-8
+encoding//src/com/ezio/multiwii/helpers/LowPassFilter.java=UTF-8
 encoding//src/com/ezio/multiwii/helpers/Sensors.java=UTF-8

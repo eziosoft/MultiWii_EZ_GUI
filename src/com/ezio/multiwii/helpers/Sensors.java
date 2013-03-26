@@ -190,30 +190,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 		}
 	}
 
-	public class LowPassFilter {
-		/*
-		 * time smoothing constant for low-pass filter 0 ≤ alpha ≤ 1 ; a smaller
-		 * value basically means more smoothing See:
-		 * http://en.wikipedia.org/wiki
-		 * /Low-pass_filter#Discrete-time_realization
-		 */
-		float ALPHA = 0f;
-		float lastOutput = 0;
-
-		public LowPassFilter(float ALPHA) {
-			this.ALPHA = ALPHA;
-		}
-
-		protected float lowPass(float input) {
-			if (Math.abs(input - lastOutput) > 170) {
-				lastOutput = input;
-				return lastOutput;
-			}
-			lastOutput = lastOutput + ALPHA * (input - lastOutput);
-			return lastOutput;
-		}
-	}
-
 	@Override
 	public void onLocationChanged(Location location) {
 
@@ -257,8 +233,10 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
 		if (location != null) {
-//			double lat = (location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()));
-//			double lon = (location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
+			// double lat = (location.getLatitude() + (location.getLatitude() -
+			// oldLocation.getLatitude()));
+			// double lon = (location.getLongitude() + (location.getLongitude()
+			// - oldLocation.getLongitude()));
 
 			return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
 		} else

@@ -20,7 +20,7 @@ public class HorizonClass {
 	Paint mPaint;
 	Rect DrawingRec;
 	int ww = 0, hh = 0;
-	int tmp = 0;
+	float tmp = 0;
 
 	Bitmap[] bmp = new Bitmap[4];
 
@@ -28,8 +28,8 @@ public class HorizonClass {
 
 	Context context;
 
-	public int roll = 15;
-	public int pitch = 20;
+	public float roll = 15;
+	public float pitch = 20;
 
 	public HorizonClass(Context context, AttributeSet attrs) {
 		// super(context, attrs);
@@ -51,8 +51,8 @@ public class HorizonClass {
 		DrawingRec = new Rect();
 	}
 
-	public void Set(int pitch, int roll) {
-		this.roll = roll;
+	public void Set(float pitch, float roll) {
+		this.roll = -roll;
 		this.pitch = pitch;
 	}
 
@@ -67,6 +67,10 @@ public class HorizonClass {
 			c.drawBitmap(bmp[0], matrix, null);
 
 			matrix.reset();
+			if (pitch > 90)
+				pitch = 90;
+			if (pitch < -90)
+				pitch = -90;
 			tmp = Functions.map(pitch, -90, 90, -(bmp[1].getHeight() / 2), bmp[1].getHeight() / 2);
 			matrix.postRotate(roll, bmp[1].getWidth() / 2, bmp[1].getHeight() / 2 - tmp);
 			matrix.postTranslate(x + (ww - bmp[1].getWidth()) / 2, y + ((hh - bmp[1].getHeight()) / 2) + tmp);
@@ -86,14 +90,6 @@ public class HorizonClass {
 	}
 
 	public void onSizeChanged(int w, int h) {
-		// super.onSizeChanged(w, h, oldw, oldh);
-		// Account for padding
-		// float xpad = (float) (getPaddingLeft() + getPaddingRight());
-		// float ypad = (float) (getPaddingTop() + getPaddingBottom());
-
-		// ww = (int) (w - xpad);
-		// hh = (int) (h - ypad);
-
 		ww = (int) (w);
 		hh = (int) (h);
 
@@ -109,13 +105,6 @@ public class HorizonClass {
 		}
 
 	}
-
-	// @Override
-	// protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-	// int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-	// int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-	// this.setMeasuredDimension(parentWidth, parentWidth);
-	// }
 
 	// Scale and keep aspect ratio
 	private Bitmap scaleToFill(Bitmap b, int width, int height) {

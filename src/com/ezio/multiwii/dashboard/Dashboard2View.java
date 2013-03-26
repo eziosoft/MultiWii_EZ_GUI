@@ -37,6 +37,7 @@ import android.view.View;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.helpers.Functions;
+import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class Dashboard2View extends View {
 
@@ -91,6 +92,9 @@ public class Dashboard2View extends View {
 																												// scientific
 																												// notation
 
+	LowPassFilter lowPassFilterRoll;
+	LowPassFilter lowPassFilterPitch;
+
 	public void Set(int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float verticalSpeed, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 		SatNum = satNum;
 		DistanceToHome = distanceToHome;
@@ -110,7 +114,7 @@ public class Dashboard2View extends View {
 		PowerTrigger = powerTrigger;
 		TXRSSI = txRSSI;
 		RXRSSI = rxRSSI;
-		horizon.Set((int) pitch, (int) roll);
+		horizon.Set(lowPassFilterPitch.lowPass(pitch), lowPassFilterRoll.lowPass(roll));
 		this.invalidate();
 
 	}
@@ -189,6 +193,9 @@ public class Dashboard2View extends View {
 
 		horizon = new HorizonClass(context, null);
 		horizon.onSizeChanged(hh, hh);
+
+		lowPassFilterPitch = new LowPassFilter(0.2f);
+		lowPassFilterRoll = new LowPassFilter(0.2f);
 	}
 
 	void drawCompass(Canvas c, float x, float y, float wight, int step, int range, int value) {
@@ -237,7 +244,7 @@ public class Dashboard2View extends View {
 		}
 
 		// debug
-		if (true) {
+		if (false) {
 			SatNum = 5;
 			DistanceToHome = 254;
 			DirectionToHome = 45;
