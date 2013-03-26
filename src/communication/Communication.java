@@ -14,7 +14,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.ezio.multiwii.mw;
+package communication;
+
+import android.content.Context;
 
 public abstract class Communication {
 	public static final String TAG = "MULTIWII"; // debug
@@ -25,15 +27,29 @@ public abstract class Communication {
 	public boolean ConnectionLost = false;
 	public int ReconnectTry = 0;
 
+	Context context;
+
+	public Communication(Context context) {
+		this.context = context;
+	}
+
 	public abstract void Enable();
 
+	/**
+	 * After connection is made set Connected=true
+	 * 
+	 * @param address
+	 *            -address of device
+	 */
 	public abstract void Connect(String address);
 
-	public abstract int available();
+	public abstract int dataAvailable();
 
 	public abstract byte Read();
 
 	public abstract void Write(byte[] arr);
+
+	public abstract void Close();
 
 	public abstract void Disable();
 }

@@ -25,6 +25,8 @@ import android.util.Log;
 
 import com.ezio.multiwii.helpers.FileAccess;
 import com.ezio.multiwii.waypoints.Waypoint;
+import communication.BT;
+import communication.Communication;
 
 public abstract class MultirotorData {
 
@@ -63,7 +65,7 @@ public abstract class MultirotorData {
 	public boolean I2cMagnetoActive;
 	public boolean GPSActive;
 
-	public BT bt;
+	public Communication bt;
 	public String buttonCheckboxLabel[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
 
 	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];

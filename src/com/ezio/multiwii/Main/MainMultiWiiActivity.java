@@ -55,12 +55,12 @@ import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.map.MapActivityMy;
 import com.ezio.multiwii.mapoffline.MapOfflineActivityMy;
 import com.ezio.multiwii.motors.MotorsActivity;
-import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.other.OtherActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.viewpagerindicator.TitlePageIndicator;
+import communication.BT;
 
 public class MainMultiWiiActivity extends SherlockActivity {
 
@@ -113,7 +113,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		app.AppStartCounter++;
 		app.SaveSettings(true);
-		
+
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 	}
@@ -169,8 +169,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void Close(View v) {
 		try {
 			mHandler.removeCallbacksAndMessages(null);
-			app.bt.CloseSocket();
-			app.BTFrsky.CloseSocket();
+			app.bt.Close();
+			app.BTFrsky.Close();
 		}
 
 		catch (Exception e) {
@@ -221,7 +221,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
-			Log.d(app.TAG, "loop " + this.getClass().getName());
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
 		}
 
 	};

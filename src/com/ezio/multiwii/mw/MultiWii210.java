@@ -23,16 +23,17 @@ import java.util.List;
 import android.util.Log;
 
 import com.ezio.multiwii.waypoints.Waypoint;
+import communication.Communication;
 
 public class MultiWii210 extends MultirotorData {
 
-	public MultiWii210(BT b) {
+	public MultiWii210(Communication bt) {
 		EZGUIProtocol = "213 r1349";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after conection
 
-		bt = b;
+		this.bt = bt;
 
 		// changes from 2.0//
 		PIDITEMS = 10;
@@ -343,7 +344,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void ReadFrame() {
-		while (bt.available() > 0) {
+		while (bt.dataAvailable() > 0) {
 			c = (bt.Read());
 			// Log.d("21",String.valueOf(c));
 			if (c_state == IDLE) {
@@ -432,6 +433,7 @@ public class MultiWii210 extends MultirotorData {
 	@Override
 	public void ProcessSerialData(boolean appLogging) {
 		if (bt.Connected) {
+
 			ReadFrame();
 			// ProcessSerialData(appLogging);
 			baro = alt = baro - AltCorrection;

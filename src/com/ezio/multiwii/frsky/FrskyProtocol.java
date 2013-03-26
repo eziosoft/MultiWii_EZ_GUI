@@ -20,7 +20,8 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import com.ezio.multiwii.mw.BT;
+import communication.BT1;
+import communication.Communication;
 
 public class FrskyProtocol {
 
@@ -34,14 +35,14 @@ public class FrskyProtocol {
 	int f = 0;
 	int frame[] = new int[11];
 
-	BT bt;
+	BT1 bt;
 
-	public FrskyProtocol(BT b) {
-		bt = b;
+	public FrskyProtocol(Communication bTFrsky) {
+		bt = (BT1) bTFrsky;
 	}
 
 	public void ProcessSerialData(boolean appLogging) {
-		while (bt.available() > 0) {
+		while (bt.dataAvailable() > 0) {
 			int b = bt.Read(); // was bt.Read8()
 
 			if (b == 0x7e) {

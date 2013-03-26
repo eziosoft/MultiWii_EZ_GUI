@@ -34,10 +34,12 @@ import com.ezio.multiwii.helpers.Notifications;
 import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
-import com.ezio.multiwii.mw.BT;
 import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
+import communication.BT;
+import communication.BT1;
+import communication.Communication;
 
 public class App extends Application implements Sensors.Listener {
 
@@ -59,8 +61,8 @@ public class App extends Application implements Sensors.Listener {
 	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
 
-	public BT bt;
-	public BT BTFrsky;
+	public Communication bt;
+	public Communication BTFrsky;
 	public MultirotorData mw;
 	public Sensors sensors;
 
@@ -191,8 +193,8 @@ public class App extends Application implements Sensors.Listener {
 
 		ForceLanguage();
 
-		bt = new BT(getApplicationContext());
-		BTFrsky = new BT(getApplicationContext());
+		bt = new BT1(getApplicationContext());
+		BTFrsky = new BT1(getApplicationContext());
 		tts = new TTS(getApplicationContext());
 
 		SelectProtocol();

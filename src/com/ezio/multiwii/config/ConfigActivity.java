@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import com.ezio.multiwii.mw.BT;
+import communication.BT;
 
 public class ConfigActivity extends SherlockActivity {
 
