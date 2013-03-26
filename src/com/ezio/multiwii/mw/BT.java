@@ -46,7 +46,7 @@ public class BT {
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	//
 	// ==> hardcode your server's MAC address here <==
-	public String address = "";
+	// public String address = "";
 
 	Context context;
 
@@ -57,10 +57,10 @@ public class BT {
 
 	public BT(Context con) {
 		context = con;
-		GetAdapter();
+		Enable();
 	}
 
-	private void GetAdapter() {
+	public void Enable() {
 		if (D)
 			Log.d(TAG, "+++ ON CREATE +++");
 
@@ -84,7 +84,7 @@ public class BT {
 			Log.d(TAG, "+++ DONE IN ON CREATE, GOT LOCAL BT ADAPTER +++");
 	}
 
-	public void BTDisable() {
+	public void Disable() {
 		try {
 			mBluetoothAdapter.disable();
 		} catch (Exception e) {
@@ -93,17 +93,14 @@ public class BT {
 
 	}
 
-	public void GetRemoteDevice(String MAC) {
+	private void GetRemoteDevice(String address) {
 		if (D) {
 			Log.d(TAG, "+ ON RESUME +");
 			Log.d(TAG, "+ ABOUT TO ATTEMPT CLIENT CONNECT +");
-
 		}
 
 		Toast.makeText(context, context.getString(R.string.Connecting), Toast.LENGTH_LONG).show();
 		// app.Speak("Connecting");
-
-		address = MAC;
 
 		// When this returns, it will 'know' about the server,
 		// via it's MAC address.
@@ -217,7 +214,8 @@ public class BT {
 		}
 
 		try {
-			btSocket.close();
+			if (btSocket != null)
+				btSocket.close();
 			Connected = false;
 
 			Toast.makeText(context, context.getString(R.string.Disconnected), Toast.LENGTH_LONG).show();

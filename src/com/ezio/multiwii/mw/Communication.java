@@ -16,11 +16,24 @@
  */
 package com.ezio.multiwii.mw;
 
-
-
 public abstract class Communication {
+	public static final String TAG = "MULTIWII"; // debug
 
-	public abstract void GetAdapter();
-	
-	
+	public boolean Connected = false;
+	public String address = "";
+
+	public boolean ConnectionLost = false;
+	public int ReconnectTry = 0;
+
+	public abstract void Enable();
+
+	public abstract void Connect(String address);
+
+	public abstract int available();
+
+	public abstract byte Read();
+
+	public abstract void Write(byte[] arr);
+
+	public abstract void Disable();
 }
