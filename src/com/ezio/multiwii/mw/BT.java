@@ -44,7 +44,7 @@ public class BT {
 	// RFCOMM channel 1 (default) if not in use);
 	// see comments in onResume().
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+	//
 	// ==> hardcode your server's MAC address here <==
 	public String address = "";
 
@@ -52,16 +52,15 @@ public class BT {
 
 	public boolean ConnectionLost = false;
 	public int ReconnectTry = 0;
-
+	//
 	Handler handler;
 
 	public BT(Context con) {
 		context = con;
-
 		GetAdapter();
 	}
 
-	public void GetAdapter() {
+	private void GetAdapter() {
 		if (D)
 			Log.d(TAG, "+++ ON CREATE +++");
 
@@ -186,16 +185,17 @@ public class BT {
 
 	}
 
-	public void Send(String out) {
-
-		byte[] msgBuffer = out.getBytes();
-		try {
-			outStream.write(msgBuffer);
-		} catch (IOException e) {
-			Log.e(TAG, "SEND : Exception during write.", e);
-		}
-	}
-
+	//
+	// public void Send(String out) {
+	//
+	// byte[] msgBuffer = out.getBytes();
+	// try {
+	// outStream.write(msgBuffer);
+	// } catch (IOException e) {
+	// Log.e(TAG, "SEND : Exception during write.", e);
+	// }
+	// }
+	//
 	public void Write(byte[] arr) {
 		try {
 			if (Connected)
@@ -229,6 +229,7 @@ public class BT {
 
 	}
 
+	//
 	public int available() {
 		int a = 0;
 
@@ -242,66 +243,65 @@ public class BT {
 		return a;
 	}
 
-	int Read32() {
-		byte[] b = new byte[4];
-
-		try {
-			inStream.read(b, 0, 4);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e(TAG, "Read error ", e);
-		}
-		return (b[0] & 0xff) + ((b[1] & 0xff) << 8) + ((b[2] & 0xff) << 16) + ((b[3] & 0xff) << 24);
-	}
-
-	public int Read16() {
-		byte[] b = new byte[2];
-
-		try {
-			inStream.read(b, 0, 2);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e(TAG, "Read error ", e);
-		}
-
-		return (b[0] & 0xff) + (b[1] << 8);
-	}
-
-	public int Read8() {
-		byte[] b = new byte[1];
-
-		try {
-			inStream.read(b, 0, 1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e(TAG, "Read error ", e);
-		}
-
-		return b[0] & 0xff;
-	}
+	//
+	// int Read32() {
+	// byte[] b = new byte[4];
+	//
+	// try {
+	// inStream.read(b, 0, 4);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// Log.e(TAG, "Read error ", e);
+	// }
+	// return (b[0] & 0xff) + ((b[1] & 0xff) << 8) + ((b[2] & 0xff) << 16) +
+	// ((b[3] & 0xff) << 24);
+	// }
+	//
+	// public int Read16() {
+	// byte[] b = new byte[2];
+	//
+	// try {
+	// inStream.read(b, 0, 2);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// Log.e(TAG, "Read error ", e);
+	// }
+	//
+	// return (b[0] & 0xff) + (b[1] << 8);
+	// }
+	//
+	// public int Read8() {
+	// byte[] b = new byte[1];
+	//
+	// try {
+	// inStream.read(b, 0, 1);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// Log.e(TAG, "Read error ", e);
+	// }
+	// return b[0] & 0xff;
+	// }
 
 	public byte Read() {
 		byte a = 0;
-
 		try {
 			a = (byte) inStream.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		return a;
+		return (byte) (a & 0xff);
 	}
-
-	public byte[] ReadFrame(int framesize) {
-		byte[] a = new byte[framesize];
-		try {
-			inStream.read(a, 0, framesize);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return a;
-
-	}
-
+	//
+	// public byte[] ReadFrame(int framesize) {
+	// byte[] a = new byte[framesize];
+	// try {
+	// inStream.read(a, 0, framesize);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// return a;
+	//
+	// }
+	//
 }

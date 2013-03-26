@@ -42,7 +42,7 @@ public class FrskyProtocol {
 
 	public void ProcessSerialData(boolean appLogging) {
 		while (bt.available() > 0) {
-			int b = bt.Read8();
+			int b = bt.Read(); // was bt.Read8()
 
 			if (b == 0x7e) {
 				frame[f] = b;
@@ -62,7 +62,7 @@ public class FrskyProtocol {
 			}
 
 			if (b == 0x7d)
-				b = (bt.Read8() ^ 0x20);
+				b = (bt.Read() ^ 0x20); // was bt.Read8()
 
 			frame[f] = b;
 			f++;
@@ -126,11 +126,7 @@ public class FrskyProtocol {
 					e.printStackTrace();
 				}
 
-				Log.d("frsky",
-						getHex(frame) + "->bytes " + String.valueOf(validBytes)
-								+ "   b=" + getHex(buffor.toArray()) + "    f="
-								+ getHex(dataInFrame) + "    hubFrame="
-								+ getHex(hubFrame));
+				Log.d("frsky", getHex(frame) + "->bytes " + String.valueOf(validBytes) + "   b=" + getHex(buffor.toArray()) + "    f=" + getHex(dataInFrame) + "    hubFrame=" + getHex(hubFrame));
 
 			} else {
 
@@ -153,8 +149,7 @@ public class FrskyProtocol {
 		}
 		final StringBuilder hex = new StringBuilder(2 * raw.length);
 		for (final int b : raw) {
-			hex.append(HEXES.charAt((b & 0xF0) >> 4)).append(
-					HEXES.charAt((b & 0x0F)));
+			hex.append(HEXES.charAt((b & 0xF0) >> 4)).append(HEXES.charAt((b & 0x0F)));
 		}
 		return hex.toString();
 	}
@@ -165,8 +160,7 @@ public class FrskyProtocol {
 		}
 		final StringBuilder hex = new StringBuilder(2 * raw.length);
 		for (final Object b : raw) {
-			hex.append(HEXES.charAt(((Integer) b & 0xF0) >> 4)).append(
-					HEXES.charAt(((Integer) b & 0x0F)));
+			hex.append(HEXES.charAt(((Integer) b & 0xF0) >> 4)).append(HEXES.charAt(((Integer) b & 0x0F)));
 		}
 		return hex.toString();
 	}

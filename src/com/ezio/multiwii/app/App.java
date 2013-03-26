@@ -23,16 +23,11 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.raw;
-import com.ezio.multiwii.R.string;
 import com.ezio.multiwii.frsky.FrskyProtocol;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.helpers.Notifications;
@@ -40,7 +35,6 @@ import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.BT;
-import com.ezio.multiwii.mw.MultiWii200;
 import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
@@ -219,9 +213,9 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 
-		if (Protocol == 200) {
-			mw = new MultiWii200(bt);
-		}
+//		if (Protocol == 200) {
+//			mw = new MultiWii200(bt);
+//		}
 
 		if (Protocol == 210) {
 			mw = new MultiWii210(bt);
