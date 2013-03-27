@@ -94,7 +94,7 @@ public class RawDataActivity extends Activity {
 			TVData.setText(getString(R.string.MacNotSet));
 		} else {
 			TVData.setText("");
-			if (!app.bt.Connected)
+			if (!app.comm.Connected)
 				TVData.setText(getString(R.string.InfoNotConnected));
 		}
 

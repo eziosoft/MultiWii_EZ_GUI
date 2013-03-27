@@ -344,7 +344,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void ReadFrame() {
-		while (bt.dataAvailable() > 0) {
+		while (bt.dataAvailable()) {
 			c = (bt.Read());
 			// Log.d("21",String.valueOf(c));
 			if (c_state == IDLE) {

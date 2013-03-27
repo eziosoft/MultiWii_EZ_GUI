@@ -42,7 +42,7 @@ public class FrskyProtocol {
 	}
 
 	public void ProcessSerialData(boolean appLogging) {
-		while (bt.dataAvailable() > 0) {
+		while (bt.dataAvailable()) {
 			int b = bt.Read(); // was bt.Read8()
 
 			if (b == 0x7e) {

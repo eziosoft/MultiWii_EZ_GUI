@@ -109,12 +109,13 @@ public class BT1 extends Communication {
 	}
 
 	@Override
-	public int dataAvailable() {
-		int a = 0;
+	public boolean dataAvailable() {
+		boolean a = false;
 
 		try {
 			if (Connected)
-				a = inStream.available();
+				a = inStream.available() > 0;
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

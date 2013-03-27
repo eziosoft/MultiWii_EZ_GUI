@@ -43,7 +43,7 @@ public abstract class Communication {
 	 */
 	public abstract void Connect(String address);
 
-	public abstract int dataAvailable();
+	public abstract boolean dataAvailable();
 
 	public abstract byte Read();
 

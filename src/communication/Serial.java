@@ -16,62 +16,133 @@
  */
 package communication;
 
+import java.util.LinkedList;
+
+import jp.ksksue.driver.serial.FTDriver;
+import android.annotation.TargetApi;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.os.Handler;
-import android.util.Log;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.widget.Toast;
 
-import com.ezio.multiwii.R;
+public class Serial extends Communication {
 
-public class Serial extends Communication{
+	// [FTDriver] Permission String
+	private static final String ACTION_USB_PERMISSION = "jp.ksksue.tutorial.USB_PERMISSION";
+
+	FTDriver mSerial;
+
+	LinkedList<Integer> fifo = new LinkedList<Integer>();
 
 	public Serial(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		Enable();
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public void Enable() {
-		// TODO Auto-generated method stub
-		
+		// [FTDriver] Create Instance
+		mSerial = new FTDriver((UsbManager) context.getSystemService(Context.USB_SERVICE));
+
+		// [FTDriver] setPermissionIntent() before begin()
+		PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
+		mSerial.setPermissionIntent(permissionIntent);
+
+		// listen for new devices
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
+		filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+		((Context) context).registerReceiver(mUsbReceiver, filter);
+
 	}
 
 	@Override
 	public void Connect(String address) {
-		// TODO Auto-generated method stub
-		
+		// [FTDriver] Open USB Serial
+		if (mSerial.begin(FTDriver.BAUD115200)) {
+			Connected = true;
+			Toast.makeText(context, "connected", Toast.LENGTH_SHORT).show();
+
+		} else {
+			Connected = false;
+			Toast.makeText(context, "cannot connect", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
-	public int dataAvailable() {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean dataAvailable() {
+		return !fifo.isEmpty();
 	}
 
 	@Override
 	public byte Read() {
-		// TODO Auto-generated method stub
-		return 0;
+		Connected = mSerial.isConnected();
+		// [FTDriver] Create Read Buffer
+		byte[] rbuf = new byte[4096]; // 1byte <--slow-- [Transfer Speed]
+										// --fast-->
+										// 4096 byte
+		if (mSerial.isConnected()) {
+			// [FTDriver] Read from USB Serial
+			int len = mSerial.read(rbuf);
+
+			for (int i = 0; i < len; i++)
+				fifo.add(Integer.valueOf(rbuf[i]));
+		}
+		return (byte) (fifo.removeFirst() & 0xff);
 	}
 
 	@Override
 	public void Write(byte[] arr) {
-		// TODO Auto-generated method stub
-		
+		Connected = mSerial.isConnected();
+
+		if (mSerial.isConnected()) {
+			mSerial.write(arr, arr.length);
+		} else {
+			Toast.makeText(context, "Write error - not connected", Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 	@Override
 	public void Close() {
-		// TODO Auto-generated method stub
-		
+		Connected = false;
+		mSerial.end();
+		Toast.makeText(context, "disconnect", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void Disable() {
-		// TODO Auto-generated method stub
-		
+		Connected = false;
+		mSerial.end();
+		context.unregisterReceiver(mUsbReceiver);
+		Toast.makeText(context, "disconnect", Toast.LENGTH_SHORT).show();
+
 	}
 
+	// BroadcastReceiver when insert/remove the device USB plug into/from a USB
+	// port
+	BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+				Toast.makeText(context, "USB_DEVICE_ATTACHED", Toast.LENGTH_LONG).show();
 
+				// mSerial.usbAttached(intent);
+				// mSerial.begin(SERIAL_BAUDRATE);
+				// mainloop();
 
+			} else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+				Toast.makeText(context, "USB_DEVICE_DETACHED", Toast.LENGTH_LONG).show();
+				Connected = false;
+				// mSerial.usbDetached(intent);
+				// mSerial.end();
+				// mStop = true;
+			}
+		}
+	};
 }

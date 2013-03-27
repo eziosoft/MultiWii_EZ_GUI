@@ -143,7 +143,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
-		if (app.bt.Connected) {
+		if (app.comm.Connected) {
 
 			try {
 				mHandler.removeCallbacksAndMessages(null);
@@ -169,8 +169,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void Close(View v) {
 		try {
 			mHandler.removeCallbacksAndMessages(null);
-			app.bt.Close();
-			app.BTFrsky.Close();
+			app.comm.Close();
+			app.commFrsky.Close();
 		}
 
 		catch (Exception e) {
@@ -181,7 +181,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void Connect(String MacAddress) {
 		if (!app.MacAddress.equals("")) {
-			app.bt.Connect(app.MacAddress);
+			app.comm.Connect(app.MacAddress);
 			app.Say(getString(R.string.menu_connect));
 		} else {
 			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
@@ -195,7 +195,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void ConnectFrsky(String MacAddress) {
 		if (!app.MacAddressFrsky.equals("")) {
-			app.BTFrsky.Connect(app.MacAddressFrsky);
+			app.commFrsky.Connect(app.MacAddressFrsky);
 			app.Say(getString(R.string.Connect_frsky));
 		} else {
 			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
@@ -371,7 +371,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
 			if (app.DisableBTonExit) {
-				app.bt.Disable();
+				app.comm.Disable();
 			}
 
 			app.sensors.stop();
@@ -403,8 +403,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (item.getItemId() == R.id.menu_disconnect) {
 			app.Say(getString(R.string.menu_disconnect));
-			app.bt.ConnectionLost = false;
-			app.BTFrsky.ConnectionLost = false;
+			app.comm.ConnectionLost = false;
+			app.commFrsky.ConnectionLost = false;
 			Close(null);
 			return true;
 		}

@@ -37,9 +37,9 @@ import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
-import communication.BT;
 import communication.BT1;
 import communication.Communication;
+import communication.Serial;
 
 public class App extends Application implements Sensors.Listener {
 
@@ -61,8 +61,8 @@ public class App extends Application implements Sensors.Listener {
 	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
 
-	public Communication bt;
-	public Communication BTFrsky;
+	public Communication comm;
+	public Communication commFrsky;
 	public MultirotorData mw;
 	public Sensors sensors;
 
@@ -95,6 +95,14 @@ public class App extends Application implements Sensors.Listener {
 	// ----settings-----
 	private static String COPYFRSKYTOMW = "COPYFRSKYTOMW";
 	public boolean CopyFrskyToMW;
+
+	private static String COMMUNICATION_TYPE = "CommunicationType";
+	public static int COMMUNICATION_TYPE_BT = 0;
+	public static int COMMUNICATION_TYPE_SERIAL = 1;
+	public int CommunicationType = COMMUNICATION_TYPE_SERIAL;
+
+	private static String COMMUNICATION_TYPE_FRSKY = "CommunicationType";
+	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
 
 	private static String RADIOMODE = "RadioMode";
 	public int RadioMode;
@@ -193,8 +201,22 @@ public class App extends Application implements Sensors.Listener {
 
 		ForceLanguage();
 
-		bt = new BT1(getApplicationContext());
-		BTFrsky = new BT1(getApplicationContext());
+		if (CommunicationType == COMMUNICATION_TYPE_BT) {
+			comm = new BT1(getApplicationContext());
+		}
+
+		if (CommunicationType == COMMUNICATION_TYPE_SERIAL) {
+			comm = new Serial(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
+			commFrsky = new BT1(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL) {
+			commFrsky = new Serial(getApplicationContext());
+		}
+
 		tts = new TTS(getApplicationContext());
 
 		SelectProtocol();
@@ -215,15 +237,15 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 
-//		if (Protocol == 200) {
-//			mw = new MultiWii200(bt);
-//		}
+		// if (Protocol == 200) {
+		// mw = new MultiWii200(bt);
+		// }
 
 		if (Protocol == 210) {
-			mw = new MultiWii210(bt);
+			mw = new MultiWii210(comm);
 		}
 
-		frsky = new FrskyProtocol(BTFrsky);
+		frsky = new FrskyProtocol(commFrsky);
 
 		oldActiveModes = new boolean[20];// not the best method
 		mw._1G = _1Gtemp;
@@ -304,16 +326,16 @@ public class App extends Application implements Sensors.Listener {
 	public void Frequentjobs() {
 
 		// rssi
-		if (!BTFrsky.Connected && bt.Connected) {
+		if (!commFrsky.Connected && comm.Connected) {
 			frsky.TxRSSI = Functions.map(mw.rssi, 0, 1024, 0, 110);
 		}
 
 		// Copy data from FrSky
-		if (CopyFrskyToMW && BTFrsky.Connected && !bt.Connected)
+		if (CopyFrskyToMW && commFrsky.Connected && !comm.Connected)
 			FrskyToMW();
 
 		// Say battery level every xx seconds
-		if (PeriodicSpeaking > 0 && bt.Connected && timer1 < System.currentTimeMillis()) {
+		if (PeriodicSpeaking > 0 && comm.Connected && timer1 < System.currentTimeMillis()) {
 			timer1 = System.currentTimeMillis() + PeriodicSpeaking;
 			if (mw.bytevbat > 10) {
 				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)));
@@ -321,7 +343,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		// beep when low battery
-		if (mw.bytevbat > 10 && VoltageAlarm > 0 && bt.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
+		if (mw.bytevbat > 10 && VoltageAlarm > 0 && comm.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
 			timer2 = System.currentTimeMillis() + timer2Freq;
 			soundManager.playSound(0);
 		}
@@ -378,11 +400,11 @@ public class App extends Application implements Sensors.Listener {
 			timer4 = System.currentTimeMillis() + timer4Freq;
 
 			// Reconecting
-			if (bt.ConnectionLost) {
-				if (bt.ReconnectTry < 1) {
+			if (comm.ConnectionLost) {
+				if (comm.ReconnectTry < 1) {
 					tts.Speak(getString(R.string.Reconnecting));
-					bt.Connect(MacAddress);
-					bt.ReconnectTry++;
+					comm.Connect(MacAddress);
+					comm.ReconnectTry++;
 				}
 			}
 
@@ -445,8 +467,8 @@ public class App extends Application implements Sensors.Listener {
 
 	public void ConnectionBug() { // autoconnect again when new activity is
 									// started
-		if (ConnectOnStart && !bt.Connected) {
-			bt.Connect(MacAddress);
+		if (ConnectOnStart && !comm.Connected) {
+			comm.Connect(MacAddress);
 			Say(getString(R.string.menu_connect));
 		}
 	}
