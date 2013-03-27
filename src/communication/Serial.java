@@ -46,6 +46,7 @@ public class Serial extends Communication {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public void Enable() {
+		Toast.makeText(context, "Starting Serial...", Toast.LENGTH_SHORT).show();
 		// [FTDriver] Create Instance
 		mSerial = new FTDriver((UsbManager) context.getSystemService(Context.USB_SERVICE));
 
@@ -66,21 +67,27 @@ public class Serial extends Communication {
 		// [FTDriver] Open USB Serial
 		if (mSerial.begin(FTDriver.BAUD115200)) {
 			Connected = true;
-			Toast.makeText(context, "connected", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Serial connected", Toast.LENGTH_SHORT).show();
 
 		} else {
 			Connected = false;
-			Toast.makeText(context, "cannot connect", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Serial cannot connect", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	@Override
 	public boolean dataAvailable() {
+		readToBuffer();
 		return !fifo.isEmpty();
 	}
 
 	@Override
 	public byte Read() {
+		readToBuffer();
+		return (byte) (fifo.removeFirst() & 0xff);
+	}
+
+	private void readToBuffer() {
 		Connected = mSerial.isConnected();
 		// [FTDriver] Create Read Buffer
 		byte[] rbuf = new byte[4096]; // 1byte <--slow-- [Transfer Speed]
@@ -93,7 +100,6 @@ public class Serial extends Communication {
 			for (int i = 0; i < len; i++)
 				fifo.add(Integer.valueOf(rbuf[i]));
 		}
-		return (byte) (fifo.removeFirst() & 0xff);
 	}
 
 	@Override

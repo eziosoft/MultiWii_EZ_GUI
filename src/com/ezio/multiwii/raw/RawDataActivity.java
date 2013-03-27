@@ -16,15 +16,10 @@
  */
 package com.ezio.multiwii.raw;
 
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
-import com.ezio.multiwii.app.App;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -32,6 +27,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class RawDataActivity extends Activity {
 	private boolean killme = false;
@@ -225,6 +223,7 @@ public class RawDataActivity extends Activity {
 		log("bt.ReconnectTry", String.valueOf(app.mw.bt.ReconnectTry));
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
+		log("Andorid version",String.valueOf(Build.VERSION.SDK_INT));
 
 		for (String s : app.mw.buttonCheckboxLabel) {
 			log("buttonCheckboxLabel", s);

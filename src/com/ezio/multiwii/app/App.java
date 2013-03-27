@@ -99,7 +99,7 @@ public class App extends Application implements Sensors.Listener {
 	private static String COMMUNICATION_TYPE = "CommunicationType";
 	public static int COMMUNICATION_TYPE_BT = 0;
 	public static int COMMUNICATION_TYPE_SERIAL = 1;
-	public int CommunicationType = COMMUNICATION_TYPE_SERIAL;
+	public int CommunicationType = COMMUNICATION_TYPE_BT;
 
 	private static String COMMUNICATION_TYPE_FRSKY = "CommunicationType";
 	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
@@ -276,6 +276,7 @@ public class App extends Application implements Sensors.Listener {
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 		MapZoomLevel = prefs.getInt(MAPZOOMLEVEL, 9);
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
+		CommunicationType = prefs.getInt(COMMUNICATION_TYPE, COMMUNICATION_TYPE_BT);
 	}
 
 	public void SaveSettings(boolean quiet) {
@@ -302,6 +303,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putBoolean(REVERSEROLL, ReverseRoll);
 		editor.putInt(MAPZOOMLEVEL, MapZoomLevel);
 		editor.putInt(MAPCENTERPERIOD, MapCenterPeriod);
+		editor.putInt(COMMUNICATION_TYPE, CommunicationType);
 		editor.commit();
 
 		if (!quiet) {

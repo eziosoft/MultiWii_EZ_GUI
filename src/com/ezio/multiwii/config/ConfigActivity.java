@@ -18,6 +18,7 @@ package com.ezio.multiwii.config;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,35 +31,29 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import communication.BT;
+import communication.BT_old;
 
 public class ConfigActivity extends SherlockActivity {
 
 	App app;
 	RadioButton Mode1;
 	RadioButton Mode2;
-
 	RadioButton Protocol20;
 	RadioButton Protocol21;
-
 	RadioButton MagMode1;
 	RadioButton MagMode2;
-
-	CheckBox CheckBoxTTS;
-	CheckBox CheckBoxUseOfflineMap;
 
 	TextView MacAddressBTTV;
 	TextView MacAddressBTFrskyTV;
 
+	CheckBox CheckBoxTTS;
+	CheckBox CheckBoxUseOfflineMap;
 	CheckBox CheckBoxConnectOnStart;
-
 	CheckBox CheckBoxAltCorrection;
-
 	CheckBox CheckBoxDisableBTonExit;
-
 	CheckBox CheckBoxCopyFrskyToMW;
-
 	CheckBox CheckBoxReverseRollDirection;
+	CheckBox CheckBoxUseFTDISerial;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -75,7 +70,7 @@ public class ConfigActivity extends SherlockActivity {
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.d(BT.TAG, "onActivityResult " + resultCode);
+		Log.d(BT_old.TAG, "onActivityResult " + resultCode);
 		switch (requestCode) {
 
 		case REQUEST_CONNECT_DEVICE_MULTIWII:
@@ -142,6 +137,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
 		CheckBoxReverseRollDirection = (CheckBox) findViewById(R.id.checkBoxReverseRollDirection);
 		EditTextMapCenterPeriod = (EditText) findViewById(R.id.EditTextMapCenterPeriod);
+		CheckBoxUseFTDISerial = (CheckBox) findViewById(R.id.checkBoxUseFTDISerial);
 
 	}
 
@@ -181,6 +177,10 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
+		CheckBoxUseFTDISerial.setChecked(app.CommunicationType == App.COMMUNICATION_TYPE_SERIAL);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
+			CheckBoxUseFTDISerial.setVisibility(View.GONE);
+		}
 
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);
 		MacAddressBTFrskyTV.setText("MAC:" + app.MacAddressFrsky);
@@ -248,6 +248,12 @@ public class ConfigActivity extends SherlockActivity {
 		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText().toString());
 		app.RefreshRate = Integer.parseInt(EditTextRefreshRate.getText().toString());
 		app.MapCenterPeriod = Integer.parseInt(EditTextMapCenterPeriod.getText().toString());
+
+		if (CheckBoxUseFTDISerial.isChecked()) {
+			app.CommunicationType = App.COMMUNICATION_TYPE_SERIAL;
+		} else {
+			app.CommunicationType = App.COMMUNICATION_TYPE_BT;
+		}
 
 		app.SaveSettings(false);
 

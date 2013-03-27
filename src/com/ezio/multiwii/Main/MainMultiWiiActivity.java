@@ -60,7 +60,7 @@ import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.viewpagerindicator.TitlePageIndicator;
-import communication.BT;
+import communication.BT_old;
 
 public class MainMultiWiiActivity extends SherlockActivity {
 
@@ -152,7 +152,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			}
 
 			mHandler.postDelayed(update, 100);
-			Log.d(BT.TAG, "OnResume if connected");
+			Log.d(BT_old.TAG, "OnResume if connected");
 
 		}
 

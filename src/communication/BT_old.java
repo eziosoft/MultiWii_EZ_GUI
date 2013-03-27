@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 import com.ezio.multiwii.R;
 
-public class BT {
+public class BT_old {
 
 	public boolean Connected = false;
 	public static final String TAG = "MULTIWII";
@@ -55,7 +55,7 @@ public class BT {
 	//
 	Handler handler;
 
-	public BT(Context con) {
+	public BT_old(Context con) {
 		context = con;
 		Enable();
 	}

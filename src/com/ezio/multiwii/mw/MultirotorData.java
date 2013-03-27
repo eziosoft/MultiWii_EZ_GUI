@@ -25,7 +25,7 @@ import android.util.Log;
 
 import com.ezio.multiwii.helpers.FileAccess;
 import com.ezio.multiwii.waypoints.Waypoint;
-import communication.BT;
+import communication.BT_old;
 import communication.Communication;
 
 public abstract class MultirotorData {
