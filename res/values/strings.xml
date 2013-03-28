@@ -203,5 +203,6 @@
     <string name="MapCenterPeriod">Map center period</string>
     <string name="VerticalSpeed">Vertical speed</string>
     <string name="UseFTDISerial">Use Serial Port for MultiWii(Android 3.1 and up)</string>
+    <string name="Dashboard3">Dashboard 3</string>
 
 </resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <com.ezio.multiwii.dashboard.dashboard3.HorizonView
+                    android:id="@+id/horizonView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                      android:layout_weight="1" />
+
+                <com.ezio.multiwii.dashboard.dashboard3.VarioView
+                    android:id="@+id/varioView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                      android:layout_weight="1" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <com.ezio.multiwii.dashboard.dashboard3.AltitudeView
+                    android:id="@+id/altitudeView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                      android:layout_weight="1" />
+
+                <com.ezio.multiwii.dashboard.dashboard3.HeadingView
+                    android:id="@+id/headingView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                      android:layout_weight="1" />
+            </TableRow>
+        </TableLayout>
+
+        <org.osmdroid.views.MapView
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+        </org.osmdroid.views.MapView>
+    </LinearLayout>
+
+</LinearLayout>

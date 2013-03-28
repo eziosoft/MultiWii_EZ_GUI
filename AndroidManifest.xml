@@ -43,7 +43,7 @@
         <activity
             android:name=".dashboard.Dashboard2Activity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensorLandscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
@@ -131,6 +131,7 @@
             android:name=".about.InfoActivity"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity android:name=".dashboard.dashboard3.Dashboard3Activity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
