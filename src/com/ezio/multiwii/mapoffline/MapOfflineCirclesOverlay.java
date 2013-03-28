@@ -27,7 +27,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-class MapOfflineCirclesOverlay extends Overlay {
+public class MapOfflineCirclesOverlay extends Overlay {
 
 	private Projection projection;
 	GeoPoint GHome = new GeoPoint(0, 0);

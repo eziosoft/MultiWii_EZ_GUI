@@ -44,7 +44,7 @@ import android.widget.Toast;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 
-class MapOfflineCopterOverlay extends Overlay {
+public class MapOfflineCopterOverlay extends Overlay {
 	private Context context;
 	private Projection projection;
 	GeoPoint GCopter = new GeoPoint(0, 0);
