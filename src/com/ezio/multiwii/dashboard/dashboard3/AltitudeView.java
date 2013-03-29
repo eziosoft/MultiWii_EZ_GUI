@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class AltitudeView extends View {
 
@@ -29,6 +30,8 @@ public class AltitudeView extends View {
 	Context context;
 
 	public float alt = 150;
+
+	LowPassFilter lowPassFilter = new LowPassFilter(0.05f);
 
 	public AltitudeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -51,7 +54,7 @@ public class AltitudeView extends View {
 	}
 
 	public void Set(float alt) {
-		this.alt = alt;
+		this.alt = lowPassFilter.lowPass(alt);
 		invalidate();
 	}
 

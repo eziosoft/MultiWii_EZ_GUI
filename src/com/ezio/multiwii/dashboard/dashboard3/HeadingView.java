@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class HeadingView extends View {
 
@@ -29,6 +30,8 @@ public class HeadingView extends View {
 	Context context;
 
 	public float heading = 0;
+	
+	LowPassFilter lowPassFilter = new LowPassFilter(0.2f);
 
 	public HeadingView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -49,7 +52,7 @@ public class HeadingView extends View {
 	}
 
 	public void Set(float heading) {
-		this.heading = heading;
+		this.heading = lowPassFilter.lowPass( heading);
 		invalidate();
 	}
 

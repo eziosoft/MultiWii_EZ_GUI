@@ -15,7 +15,9 @@ import android.view.WindowManager;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
-import com.ezio.multiwii.mapoffline.*;
+import com.ezio.multiwii.helpers.LowPassFilter;
+import com.ezio.multiwii.mapoffline.MapOfflineCirclesOverlay;
+import com.ezio.multiwii.mapoffline.MapOfflineCopterOverlay;
 
 public class Dashboard3Activity extends Activity {
 	private boolean killme = false;
@@ -35,6 +37,8 @@ public class Dashboard3Activity extends Activity {
 	AltitudeView altitudeView;
 	HeadingView headingView;
 	VarioView varioView;
+	
+	
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -86,9 +90,9 @@ public class Dashboard3Activity extends Activity {
 				a = -1;
 			}
 			horizonView.Set(-app.mw.angx*a, app.mw.angy);
-			altitudeView.Set(app.mw.alt);
+			altitudeView.Set(app.mw.alt*10);
 			headingView.Set(app.mw.head);
-			varioView.Set(app.mw.vario/100f);
+			varioView.Set(app.mw.vario*0.6f);
 
 			// ///////////////////////
 

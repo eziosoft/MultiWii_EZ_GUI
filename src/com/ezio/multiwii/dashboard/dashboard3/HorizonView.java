@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class HorizonView extends View {
 
@@ -30,6 +31,9 @@ public class HorizonView extends View {
 
 	public float roll = 15;
 	public float pitch = 20;
+
+	LowPassFilter lowPassFilterRoll = new LowPassFilter(0.2f);
+	LowPassFilter lowPassFilterPitch = new LowPassFilter(0.2f);
 
 	public HorizonView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -52,8 +56,8 @@ public class HorizonView extends View {
 	}
 
 	public void Set(float roll, float pitch) {
-		this.roll = roll;
-		this.pitch = pitch;
+		this.roll = lowPassFilterRoll.lowPass(roll);
+		this.pitch = lowPassFilterPitch.lowPass(pitch);
 		invalidate();
 	}
 

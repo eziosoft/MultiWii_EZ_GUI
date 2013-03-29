@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class VarioView extends View {
 
@@ -29,6 +30,8 @@ public class VarioView extends View {
 	Context context;
 
 	public float vairo = 0;
+
+	LowPassFilter lowPassFilter = new LowPassFilter(0.2f);
 
 	public VarioView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -49,7 +52,7 @@ public class VarioView extends View {
 	}
 
 	public void Set(float vairo) {
-		this.vairo = vairo;
+		this.vairo = lowPassFilter.lowPass(vairo);
 		invalidate();
 	}
 
@@ -67,7 +70,7 @@ public class VarioView extends View {
 
 			matrix.reset();
 			matrix.preTranslate(0, -bmp[1].getHeight() * 0.3f);
-			matrix.postRotate(map(vairo, -20, 20, -180 - 90, 180 - 90), bmp[1].getWidth() / 2, bmp[1].getHeight() / 2);
+			matrix.postRotate(map(vairo, -20, 20, -160, 160) - 90, bmp[1].getWidth() / 2, bmp[1].getHeight() / 2);
 			matrix.postTranslate((ww - bmp[1].getWidth()) / 2, (float) ((hh - bmp[1].getHeight()) / 2));
 			c.drawBitmap(bmp[1], matrix, null);
 
