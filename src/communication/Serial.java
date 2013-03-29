@@ -16,8 +16,6 @@
  */
 package communication;
 
-import java.util.LinkedList;
-
 import jp.ksksue.driver.serial.FTDriver;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -35,8 +33,9 @@ public class Serial extends Communication {
 	private static final String ACTION_USB_PERMISSION = "jp.ksksue.tutorial.USB_PERMISSION";
 
 	FTDriver mSerial;
+	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
-	LinkedList<Integer> fifo = new LinkedList<Integer>();
+	boolean loopStop = false;
 
 	public Serial(Context context) {
 		super(context);
@@ -65,10 +64,11 @@ public class Serial extends Communication {
 	@Override
 	public void Connect(String address) {
 		// [FTDriver] Open USB Serial
-		if (mSerial.begin(FTDriver.BAUD115200)) {
+		if (mSerial.begin(Integer.parseInt(address))) {
 			Connected = true;
+			loopStop = false;
+			startMainLoop();
 			Toast.makeText(context, "Serial connected", Toast.LENGTH_SHORT).show();
-
 		} else {
 			Connected = false;
 			Toast.makeText(context, "Serial cannot connect", Toast.LENGTH_SHORT).show();
@@ -77,29 +77,12 @@ public class Serial extends Communication {
 
 	@Override
 	public boolean dataAvailable() {
-		readToBuffer();
 		return !fifo.isEmpty();
 	}
 
 	@Override
 	public byte Read() {
-		readToBuffer();
-		return (byte) (fifo.removeFirst() & 0xff);
-	}
-
-	private void readToBuffer() {
-		Connected = mSerial.isConnected();
-		// [FTDriver] Create Read Buffer
-		byte[] rbuf = new byte[4096]; // 1byte <--slow-- [Transfer Speed]
-										// --fast-->
-										// 4096 byte
-		if (mSerial.isConnected()) {
-			// [FTDriver] Read from USB Serial
-			int len = mSerial.read(rbuf);
-
-			for (int i = 0; i < len; i++)
-				fifo.add(Integer.valueOf(rbuf[i]));
-		}
+		return (byte) (fifo.get() & 0xff);
 	}
 
 	@Override
@@ -109,24 +92,25 @@ public class Serial extends Communication {
 		if (mSerial.isConnected()) {
 			mSerial.write(arr, arr.length);
 		} else {
-			Toast.makeText(context, "Write error - not connected", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "Serial port Write error - not connected", Toast.LENGTH_SHORT).show();
 		}
-
 	}
 
 	@Override
 	public void Close() {
 		Connected = false;
+		loopStop = true;
 		mSerial.end();
-		Toast.makeText(context, "disconnect", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void Disable() {
 		Connected = false;
+		loopStop = true;
 		mSerial.end();
 		context.unregisterReceiver(mUsbReceiver);
-		Toast.makeText(context, "disconnect", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
 
 	}
 
@@ -138,16 +122,52 @@ public class Serial extends Communication {
 			if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
 				Toast.makeText(context, "USB_DEVICE_ATTACHED", Toast.LENGTH_LONG).show();
 
-				// mSerial.usbAttached(intent);
+				mSerial.usbAttached(intent);
 				// mSerial.begin(SERIAL_BAUDRATE);
 				// mainloop();
 
 			} else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
 				Toast.makeText(context, "USB_DEVICE_DETACHED", Toast.LENGTH_LONG).show();
 				Connected = false;
-				// mSerial.usbDetached(intent);
-				// mSerial.end();
-				// mStop = true;
+				mSerial.usbDetached(intent);
+				mSerial.end();
+				loopStop = true;
+			}
+		}
+	};
+
+	private void readToBuffer() {
+		Connected = mSerial.isConnected();
+		// [FTDriver] Create Read Buffer
+		byte[] rbuf = new byte[4096]; // 1byte <--slow-- [Transfer Speed]
+										// --fast-->
+										// 4096 byte
+		if (mSerial.isConnected()) {
+			// [FTDriver] Read from USB Serial
+			int len = mSerial.read(rbuf);
+
+			// Log.d("aaa", "ReadtoBuffer:" + String.valueOf(rbuf));
+			for (int i = 0; i < len; i++)
+				fifo.put(Integer.valueOf(rbuf[i]));
+
+			//Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
+		}
+	}
+
+	private void startMainLoop() {
+		new Thread(mLoop).start();
+	}
+
+	private Runnable mLoop = new Runnable() {
+		@Override
+		public void run() {
+			while (!loopStop) {// this is the main loop for transferring
+				readToBuffer();
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	};

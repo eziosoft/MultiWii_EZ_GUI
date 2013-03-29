@@ -204,5 +204,7 @@
     <string name="VerticalSpeed">Vertical speed</string>
     <string name="UseFTDISerial">Use Serial Port for MultiWii(Android 3.1 and up)</string>
     <string name="Dashboard3">Dashboard 3</string>
+    <string name="SerialPort">Serial Port</string>
+    <string name="SerialPortBaudRate">Serial Port baud rate</string>
 
 </resources>

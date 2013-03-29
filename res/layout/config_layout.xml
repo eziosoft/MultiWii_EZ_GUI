@@ -80,11 +80,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/disableBTonExit" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/smalltittle"
+                android:text="@string/SerialPort"
+                android:textColor="@color/smalltittleText" />
+
             <CheckBox
                 android:id="@+id/checkBoxUseFTDISerial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/UseFTDISerial" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SerialPortBaudRate" />
+
+            <EditText
+                android:id="@+id/editTextSerialPortBaudRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="do NOT leave empty or 0 - default 115200"
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="match_parent"

@@ -96,12 +96,18 @@ public class App extends Application implements Sensors.Listener {
 	private static String COPYFRSKYTOMW = "COPYFRSKYTOMW";
 	public boolean CopyFrskyToMW;
 
-	private static String COMMUNICATION_TYPE = "CommunicationType";
+	private static String COMMUNICATION_TYPE_MW = "CommunicationTypeMW";
 	public static int COMMUNICATION_TYPE_BT = 0;
 	public static int COMMUNICATION_TYPE_SERIAL = 1;
-	public int CommunicationType = COMMUNICATION_TYPE_BT;
+	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
-	private static String COMMUNICATION_TYPE_FRSKY = "CommunicationType";
+	public static String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW";
+	public String SerialPortBaudRateMW = "115200";
+
+	public static String SERIAL_PORT_BAUD_RATE_FRSKY = "SerialPortBaudRateFrSky";
+	public String SerialPortBaudRateFrSky = "9600";
+
+	private static String COMMUNICATION_TYPE_FRSKY = "CommunicationTypeFrSky";
 	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
 
 	private static String RADIOMODE = "RadioMode";
@@ -201,11 +207,11 @@ public class App extends Application implements Sensors.Listener {
 
 		ForceLanguage();
 
-		if (CommunicationType == COMMUNICATION_TYPE_BT) {
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
 			comm = new BT1(getApplicationContext());
 		}
 
-		if (CommunicationType == COMMUNICATION_TYPE_SERIAL) {
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL) {
 			comm = new Serial(getApplicationContext());
 		}
 
@@ -276,7 +282,11 @@ public class App extends Application implements Sensors.Listener {
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 		MapZoomLevel = prefs.getInt(MAPZOOMLEVEL, 9);
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
-		CommunicationType = prefs.getInt(COMMUNICATION_TYPE, COMMUNICATION_TYPE_BT);
+		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT);
+		CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY, COMMUNICATION_TYPE_BT);
+		SerialPortBaudRateMW = prefs.getString(SERIAL_PORT_BAUD_RATE_MW, "115200");
+		SerialPortBaudRateFrSky = prefs.getString(SERIAL_PORT_BAUD_RATE_FRSKY, "9600");
+
 	}
 
 	public void SaveSettings(boolean quiet) {
@@ -303,7 +313,8 @@ public class App extends Application implements Sensors.Listener {
 		editor.putBoolean(REVERSEROLL, ReverseRoll);
 		editor.putInt(MAPZOOMLEVEL, MapZoomLevel);
 		editor.putInt(MAPCENTERPERIOD, MapCenterPeriod);
-		editor.putInt(COMMUNICATION_TYPE, CommunicationType);
+		editor.putInt(COMMUNICATION_TYPE_MW, CommunicationTypeMW);
+		editor.putString(SERIAL_PORT_BAUD_RATE_MW, SerialPortBaudRateMW);
 		editor.commit();
 
 		if (!quiet) {

@@ -65,6 +65,7 @@ public class ConfigActivity extends SherlockActivity {
 	EditText EditTextVoltageAlarm;
 	EditText EditTextRefreshRate;
 	EditText EditTextMapCenterPeriod;
+	EditText EditTextSerialBaudRateMW;
 
 	private static final int REQUEST_CONNECT_DEVICE_MULTIWII = 1;
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
@@ -138,6 +139,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxReverseRollDirection = (CheckBox) findViewById(R.id.checkBoxReverseRollDirection);
 		EditTextMapCenterPeriod = (EditText) findViewById(R.id.EditTextMapCenterPeriod);
 		CheckBoxUseFTDISerial = (CheckBox) findViewById(R.id.checkBoxUseFTDISerial);
+		EditTextSerialBaudRateMW = (EditText) findViewById(R.id.editTextSerialPortBaudRate);
 
 	}
 
@@ -177,7 +179,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
-		CheckBoxUseFTDISerial.setChecked(app.CommunicationType == App.COMMUNICATION_TYPE_SERIAL);
+		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL);
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
 			CheckBoxUseFTDISerial.setVisibility(View.GONE);
 		}
@@ -196,6 +198,7 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 		EditTextMapCenterPeriod.setText(String.valueOf(app.MapCenterPeriod));
+		EditTextSerialBaudRateMW.setText(app.SerialPortBaudRateMW);
 
 		app.Say(getString(R.string.Config));
 
@@ -250,10 +253,12 @@ public class ConfigActivity extends SherlockActivity {
 		app.MapCenterPeriod = Integer.parseInt(EditTextMapCenterPeriod.getText().toString());
 
 		if (CheckBoxUseFTDISerial.isChecked()) {
-			app.CommunicationType = App.COMMUNICATION_TYPE_SERIAL;
+			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_SERIAL;
 		} else {
-			app.CommunicationType = App.COMMUNICATION_TYPE_BT;
+			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT;
 		}
+
+		app.SerialPortBaudRateMW = EditTextSerialBaudRateMW.getText().toString();
 
 		app.SaveSettings(false);
 

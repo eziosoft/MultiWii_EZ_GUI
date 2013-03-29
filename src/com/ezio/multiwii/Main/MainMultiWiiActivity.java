@@ -181,30 +181,41 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void Connect(String MacAddress) {
-		if (!app.MacAddress.equals("")) {
-			app.comm.Connect(app.MacAddress);
-			app.Say(getString(R.string.menu_connect));
-		} else {
-			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
+		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL) {
+			app.comm.Connect(app.SerialPortBaudRateMW);
 		}
-		try {
-			mHandler.removeCallbacksAndMessages(null);
-		} catch (Exception e) {
 
+		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT) {
+			if (!app.MacAddress.equals("")) {
+				app.comm.Connect(app.MacAddress);
+				app.Say(getString(R.string.menu_connect));
+			} else {
+				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
+			}
+			try {
+				mHandler.removeCallbacksAndMessages(null);
+			} catch (Exception e) {
+			}
 		}
 	}
 
 	public void ConnectFrsky(String MacAddress) {
-		if (!app.MacAddressFrsky.equals("")) {
-			app.commFrsky.Connect(app.MacAddressFrsky);
-			app.Say(getString(R.string.Connect_frsky));
-		} else {
-			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
+		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL) {
+			app.comm.Connect(app.SerialPortBaudRateFrSky);
 		}
-		try {
-			mHandler.removeCallbacksAndMessages(null);
-		} catch (Exception e) {
 
+		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT) {
+			if (!app.MacAddressFrsky.equals("")) {
+				app.commFrsky.Connect(app.MacAddressFrsky);
+				app.Say(getString(R.string.Connect_frsky));
+			} else {
+				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
+			}
+			try {
+				mHandler.removeCallbacksAndMessages(null);
+			} catch (Exception e) {
+
+			}
 		}
 	}
 
@@ -302,7 +313,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), Dashboard2Activity.class));
 	}
-	
+
 	public void Dashboard3OnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);

@@ -51,7 +51,7 @@ public class Dashboard2Activity extends Activity {
 
 			// float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax +
 			// app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
-			v.Set(app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, a * app.mw.angx, app.mw.head, app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+			v.Set(app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, a * app.mw.angx, app.mw.head, app.mw.vario/100f, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
 			app.Frequentjobs();
 			app.mw.SendRequest();

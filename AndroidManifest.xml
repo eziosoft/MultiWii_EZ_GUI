@@ -24,6 +24,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            
+            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+            
         </activity>
         <activity
             android:name=".config.DeviceListActivity"
@@ -131,7 +138,11 @@
             android:name=".about.InfoActivity"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
-        <activity android:name=".dashboard.dashboard3.Dashboard3Activity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
+        <activity
+            android:name=".dashboard.dashboard3.Dashboard3Activity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

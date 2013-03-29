@@ -31,15 +31,18 @@ public class Dashboard3Activity extends Activity {
 	MapOfflineCopterOverlay copter;
 	MapOfflineCirclesOverlay circles;
 
+	HorizonView horizonView;
+	AltitudeView altitudeView;
+	HeadingView headingView;
+	VarioView varioView;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frsky.ProcessSerialData(false);
-		
 
-			
 			if (app.D) {
 				app.mw.GPS_latitude += random.nextInt(200) - 50;// for
 				// simulation
@@ -71,13 +74,24 @@ public class Dashboard3Activity extends Activity {
 					state += " " + app.mw.buttonCheckboxLabel[i];
 				}
 			}
-			
+
 			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
 
 			circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 			mapView.postInvalidate();
-			
-			
+
+			// ///////////////////////
+			int a = 1; // used for reverce roll
+			if (app.ReverseRoll) {
+				a = -1;
+			}
+			horizonView.Set(-app.mw.angx*a, app.mw.angy);
+			altitudeView.Set(app.mw.alt);
+			headingView.Set(app.mw.head);
+			varioView.Set(app.mw.vario/100f);
+
+			// ///////////////////////
+
 			app.Frequentjobs();
 			app.mw.SendRequest();
 			if (!killme)
@@ -102,15 +116,20 @@ public class Dashboard3Activity extends Activity {
 
 		myMapController = mapView.getController();
 		myMapController.setZoom(app.MapZoomLevel);
-		
+
 		circles = new MapOfflineCirclesOverlay(getApplicationContext());
 		copter = new MapOfflineCopterOverlay(getApplicationContext());
 
 		mapView.getOverlays().add(copter);
 		mapView.getOverlays().add(circles);
 
+		horizonView = (HorizonView) findViewById(R.id.horizonView1);
+		varioView = (VarioView) findViewById(R.id.varioView1);
+		headingView = (HeadingView) findViewById(R.id.headingView1);
+		altitudeView = (AltitudeView) findViewById(R.id.altitudeView1);
+
 	}
-	
+
 	private void CenterLocation(GeoPoint centerGeoPoint) {
 		myMapController.animateTo(centerGeoPoint);
 	};
