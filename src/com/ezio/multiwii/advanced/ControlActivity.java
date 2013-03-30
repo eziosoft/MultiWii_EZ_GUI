@@ -16,13 +16,6 @@
  */
 package com.ezio.multiwii.advanced;
 
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
-import com.ezio.multiwii.app.App;
-import com.ezio.multiwii.radio.StickView;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +25,10 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.SeekBar;
+
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.radio.StickView;
 
 public class ControlActivity extends Activity {
 

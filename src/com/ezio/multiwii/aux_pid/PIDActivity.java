@@ -51,10 +51,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.menu;
-import com.ezio.multiwii.R.string;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 

@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
-import com.ezio.multiwii.helpers.LowPassFilter;
 import com.ezio.multiwii.mapoffline.MapOfflineCirclesOverlay;
 import com.ezio.multiwii.mapoffline.MapOfflineCopterOverlay;
 

@@ -16,15 +16,14 @@
  */
 package com.ezio.multiwii.about;
 
-import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.app.App;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import com.ezio.multiwii.R;
+import com.ezio.multiwii.app.App;
 
 public class InfoActivity extends Activity {
 

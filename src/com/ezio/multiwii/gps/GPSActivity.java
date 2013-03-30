@@ -27,9 +27,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.waypoints.Waypoint;
 

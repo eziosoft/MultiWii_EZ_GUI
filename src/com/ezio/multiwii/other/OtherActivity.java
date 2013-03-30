@@ -23,9 +23,6 @@ import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.id;
-import com.ezio.multiwii.R.layout;
-import com.ezio.multiwii.R.string;
 import com.ezio.multiwii.app.App;
 
 public class OtherActivity extends SherlockActivity {

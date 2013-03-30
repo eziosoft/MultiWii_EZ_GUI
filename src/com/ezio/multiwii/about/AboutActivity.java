@@ -21,7 +21,6 @@ import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
-import com.ezio.multiwii.R.layout;
 
 public class AboutActivity extends SherlockActivity {
 
