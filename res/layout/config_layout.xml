@@ -159,12 +159,14 @@
                 android:layout_height="wrap_content"
                 android:background="@color/smalltittle"
                 android:text="@string/ProtocolVersion"
-                android:textColor="@color/smalltittleText" />
+                android:textColor="@color/smalltittleText"
+                android:visibility="gone" />
 
             <RadioGroup
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <RadioButton
                     android:id="@+id/radioButtonProtocol20"
