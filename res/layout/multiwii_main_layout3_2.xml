@@ -102,6 +102,16 @@
                     android:layout_height="wrap_content" >
 
                     <Button
+                        android:id="@+id/Button02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="RawDataOnClick"
+                        android:text="@string/RawData" />
+
+                    <Button
                         android:id="@+id/Button01"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

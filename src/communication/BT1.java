@@ -52,8 +52,8 @@ public class BT1 extends Communication {
 			return;
 		}
 
-		// if (D)
-		// Log.d(TAG, "+++ DONE IN ON CREATE, GOT LOCAL BT ADAPTER +++");
+		 if (D)
+		 Log.d(TAG, "+++ DONE IN ON CREATE, GOT LOCAL BT ADAPTER +++");
 
 	}
 

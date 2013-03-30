@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -66,6 +67,8 @@ public class ConfigActivity extends SherlockActivity {
 	EditText EditTextRefreshRate;
 	EditText EditTextMapCenterPeriod;
 	EditText EditTextSerialBaudRateMW;
+
+	LinearLayout LayoutSerialFTDI;
 
 	private static final int REQUEST_CONNECT_DEVICE_MULTIWII = 1;
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
@@ -140,6 +143,7 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextMapCenterPeriod = (EditText) findViewById(R.id.EditTextMapCenterPeriod);
 		CheckBoxUseFTDISerial = (CheckBox) findViewById(R.id.checkBoxUseFTDISerial);
 		EditTextSerialBaudRateMW = (EditText) findViewById(R.id.editTextSerialPortBaudRate);
+		LayoutSerialFTDI = (LinearLayout) findViewById(R.id.LinearLayoutSerialPort);
 
 	}
 
@@ -181,7 +185,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
 		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL);
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
-			CheckBoxUseFTDISerial.setVisibility(View.GONE);
+			LayoutSerialFTDI.setVisibility(View.GONE);
 		}
 
 		MacAddressBTTV.setText("MAC:" + app.MacAddress);

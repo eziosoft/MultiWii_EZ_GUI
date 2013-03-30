@@ -42,12 +42,24 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="Dashboard2OnClick"
                         android:text="@string/dashboard2" />
+
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/Button02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="Dashboard3OnClick"
+                        android:text="@string/Dashboard3"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/button3"
@@ -59,31 +71,12 @@
                         android:onClick="MapOnClick"
                         android:text="@string/Map" />
 
-                    <Button
-                        android:id="@+id/button4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="RadioOnClick"
-                        android:text="@string/Radio" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
-
-                    <Button
-                        android:id="@+id/button5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="GraphsOnClick"
-                        android:text="@string/Graphs" />
 
                     <Button
                         android:id="@+id/button6"
@@ -94,6 +87,17 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="MotorsOnClick"
                         android:text="@string/Motors" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="RadioOnClick"
+                        android:text="@string/Radio" />
+
                 </TableRow>
 
                 <TableRow
@@ -112,14 +116,14 @@
                         android:text="@string/GPS" />
 
                     <Button
-                        android:id="@+id/Button01"
+                        android:id="@+id/button5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="RawDataOnClick"
-                        android:text="@string/RawData" />
+                        android:onClick="GraphsOnClick"
+                        android:text="@string/Graphs" />
 
                 </TableRow>
 
@@ -127,16 +131,6 @@
                     android:id="@+id/tableRow5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
-
-                    <Button
-                        android:id="@+id/Button02"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="Dashboard3OnClick"
-                        android:text="@string/Dashboard3" />
 
                 </TableRow>
 
