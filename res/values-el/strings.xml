@@ -191,4 +191,10 @@
   <string name="EnterFileName">Πληκτρολογήστε όνομα αρχείου</string>
   <string name="ReverseRollDirection">Ρολό αντίστροφη κατεύθυνση</string>
   <string name="SetAltitude">Καθορισμένο ύψος σε cm:</string>
+  <string name="MapCenterPeriod">Χάρτης κέντρο περίοδο</string>
+  <string name="VerticalSpeed">Κατακόρυφης ταχύτητας·</string>
+  <string name="UseFTDISerial">Χρήση σειριακή θύρα για MultiWii</string>
+  <string name="Dashboard3">Ταμπλό 3</string>
+  <string name="SerialPort">Σειριακή θύρα</string>
+  <string name="SerialPortBaudRate">Σειριακή ταχύτητα baud</string>
 </resources>

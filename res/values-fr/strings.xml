@@ -28,7 +28,6 @@
   <string name="PhoneMag">PhoneMag</string>
   <string name="PitchRollCircleView">Vue du cercle Tangage/Roulis</string>
   <string name="pointFrontHelp">Orienter le multirotor vers l\'avant, comparer l\'indication de la boussole du téléphone et du multirotor. Indique l\'avant du multirotor, indépendamment de l\'emplacement du téléphone.</string>
-  <string name="TTS">conversion texte/parole</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Distance par rapport au point de retour(m)</string>
   <string name="GPS_directionToHome">Distance par rapport au point de retour</string>

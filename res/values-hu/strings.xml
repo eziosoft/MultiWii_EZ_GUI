@@ -23,7 +23,6 @@
   <string name="Point_multirotor_front">Multirotor felé mutat</string>
   <string name="PitchRollCircleView">G-ball</string>
   <string name="pointFrontHelp">A \"multirotor felé mutat\" beállítás során az iránytű a multirotor irányát mutatja a telefonhoz képest</string>
-  <string name="TTS">TSzöveg kimondás</string>
   <string name="GPS_directionToHome">Home iránya</string>
   <string name="GPS_update">Frissít</string>
   <string name="StartLogging">Adatrögzítés kezdete</string>

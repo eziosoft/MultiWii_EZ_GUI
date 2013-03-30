@@ -28,7 +28,6 @@
   <string name="PhoneMag">MAG del Teléfono</string>
   <string name="PitchRollCircleView">Ver circulo de Alerón Elevador</string>
   <string name="pointFrontHelp">Apunta al frente del multirotor y compara las lecturas de la brújula del multirotor y del teléfono indicando la parte delantera independiente de la ubicación del teléfono.</string>
-  <string name="TTS">Texto a voz</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Distancia a casa(m)</string>
   <string name="GPS_directionToHome">Dirección a casa</string>

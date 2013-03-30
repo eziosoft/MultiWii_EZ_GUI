@@ -28,7 +28,6 @@
   <string name="PhoneMag">Mag (Phone)</string>
   <string name="PitchRollCircleView">Nick/Roll Kreisansicht</string>
   <string name="pointFrontHelp">\"In Blickrichtung des Multirotors\" vergleicht die Kompasswerte von deinem Android und dem Multirotor. Zeigt an in welche Richtung der Multirotor gerade zeigt.</string>
-  <string name="TTS">Sprachausgabe</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Entfernung vom Start</string>
   <string name="GPS_directionToHome">Richtung zum Start</string>

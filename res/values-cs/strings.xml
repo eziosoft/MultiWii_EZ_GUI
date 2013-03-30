@@ -26,7 +26,6 @@
   <string name="PhoneMag">Kompas tel.</string>
   <string name="PitchRollCircleView">Kruhový náhled Stoup/Náklon</string>
   <string name="pointFrontHelp">Směr předku copteru porovnává data z kompasu telefonu a kopteru. Ukazuje směr předeku kopteru.</string>
-  <string name="TTS">Mluvení</string>
   <string name="GPS_directionToHome">Směr domů</string>
   <string name="GPS_numSat">Počet sat.</string>
   <string name="GPS_fix">Fixace</string>

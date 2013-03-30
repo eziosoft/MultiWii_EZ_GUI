@@ -28,7 +28,6 @@
   <string name="PhoneMag">TelefoonMag</string>
   <string name="PitchRollCircleView">Pitch Roll cirkel weergeven</string>
   <string name="pointFrontHelp">Multirotor voorzijde aanwijzen vergelijkt de kompas lezingen uit de telefoon en multicopter. Geeft de multicopter vooruit aan ongeacht de locatie van de telefoon.</string>
-  <string name="TTS">Tekst uitspreken</string>
   <string name="GPS">GPS</string>
   <string name="GPS_directionToHome">Richting naar Home</string>
   <string name="GPS_numSat">NumSat</string>

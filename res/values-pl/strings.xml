@@ -28,7 +28,7 @@
   <string name="PhoneMag">Kompas</string>
   <string name="PitchRollCircleView">Pitch-Roll Widok Kołowy</string>
   <string name="pointFrontHelp">Wskazuje realne ustawienie modelu bez względu na ustawienie telefonu dzięki różnicy we wskazaniach kompasu telefonu i modelu.</string>
-  <string name="TTS">Text to speach</string>
+  <string name="TTS">Tekst na mowę</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Odległość do domu(m)</string>
   <string name="GPS_directionToHome">Kierunek do domu</string>
@@ -191,4 +191,9 @@
   <string name="ReverseRollDirection">Odwróć roll na panelu 2</string>
   <string name="SetAltitude">Ustaw wysokość w cm:</string>
   <string name="MapCenterPeriod">Okres centrowania mapy</string>
+  <string name="VerticalSpeed">Prędkość pionowa</string>
+  <string name="UseFTDISerial">Użyj port szeregowy dla MultiWii</string>
+  <string name="Dashboard3">Panel 3</string>
+  <string name="SerialPort">Port szeregowy</string>
+  <string name="SerialPortBaudRate">Szybkość transmisji portu szeregowego</string>
 </resources>
