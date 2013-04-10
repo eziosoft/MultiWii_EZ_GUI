@@ -59,7 +59,7 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="Dashboard3OnClick"
                         android:text="@string/Dashboard3"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <Button
                         android:id="@+id/button3"
