@@ -196,6 +196,7 @@ public class WaypointActivity extends Activity {
 		mHandler.postDelayed(update, app.RefreshRate);
 
 		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 	}
 

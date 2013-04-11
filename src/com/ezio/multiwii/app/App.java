@@ -47,12 +47,7 @@ public class App extends Application implements Sensors.Listener {
 	public String[] TestersIDs = { "ffffffff-81b6-215f-0033-c58700000000", "00000000-42ad-8ad2-c75d-308a64cc2b6a" };
 	public boolean D = false; // debug
 	public String TAG = "EZGUI";
-	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg"; // put
-	// your
-	// debug
-	// key
-	// here
-
+	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg";
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
@@ -268,7 +263,12 @@ public class App extends Application implements Sensors.Listener {
 		MacAddressFrsky = prefs.getString(MACADDERSSFRSKY, "");
 		ConnectOnStart = prefs.getBoolean(CONNECTONSTART, false);
 		AltCorrection = prefs.getBoolean(ALTCORRECTION, false);
-		AdvancedFunctions = prefs.getBoolean(ADVANCEDFINCTIONS, false);
+		// AdvancedFunctions = prefs.getBoolean(ADVANCEDFINCTIONS, false);
+
+		AdvancedFunctions = (Functions.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), TestersIDs));
+		if (AdvancedFunctions)
+			Toast.makeText(getApplicationContext(), "You are a tester", Toast.LENGTH_SHORT).show();
+
 		DisableBTonExit = prefs.getBoolean(DISABLEBTONEXIT, true);
 		_1Gtemp = prefs.getInt(G1, 256);
 		ForceLanguage = prefs.getString(FORCELANGUAGE, "");
@@ -299,7 +299,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putString(MACADDERSSFRSKY, MacAddressFrsky);
 		editor.putBoolean(CONNECTONSTART, ConnectOnStart);
 		editor.putBoolean(ALTCORRECTION, AltCorrection);
-		editor.putBoolean(ADVANCEDFINCTIONS, AdvancedFunctions);
+		// editor.putBoolean(ADVANCEDFINCTIONS, AdvancedFunctions);
 		editor.putBoolean(DISABLEBTONEXIT, DisableBTonExit);
 		editor.putInt(G1, mw._1G);
 		editor.putString(FORCELANGUAGE, ForceLanguage);
