@@ -8,6 +8,8 @@ import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -36,8 +38,6 @@ public class Dashboard3Activity extends Activity {
 	AltitudeView altitudeView;
 	HeadingView headingView;
 	VarioView varioView;
-	
-	
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -88,10 +88,10 @@ public class Dashboard3Activity extends Activity {
 			if (app.ReverseRoll) {
 				a = -1;
 			}
-			horizonView.Set(-app.mw.angx*a, app.mw.angy);
-			altitudeView.Set(app.mw.alt*10);
+			horizonView.Set(-app.mw.angx * a, app.mw.angy);
+			altitudeView.Set(app.mw.alt * 10);
 			headingView.Set(app.mw.head);
-			varioView.Set(app.mw.vario*0.6f);
+			varioView.Set(app.mw.vario * 0.6f);
 
 			// ///////////////////////
 
@@ -141,9 +141,25 @@ public class Dashboard3Activity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		app.Say(getString(R.string.Motors));
+		app.Say(getString(R.string.Dashboard3));
 		killme = false;
-		mHandler.postDelayed(update, app.RefreshRate);
+
+		if (Functions.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), app.TestersIDs)) {
+			mHandler.postDelayed(update, app.RefreshRate);
+		} else {
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+
+			dlgAlert.setMessage("This is not ready yet");
+			dlgAlert.setTitle("NOT READY YET");
+			dlgAlert.setPositiveButton("OK", null);
+			dlgAlert.setCancelable(false);
+			dlgAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			});
+			dlgAlert.create().show();
+		}
 
 	}
 
