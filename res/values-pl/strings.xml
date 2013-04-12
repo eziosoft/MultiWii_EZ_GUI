@@ -192,7 +192,7 @@
   <string name="SetAltitude">Ustaw wysokość w cm:</string>
   <string name="MapCenterPeriod">Okres centrowania mapy</string>
   <string name="VerticalSpeed">Prędkość pionowa</string>
-  <string name="UseFTDISerial">Użyj port szeregowy dla MultiWii</string>
+  <string name="UseFTDISerial">Użyj port szeregowy dla MultiWii (zrestartuj applikacje zanim połączysz)</string>
   <string name="Dashboard3">Panel 3</string>
   <string name="SerialPort">Port szeregowy</string>
   <string name="SerialPortBaudRate">Szybkość transmisji portu szeregowego</string>

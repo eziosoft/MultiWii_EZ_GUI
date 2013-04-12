@@ -202,7 +202,7 @@
     <string name="SetAltitude">Set altitude in cm:</string>
     <string name="MapCenterPeriod">Map center period</string>
     <string name="VerticalSpeed">Vertical speed</string>
-    <string name="UseFTDISerial">Use Serial Port for MultiWii</string>
+    <string name="UseFTDISerial">Use Serial Port for MultiWii (please restart the app before you connect)</string>
     <string name="Dashboard3">Dashboard 3</string>
     <string name="SerialPort">Serial Port</string>
     <string name="SerialPortBaudRate">Serial Port baud rate</string>
