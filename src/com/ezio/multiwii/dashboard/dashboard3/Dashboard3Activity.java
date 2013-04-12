@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.ezio.multiwii.R;
@@ -39,51 +40,59 @@ public class Dashboard3Activity extends Activity {
 	HeadingView headingView;
 	VarioView varioView;
 
+	long timer1 = 0;
+
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
 
-			app.mw.ProcessSerialData(app.loggingON);
-			app.frsky.ProcessSerialData(false);
+			if (timer1 < System.currentTimeMillis()) {
+				app.mw.ProcessSerialData(app.loggingON);
+				app.frsky.ProcessSerialData(false);
 
-			if (app.D) {
-				app.mw.GPS_latitude += random.nextInt(200) - 50;// for
-				// simulation
-				app.mw.GPS_longitude += random.nextInt(100) - 50;// for
-				// simulation
-				app.mw.GPS_fix = 1;
-
-				app.mw.head++;
-			}
-
-			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
-
-			if (centerStep >= app.MapCenterPeriod) {
-				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
-					CenterLocation(g);
-				} else {
-					CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
+				if (app.D) {
+					app.mw.GPS_latitude += random.nextInt(200) - 50;// simulation
+					app.mw.GPS_longitude += random.nextInt(100) - 50;// simulation
+					app.mw.GPS_fix = 1;
+					app.mw.head++;
 				}
-				centerStep = 0;
-			}
-			centerStep++;
 
-			GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
-			GeoPoint gPostionHold = new GeoPoint(app.mw.Waypoints[16].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[16].getGeoPoint().getLongitudeE6());
+				GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			String state = "";
-			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
-				if (app.mw.ActiveModes[i]) {
-					state += " " + app.mw.buttonCheckboxLabel[i];
+				if (centerStep >= app.MapCenterPeriod) {
+					if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
+						CenterLocation(g);
+					} else {
+						CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
+					}
+					centerStep = 0;
 				}
+				centerStep++;
+
+				GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
+				GeoPoint gPostionHold = new GeoPoint(app.mw.Waypoints[16].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[16].getGeoPoint().getLongitudeE6());
+
+				String state = "";
+				for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
+					if (app.mw.ActiveModes[i]) {
+						state += " " + app.mw.buttonCheckboxLabel[i];
+					}
+				}
+
+				copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+
+				circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
+				mapView.postInvalidate();
+
+				app.Frequentjobs();
+				app.mw.SendRequest();
+
+				timer1 = System.currentTimeMillis() + app.RefreshRate;
+				Log.d("aaa","1");
 			}
-
-			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
-
-			circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
-			mapView.postInvalidate();
 
 			// ///////////////////////
+			Log.d("aaa","2");
 			int a = 1; // used for reverce roll
 			if (app.ReverseRoll) {
 				a = -1;
@@ -95,10 +104,8 @@ public class Dashboard3Activity extends Activity {
 
 			// ///////////////////////
 
-			app.Frequentjobs();
-			app.mw.SendRequest();
 			if (!killme)
-				mHandler.postDelayed(update, app.RefreshRate);
+				mHandler.postDelayed(update, 20);
 
 		}
 	};
@@ -149,7 +156,7 @@ public class Dashboard3Activity extends Activity {
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-			dlgAlert.setMessage("This is not ready yet");
+			dlgAlert.setMessage("coming soon");
 			dlgAlert.setTitle("NOT READY YET");
 			dlgAlert.setPositiveButton("OK", null);
 			dlgAlert.setCancelable(false);
