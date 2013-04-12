@@ -30,6 +30,7 @@
   <string name="pointFrontHelp">多軸飛行器機頭方向從手機和multicopte地磁計讀數來比較
 
  多軸飛行器不管前方指示的位置在手機裡</string>
+  <string name="TTS">文字轉語音</string>
   <string name="GPS">衛星定位系統</string>
   <string name="GPS_distanceToHome">離家距離(米)</string>
   <string name="GPS_directionToHome">家的方向</string>
@@ -189,4 +190,9 @@
   <string name="EnterFileName">輸入檔案名稱</string>
   <string name="ReverseRollDirection">反轉滾動方向</string>
   <string name="SetAltitude">設定高度為公分</string>
+  <string name="VerticalSpeed">爬升速度</string>
+  <string name="UseFTDISerial">使用串口給MultiWii</string>
+  <string name="Dashboard3">控制板3</string>
+  <string name="SerialPort">串口</string>
+  <string name="SerialPortBaudRate">串口波特率</string>
 </resources>

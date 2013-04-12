@@ -88,12 +88,12 @@ public class Dashboard3Activity extends Activity {
 				app.mw.SendRequest();
 
 				timer1 = System.currentTimeMillis() + app.RefreshRate;
-				Log.d("aaa","1");
+				Log.d("aaa", "1");
 			}
 
 			// ///////////////////////
-			Log.d("aaa","2");
-			int a = 1; // used for reverce roll
+			Log.d("aaa", "2");
+			int a = 1; // used for reverce roll in artificial horyzon
 			if (app.ReverseRoll) {
 				a = -1;
 			}
@@ -101,7 +101,6 @@ public class Dashboard3Activity extends Activity {
 			altitudeView.Set(app.mw.alt * 10);
 			headingView.Set(app.mw.head);
 			varioView.Set(app.mw.vario * 0.6f);
-
 			// ///////////////////////
 
 			if (!killme)
@@ -167,7 +166,6 @@ public class Dashboard3Activity extends Activity {
 			});
 			dlgAlert.create().show();
 		}
-
 	}
 
 	@Override
