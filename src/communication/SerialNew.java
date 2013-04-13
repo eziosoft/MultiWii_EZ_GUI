@@ -17,6 +17,8 @@
 package communication;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -27,16 +29,37 @@ import android.widget.Toast;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
+import com.hoho.android.usbserial.util.SerialInputOutputManager;
+
 
 public class SerialNew extends Communication {
+
+	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+
+	private SerialInputOutputManager mSerialIoManager;
+
+	private final SerialInputOutputManager.Listener mListener = new SerialInputOutputManager.Listener() {
+
+		@Override
+		public void onRunError(Exception e) {
+			Log.d(TAG, "Runner stopped.");
+		}
+
+		@Override
+		public void onNewData(final byte[] data) {
+			for (int i = 0; i < data.length; i++)
+				fifo.put(Integer.valueOf(data[i]));
+			Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
+
+		}
+	};
 
 	private UsbManager mUsbManager;
 	UsbSerialDriver mSerial;
 
 	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
-	boolean loopStop = false;
-
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	public SerialNew(Context context) {
 		super(context);
 		mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
@@ -68,6 +91,7 @@ public class SerialNew extends Communication {
 				return;
 			}
 			Toast.makeText(context, "Serial device: " + mSerial, Toast.LENGTH_LONG).show();
+			onDeviceStateChange();
 		}
 	}
 
@@ -75,16 +99,15 @@ public class SerialNew extends Communication {
 	public void Connect(String address) {
 
 		try {
-			mSerial.setBaudRate(Integer.parseInt(address));
+			//mSerial.setBaudRate(Integer.parseInt(address));
+			mSerial.setParameters(Integer.parseInt(address), UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
+			//setParameters(mBaudRate, mDataBits, mStopBits, mParity);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Connected = true;
-		startMainLoop();
 	}
 
 	@Override
@@ -105,7 +128,6 @@ public class SerialNew extends Communication {
 			try {
 				mSerial.write(arr, 0);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -117,66 +139,53 @@ public class SerialNew extends Communication {
 
 	@Override
 	public void Close() {
-		Connected = false;
-		loopStop = true;
-		try {
-			mSerial.close();
-			Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		stopIoManager();
+		if (mSerial != null) {
+			try {
+				mSerial.close();
+			} catch (IOException e) {
+				// Ignore.
+			}
+			// mSerial = null;
 		}
+		Connected = false;
+
+		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
 
 	}
 
 	@Override
 	public void Disable() {
-		Connected = false;
-		loopStop = true;
+
 		try {
 			mSerial.close();
 			Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
+			Connected = false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
-	private void readToBuffer() {
-		byte[] rbuf = new byte[4096];
-
-		if (Connected) {
-
-			int len = 0;
-			try {
-				len = mSerial.read(rbuf, 0);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			// Log.d("aaa", "ReadtoBuffer:" + String.valueOf(rbuf));
-			for (int i = 0; i < len; i++)
-				fifo.put(Integer.valueOf(rbuf[i]));
-			// Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
+	private void stopIoManager() {
+		if (mSerialIoManager != null) {
+			Log.i(TAG, "Stopping io manager ..");
+			mSerialIoManager.stop();
+			mSerialIoManager = null;
 		}
 	}
 
-	private void startMainLoop() {
-		new Thread(mLoop).start();
+	private void startIoManager() {
+		if (mSerial != null) {
+			Log.i(TAG, "Starting io manager ..");
+			mSerialIoManager = new SerialInputOutputManager(mSerial, mListener);
+			mExecutor.submit(mSerialIoManager);
+		}
 	}
 
-	private Runnable mLoop = new Runnable() {
-		@Override
-		public void run() {
-			while (!loopStop) {// this is the main loop for transferring
-				readToBuffer();
-				try {
-					Thread.sleep(5);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	};
+	private void onDeviceStateChange() {
+		stopIoManager();
+		startIoManager();
+	}
+
 }

@@ -41,7 +41,7 @@ public abstract class MultirotorData {
 	public int byteRC_RATE, byteRC_EXPO, byteRollPitchRate, byteYawRate, byteDynThrPID;
 	public int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
 
-	public int version, versionMisMatch ;
+	public int version, versionMisMatch;
 	public float gx, gy, gz, ax, ay, az, magx, magy, magz, baro, head, angx, angy, debug1, debug2, debug3, debug4;
 	public int GPS_distanceToHome, GPS_directionToHome;
 	public int GPS_numSat, GPS_fix, GPS_update;
@@ -108,6 +108,8 @@ public abstract class MultirotorData {
 	public static final int MSP_SET_WP = 209;
 	public static final int MSP_SELECT_SETTING = 210;
 	public static final int MSP_SET_HEAD = 211; // rate
+
+	public static final int MSP_SET_MOTOR = 214;
 
 	public static final int MSP_BIND = 240;
 
@@ -199,8 +201,10 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate);
 
 	public abstract void SendRequestMSP_ENABLE_FRSKY();
-	
+
 	public abstract void SendRequestMSP_SET_HEAD(int heading);
+	
+	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
 	// ///////////////////////////////////////////////
 

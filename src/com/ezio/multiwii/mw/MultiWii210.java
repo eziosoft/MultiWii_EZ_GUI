@@ -388,10 +388,10 @@ public class MultiWii210 extends MultirotorData {
 					Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
 					Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
 					for (i = 0; i < dataSize; i++) {
-						if (i != 0) {
-							Log.e("Multiwii protocol"," ");
-						}
-						//Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
+						// if (i != 0) {
+						// Log.e("Multiwii protocol"," ");
+						// }
+						// Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
 					}
 					Log.e("Multiwii protocol", "} [" + c + "]");
 					Log.e("Multiwii protocol", new String(inBuf, 0, dataSize));
@@ -616,11 +616,8 @@ public class MultiWii210 extends MultirotorData {
 	public void SendRequestGetWayPoint(int Number) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) Number);
-
 		sendRequestMSP(requestMSP(MSP_WP, payload.toArray(new Character[payload.size()])));
-
 		Log.d("aaa", "MSP_WP (SendRequestGetWayPoint) " + String.valueOf(Number));
-
 	}
 
 	// ////////Extra functions/////////////////
@@ -662,14 +659,6 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_SET_WP(Waypoint w) {
-		// uint8_t wp_no = read8(); //get the wp number
-		// lat = read32();
-		// lon = read32();
-		// alt = read32(); // to set altitude (cm)
-		// read16(); // future: to set heading (deg)
-		// read16(); // future: to set time to stay (ms)
-		// read8(); // future: to set nav flag
-
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) w.Number);
 		payload.add((char) (w.Lat & 0xFF));
@@ -708,6 +697,15 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) ((heading >> 8) & 0xFF));
 		sendRequestMSP(requestMSP(MSP_SET_HEAD, payload.toArray(new Character[payload.size()])));
 		Log.d("aaa", "MSP_SET_HEAD " + String.valueOf(heading));
+
+	}
+
+	@Override
+	public void SendRequestMSP_SET_MOTOR(byte motorTogglesByte) {
+		payload = new ArrayList<Character>();
+		payload.add((char) (motorTogglesByte & 0xFF));
+		sendRequestMSP(requestMSP(MSP_SET_MOTOR, payload.toArray(new Character[payload.size()])));
+		Log.d("aaa", "MSP_SET_MOTOR " + String.valueOf(motorTogglesByte));
 
 	}
 
