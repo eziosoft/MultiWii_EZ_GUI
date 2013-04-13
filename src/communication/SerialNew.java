@@ -30,10 +30,6 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 
 public class SerialNew extends Communication {
 
-	// [FTDriver] Permission String
-	// private static final String ACTION_USB_PERMISSION =
-	// "jp.ksksue.tutorial.USB_PERMISSION";
-
 	private UsbManager mUsbManager;
 	UsbSerialDriver mSerial;
 
