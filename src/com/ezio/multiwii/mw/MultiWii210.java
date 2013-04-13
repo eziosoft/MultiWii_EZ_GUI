@@ -308,11 +308,6 @@ public class MultiWii210 extends MultirotorData {
 
 			Waypoints[WP.Number] = WP;
 
-			// Waypoints[WP.Number].Lat = WP.Lat;
-			// Waypoints[WP.Number].Lon = WP.Lon;
-			// Waypoints[WP.Number].Alt = WP.Alt;
-			// Waypoints[WP.Number].NavFlag = WP.NavFlag;
-
 			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
 
 			break;
@@ -384,7 +379,7 @@ public class MultiWii210 extends MultirotorData {
 				/* compare calculated and transferred checksum */
 				if ((checksum & 0xFF) == (c & 0xFF)) {
 					if (err_rcvd) {
-						// System.err.println("Copter did not understand request type "+c);
+						Log.e("Multiwii protocol", "Copter did not understand request type " + c);
 					} else {
 						/* we got a valid response packet, evaluate it */
 						evaluateCommand(cmd, (int) dataSize);
@@ -394,12 +389,12 @@ public class MultiWii210 extends MultirotorData {
 					Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
 					for (i = 0; i < dataSize; i++) {
 						if (i != 0) {
-							System.err.print(' ');
+							Log.e("Multiwii protocol"," ");
 						}
-						System.out.print((inBuf[i] & 0xFF));
+						//Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
 					}
-					System.out.println("} [" + c + "]");
-					System.out.println(new String(inBuf, 0, dataSize));
+					Log.e("Multiwii protocol", "} [" + c + "]");
+					Log.e("Multiwii protocol", new String(inBuf, 0, dataSize));
 				}
 				c_state = IDLE;
 			}

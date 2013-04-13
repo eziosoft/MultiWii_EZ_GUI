@@ -40,6 +40,7 @@ import com.ezio.multiwii.waypoints.Waypoint;
 import communication.BT1;
 import communication.Communication;
 import communication.Serial;
+import communication.SerialNew;
 
 public class App extends Application implements Sensors.Listener {
 
@@ -208,7 +209,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL) {
-			comm = new Serial(getApplicationContext());
+			comm = new SerialNew(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
@@ -216,7 +217,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL) {
-			commFrsky = new Serial(getApplicationContext());
+			commFrsky = new SerialNew(getApplicationContext());
 		}
 
 		tts = new TTS(getApplicationContext());

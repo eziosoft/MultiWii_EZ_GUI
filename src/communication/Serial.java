@@ -92,7 +92,9 @@ public class Serial extends Communication {
 		if (mSerial.isConnected()) {
 			mSerial.write(arr, arr.length);
 		} else {
-			//Toast.makeText(context, "Serial port Write error - not connected", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context,
+			// "Serial port Write error - not connected",
+			// Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -150,7 +152,7 @@ public class Serial extends Communication {
 			for (int i = 0; i < len; i++)
 				fifo.put(Integer.valueOf(rbuf[i]));
 
-			//Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
+			// Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
 		}
 	}
 

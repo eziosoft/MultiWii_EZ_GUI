@@ -12,7 +12,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.WindowManager;
 
 import com.ezio.multiwii.R;
@@ -88,11 +87,10 @@ public class Dashboard3Activity extends Activity {
 				app.mw.SendRequest();
 
 				timer1 = System.currentTimeMillis() + app.RefreshRate;
-				Log.d("aaa", "1");
+
 			}
 
 			// ///////////////////////
-			Log.d("aaa", "2");
 			int a = 1; // used for reverce roll in artificial horyzon
 			if (app.ReverseRoll) {
 				a = -1;
