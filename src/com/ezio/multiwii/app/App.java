@@ -37,7 +37,7 @@ import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
-import communication.BT1;
+import communication.BT;
 import communication.Communication;
 import communication.Serial;
 import communication.SerialNew;
@@ -205,7 +205,7 @@ public class App extends Application implements Sensors.Listener {
 		ForceLanguage();
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
-			comm = new BT1(getApplicationContext());
+			comm = new BT(getApplicationContext());
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL) {
@@ -213,7 +213,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
-			commFrsky = new BT1(getApplicationContext());
+			commFrsky = new BT(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL) {

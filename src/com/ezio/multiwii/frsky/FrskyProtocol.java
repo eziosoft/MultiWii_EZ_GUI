@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import communication.BT1;
+import communication.BT;
 import communication.Communication;
 
 public class FrskyProtocol {
@@ -35,10 +35,10 @@ public class FrskyProtocol {
 	int f = 0;
 	int frame[] = new int[11];
 
-	BT1 bt;
+	BT bt;
 
 	public FrskyProtocol(Communication bTFrsky) {
-		bt = (BT1) bTFrsky;
+		bt = (BT) bTFrsky;
 	}
 
 	public void ProcessSerialData(boolean appLogging) {

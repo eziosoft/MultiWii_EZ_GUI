@@ -709,4 +709,29 @@ public class MultiWii210 extends MultirotorData {
 
 	}
 
+	@Override
+	public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit) {
+		// TODO Auto-generated method stub
+//		conf.minthrottle = read16();
+//	    // Prepared for future use
+//	    /*conf.maxthrottle = */read16();
+//	    /*conf.mincommand  = */read16();
+//	    /*conf.midrc       = */read16();
+//	    #if MAG
+//	      conf.mag_decliniation = read16()-1000;
+//	    #else
+//	      read16();
+//	    #endif
+//	    #if defined(VBAT)
+//	      conf.vbatscale        = read8();
+//	      conf.vbatlevel_warn1  = read8();
+//	      conf.vbatlevel_warn2  = read8();
+//	      conf.vbatlevel_crit   = read8();
+//	    #else
+//	      for(uint8_t i=0;i<4;i++) read8();
+//	    #endif
+//	    headSerialReply(0);
+//	    break;
+	}
+
 }

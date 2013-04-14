@@ -15,7 +15,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-public class BT1 extends Communication {
+public class BT extends Communication {
 
 	private static final boolean D = true;
 	private BluetoothAdapter mBluetoothAdapter = null;
@@ -29,7 +29,7 @@ public class BT1 extends Communication {
 
 	Handler handler;
 
-	public BT1(Context context) {
+	public BT(Context context) {
 		super(context);
 		Enable();
 	}

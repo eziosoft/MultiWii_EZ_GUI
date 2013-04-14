@@ -203,8 +203,10 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_ENABLE_FRSKY();
 
 	public abstract void SendRequestMSP_SET_HEAD(int heading);
-	
+
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
+
+	public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit);
 
 	// ///////////////////////////////////////////////
 
