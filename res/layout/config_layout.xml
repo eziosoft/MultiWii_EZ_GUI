@@ -99,6 +99,26 @@
                     android:layout_height="wrap_content"
                     android:text="@string/UseFTDISerial" />
 
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/radioFTDI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/FTDI" />
+
+                    <RadioButton
+                        android:id="@+id/radioOtherChips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/OtherSerialChips" />
+
+                </RadioGroup>
+
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
@@ -402,9 +422,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ReverseRollDirection" />
-
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

@@ -95,7 +95,8 @@ public class App extends Application implements Sensors.Listener {
 
 	private static String COMMUNICATION_TYPE_MW = "CommunicationTypeMW";
 	public static int COMMUNICATION_TYPE_BT = 0;
-	public static int COMMUNICATION_TYPE_SERIAL = 1;
+	public static int COMMUNICATION_TYPE_SERIAL_FTDI = 1;
+	public static int COMMUNICATION_TYPE_SERIAL_OTHERCHIPS = 2;
 	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
 	public static String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW";
@@ -200,29 +201,9 @@ public class App extends Application implements Sensors.Listener {
 
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = prefs.edit();
-		ReadSettings();
-
-		ForceLanguage();
-
-		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
-			comm = new BT(getApplicationContext());
-		}
-
-		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL) {
-			comm = new SerialNew(getApplicationContext());
-		}
-
-		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
-			commFrsky = new BT(getApplicationContext());
-		}
-
-		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL) {
-			commFrsky = new SerialNew(getApplicationContext());
-		}
+		Init();
 
 		tts = new TTS(getApplicationContext());
-
-		SelectProtocol();
 
 		prepareSounds();
 
@@ -238,11 +219,44 @@ public class App extends Application implements Sensors.Listener {
 
 	}
 
+	public void Init() {
+		ReadSettings();
+		ForceLanguage();
+
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
+			comm = new BT(getApplicationContext());
+		}
+
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_FTDI) {
+			comm = new Serial(getApplicationContext());
+		}
+
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
+			comm = new SerialNew(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
+			commFrsky = new BT(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_FTDI) {
+			commFrsky = new Serial(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
+			commFrsky = new SerialNew(getApplicationContext());
+		}
+
+		SelectProtocol();
+	}
+
 	public void SelectProtocol() {
 
 		// if (Protocol == 200) {
 		// mw = new MultiWii200(bt);
 		// }
+
+		Protocol = 210;
 
 		if (Protocol == 210) {
 			mw = new MultiWii210(comm);

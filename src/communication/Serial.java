@@ -45,7 +45,7 @@ public class Serial extends Communication {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public void Enable() {
-		Toast.makeText(context, "Starting Serial FTDI ONLY", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "Starting Serial FTDI", Toast.LENGTH_SHORT).show();
 		// [FTDriver] Create Instance
 		mSerial = new FTDriver((UsbManager) context.getSystemService(Context.USB_SERVICE));
 

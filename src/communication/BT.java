@@ -36,6 +36,7 @@ public class BT extends Communication {
 
 	@Override
 	public void Enable() {
+		Toast.makeText(context, "Starting Bluetooth", Toast.LENGTH_SHORT).show();
 		if (D)
 			Log.d(TAG, "+++ Enable BT +++");
 

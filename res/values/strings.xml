@@ -206,5 +206,7 @@
     <string name="Dashboard3">Dashboard 3</string>
     <string name="SerialPort">Serial Port</string>
     <string name="SerialPortBaudRate">Serial Port baud rate</string>
+    <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+    <string name="OtherSerialChips">Other (CDC/ACM)</string>
 
 </resources>

@@ -43,6 +43,8 @@ public class ConfigActivity extends SherlockActivity {
 	RadioButton Protocol21;
 	RadioButton MagMode1;
 	RadioButton MagMode2;
+	RadioButton RadioFTDI;
+	RadioButton RadioOtherChips;
 
 	TextView MacAddressBTTV;
 	TextView MacAddressBTFrskyTV;
@@ -144,6 +146,8 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxUseFTDISerial = (CheckBox) findViewById(R.id.checkBoxUseFTDISerial);
 		EditTextSerialBaudRateMW = (EditText) findViewById(R.id.editTextSerialPortBaudRate);
 		LayoutSerialFTDI = (LinearLayout) findViewById(R.id.LinearLayoutSerialPort);
+		RadioFTDI = (RadioButton) findViewById(R.id.radioFTDI);
+		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
 
 	}
 
@@ -183,7 +187,9 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
-		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL);
+		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
+		RadioFTDI.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT);
+		RadioOtherChips.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
 			LayoutSerialFTDI.setVisibility(View.GONE);
 		}
@@ -257,7 +263,12 @@ public class ConfigActivity extends SherlockActivity {
 		app.MapCenterPeriod = Integer.parseInt(EditTextMapCenterPeriod.getText().toString());
 
 		if (CheckBoxUseFTDISerial.isChecked()) {
-			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_SERIAL;
+			if (RadioFTDI.isChecked())
+				app.CommunicationTypeMW = App.COMMUNICATION_TYPE_SERIAL_FTDI;
+
+			if (RadioOtherChips.isChecked())
+				app.CommunicationTypeMW = App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS;
+
 		} else {
 			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT;
 		}
@@ -266,7 +277,7 @@ public class ConfigActivity extends SherlockActivity {
 
 		app.SaveSettings(false);
 
-		app.SelectProtocol();
+		app.Init();
 
 	}
 }

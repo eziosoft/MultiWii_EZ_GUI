@@ -69,6 +69,7 @@ public class SerialNew extends Communication {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public void Enable() {
+		Toast.makeText(context, "Starting Serial Other Chips", Toast.LENGTH_SHORT).show();
 		mSerial = UsbSerialProber.acquire(mUsbManager);
 		Log.d(TAG, "Resumed, mSerialDevice=" + mSerial);
 		if (mSerial == null) {
@@ -90,7 +91,7 @@ public class SerialNew extends Communication {
 				mSerial = null;
 				return;
 			}
-			Toast.makeText(context, "Serial device: " + mSerial, Toast.LENGTH_LONG).show();
+			//Toast.makeText(context, "Serial device: " + mSerial, Toast.LENGTH_LONG).show();
 			onDeviceStateChange();
 		}
 	}

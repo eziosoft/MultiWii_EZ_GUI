@@ -181,7 +181,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void Connect(String MacAddress) {
-		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL) {
+		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
 			app.comm.Connect(app.SerialPortBaudRateMW);
 		}
 
@@ -200,7 +200,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void ConnectFrsky(String MacAddress) {
-		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL) {
+		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL_FTDI) {
 			app.comm.Connect(app.SerialPortBaudRateFrSky);
 		}
 

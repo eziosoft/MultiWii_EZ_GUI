@@ -226,6 +226,7 @@ public class RawDataActivity extends Activity {
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
+		log("CommunicationTypeMW",app.CommunicationTypeMW);
 		log("DeviceID", Functions.GetDeviceID(getApplicationContext()));
 
 		for (String s : app.mw.buttonCheckboxLabel) {
