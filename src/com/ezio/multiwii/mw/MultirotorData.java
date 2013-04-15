@@ -108,7 +108,8 @@ public abstract class MultirotorData {
 	public static final int MSP_SET_WP = 209;
 	public static final int MSP_SELECT_SETTING = 210;
 	public static final int MSP_SET_HEAD = 211; // rate
-
+	public static final int MSP_SET_SERVO_CONF = 212;
+	public static final int MSP_SET_MISC_CONF = 213;
 	public static final int MSP_SET_MOTOR = 214;
 
 	public static final int MSP_BIND = 240;

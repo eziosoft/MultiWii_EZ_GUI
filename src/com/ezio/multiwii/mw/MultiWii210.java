@@ -702,36 +702,72 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_SET_MOTOR(byte motorTogglesByte) {
+		int motEnable[] = new int[8];
 		payload = new ArrayList<Character>();
-		payload.add((char) (motorTogglesByte & 0xFF));
+		motorTogglesByte = (byte) (motEnable[0] + motEnable[1] * 2 + motEnable[2] * 4 + motEnable[3] * 8 + motEnable[4] * 16 + motEnable[5] * 32 + motEnable[6] * 64 + motEnable[7] * 128);
+		payload.add((char) (motorTogglesByte));
+		// toggleMotor=false;
 		sendRequestMSP(requestMSP(MSP_SET_MOTOR, payload.toArray(new Character[payload.size()])));
 		Log.d("aaa", "MSP_SET_MOTOR " + String.valueOf(motorTogglesByte));
-
 	}
 
 	@Override
 	public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit) {
-		// TODO Auto-generated method stub
-//		conf.minthrottle = read16();
-//	    // Prepared for future use
-//	    /*conf.maxthrottle = */read16();
-//	    /*conf.mincommand  = */read16();
-//	    /*conf.midrc       = */read16();
-//	    #if MAG
-//	      conf.mag_decliniation = read16()-1000;
-//	    #else
-//	      read16();
-//	    #endif
-//	    #if defined(VBAT)
-//	      conf.vbatscale        = read8();
-//	      conf.vbatlevel_warn1  = read8();
-//	      conf.vbatlevel_warn2  = read8();
-//	      conf.vbatlevel_crit   = read8();
-//	    #else
-//	      for(uint8_t i=0;i<4;i++) read8();
-//	    #endif
-//	    headSerialReply(0);
-//	    break;
-	}
+		payload = new ArrayList<Character>();
 
+		payload.add((char) (minthrottle % 256));
+		payload.add((char) (minthrottle / 256));
+
+		payload.add((char) (maxthrottle % 256));
+		payload.add((char) (maxthrottle / 256));
+
+		payload.add((char) (mincommand % 256));
+		payload.add((char) (mincommand / 256));
+
+		payload.add((char) (midrc % 256));
+		payload.add((char) (midrc / 256));
+
+		int nn = Math.round(midrc * 10) + 1000;
+		payload.add((char) (nn % 256));
+		payload.add((char) (nn / 256));
+
+		nn = Math.round(vbatscale);
+		payload.add((char) (nn)); // VBatscale
+
+		int q = (int) (vbatlevel_warn1 * 10);
+		payload.add((char) (q));
+
+		q = (int) (vbatlevel_warn2 * 10);
+		payload.add((char) (q));
+
+		q = (int) (vbatlevel_crit * 10);
+		payload.add((char) (q));
+
+		sendRequestMSP(requestMSP(MSP_SET_MISC_CONF, payload.toArray(new Character[payload.size()])));
+
+		// MSP_EEPROM_WRITE
+		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
+		Log.d("aaa", "MSP_SET_MISC_CONF");
+		// TODO Auto-generated method stub
+		// conf.minthrottle = read16();
+		// // Prepared for future use
+		// /*conf.maxthrottle = */read16();
+		// /*conf.mincommand = */read16();
+		// /*conf.midrc = */read16();
+		// #if MAG
+		// conf.mag_decliniation = read16()-1000;
+		// #else
+		// read16();
+		// #endif
+		// #if defined(VBAT)
+		// conf.vbatscale = read8();
+		// conf.vbatlevel_warn1 = read8();
+		// conf.vbatlevel_warn2 = read8();
+		// conf.vbatlevel_crit = read8();
+		// #else
+		// for(uint8_t i=0;i<4;i++) read8();
+		// #endif
+		// headSerialReply(0);
+		// break;
+	}
 }
