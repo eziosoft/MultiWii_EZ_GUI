@@ -95,6 +95,8 @@ public abstract class MultirotorData {
 	public static final int MSP_PIDNAMES = 117;
 	public static final int MSP_WP = 118;
 	public static final int MSP_BOXIDS = 119;
+	public static final int MSP_SERVO_CONF = 120; // out message Servo settings
+	public static final int MSP_MISC_CONF = 121;
 
 	public static final int MSP_SET_RAW_RC = 200;
 	public static final int MSP_SET_RAW_GPS = 201;
@@ -157,6 +159,20 @@ public abstract class MultirotorData {
 	// present in the compiled code.
 	public int confSetting = 0;
 	// end 2.11//////////////////////////
+
+	// Protocol 2.2
+	int minthrottle = 0;
+	int maxthrottle=0;
+	int mincommand=0;
+	int midrc=0;
+	int armedNum=0;
+	int lifetime=0;
+	int mag_decliniation=0;
+	int vbatscale=0;
+	float vbatlevel_warn1=0;
+	float vbatlevel_warn2=0;
+	float vbatlevel_crit=0;
+	// /end 2.2
 
 	public FileAccess FA;
 	public float AltCorrection = 0;

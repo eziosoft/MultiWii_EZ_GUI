@@ -128,6 +128,23 @@ public class MultiWii210 extends MultirotorData {
 				// TODO
 			}
 			break;
+
+		case MSP_MISC_CONF:
+			minthrottle = read16();
+			maxthrottle = read16();
+			mincommand = read16();
+			midrc = read16();
+
+			armedNum = read16();
+			lifetime = read32();
+
+			mag_decliniation = ((read16() - 1000) / 10);
+			vbatscale = read8();
+			vbatlevel_warn1 = (float) (read8() / 10.0);
+			vbatlevel_warn2 = (float) (read8() / 10.0);
+			vbatlevel_crit = (float) (read8() / 10.0);
+			break;
+
 		case MSP_STATUS:
 			cycleTime = read16();
 			i2cError = read16();
@@ -748,7 +765,6 @@ public class MultiWii210 extends MultirotorData {
 		// MSP_EEPROM_WRITE
 		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
 		Log.d("aaa", "MSP_SET_MISC_CONF");
-		// TODO Auto-generated method stub
 		// conf.minthrottle = read16();
 		// // Prepared for future use
 		// /*conf.maxthrottle = */read16();
