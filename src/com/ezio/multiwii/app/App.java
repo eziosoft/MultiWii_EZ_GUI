@@ -37,6 +37,7 @@ import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.mw.MultiWii210;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
+import com.ezio.sec.Sec;
 import communication.BT;
 import communication.Communication;
 import communication.Serial;
@@ -45,7 +46,6 @@ import communication.SerialNew;
 public class App extends Application implements Sensors.Listener {
 
 	// debug
-	public String[] TestersIDs = { "ffffffff-81b6-215f-0033-c58700000000", "00000000-42ad-8ad2-c75d-308a64cc2b6a" };
 	public boolean D = false; // debug
 	public String TAG = "EZGUI";
 	public String MapAPIKeyDebug = "0AxI9Dd4w6Y_4upkSvwAfQDK1f8fXpsnCx07vyg";
@@ -280,7 +280,7 @@ public class App extends Application implements Sensors.Listener {
 		AltCorrection = prefs.getBoolean(ALTCORRECTION, false);
 		// AdvancedFunctions = prefs.getBoolean(ADVANCEDFINCTIONS, false);
 
-		AdvancedFunctions = (Functions.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), TestersIDs));
+		AdvancedFunctions = (Sec.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), Sec.TestersIDs));
 		if (AdvancedFunctions)
 			Toast.makeText(getApplicationContext(), "You are a tester", Toast.LENGTH_SHORT).show();
 

@@ -23,14 +23,6 @@ import android.telephony.TelephonyManager;
 
 public class Functions {
 
-	public static boolean VerifyDeveloperID(String ID, String[] AllowedIDs) {
-		for (String string : AllowedIDs) {
-			if (string.equals(ID))
-				return true;
-		}
-		return false;
-	}
-
 	public static String GetDeviceID(Context context) {
 		final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 

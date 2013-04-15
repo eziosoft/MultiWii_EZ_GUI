@@ -19,6 +19,7 @@ import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.mapoffline.MapOfflineCirclesOverlay;
 import com.ezio.multiwii.mapoffline.MapOfflineCopterOverlay;
+import com.ezio.sec.Sec;
 
 public class Dashboard3Activity extends Activity {
 	private boolean killme = false;
@@ -148,16 +149,16 @@ public class Dashboard3Activity extends Activity {
 		app.Say(getString(R.string.Dashboard3));
 		killme = false;
 
-		if (Functions.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), app.TestersIDs)) {
+		if (Sec.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), Sec.TestersIDs)) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-			dlgAlert.setMessage("coming soon");
+			dlgAlert.setMessage("Coming soon");
 			dlgAlert.setTitle("NOT READY YET");
 			dlgAlert.setPositiveButton("OK", null);
 			dlgAlert.setCancelable(false);
-			dlgAlert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
 				}
