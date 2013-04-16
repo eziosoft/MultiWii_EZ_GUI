@@ -208,5 +208,7 @@
     <string name="SerialPortBaudRate">Serial Port baud rate</string>
     <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
     <string name="OtherSerialChips">Other (CDC/ACM)</string>
+    <string name="ACCcalibrationInfo">Place frame on a level surface, press the AccCalibration button, ensure it is not moving during this period</string>
+    <string name="MagCalibrationInfo">Press the MagCalibration button, move multirotor atleast 360 degrees on all axis of rotation. You have 30 seconds to perform this task.</string>
 
 </resources>
