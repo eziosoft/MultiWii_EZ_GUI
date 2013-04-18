@@ -114,12 +114,13 @@ public class HorizonView extends View {
 			bmp[1] = scaleToFill(bmp[1], factor);
 			bmp[2] = scaleToFill(bmp[2], factor);
 			bmp[3] = scaleToFill(bmp[3], factor);
+			
 		}
-
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		
 		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
 		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
 		int size = Math.min(parentHeight, parentWidth);

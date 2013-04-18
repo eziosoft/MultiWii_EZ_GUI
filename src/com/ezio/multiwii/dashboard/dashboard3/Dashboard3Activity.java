@@ -13,12 +13,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.mapoffline.MapOfflineCirclesOverlay;
-import com.ezio.multiwii.mapoffline.MapOfflineCopterOverlay;
 import com.ezio.sec.Sec;
 
 public class Dashboard3Activity extends Activity {
@@ -32,13 +32,16 @@ public class Dashboard3Activity extends Activity {
 	MapView mapView;
 	private MapController myMapController;
 	private int centerStep = 0;
-	MapOfflineCopterOverlay copter;
+	MapOfflineCopterOverlayD3 copter;
 	MapOfflineCirclesOverlay circles;
 
 	HorizonView horizonView;
 	AltitudeView altitudeView;
 	HeadingView headingView;
 	VarioView varioView;
+
+	TextView TextViewL;
+	TextView TextViewR;
 
 	long timer1 = 0;
 
@@ -84,6 +87,10 @@ public class Dashboard3Activity extends Activity {
 				circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 				mapView.postInvalidate();
 
+				TextViewL.setText("Sat:" + String.valueOf(app.mw.GPS_numSat) + "\n" + "Bat:" + String.valueOf(app.mw.bytevbat / 10f) + "V");
+
+				TextViewR.setText(getString(R.string.GPS_distanceToHome) + ":" + String.valueOf(app.mw.GPS_distanceToHome));
+
 				app.Frequentjobs();
 				app.mw.SendRequest();
 
@@ -103,7 +110,7 @@ public class Dashboard3Activity extends Activity {
 			// ///////////////////////
 
 			if (!killme)
-				mHandler.postDelayed(update, 20);
+				mHandler.postDelayed(update, 50);
 
 		}
 	};
@@ -126,7 +133,7 @@ public class Dashboard3Activity extends Activity {
 		myMapController.setZoom(app.MapZoomLevel);
 
 		circles = new MapOfflineCirclesOverlay(getApplicationContext());
-		copter = new MapOfflineCopterOverlay(getApplicationContext());
+		copter = new MapOfflineCopterOverlayD3(getApplicationContext());
 
 		mapView.getOverlays().add(copter);
 		mapView.getOverlays().add(circles);
@@ -135,6 +142,9 @@ public class Dashboard3Activity extends Activity {
 		varioView = (VarioView) findViewById(R.id.varioView1);
 		headingView = (HeadingView) findViewById(R.id.headingView1);
 		altitudeView = (AltitudeView) findViewById(R.id.altitudeView1);
+
+		TextViewL = (TextView) findViewById(R.id.TextViewL);
+		TextViewR = (TextView) findViewById(R.id.TextViewR);
 
 	}
 
