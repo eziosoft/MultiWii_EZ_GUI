@@ -50,7 +50,7 @@ public class MapActivityMy extends MapActivity {
 
 	private boolean killme = false;
 
-	private int centerStep = 0;
+	private long centerStep = 0;
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -71,15 +71,14 @@ public class MapActivityMy extends MapActivity {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			if (centerStep >= app.MapCenterPeriod) {
+			if (centerStep < System.currentTimeMillis()) {
 				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 					CenterLocation(g);
 				} else {
 					CenterLocation(app.sensors.geopointOnlineMapCurrentPosition);
 				}
-				centerStep = 0;
+				centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
 			}
-			centerStep++;
 
 			String state = "";
 			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {

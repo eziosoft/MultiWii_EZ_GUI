@@ -254,22 +254,22 @@ public class MapOfflineCopterOverlayD3 extends Overlay {
 //		mPaint0.setTextSize(textSizeMedium);
 //		DrawStaticText(String.valueOf(DistanceToHome), 0, a, mPaint4, boundingBox, canvas);
 
-		if (VBat > 0) {
-			a += textSizeSmall;
-			mPaint0.setTextSize(textSizeSmall);
-			DrawStaticText(context.getString(R.string.BattVoltage), 0, a, mPaint0, boundingBox, canvas);
-			a += textSizeMedium;
-			mPaint0.setTextSize(textSizeMedium);
-			DrawStaticText(String.valueOf(VBat), 0, a, mPaint4, boundingBox, canvas);
-
-			a += textSizeSmall;
-			mPaint0.setTextSize(textSizeSmall);
-			DrawStaticText(context.getString(R.string.PowerSumPowerTrigger), 0, a, mPaint0, boundingBox, canvas);
-			a += textSizeMedium;
-			mPaint0.setTextSize(textSizeMedium);
-			DrawStaticText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, mPaint4, boundingBox, canvas);
-
-		}
+//		if (VBat > 0) {
+//			a += textSizeSmall;
+//			mPaint0.setTextSize(textSizeSmall);
+//			DrawStaticText(context.getString(R.string.BattVoltage), 0, a, mPaint0, boundingBox, canvas);
+//			a += textSizeMedium;
+//			mPaint0.setTextSize(textSizeMedium);
+//			DrawStaticText(String.valueOf(VBat), 0, a, mPaint4, boundingBox, canvas);
+//
+//			a += textSizeSmall;
+//			mPaint0.setTextSize(textSizeSmall);
+//			DrawStaticText(context.getString(R.string.PowerSumPowerTrigger), 0, a, mPaint0, boundingBox, canvas);
+//			a += textSizeMedium;
+//			mPaint0.setTextSize(textSizeMedium);
+//			DrawStaticText(String.valueOf(PowerSum) + "/" + String.valueOf(PowerTrigger), 0, a, mPaint4, boundingBox, canvas);
+//
+//		}
 
 	}
 

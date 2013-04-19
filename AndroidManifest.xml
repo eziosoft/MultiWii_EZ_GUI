@@ -141,7 +141,7 @@
         <activity
             android:name=".dashboard.dashboard3.Dashboard3Activity"
             
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
     </application>

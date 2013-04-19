@@ -48,7 +48,7 @@ public class MapOfflineActivityMy extends Activity {
 
 	private boolean killme = false;
 
-	private int centerStep = 0;
+	private long centerStep = 0;
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -69,15 +69,15 @@ public class MapOfflineActivityMy extends Activity {
 
 			GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-			if (centerStep >= app.MapCenterPeriod) {
+			if (centerStep < System.currentTimeMillis()) {
 				if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 					CenterLocation(g);
 				} else {
 					CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
 				}
-				centerStep = 0;
+				centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
 			}
-			centerStep++;
+
 
 			GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
 			GeoPoint gPostionHold = new GeoPoint(app.mw.Waypoints[16].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[16].getGeoPoint().getLongitudeE6());

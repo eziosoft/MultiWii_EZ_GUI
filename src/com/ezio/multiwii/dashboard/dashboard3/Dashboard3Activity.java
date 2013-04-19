@@ -48,7 +48,7 @@ public class Dashboard3Activity extends Activity {
 
 	MapView mapView;
 	private MapController myMapController;
-	private int centerStep = 0;
+	private long centerStep = 0;
 	MapOfflineCopterOverlayD3 copter;
 	MapOfflineCirclesOverlay circles;
 
@@ -61,6 +61,7 @@ public class Dashboard3Activity extends Activity {
 	TextView TextViewd32;
 	TextView TextViewd33;
 	TextView TextViewd34;
+	TextView TextViewStatus;
 
 	long timer1 = 0;
 
@@ -81,15 +82,14 @@ public class Dashboard3Activity extends Activity {
 
 				GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
 
-				if (centerStep >= app.MapCenterPeriod) {
+				if (centerStep < System.currentTimeMillis()) {
 					if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
 						CenterLocation(g);
 					} else {
 						CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
 					}
-					centerStep = 0;
+					centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
 				}
-				centerStep++;
 
 				GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
 				GeoPoint gPostionHold = new GeoPoint(app.mw.Waypoints[16].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[16].getGeoPoint().getLongitudeE6());
@@ -111,6 +111,7 @@ public class Dashboard3Activity extends Activity {
 
 				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome));
 				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger));
+				TextViewStatus.setText(state);
 
 				app.Frequentjobs();
 				app.mw.SendRequest();
@@ -124,7 +125,7 @@ public class Dashboard3Activity extends Activity {
 			if (app.ReverseRoll) {
 				a = -1;
 			}
-			horizonView.Set(-app.mw.angx * a, app.mw.angy);
+			horizonView.Set(-app.mw.angx * a, app.mw.angy * 1.5f);
 			altitudeView.Set(app.mw.alt * 10);
 			headingView.Set(app.mw.head);
 			varioView.Set(app.mw.vario * 0.6f);
@@ -168,12 +169,14 @@ public class Dashboard3Activity extends Activity {
 		TextViewd32 = (TextView) findViewById(R.id.TextViewd32);
 		TextViewd33 = (TextView) findViewById(R.id.TextViewd33);
 		TextViewd34 = (TextView) findViewById(R.id.TextViewd34);
-//
-//		Typeface type = Typeface.createFromAsset(getAssets(), "fonts/14_LED1.ttf");
-//		TextViewd31.setTypeface(type);
-//		TextViewd32.setTypeface(type);
-//		TextViewd33.setTypeface(type);
-//		TextViewd34.setTypeface(type);
+		TextViewStatus = (TextView) findViewById(R.id.textViewStatus);
+		//
+		// Typeface type = Typeface.createFromAsset(getAssets(),
+		// "fonts/14_LED1.ttf");
+		// TextViewd31.setTypeface(type);
+		// TextViewd32.setTypeface(type);
+		// TextViewd33.setTypeface(type);
+		// TextViewd34.setTypeface(type);
 	}
 
 	private void CenterLocation(GeoPoint centerGeoPoint) {
