@@ -371,7 +371,7 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			if (mw.alt != 0) {
-				Say(getString(R.string.TTS_Altitude) + " " + String.valueOf((int)mw.alt) + " " + getString(R.string.TTS_Meters));
+				Say(getString(R.string.TTS_Altitude) + " " + String.valueOf((int) mw.alt) + " " + getString(R.string.TTS_Meters));
 			}
 		}
 

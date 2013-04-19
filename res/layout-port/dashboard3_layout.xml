@@ -51,13 +51,13 @@
                     android:id="@+id/horizonView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                      android:layout_weight="1" />
+                    android:layout_weight="1" />
 
-                <com.ezio.multiwii.dashboard.dashboard3.VarioView
-                    android:id="@+id/varioView1"
+                <com.ezio.multiwii.dashboard.dashboard3.HeadingView
+                    android:id="@+id/headingView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                      android:layout_weight="1" />
+                    android:layout_weight="1" />
             </TableRow>
 
             <TableRow
@@ -70,13 +70,13 @@
                     android:id="@+id/altitudeView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                      android:layout_weight="1" />
+                    android:layout_weight="1" />
 
-                <com.ezio.multiwii.dashboard.dashboard3.HeadingView
-                    android:id="@+id/headingView1"
+                <com.ezio.multiwii.dashboard.dashboard3.VarioView
+                    android:id="@+id/varioView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                      android:layout_weight="1" />
+                    android:layout_weight="1" />
             </TableRow>
 
             <TableRow
@@ -87,41 +87,39 @@
                 android:background="#111" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
                     android:text="SAT:"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/TextViewd31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="fill"
-                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="#111"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#dc8126" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
                     android:text="BAT:"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/TextViewd32"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="fill"
-                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="#111"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#dc8126" />
@@ -135,47 +133,46 @@
                 android:background="#111" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
                     android:text="TO HOME:"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/TextViewd33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="fill"
-                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="#111"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#dc8126" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
                     android:text="POWER:"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/TextViewd34"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="fill"
-                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="#111"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#dc8126" />
             </TableRow>
 
         </TableLayout>
+
     </LinearLayout>
 
 </LinearLayout>

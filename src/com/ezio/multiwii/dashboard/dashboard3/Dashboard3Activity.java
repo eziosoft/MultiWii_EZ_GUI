@@ -26,6 +26,7 @@ import org.osmdroid.views.MapView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -107,10 +108,13 @@ public class Dashboard3Activity extends Activity {
 				mapView.postInvalidate();
 
 				TextViewd31.setText(String.valueOf(app.mw.GPS_numSat));
-				TextViewd32.setText(String.valueOf(app.mw.bytevbat / 10f));
+				if (app.mw.GPS_update % 2 == 0) {
+					TextViewd31.append("*");
+				}
+				TextViewd32.setText(String.valueOf(app.mw.bytevbat / 10f)+"V");
 
-				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome));
-				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger));
+				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome)+"m");
+				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger) + "(" + String.valueOf(Functions.map(app.mw.pMeterSum, 1, app.mw.intPowerTrigger, 100, 0)) + "%)");
 				TextViewStatus.setText(state);
 
 				app.Frequentjobs();

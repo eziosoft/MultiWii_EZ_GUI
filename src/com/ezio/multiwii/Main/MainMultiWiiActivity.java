@@ -390,6 +390,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		if (item.getItemId() == R.id.menu_exit) {
 			if (app.DisableBTonExit) {
 				app.comm.Disable();
+				app.commFrsky.Disable();
 			}
 
 			app.sensors.stop();
