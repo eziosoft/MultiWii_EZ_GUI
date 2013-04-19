@@ -367,7 +367,11 @@ public class App extends Application implements Sensors.Listener {
 		if (PeriodicSpeaking > 0 && comm.Connected && timer1 < System.currentTimeMillis()) {
 			timer1 = System.currentTimeMillis() + PeriodicSpeaking;
 			if (mw.bytevbat > 10) {
-				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)));
+				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)) + " " + getString(R.string.TTS_Volts));
+			}
+
+			if (mw.alt != 0) {
+				Say(getString(R.string.TTS_Altitude) + " " + String.valueOf((int)mw.alt) + " " + getString(R.string.TTS_Meters));
 			}
 		}
 

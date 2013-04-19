@@ -196,4 +196,7 @@
   <string name="Dashboard3">Panel 3</string>
   <string name="SerialPort">Port szeregowy</string>
   <string name="SerialPortBaudRate">Szybkość transmisji portu szeregowego</string>
+   <string name="TTS_Volts">Wolta</string>
+    <string name="TTS_Meters">Metrów</string>
+    <string name="TTS_Altitude">Wysokość</string>
 </resources>

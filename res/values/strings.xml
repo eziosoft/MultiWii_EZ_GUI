@@ -210,5 +210,8 @@
     <string name="OtherSerialChips">Other (CDC/ACM)</string>
     <string name="ACCcalibrationInfo">Place frame on a level surface, press the AccCalibration button, ensure it is not moving during this period</string>
     <string name="MagCalibrationInfo">Press the MagCalibration button, move multirotor atleast 360 degrees on all axis of rotation. You have 30 seconds to perform this task.</string>
+    <string name="TTS_Volts">Volts</string>
+    <string name="TTS_Meters">Meters</string>
+    <string name="TTS_Altitude">Altitude</string>
 
 </resources>
