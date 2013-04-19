@@ -1,3 +1,19 @@
+/*  MultiWii EZ-GUI
+    Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.ezio.multiwii.dashboard.dashboard3;
 
 import java.util.Random;
@@ -10,6 +26,7 @@ import org.osmdroid.views.MapView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -40,8 +57,10 @@ public class Dashboard3Activity extends Activity {
 	HeadingView headingView;
 	VarioView varioView;
 
-	TextView TextViewL;
-	TextView TextViewR;
+	TextView TextViewd31;
+	TextView TextViewd32;
+	TextView TextViewd33;
+	TextView TextViewd34;
 
 	long timer1 = 0;
 
@@ -87,9 +106,11 @@ public class Dashboard3Activity extends Activity {
 				circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 				mapView.postInvalidate();
 
-				TextViewL.setText("Sat:" + String.valueOf(app.mw.GPS_numSat) + "\n" + "Bat:" + String.valueOf(app.mw.bytevbat / 10f) + "V");
+				TextViewd31.setText(String.valueOf(app.mw.GPS_numSat));
+				TextViewd32.setText(String.valueOf(app.mw.bytevbat / 10f));
 
-				TextViewR.setText(getString(R.string.GPS_distanceToHome) + ":" + String.valueOf(app.mw.GPS_distanceToHome));
+				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome));
+				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger));
 
 				app.Frequentjobs();
 				app.mw.SendRequest();
@@ -143,9 +164,16 @@ public class Dashboard3Activity extends Activity {
 		headingView = (HeadingView) findViewById(R.id.headingView1);
 		altitudeView = (AltitudeView) findViewById(R.id.altitudeView1);
 
-		TextViewL = (TextView) findViewById(R.id.TextViewL);
-		TextViewR = (TextView) findViewById(R.id.TextViewR);
-
+		TextViewd31 = (TextView) findViewById(R.id.TextViewd31);
+		TextViewd32 = (TextView) findViewById(R.id.TextViewd32);
+		TextViewd33 = (TextView) findViewById(R.id.TextViewd33);
+		TextViewd34 = (TextView) findViewById(R.id.TextViewd34);
+//
+//		Typeface type = Typeface.createFromAsset(getAssets(), "fonts/14_LED1.ttf");
+//		TextViewd31.setTypeface(type);
+//		TextViewd32.setTypeface(type);
+//		TextViewd33.setTypeface(type);
+//		TextViewd34.setTypeface(type);
 	}
 
 	private void CenterLocation(GeoPoint centerGeoPoint) {

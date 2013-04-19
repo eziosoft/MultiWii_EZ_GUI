@@ -1,3 +1,19 @@
+/*  MultiWii EZ-GUI
+    Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.ezio.multiwii.dashboard.dashboard3;
 
 import android.content.Context;
@@ -46,7 +62,7 @@ public class AltitudeView extends View {
 		bmp[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.hand1);
 
 		mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		mPaint.setColor(Color.rgb(50, 50, 50));
+		mPaint.setColor(Color.TRANSPARENT);
 		mPaint.setStyle(Style.FILL_AND_STROKE);
 		mPaint.setTextSize(12);
 
@@ -114,10 +130,44 @@ public class AltitudeView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-		int size = Math.min(parentHeight, parentWidth);
-		this.setMeasuredDimension(size, size);
+		int desiredWidth = 100;
+		int desiredHeight = 100;
+
+		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+		int width;
+		int height;
+
+		// Measure Width
+		if (widthMode == MeasureSpec.EXACTLY) {
+			// Must be this size
+			width = widthSize;
+		} else if (widthMode == MeasureSpec.AT_MOST) {
+			// Can't be bigger than...
+			width = Math.min(desiredWidth, widthSize);
+		} else {
+			// Be whatever you want
+			width = desiredWidth;
+		}
+
+		// Measure Height
+		if (heightMode == MeasureSpec.EXACTLY) {
+			// Must be this size
+			height = heightSize;
+		} else if (heightMode == MeasureSpec.AT_MOST) {
+			// Can't be bigger than...
+			height = Math.min(desiredHeight, heightSize);
+		} else {
+			// Be whatever you want
+			height = desiredHeight;
+		}
+
+		// MUST CALL THIS
+		setMeasuredDimension(width, height);
+
 	}
 
 	// Scale and keep aspect ratio

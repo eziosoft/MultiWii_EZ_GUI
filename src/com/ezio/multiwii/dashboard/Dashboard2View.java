@@ -243,7 +243,7 @@ public class Dashboard2View extends View {
 		}
 
 		// debug
-		if (false) {
+		if (true) {
 			SatNum = 5;
 			DistanceToHome = 254;
 			DirectionToHome = 45;
