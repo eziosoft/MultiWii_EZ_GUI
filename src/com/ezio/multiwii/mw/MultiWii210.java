@@ -786,4 +786,10 @@ public class MultiWii210 extends MultirotorData {
 		// headSerialReply(0);
 		// break;
 	}
+
+	@Override
+	public void SendRequestMSP_MISC_CONF() {
+		sendRequestMSP(requestMSP(MSP_MISC_CONF));
+
+	}
 }

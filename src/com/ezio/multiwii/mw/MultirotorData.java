@@ -161,17 +161,17 @@ public abstract class MultirotorData {
 	// end 2.11//////////////////////////
 
 	// Protocol 2.2
-	int minthrottle = 0;
-	int maxthrottle=0;
-	int mincommand=0;
-	int midrc=0;
-	int armedNum=0;
-	int lifetime=0;
-	int mag_decliniation=0;
-	int vbatscale=0;
-	float vbatlevel_warn1=0;
-	float vbatlevel_warn2=0;
-	float vbatlevel_crit=0;
+	public int minthrottle = 0;
+	public int maxthrottle = 0;
+	public int mincommand = 0;
+	public int midrc = 0;
+	public int armedNum = 0;
+	public int lifetime = 0;
+	public int mag_decliniation = 0;
+	public int vbatscale = 0;
+	public float vbatlevel_warn1 = 0;
+	public float vbatlevel_warn2 = 0;
+	public float vbatlevel_crit = 0;
 	// /end 2.2
 
 	public FileAccess FA;
@@ -224,6 +224,8 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
 	public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit);
+
+	public abstract void SendRequestMSP_MISC_CONF();
 
 	// ///////////////////////////////////////////////
 

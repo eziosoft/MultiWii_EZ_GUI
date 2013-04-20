@@ -213,5 +213,14 @@
     <string name="TTS_Volts">Volts</string>
     <string name="TTS_Meters">Meters</string>
     <string name="TTS_Altitude">Altitude</string>
+    <string name="MinThrottle">MinThrottle</string>
+    <string name="MaxThrottle">MaxThrottle</string>
+    <string name="MinCommand">MinCommand</string>
+    <string name="MidRC">MidRC</string>
+    
+    <string name="VBatScale">VBatScale</string>
+    <string name="BatWarning1">BatWarning1</string>
+    <string name="BatWarning2">BatWarning2</string>
+    <string name="BatCritical">BatCritical</string>
 
 </resources>

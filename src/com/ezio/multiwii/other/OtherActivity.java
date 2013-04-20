@@ -33,6 +33,16 @@ public class OtherActivity extends SherlockActivity {
 	EditText EditTextSelectSettings;
 	EditText EditTextSetSerialBoudRate;
 
+	EditText EditTextMinThrottle;
+	EditText EditTextMaxThrottle;
+	EditText EditTextMinCommand;
+	EditText EditTextMidRC;
+
+	EditText EditTextVBatsScale;
+	EditText EditTextBatWarning1;
+	EditText EditTextBatWarning2;
+	EditText EditTextBatCritical;
+
 	Button ButtonRxBIND;
 
 	@Override
@@ -47,6 +57,16 @@ public class OtherActivity extends SherlockActivity {
 		ButtonRxBIND = (Button) findViewById(R.id.buttonRXBIND);
 
 		EditTextSetSerialBoudRate = (EditText) findViewById(R.id.editTextSerialBoudRate);
+
+		EditTextMinThrottle = (EditText) findViewById(R.id.editTextMinThrottle);
+		EditTextMaxThrottle = (EditText) findViewById(R.id.editTextMaxThrottle);
+		EditTextMinCommand = (EditText) findViewById(R.id.editTextMinCommand);
+		EditTextMidRC = (EditText) findViewById(R.id.editTextMidRC);
+
+		EditTextVBatsScale = (EditText) findViewById(R.id.EditTextVBatScale);
+		EditTextBatWarning1 = (EditText) findViewById(R.id.EditTextBatWarning1);
+		EditTextBatWarning2 = (EditText) findViewById(R.id.EditTextBatWarning2);
+		EditTextBatCritical = (EditText) findViewById(R.id.EditTextBatCritical);
 
 	}
 
@@ -65,6 +85,8 @@ public class OtherActivity extends SherlockActivity {
 		app.Say(getString(R.string.Other));
 
 		app.mw.SendRequestGetMisc();
+		app.mw.SendRequestMSP_MISC_CONF();
+
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
@@ -76,6 +98,16 @@ public class OtherActivity extends SherlockActivity {
 
 		EditTextPowerMeterAlarm.setText(String.valueOf(app.mw.intPowerTrigger));
 		EditTextSelectSettings.setText(String.valueOf(app.mw.confSetting));
+
+		EditTextMinThrottle.setText(String.valueOf(app.mw.minthrottle));
+		EditTextMaxThrottle.setText(String.valueOf(app.mw.maxthrottle));
+		EditTextMinCommand.setText(String.valueOf(app.mw.mincommand));
+		EditTextMidRC.setText(String.valueOf(app.mw.midrc));
+
+		EditTextVBatsScale.setText(String.valueOf(app.mw.vbatscale));
+		EditTextBatWarning1.setText(String.valueOf(app.mw.vbatlevel_warn1));
+		EditTextBatWarning2.setText(String.valueOf(app.mw.vbatlevel_warn2));
+		EditTextBatCritical.setText(String.valueOf(app.mw.vbatlevel_crit));
 
 		// if ((app.mw.multiCapability & 1) > 0) {
 		// ButtonRxBIND.setVisibility(Button.VISIBLE);
