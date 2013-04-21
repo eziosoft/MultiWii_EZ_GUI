@@ -319,6 +319,7 @@ public class AUXActivity extends SherlockActivity {
 		app.Say(getString(R.string.SetCheckboxes));
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
+		ReadOnClick();
 
 	}
 
