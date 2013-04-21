@@ -200,5 +200,27 @@
  	<string name="EnterFileName">Введите имя файла</string>
   <string name="ReverseRollDirection">Реверсировать направление Roll</string>
  	<string name="SetAltitude">Установить высоту в см:</string>
+  <string name="MapCenterPeriod">Map center period</string>
+  <string name="VerticalSpeed">Вертикальная скорость</string>
+  <string name="UseFTDISerial">Использовать Серийный Порт в MultiWii (перезагрузите приложение перед подключениям порта )</string>
+  <string name="Dashboard3">Приборка 3</string>
+  <string name="SerialPort">Серийный Порт</string>
+  <string name="SerialPortBaudRate">Скорость Порта</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Другие (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Поместите мультиротор на ровною поверхность, нажмите кнопку "Калибровать Акселерометр", убедитесь, что он не двигается в течение этого периода</string>
+  <string name="MagCalibrationInfo">Нажмите  "Калибровать Компас", вращайте мультиротор на 360 градусов по всем осям. У вас есть 30 секунд, чтобы выполнить это действия.</string>
+  <string name="TTS_Volts">Вольт</string>
+  <string name="TTS_Meters">Метри</string>
+  <string name="TTS_Altitude">Висота</string>
+  <string name="MinThrottle">MinThrottle</string>
+  <string name="MaxThrottle">MaxThrottle</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="MidRC">MidRC</string>
+    
+  <string name="VBatScale">VBatScale</string>
+  <string name="BatWarning1">ТривогаБатар1</string>
+  <string name="BatWarning2">ТривогаБатар2</string>
+  <string name="BatCritical">ОпасностьБатар</string>
 
 </resources>
