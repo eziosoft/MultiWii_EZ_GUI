@@ -194,7 +194,7 @@ public class Dashboard3Activity extends Activity {
 		app.Say(getString(R.string.Dashboard3));
 		killme = false;
 
-		if (Sec.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), Sec.TestersIDs)) {
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs)) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);

@@ -51,7 +51,7 @@
         <TableRow
             android:id="@+id/tableRow4"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#000"
             android:baselineAligned="false"
@@ -59,7 +59,7 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" >
 
                 <TableRow
@@ -71,7 +71,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                      
                         android:text="SAT:"
                         android:textColor="#fff" />
 
@@ -92,7 +91,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                       
                         android:text="BAT:"
                         android:textColor="#fff" />
 
@@ -104,7 +102,6 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#dc8126" />
                 </TableRow>
-
             </TableLayout>
 
             <TableLayout
@@ -119,7 +116,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                       
                         android:text="POWER:"
                         android:textColor="#fff" />
 
@@ -141,7 +137,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                      
                         android:text="TO HOME:"
                         android:textColor="#fff" />
 
@@ -153,9 +148,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#dc8126" />
                 </TableRow>
-
             </TableLayout>
-
         </TableRow>
 
         <TableRow
@@ -173,7 +166,6 @@
                 android:text="-"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#dc8126" />
-
         </TableRow>
 
     </TableLayout>

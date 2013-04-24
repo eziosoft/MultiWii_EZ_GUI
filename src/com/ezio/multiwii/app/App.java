@@ -280,7 +280,7 @@ public class App extends Application implements Sensors.Listener {
 		AltCorrection = prefs.getBoolean(ALTCORRECTION, false);
 		// AdvancedFunctions = prefs.getBoolean(ADVANCEDFINCTIONS, false);
 
-		AdvancedFunctions = (Sec.VerifyDeveloperID(Functions.GetDeviceID(getApplicationContext()), Sec.TestersIDs));
+		AdvancedFunctions = (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs));
 		if (AdvancedFunctions)
 			Toast.makeText(getApplicationContext(), "You are a tester", Toast.LENGTH_SHORT).show();
 

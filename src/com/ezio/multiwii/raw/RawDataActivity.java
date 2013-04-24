@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import com.ezio.multiwii.helpers.Functions;
+import com.ezio.sec.Sec;
 
 public class RawDataActivity extends Activity {
 	private boolean killme = false;
@@ -227,7 +227,7 @@ public class RawDataActivity extends Activity {
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
 		log("CommunicationTypeMW",app.CommunicationTypeMW);
-		log("DeviceID", Functions.GetDeviceID(getApplicationContext()));
+		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
 
 		for (String s : app.mw.buttonCheckboxLabel) {
 			log("buttonCheckboxLabel", s);
