@@ -77,7 +77,7 @@ public class FileAccess {
 
 	}
 
-	public void Write(String s) {
+	public void Append(String s) {
 
 		if (root.canWrite()) {
 			try {
@@ -93,6 +93,21 @@ public class FileAccess {
 
 	}
 
+	public void Write(String s) {
+
+		if (root.canWrite()) {
+			try {
+				out.write(s + "\n");
+				Log.d("plik", "write OK");
+			} catch (IOException e) {
+
+				Log.d("plik", "fileAccess ERR");
+				// Toast.makeText(context, "Can't write to file",
+				// Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
 	public void closeFile() {
 		try {
 			out.close();
@@ -103,6 +118,5 @@ public class FileAccess {
 			// Toast.makeText(context, "Can't close the file",
 			// Toast.LENGTH_LONG).show();
 		}
-
 	}
 }

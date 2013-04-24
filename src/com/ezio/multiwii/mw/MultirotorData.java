@@ -290,7 +290,7 @@ public abstract class MultirotorData {
 		s += "GPS_longitude" + ";";
 		s += "cycleTime" + ";";
 		s += "i2cError" + ";";
-		FA.Write(s);
+		FA.Append(s);
 	}
 
 	public void Logging() {
@@ -335,7 +335,7 @@ public abstract class MultirotorData {
 		s += String.valueOf(cycleTime) + ";";
 		s += String.valueOf(i2cError) + ";";
 
-		FA.Write(s);
+		FA.Append(s);
 		Log.d("plik", s);
 	}
 

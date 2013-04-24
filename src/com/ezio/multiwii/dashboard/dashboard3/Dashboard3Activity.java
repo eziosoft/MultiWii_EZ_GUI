@@ -26,8 +26,6 @@ import org.osmdroid.views.MapView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -194,7 +192,7 @@ public class Dashboard3Activity extends Activity {
 		app.Say(getString(R.string.Dashboard3));
 		killme = false;
 
-		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs)) {
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D3")) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);

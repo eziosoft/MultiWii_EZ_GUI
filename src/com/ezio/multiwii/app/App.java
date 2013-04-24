@@ -216,7 +216,6 @@ public class App extends Application implements Sensors.Listener {
 		sensors = new Sensors(getApplicationContext());
 		sensors.registerListener(this);
 		sensors.start();
-
 	}
 
 	public void Init() {
