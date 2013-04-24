@@ -154,7 +154,7 @@
   <string name="RxRSSI">RxRSSI</string>
   <string name="Connect_frsky">Frsky σύνδεση</string>
   <string name="UseOfflineMap">Χρήση Offline χάρτη</string>
-  <string name="RefreshRate">Ρυθμός ανανέωσης στη σκλήρυνση κατά πλάκας (πρέπει να είναι &gt; = 100)</string>
+  <string name="RefreshRate">Ρυθμός ανανέωσης σε ms(πρέπει να είναι &gt; = 100)</string>
   <string name="ConnectionBug">Χρήση όταν αυτό αποσυνδέεται όταν το κουμπί είναι πατημένο (σωστό λειτουργεί τώρα μόνο για dashboard2)</string>
   <string name="CopyFrskyToMW">Χρήση δεδομένων από Frsky παντού</string>
   <string name="page1">Ταμπλό</string>
@@ -193,8 +193,10 @@
   <string name="SetAltitude">Καθορισμένο ύψος σε cm:</string>
   <string name="MapCenterPeriod">Χάρτης κέντρο περίοδο</string>
   <string name="VerticalSpeed">Κατακόρυφης ταχύτητας·</string>
-  <string name="UseFTDISerial">Χρήση σειριακή θύρα για MultiWii</string>
+  <string name="UseFTDISerial">Χρήση σειριακή θύρα για MultiWii (παρακαλώ ξαναξεκινήστε το app προτού γίνει σύνδεση)</string>
   <string name="Dashboard3">Ταμπλό 3</string>
   <string name="SerialPort">Σειριακή θύρα</string>
   <string name="SerialPortBaudRate">Σειριακή ταχύτητα baud</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Άλλο (CDC/ACM)</string>
 </resources>

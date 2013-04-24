@@ -152,7 +152,7 @@
   <string name="Frsky">Frsky</string>
   <string name="TxRSSI">发射机信号强度</string>
   <string name="RxRSSI">接收信号强度</string>
-  <string name="Connect_frsky">Frsky 已连接</string>
+  <string name="Connect_frsky">Frsky 连接</string>
   <string name="UseOfflineMap">使用离线地图</string>
   <string name="RefreshRate">刷新率 (单位ms，必须  >= 100)</string>
   <string name="ConnectionBug">当断开连接时按下按钮  (只能在 dashboard2中起作用) </string>
@@ -192,8 +192,10 @@
   <string name="SetAltitude">设置高度（单位：厘米）：</string>
   <string name="MapCenterPeriod">地图中点刷新间隔周期</string>
   <string name="VerticalSpeed">垂直速度</string>
-  <string name="UseFTDISerial">使用FTDI串口传输飞控数据</string>
+  <string name="UseFTDISerial">使用USB Host连接 MultiWii (请在连接前重新启动程序)</string>
   <string name="Dashboard3">仪表板 3</string>
   <string name="SerialPort">串口</string>
   <string name="SerialPortBaudRate">串口波特率</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">其他 (CDC/ACM)</string>
 </resources>

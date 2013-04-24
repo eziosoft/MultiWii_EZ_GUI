@@ -192,7 +192,6 @@
   <string name="SetAltitude">Impostare altezza in cm:</string>
   <string name="MapCenterPeriod">Map center period</string>
   <string name="VerticalSpeed">Velocità verticale</string>
-  <string name="UseFTDISerial">Usa porta seriale per MultiWii</string>
   <string name="Dashboard3">Dashboard 3</string>
   <string name="SerialPort">Porta seriale</string>
   <string name="SerialPortBaudRate">Baud rate porta seriale</string>

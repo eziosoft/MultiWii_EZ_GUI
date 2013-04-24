@@ -28,6 +28,7 @@
   <string name="PhoneMag">PhoneMag</string>
   <string name="PitchRollCircleView">Vue du cercle Tangage/Roulis</string>
   <string name="pointFrontHelp">Orienter le multirotor vers l\'avant, comparer l\'indication de la boussole du téléphone et du multirotor. Indique l\'avant du multirotor, indépendamment de l\'emplacement du téléphone.</string>
+  <string name="TTS">synthèse vocal</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Distance par rapport au point de retour(m)</string>
   <string name="GPS_directionToHome">Distance par rapport au point de retour</string>
@@ -171,6 +172,7 @@
   <string name="SetAsHome">Définir en point de retour</string>
   <string name="Waypoints">Points de passage</string>
   <string name="LowVoltageAlarm">Alarme basse tension</string>
+  <string name="RadioModeInfo">Cela sert uniquement à afficher correctement les manches de la radio en mode Radio</string>
   <string name="MagModeInfo">Changements de comportement de la flèche de la boussole. Tableau de bord 1</string>
   <string name="CommunityMap">Carte communautaire</string>
   <string name="AddToCommunityMap">Ajouter à la carte communautaire</string>
@@ -185,4 +187,12 @@
   <string name="EnterFileName">Entrez le nom du fichier</string>
   <string name="ReverseRollDirection">Inverser le sens du roulis</string>
   <string name="SetAltitude">Altitude en cm :</string>
+  <string name="MapCenterPeriod">fréquence de recentrage de la carte</string>
+  <string name="VerticalSpeed">Vitesse verticale</string>
+  <string name="UseFTDISerial">Utiliser le Port série pour MultiWii (s\'il vous plaît redémarrer l\'application avant de vous connecter)</string>
+  <string name="Dashboard3">Tableau de bord 3</string>
+  <string name="SerialPort">Port série</string>
+  <string name="SerialPortBaudRate">vitesse du port serie</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Autre (CDC/ACM)</string>
 </resources>

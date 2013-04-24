@@ -28,6 +28,7 @@
   <string name="PhoneMag">MAG del Teléfono</string>
   <string name="PitchRollCircleView">Ver circulo de Alerón Elevador</string>
   <string name="pointFrontHelp">Apunta al frente del multirotor y compara las lecturas de la brújula del multirotor y del teléfono indicando la parte delantera independiente de la ubicación del teléfono.</string>
+  <string name="TTS">Texto a voz</string>
   <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Distancia a casa(m)</string>
   <string name="GPS_directionToHome">Dirección a casa</string>
@@ -189,4 +190,9 @@
   <string name="EnterFileName">Nombre del Fichero</string>
   <string name="ReverseRollDirection">Invertir Roll </string>
   <string name="SetAltitude">Ajuste la altura en cm:</string>
+  <string name="MapCenterPeriod">Período del centro del mapa</string>
+  <string name="VerticalSpeed">Velocidad Vertical</string>
+  <string name="Dashboard3">Panel de Instrumentos 3</string>
+  <string name="SerialPort">Puerto Serial</string>
+  <string name="SerialPortBaudRate">Tasa de baudios del puerto serie</string>
 </resources>

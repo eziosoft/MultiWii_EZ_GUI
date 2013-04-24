@@ -23,6 +23,8 @@
   <string name="Point_multirotor_front">Multirotor felé mutat</string>
   <string name="PitchRollCircleView">G-ball</string>
   <string name="pointFrontHelp">A \"multirotor felé mutat\" beállítás során az iránytű a multirotor irányát mutatja a telefonhoz képest</string>
+  <string name="GPS">GPS</string>
+  <string name="GPS_distanceToHome">Home távolság (m)</string>
   <string name="GPS_directionToHome">Home iránya</string>
   <string name="GPS_update">Frissít</string>
   <string name="StartLogging">Adatrögzítés kezdete</string>
@@ -48,6 +50,7 @@
   <string name="Servos">Szervók</string>
   <string name="AltCorrection">Magasság korrekció</string>
   <string name="AltCorrectionInfo">Magasság 0-ra állítása élesítéskor</string>
+  <string name="PID">PID</string>
   <string name="Read">Olvas</string>
   <string name="Write">Ír</string>
   <string name="Other">Egyéb</string>
@@ -118,4 +121,5 @@
   <string name="SelectSetting">nBeállítás kiválasztása</string>
   <string name="RXBIND">RX PÁROSÍTÁS</string>
   <string name="FollowMe">Follow Me (nincs tesztelve!  csak #define USE_MSP_WP konfiggal használható) vilog ha a telefon pozíciót átküldi a Multiwii-nek MW</string>
+  <string name="InfoDonate">Hasznosnak találtad az alkalmazást? Támogasd a fejlesztőt!</string>
 </resources>
