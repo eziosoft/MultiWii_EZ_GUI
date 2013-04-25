@@ -290,6 +290,25 @@ public abstract class MultirotorData {
 		s += "GPS_longitude" + ";";
 		s += "cycleTime" + ";";
 		s += "i2cError" + ";";
+
+		s += "rcThrottle" + ";";
+		s += "rcYaw" + ";";
+		s += "rcRoll" + ";";
+		s += "rcPitch" + ";";
+		s += "rcAUX1" + ";";
+		s += "rcAUX2" + ";";
+		s += "rcAUX3" + ";";
+		s += "rcAUX4" + ";";
+
+		s += "Motor1" + ";";
+		s += "Motor2" + ";";
+		s += "Motor3" + ";";
+		s += "Motor4" + ";";
+		s += "Motor5" + ";";
+		s += "Motor6" + ";";
+		s += "Motor7" + ";";
+		s += "Motor8" + ";";
+
 		FA.Append(s);
 	}
 
@@ -334,6 +353,24 @@ public abstract class MultirotorData {
 
 		s += String.valueOf(cycleTime) + ";";
 		s += String.valueOf(i2cError) + ";";
+
+		s += String.valueOf(rcThrottle) + ";";
+		s += String.valueOf(rcYaw) + ";";
+		s += String.valueOf(rcRoll) + ";";
+		s += String.valueOf(rcPitch) + ";";
+		s += String.valueOf(rcAUX1) + ";";
+		s += String.valueOf(rcAUX2) + ";";
+		s += String.valueOf(rcAUX3) + ";";
+		s += String.valueOf(rcAUX4) + ";";
+
+		s += String.valueOf(mot[0]) + ";";
+		s += String.valueOf(mot[1]) + ";";
+		s += String.valueOf(mot[2]) + ";";
+		s += String.valueOf(mot[3]) + ";";
+		s += String.valueOf(mot[4]) + ";";
+		s += String.valueOf(mot[5]) + ";";
+		s += String.valueOf(mot[6]) + ";";
+		s += String.valueOf(mot[7]) + ";";
 
 		FA.Append(s);
 		Log.d("plik", s);
