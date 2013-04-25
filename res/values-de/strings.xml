@@ -192,7 +192,23 @@
   <string name="SetAltitude">Höhe in cm einstellen:</string>
   <string name="MapCenterPeriod">Zeit bis Kartenzentrierung</string>
   <string name="VerticalSpeed">vertikale Geschwindigkeit</string>
+  <string name="UseFTDISerial">Seriellen Port für MultiWii benutzen (bitte die Anwendung vor dem Verbinden neu starten)</string>
   <string name="Dashboard3">Anzeige 3</string>
   <string name="SerialPort">serielle Schnittstelle</string>
   <string name="SerialPortBaudRate">Baudrate</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Andere (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Platziere den Rahmen auf einer ebenen Fläche, drücke den AccCalibration Button und versichere dich, dass er sich in dieser Zeit nicht bewegt</string>
+  <string name="MagCalibrationInfo">Drücke den MagCalibration Button und bewege den Copter mindestens 360 Grad um alle Achsen. Du hast 30 Sekunden dafür Zeit.</string>
+  <string name="TTS_Volts">Volt</string>
+  <string name="TTS_Meters">Meter</string>
+  <string name="TTS_Altitude">Höhe</string>
+  <string name="MinThrottle">MinThrottle</string>
+  <string name="MaxThrottle">MaxThrottle</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="MidRC">MidRC</string>
+  <string name="VBatScale">VBatMaßstab</string>
+  <string name="BatWarning1">Batterie Warnung 1</string>
+  <string name="BatWarning2">Batterie Warnung 2</string>
+  <string name="BatCritical">Batterie kritisch</string>
 </resources>

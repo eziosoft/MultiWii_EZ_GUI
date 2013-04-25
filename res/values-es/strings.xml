@@ -192,7 +192,23 @@
   <string name="SetAltitude">Ajuste la altura en cm:</string>
   <string name="MapCenterPeriod">Período del centro del mapa</string>
   <string name="VerticalSpeed">Velocidad Vertical</string>
+  <string name="UseFTDISerial">Use el puerto serie (reinicie la aplicación antes de conectar)</string>
   <string name="Dashboard3">Panel de Instrumentos 3</string>
   <string name="SerialPort">Puerto Serial</string>
   <string name="SerialPortBaudRate">Tasa de baudios del puerto serie</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Otros (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Coloque el Multicopter sobre una superficie nivelada , presione el botón de AccCalibration y no lo mueva el durante este proceso</string>
+  <string name="MagCalibrationInfo">Presione el botón de MagCalibration y mueva el multirotor 360 grados en todos los ejes de rotación. Usted tiene 30 segundos para realizar esta tarea.</string>
+  <string name="TTS_Volts">Voltios</string>
+  <string name="TTS_Meters">Metros</string>
+  <string name="TTS_Altitude">Altitud</string>
+  <string name="MinThrottle">MinAcelerador</string>
+  <string name="MaxThrottle">MaxAcelerador</string>
+  <string name="MinCommand">MinComando</string>
+  <string name="MidRC">MidRC</string>
+  <string name="VBatScale">VBatEscala</string>
+  <string name="BatWarning1">BatAdvertencia1</string>
+  <string name="BatWarning2">BatAdvertencia2</string>
+  <string name="BatCritical">BatCritical</string>
 </resources>

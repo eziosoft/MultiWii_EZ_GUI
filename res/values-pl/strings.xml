@@ -211,4 +211,7 @@
   <string name="BatWarning1">BatWarning1</string>
   <string name="BatWarning2">BatWarning2</string>
   <string name="BatCritical">BatCritical</string>
+  <string name="GreenValuesCanBeChanged">Zielone wartości mogą być zmieniane</string>
+  <string name="Locked">Zablokowany</string>
+  <string name="DoYouWantToUnlock">Czy chcesz odblokować?</string>
 </resources>

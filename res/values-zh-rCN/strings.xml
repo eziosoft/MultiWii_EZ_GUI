@@ -198,4 +198,17 @@
   <string name="SerialPortBaudRate">串口波特率</string>
   <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
   <string name="OtherSerialChips">其他 (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">请将机架放在水平的表面上，点击 AccCalibration 按钮，确保它不在这段期间移动</string>
+  <string name="MagCalibrationInfo">按下 MagCalibration 按钮，在每一个维度上，旋转机架 至少360 度。请在 30 秒内完成。</string>
+  <string name="TTS_Volts">伏</string>
+  <string name="TTS_Meters">米</string>
+  <string name="TTS_Altitude">海拔高度</string>
+  <string name="MinThrottle">最小油门</string>
+  <string name="MaxThrottle">最大油门</string>
+  <string name="MinCommand">最小命令</string>
+  <string name="MidRC">遥控中立点</string>
+  <string name="VBatScale">电压系数</string>
+  <string name="BatWarning1">电压告警1</string>
+  <string name="BatWarning2">电压告警2</string>
+  <string name="BatCritical">电压紧急</string>
 </resources>

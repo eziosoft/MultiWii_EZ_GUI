@@ -199,4 +199,17 @@
   <string name="SerialPortBaudRate">Σειριακή ταχύτητα baud</string>
   <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
   <string name="OtherSerialChips">Άλλο (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Τοποθετήστε το πλαίσιο σε μια επιφάνεια επιπέδων, πατήστε το κουμπί AccCalibration, εξασφάλισιστε οτι δεν κινειται κατά τη διάρκεια αυτής της περιόδου</string>
+  <string name="MagCalibrationInfo">Πατήστε το κουμπί MagCalibration, κινηστε multirotor τουλάχιστον 360 μοίρες σε όλες τις άξονα περιστροφής. Έχετε 30 δευτερόλεπτα για να εκτελέσετε αυτήν την εργασία.</string>
+  <string name="TTS_Volts">Βολτ</string>
+  <string name="TTS_Meters">Μέτρα</string>
+  <string name="TTS_Altitude">Υψόμετρο</string>
+  <string name="MinThrottle">MinThrottle</string>
+  <string name="MaxThrottle">MaxThrottle</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="MidRC">MidRC</string>
+  <string name="VBatScale">VBatScale</string>
+  <string name="BatWarning1">BatWarning1</string>
+  <string name="BatWarning2">BatWarning2</string>
+  <string name="BatCritical">BatCritical</string>
 </resources>

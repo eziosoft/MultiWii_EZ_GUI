@@ -192,7 +192,23 @@
   <string name="SetAltitude">Impostare altezza in cm:</string>
   <string name="MapCenterPeriod">Map center period</string>
   <string name="VerticalSpeed">Velocità verticale</string>
+  <string name="UseFTDISerial">Usa porta seriale per MultiWii (Riavvia l\'applicazione prima di connettere)</string>
   <string name="Dashboard3">Dashboard 3</string>
   <string name="SerialPort">Porta seriale</string>
   <string name="SerialPortBaudRate">Baud rate porta seriale</string>
+  <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
+  <string name="OtherSerialChips">Altro (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Posiziona il telaio su una superficie piana, premere il pulsante AccCalibration, assicurati di non muovere il telaio durante l\'operazione</string>
+  <string name="MagCalibrationInfo">Premere il bottone MagCalibration , gira il Multicottero su ogni asse per almeno 360 gradi di rotazione. hai 30 secondi per farlo.</string>
+  <string name="TTS_Volts">Volts</string>
+  <string name="TTS_Meters">Metri</string>
+  <string name="TTS_Altitude">Altitudine</string>
+  <string name="MinThrottle">MinThrottle</string>
+  <string name="MaxThrottle">MaxThrottle</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="MidRC">MidRC</string>
+  <string name="VBatScale">VBatScale</string>
+  <string name="BatWarning1">BatWarning1</string>
+  <string name="BatWarning2">BatWarning2</string>
+  <string name="BatCritical">BatCritical</string>
 </resources>
