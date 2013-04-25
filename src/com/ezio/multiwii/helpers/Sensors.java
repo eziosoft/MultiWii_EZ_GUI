@@ -232,7 +232,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 	}
 
 	public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
-		if (location != null) {
+		if (location != null && oldLocation != null) {
 			// double lat = (location.getLatitude() + (location.getLatitude() -
 			// oldLocation.getLatitude()));
 			// double lon = (location.getLongitude() + (location.getLongitude()
@@ -244,7 +244,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 	}
 
 	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
-		if (location != null) {
+		if (location != null && oldLocation != null) {
 			int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
 			int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);
 			return new com.google.android.maps.GeoPoint(lat, lon);
