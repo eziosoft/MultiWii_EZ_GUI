@@ -200,6 +200,13 @@ public class RawDataActivity extends Activity {
 
 		log("rssi", app.mw.rssi);
 
+		log("declination", app.mw.mag_decliniation);
+
+		for (String s : app.mw.buttonCheckboxLabel) {
+			log("buttonCheckboxLabel", s);
+
+		}
+
 		log("---", 0);
 
 		log("EZ-Gui Protocol", app.mw.EZGUIProtocol);
@@ -212,6 +219,7 @@ public class RawDataActivity extends Activity {
 		} catch (NameNotFoundException e1) {
 			e1.printStackTrace();
 		}
+
 		log("App version", getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		log("versionMisMatch", app.mw.versionMisMatch);
@@ -226,13 +234,8 @@ public class RawDataActivity extends Activity {
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
-		log("CommunicationTypeMW",app.CommunicationTypeMW);
+		log("CommunicationTypeMW", app.CommunicationTypeMW);
 		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
-
-		for (String s : app.mw.buttonCheckboxLabel) {
-			log("buttonCheckboxLabel", s);
-
-		}
 
 	}
 

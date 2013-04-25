@@ -222,5 +222,6 @@
     <string name="BatWarning1">BatWarning1</string>
     <string name="BatWarning2">BatWarning2</string>
     <string name="BatCritical">BatCritical</string>
+    <string name="GreenValuesCanBeChanged">Green values can be changed</string>
 
 </resources>

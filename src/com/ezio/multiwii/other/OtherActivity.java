@@ -17,9 +17,11 @@
 package com.ezio.multiwii.other;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
@@ -27,7 +29,8 @@ import com.ezio.multiwii.app.App;
 
 public class OtherActivity extends SherlockActivity {
 	App app;
-	// Handler mHandler = new Handler();
+	Handler mHandler = new Handler();
+	private boolean killme = false;
 
 	EditText EditTextPowerMeterAlarm;
 	EditText EditTextSelectSettings;
@@ -42,8 +45,28 @@ public class OtherActivity extends SherlockActivity {
 	EditText EditTextBatWarning1;
 	EditText EditTextBatWarning2;
 	EditText EditTextBatCritical;
+	TextView TextViewVolt;
+	EditText EditTextDeclination;
 
 	Button ButtonRxBIND;
+
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
+
+			app.mw.ProcessSerialData(app.loggingON);
+
+			app.frsky.ProcessSerialData(false);
+			app.Frequentjobs();
+
+			TextViewVolt.setText(String.valueOf(app.mw.bytevbat / 10f) + "V");
+
+			app.mw.SendRequest();
+			if (!killme)
+				mHandler.postDelayed(update, app.RefreshRate);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +90,16 @@ public class OtherActivity extends SherlockActivity {
 		EditTextBatWarning1 = (EditText) findViewById(R.id.EditTextBatWarning1);
 		EditTextBatWarning2 = (EditText) findViewById(R.id.EditTextBatWarning2);
 		EditTextBatCritical = (EditText) findViewById(R.id.EditTextBatCritical);
+		TextViewVolt = (TextView) findViewById(R.id.textViewVolt);
+		EditTextDeclination = (EditText) findViewById(R.id.editTextDeclination);
 
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// mHandler.removeCallbacks(update);
+		mHandler.removeCallbacks(null);
+		killme = true;
 
 	}
 
@@ -81,14 +107,19 @@ public class OtherActivity extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		// mHandler.postDelayed(update, App.REFRESH_RATE);
+		killme = false;
+		mHandler.postDelayed(update, app.RefreshRate);
 		app.Say(getString(R.string.Other));
 
+		Read();
+	}
+
+	private void Read() {
 		app.mw.SendRequestGetMisc();
 		app.mw.SendRequestMSP_MISC_CONF();
 
 		try {
-			Thread.sleep(300);
+			Thread.sleep(600);
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
@@ -108,13 +139,24 @@ public class OtherActivity extends SherlockActivity {
 		EditTextBatWarning1.setText(String.valueOf(app.mw.vbatlevel_warn1));
 		EditTextBatWarning2.setText(String.valueOf(app.mw.vbatlevel_warn2));
 		EditTextBatCritical.setText(String.valueOf(app.mw.vbatlevel_crit));
+		EditTextDeclination.setText(String.valueOf(app.mw.mag_decliniation));
+	}
 
-		// if ((app.mw.multiCapability & 1) > 0) {
-		// ButtonRxBIND.setVisibility(Button.VISIBLE);
-		// } else {
-		// ButtonRxBIND.setVisibility(Button.GONE);
-		// }
+	public void MSP_MISC_CONFreadOnClick(View v) {
+		Read();
+	}
 
+	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
+		app.mw.SendRequestMSP_SET_MISC_CONF(Integer.parseInt(EditTextMinThrottle.getText().toString()),
+		Integer.parseInt(EditTextMaxThrottle.getText().toString()),
+		Integer.parseInt(EditTextMinCommand.getText().toString()),
+		Integer.parseInt(EditTextMidRC.getText().toString()),
+		Float.parseFloat(EditTextDeclination.getText().toString()), 
+		(byte) Integer.parseInt(EditTextVBatsScale.getText().toString()),
+		(Float.parseFloat(EditTextBatWarning1.getText().toString())),
+		(Float.parseFloat(EditTextBatWarning2.getText().toString())),
+		(Float.parseFloat(EditTextBatCritical.getText().toString())));
+		
 	}
 
 	public void MagCalibrationOnClick(View v) {

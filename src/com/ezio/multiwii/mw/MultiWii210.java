@@ -138,7 +138,7 @@ public class MultiWii210 extends MultirotorData {
 			armedNum = read16();
 			lifetime = read32();
 
-			mag_decliniation = ((read16() - 1000) / 10);
+			mag_decliniation = ((read16() - 1000f) / 10f);
 			vbatscale = read8();
 			vbatlevel_warn1 = (float) (read8() / 10.0);
 			vbatlevel_warn2 = (float) (read8() / 10.0);
@@ -729,12 +729,13 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit) {
+	public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
 		payload = new ArrayList<Character>();
 
 		payload.add((char) (minthrottle % 256));
 		payload.add((char) (minthrottle / 256));
 
+		// Prepared for future use
 		payload.add((char) (maxthrottle % 256));
 		payload.add((char) (maxthrottle / 256));
 
@@ -743,8 +744,9 @@ public class MultiWii210 extends MultirotorData {
 
 		payload.add((char) (midrc % 256));
 		payload.add((char) (midrc / 256));
+		// /////////////////////////
 
-		int nn = Math.round(midrc * 10) + 1000;
+		int nn = Math.round(mag_decliniation * 10) + 1000;
 		payload.add((char) (nn % 256));
 		payload.add((char) (nn / 256));
 

@@ -159,6 +159,14 @@
                 </TableRow>
             </TableLayout>
 
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/Green"
+                android:text="@string/GreenValuesCanBeChanged" />
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +182,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/Green"
                         android:text="@string/MinThrottle" />
 
                     <EditText
@@ -240,13 +249,6 @@
                         android:ems="10"
                         android:inputType="number" />
                 </TableRow>
-            </TableLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/descryption" >
 
                 <TableRow
                     android:id="@+id/TableRow02"
@@ -257,6 +259,7 @@
                         android:id="@+id/TextView02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/Green"
                         android:text="@string/VBatScale" />
 
                     <EditText
@@ -276,6 +279,7 @@
                         android:id="@+id/TextView04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/Green"
                         android:text="@string/BatWarning1" />
 
                     <EditText
@@ -295,6 +299,7 @@
                         android:id="@+id/TextView03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/Green"
                         android:text="@string/BatWarning2" />
 
                     <EditText
@@ -314,6 +319,7 @@
                         android:id="@+id/TextView05"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/Green"
                         android:text="@string/BatCritical" />
 
                     <EditText
@@ -322,6 +328,66 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="numberDecimal" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/BattVoltage" />
+
+                    <TextView
+                        android:id="@+id/textViewVolt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="TextView" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Declination" />
+
+                    <EditText
+                        android:id="@+id/editTextDeclination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="numberDecimal|numberSigned" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="MSP_MISC_CONFreadOnClick"
+                        android:text="@string/Read" />
+
+                    <Button
+                        android:id="@+id/button7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="MSP_SET_MISC_CONF_WriteOnClick"
+                        android:text="@string/Write" />
+
                 </TableRow>
             </TableLayout>
 

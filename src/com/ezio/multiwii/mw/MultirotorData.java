@@ -167,7 +167,7 @@ public abstract class MultirotorData {
 	public int midrc = 0;
 	public int armedNum = 0;
 	public int lifetime = 0;
-	public int mag_decliniation = 0;
+	public float mag_decliniation = 0;
 	public int vbatscale = 0;
 	public float vbatlevel_warn1 = 0;
 	public float vbatlevel_warn2 = 0;
@@ -223,7 +223,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
-	public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, int mag_decliniation, byte vbatscale, byte vbatlevel_warn1, byte vbatlevel_warn2, byte vbatlevel_crit);
+	public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
 
 	public abstract void SendRequestMSP_MISC_CONF();
 
