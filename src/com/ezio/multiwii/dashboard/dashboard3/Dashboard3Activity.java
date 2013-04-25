@@ -26,6 +26,9 @@ import org.osmdroid.views.MapView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -109,9 +112,9 @@ public class Dashboard3Activity extends Activity {
 				if (app.mw.GPS_update % 2 == 0) {
 					TextViewd31.append("*");
 				}
-				TextViewd32.setText(String.valueOf(app.mw.bytevbat / 10f)+"V");
+				TextViewd32.setText(String.valueOf(app.mw.bytevbat / 10f) + "V");
 
-				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome)+"m");
+				TextViewd33.setText(String.valueOf(app.mw.GPS_distanceToHome) + "m");
 				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger) + "(" + String.valueOf(Functions.map(app.mw.pMeterSum, 1, app.mw.intPowerTrigger, 100, 0)) + "%)");
 				TextViewStatus.setText(state);
 
@@ -197,15 +200,31 @@ public class Dashboard3Activity extends Activity {
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-			dlgAlert.setMessage("Coming soon");
-			dlgAlert.setTitle("NOT READY YET");
-			dlgAlert.setPositiveButton("OK", null);
+			dlgAlert.setMessage(getString(R.string.Locked));
+			dlgAlert.setTitle(getString(R.string.DoYouWantToUnlock));
+			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
 			dlgAlert.setCancelable(false);
-			dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					try {
+						Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.ezio.ez_gui_unlocker");
+						startActivity(LaunchIntent);
+					} catch (Exception e) {
+						Intent goToMarket = null;
+						goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ezio.ez_gui_unlocker"));
+						startActivity(goToMarket);
+					}
+					finish();
+				}
+			});
+			dlgAlert.setNegativeButton(getString(R.string.No), new OnClickListener() {
+
+				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
 				}
 			});
+
 			dlgAlert.create().show();
 		}
 	}

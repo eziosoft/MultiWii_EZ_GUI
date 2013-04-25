@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
@@ -32,7 +31,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import communication.BT_old;
 
 public class ConfigActivity extends SherlockActivity {
 
@@ -76,7 +74,7 @@ public class ConfigActivity extends SherlockActivity {
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.d(BT_old.TAG, "onActivityResult " + resultCode);
+//		Log.d(BT_old.TAG, "onActivityResult " + resultCode);
 		switch (requestCode) {
 
 		case REQUEST_CONNECT_DEVICE_MULTIWII:

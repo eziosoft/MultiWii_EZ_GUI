@@ -223,5 +223,7 @@
     <string name="BatWarning2">BatWarning2</string>
     <string name="BatCritical">BatCritical</string>
     <string name="GreenValuesCanBeChanged">Green values can be changed</string>
+    <string name="Locked">Locked</string>
+    <string name="DoYouWantToUnlock">Do you want to unlock it ?</string>
 
 </resources>
