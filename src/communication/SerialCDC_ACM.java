@@ -31,8 +31,7 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
-
-public class SerialNew extends Communication {
+public class SerialCDC_ACM extends Communication {
 
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
@@ -60,7 +59,7 @@ public class SerialNew extends Communication {
 	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
-	public SerialNew(Context context) {
+	public SerialCDC_ACM(Context context) {
 		super(context);
 		mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
 		Enable();
@@ -91,7 +90,8 @@ public class SerialNew extends Communication {
 				mSerial = null;
 				return;
 			}
-			//Toast.makeText(context, "Serial device: " + mSerial, Toast.LENGTH_LONG).show();
+			// Toast.makeText(context, "Serial device: " + mSerial,
+			// Toast.LENGTH_LONG).show();
 			onDeviceStateChange();
 		}
 	}
@@ -100,13 +100,11 @@ public class SerialNew extends Communication {
 	public void Connect(String address) {
 
 		try {
-			//mSerial.setBaudRate(Integer.parseInt(address));
+			// mSerial.setBaudRate(Integer.parseInt(address));
 			mSerial.setParameters(Integer.parseInt(address), UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
-			//setParameters(mBaudRate, mDataBits, mStopBits, mParity);
+			// setParameters(mBaudRate, mDataBits, mStopBits, mParity);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		Connected = true;
 	}
@@ -159,11 +157,12 @@ public class SerialNew extends Communication {
 	public void Disable() {
 
 		try {
-			mSerial.close();
+			if (mSerial != null)
+				mSerial.close();
 			Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
 			Connected = false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 	}

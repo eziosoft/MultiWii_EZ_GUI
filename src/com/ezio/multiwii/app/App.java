@@ -40,8 +40,8 @@ import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.sec.Sec;
 import communication.BT;
 import communication.Communication;
-import communication.Serial;
-import communication.SerialNew;
+import communication.SerialFTDI;
+import communication.SerialCDC_ACM;
 
 public class App extends Application implements Sensors.Listener {
 
@@ -227,11 +227,11 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_FTDI) {
-			comm = new Serial(getApplicationContext());
+			comm = new SerialFTDI(getApplicationContext());
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			comm = new SerialNew(getApplicationContext());
+			comm = new SerialCDC_ACM(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
@@ -239,11 +239,11 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_FTDI) {
-			commFrsky = new Serial(getApplicationContext());
+			commFrsky = new SerialFTDI(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			commFrsky = new SerialNew(getApplicationContext());
+			commFrsky = new SerialCDC_ACM(getApplicationContext());
 		}
 
 		SelectProtocol();

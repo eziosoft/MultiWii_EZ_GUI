@@ -27,7 +27,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.widget.Toast;
 
-public class Serial extends Communication {
+public class SerialFTDI extends Communication {
 
 	// [FTDriver] Permission String
 	private static final String ACTION_USB_PERMISSION = "jp.ksksue.tutorial.USB_PERMISSION";
@@ -37,7 +37,7 @@ public class Serial extends Communication {
 
 	boolean loopStop = false;
 
-	public Serial(Context context) {
+	public SerialFTDI(Context context) {
 		super(context);
 		Enable();
 	}
