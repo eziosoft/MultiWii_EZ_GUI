@@ -357,63 +357,67 @@ public class MultiWii210 extends MultirotorData {
 
 	private void ReadFrame() {
 		while (bt.dataAvailable()) {
-			c = (bt.Read());
-			// Log.d("21",String.valueOf(c));
-			if (c_state == IDLE) {
-				c_state = (c == '$') ? HEADER_START : IDLE;
-			} else if (c_state == HEADER_START) {
-				c_state = (c == 'M') ? HEADER_M : IDLE;
-			} else if (c_state == HEADER_M) {
-				if (c == '>') {
-					c_state = HEADER_ARROW;
-				} else if (c == '!') {
-					c_state = HEADER_ERR;
-				} else {
+			try {
+				c = (bt.Read());
+				// Log.d("21",String.valueOf(c));
+				if (c_state == IDLE) {
+					c_state = (c == '$') ? HEADER_START : IDLE;
+				} else if (c_state == HEADER_START) {
+					c_state = (c == 'M') ? HEADER_M : IDLE;
+				} else if (c_state == HEADER_M) {
+					if (c == '>') {
+						c_state = HEADER_ARROW;
+					} else if (c == '!') {
+						c_state = HEADER_ERR;
+					} else {
+						c_state = IDLE;
+					}
+				} else if (c_state == HEADER_ARROW || c_state == HEADER_ERR) {
+					/* is this an error message? */
+					err_rcvd = (c_state == HEADER_ERR); /*
+														 * now we are expecting
+														 * the payload size
+														 */
+					dataSize = (c & 0xFF);
+					/* reset index variables */
+					p = 0;
+					offset = 0;
+					checksum = 0;
+					checksum ^= (c & 0xFF);
+					/* the command is to follow */
+					c_state = HEADER_SIZE;
+				} else if (c_state == HEADER_SIZE) {
+					cmd = (byte) (c & 0xFF);
+					checksum ^= (c & 0xFF);
+					c_state = HEADER_CMD;
+				} else if (c_state == HEADER_CMD && offset < dataSize) {
+					checksum ^= (c & 0xFF);
+					inBuf[offset++] = (byte) (c & 0xFF);
+				} else if (c_state == HEADER_CMD && offset >= dataSize) {
+					/* compare calculated and transferred checksum */
+					if ((checksum & 0xFF) == (c & 0xFF)) {
+						if (err_rcvd) {
+							Log.e("Multiwii protocol", "Copter did not understand request type " + c);
+						} else {
+							/* we got a valid response packet, evaluate it */
+							evaluateCommand(cmd, (int) dataSize);
+						}
+					} else {
+						Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
+						Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
+						for (i = 0; i < dataSize; i++) {
+							// if (i != 0) {
+							// Log.e("Multiwii protocol"," ");
+							// }
+							// Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
+						}
+						Log.e("Multiwii protocol", "} [" + c + "]");
+						Log.e("Multiwii protocol", new String(inBuf, 0, dataSize));
+					}
 					c_state = IDLE;
 				}
-			} else if (c_state == HEADER_ARROW || c_state == HEADER_ERR) {
-				/* is this an error message? */
-				err_rcvd = (c_state == HEADER_ERR); /*
-													 * now we are expecting the
-													 * payload size
-													 */
-				dataSize = (c & 0xFF);
-				/* reset index variables */
-				p = 0;
-				offset = 0;
-				checksum = 0;
-				checksum ^= (c & 0xFF);
-				/* the command is to follow */
-				c_state = HEADER_SIZE;
-			} else if (c_state == HEADER_SIZE) {
-				cmd = (byte) (c & 0xFF);
-				checksum ^= (c & 0xFF);
-				c_state = HEADER_CMD;
-			} else if (c_state == HEADER_CMD && offset < dataSize) {
-				checksum ^= (c & 0xFF);
-				inBuf[offset++] = (byte) (c & 0xFF);
-			} else if (c_state == HEADER_CMD && offset >= dataSize) {
-				/* compare calculated and transferred checksum */
-				if ((checksum & 0xFF) == (c & 0xFF)) {
-					if (err_rcvd) {
-						Log.e("Multiwii protocol", "Copter did not understand request type " + c);
-					} else {
-						/* we got a valid response packet, evaluate it */
-						evaluateCommand(cmd, (int) dataSize);
-					}
-				} else {
-					Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
-					Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
-					for (i = 0; i < dataSize; i++) {
-						// if (i != 0) {
-						// Log.e("Multiwii protocol"," ");
-						// }
-						// Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
-					}
-					Log.e("Multiwii protocol", "} [" + c + "]");
-					Log.e("Multiwii protocol", new String(inBuf, 0, dataSize));
-				}
-				c_state = IDLE;
+			} catch (Exception e) {
+				Log.e("Multiwii protocol", "ReadFrame:" + e.getMessage());
 			}
 		}
 	}
