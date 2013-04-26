@@ -217,7 +217,6 @@
     <string name="MaxThrottle">MaxThrottle</string>
     <string name="MinCommand">MinCommand</string>
     <string name="MidRC">MidRC</string>
-    
     <string name="VBatScale">VBatScale</string>
     <string name="BatWarning1">BatWarning1</string>
     <string name="BatWarning2">BatWarning2</string>
@@ -225,5 +224,6 @@
     <string name="GreenValuesCanBeChanged">Green values can be changed</string>
     <string name="Locked">Locked</string>
     <string name="DoYouWantToUnlock">Do you want to unlock it ?</string>
+    <string name="TakeDeclinationFromPhone">Take declination from the phone</string>
 
 </resources>

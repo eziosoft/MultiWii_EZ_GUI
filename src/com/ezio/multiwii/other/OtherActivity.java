@@ -142,21 +142,17 @@ public class OtherActivity extends SherlockActivity {
 		EditTextDeclination.setText(String.valueOf(app.mw.mag_decliniation));
 	}
 
+	public void DeclinationTakeFromPhoneOnClick(View v) {
+		EditTextDeclination.setText(String.valueOf(app.sensors.Declination));
+	}
+
 	public void MSP_MISC_CONFreadOnClick(View v) {
 		Read();
 	}
 
 	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
-		app.mw.SendRequestMSP_SET_MISC_CONF(Integer.parseInt(EditTextMinThrottle.getText().toString()),
-		Integer.parseInt(EditTextMaxThrottle.getText().toString()),
-		Integer.parseInt(EditTextMinCommand.getText().toString()),
-		Integer.parseInt(EditTextMidRC.getText().toString()),
-		Float.parseFloat(EditTextDeclination.getText().toString()), 
-		(byte) Integer.parseInt(EditTextVBatsScale.getText().toString()),
-		(Float.parseFloat(EditTextBatWarning1.getText().toString())),
-		(Float.parseFloat(EditTextBatWarning2.getText().toString())),
-		(Float.parseFloat(EditTextBatCritical.getText().toString())));
-		
+		app.mw.SendRequestMSP_SET_MISC_CONF(Integer.parseInt(EditTextMinThrottle.getText().toString()), Integer.parseInt(EditTextMaxThrottle.getText().toString()), Integer.parseInt(EditTextMinCommand.getText().toString()), Integer.parseInt(EditTextMidRC.getText().toString()), Float.parseFloat(EditTextDeclination.getText().toString()), (byte) Integer.parseInt(EditTextVBatsScale.getText().toString()), (Float.parseFloat(EditTextBatWarning1.getText().toString())), (Float.parseFloat(EditTextBatWarning2.getText().toString())), (Float.parseFloat(EditTextBatCritical.getText().toString())));
+
 	}
 
 	public void MagCalibrationOnClick(View v) {

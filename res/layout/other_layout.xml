@@ -356,17 +356,27 @@
 
                     <TextView
                         android:id="@+id/textView12"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/Green"
                         android:text="@string/Declination" />
 
                     <EditText
                         android:id="@+id/editTextDeclination"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:ems="10"
                         android:inputType="numberDecimal|numberSigned" />
+
+                    <Button
+                        android:id="@+id/button23"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="DeclinationTakeFromPhoneOnClick"
+                        android:text="@string/TakeDeclinationFromPhone" />
                 </TableRow>
 
                 <TableRow
