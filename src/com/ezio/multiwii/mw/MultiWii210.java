@@ -28,7 +28,7 @@ import communication.Communication;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(Communication bt) {
-		EZGUIProtocol = "213 r1349";
+		EZGUIProtocol = "2.2 r1419";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after conection
@@ -129,21 +129,21 @@ public class MultiWii210 extends MultirotorData {
 			}
 			break;
 
-		case MSP_MISC_CONF:
-			minthrottle = read16();
-			maxthrottle = read16();
-			mincommand = read16();
-			midrc = read16();
-
-			armedNum = read16();
-			lifetime = read32();
-
-			mag_decliniation = ((read16() - 1000f) / 10f);
-			vbatscale = read8();
-			vbatlevel_warn1 = (float) (read8() / 10.0);
-			vbatlevel_warn2 = (float) (read8() / 10.0);
-			vbatlevel_crit = (float) (read8() / 10.0);
-			break;
+		// case MSP_MISC_CONF:
+		// minthrottle = read16();
+		// maxthrottle = read16();
+		// mincommand = read16();
+		// midrc = read16();
+		//
+		// armedNum = read16();
+		// lifetime = read32();
+		//
+		// mag_decliniation = ((read16() - 1000f) / 10f);
+		// vbatscale = read8();
+		// vbatlevel_warn1 = (float) (read8() / 10.0);
+		// vbatlevel_warn2 = (float) (read8() / 10.0);
+		// vbatlevel_crit = (float) (read8() / 10.0);
+		// break;
 
 		case MSP_STATUS:
 			cycleTime = read16();
@@ -291,9 +291,64 @@ public class MultiWii210 extends MultirotorData {
 			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
 			// dataSize));
 			break;
+		// case MSP_MISC:
+		// intPowerTrigger = read16();
+		// break;
+
 		case MSP_MISC:
 			intPowerTrigger = read16();
+
+			// int
+			// minthrottle,maxthrottle,mincommand,midrc,armedNum,lifetime,mag_decliniation
+			// ;
+
+			minthrottle = read16();
+			maxthrottle = read16();
+			mincommand = read16();
+			midrc = read16();
+			armedNum = read16();
+
+			// for (i = 0; i < 5; i++) {
+			// MConf[i] = read16();
+			// confINF[i].setValue((int) MConf[i]).show();
+			// }
+
+			lifetime = read32();
+			// MConf[5] = read32();
+			// confINF[5].setValue((int) MConf[5]);
+
+			// for (i = 1; i < 5; i++)
+			// confINF[i].setColorBackground(grey_).setMin((int)
+			// MConf[i]).setMax((int) MConf[i]);
+
+			// LOG_PERMANENT
+			// if (MConf[4] < 1) {
+			// confINF[5].hide();
+			// confINF[4].hide();
+			// } else {
+			// confINF[5].show();
+			// confINF[4].show();
+			// }
+
+			mag_decliniation = read16() / 10f;
+			// mag_decliniation
+			// MConf[6] = read16();
+			// confINF[6].setValue((float) MConf[6] / 10).show();
+
+			vbatscale = read8();
+			vbatlevel_warn1 = (float) (read8() / 10.0f);
+			vbatlevel_warn2 = (float) (read8() / 10.0f);
+			vbatlevel_crit = (float) (read8() / 10.0f);
+			// VBAT
+			//
+
+			// if (q > 1) {
+			// for (i = 0; i < 5; i++)
+			// VBat[i].show();
+			// }
+			// controlP5.addTab("Config").show();
 			break;
+
 		case MSP_MOTOR_PINS:
 			for (i = 0; i < 8; i++) {
 				byteMP[i] = read8();
@@ -433,17 +488,47 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestSetandSaveMISC(int confPowerTrigger) {
-		// MSP_SET_MISC
+	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
+
 		payload = new ArrayList<Character>();
 		intPowerTrigger = (Math.round(confPowerTrigger));
 		payload.add((char) (intPowerTrigger % 256));
 		payload.add((char) (intPowerTrigger / 256));
 
+		payload.add((char) (minthrottle % 256));
+		payload.add((char) (minthrottle / 256));
+
+		// Prepared for future use
+		payload.add((char) (maxthrottle % 256));
+		payload.add((char) (maxthrottle / 256));
+
+		payload.add((char) (mincommand % 256));
+		payload.add((char) (mincommand / 256));
+
+		payload.add((char) (midrc % 256));
+		payload.add((char) (midrc / 256));
+		// /////////////////////////
+
+		int nn = Math.round(mag_decliniation * 10);
+		payload.add((char) (nn - ((nn >> 8) << 8)));
+		payload.add((char) (nn >> 8));
+
+		nn = Math.round(vbatscale);
+		payload.add((char) (nn)); // VBatscale
+
+		int q = (int) (vbatlevel_warn1 * 10);
+		payload.add((char) (q));
+
+		q = (int) (vbatlevel_warn2 * 10);
+		payload.add((char) (q));
+
+		q = (int) (vbatlevel_crit * 10);
+		payload.add((char) (q));
+
 		sendRequestMSP(requestMSP(MSP_SET_MISC, payload.toArray(new Character[payload.size()])));
 
 		// MSP_EEPROM_WRITE
-		SendRequestWriteToEEprom();
+		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
 	}
 
 	@Override
@@ -732,70 +817,54 @@ public class MultiWii210 extends MultirotorData {
 		Log.d("aaa", "MSP_SET_MOTOR " + String.valueOf(motorTogglesByte));
 	}
 
-	@Override
-	public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
-		payload = new ArrayList<Character>();
+	// @Override
+	// public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int
+	// maxthrottle, int mincommand, int midrc, float mag_decliniation, byte
+	// vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float
+	// vbatlevel_crit) {
+	// payload = new ArrayList<Character>();
+	//
+	// payload.add((char) (minthrottle % 256));
+	// payload.add((char) (minthrottle / 256));
+	//
+	// // Prepared for future use
+	// payload.add((char) (maxthrottle % 256));
+	// payload.add((char) (maxthrottle / 256));
+	//
+	// payload.add((char) (mincommand % 256));
+	// payload.add((char) (mincommand / 256));
+	//
+	// payload.add((char) (midrc % 256));
+	// payload.add((char) (midrc / 256));
+	// // /////////////////////////
+	//
+	// int nn = Math.round(mag_decliniation * 10) + 1000;
+	// payload.add((char) (nn % 256));
+	// payload.add((char) (nn / 256));
+	//
+	// nn = Math.round(vbatscale);
+	// payload.add((char) (nn)); // VBatscale
+	//
+	// int q = (int) (vbatlevel_warn1 * 10);
+	// payload.add((char) (q));
+	//
+	// q = (int) (vbatlevel_warn2 * 10);
+	// payload.add((char) (q));
+	//
+	// q = (int) (vbatlevel_crit * 10);
+	// payload.add((char) (q));
+	//
+	// sendRequestMSP(requestMSP(MSP_SET_MISC_CONF, payload.toArray(new
+	// Character[payload.size()])));
+	//
+	// // MSP_EEPROM_WRITE
+	// sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
+	// Log.d("aaa", "MSP_SET_MISC_CONF");
+	// }
 
-		payload.add((char) (minthrottle % 256));
-		payload.add((char) (minthrottle / 256));
-
-		// Prepared for future use
-		payload.add((char) (maxthrottle % 256));
-		payload.add((char) (maxthrottle / 256));
-
-		payload.add((char) (mincommand % 256));
-		payload.add((char) (mincommand / 256));
-
-		payload.add((char) (midrc % 256));
-		payload.add((char) (midrc / 256));
-		// /////////////////////////
-
-		int nn = Math.round(mag_decliniation * 10) + 1000;
-		payload.add((char) (nn % 256));
-		payload.add((char) (nn / 256));
-
-		nn = Math.round(vbatscale);
-		payload.add((char) (nn)); // VBatscale
-
-		int q = (int) (vbatlevel_warn1 * 10);
-		payload.add((char) (q));
-
-		q = (int) (vbatlevel_warn2 * 10);
-		payload.add((char) (q));
-
-		q = (int) (vbatlevel_crit * 10);
-		payload.add((char) (q));
-
-		sendRequestMSP(requestMSP(MSP_SET_MISC_CONF, payload.toArray(new Character[payload.size()])));
-
-		// MSP_EEPROM_WRITE
-		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
-		Log.d("aaa", "MSP_SET_MISC_CONF");
-		// conf.minthrottle = read16();
-		// // Prepared for future use
-		// /*conf.maxthrottle = */read16();
-		// /*conf.mincommand = */read16();
-		// /*conf.midrc = */read16();
-		// #if MAG
-		// conf.mag_decliniation = read16()-1000;
-		// #else
-		// read16();
-		// #endif
-		// #if defined(VBAT)
-		// conf.vbatscale = read8();
-		// conf.vbatlevel_warn1 = read8();
-		// conf.vbatlevel_warn2 = read8();
-		// conf.vbatlevel_crit = read8();
-		// #else
-		// for(uint8_t i=0;i<4;i++) read8();
-		// #endif
-		// headSerialReply(0);
-		// break;
-	}
-
-	@Override
-	public void SendRequestMSP_MISC_CONF() {
-		sendRequestMSP(requestMSP(MSP_MISC_CONF));
-
-	}
+	// @Override
+	// public void SendRequestMSP_MISC_CONF() {
+	// sendRequestMSP(requestMSP(MSP_MISC_CONF));
+	//
+	// }
 }

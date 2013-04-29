@@ -116,7 +116,6 @@ public class OtherActivity extends SherlockActivity {
 
 	private void Read() {
 		app.mw.SendRequestGetMisc();
-		app.mw.SendRequestMSP_MISC_CONF();
 
 		try {
 			Thread.sleep(600);
@@ -150,10 +149,18 @@ public class OtherActivity extends SherlockActivity {
 		Read();
 	}
 
-	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
-		app.mw.SendRequestMSP_SET_MISC_CONF(Integer.parseInt(EditTextMinThrottle.getText().toString()), Integer.parseInt(EditTextMaxThrottle.getText().toString()), Integer.parseInt(EditTextMinCommand.getText().toString()), Integer.parseInt(EditTextMidRC.getText().toString()), Float.parseFloat(EditTextDeclination.getText().toString()), (byte) Integer.parseInt(EditTextVBatsScale.getText().toString()), (Float.parseFloat(EditTextBatWarning1.getText().toString())), (Float.parseFloat(EditTextBatWarning2.getText().toString())), (Float.parseFloat(EditTextBatCritical.getText().toString())));
-
-	}
+	// public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
+	// app.mw.SendRequestMSP_SET_MISC_CONF(Integer.parseInt(EditTextMinThrottle.getText().toString()),
+	// Integer.parseInt(EditTextMaxThrottle.getText().toString()),
+	// Integer.parseInt(EditTextMinCommand.getText().toString()),
+	// Integer.parseInt(EditTextMidRC.getText().toString()),
+	// Float.parseFloat(EditTextDeclination.getText().toString()), (byte)
+	// Integer.parseInt(EditTextVBatsScale.getText().toString()),
+	// (Float.parseFloat(EditTextBatWarning1.getText().toString())),
+	// (Float.parseFloat(EditTextBatWarning2.getText().toString())),
+	// (Float.parseFloat(EditTextBatCritical.getText().toString())));
+	//
+	// }
 
 	public void MagCalibrationOnClick(View v) {
 		app.mw.SendRequestMagCalibration();
@@ -163,8 +170,8 @@ public class OtherActivity extends SherlockActivity {
 		app.mw.SendRequestAccCalibration();
 	}
 
-	public void WritePowerMeterAlarmOnClick(View v) {
-		app.mw.SendRequestSetandSaveMISC(Integer.parseInt(EditTextPowerMeterAlarm.getText().toString()));
+	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
+		app.mw.SendRequestMSP_SET_MISC(Integer.parseInt(EditTextPowerMeterAlarm.getText().toString()), Integer.parseInt(EditTextMinThrottle.getText().toString()), Integer.parseInt(EditTextMaxThrottle.getText().toString()), Integer.parseInt(EditTextMinCommand.getText().toString()), Integer.parseInt(EditTextMidRC.getText().toString()), Float.parseFloat(EditTextDeclination.getText().toString()), (byte) Integer.parseInt(EditTextVBatsScale.getText().toString()), (Float.parseFloat(EditTextBatWarning1.getText().toString())), (Float.parseFloat(EditTextBatWarning2.getText().toString())), (Float.parseFloat(EditTextBatCritical.getText().toString())));
 	}
 
 	public void WriteSelectSettingOnClick(View v) {

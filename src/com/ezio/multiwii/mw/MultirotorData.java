@@ -96,7 +96,7 @@ public abstract class MultirotorData {
 	public static final int MSP_WP = 118;
 	public static final int MSP_BOXIDS = 119;
 	public static final int MSP_SERVO_CONF = 120; // out message Servo settings
-	public static final int MSP_MISC_CONF = 121;
+	// public static final int MSP_MISC_CONF = 121;
 
 	public static final int MSP_SET_RAW_RC = 200;
 	public static final int MSP_SET_RAW_GPS = 201;
@@ -111,7 +111,7 @@ public abstract class MultirotorData {
 	public static final int MSP_SELECT_SETTING = 210;
 	public static final int MSP_SET_HEAD = 211; // rate
 	public static final int MSP_SET_SERVO_CONF = 212;
-	public static final int MSP_SET_MISC_CONF = 213;
+	// public static final int MSP_SET_MISC_CONF = 213;
 	public static final int MSP_SET_MOTOR = 214;
 
 	public static final int MSP_BIND = 240;
@@ -193,7 +193,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestResetSettings();
 
-	public abstract void SendRequestSetandSaveMISC(int confPowerTrigger);
+	public abstract void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
 
 	public abstract void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD);
 
@@ -223,9 +223,12 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
-	public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
-
-	public abstract void SendRequestMSP_MISC_CONF();
+	// public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int
+	// maxthrottle, int mincommand, int midrc, float mag_decliniation, byte
+	// vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float
+	// vbatlevel_crit);
+	//
+	// public abstract void SendRequestMSP_MISC_CONF();
 
 	// ///////////////////////////////////////////////
 
