@@ -203,15 +203,15 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed);
 
-	public abstract void SendRequestGetWayPoint(int Number);
+	public abstract void SendRequestMSP_WP(int Number);
 
 	public abstract void SendRequestSetRawRC(int[] channels8);
 
 	public abstract void SendRequestWriteToEEprom();
 
-	public abstract void SendRequestSelectSetting(int setting);
+	public abstract void SendRequestMSP_SELECT_SETTING(int setting);
 
-	public abstract void SendRequestBIND();
+	public abstract void SendRequestMSP_BIND();
 
 	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
 

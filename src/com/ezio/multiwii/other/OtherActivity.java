@@ -56,7 +56,7 @@ public class OtherActivity extends SherlockActivity {
 
 			app.mw.ProcessSerialData(app.loggingON);
 
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
 
 			TextViewVolt.setText(String.valueOf(app.mw.bytevbat / 10f) + "V");
@@ -175,11 +175,11 @@ public class OtherActivity extends SherlockActivity {
 	}
 
 	public void WriteSelectSettingOnClick(View v) {
-		app.mw.SendRequestSelectSetting(Integer.parseInt(EditTextSelectSettings.getText().toString()));
+		app.mw.SendRequestMSP_SELECT_SETTING(Integer.parseInt(EditTextSelectSettings.getText().toString()));
 	}
 
 	public void RXBINDOnClick(View v) {
-		app.mw.SendRequestBIND();
+		app.mw.SendRequestMSP_BIND();
 	}
 
 	public void SetSerialBoudRateOnClick(View v) {

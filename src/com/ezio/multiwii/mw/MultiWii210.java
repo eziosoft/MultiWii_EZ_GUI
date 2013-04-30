@@ -719,7 +719,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGetWayPoint(int Number) {
+	public void SendRequestMSP_WP(int Number) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) Number);
 		sendRequestMSP(requestMSP(MSP_WP, payload.toArray(new Character[payload.size()])));
@@ -751,16 +751,18 @@ public class MultiWii210 extends MultirotorData {
 	// ///////////End of Extra Functions////////////
 
 	@Override
-	public void SendRequestSelectSetting(int setting) {
+	public void SendRequestMSP_SELECT_SETTING(int setting) {
 
 		payload = new ArrayList<Character>();
 		payload.add((char) setting);
 		sendRequestMSP(requestMSP(MSP_SELECT_SETTING, payload.toArray(new Character[payload.size()])));
+		Log.d("aaa", "MSP_SELECT_SETTING");
 	}
 
 	@Override
-	public void SendRequestBIND() {
+	public void SendRequestMSP_BIND() {
 		sendRequestMSP(requestMSP(MSP_BIND));
+		Log.d("aaa", "MSP_BIND");
 	}
 
 	@Override

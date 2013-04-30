@@ -55,7 +55,7 @@ public class MapOfflineActivityMy extends Activity {
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 
 			if (app.D) {
 				app.mw.GPS_latitude += random.nextInt(200) - 50;// for
@@ -92,7 +92,7 @@ public class MapOfflineActivityMy extends Activity {
 			// float gforce = (float) Math.sqrt(app.mw.ax * app.mw.ax +
 			// app.mw.ay * app.mw.ay + app.mw.az * app.mw.az) / app.mw._1G;
 
-			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frsky.TxRSSI, app.frsky.RxRSSI);
+			copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frskyProtocol.TxRSSI, app.frskyProtocol.RxRSSI);
 
 			circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
 			mapView.postInvalidate();

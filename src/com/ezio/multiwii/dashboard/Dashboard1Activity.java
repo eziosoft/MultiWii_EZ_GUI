@@ -50,7 +50,7 @@ public class Dashboard1Activity extends Activity {
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 
 			myAzimuth = (float) (app.sensors.Heading);
 			if (app.D) {

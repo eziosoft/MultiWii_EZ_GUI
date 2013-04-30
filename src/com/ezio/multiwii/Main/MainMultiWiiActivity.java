@@ -224,8 +224,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 			app.mw.ProcessSerialData(app.loggingON);
 
-			app.frsky.ProcessSerialData(false);
-			setSupportProgress((int) Functions.map(app.frsky.TxRSSI, 0, 110, 0, 10000));
+			app.frskyProtocol.ProcessSerialData(false);
+			setSupportProgress((int) Functions.map(app.frskyProtocol.TxRSSI, 0, 110, 0, 10000));
 
 			app.Frequentjobs();
 			app.mw.SendRequest();

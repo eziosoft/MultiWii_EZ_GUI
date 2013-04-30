@@ -68,7 +68,7 @@ public class WaypointActivity extends Activity {
 
 			app.mw.ProcessSerialData(app.loggingON);
 
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
 
 			TVData.setText("");
@@ -139,7 +139,7 @@ public class WaypointActivity extends Activity {
 
 	public void GetWPOnClick(View v) {
 		for (int i = 0; i < 16; i++) {
-			app.mw.SendRequestGetWayPoint(i);
+			app.mw.SendRequestMSP_WP(i);
 		}
 	}
 

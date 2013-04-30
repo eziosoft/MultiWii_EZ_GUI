@@ -40,7 +40,7 @@ public class TemplateActivity extends Activity {
 
 											app.mw.ProcessSerialData(app.loggingON);
 
-											app.frsky.ProcessSerialData(false);
+											app.frskyProtocol.ProcessSerialData(false);
 											app.Frequentjobs();
 
 											app.mw.SendRequest();

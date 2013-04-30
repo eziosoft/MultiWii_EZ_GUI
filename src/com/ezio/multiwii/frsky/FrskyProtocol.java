@@ -35,21 +35,30 @@ public class FrskyProtocol {
 	int f = 0;
 	int frame[] = new int[11];
 
-	BT bt;
+	Communication communicationFrsky;
 
 	public FrskyProtocol(Communication bTFrsky) {
-		bt = (BT) bTFrsky;
+		communicationFrsky = bTFrsky;
 	}
 
 	public void ProcessSerialData(boolean appLogging) {
-		while (bt.dataAvailable()) {
-			int b = bt.Read(); // was bt.Read8()
+		while (communicationFrsky.dataAvailable()) {
+			int b = communicationFrsky.Read() & 0xFF; // was bt.Read8()
+
+			byte[] a = new byte[1];
+			a[0] = (byte) b;
+			communicationFrsky.Write(a);
+
+			// Log.d("frsky", String.valueOf(b));
 
 			if (b == 0x7e) {
 				frame[f] = b;
 				if (frame[0] == 0x7e && frame[10] == 0x7e) {
 
+					Log.d("frsky", "Frame=" + getHex(frame) + "  " + "f[1]=" + String.valueOf(frame[1]));
+
 					if (frame[1] == 0xFE) {
+						Log.d("frsky", "evaluateCommandFE");
 						evaluateCommandFE(frame);
 					}
 
@@ -63,7 +72,7 @@ public class FrskyProtocol {
 			}
 
 			if (b == 0x7d)
-				b = (bt.Read() ^ 0x20); // was bt.Read8()
+				b = (communicationFrsky.Read() ^ 0x20); // was bt.Read8()
 
 			frame[f] = b;
 			f++;
@@ -77,6 +86,8 @@ public class FrskyProtocol {
 		Analog2 = frame[3];
 		TxRSSI = frame[4];
 		RxRSSI = frame[5] / 2;
+		Log.d("frsky", "evaluateCommandFE");
+
 	}
 
 	ArrayList<Integer> buffor = new ArrayList<Integer>();
@@ -138,6 +149,7 @@ public class FrskyProtocol {
 			// getHex(frame) + "->bytes " + String.valueOf(validBytes)
 			// + "   b=" + getHex(buffor.toArray()) + "    f="
 			// + getHex(dataInFrame));
+			Log.d("frsky", "evaluateCommandFD");
 		}
 
 	}

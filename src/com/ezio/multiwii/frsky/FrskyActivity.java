@@ -53,24 +53,24 @@ public class FrskyActivity extends SherlockActivity {
 
 			app.mw.SendRequest();
 
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 
-			pbRx.setProgress(app.frsky.RxRSSI);
-			pbTx.setProgress(app.frsky.TxRSSI);
+			pbRx.setProgress(app.frskyProtocol.RxRSSI);
+			pbTx.setProgress(app.frskyProtocol.TxRSSI);
 
-			RxdBTV.setText(String.valueOf(app.frsky.RxRSSI) + "dBc");
-			TxdBTV.setText(String.valueOf(app.frsky.TxRSSI) + "dBc");
+			RxdBTV.setText(String.valueOf(app.frskyProtocol.RxRSSI) + "dBc");
+			TxdBTV.setText(String.valueOf(app.frskyProtocol.TxRSSI) + "dBc");
 
-			TV.setText("A1=" + String.valueOf(app.frsky.Analog1) + " A2="
-					+ String.valueOf(app.frsky.Analog2) + " RxRSSI="
-					+ String.valueOf(app.frsky.RxRSSI) + " TxRSSI="
-					+ String.valueOf(app.frsky.TxRSSI));
+			TV.setText("A1=" + String.valueOf(app.frskyProtocol.Analog1) + " A2="
+					+ String.valueOf(app.frskyProtocol.Analog2) + " RxRSSI="
+					+ String.valueOf(app.frskyProtocol.RxRSSI) + " TxRSSI="
+					+ String.valueOf(app.frskyProtocol.TxRSSI));
 
 			TV.setText("");
-			log("A1=" + String.valueOf((float) app.frsky.Analog1 * 0.052f)
-					+ " A2=" + String.valueOf(app.frsky.Analog2) + " "
+			log("A1=" + String.valueOf((float) app.frskyProtocol.Analog1 * 0.052f)
+					+ " A2=" + String.valueOf(app.frskyProtocol.Analog2) + " "
 					+ "HubErr="
-					+ String.valueOf(app.frsky.frskyHubProtocol.hubErrors));
+					+ String.valueOf(app.frskyProtocol.frskyHubProtocol.hubErrors));
 //			log("Altitude="
 //					+ String.valueOf(app.frsky.frskyHubProtocol.Altitude));
 //			log("Heading=" + String.valueOf(app.frsky.frskyHubProtocol.Heading));
@@ -81,7 +81,7 @@ public class FrskyActivity extends SherlockActivity {
 			// + String.valueOf(app.frsky.FMinute) + ":"
 			// + String.valueOf(app.frsky.FSecond));
 
-			TVSmall.setText(app.frsky.frskyHubProtocol.whatFramesToString());
+			TVSmall.setText(app.frskyProtocol.frskyHubProtocol.whatFramesToString());
 
 			// log(app.frsky.lastHubFrameslog);
 

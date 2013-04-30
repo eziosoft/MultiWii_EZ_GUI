@@ -70,7 +70,7 @@ public class App extends Application implements Sensors.Listener {
 	public boolean FollowHeading = false;
 	public boolean FollowHeadingBlinkFlag = false;
 
-	public FrskyProtocol frsky;
+	public FrskyProtocol frskyProtocol;
 
 	private SharedPreferences prefs;
 	private Editor editor;
@@ -261,7 +261,7 @@ public class App extends Application implements Sensors.Listener {
 			mw = new MultiWii210(comm);
 		}
 
-		frsky = new FrskyProtocol(commFrsky);
+		frskyProtocol = new FrskyProtocol(commFrsky);
 
 		oldActiveModes = new boolean[20];// not the best method
 		mw._1G = _1Gtemp;
@@ -355,7 +355,7 @@ public class App extends Application implements Sensors.Listener {
 
 		// rssi
 		if (!commFrsky.Connected && comm.Connected) {
-			frsky.TxRSSI = Functions.map(mw.rssi, 0, 1024, 0, 110);
+			frskyProtocol.TxRSSI = Functions.map(mw.rssi, 0, 1024, 0, 110);
 		}
 
 		// Copy data from FrSky
@@ -441,16 +441,18 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			// update Home position
-			mw.SendRequestGetWayPoint(0);
+			if (comm.Connected) {
+				mw.SendRequestMSP_WP(0);
 
-			for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
-				if (mw.buttonCheckboxLabel[i].equals("GPS HOLD")) {
-					if (mw.ActiveModes[i]) {
-						// update Position hold
-						mw.SendRequestGetWayPoint(16);
-					} else {
-						mw.Waypoints[16].Lat = 0;
-						mw.Waypoints[16].Lon = 0;
+				for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
+					if (mw.buttonCheckboxLabel[i].equals("GPS HOLD")) {
+						if (mw.ActiveModes[i]) {
+							// update Position hold
+							mw.SendRequestMSP_WP(16);
+						} else {
+							mw.Waypoints[16].Lat = 0;
+							mw.Waypoints[16].Lon = 0;
+						}
 					}
 				}
 			}
@@ -506,23 +508,23 @@ public class App extends Application implements Sensors.Listener {
 	}
 
 	private void FrskyToMW() {
-		mw.angx = frsky.frskyHubProtocol.angX;
-		mw.angy = frsky.frskyHubProtocol.angY;
+		mw.angx = frskyProtocol.frskyHubProtocol.angX;
+		mw.angy = frskyProtocol.frskyHubProtocol.angY;
 
-		mw.ax = frsky.frskyHubProtocol.Acc_X;
-		mw.ay = frsky.frskyHubProtocol.Acc_Y;
-		mw.az = frsky.frskyHubProtocol.Acc_Z;
+		mw.ax = frskyProtocol.frskyHubProtocol.Acc_X;
+		mw.ay = frskyProtocol.frskyHubProtocol.Acc_Y;
+		mw.az = frskyProtocol.frskyHubProtocol.Acc_Z;
 
-		mw.head = frsky.frskyHubProtocol.Heading;
-		mw.GPS_numSat = frsky.frskyHubProtocol.Temperature_1;
-		mw.GPS_speed = frsky.frskyHubProtocol.GPS_Speed;
+		mw.head = frskyProtocol.frskyHubProtocol.Heading;
+		mw.GPS_numSat = frskyProtocol.frskyHubProtocol.Temperature_1;
+		mw.GPS_speed = frskyProtocol.frskyHubProtocol.GPS_Speed;
 
-		mw.GPS_latitude = (int) frsky.frskyHubProtocol.GPS_Latitude;
-		mw.GPS_longitude = (int) frsky.frskyHubProtocol.GPS_Longtitude;
+		mw.GPS_latitude = (int) frskyProtocol.frskyHubProtocol.GPS_Latitude;
+		mw.GPS_longitude = (int) frskyProtocol.frskyHubProtocol.GPS_Longtitude;
 
-		mw.alt = frsky.frskyHubProtocol.Altitude;
+		mw.alt = frskyProtocol.frskyHubProtocol.Altitude;
 
-		mw.bytevbat = (byte) frsky.frskyHubProtocol.Voltage;
+		mw.bytevbat = (byte) frskyProtocol.frskyHubProtocol.Voltage;
 	}
 
 	@Override

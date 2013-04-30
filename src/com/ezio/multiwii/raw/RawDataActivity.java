@@ -48,7 +48,7 @@ public class RawDataActivity extends Activity {
 
 			app.mw.ProcessSerialData(app.loggingON);
 
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
 
 			displayData();
@@ -235,6 +235,8 @@ public class RawDataActivity extends Activity {
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
 		log("CommunicationTypeMW", app.CommunicationTypeMW);
+		log("comm Connected",String.valueOf(app.comm.Connected));
+		log("commFrsky Connected",String.valueOf(app.commFrsky.Connected));
 		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
 
 	}

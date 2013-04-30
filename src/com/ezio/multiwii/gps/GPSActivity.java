@@ -70,7 +70,7 @@ public class GPSActivity extends SherlockActivity {
 		public void run() {
 
 			app.mw.ProcessSerialData(app.loggingON);
-			app.frsky.ProcessSerialData(false);
+			app.frskyProtocol.ProcessSerialData(false);
 
 			float lat = (float) (app.mw.GPS_latitude / Math.pow(10, 7));
 			float lon = (float) (app.mw.GPS_longitude / Math.pow(10, 7));
