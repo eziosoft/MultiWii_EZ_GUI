@@ -133,7 +133,7 @@ public class BT extends Communication {
 			e.printStackTrace();
 			Toast.makeText(context, "Read error", Toast.LENGTH_LONG).show();
 		}
-		return (byte) (a & 0xff);
+		return (byte) (a);
 	}
 
 	@Override
