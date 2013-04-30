@@ -186,7 +186,7 @@ public class OtherActivity extends SherlockActivity {
 		app.mw.SendRequestMSP_ENABLE_FRSKY();
 		// app.mw.SendRequestMSP_SET_SERIAL_BAUDRATE(Integer.parseInt(EditTextSetSerialBoudRate.getText().toString()));
 		app.mw.SendRequestMSP_SET_SERIAL_BAUDRATE(9600);
-		app.comm.Close();
+		app.commMW.Close();
 	}
 
 }

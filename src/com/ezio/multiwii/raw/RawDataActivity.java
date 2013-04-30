@@ -94,7 +94,7 @@ public class RawDataActivity extends Activity {
 			TVData.setText(getString(R.string.MacNotSet));
 		} else {
 			TVData.setText("");
-			if (!app.comm.Connected)
+			if (!app.commMW.Connected)
 				TVData.setText(getString(R.string.InfoNotConnected));
 		}
 
@@ -235,7 +235,7 @@ public class RawDataActivity extends Activity {
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
 		log("CommunicationTypeMW", app.CommunicationTypeMW);
-		log("comm Connected",String.valueOf(app.comm.Connected));
+		log("comm Connected",String.valueOf(app.commMW.Connected));
 		log("commFrsky Connected",String.valueOf(app.commFrsky.Connected));
 		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
 

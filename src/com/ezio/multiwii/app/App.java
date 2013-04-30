@@ -52,13 +52,12 @@ public class App extends Application implements Sensors.Listener {
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
-	// public boolean DataSent = false; // to server
-
+	
 	private static String REFRESHRATE = "REFRESHRATE";
 	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
 
-	public Communication comm;
+	public Communication commMW;
 	public Communication commFrsky;
 	public MultirotorData mw;
 	public Sensors sensors;
@@ -223,15 +222,15 @@ public class App extends Application implements Sensors.Listener {
 		ForceLanguage();
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
-			comm = new BT(getApplicationContext());
+			commMW = new BT(getApplicationContext());
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_FTDI) {
-			comm = new SerialFTDI(getApplicationContext());
+			commMW = new SerialFTDI(getApplicationContext());
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			comm = new SerialCDC_ACM(getApplicationContext());
+			commMW = new SerialCDC_ACM(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
@@ -258,7 +257,7 @@ public class App extends Application implements Sensors.Listener {
 		Protocol = 210;
 
 		if (Protocol == 210) {
-			mw = new MultiWii210(comm);
+			mw = new MultiWii210(commMW);
 		}
 
 		frskyProtocol = new FrskyProtocol(commFrsky);
@@ -354,16 +353,16 @@ public class App extends Application implements Sensors.Listener {
 	public void Frequentjobs() {
 
 		// rssi
-		if (!commFrsky.Connected && comm.Connected) {
+		if (!commFrsky.Connected && commMW.Connected) {
 			frskyProtocol.TxRSSI = Functions.map(mw.rssi, 0, 1024, 0, 110);
 		}
 
 		// Copy data from FrSky
-		if (CopyFrskyToMW && commFrsky.Connected && !comm.Connected)
+		if (CopyFrskyToMW && commFrsky.Connected && !commMW.Connected)
 			FrskyToMW();
 
 		// Say battery level every xx seconds
-		if (PeriodicSpeaking > 0 && comm.Connected && timer1 < System.currentTimeMillis()) {
+		if (PeriodicSpeaking > 0 && commMW.Connected && timer1 < System.currentTimeMillis()) {
 			timer1 = System.currentTimeMillis() + PeriodicSpeaking;
 			if (mw.bytevbat > 10) {
 				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)) + " " + getString(R.string.TTS_Volts));
@@ -375,7 +374,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		// beep when low battery
-		if (mw.bytevbat > 10 && VoltageAlarm > 0 && comm.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
+		if (mw.bytevbat > 10 && VoltageAlarm > 0 && commMW.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
 			timer2 = System.currentTimeMillis() + timer2Freq;
 			soundManager.playSound(0);
 		}
@@ -432,16 +431,16 @@ public class App extends Application implements Sensors.Listener {
 			timer4 = System.currentTimeMillis() + timer4Freq;
 
 			// Reconecting
-			if (comm.ConnectionLost) {
-				if (comm.ReconnectTry < 1) {
+			if (commMW.ConnectionLost) {
+				if (commMW.ReconnectTry < 1) {
 					tts.Speak(getString(R.string.Reconnecting));
-					comm.Connect(MacAddress);
-					comm.ReconnectTry++;
+					commMW.Connect(MacAddress);
+					commMW.ReconnectTry++;
 				}
 			}
 
 			// update Home position
-			if (comm.Connected) {
+			if (commMW.Connected) {
 				mw.SendRequestMSP_WP(0);
 
 				for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
@@ -501,8 +500,8 @@ public class App extends Application implements Sensors.Listener {
 
 	public void ConnectionBug() { // autoconnect again when new activity is
 									// started
-		if (ConnectOnStart && !comm.Connected) {
-			comm.Connect(MacAddress);
+		if (ConnectOnStart && !commMW.Connected) {
+			commMW.Connect(MacAddress);
 			Say(getString(R.string.menu_connect));
 		}
 	}

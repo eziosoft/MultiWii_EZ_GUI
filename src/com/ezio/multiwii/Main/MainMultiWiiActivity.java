@@ -143,7 +143,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
-		if (app.comm.Connected) {
+		if (app.commMW.Connected) {
 
 			try {
 				mHandler.removeCallbacksAndMessages(null);
@@ -169,7 +169,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void Close(View v) {
 		try {
 			mHandler.removeCallbacksAndMessages(null);
-			app.comm.Close();
+			app.commMW.Close();
 			app.commFrsky.Close();
 		}
 
@@ -181,12 +181,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void Connect(String MacAddress) {
 		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			app.comm.Connect(app.SerialPortBaudRateMW);
+			app.commMW.Connect(app.SerialPortBaudRateMW);
 		}
 
 		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT) {
 			if (!app.MacAddress.equals("")) {
-				app.comm.Connect(app.MacAddress);
+				app.commMW.Connect(app.MacAddress);
 				app.Say(getString(R.string.menu_connect));
 			} else {
 				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
@@ -200,7 +200,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void ConnectFrsky(String MacAddress) {
 		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL_FTDI) {
-			app.comm.Connect(app.SerialPortBaudRateFrSky);
+			app.commMW.Connect(app.SerialPortBaudRateFrSky);
 		}
 
 		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT) {
@@ -388,7 +388,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
 			if (app.DisableBTonExit) {
-				app.comm.Disable();
+				app.commMW.Disable();
 				app.commFrsky.Disable();
 			}
 
@@ -421,7 +421,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (item.getItemId() == R.id.menu_disconnect) {
 			app.Say(getString(R.string.menu_disconnect));
-			app.comm.ConnectionLost = false;
+			app.commMW.ConnectionLost = false;
 			app.commFrsky.ConnectionLost = false;
 			Close(null);
 			return true;

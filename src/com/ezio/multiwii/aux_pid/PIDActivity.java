@@ -210,7 +210,7 @@ public class PIDActivity extends SherlockActivity {
 		app.Say(getString(R.string.PID));
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-		while (app.comm.dataAvailable()) {
+		while (app.commMW.dataAvailable()) {
 			app.mw.ProcessSerialData(false);
 		}
 		ShowData();
