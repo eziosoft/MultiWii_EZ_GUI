@@ -217,7 +217,7 @@ public class PIDActivity extends SherlockActivity {
 	}
 
 	public void ReadOnClick(View v) {
-		app.mw.SendRequestGetPID();
+		app.mw.SendRequestMSP_PID_MSP_RC_TUNING();
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
@@ -237,7 +237,7 @@ public class PIDActivity extends SherlockActivity {
 
 			public void onClick(DialogInterface dialog, int id) {
 
-				app.mw.SendRequestResetSettings();
+				app.mw.SendRequestMSP_RESET_CONF();
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -324,9 +324,9 @@ public class PIDActivity extends SherlockActivity {
 
 			public void onClick(DialogInterface dialog, int id) {
 
-				app.mw.SendRequestSetPID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
+				app.mw.SendRequestMSP_SET_PID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
 
-				app.mw.SendRequestWriteToEEprom();
+				app.mw.SendRequestMSP_EEPROM_WRITE();
 
 				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 

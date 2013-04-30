@@ -542,7 +542,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (InjectGPSEnable) {
-			mw.SendRequestGPSinject21((byte) sensors.PhoneFix, (byte) sensors.PhoneNumSat, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), (int) sensors.PhoneAltitude, (int) sensors.PhoneSpeed);
+			mw.SendRequestMSP_SET_RAW_GPS((byte) sensors.PhoneFix, (byte) sensors.PhoneNumSat, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), (int) sensors.PhoneAltitude, (int) sensors.PhoneSpeed);
 			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
 		}
 

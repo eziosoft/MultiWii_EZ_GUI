@@ -478,7 +478,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGetPID() {
+	public void SendRequestMSP_PID_MSP_RC_TUNING() {
 		if (bt.Connected) {
 			int[] requests = { MSP_PID, MSP_RC_TUNING };
 			sendRequestMSP(requestMSP(requests));
@@ -544,19 +544,19 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestAccCalibration() {
+	public void SendRequestMSP_ACC_CALIBRATION() {
 		sendRequestMSP(requestMSP(MSP_ACC_CALIBRATION));
 	}
 
 	@Override
-	public void SendRequestMagCalibration() {
+	public void SendRequestMSP_MAG_CALIBRATION() {
 		sendRequestMSP(requestMSP(MSP_MAG_CALIBRATION));
 	}
 
 	ArrayList<Character> payload = new ArrayList<Character>();
 
 	@Override
-	public void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD) {
+	public void SendRequestMSP_SET_PID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD) {
 
 		// MSP_SET_RC_TUNING
 		payload = new ArrayList<Character>();
@@ -599,19 +599,19 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestResetSettings() {
+	public void SendRequestMSP_RESET_CONF() {
 		sendRequestMSP(requestMSP(MSP_RESET_CONF));
 
 	}
 
 	@Override
-	public void SendRequestGetMisc() {
+	public void SendRequestMSP_MISC() {
 		sendRequestMSP(requestMSP(MSP_MISC));
 
 	}
 
 	@Override
-	public void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed) {
+	public void SendRequestMSP_SET_RAW_GPS(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) GPS_FIX);
 		payload.add((char) numSat);
@@ -638,7 +638,7 @@ public class MultiWii210 extends MultirotorData {
 	 * 0rcRoll 1rcPitch 2rcYaw 3rcThrottle 4rcAUX1 5rcAUX2 6rcAUX3 7rcAUX4
 	 */
 	@Override
-	public void SendRequestSetRawRC(int[] channels8) {
+	public void SendRequestMSP_SET_RAW_RC(int[] channels8) {
 		ArrayList<Character> payload = new ArrayList<Character>();
 		for (int i = 0; i < 8; i++) {
 			payload.add((char) (channels8[i] & 0xFF));
@@ -652,12 +652,12 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestGetCheckboxes() {
+	public void SendRequestMSP_BOX() {
 		sendRequestMSP(requestMSP(MSP_BOX));
 	}
 
 	@Override
-	public void SendRequestSetCheckboxes() {
+	public void SendRequestMSP_SET_BOX() {
 		// MSP_SET_BOX
 		payload = new ArrayList<Character>();
 		for (i = 0; i < CHECKBOXITEMS; i++) {
@@ -676,7 +676,7 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestWriteToEEprom() {
+	public void SendRequestMSP_EEPROM_WRITE() {
 		// MSP_EEPROM_WRITE
 		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
 	}
@@ -819,54 +819,4 @@ public class MultiWii210 extends MultirotorData {
 		Log.d("aaa", "MSP_SET_MOTOR " + String.valueOf(motorTogglesByte));
 	}
 
-	// @Override
-	// public void SendRequestMSP_SET_MISC_CONF(int minthrottle, int
-	// maxthrottle, int mincommand, int midrc, float mag_decliniation, byte
-	// vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float
-	// vbatlevel_crit) {
-	// payload = new ArrayList<Character>();
-	//
-	// payload.add((char) (minthrottle % 256));
-	// payload.add((char) (minthrottle / 256));
-	//
-	// // Prepared for future use
-	// payload.add((char) (maxthrottle % 256));
-	// payload.add((char) (maxthrottle / 256));
-	//
-	// payload.add((char) (mincommand % 256));
-	// payload.add((char) (mincommand / 256));
-	//
-	// payload.add((char) (midrc % 256));
-	// payload.add((char) (midrc / 256));
-	// // /////////////////////////
-	//
-	// int nn = Math.round(mag_decliniation * 10) + 1000;
-	// payload.add((char) (nn % 256));
-	// payload.add((char) (nn / 256));
-	//
-	// nn = Math.round(vbatscale);
-	// payload.add((char) (nn)); // VBatscale
-	//
-	// int q = (int) (vbatlevel_warn1 * 10);
-	// payload.add((char) (q));
-	//
-	// q = (int) (vbatlevel_warn2 * 10);
-	// payload.add((char) (q));
-	//
-	// q = (int) (vbatlevel_crit * 10);
-	// payload.add((char) (q));
-	//
-	// sendRequestMSP(requestMSP(MSP_SET_MISC_CONF, payload.toArray(new
-	// Character[payload.size()])));
-	//
-	// // MSP_EEPROM_WRITE
-	// sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
-	// Log.d("aaa", "MSP_SET_MISC_CONF");
-	// }
-
-	// @Override
-	// public void SendRequestMSP_MISC_CONF() {
-	// sendRequestMSP(requestMSP(MSP_MISC_CONF));
-	//
-	// }
 }

@@ -183,31 +183,31 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequest();
 
-	public abstract void SendRequestGetPID();
+	public abstract void SendRequestMSP_PID_MSP_RC_TUNING();
 
-	public abstract void SendRequestGetMisc();
+	public abstract void SendRequestMSP_MISC();
 
-	public abstract void SendRequestAccCalibration();
+	public abstract void SendRequestMSP_ACC_CALIBRATION();
 
-	public abstract void SendRequestMagCalibration();
+	public abstract void SendRequestMSP_MAG_CALIBRATION();
 
-	public abstract void SendRequestResetSettings();
+	public abstract void SendRequestMSP_RESET_CONF();
 
 	public abstract void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
 
-	public abstract void SendRequestSetPID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD);
+	public abstract void SendRequestMSP_SET_PID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD);
 
-	public abstract void SendRequestGetCheckboxes();
+	public abstract void SendRequestMSP_BOX();
 
-	public abstract void SendRequestSetCheckboxes();
+	public abstract void SendRequestMSP_SET_BOX();
 
-	public abstract void SendRequestGPSinject21(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed);
+	public abstract void SendRequestMSP_SET_RAW_GPS(byte GPS_FIX, byte numSat, int coordLAT, int coordLON, int altitude, int speed);
 
 	public abstract void SendRequestMSP_WP(int Number);
 
-	public abstract void SendRequestSetRawRC(int[] channels8);
+	public abstract void SendRequestMSP_SET_RAW_RC(int[] channels8);
 
-	public abstract void SendRequestWriteToEEprom();
+	public abstract void SendRequestMSP_EEPROM_WRITE();
 
 	public abstract void SendRequestMSP_SELECT_SETTING(int setting);
 

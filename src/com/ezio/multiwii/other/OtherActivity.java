@@ -115,7 +115,7 @@ public class OtherActivity extends SherlockActivity {
 	}
 
 	private void Read() {
-		app.mw.SendRequestGetMisc();
+		app.mw.SendRequestMSP_MISC();
 
 		try {
 			Thread.sleep(600);
@@ -163,11 +163,11 @@ public class OtherActivity extends SherlockActivity {
 	// }
 
 	public void MagCalibrationOnClick(View v) {
-		app.mw.SendRequestMagCalibration();
+		app.mw.SendRequestMSP_MAG_CALIBRATION();
 	}
 
 	public void AccCalibrationOnClick(View v) {
-		app.mw.SendRequestAccCalibration();
+		app.mw.SendRequestMSP_ACC_CALIBRATION();
 	}
 
 	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {

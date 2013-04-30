@@ -82,7 +82,7 @@ public class ControlActivity extends Activity {
 											app.Frequentjobs();
 
 											//app.mw.SendRequest();
-											app.mw.SendRequestSetRawRC(CH8);
+											app.mw.SendRequestMSP_SET_RAW_RC(CH8);
 											if (!killme)
 												mHandler.postDelayed(update, 70);
 

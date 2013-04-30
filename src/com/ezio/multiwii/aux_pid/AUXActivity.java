@@ -87,7 +87,7 @@ public class AUXActivity extends SherlockActivity {
 	}
 
 	void ReadOnClick() {
-		app.mw.SendRequestGetCheckboxes();
+		app.mw.SendRequestMSP_BOX();
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
@@ -111,9 +111,9 @@ public class AUXActivity extends SherlockActivity {
 						app.mw.Checkbox[i][j] = GetCheckbox(i * 100 + j);
 					}
 				}
-				app.mw.SendRequestSetCheckboxes();
+				app.mw.SendRequestMSP_SET_BOX();
 
-				app.mw.SendRequestWriteToEEprom();
+				app.mw.SendRequestMSP_EEPROM_WRITE();
 
 				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
