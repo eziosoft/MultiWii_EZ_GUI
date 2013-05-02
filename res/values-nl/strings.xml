@@ -47,7 +47,6 @@
   <string name="MacNotSet">Ga naar Config en selecteer uw bluetooth apparaat eerst.\n\nKan werken, kan niet werken, zou de wereld of wat dan ook kunnen vernietigen. \nGebruik op uw eigen risico! \n\n Als U deze app waardeert koop dan een biertje voor me (doneren).</string>
   <string name="InfoNotConnected">\n\nKan werken, kan niet werken, zou de wereld of wat dan ook kunnen vernietigen. \nGebruik op uw eigen risico. \n Als U deze app waardeert koop dan een biertje voor me (doneren).</string>
   <string name="BTDevice">Bluetooth-apparaat</string>
-  <string name="menu_vote">Beoordeel het!</string>
   <string name="PhoneLatitude">TelefoonBreedtegraad</string>
   <string name="PhoneLongitude">TelefoonLengtegraad</string>
   <string name="PhoneAltitude">TelefoonHoogte(m)</string>

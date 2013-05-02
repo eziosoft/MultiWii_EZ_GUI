@@ -10,7 +10,7 @@
   <string name="title_other_devices">Jiná dostupná zařízení</string>
   <string name="button_scan">Hledej zařízení</string>
   <string name="Radio">Rádio</string>
-  <string name="PitchRoll">Příst. deska 1</string>
+  <string name="PitchRoll">Přístr. deska 1</string>
   <string name="Pitch">Pitch</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Kompas</string>
@@ -48,7 +48,6 @@
   <string name="MacNotSet">Nejdříve běž do nastavení a vyber BT zařízení\n\nMožná bude fungovat, možná ne, možná zníčí svět.\nPoužívej jen na vlastní nebezpečí!!!\n\n Jestli se ti tato aplikace líbí kup mi pivo (Přispět).</string>
   <string name="InfoNotConnected">\n\nMožná bude fungovat, možná ne, možná zníčí svět.\nPožití jen na vlastní nebezpečí!!!\n Jestli se ti tato aplikace líbí kup mi pivo (Daruj).</string>
   <string name="BTDevice">Zařízení Bluetooth</string>
-  <string name="menu_vote">Ohodnoť!</string>
   <string name="PhoneLatitude">Zem. šířka telefonu</string>
   <string name="PhoneLongitude">Zem. délka telefonu</string>
   <string name="PhoneAltitude">Výška telefonu (m)</string>
@@ -73,7 +72,7 @@
   <string name="Other">Ostatní</string>
   <string name="PhoneSpeed">Rychlost telefonu(cm/s)</string>
   <string name="PhoneNumSat">PočSat telefonu </string>
-  <string name="dashboard2">Přist. deska 2</string>
+  <string name="dashboard2">Přístr. deska 2</string>
   <string name="disableBTonExit">Vypni BT po odchodu</string>
   <string name="Declination">Mag Deklinace</string>
   <string name="ThrMid">Plyn střed</string>
@@ -153,7 +152,7 @@
   <string name="Connect_frsky">Připoj Frsky</string>
   <string name="UseOfflineMap">Použíj mapy offline</string>
   <string name="RefreshRate">Obnovovací frekvence v ms (měla by být &gt;=100)</string>
-  <string name="ConnectionBug">Použi v případě odpojovaní když zmáčknes tlačítko (zatím funguje jen pro Přís. desku 2 )</string>
+  <string name="ConnectionBug">Použito v případě odpojovaní když stiskneš tlačítko (zatím funguje jen pro Přístr. desku 2 )</string>
   <string name="CopyFrskyToMW">Použíj data z Frsky všude</string>
   <string name="page1">Hlavní nabídka</string>
   <string name="page2">Nastavení MW</string>
@@ -190,12 +189,12 @@
   <string name="SetAltitude">Nastavení výšky v cm:</string>
   <string name="VerticalSpeed">Vertikální rychlost</string>
   <string name="UseFTDISerial">Používat sériový port pro MultiWii (prosím restartujte aplikaci před připojením)</string>
-  <string name="Dashboard3">Příst. deska 3</string>
+  <string name="Dashboard3">Přístr. deska 3</string>
   <string name="SerialPort">Sériový Port</string>
   <string name="SerialPortBaudRate">Rychlost sériového portu</string>
   <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
   <string name="OtherSerialChips">Ostatní (CDC/ACM)</string>
-  <string name="ACCcalibrationInfo">Umístěte rám na rovný povrch, stiskněte tlačítko Kalibrace ACC a zajistěte že se rám nebude během kalibrace pohybovat</string>
+  <string name="ACCcalibrationInfo">Umístěte multirotor na rovný povrch, stiskněte tlačítko Kalibrace ACC a zajistěte že se nebude během kalibrace pohybovat</string>
   <string name="MagCalibrationInfo">Stiskněte tlačítko Kalibrace MAG, pohybujte multirotorem v rozsahu 360 stupňů ve všech osaách. Máte 30 sekund k dokončení této kalibrace.</string>
   <string name="TTS_Volts">Voltů</string>
   <string name="TTS_Meters">Metrů</string>

@@ -51,7 +51,6 @@
   <string name="MacNotSet">到設定去選擇你的藍牙設備 first\n\nMay 、 \nUse 風險由您自己承擔!  \n\n </string>
   <string name="InfoNotConnected">\n\nMay 、 \nUse 在您自己的風險 、 \n </string>
   <string name="BTDevice">藍芽裝置</string>
-  <string name="menu_vote">購買吧</string>
   <string name="PhoneLatitude">手機緯度</string>
   <string name="PhoneLongitude">手機經度</string>
   <string name="PhoneAltitude">手機高度(米)</string>

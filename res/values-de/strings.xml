@@ -3,14 +3,14 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Nach Geräten suchen...</string>
-  <string name="select_device">Verbindung mit</string>
+  <string name="select_device">Gerät wählen mit dem eine Verbindung hersgestellt werden soll</string>
   <string name="none_paired">Keine verbundenen Geräte (paired)</string>
   <string name="none_found">Keine Geräte gefunden</string>
   <string name="title_paired_devices">verbundene Geräte</string>
   <string name="title_other_devices">Andere verfügbare Geräte</string>
   <string name="button_scan">Nach Geräten suchen</string>
-  <string name="Radio">RC Signal</string>
-  <string name="PitchRoll">Anzeige 1</string>
+  <string name="Radio">Funksignal</string>
+  <string name="PitchRoll">Auswertung 1</string>
   <string name="Pitch">Nick</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Kompass</string>
@@ -49,7 +49,6 @@
   <string name="MacNotSet">Bitte die Einstellungen öffnen und ein Bluetooth Gerät auswählen.\n\nFunktioniert hoffentlich, könnte die Welt vernichten, egal.\nBenutzung auf eigene Gefahr.</string>
   <string name="InfoNotConnected">\n\nFunktioniert hoffentlich, könnte die Welt vernichten, egal.\nBenutzung auf eigene Gefahr. \n Gefällt dir die App? Ich würde mich über Trinkgeld (Spende) freuen.</string>
   <string name="BTDevice">Bluetooth Gerät</string>
-  <string name="menu_vote">App bewerten!</string>
   <string name="PhoneLatitude">Breitengrad (Android)</string>
   <string name="PhoneLongitude">Längengrad (Android)</string>
   <string name="PhoneAltitude">Höhe (m)</string>
@@ -211,4 +210,7 @@
   <string name="BatWarning1">Batterie Warnung 1</string>
   <string name="BatWarning2">Batterie Warnung 2</string>
   <string name="BatCritical">Batterie kritisch</string>
+  <string name="GreenValuesCanBeChanged">Grüne Werte können geändert werden</string>
+  <string name="Locked">Gesperrt</string>
+  <string name="DoYouWantToUnlock">Möchten Sie es entsperren?</string>
 </resources>

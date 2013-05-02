@@ -49,7 +49,6 @@
   <string name="MacNotSet">Aller à Config et sélectionnez votre premier périphérique bluetooth\n\nPeut fonctionner ou pas, peut détruire le monde ou n\'importe quoi.\nUtilisez à vos propres risques!\n\nSi vous aimez cette application achetez-moi une bière (Donate).</string>
   <string name="InfoNotConnected">\n\nPeut fonctionner ou pas, peut détruire le monde ou n\'importe quoi d\'autre. \nUtilisez à vos propres risques!\n si vous aimez ce soft achetez moi une bière (un don).</string>
   <string name="BTDevice">Périphérique Bluetooth</string>
-  <string name="menu_vote">Donnez votre avis !</string>
   <string name="PhoneLatitude">PhoneLatitude</string>
   <string name="PhoneLongitude">PhoneLongitude</string>
   <string name="PhoneAltitude">PhoneAltitude(m)</string>
@@ -83,6 +82,7 @@
   <string name="RCRate">Taux de RC</string>
   <string name="RCExpo">RC Expo</string>
   <string name="BattVoltage">Tension de Batterie</string>
+  <string name="PowerSum">Somme puissance</string>
   <string name="PowerMeterAlarm">Alarme Alimentation</string>
   <string name="Level">Niveau</string>
   <string name="Map">Carte</string>
@@ -114,6 +114,7 @@
   <string name="BatteryLevelIs">Tension de batterie est</string>
   <string name="Reconnecting">Perte de la connexion. Reconnexion</string>
   <string name="Language">Langue</string>
+  <string name="NotForce">Pas de Force</string>
   <string name="ForceEnglish">Forcer Anglais</string>
   <string name="ForceGerman">Forcer allemand</string>
   <string name="ForceHungarian">« Forcer hongrois »</string>
@@ -128,6 +129,7 @@
   <string name="VoltageAlarm">Bips lorsque la tension est inférieure à :</string>
   <string name="AdvancedWarning">Cette section contient des caractéristiques dangereuses et pas très bien testées. Utilisez-le uniquement lorsque vous savez ce que vous faites. \nDOIT ETRE UTILISE AVEC UNE EXTREME PRUDENCE! \n\n!UTILISATION À VOS RISQUES ET PÉRILS !</string>
   <string name="Advanced">Avancé</string>
+  <string name="PhoneAccuracy">PhonePrecision(cm)</string>
   <string name="SetCheckboxes">AUX</string>
   <string name="Set">Définir</string>
   <string name="SavetoEEPROM">Enregistrer dans l\'EEPROM</string>
@@ -195,4 +197,20 @@
   <string name="SerialPortBaudRate">vitesse du port serie</string>
   <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
   <string name="OtherSerialChips">Autre (CDC/ACM)</string>
+  <string name="ACCcalibrationInfo">Placer le châssis sur une surface plane, appuyez sur le bouton AccCalibration, s\'assurer qu\'il ne bouge pas pendant cette période</string>
+  <string name="MagCalibrationInfo">Appuyez sur le bouton MagCalibration, déplacer le multirotor au moins de 360 degrés sur tous les axes de rotation. Vous avez 30 secondes pour effectuer cette tâche.</string>
+  <string name="TTS_Volts">Volts</string>
+  <string name="TTS_Meters">Mètres</string>
+  <string name="TTS_Altitude">Altitude</string>
+  <string name="MinThrottle">MinGaz</string>
+  <string name="MaxThrottle">MaxGaz</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="MidRC">MidRC</string>
+  <string name="VBatScale">VBatEchel</string>
+  <string name="BatWarning1">BatAlarm1</string>
+  <string name="BatWarning2">BatAlarm2</string>
+  <string name="BatCritical">BatCritic</string>
+  <string name="GreenValuesCanBeChanged">Les valeurs vertes peuvent être modifiées</string>
+  <string name="Locked">Verrouillé</string>
+  <string name="DoYouWantToUnlock">Vous voulez le débloquer ?</string>
 </resources>

@@ -49,7 +49,6 @@
   <string name="MacNotSet">Vaya a configuración y seleccione su dispositivo bluetooth, puede destruir el mundo o lo que sea. bajo su propio riesgo! Si te gusta esta aplicación me comprame una cerveza (donación).</string>
   <string name="InfoNotConnected">Puede funcionar, o no, puede destruir el mundo o lo que sea úselo bajo su propio riesgo. si te gusta esta app cómprame una cerveza (Donación)</string>
   <string name="BTDevice">Dispositivo Bluetooth</string>
-  <string name="menu_vote">Votar!</string>
   <string name="PhoneLatitude">Latitud del teléfono</string>
   <string name="PhoneLongitude">Longitud del teléfono</string>
   <string name="PhoneAltitude">Altitud del teléfono(m)</string>
@@ -211,4 +210,7 @@
   <string name="BatWarning1">BatAdvertencia1</string>
   <string name="BatWarning2">BatAdvertencia2</string>
   <string name="BatCritical">BatCritical</string>
+  <string name="GreenValuesCanBeChanged">Se pueden cambiar los valores en verdes</string>
+  <string name="Locked">Bloqueado</string>
+  <string name="DoYouWantToUnlock">¿Quieres desbloquearlo?</string>
 </resources>
