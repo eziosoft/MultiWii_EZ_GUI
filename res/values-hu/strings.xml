@@ -41,7 +41,6 @@
   <string name="MacNotSet">Először lépj a beállításokba és válassz Bluetooth eszközt\n\n\nCsak saját felelősségre használd!!!\n\n Ha tetszik az alkalmazás, vegyél nekem egy sört (Támogatás).</string>
   <string name="InfoNotConnected">\n\n\nCsak saját felelősségre használd!!!\n Ha tetszik az alkalmazás, vegyél nekem egy sör! (Támogatás).</string>
   <string name="BTDevice">Bluetooth eszköz</string>
-  <string name="menu_vote">Értékeld!</string>
   <string name="PhoneLatitude">Telefon szélesség</string>
   <string name="PhoneLongitude">Telefon hosszúság</string>
   <string name="PhoneAltitude">Telefon magasság(m)</string>

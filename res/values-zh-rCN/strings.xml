@@ -49,7 +49,6 @@
   <string name="MacNotSet">首先配置和选择你的蓝牙设备，\n\n可能可以，可能不能使用，可能会严重炸机。\n\n使用风险自己承担。\n\n如果你喜欢这个程序，给我买瓶啤酒（捐赠）。</string>
   <string name="InfoNotConnected">\n\n可能可以，可能不能使用，可能会严重炸机。\n\n使用风险自己承担。\n\n如果你喜欢这个程序，给我买瓶啤酒（捐赠）。</string>
   <string name="BTDevice">蓝牙设备</string>
-  <string name="menu_vote">评价它 ！</string>
   <string name="PhoneLatitude">手机纬度</string>
   <string name="PhoneLongitude">手机经度</string>
   <string name="PhoneAltitude">手机高度（米）</string>
@@ -211,4 +210,7 @@
   <string name="BatWarning1">电压告警1</string>
   <string name="BatWarning2">电压告警2</string>
   <string name="BatCritical">电压紧急</string>
+  <string name="GreenValuesCanBeChanged">只有绿色的值可以更改</string>
+  <string name="Locked">锁定</string>
+  <string name="DoYouWantToUnlock">你想要将它解锁吗？</string>
 </resources>
