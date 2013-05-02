@@ -479,12 +479,8 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_PID_MSP_RC_TUNING() {
-		if (bt.Connected) {
-			int[] requests = { MSP_PID, MSP_RC_TUNING };
-			sendRequestMSP(requestMSP(requests));
-
-		}
-
+		int[] requests = { MSP_PID, MSP_RC_TUNING };
+		sendRequestMSP(requestMSP(requests));
 	}
 
 	@Override

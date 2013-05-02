@@ -275,7 +275,7 @@ public class ConfigActivity extends SherlockActivity {
 
 		app.SaveSettings(false);
 
-		app.Init();
+		//app.Init();
 
 	}
 }

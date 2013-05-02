@@ -143,7 +143,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
-		if (app.commMW.Connected) {
+		if (app.commMW.Connected || app.commFrsky.Connected) {
 
 			try {
 				mHandler.removeCallbacksAndMessages(null);

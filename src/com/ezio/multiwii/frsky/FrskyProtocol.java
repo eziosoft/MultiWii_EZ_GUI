@@ -43,22 +43,16 @@ public class FrskyProtocol {
 
 	public void ProcessSerialData(boolean appLogging) {
 		while (communicationFrsky.dataAvailable()) {
-			int b = communicationFrsky.Read() & 0xFF; // was bt.Read8()
-
-			byte[] a = new byte[1];
-			a[0] = (byte) b;
-			communicationFrsky.Write(a);
-
-			// Log.d("frsky", String.valueOf(b));
+			int b = communicationFrsky.Read() & 0xFF;
 
 			if (b == 0x7e) {
 				frame[f] = b;
 				if (frame[0] == 0x7e && frame[10] == 0x7e) {
 
-					Log.d("frsky", "Frame=" + getHex(frame) + "  " + "f[1]=" + String.valueOf(frame[1]));
+					// Log.d("frsky", "Frame=" + getHex(frame) + "  " + "f[1]="
+					// + String.valueOf(frame[1]));
 
 					if (frame[1] == 0xFE) {
-						Log.d("frsky", "evaluateCommandFE");
 						evaluateCommandFE(frame);
 					}
 
@@ -72,7 +66,7 @@ public class FrskyProtocol {
 			}
 
 			if (b == 0x7d)
-				b = (communicationFrsky.Read() ^ 0x20); // was bt.Read8()
+				b = (communicationFrsky.Read() & 0xFF ^ 0x20);
 
 			frame[f] = b;
 			f++;
@@ -134,21 +128,19 @@ public class FrskyProtocol {
 				try {
 					frskyHubProtocol.ProcessFrame(hubFrame);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				Log.d("frsky", getHex(frame) + "->bytes " + String.valueOf(validBytes) + "   b=" + getHex(buffor.toArray()) + "    f=" + getHex(dataInFrame) + "    hubFrame=" + getHex(hubFrame));
+				// Log.d("frsky", getHex(frame) + "->bytes " +
+				// String.valueOf(validBytes) + "   b=" +
+				// getHex(buffor.toArray()) + "    f=" + getHex(dataInFrame) +
+				// "    hubFrame=" + getHex(hubFrame));
 
 			} else {
 
 				buffor.remove(0);
 			}
 
-			// Log.d("frsky",
-			// getHex(frame) + "->bytes " + String.valueOf(validBytes)
-			// + "   b=" + getHex(buffor.toArray()) + "    f="
-			// + getHex(dataInFrame));
 			Log.d("frsky", "evaluateCommandFD");
 		}
 

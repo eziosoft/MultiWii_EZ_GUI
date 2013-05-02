@@ -362,7 +362,7 @@ public class App extends Application implements Sensors.Listener {
 			FrskyToMW();
 
 		// Say battery level every xx seconds
-		if (PeriodicSpeaking > 0 && commMW.Connected && timer1 < System.currentTimeMillis()) {
+		if (PeriodicSpeaking > 0 && (commMW.Connected || commFrsky.Connected) && timer1 < System.currentTimeMillis()) {
 			timer1 = System.currentTimeMillis() + PeriodicSpeaking;
 			if (mw.bytevbat > 10) {
 				Say(getString(R.string.BatteryLevelIs) + " " + String.valueOf((float) (mw.bytevbat / 10f)) + " " + getString(R.string.TTS_Volts));
@@ -374,7 +374,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		// beep when low battery
-		if (mw.bytevbat > 10 && VoltageAlarm > 0 && commMW.Connected && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
+		if (mw.bytevbat > 10 && VoltageAlarm > 0 && (commMW.Connected || commFrsky.Connected) && timer2 < System.currentTimeMillis() && (float) (mw.bytevbat / 10f) < VoltageAlarm) {
 			timer2 = System.currentTimeMillis() + timer2Freq;
 			soundManager.playSound(0);
 		}

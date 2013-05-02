@@ -228,7 +228,7 @@ public class RawDataActivity extends Activity {
 		log("PIDITEMS", app.mw.PIDITEMS);
 		log("timer1", app.mw.timer1);
 		log("timer2", app.mw.timer2);
-		log("bt.Connected", String.valueOf(app.mw.bt.Connected));
+	
 		log("bt.ConnectionLost", String.valueOf(app.mw.bt.ConnectionLost));
 		log("bt.ReconnectTry", String.valueOf(app.mw.bt.ReconnectTry));
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
