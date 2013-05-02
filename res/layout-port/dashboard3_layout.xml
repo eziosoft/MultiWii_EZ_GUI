@@ -171,6 +171,27 @@
                     android:textColor="#dc8126" />
             </TableRow>
 
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#111" >
+
+                <ProgressBar
+                    android:id="@+id/progressBarTx"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarRx"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </TableRow>
+
         </TableLayout>
 
     </LinearLayout>

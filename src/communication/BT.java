@@ -114,7 +114,7 @@ public class BT extends Communication {
 		boolean a = false;
 
 		try {
-			//if (Connected)
+			if (Connected)
 				a = inStream.available() > 0;
 
 		} catch (IOException e) {

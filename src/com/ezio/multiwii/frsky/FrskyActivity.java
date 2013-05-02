@@ -42,7 +42,6 @@ public class FrskyActivity extends SherlockActivity {
 	TextView TxdBTV;
 	TextView RxdBTV;
 
-	
 	private Runnable update = new Runnable() {
 		@Override
 		public void run() {
@@ -61,22 +60,20 @@ public class FrskyActivity extends SherlockActivity {
 			RxdBTV.setText(String.valueOf(app.frskyProtocol.RxRSSI) + "dBc");
 			TxdBTV.setText(String.valueOf(app.frskyProtocol.TxRSSI) + "dBc");
 
-			TV.setText("A1=" + String.valueOf(app.frskyProtocol.Analog1) + " A2="
-					+ String.valueOf(app.frskyProtocol.Analog2) + " RxRSSI="
-					+ String.valueOf(app.frskyProtocol.RxRSSI) + " TxRSSI="
-					+ String.valueOf(app.frskyProtocol.TxRSSI));
+			TV.setText("A1=" + String.valueOf(app.frskyProtocol.Analog1) + " A2=" + String.valueOf(app.frskyProtocol.Analog2) + " RxRSSI=" + String.valueOf(app.frskyProtocol.RxRSSI) + " TxRSSI=" + String.valueOf(app.frskyProtocol.TxRSSI));
 
 			TV.setText("");
-			log("A1=" + String.valueOf((float) app.frskyProtocol.Analog1 * 0.052f)
-					+ " A2=" + String.valueOf(app.frskyProtocol.Analog2) + " "
-					+ "HubErr="
-					+ String.valueOf(app.frskyProtocol.frskyHubProtocol.hubErrors));
-//			log("Altitude="
-//					+ String.valueOf(app.frsky.frskyHubProtocol.Altitude));
-//			log("Heading=" + String.valueOf(app.frsky.frskyHubProtocol.Heading));
-//			log("AccX=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_X / 10));
-//			log("AccY=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_Y / 10));
-//			log("AccZ=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_Z / 10));
+			log("A1=" + String.valueOf((float) app.frskyProtocol.Analog1 * 0.052f) + " A2=" + String.valueOf(app.frskyProtocol.Analog2) + " " + "HubErr=" + String.valueOf(app.frskyProtocol.frskyHubProtocol.hubErrors));
+			// log("Altitude="
+			// + String.valueOf(app.frsky.frskyHubProtocol.Altitude));
+			// log("Heading=" +
+			// String.valueOf(app.frsky.frskyHubProtocol.Heading));
+			// log("AccX=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_X /
+			// 10));
+			// log("AccY=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_Y /
+			// 10));
+			// log("AccZ=" + String.valueOf(app.frsky.frskyHubProtocol.Acc_Z /
+			// 10));
 			// log("Time=" + String.valueOf(app.frsky.FHour) + ":"
 			// + String.valueOf(app.frsky.FMinute) + ":"
 			// + String.valueOf(app.frsky.FSecond));
@@ -87,8 +84,8 @@ public class FrskyActivity extends SherlockActivity {
 
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
-			
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};

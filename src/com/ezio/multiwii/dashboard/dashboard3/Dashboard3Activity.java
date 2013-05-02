@@ -31,7 +31,9 @@ import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ezio.multiwii.R;
@@ -64,6 +66,9 @@ public class Dashboard3Activity extends Activity {
 	TextView TextViewd33;
 	TextView TextViewd34;
 	TextView TextViewStatus;
+
+	ProgressBar ProgressBarTx;
+	ProgressBar ProgressBarRx;
 
 	long timer1 = 0;
 
@@ -118,6 +123,15 @@ public class Dashboard3Activity extends Activity {
 				TextViewd34.setText(String.valueOf(app.mw.pMeterSum) + "/" + String.valueOf(app.mw.intPowerTrigger) + "(" + String.valueOf(Functions.map(app.mw.pMeterSum, 1, app.mw.intPowerTrigger, 100, 0)) + "%)");
 				TextViewStatus.setText(state);
 
+				if (app.frskyProtocol.RxRSSI > 0 || app.frskyProtocol.TxRSSI > 0) {
+					ProgressBarRx.setVisibility(View.VISIBLE);
+					ProgressBarTx.setVisibility(View.VISIBLE);
+					ProgressBarRx.setProgress(app.frskyProtocol.RxRSSI);
+					ProgressBarTx.setProgress(app.frskyProtocol.TxRSSI);
+				} else {
+					ProgressBarRx.setVisibility(View.GONE);
+					ProgressBarTx.setVisibility(View.GONE);
+				}
 				app.Frequentjobs();
 				app.mw.SendRequest();
 
@@ -175,13 +189,13 @@ public class Dashboard3Activity extends Activity {
 		TextViewd33 = (TextView) findViewById(R.id.TextViewd33);
 		TextViewd34 = (TextView) findViewById(R.id.TextViewd34);
 		TextViewStatus = (TextView) findViewById(R.id.textViewStatus);
-		//
-		// Typeface type = Typeface.createFromAsset(getAssets(),
-		// "fonts/14_LED1.ttf");
-		// TextViewd31.setTypeface(type);
-		// TextViewd32.setTypeface(type);
-		// TextViewd33.setTypeface(type);
-		// TextViewd34.setTypeface(type);
+
+		ProgressBarTx = (ProgressBar) findViewById(R.id.progressBarTx);
+		ProgressBarRx = (ProgressBar) findViewById(R.id.progressBarRx);
+
+		ProgressBarRx.setMax(110);
+		ProgressBarTx.setMax(110);
+
 	}
 
 	private void CenterLocation(GeoPoint centerGeoPoint) {

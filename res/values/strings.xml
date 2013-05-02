@@ -48,7 +48,7 @@
     <string name="MacNotSet">Go to Config and select your bluetooth device first\n\nMay work, may not, may destroy the world or whatever.\nUse at your own risk!\n\n If you like this app buy me a beer (Donate).</string>
     <string name="InfoNotConnected">\n\nMay work, may not, may destroy the world or whatever.\nUse at your own risk.\n If you like this app buy me a beer (Donate).</string>
     <string name="BTDevice">Bluetooth device</string>
-    <string name="menu_vote">Rate it!</string>
+    <string name="menu_vote">Rate it or check for updates</string>
     <string name="PhoneLatitude">PhoneLatitude</string>
     <string name="PhoneLongitude">PhoneLongitude</string>
     <string name="PhoneAltitude">PhoneAltitude(m)</string>
