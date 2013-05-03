@@ -3,6 +3,10 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Nach Geräten suchen...</string>
+<<<<<<< HEAD
+=======
+  <string name="select_device">Gerät wählen mit dem eine Verbindung hersgestellt werden soll</string>
+>>>>>>> master
   <string name="none_paired">Keine verbundenen Geräte (paired)</string>
   <string name="none_found">Keine Geräte gefunden</string>
   <string name="title_paired_devices">verbundene Geräte</string>
