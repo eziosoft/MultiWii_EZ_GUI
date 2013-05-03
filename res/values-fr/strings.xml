@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Détection des périphériques...</string>
-  <string name="select_device">Sélectionnez un périphérique à connecter</string>
   <string name="none_paired">Aucun périphérique appairés</string>
   <string name="none_found">Aucun périphérique trouvé</string>
   <string name="title_paired_devices">Périphériques appairés</string>
@@ -65,7 +64,6 @@
   <string name="PID">PID</string>
   <string name="Read">Lire</string>
   <string name="Write">Écrire</string>
-  <string name="Rate">Taux</string>
   <string name="RATE">TAUX</string>
   <string name="TPA">Atténuation Thr PID</string>
   <string name="Reset">Réinitialiser</string>

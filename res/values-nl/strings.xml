@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">scannen naar apparaten...</string>
-  <string name="select_device">Selecteer een apparaat om aan te sluiten</string>
   <string name="none_paired">Geen apparaten gekoppeld</string>
   <string name="none_found">Geen apparaten gevonden</string>
   <string name="title_paired_devices">Gekoppelde apparaten</string>

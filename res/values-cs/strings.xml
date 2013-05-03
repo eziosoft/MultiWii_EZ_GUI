@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">hledám zařízení...</string>
-  <string name="select_device">vyberte zařízení k připojení</string>
   <string name="none_paired">Žádné zařizení nebylo zpárováno</string>
   <string name="none_found">Zařízení nenalezeno</string>
   <string name="title_paired_devices">Spárovaná zařízení</string>
@@ -63,7 +62,6 @@
   <string name="PID">PID</string>
   <string name="Read">Načíst</string>
   <string name="Write">Zapsat</string>
-  <string name="Rate">Ohodnotit</string>
   <string name="RATE">MÍRA</string>
   <string name="TPA">Útlum Thr PID</string>
   <string name="Reset">Reset</string>

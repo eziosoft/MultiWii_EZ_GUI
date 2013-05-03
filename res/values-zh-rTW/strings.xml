@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ GUI</string>
   <string name="scanning">掃描設備......</string>
-  <string name="select_device">選擇要連接的設備</string>
   <string name="none_paired">沒有設備配對過</string>
   <string name="none_found">找不到設備</string>
   <string name="title_paired_devices">配對的設備</string>
@@ -66,7 +65,6 @@
   <string name="PID">PID 微調</string>
   <string name="Read">讀取</string>
   <string name="Write">寫入</string>
-  <string name="Rate">速率</string>
   <string name="RATE">比率</string>
   <string name="TPA">Thr PID 衰減</string>
   <string name="Reset">重新啟動</string>

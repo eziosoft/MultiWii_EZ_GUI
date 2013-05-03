@@ -66,7 +66,7 @@
   <string name="PID">PID</string>
   <string name="Read">Odczytaj</string>
   <string name="Write">Zapisz</string>
-  <string name="Rate">Oceń lub sprawdź aktualizacje</string>
+  <string name="Rate">Rate</string>
   <string name="RATE">RATE</string>
   <string name="TPA">Thr PID attenuation</string>
   <string name="Reset">Resetuj</string>

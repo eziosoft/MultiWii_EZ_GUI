@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">σάρωση για συσκευές...</string>
-  <string name="select_device">Επιλέξτε μια συσκευή για σύνδεση</string>
   <string name="none_paired">Συσκευές δεν έχουν ζευγαρωθεί</string>
   <string name="none_found">Οι συσκευές που βρέθηκαν</string>
   <string name="title_paired_devices">Συζευγμένες συσκευές</string>
@@ -65,7 +64,6 @@
   <string name="PID">PID</string>
   <string name="Read">Ανάγνωση</string>
   <string name="Write">Γράψτε</string>
-  <string name="Rate">Ποσοστό</string>
   <string name="RATE">ΠΟΣΟΣΤΌ</string>
   <string name="TPA">Thr PID εξασθένηση</string>
   <string name="Reset">Επαναφορά</string>

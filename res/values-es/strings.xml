@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Buscando Dispositivos</string>
-  <string name="select_device">Selecciona dispositivo para conectar</string>
   <string name="none_paired">Ningún dispositivo apareado</string>
   <string name="none_found">Ningún dispositivo encontrado</string>
   <string name="title_paired_devices">Dispositivos vinculados</string>
@@ -65,7 +64,6 @@
   <string name="PID">PID</string>
   <string name="Read">Leer</string>
   <string name="Write">Escribir</string>
-  <string name="Rate">Votar</string>
   <string name="RATE">Tasa</string>
   <string name="TPA">Atenuación de THR PID</string>
   <string name="Reset">Resetear</string>
