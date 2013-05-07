@@ -3,6 +3,7 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">扫描设备......</string>
+  <string name="select_device">选择要连接的设备</string>
   <string name="none_paired">没有已配对好的设备</string>
   <string name="none_found">未找到设备</string>
   <string name="title_paired_devices">已配对的设备</string>
@@ -48,6 +49,7 @@
   <string name="MacNotSet">首先配置和选择你的蓝牙设备，\n\n可能可以，可能不能使用，可能会严重炸机。\n\n使用风险自己承担。\n\n如果你喜欢这个程序，给我买瓶啤酒（捐赠）。</string>
   <string name="InfoNotConnected">\n\n可能可以，可能不能使用，可能会严重炸机。\n\n使用风险自己承担。\n\n如果你喜欢这个程序，给我买瓶啤酒（捐赠）。</string>
   <string name="BTDevice">蓝牙设备</string>
+  <string name="menu_vote">评价它 ！</string>
   <string name="PhoneLatitude">手机纬度</string>
   <string name="PhoneLongitude">手机经度</string>
   <string name="PhoneAltitude">手机高度（米）</string>
@@ -203,7 +205,6 @@
   <string name="MinThrottle">最小油门</string>
   <string name="MaxThrottle">最大油门</string>
   <string name="MinCommand">最小命令</string>
-  <string name="MidRC">遥控中立点</string>
   <string name="VBatScale">电压系数</string>
   <string name="BatWarning1">电压告警1</string>
   <string name="BatWarning2">电压告警2</string>
@@ -211,4 +212,5 @@
   <string name="GreenValuesCanBeChanged">只有绿色的值可以更改</string>
   <string name="Locked">锁定</string>
   <string name="DoYouWantToUnlock">你想要将它解锁吗？</string>
+  <string name="TakeDeclinationFromPhone">使用来自手机的磁偏角</string>
 </resources>

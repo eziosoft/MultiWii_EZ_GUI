@@ -92,7 +92,11 @@
   <string name="SavetoEEPROM">Salvar para EEPROM</string>
   <string name="Graphs">Gráficos</string>
   <string name="show">Mostrar</string>
+  <string name="MAGROLL">MAG ROLL</string>
+  <string name="MAGPITCH">MAG PITCH</string>
+  <string name="MAGYAW">MAG YAW</string>
   <string name="ALT">ALT</string>
+  <string name="HEAD">CABEÇA</string>
   <string name="Pause">Pausar</string>
   <string name="SelectBTdeviceFrsky">Selecione BT Frsky</string>
   <string name="Frsky">Frsky</string>
@@ -123,6 +127,7 @@
   <string name="LowVoltageAlarm">Alarme de Baixa Voltagem</string>
   <string name="RadioModeInfo">Usado somente para exibir corretamente os Sticks do Rádio</string>
   <string name="MagModeInfo">Muda o comportamento da seta da bússola no Painel de Instrumentos 1</string>
+  <string name="CommunityMap">Mapa da Comunidade</string>
   <string name="AddToCommunityMap">Adicionar a Mapa da Comunidade</string>
   <string name="EnterYourNick">Usuário</string>
   <string name="EnterDescription">Inserir Descrição</string>
@@ -133,4 +138,21 @@
   <string name="EnterFileName">Nome do arquivo</string>
   <string name="ReverseRollDirection">Inverter direção da inclinação</string>
   <string name="SetAltitude">Definir altitude em cm:</string>
+  <string name="VerticalSpeed">Velocidade vertical</string>
+  <string name="Dashboard3">Painel de Instrumentos 3</string>
+  <string name="SerialPort">Porta serial</string>
+  <string name="SerialPortBaudRate">Taxa de transmissão Porta Serial</string>
+  <string name="TTS_Volts">Volts</string>
+  <string name="TTS_Meters">Metros</string>
+  <string name="TTS_Altitude">Altitude</string>
+  <string name="MinThrottle">MinThrottle</string>
+  <string name="MaxThrottle">MaxThrottle</string>
+  <string name="MinCommand">MinCommand</string>
+  <string name="VBatScale">EscalaVBat</string>
+  <string name="BatWarning1">AvisoBat1</string>
+  <string name="BatWarning2">AvisoBat2</string>
+  <string name="BatCritical">BatCrítico</string>
+  <string name="Locked">Bloqueado</string>
+  <string name="DoYouWantToUnlock">Você deseja desbloqueá-lo?</string>
+  <string name="TakeDeclinationFromPhone">Tomar a declinação do telefone</string>
 </resources>

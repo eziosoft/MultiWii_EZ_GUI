@@ -66,7 +66,6 @@
   <string name="PID">PID</string>
   <string name="Read">Odczytaj</string>
   <string name="Write">Zapisz</string>
-  <string name="Rate">Oceń</string>
   <string name="RATE">RATE</string>
   <string name="TPA">Thr PID attenuation</string>
   <string name="Reset">Resetuj</string>
@@ -206,7 +205,7 @@
   <string name="MinThrottle">MinThrottle</string>
   <string name="MaxThrottle">MaxThrottle</string>
   <string name="MinCommand">MinCommand</string>
-  <string name="MidRC">MidRC</string>
+  <string name="FailsafeThrottle">Failsafe Throttle</string>
   <string name="VBatScale">VBatScale</string>
   <string name="BatWarning1">BatWarning1</string>
   <string name="BatWarning2">BatWarning2</string>
@@ -214,5 +213,7 @@
   <string name="GreenValuesCanBeChanged">Zielone wartości mogą być zmieniane</string>
   <string name="Locked">Zablokowany</string>
   <string name="DoYouWantToUnlock">Czy chcesz odblokować?</string>
-  <string name="TakeDeclinationFromPhone">Wstaw deklinacje automatycznie</string>
+  <string name="TakeDeclinationFromPhone">Weź deklinację z telefonu</string>
+  <string name="RateOrUpdate">Ocen lub aktualizuj</string>
+  <string name="ArmedCount">Całkowita ilość uzbrojeń</string>
 </resources>
