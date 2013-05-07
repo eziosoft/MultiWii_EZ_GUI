@@ -65,8 +65,7 @@
     <string name="PID">PID</string>
     <string name="Read">Read</string>
     <string name="Write">Write</string>
-    <string name="Rate">Rate</string>
-    <string name="RATE">RATE</string>
+        <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
     <string name="AccCalibration">AccCalibration</string>
@@ -216,7 +215,7 @@
     <string name="MinThrottle">MinThrottle</string>
     <string name="MaxThrottle">MaxThrottle</string>
     <string name="MinCommand">MinCommand</string>
-    <string name="MidRC">MidRC</string>
+    <string name="FailsafeThrottle">Failsafe Throttle</string>
     <string name="VBatScale">VBatScale</string>
     <string name="BatWarning1">BatWarning1</string>
     <string name="BatWarning2">BatWarning2</string>
@@ -225,5 +224,7 @@
     <string name="Locked">Locked</string>
     <string name="DoYouWantToUnlock">Do you want to unlock it ?</string>
     <string name="TakeDeclinationFromPhone">Take declination from the phone</string>
+    <string name="RateOrUpdate">Rate or Update</string>
+    <string name="ArmedCount">Armed Count</string>
 
 </resources>

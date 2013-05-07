@@ -208,10 +208,10 @@
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/MidRC" />
+                        android:text="@string/FailsafeThrottle" />
 
                     <EditText
-                        android:id="@+id/editTextMidRC"
+                        android:id="@+id/editTextFailsafeThrottle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -365,6 +365,25 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="number" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ArmedCount" />
+
+                    <TextView
+                        android:id="@+id/textViewArmedCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+
                 </TableRow>
 
                 <TableRow

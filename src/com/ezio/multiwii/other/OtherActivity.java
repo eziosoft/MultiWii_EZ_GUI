@@ -39,7 +39,7 @@ public class OtherActivity extends SherlockActivity {
 	EditText EditTextMinThrottle;
 	EditText EditTextMaxThrottle;
 	EditText EditTextMinCommand;
-	EditText EditTextMidRC;
+	EditText EditTextFailsafeThrottle;
 
 	EditText EditTextVBatsScale;
 	EditText EditTextBatWarning1;
@@ -47,6 +47,8 @@ public class OtherActivity extends SherlockActivity {
 	EditText EditTextBatCritical;
 	TextView TextViewVolt;
 	EditText EditTextDeclination;
+
+	TextView textViewArmedCount;
 
 	Button ButtonRxBIND;
 
@@ -84,7 +86,7 @@ public class OtherActivity extends SherlockActivity {
 		EditTextMinThrottle = (EditText) findViewById(R.id.editTextMinThrottle);
 		EditTextMaxThrottle = (EditText) findViewById(R.id.editTextMaxThrottle);
 		EditTextMinCommand = (EditText) findViewById(R.id.editTextMinCommand);
-		EditTextMidRC = (EditText) findViewById(R.id.editTextMidRC);
+		EditTextFailsafeThrottle = (EditText) findViewById(R.id.editTextFailsafeThrottle);
 
 		EditTextVBatsScale = (EditText) findViewById(R.id.EditTextVBatScale);
 		EditTextBatWarning1 = (EditText) findViewById(R.id.EditTextBatWarning1);
@@ -92,6 +94,7 @@ public class OtherActivity extends SherlockActivity {
 		EditTextBatCritical = (EditText) findViewById(R.id.EditTextBatCritical);
 		TextViewVolt = (TextView) findViewById(R.id.textViewVolt);
 		EditTextDeclination = (EditText) findViewById(R.id.editTextDeclination);
+		textViewArmedCount = (TextView) findViewById(R.id.textViewArmedCount);
 
 	}
 
@@ -132,13 +135,14 @@ public class OtherActivity extends SherlockActivity {
 		EditTextMinThrottle.setText(String.valueOf(app.mw.minthrottle));
 		EditTextMaxThrottle.setText(String.valueOf(app.mw.maxthrottle));
 		EditTextMinCommand.setText(String.valueOf(app.mw.mincommand));
-		EditTextMidRC.setText(String.valueOf(app.mw.midrc));
+		EditTextFailsafeThrottle.setText(String.valueOf(app.mw.failsafe_throttle));
 
 		EditTextVBatsScale.setText(String.valueOf(app.mw.vbatscale));
 		EditTextBatWarning1.setText(String.valueOf(app.mw.vbatlevel_warn1));
 		EditTextBatWarning2.setText(String.valueOf(app.mw.vbatlevel_warn2));
 		EditTextBatCritical.setText(String.valueOf(app.mw.vbatlevel_crit));
 		EditTextDeclination.setText(String.valueOf(app.mw.mag_decliniation));
+		textViewArmedCount.setText(String.valueOf(app.mw.armedNum));
 	}
 
 	public void DeclinationTakeFromPhoneOnClick(View v) {
@@ -171,7 +175,7 @@ public class OtherActivity extends SherlockActivity {
 	}
 
 	public void MSP_SET_MISC_CONF_WriteOnClick(View v) {
-		app.mw.SendRequestMSP_SET_MISC(Integer.parseInt(EditTextPowerMeterAlarm.getText().toString()), Integer.parseInt(EditTextMinThrottle.getText().toString()), Integer.parseInt(EditTextMaxThrottle.getText().toString()), Integer.parseInt(EditTextMinCommand.getText().toString()), Integer.parseInt(EditTextMidRC.getText().toString()), Float.parseFloat(EditTextDeclination.getText().toString()), (byte) Integer.parseInt(EditTextVBatsScale.getText().toString()), (Float.parseFloat(EditTextBatWarning1.getText().toString())), (Float.parseFloat(EditTextBatWarning2.getText().toString())), (Float.parseFloat(EditTextBatCritical.getText().toString())));
+		app.mw.SendRequestMSP_SET_MISC(Integer.parseInt(EditTextPowerMeterAlarm.getText().toString()), Integer.parseInt(EditTextMinThrottle.getText().toString()), Integer.parseInt(EditTextMaxThrottle.getText().toString()), Integer.parseInt(EditTextMinCommand.getText().toString()), Integer.parseInt(EditTextFailsafeThrottle.getText().toString()), Float.parseFloat(EditTextDeclination.getText().toString()), (byte) Integer.parseInt(EditTextVBatsScale.getText().toString()), (Float.parseFloat(EditTextBatWarning1.getText().toString())), (Float.parseFloat(EditTextBatWarning2.getText().toString())), (Float.parseFloat(EditTextBatCritical.getText().toString())));
 	}
 
 	public void WriteSelectSettingOnClick(View v) {

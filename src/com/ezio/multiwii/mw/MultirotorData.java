@@ -164,7 +164,7 @@ public abstract class MultirotorData {
 	public int minthrottle = 0;
 	public int maxthrottle = 0;
 	public int mincommand = 0;
-	public int midrc = 0;
+	public int failsafe_throttle = 0;
 	public int armedNum = 0;
 	public int lifetime = 0;
 	public float mag_decliniation = 0;
