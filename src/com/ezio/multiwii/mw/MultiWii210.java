@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.test.suitebuilder.TestSuiteBuilder.FailedToCreateTests;
 import android.util.Log;
 
 import com.ezio.multiwii.waypoints.Waypoint;
@@ -32,9 +31,9 @@ public class MultiWii210 extends MultirotorData {
 		EZGUIProtocol = "2.2 r1432";
 
 		timer1 = 10; // used to send request every 10 requests
-		timer2 = 0; // used to send requests once after conection
+		timer2 = 0; // used to send requests once after connection
 
-		this.bt = bt;
+		this.communication = bt;
 
 		// changes from 2.0//
 		PIDITEMS = 10;
@@ -49,8 +48,8 @@ public class MultiWii210 extends MultirotorData {
 
 	private void init() {
 		CHECKBOXITEMS = buttonCheckboxLabel.length;
-		activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
-		activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
+		//activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
+		//activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
@@ -113,7 +112,7 @@ public class MultiWii210 extends MultirotorData {
 		for (byte b : msp) {
 			arr[i++] = b;
 		}
-		bt.Write(arr); // send the complete byte sequence in one go
+		communication.Write(arr); // send the complete byte sequence in one go
 	}
 
 	public void evaluateCommand(byte cmd, int dataSize) {
@@ -127,6 +126,17 @@ public class MultiWii210 extends MultirotorData {
 			multiCapability = read32();// capability
 			if ((multiCapability & 1) > 0) {
 				// TODO
+			}
+			break;
+
+		case MSP_SERVO_CONF:
+
+			// min:2 / max:2 / middle:2 / rate:1
+			for (i = 0; i < 8; i++) {
+				ServoConf[i].Min = read16();
+				ServoConf[i].Max = read16();
+				ServoConf[i].MidPoint = read16();
+				ServoConf[i].Rate = read8();
 			}
 			break;
 
@@ -390,9 +400,9 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void ReadFrame() {
-		while (bt.dataAvailable()) {
+		while (communication.dataAvailable()) {
 			try {
-				c = (bt.Read());
+				c = (communication.Read());
 				// Log.d("21",String.valueOf(c));
 				if (c_state == IDLE) {
 					c_state = (c == '$') ? HEADER_START : IDLE;
@@ -538,7 +548,7 @@ public class MultiWii210 extends MultirotorData {
 
 	@Override
 	public void ProcessSerialData(boolean appLogging) {
-		if (bt.Connected) {
+		if (communication.Connected) {
 
 			ReadFrame();
 			// ProcessSerialData(appLogging);
@@ -689,7 +699,7 @@ public class MultiWii210 extends MultirotorData {
 	// //Main Request//////////////////////////////////////////////////
 	@Override
 	public void SendRequest() {
-		if (bt.Connected) {
+		if (communication.Connected) {
 			int[] requests;
 
 			// this is fired only once////////
@@ -698,7 +708,7 @@ public class MultiWii210 extends MultirotorData {
 			} else {
 				if (timer2 != 10) {
 
-					requests = new int[] { MSP_BOXNAMES };
+					requests = new int[] { MSP_BOXNAMES, MSP_SERVO_CONF };
 					sendRequestMSP(requestMSP(requests));
 					timer2 = 10;
 					return;
