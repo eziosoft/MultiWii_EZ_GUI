@@ -88,7 +88,7 @@ public abstract class MultirotorData {
 	public Communication communication;
 	public FileAccess FA;
 	public float AltCorrection = 0;
-	public int _1G = 256;
+	// public int _1G = 256;
 	// /////
 	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATP", "OCTOFLATX", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6_H" };
 
@@ -124,7 +124,7 @@ public abstract class MultirotorData {
 	// public int nunchukPresent;
 	public int present = 0;
 	public int mode = 0;
-	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];
+
 	public int AccPresent;
 	public int BaroPresent;
 	public int MagPresent;
@@ -145,6 +145,7 @@ public abstract class MultirotorData {
 	// public boolean I2cMagnetoActive;
 	// public boolean GPSActive;
 
+	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];
 	public Boolean[][] Checkbox = new Boolean[CHECKBOXITEMS][12]; // state of
 																	// chexboxes
 

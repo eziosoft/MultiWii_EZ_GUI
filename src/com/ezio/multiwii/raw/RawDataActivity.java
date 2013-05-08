@@ -233,7 +233,7 @@ public class RawDataActivity extends Activity {
 		log("App version", getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		log("versionMisMatch", app.mw.versionMisMatch);
-		log("1G", app.mw._1G);
+		//log("1G", app.mw._1G);
 		log("CHECKBOXITEMS", app.mw.CHECKBOXITEMS);
 		log("PIDITEMS", app.mw.PIDITEMS);
 		log("timer1", app.mw.timer1);

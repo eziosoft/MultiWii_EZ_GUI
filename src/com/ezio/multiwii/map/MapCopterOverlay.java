@@ -80,7 +80,6 @@ class CopterOverlay extends Overlay {
 
 	public float Lat = (float) 23.233212, Lon = (float) 32.43214;
 	public float Pitch = 10, Roll = 20, Azimuth = 30;
-	public float Gforce = 1;
 
 	public String State = "ARM";
 
@@ -136,7 +135,7 @@ class CopterOverlay extends Overlay {
 
 	}
 
-	public void Set(GeoPoint copter, GeoPoint home, GeoPoint positionHold, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, float gforce, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
+	public void Set(GeoPoint copter, GeoPoint home, GeoPoint positionHold, int satNum, float distanceToHome, float directionToHome, float speed, float gpsAltitude, float altitude, float lat, float lon, float pitch, float roll, float azimuth, String state, int vbat, int powerSum, int powerTrigger, int txRSSI, int rxRSSI) {
 
 		GCopter = copter;
 		GHome = home;
@@ -153,7 +152,7 @@ class CopterOverlay extends Overlay {
 		Pitch = pitch;
 		Roll = roll;
 		Azimuth = azimuth;
-		Gforce = gforce;
+
 		State = state;
 		VBat = (float) (vbat / 10.0);
 		PowerSum = powerSum;
