@@ -63,7 +63,7 @@ public class AUXActivity extends SherlockActivity {
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
-			Log.d(app.TAG, "loop "+this.getClass().getName());
+			Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
@@ -127,28 +127,6 @@ public class AUXActivity extends SherlockActivity {
 		alert.show();
 
 	}
-
-	// private void SaveOnClick() {
-	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	// builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes),
-	// new DialogInterface.OnClickListener() {
-	//
-	// public void onClick(DialogInterface dialog, int id) {
-	//
-	// app.mw.SendRequestWriteToEEprom();
-	// Toast.makeText(getApplicationContext(), getString(R.string.Done),
-	// Toast.LENGTH_SHORT).show();
-	//
-	// }
-	// }).setNegativeButton(getString(R.string.No), new
-	// DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int id) {
-	// dialog.cancel();
-	// }
-	// });
-	// AlertDialog alert = builder.create();
-	// alert.show();
-	// }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
