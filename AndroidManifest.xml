@@ -34,7 +34,7 @@
         </activity>
         <activity
             android:name=".config.DeviceListActivity"
-            android:theme="@style/Theme.Sherlock.Dialog" >
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name=".radio.RadioActivity"
