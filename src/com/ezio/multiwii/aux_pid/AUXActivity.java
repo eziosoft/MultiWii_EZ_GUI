@@ -169,6 +169,8 @@ public class AUXActivity extends SherlockActivity {
 
 	void CreateGUI() {
 		TextViewInfo = new TextView(this);
+		TextViewInfo.setGravity(Gravity.CENTER);
+		TextViewInfo.setBackgroundResource(R.drawable.frame);
 
 		HorizontalScrollView s1 = new HorizontalScrollView(this);
 		ScrollView s2 = new ScrollView(this);
@@ -176,6 +178,7 @@ public class AUXActivity extends SherlockActivity {
 		LinearLayout l = new LinearLayout(this);
 
 		TableLayout t = new TableLayout(this);
+		t.setBackgroundResource(R.drawable.frame);
 
 		// adding tittles
 		TableRow r1 = new TableRow(this);

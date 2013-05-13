@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/descryption"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/descryption"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
@@ -78,7 +78,8 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/frame" >
 
                     <TextView
                         android:id="@+id/textView2"
@@ -127,19 +128,11 @@
                 </TableRow>
             </TableLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/Green"
-                android:text="@string/GreenValuesCanBeChanged" />
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/descryption" >
+                android:background="@drawable/frame" >
 
                 <TableRow
                     android:id="@+id/tableRow5"
@@ -159,6 +152,14 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/Green"
+                        android:text="@string/GreenValuesCanBeChanged" />
+
                 </TableRow>
 
                 <TableRow
@@ -415,6 +416,7 @@
                 android:id="@+id/buttonRXBIND"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="RXBINDOnClick"
                 android:text="@string/RXBIND"
@@ -424,7 +426,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/descryption"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
