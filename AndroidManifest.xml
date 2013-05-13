@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="83"
-    android:versionName="3.37" >
+    android:versionCode="86"
+    android:versionName="3.40" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -34,7 +34,7 @@
         </activity>
         <activity
             android:name=".config.DeviceListActivity"
-            android:theme="@style/Theme.Sherlock.Dialog" >
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name=".radio.RadioActivity"

@@ -52,7 +52,6 @@ public class App extends Application implements Sensors.Listener {
 	public String MapAPIKeyPublic = "0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ";
 	// end debug/////////////////
 
-	
 	private static String REFRESHRATE = "REFRESHRATE";
 	public int RefreshRate = 100; // this means wait 100ms after everything is
 									// done
@@ -131,14 +130,14 @@ public class App extends Application implements Sensors.Listener {
 	private static String ALTCORRECTION = "ALTCORRECTION";
 	public boolean AltCorrection = false;
 
-	private static String ADVANCEDFINCTIONS = "ADVANCEDFINCTIONS";
+	private static String ADVANCEDFUNCTIONS = "ADVANCEDFUNCTIONS";
 	public boolean AdvancedFunctions = false;
 
 	private static String DISABLEBTONEXIT = "DISABLEBTONEXIT";
 	public boolean DisableBTonExit = true;
 
-	private static String G1 = "G1";
-	private int _1Gtemp; // 1g value, used for g-force display
+	// private static String G1 = "G1";
+	// private int _1Gtemp; // 1g value, used for g-force display
 
 	private static String FORCELANGUAGE = "FORCELANGUAGE";
 	public String ForceLanguage = "";
@@ -263,7 +262,7 @@ public class App extends Application implements Sensors.Listener {
 		frskyProtocol = new FrskyProtocol(commFrsky);
 
 		oldActiveModes = new boolean[20];// not the best method
-		mw._1G = _1Gtemp;
+		// mw._1G = _1Gtemp;
 
 	}
 
@@ -283,7 +282,7 @@ public class App extends Application implements Sensors.Listener {
 			Toast.makeText(getApplicationContext(), "You are a tester", Toast.LENGTH_SHORT).show();
 
 		DisableBTonExit = prefs.getBoolean(DISABLEBTONEXIT, true);
-		_1Gtemp = prefs.getInt(G1, 256);
+		// _1Gtemp = prefs.getInt(G1, 256);
 		ForceLanguage = prefs.getString(FORCELANGUAGE, "");
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 9.9f);
@@ -314,7 +313,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putBoolean(ALTCORRECTION, AltCorrection);
 		// editor.putBoolean(ADVANCEDFINCTIONS, AdvancedFunctions);
 		editor.putBoolean(DISABLEBTONEXIT, DisableBTonExit);
-		editor.putInt(G1, mw._1G);
+		// editor.putInt(G1, mw._1G);
 		editor.putString(FORCELANGUAGE, ForceLanguage);
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
@@ -408,7 +407,8 @@ public class App extends Application implements Sensors.Listener {
 
 					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
 						mw.AltCorrection = mw.alt;
-						mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay * mw.ay + mw.az * mw.az);
+						// mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay *
+						// mw.ay + mw.az * mw.az);
 					}
 
 					if (!AltCorrection)
@@ -468,17 +468,6 @@ public class App extends Application implements Sensors.Listener {
 		}
 		// --------------------END timer every 5sek---------------------------
 	}
-
-	// private void playSound() {
-	// try {
-	// Uri notification =
-	// RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-	// Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-	// notification);
-	// r.play();
-	// } catch (Exception e) {
-	// }
-	// }
 
 	private void prepareSounds() {
 		soundManager = new SoundManager(getApplicationContext());

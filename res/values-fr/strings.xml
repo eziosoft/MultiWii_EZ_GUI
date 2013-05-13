@@ -203,7 +203,6 @@
   <string name="MinThrottle">MinGaz</string>
   <string name="MaxThrottle">MaxGaz</string>
   <string name="MinCommand">MinCommand</string>
-  <string name="MidRC">MidRC</string>
   <string name="VBatScale">VBatEchel</string>
   <string name="BatWarning1">BatAlarm1</string>
   <string name="BatWarning2">BatAlarm2</string>

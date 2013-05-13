@@ -28,12 +28,12 @@ import communication.Communication;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(Communication bt) {
-		EZGUIProtocol = "2.2 r1419";
+		EZGUIProtocol = "2.2 r1432";
 
 		timer1 = 10; // used to send request every 10 requests
-		timer2 = 0; // used to send requests once after conection
+		timer2 = 0; // used to send requests once after connection
 
-		this.bt = bt;
+		this.communication = bt;
 
 		// changes from 2.0//
 		PIDITEMS = 10;
@@ -48,8 +48,8 @@ public class MultiWii210 extends MultirotorData {
 
 	private void init() {
 		CHECKBOXITEMS = buttonCheckboxLabel.length;
-		activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
-		activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
+		//activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
+		//activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
@@ -112,7 +112,7 @@ public class MultiWii210 extends MultirotorData {
 		for (byte b : msp) {
 			arr[i++] = b;
 		}
-		bt.Write(arr); // send the complete byte sequence in one go
+		communication.Write(arr); // send the complete byte sequence in one go
 	}
 
 	public void evaluateCommand(byte cmd, int dataSize) {
@@ -126,6 +126,17 @@ public class MultiWii210 extends MultirotorData {
 			multiCapability = read32();// capability
 			if ((multiCapability & 1) > 0) {
 				// TODO
+			}
+			break;
+
+		case MSP_SERVO_CONF:
+
+			// min:2 / max:2 / middle:2 / rate:1
+			for (i = 0; i < 8; i++) {
+				ServoConf[i].Min = read16();
+				ServoConf[i].Max = read16();
+				ServoConf[i].MidPoint = read16();
+				ServoConf[i].Rate = read8();
 			}
 			break;
 
@@ -291,62 +302,40 @@ public class MultiWii210 extends MultirotorData {
 			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
 			// dataSize));
 			break;
-		// case MSP_MISC:
-		// intPowerTrigger = read16();
-		// break;
 
 		case MSP_MISC:
-			intPowerTrigger = read16();
 
-			// int
-			// minthrottle,maxthrottle,mincommand,midrc,armedNum,lifetime,mag_decliniation
-			// ;
+			// intPowerTrigger1 (16bit)
+
+			// conf.minthrottle (16bit)
+			// MAXTHROTTLE (16bit)
+			// MINCOMMAND (16bit)
+			// conf.failsafe_throttle (16bit)
+			// plog.arm (16bit)
+			// plog.lifetime + (plog.armed_time / 1000000) (32bit)
+			// conf.mag_declination (16bit)
+			// conf.vbatscale; (8bit)
+			// conf.vbatlevel_warn1; (8bit)
+			// conf.vbatlevel_warn2; (8bit)
+			// conf.vbatlevel_crit; (8bit)
+
+			intPowerTrigger = read16();
 
 			minthrottle = read16();
 			maxthrottle = read16();
 			mincommand = read16();
-			midrc = read16();
+			failsafe_throttle = read16();
 			armedNum = read16();
 
-			// for (i = 0; i < 5; i++) {
-			// MConf[i] = read16();
-			// confINF[i].setValue((int) MConf[i]).show();
-			// }
-
 			lifetime = read32();
-			// MConf[5] = read32();
-			// confINF[5].setValue((int) MConf[5]);
-
-			// for (i = 1; i < 5; i++)
-			// confINF[i].setColorBackground(grey_).setMin((int)
-			// MConf[i]).setMax((int) MConf[i]);
-
-			// LOG_PERMANENT
-			// if (MConf[4] < 1) {
-			// confINF[5].hide();
-			// confINF[4].hide();
-			// } else {
-			// confINF[5].show();
-			// confINF[4].show();
-			// }
 
 			mag_decliniation = read16() / 10f;
-			// mag_decliniation
-			// MConf[6] = read16();
-			// confINF[6].setValue((float) MConf[6] / 10).show();
 
 			vbatscale = read8();
 			vbatlevel_warn1 = (float) (read8() / 10.0f);
 			vbatlevel_warn2 = (float) (read8() / 10.0f);
 			vbatlevel_crit = (float) (read8() / 10.0f);
-			// VBAT
-			//
 
-			// if (q > 1) {
-			// for (i = 0; i < 5; i++)
-			// VBat[i].show();
-			// }
-			// controlP5.addTab("Config").show();
 			break;
 
 		case MSP_MOTOR_PINS:
@@ -411,9 +400,9 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void ReadFrame() {
-		while (bt.dataAvailable()) {
+		while (communication.dataAvailable()) {
 			try {
-				c = (bt.Read());
+				c = (communication.Read());
 				// Log.d("21",String.valueOf(c));
 				if (c_state == IDLE) {
 					c_state = (c == '$') ? HEADER_START : IDLE;
@@ -484,9 +473,27 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
+	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int failsafe_throttle, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
+
+		// MSP_SET_MISC
+		// intPowerTrigger1 (16bit)
+
+		// conf.minthrottle (16bit)
+		// MAXTHROTTLE (16bit)
+		// MINCOMMAND (16bit)
+		// conf.failsafe_throttle (16bit)
+
+		// plog.arm (16bit) not used
+		// plog.lifetime + (plog.armed_time / 1000000) (32bit) not used
+
+		// conf.mag_declination (16bit)
+		// conf.vbatscale; (8bit)
+		// conf.vbatlevel_warn1; (8bit)
+		// conf.vbatlevel_warn2; (8bit)
+		// conf.vbatlevel_crit; (8bit)
 
 		payload = new ArrayList<Character>();
+
 		intPowerTrigger = (Math.round(confPowerTrigger));
 		payload.add((char) (intPowerTrigger % 256));
 		payload.add((char) (intPowerTrigger / 256));
@@ -494,20 +501,29 @@ public class MultiWii210 extends MultirotorData {
 		payload.add((char) (minthrottle % 256));
 		payload.add((char) (minthrottle / 256));
 
-		// Prepared for future use
 		payload.add((char) (maxthrottle % 256));
 		payload.add((char) (maxthrottle / 256));
 
 		payload.add((char) (mincommand % 256));
 		payload.add((char) (mincommand / 256));
 
-		payload.add((char) (midrc % 256));
-		payload.add((char) (midrc / 256));
-		// /////////////////////////
+		payload.add((char) (failsafe_throttle % 256));
+		payload.add((char) (failsafe_throttle / 256));
 
-		int nn = Math.round(mag_decliniation * 10);
-		payload.add((char) (nn - ((nn >> 8) << 8)));
-		payload.add((char) (nn >> 8));
+		payload.add((char) (0));// plog.arm (16bit) not used
+		payload.add((char) (0));// plog.arm (16bit) not used
+		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
+									// (32bit) not used
+		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
+									// (32bit) not used
+		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
+									// (32bit) not used
+		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
+									// (32bit) not used
+
+		int nn = Math.round(mag_decliniation * 10); // mag_decliniation
+		payload.add((char) (nn - ((nn >> 8) << 8))); // mag_decliniation
+		payload.add((char) (nn >> 8)); // mag_decliniation
 
 		nn = Math.round(vbatscale);
 		payload.add((char) (nn)); // VBatscale
@@ -525,11 +541,14 @@ public class MultiWii210 extends MultirotorData {
 
 		// MSP_EEPROM_WRITE
 		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
+
+		// ///////////////////////////////////////////////////////////
+
 	}
 
 	@Override
 	public void ProcessSerialData(boolean appLogging) {
-		if (bt.Connected) {
+		if (communication.Connected) {
 
 			ReadFrame();
 			// ProcessSerialData(appLogging);
@@ -680,7 +699,7 @@ public class MultiWii210 extends MultirotorData {
 	// //Main Request//////////////////////////////////////////////////
 	@Override
 	public void SendRequest() {
-		if (bt.Connected) {
+		if (communication.Connected) {
 			int[] requests;
 
 			// this is fired only once////////
@@ -689,7 +708,7 @@ public class MultiWii210 extends MultirotorData {
 			} else {
 				if (timer2 != 10) {
 
-					requests = new int[] { MSP_BOXNAMES };
+					requests = new int[] { MSP_BOXNAMES, MSP_SERVO_CONF };
 					sendRequestMSP(requestMSP(requests));
 					timer2 = 10;
 					return;

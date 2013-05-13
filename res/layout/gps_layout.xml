@@ -5,17 +5,6 @@
     android:keepScreenOn="true"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/tittle"
-        android:clickable="true"
-        android:gravity="center"
-        android:onClick="SHOWHIDDENOncLick"
-        android:text="@string/GPS"
-        android:textColor="@color/tittleText" />
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -26,9 +15,38 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tittle"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="SHOWHIDDENOncLick"
+                android:text="@string/GPS"
+                android:textColor="@color/tittleText" />
+
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame" >
+
+                <TableRow
+                    android:id="@+id/tableRow16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/TextView04"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame"
+                        android:gravity="center"
+                        android:text="MultiWii" />
+
+                </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow1"
@@ -133,16 +151,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_update"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
-
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
                     <TextView
                         android:id="@+id/TextViewGPS_update"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
-
                 </TableRow>
 
                 <TableRow
@@ -259,7 +275,6 @@
                         android:text="---"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
                 </TableRow>
-
             </TableLayout>
 
             <!-- <com.google.android.maps.MapView -->
@@ -270,15 +285,27 @@
             <!-- android:clickable="true" -->
             <!-- android:enabled="true" /> -->
 
-            <View
-                android:id="@+id/view1"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:background="@color/smalltittle" />
-
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame" >
+
+                <TableRow
+                    android:id="@+id/tableRow15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame"
+                        android:gravity="center"
+                        android:text="Android" />
+
+                </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow9"
@@ -384,21 +411,20 @@
                     android:id="@+id/tableRow14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
-
+
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/PhoneAccuracy" />
-
+
                     <TextView
                         android:id="@+id/textViewPhoneAccuracy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="---" />
-
                 </TableRow>
 
                 <TableRow
@@ -440,7 +466,6 @@
                         android:layout_weight="1"
                         android:text="---" />
                 </TableRow>
-
             </TableLayout>
 
             <!-- <com.google.android.maps.MapView -->
@@ -456,45 +481,40 @@
             <!-- </com.google.android.maps.MapView> -->
             <!-- android:apiKey="0AxI9Dd4w6Y-ERQuGVB0WKB4x4iZe3uD9HVpWYQ" do android market/> -->
 
-            <View
-                android:id="@+id/View01"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:background="@color/smalltittle" />
-
-            <CheckBox
-                android:id="@+id/checkBoxFollowMe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="FollowMeCheckBoxOnClick"
-                android:text="@string/FollowMe" />
-
-            <TextView
-                android:id="@+id/textViewFollowMeInfo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="---" />
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
+                android:orientation="vertical" >
 
-            <View
-                android:id="@+id/View02"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:background="@color/smalltittle" />
-
-            <CheckBox
-                android:id="@+id/checkBoxInjectGPS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="InjectGPSCheckBoxOnClick"
-                android:text="Inject GPS  (#define GPS_FROM_OSD has to be uncomented)" />
+                <CheckBox
+                    android:id="@+id/checkBoxFollowMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="FollowMeCheckBoxOnClick"
+                    android:text="@string/FollowMe" />
 
-            <CheckBox
-                android:id="@+id/checkBoxFollowHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="FollowHeadingCheckBoxOnClick"
-                android:text="@string/Follow_Heading" />
+                <TextView
+                    android:id="@+id/textViewFollowMeInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="---" />
 
+                <CheckBox
+                    android:id="@+id/checkBoxInjectGPS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="InjectGPSCheckBoxOnClick"
+                    android:text="Inject GPS  (#define GPS_FROM_OSD has to be uncomented)" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxFollowHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="FollowHeadingCheckBoxOnClick"
+                    android:text="@string/Follow_Heading" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

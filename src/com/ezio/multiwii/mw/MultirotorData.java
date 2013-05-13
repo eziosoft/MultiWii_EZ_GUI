@@ -29,49 +29,6 @@ import communication.Communication;
 
 public abstract class MultirotorData {
 
-	public String EZGUIProtocol = "";
-
-	// ////////Protocol 2.0 ////////
-	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATP", "OCTOFLATX", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6_H" };
-
-	public int PIDITEMS = 8; // 8 in 2.0, extended to 10 in 2.1
-	public int CHECKBOXITEMS = 11; // in 2.1
-	public int multiType; // 1
-
-	public int byteRC_RATE, byteRC_EXPO, byteRollPitchRate, byteYawRate, byteDynThrPID;
-	public int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
-
-	public int version, versionMisMatch;
-	public float gx, gy, gz, ax, ay, az, magx, magy, magz, baro, head, angx, angy, debug1, debug2, debug3, debug4;
-	public int GPS_distanceToHome, GPS_directionToHome;
-	public int GPS_numSat, GPS_fix, GPS_update;
-	public int init_com, graph_on, pMeterSum = 0, intPowerTrigger = 0, bytevbat = 0;
-	public int rssi;
-
-	public float mot[] = new float[8];
-	public float servo[] = new float[8];
-	public float rcThrottle = 1500, rcRoll = 1500, rcPitch = 1500, rcYaw = 1500, rcAUX1 = 1500, rcAUX2 = 1500, rcAUX3 = 1500, rcAUX4 = 1500;
-	public int nunchukPresent, AccPresent, BaroPresent, MagPresent, GPSPresent, levelMode;
-
-	public float timer1, timer2;
-	public int cycleTime, i2cError;
-	public int activation1[] = new int[CHECKBOXITEMS];
-	public int activation2[] = new int[CHECKBOXITEMS];
-	public int frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS;
-
-	public boolean I2cAccActive;
-	public boolean I2cBaroActive;
-	public boolean I2cMagnetoActive;
-	public boolean GPSActive;
-
-	public Communication bt;
-	public String buttonCheckboxLabel[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
-
-	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];
-
-	// //////end 2.0/////////////
-
-	// ///////Protocol 2.10 additions/////////////
 	/******************************* Multiwii Serial Protocol **********************/
 	final String MSP_HEADER = "$M<";
 
@@ -96,7 +53,6 @@ public abstract class MultirotorData {
 	public static final int MSP_WP = 118;
 	public static final int MSP_BOXIDS = 119;
 	public static final int MSP_SERVO_CONF = 120; // out message Servo settings
-	// public static final int MSP_MISC_CONF = 121;
 
 	public static final int MSP_SET_RAW_RC = 200;
 	public static final int MSP_SET_RAW_GPS = 201;
@@ -109,9 +65,8 @@ public abstract class MultirotorData {
 	public static final int MSP_RESET_CONF = 208;
 	public static final int MSP_SET_WP = 209;
 	public static final int MSP_SELECT_SETTING = 210;
-	public static final int MSP_SET_HEAD = 211; // rate
+	public static final int MSP_SET_HEAD = 211;
 	public static final int MSP_SET_SERVO_CONF = 212;
-	// public static final int MSP_SET_MISC_CONF = 213;
 	public static final int MSP_SET_MOTOR = 214;
 
 	public static final int MSP_BIND = 240;
@@ -126,20 +81,71 @@ public abstract class MultirotorData {
 
 	public static final int IDLE = 0, HEADER_START = 1, HEADER_M = 2, HEADER_ARROW = 3, HEADER_SIZE = 4, HEADER_CMD = 5, HEADER_ERR = 6;
 
-	public float alt;
-	public int vario;
-	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, GPS_ground_course;
+	/******************************* Multiwii Serial Protocol END **********************/
+
+	public String EZGUIProtocol = "";
+
+	public Communication communication;
+	public FileAccess FA;
+	public float AltCorrection = 0;
+	// public int _1G = 256;
+	// /////
+	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATP", "OCTOFLATX", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6_H" };
+
+	public int PIDITEMS = 10;
+	public int CHECKBOXITEMS = 11; // in 2.1
+	public String buttonCheckboxLabel[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
+
+	public int multiType;
 	public int MSPversion;
 
-	public int present = 0;
+	public int byteRC_RATE, byteRC_EXPO, byteRollPitchRate, byteYawRate, byteDynThrPID;
+	public int byteThrottle_EXPO;
+	public int byteThrottle_MID;
 
+	public int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
+
+	public int version, versionMisMatch;
+	public float gx, gy, gz, ax, ay, az, magx, magy, magz, baro, head, angx, angy, debug1, debug2, debug3, debug4;
+	public float alt;
+	public int vario;
+
+	public int GPS_distanceToHome, GPS_directionToHome;
+	public int GPS_numSat, GPS_fix, GPS_update;
+	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, GPS_ground_course;
+	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
+
+	public int init_com, graph_on, pMeterSum = 0, intPowerTrigger = 0, bytevbat = 0;
+	public int rssi;
+
+	public float mot[] = new float[8];
+	public float servo[] = new float[8];
+	public float rcThrottle = 1500, rcRoll = 1500, rcPitch = 1500, rcYaw = 1500, rcAUX1 = 1500, rcAUX2 = 1500, rcAUX3 = 1500, rcAUX4 = 1500;
+	// public int nunchukPresent;
+	public int present = 0;
 	public int mode = 0;
 
+	public int AccPresent;
+	public int BaroPresent;
+	public int MagPresent;
+	public int GPSPresent;
 	public int SonarPresent;
-	public int byteThrottle_EXPO;
-
-	public int byteThrottle_MID;
 	int activation[];
+
+	// public int levelMode;
+
+	public float timer1, timer2;
+	public int cycleTime, i2cError;
+	// public int activation1[] = new int[CHECKBOXITEMS];
+	// public int activation2[] = new int[CHECKBOXITEMS];
+	// public int frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS;
+
+	// public boolean I2cAccActive;
+	// public boolean I2cBaroActive;
+	// public boolean I2cMagnetoActive;
+	// public boolean GPSActive;
+
+	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];
 	public Boolean[][] Checkbox = new Boolean[CHECKBOXITEMS][12]; // state of
 																	// chexboxes
 
@@ -147,24 +153,16 @@ public abstract class MultirotorData {
 								// and // Arduino // model // (pro // Mini, //
 								// // Mega, // etc).
 
-	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
-
-	// ///////////////////////////////////////////////////////////////////////////////////////////////
-	// //////////end 2.10///////////
-
-	// //Protocol 2.11///////////////////////////////////////
 	public String DebugMSG;
 	public int multiCapability = 0; // Bitflags stating what capabilities
 									// are/are not
 	// present in the compiled code.
 	public int confSetting = 0;
-	// end 2.11//////////////////////////
 
-	// Protocol 2.2
 	public int minthrottle = 0;
 	public int maxthrottle = 0;
 	public int mincommand = 0;
-	public int midrc = 0;
+	public int failsafe_throttle = 0;
 	public int armedNum = 0;
 	public int lifetime = 0;
 	public float mag_decliniation = 0;
@@ -172,13 +170,10 @@ public abstract class MultirotorData {
 	public float vbatlevel_warn1 = 0;
 	public float vbatlevel_warn2 = 0;
 	public float vbatlevel_crit = 0;
-	// /end 2.2
 
-	public FileAccess FA;
-	public float AltCorrection = 0;
+	public ServoConfClass[] ServoConf = new ServoConfClass[] { new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass() };
 
-	public int _1G = 256;
-
+	/********************************* FUNCTIONS **************************************/
 	public abstract void ProcessSerialData(boolean appLogging);
 
 	public abstract void SendRequest();
@@ -223,14 +218,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
-	// public abstract void SendRequestMSP_SET_MISC_CONF(int minthrottle, int
-	// maxthrottle, int mincommand, int midrc, float mag_decliniation, byte
-	// vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float
-	// vbatlevel_crit);
-	//
-	// public abstract void SendRequestMSP_MISC_CONF();
-
-	// ///////////////////////////////////////////////
+	/********************************* FUNCTIONS END **************************************/
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 	private Date now;

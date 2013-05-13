@@ -3,6 +3,7 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">σάρωση για συσκευές...</string>
+  <string name="select_device">Επιλέξτε μια συσκευή για σύνδεση</string>
   <string name="none_paired">Συσκευές δεν έχουν ζευγαρωθεί</string>
   <string name="none_found">Οι συσκευές που βρέθηκαν</string>
   <string name="title_paired_devices">Συζευγμένες συσκευές</string>
@@ -48,6 +49,7 @@
   <string name="MacNotSet">Πηγαίνετε στο Config και επιλέξτε το έργο first\n\nMay συσκευή bluetooth σας, δεν επιτρέπεται, μπορεί να καταστρέψει τον κόσμο ή οτιδήποτε άλλο. \nUse με δική σας ευθύνη! \n\n αν σας αρέσει αυτό το app, μου αγοράσετε μια μπύρα (δωρεά).</string>
   <string name="InfoNotConnected">\n\nMay εργασίας, δεν επιτρέπεται, μπορεί να καταστρέψει τον κόσμο ή οτιδήποτε άλλο. \nUse στο δικό σας κίνδυνο. \n αν σας αρέσει αυτό το app, μου αγοράσετε μια μπύρα (δωρεά).</string>
   <string name="BTDevice">Συσκευή Bluetooth</string>
+  <string name="menu_vote">Εκτιμήστε το!</string>
   <string name="PhoneLatitude">Γεωγραφικό πλάτος Τηλέφωνο</string>
   <string name="PhoneLongitude">PhoneLongitude</string>
   <string name="PhoneAltitude">PhoneAltitude(m)</string>
@@ -204,7 +206,6 @@
   <string name="MinThrottle">MinThrottle</string>
   <string name="MaxThrottle">MaxThrottle</string>
   <string name="MinCommand">MinCommand</string>
-  <string name="MidRC">MidRC</string>
   <string name="VBatScale">VBatScale</string>
   <string name="BatWarning1">BatWarning1</string>
   <string name="BatWarning2">BatWarning2</string>
@@ -212,4 +213,5 @@
   <string name="GreenValuesCanBeChanged">Πράσινες τιμές μπορεί να αλλάξει</string>
   <string name="Locked">Κλειδωμένο</string>
   <string name="DoYouWantToUnlock">Θέλετε να το ξεκλειδώσετε;</string>
+  <string name="TakeDeclinationFromPhone">Πάρτε την απόκλιση από το τηλέφωνο</string>
 </resources>

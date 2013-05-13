@@ -566,91 +566,98 @@ public class PIDActivity extends SherlockActivity {
 
 	}
 
-	// ////////////////////////dialog
+	// ////////////////////////dialog slider
 
-	public void TVOnClick0_250(View v) {
-		CustomDialog(v, 0.25f);
-	}
+	// public void TVOnClick0_250(View v) {
+	// CustomDialog(v, 0.25f);
+	// }
+	//
+	// public void TVOnClick2_50(View v) {
+	// CustomDialog(v, 2.5f);
+	// }
+	//
+	// public void TVOnClick1(View v) {
+	// CustomDialog(v, 1);
+	// }
+	//
+	// public void TVOnClick5(View v) {
+	// CustomDialog(v, 5);
+	// }
+	//
+	// public void TVOnClick20(View v) {
+	// CustomDialog(v, 20);
+	// }
+	//
+	// public void TVOnClick25(View v) {
+	// CustomDialog(v, 25);
+	// }
+	//
+	// public void TVOnClick100(View v) {
+	// CustomDialog(v, 100);
+	// }
 
-	public void TVOnClick2_50(View v) {
-		CustomDialog(v, 2.5f);
-	}
-
-	public void TVOnClick1(View v) {
-		CustomDialog(v, 1);
-	}
-
-	public void TVOnClick5(View v) {
-		CustomDialog(v, 5);
-	}
-
-	public void TVOnClick20(View v) {
-		CustomDialog(v, 20);
-	}
-
-	public void TVOnClick25(View v) {
-		CustomDialog(v, 25);
-	}
-
-	public void TVOnClick100(View v) {
-		CustomDialog(v, 100);
-	}
-
-	void CustomDialog(final View v, final float maxValue) {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.your_dialog_root_element));
-
-		SeekBar seekbar = (SeekBar) layout.findViewById(R.id.seekBarCustomDialog);
-		seekbar.setMax(1000);
-		seekbar.setProgress((int) Functions.map(Float.parseFloat(((EditText) v).getText().toString().replace(",", ".")), 0f, maxValue, 0f, 1000f));
-
-		final TextView tv = (TextView) layout.findViewById(R.id.text);
-
-		tv.setText(((EditText) v).getText().toString());
-
-		seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				float v;
-				v = Functions.map(progress, 0, 1000, 0, maxValue);
-				tv.setText(String.valueOf(v));
-			}
-		});
-
-		alertDialogBuilder.setView(layout);
-		alertDialogBuilder.setCancelable(false);
-		alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				((EditText) v).setText(String.valueOf(tv.getText().toString()));
-			}
-		});
-		alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-
-				dialog.cancel();
-			}
-		});
-
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
-
-	}
+	// void CustomDialog(final View v, final float maxValue) {
+	// AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	//
+	// LayoutInflater inflater = (LayoutInflater)
+	// getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	// View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup)
+	// findViewById(R.id.your_dialog_root_element));
+	//
+	// SeekBar seekbar = (SeekBar)
+	// layout.findViewById(R.id.seekBarCustomDialog);
+	// seekbar.setMax(1000);
+	// seekbar.setProgress((int) Functions.map(Float.parseFloat(((EditText)
+	// v).getText().toString().replace(",", ".")), 0f, maxValue, 0f, 1000f));
+	//
+	// final TextView tv = (TextView) layout.findViewById(R.id.text);
+	//
+	// tv.setText(((EditText) v).getText().toString());
+	//
+	// seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+	//
+	// @Override
+	// public void onStopTrackingTouch(SeekBar seekBar) {
+	//
+	// }
+	//
+	// @Override
+	// public void onStartTrackingTouch(SeekBar seekBar) {
+	//
+	// }
+	//
+	// @Override
+	// public void onProgressChanged(SeekBar seekBar, int progress, boolean
+	// fromUser) {
+	// float v;
+	// v = Functions.map(progress, 0, 1000, 0, maxValue);
+	// tv.setText(String.valueOf(v));
+	// }
+	// });
+	//
+	// alertDialogBuilder.setView(layout);
+	// alertDialogBuilder.setCancelable(false);
+	// alertDialogBuilder.setPositiveButton("Yes", new
+	// DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int id) {
+	// ((EditText) v).setText(String.valueOf(tv.getText().toString()));
+	// }
+	// });
+	// alertDialogBuilder.setNegativeButton("No", new
+	// DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int id) {
+	//
+	// dialog.cancel();
+	// }
+	// });
+	//
+	// // create alert dialog
+	// AlertDialog alertDialog = alertDialogBuilder.create();
+	//
+	// // show it
+	// alertDialog.show();
+	//
+	// }
 
 	// /////////////////end dialog
 

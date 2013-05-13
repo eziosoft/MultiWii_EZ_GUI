@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.mw.ServoConfClass;
 import com.ezio.sec.Sec;
 
 public class RawDataActivity extends Activity {
@@ -146,7 +147,7 @@ public class RawDataActivity extends Activity {
 		log("bytevbat", app.mw.bytevbat);
 		log("pMeterSum", app.mw.pMeterSum);
 
-		log("nunchukPresent", app.mw.nunchukPresent);
+	//	log("nunchukPresent", app.mw.nunchukPresent);
 		log("AccPresent", app.mw.AccPresent);
 		log("BaroPresent", app.mw.BaroPresent);
 		log("MagnetoPresent", app.mw.MagPresent);
@@ -155,7 +156,7 @@ public class RawDataActivity extends Activity {
 
 		log("present", app.mw.present);
 		log("mode", app.mw.mode);
-		log("levelMode", app.mw.levelMode);
+	//	log("levelMode", app.mw.levelMode);
 
 		log("byteThrottle_EXPO", app.mw.byteThrottle_EXPO);
 		log("byteThrottle_MID", app.mw.byteThrottle_MID);
@@ -207,6 +208,15 @@ public class RawDataActivity extends Activity {
 
 		}
 
+		int Si = 0;
+		for (ServoConfClass s : app.mw.ServoConf) {
+			log("Servo" + String.valueOf(Si) + "MIN", s.Min);
+			log("Servo" + String.valueOf(Si) + "MID", s.MidPoint);
+			log("Servo" + String.valueOf(Si) + "MAX", s.Max);
+			log("Servo" + String.valueOf(Si) + "Rate", s.Rate);
+			Si++;
+		}
+
 		log("---", 0);
 
 		log("EZ-Gui Protocol", app.mw.EZGUIProtocol);
@@ -223,20 +233,20 @@ public class RawDataActivity extends Activity {
 		log("App version", getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		log("versionMisMatch", app.mw.versionMisMatch);
-		log("1G", app.mw._1G);
+		//log("1G", app.mw._1G);
 		log("CHECKBOXITEMS", app.mw.CHECKBOXITEMS);
 		log("PIDITEMS", app.mw.PIDITEMS);
 		log("timer1", app.mw.timer1);
 		log("timer2", app.mw.timer2);
-	
-		log("bt.ConnectionLost", String.valueOf(app.mw.bt.ConnectionLost));
-		log("bt.ReconnectTry", String.valueOf(app.mw.bt.ReconnectTry));
+
+		log("bt.ConnectionLost", String.valueOf(app.mw.communication.ConnectionLost));
+		log("bt.ReconnectTry", String.valueOf(app.mw.communication.ReconnectTry));
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));
 		log("CommunicationTypeMW", app.CommunicationTypeMW);
-		log("comm Connected",String.valueOf(app.commMW.Connected));
-		log("commFrsky Connected",String.valueOf(app.commFrsky.Connected));
+		log("comm Connected", String.valueOf(app.commMW.Connected));
+		log("commFrsky Connected", String.valueOf(app.commFrsky.Connected));
 		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
 
 	}

@@ -23,67 +23,128 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/TextView03"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/BTDevice"
-                android:textColor="@color/smalltittleText" />
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/buttonSelectBTDevice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="SelectBTdevice"
-                android:text="@string/SelectBTdevice" />
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/BTDevice"
+                    android:textColor="@color/smalltittleText" />
 
-            <TextView
-                android:id="@+id/textViewMacAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="---"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Button
+                    android:id="@+id/buttonSelectBTDevice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="SelectBTdevice"
+                    android:text="@string/SelectBTdevice" />
 
-            <Button
-                android:id="@+id/buttonSelectBTDeviceFrsky"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="SelectFrskyDevice"
-                android:text="@string/SelectBTdeviceFrsky" />
+                <TextView
+                    android:id="@+id/textViewMacAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="---"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/textViewMacAddressFrsky"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="---"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Button
+                    android:id="@+id/buttonSelectBTDeviceFrsky"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="SelectFrskyDevice"
+                    android:text="@string/SelectBTdeviceFrsky" />
 
-            <CheckBox
-                android:id="@+id/checkBoxConnectOnStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ConnectionBug"
-                android:visibility="gone" />
+                <TextView
+                    android:id="@+id/textViewMacAddressFrsky"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="---"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <CheckBox
-                android:id="@+id/checkBoxCopyFrskyToMW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CopyFrskyToMW" />
+                <CheckBox
+                    android:id="@+id/checkBoxConnectOnStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ConnectionBug"
+                    android:visibility="gone" />
 
-            <CheckBox
-                android:id="@+id/checkBoxDisableBTonExit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/disableBTonExit" />
+                <CheckBox
+                    android:id="@+id/checkBoxCopyFrskyToMW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/CopyFrskyToMW" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxDisableBTonExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/disableBTonExit" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/RefreshRate"
+                    android:textColor="@color/smalltittleText" />
+
+                <EditText
+                    android:id="@+id/editTextRefreshRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="do NOT leave empty or 0 - default 100"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/ProtocolVersion"
+                    android:textColor="@color/smalltittleText"
+                    android:visibility="gone" />
+
+                <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <RadioButton
+                        android:id="@+id/radioButtonProtocol20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="2.0"
+                        android:visibility="gone" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonProtocol21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2.1" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/RestartInfo" />
+                </RadioGroup>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/LinearLayoutSerialPort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
@@ -116,7 +177,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/OtherSerialChips" />
-
                 </RadioGroup>
 
                 <TextView
@@ -134,133 +194,104 @@
                     android:inputType="number" />
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/RefreshRate"
-                android:textColor="@color/smalltittleText" />
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
+                android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/editTextRefreshRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty or 0 - default 100"
-                android:inputType="number" >
-
-                <requestFocus />
-            </EditText>
-
-            <CheckBox
-                android:id="@+id/checkBoxUseOfflineMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/UseOfflineMap" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/MapCenterPeriod"
-                android:textColor="@color/smalltittleText" />
-
-            <EditText
-                android:id="@+id/EditTextMapCenterPeriod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty or 0 - default 3"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/ProtocolVersion"
-                android:textColor="@color/smalltittleText"
-                android:visibility="gone" />
-
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone" >
-
-                <RadioButton
-                    android:id="@+id/radioButtonProtocol20"
+                <CheckBox
+                    android:id="@+id/checkBoxUseOfflineMap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="2.0"
-                    android:visibility="gone" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonProtocol21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2.1" />
+                    android:text="@string/UseOfflineMap" />
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/RestartInfo" />
-            </RadioGroup>
+                    android:background="@color/smalltittle"
+                    android:text="@string/MapCenterPeriod"
+                    android:textColor="@color/smalltittleText" />
 
-            <TextView
+                <EditText
+                    android:id="@+id/EditTextMapCenterPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="do NOT leave empty or 0 - default 3"
+                    android:inputType="number" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/LowVoltageAlarm"
-                android:textColor="@color/smalltittleText" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/VoltageAlarm" />
-
-            <EditText
-                android:id="@+id/editTextVoltageAlarm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty"
-                android:inputType="numberDecimal" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/RadioMode"
-                android:textColor="@color/smalltittleText" />
-
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/RadioModeInfo" />
+                    android:background="@color/smalltittle"
+                    android:text="@string/LowVoltageAlarm"
+                    android:textColor="@color/smalltittleText" />
 
-                <RadioButton
-                    android:id="@+id/radioButton1"
+                <TextView
+                    android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Mode1" />
+                    android:text="@string/VoltageAlarm" />
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/editTextVoltageAlarm"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/Mode2" />
+                    android:ems="10"
+                    android:hint="do NOT leave empty"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/RadioMode"
+                    android:textColor="@color/smalltittleText" />
+
+                <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/RadioModeInfo" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Mode1" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/Mode2" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/TextView01"
@@ -269,159 +300,166 @@
                     android:background="@color/smalltittle"
                     android:text="@string/MagMode"
                     android:textColor="@color/smalltittleText" />
-            </RadioGroup>
 
-            <RadioGroup
-                android:layout_width="fill_parent"
+                <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/MagModeInfo" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonMagMode1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/PointNorth" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonMagMode2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Point_multirotor_front" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pointFrontHelp"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/AltCorrection"
+                    android:textColor="@color/smalltittleText" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AltCorrectionInfo" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxAltCorrection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AltCorrection" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/dashboard2"
+                    android:textColor="@color/smalltittleText" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxReverseRollDirection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ReverseRollDirection" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/TextView02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/TTS"
+                    android:textColor="@color/smalltittleText" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxTTS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/MagModeInfo" />
+                    android:text="@string/TTS" />
 
-                <RadioButton
-                    android:id="@+id/radioButtonMagMode1"
+                <TextView
+                    android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/PointNorth" />
+                    android:text="@string/periodicspeaking" />
 
-                <RadioButton
-                    android:id="@+id/radioButtonMagMode2"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/editTextPeriodicSpeaking"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Point_multirotor_front" />
-            </RadioGroup>
+                    android:ems="10"
+                    android:hint="do NOT leave empty"
+                    android:inputType="number"
+                    android:text="20" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointFrontHelp"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/TextView04"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/AltCorrection"
-                android:textColor="@color/smalltittleText" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AltCorrectionInfo" />
-
-            <CheckBox
-                android:id="@+id/checkBoxAltCorrection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AltCorrection" />
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/TTS"
-                android:textColor="@color/smalltittleText" />
-
-            <CheckBox
-                android:id="@+id/checkBoxTTS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TTS" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/periodicspeaking" />
-
-            <EditText
-                android:id="@+id/editTextPeriodicSpeaking"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="do NOT leave empty"
-                android:inputType="number"
-                android:text="20" >
-            </EditText>
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="SaveSettingsOnClick"
-                android:text="@string/SaveSettings"
-                android:visibility="gone" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/Language"
-                android:textColor="@color/smalltittleText" />
-
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/LanguageInfo" />
+                    android:background="@color/smalltittle"
+                    android:text="@string/Language"
+                    android:textColor="@color/smalltittleText" />
 
-                <RadioButton
-                    android:id="@+id/RadioDontForce"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/NotForce" />
+                    android:orientation="vertical" >
 
-                <RadioButton
-                    android:id="@+id/radioForceEnglish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ForceEnglish" />
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/LanguageInfo" />
 
-                <RadioButton
-                    android:id="@+id/radioForceGerman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ForceGerman" />
+                    <RadioButton
+                        android:id="@+id/RadioDontForce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/NotForce" />
 
-                <RadioButton
-                    android:id="@+id/radioForceHungarian "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ForceHungarian" />
+                    <RadioButton
+                        android:id="@+id/radioForceEnglish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ForceEnglish" />
 
-                <RadioButton
-                    android:id="@+id/radioForcePolish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ForcePolish" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radioForceGerman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ForceGerman" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/smalltittle"
-                android:text="@string/dashboard2"
-                android:textColor="@color/smalltittleText" />
+                    <RadioButton
+                        android:id="@+id/radioForceHungarian "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ForceHungarian" />
 
-            <CheckBox
-                android:id="@+id/checkBoxReverseRollDirection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ReverseRollDirection" />
+                    <RadioButton
+                        android:id="@+id/radioForcePolish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ForcePolish" />
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
