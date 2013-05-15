@@ -226,5 +226,6 @@
     <string name="TakeDeclinationFromPhone">Take declination from the phone</string>
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
+    <string name="Refresh">Refresh</string>
 
 </resources>
