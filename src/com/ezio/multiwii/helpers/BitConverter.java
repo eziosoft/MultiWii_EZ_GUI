@@ -16,7 +16,6 @@
  */
 package com.ezio.multiwii.helpers;
 
-import java.lang.Exception;
 
 public class BitConverter {
 	public static byte[] getBytes(boolean x) {

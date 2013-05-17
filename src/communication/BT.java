@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
-import com.ezio.multiwii.R;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -14,6 +12,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.ezio.multiwii.R;
 
 public class BT extends Communication {
 

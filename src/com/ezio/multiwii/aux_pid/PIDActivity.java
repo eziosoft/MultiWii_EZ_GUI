@@ -26,23 +26,17 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.ActionBarSherlock;
@@ -52,7 +46,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import com.ezio.multiwii.helpers.Functions;
 
 public class PIDActivity extends SherlockActivity {
 
@@ -319,25 +312,29 @@ public class PIDActivity extends SherlockActivity {
 		D[7] = Float.parseFloat(D8.getText().toString().replace(",", "."));
 		D[8] = Float.parseFloat(D9.getText().toString().replace(",", "."));
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+		if (v!=null) {
+			app.mw.SendRequestMSP_SET_PID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
+			app.mw.SendRequestMSP_EEPROM_WRITE();
+			Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
+		} else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
-			public void onClick(DialogInterface dialog, int id) {
+				public void onClick(DialogInterface dialog, int id) {
 
-				app.mw.SendRequestMSP_SET_PID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
+					app.mw.SendRequestMSP_SET_PID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
+					app.mw.SendRequestMSP_EEPROM_WRITE();
+					Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
-				app.mw.SendRequestMSP_EEPROM_WRITE();
-
-				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
-
-			}
-		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
+				}
+			}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
 
 	}
 

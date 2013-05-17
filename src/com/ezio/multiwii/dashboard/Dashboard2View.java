@@ -36,7 +36,6 @@ import android.view.View;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.helpers.Functions;
-import com.ezio.multiwii.helpers.LowPassFilter;
 
 public class Dashboard2View extends View {
 
