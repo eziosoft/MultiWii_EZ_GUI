@@ -147,7 +147,7 @@ public class RawDataActivity extends Activity {
 		log("bytevbat", app.mw.bytevbat);
 		log("pMeterSum", app.mw.pMeterSum);
 
-	//	log("nunchukPresent", app.mw.nunchukPresent);
+		// log("nunchukPresent", app.mw.nunchukPresent);
 		log("AccPresent", app.mw.AccPresent);
 		log("BaroPresent", app.mw.BaroPresent);
 		log("MagnetoPresent", app.mw.MagPresent);
@@ -156,7 +156,7 @@ public class RawDataActivity extends Activity {
 
 		log("present", app.mw.present);
 		log("mode", app.mw.mode);
-	//	log("levelMode", app.mw.levelMode);
+		// log("levelMode", app.mw.levelMode);
 
 		log("byteThrottle_EXPO", app.mw.byteThrottle_EXPO);
 		log("byteThrottle_MID", app.mw.byteThrottle_MID);
@@ -233,11 +233,12 @@ public class RawDataActivity extends Activity {
 		log("App version", getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		log("versionMisMatch", app.mw.versionMisMatch);
-		//log("1G", app.mw._1G);
+		// log("1G", app.mw._1G);
 		log("CHECKBOXITEMS", app.mw.CHECKBOXITEMS);
 		log("PIDITEMS", app.mw.PIDITEMS);
 		log("timer1", app.mw.timer1);
 		log("timer2", app.mw.timer2);
+		log("dataFlow", app.mw.DataFlow);
 
 		log("bt.ConnectionLost", String.valueOf(app.mw.communication.ConnectionLost));
 		log("bt.ReconnectTry", String.valueOf(app.mw.communication.ReconnectTry));
