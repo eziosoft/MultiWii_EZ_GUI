@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="86"
-    android:versionName="3.40" >
+    android:versionCode="87"
+    android:versionName="3.41" >
 
     <uses-sdk
         android:minSdkVersion="8"
