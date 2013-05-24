@@ -36,9 +36,11 @@
 
                     <TextView
                         android:id="@+id/textView13"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="@string/Profile" />
+
                 </TableRow>
 
                 <TableRow
@@ -743,6 +745,15 @@
 
                 </TableRow>
             </TableLayout>
+
+            <Button
+                android:id="@+id/button1"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SetOnClick"
+                android:tag="DONTASK"
+                android:text="@string/SavetoEEPROM" />
 
         </LinearLayout>
     </ScrollView>

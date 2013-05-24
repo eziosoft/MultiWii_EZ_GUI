@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,8 +66,6 @@ public class OtherActivity extends SherlockActivity {
 			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
 
-			TextViewVolt.setText(String.valueOf(app.mw.bytevbat / 10f) + "V");
-
 			app.mw.SendRequest();
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
@@ -99,6 +98,10 @@ public class OtherActivity extends SherlockActivity {
 		TextViewVolt = (TextView) findViewById(R.id.textViewVolt);
 		EditTextDeclination = (EditText) findViewById(R.id.editTextDeclination);
 		textViewArmedCount = (TextView) findViewById(R.id.textViewArmedCount);
+		
+		if(!app.AdvancedFunctions){
+			((LinearLayout)findViewById(R.id.otherExtended)).setVisibility(View.GONE);
+		}
 
 	}
 
@@ -147,6 +150,10 @@ public class OtherActivity extends SherlockActivity {
 		EditTextBatCritical.setText(String.valueOf(app.mw.vbatlevel_crit));
 		EditTextDeclination.setText(String.valueOf(app.mw.mag_decliniation));
 		textViewArmedCount.setText(String.valueOf(app.mw.armedNum));
+	}
+
+	public void BatteryVoltageRefreshOnClick(View v) {
+		TextViewVolt.setText(String.valueOf(app.mw.bytevbat / 10f) + "V");
 	}
 
 	public void DeclinationTakeFromPhoneOnClick(View v) {

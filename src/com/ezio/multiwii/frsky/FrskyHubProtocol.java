@@ -19,9 +19,9 @@ package com.ezio.multiwii.frsky;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.ezio.multiwii.helpers.Functions;
-
 import android.util.Log;
+
+import com.ezio.multiwii.helpers.Functions;
 
 public class FrskyHubProtocol {
 

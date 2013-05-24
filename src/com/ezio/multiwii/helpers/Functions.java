@@ -16,10 +16,6 @@
  */
 package com.ezio.multiwii.helpers;
 
-import java.util.UUID;
-
-import android.content.Context;
-import android.telephony.TelephonyManager;
 
 public class Functions {
 

@@ -48,8 +48,6 @@ public class MultiWii210 extends MultirotorData {
 
 	private void init() {
 		CHECKBOXITEMS = buttonCheckboxLabel.length;
-		//activation1 = new int[CHECKBOXITEMS]; // not used in 2.1
-		//activation2 = new int[CHECKBOXITEMS]; // not used in 2.1
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
@@ -113,9 +111,12 @@ public class MultiWii210 extends MultirotorData {
 			arr[i++] = b;
 		}
 		communication.Write(arr); // send the complete byte sequence in one go
+
+		DataFlow = DATA_FLOW_TIME_OUT;
 	}
 
 	public void evaluateCommand(byte cmd, int dataSize) {
+
 		int i;
 		int icmd = (int) (cmd & 0xFF);
 		switch (icmd) {
@@ -400,6 +401,8 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	private void ReadFrame() {
+		DataFlow--;
+
 		while (communication.dataAvailable()) {
 			try {
 				c = (communication.Read());
@@ -445,6 +448,7 @@ public class MultiWii210 extends MultirotorData {
 						} else {
 							/* we got a valid response packet, evaluate it */
 							evaluateCommand(cmd, (int) dataSize);
+							DataFlow = DATA_FLOW_TIME_OUT;
 						}
 					} else {
 						Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));

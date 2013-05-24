@@ -85,6 +85,9 @@ public abstract class MultirotorData {
 
 	public String EZGUIProtocol = "";
 
+	public static final int DATA_FLOW_TIME_OUT = 10;
+	public int DataFlow = DATA_FLOW_TIME_OUT;
+
 	public Communication communication;
 	public FileAccess FA;
 	public float AltCorrection = 0;

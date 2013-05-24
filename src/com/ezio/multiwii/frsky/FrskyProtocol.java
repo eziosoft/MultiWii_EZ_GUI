@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import communication.BT;
 import communication.Communication;
 
 public class FrskyProtocol {

@@ -40,8 +40,8 @@ import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.sec.Sec;
 import communication.BT;
 import communication.Communication;
-import communication.SerialFTDI;
 import communication.SerialCDC_ACM;
+import communication.SerialFTDI;
 
 public class App extends Application implements Sensors.Listener {
 

@@ -194,7 +194,7 @@
     <string name="Follow_Me">FollowMe</string>
     <string name="Follow_Heading">FollowHeading</string>
     <string name="Load">Load</string>
-    <string name="Profile">Profile: (compatibile with MultiWiiConf; put the files in to /sdcard/MultiWiiLogs)</string>
+    <string name="Profile">Here you can save/load your PID setting to/from file. The files are stored here: /sdcard/MultiWiiLogs and they are compatibile with MultiWiiConf</string>
     <string name="Save">Save</string>
     <string name="EnterFileName">Enter file name</string>
     <string name="ReverseRollDirection">Reverse roll direction</string>
@@ -226,5 +226,6 @@
     <string name="TakeDeclinationFromPhone">Take declination from the phone</string>
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
+    <string name="Refresh">Refresh</string>
 
 </resources>

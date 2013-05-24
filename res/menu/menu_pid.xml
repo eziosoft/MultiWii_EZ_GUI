@@ -7,14 +7,8 @@
         android:title="@string/Read">
     </item>
     <item
-        android:id="@+id/MenuSetPID"
-        android:showAsAction="never|withText"
-        android:title="@string/Set"
-        android:visible="false">
-    </item>
-    <item
         android:id="@+id/MenuSavePID"
-        android:showAsAction="never|withText"
+        android:showAsAction="always|withText"
         android:title="@string/SavetoEEPROM">
     </item>
     <item

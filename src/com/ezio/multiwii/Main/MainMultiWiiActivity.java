@@ -152,7 +152,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			}
 
 			mHandler.postDelayed(update, 100);
-//			Log.d(BT_old.TAG, "OnResume if connected");
+			// Log.d(BT_old.TAG, "OnResume if connected");
 
 		}
 

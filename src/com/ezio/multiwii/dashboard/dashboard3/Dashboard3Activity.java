@@ -26,8 +26,8 @@ import org.osmdroid.views.MapView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -144,7 +144,7 @@ public class Dashboard3Activity extends Activity {
 			if (app.ReverseRoll) {
 				a = -1;
 			}
-			horizonView.Set(-app.mw.angx * a, app.mw.angy * 1.5f);
+			horizonView.Set(-app.mw.angx * a, -app.mw.angy * 1.5f);
 			altitudeView.Set(app.mw.alt * 10);
 			headingView.Set(app.mw.head);
 			varioView.Set(app.mw.vario * 0.6f);
