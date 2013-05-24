@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="87"
-    android:versionName="3.41" >
+    android:versionCode="88"
+    android:versionName="3.42" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -23,9 +23,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
 
             <meta-data
@@ -140,7 +137,6 @@
         </activity>
         <activity
             android:name=".dashboard.dashboard3.Dashboard3Activity"
-            
             android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
