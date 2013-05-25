@@ -111,8 +111,6 @@ public class MultiWii210 extends MultirotorData {
 			arr[i++] = b;
 		}
 		communication.Write(arr); // send the complete byte sequence in one go
-
-		DataFlow = DATA_FLOW_TIME_OUT;
 	}
 
 	public void evaluateCommand(byte cmd, int dataSize) {
@@ -725,6 +723,9 @@ public class MultiWii210 extends MultirotorData {
 				requests = new int[] { MSP_ANALOG, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
 				sendRequestMSP(requestMSP(requests));
 				timer1 = 0;
+
+				if (CHECKBOXITEMS == 0)
+					timer2 = 0;
 				return;
 			}
 

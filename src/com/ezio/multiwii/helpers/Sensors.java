@@ -121,15 +121,16 @@ public class Sensors implements SensorEventListener, LocationListener {
 		return false;
 	}
 
-	public void setMOCKLocation(double Latitude, double Longitude, float Altitude, float Heading) {
+	public void setMOCKLocation(double Latitude, double Longitude, float Altitude, float Heading, float speed) {
 
 		Location mockLocation = new Location(mocLocationProvider); // a string
 		mockLocation.setLatitude(Latitude); // double
 		mockLocation.setLongitude(Longitude);
 		mockLocation.setAltitude(Altitude);
 		mockLocation.setTime(System.currentTimeMillis());
-		mockLocation.setAccuracy(10);
+		mockLocation.setAccuracy(1);
 		mockLocation.setBearing(Heading);
+		mockLocation.setSpeed(speed * 0.01f);
 
 		try {
 			Method locationJellyBeanFixMethod = Location.class.getMethod("makeComplete");

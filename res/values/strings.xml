@@ -65,7 +65,7 @@
     <string name="PID">PID</string>
     <string name="Read">Read</string>
     <string name="Write">Write</string>
-        <string name="RATE">RATE</string>
+    <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
     <string name="AccCalibration">AccCalibration</string>
@@ -228,5 +228,6 @@
     <string name="ArmedCount">Armed Count</string>
     <string name="Refresh">Refresh</string>
     <string name="MockLocationIsWorking">Mock location is working</string>
+    <string name="NoDataRecieved">No data received!</string>
 
 </resources>

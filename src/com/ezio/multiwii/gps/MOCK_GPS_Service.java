@@ -38,9 +38,9 @@ public class MOCK_GPS_Service extends Service {
 			app.mw.ProcessSerialData(app.loggingON);
 			app.frskyProtocol.ProcessSerialData(false);
 
-			app.sensors.setMOCKLocation(app.mw.GPS_latitude / Math.pow(10, 7), app.mw.GPS_longitude / Math.pow(10, 7), app.mw.alt, app.mw.head);
+			app.sensors.setMOCKLocation(app.mw.GPS_latitude / Math.pow(10, 7), app.mw.GPS_longitude / Math.pow(10, 7), app.mw.alt, app.mw.head, app.mw.GPS_speed);
 
-			 app.Frequentjobs();
+			app.Frequentjobs();
 
 			// app.mw.SendRequest();
 			// app.mw.SendRequestMSP_RAW_GPS();
@@ -64,14 +64,11 @@ public class MOCK_GPS_Service extends Service {
 		if (app.sensors.isMockEnabled()) {
 			app.sensors.initMOCKLocation();
 			mHandler.postDelayed(update, app.RefreshRate);
-		}else
-		{
+		} else {
 			stopSelf();
 		}
 
 	}
-	
-	
 
 	@Override
 	public void onDestroy() {
@@ -80,7 +77,7 @@ public class MOCK_GPS_Service extends Service {
 		killme = true;
 		app.sensors.ClearMOCKLocation();
 		super.onDestroy();
-		
+
 	}
 
 }
