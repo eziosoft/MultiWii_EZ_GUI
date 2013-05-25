@@ -838,4 +838,11 @@ public class MultiWii210 extends MultirotorData {
 		Log.d("aaa", "MSP_SET_MOTOR " + String.valueOf(motorTogglesByte));
 	}
 
+	@Override
+	public void SendRequestMSP_RAW_GPS() {
+		sendRequestMSP(requestMSP(MSP_ACC_CALIBRATION));
+		Log.d("aaa", "MSP_RAW_GPS ");
+
+	}
+
 }

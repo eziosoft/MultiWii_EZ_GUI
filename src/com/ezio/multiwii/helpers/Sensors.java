@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii.helpers;
 
+import java.lang.reflect.Method;
 import java.util.Iterator;
 
 import android.content.Context;
@@ -31,6 +32,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.widget.Toast;
 
 public class Sensors implements SensorEventListener, LocationListener {
 
@@ -70,6 +73,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	private Context context;
 
+	String mocLocationProvider;
+	public boolean MockLocationWorking = false;
+
 	public interface Listener {
 		public void onSensorsStateChangeMagAcc();
 
@@ -80,6 +86,74 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public void registerListener(Listener listener) {
 		mListener = listener;
+	}
+
+	public void initMOCKLocation() {
+		mocLocationProvider = "gps";
+		// mocLocationProvider = LocationManager.NETWORK_PROVIDER;
+		locationManager.addTestProvider(mocLocationProvider, false, false, false, false, true, true, true, 0, 5);
+		locationManager.setTestProviderEnabled(mocLocationProvider, true);
+		MockLocationWorking = true;
+	}
+
+	public boolean isMockEnabled() {
+		try {
+			int mock_location = Settings.Secure.getInt(context.getContentResolver(), "mock_location");
+			if (mock_location == 0) {
+				try {
+					Settings.Secure.putInt(context.getContentResolver(), "mock_location", 1);
+				} catch (Exception ex) {
+				}
+				mock_location = Settings.Secure.getInt(context.getContentResolver(), "mock_location");
+			}
+
+			if (mock_location == 0) {
+				Toast.makeText(context, "Turn on the mock locations in your Android settings", Toast.LENGTH_LONG).show();
+				return false;
+			} else {
+				return true;
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public void setMOCKLocation(double Latitude, double Longitude, float Altitude, float Heading) {
+
+		Location mockLocation = new Location(mocLocationProvider); // a string
+		mockLocation.setLatitude(Latitude); // double
+		mockLocation.setLongitude(Longitude);
+		mockLocation.setAltitude(Altitude);
+		mockLocation.setTime(System.currentTimeMillis());
+		mockLocation.setAccuracy(10);
+		mockLocation.setBearing(Heading);
+
+		try {
+			Method locationJellyBeanFixMethod = Location.class.getMethod("makeComplete");
+			if (locationJellyBeanFixMethod != null) {
+				locationJellyBeanFixMethod.invoke(mockLocation);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		locationManager.setTestProviderLocation(mocLocationProvider, mockLocation);
+
+	}
+
+	public void ClearMOCKLocation() {
+		if (mocLocationProvider != null) {
+			locationManager.removeTestProvider(mocLocationProvider);
+			locationManager.clearTestProviderEnabled(mocLocationProvider);
+			locationManager.clearTestProviderLocation(mocLocationProvider);
+			locationManager.clearTestProviderStatus(mocLocationProvider);
+			start();
+			MockLocationWorking = false;
+
+		}
 	}
 
 	public Sensors(Context context) {

@@ -221,6 +221,8 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
+	public abstract void SendRequestMSP_RAW_GPS();
+
 	/********************************* FUNCTIONS END **************************************/
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");

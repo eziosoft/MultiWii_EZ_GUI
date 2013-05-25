@@ -457,12 +457,15 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			String t = new String();
+			if (sensors.MockLocationWorking)
+				t += getString(R.string.MockLocationIsWorking) + ";";
 			if (FollowMeEnable)
 				t += getString(R.string.Follow_Me) + ";";
 			if (InjectGPSEnable)
 				t += "InjectGPS" + ";";
 			if (FollowHeading)
 				t += getString(R.string.Follow_Heading);
+
 			notifications.displayNotification("Status", t, false, 99, false);
 
 		}

@@ -50,6 +50,7 @@ import com.ezio.multiwii.dashboard.Dashboard2Activity;
 import com.ezio.multiwii.dashboard.dashboard3.Dashboard3Activity;
 import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.gps.GPSActivity;
+import com.ezio.multiwii.gps.MOCK_GPS_Service;
 import com.ezio.multiwii.graph.GraphsActivity;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
@@ -387,6 +388,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
+
+			try {
+				stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
 			if (app.DisableBTonExit) {
 				app.commMW.Disable();
 				app.commFrsky.Disable();

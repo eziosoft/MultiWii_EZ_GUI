@@ -173,7 +173,7 @@
     <string name="ShareIt">Share Your Config</string>
     <string name="SelectSetting">Select Setting</string>
     <string name="RXBIND">RX BIND</string>
-    <string name="FollowMe">Follow Me (not tested!  must be used with #define USE_MSP_WP) blinks when phone position is send to MW</string>
+    <string name="FollowMe">Follow Me: #define USE_MSP_WP should be uncomented in config.h; not work with I2C GPS; blinks when phone position is send to MW</string>
     <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
     <string name="convertToKML">Convert to KML (Google Earth)</string>
     <string name="infoDonate">I have spent and will spend many, many hours of my free time to build and extend this program, so if you like and use MultiWii EZ-GUI, please consider donating. This will keep me interested in extending the program.</string>
@@ -227,5 +227,6 @@
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
     <string name="Refresh">Refresh</string>
+    <string name="MockLocationIsWorking">Mock location is working</string>
 
 </resources>
