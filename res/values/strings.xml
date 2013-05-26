@@ -229,5 +229,6 @@
     <string name="Refresh">Refresh</string>
     <string name="MockLocationIsWorking">Mock location is working</string>
     <string name="NoDataRecieved">No data received!</string>
+    <string name="MOCKlocationInfo">When you start MOCK location service this program will be put to background, data from the MultiWii will be used to emulate GPS in Android system so you can use any map app to watch multirotor position. Press EZ-GUI icon in notification bar to come back</string>
 
 </resources>

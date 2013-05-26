@@ -236,7 +236,7 @@ public class GPSActivity extends SherlockActivity {
 	}
 
 	public void StopMOCKLocationServiceOnClick(View v) {
-		app.sensors.ClearMOCKLocation();
+		
 		try {
 			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
 		} catch (Exception e) {

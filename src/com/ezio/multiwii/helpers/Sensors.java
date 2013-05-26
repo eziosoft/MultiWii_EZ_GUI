@@ -33,6 +33,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Sensors implements SensorEventListener, LocationListener {
@@ -89,7 +90,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 	}
 
 	public void initMOCKLocation() {
-		mocLocationProvider = "gps";
+		mocLocationProvider = LocationManager.GPS_PROVIDER;
 		// mocLocationProvider = LocationManager.NETWORK_PROVIDER;
 		locationManager.addTestProvider(mocLocationProvider, false, false, false, false, true, true, true, 0, 5);
 		locationManager.setTestProviderEnabled(mocLocationProvider, true);
@@ -147,10 +148,12 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public void ClearMOCKLocation() {
 		if (mocLocationProvider != null) {
-			locationManager.removeTestProvider(mocLocationProvider);
+			Log.d("aaa", "ClearMOCKLocation");
+
 			locationManager.clearTestProviderEnabled(mocLocationProvider);
 			locationManager.clearTestProviderLocation(mocLocationProvider);
 			locationManager.clearTestProviderStatus(mocLocationProvider);
+			locationManager.removeTestProvider(mocLocationProvider);
 			start();
 			MockLocationWorking = false;
 

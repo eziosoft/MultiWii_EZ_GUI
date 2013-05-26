@@ -45,8 +45,11 @@ public class MOCK_GPS_Service extends Service {
 			// app.mw.SendRequest();
 			// app.mw.SendRequestMSP_RAW_GPS();
 			app.mw.SendRequest();
-			if (!killme)
+			if (!killme) {
 				mHandler.postDelayed(update, 1000);
+			} else {
+				app.sensors.ClearMOCKLocation();
+			}
 
 		}
 	};
@@ -75,7 +78,7 @@ public class MOCK_GPS_Service extends Service {
 		// TODO Auto-generated method stub
 		mHandler.removeCallbacks(null);
 		killme = true;
-		app.sensors.ClearMOCKLocation();
+
 		super.onDestroy();
 
 	}
