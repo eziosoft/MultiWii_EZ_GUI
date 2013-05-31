@@ -51,7 +51,16 @@ public class Notifications {
 		mBuilder.setOngoing(isPresistant);
 		mBuilder.setAutoCancel(true);
 
+		// Intent notificationIntent = new Intent(context,
+		// MainMultiWiiActivity.class);
+
 		Intent notificationIntent = new Intent(context, MainMultiWiiActivity.class);
+		// notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // You
+		// need this if starting
+		// the activity from a service
+		notificationIntent.setAction(Intent.ACTION_MAIN);
+		notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(contentIntent);
 

@@ -65,7 +65,7 @@
     <string name="PID">PID</string>
     <string name="Read">Read</string>
     <string name="Write">Write</string>
-        <string name="RATE">RATE</string>
+    <string name="RATE">RATE</string>
     <string name="TPA">Thr PID attenuation</string>
     <string name="Reset">Reset</string>
     <string name="AccCalibration">AccCalibration</string>
@@ -173,7 +173,7 @@
     <string name="ShareIt">Share Your Config</string>
     <string name="SelectSetting">Select Setting</string>
     <string name="RXBIND">RX BIND</string>
-    <string name="FollowMe">Follow Me (not tested!  must be used with #define USE_MSP_WP) blinks when phone position is send to MW</string>
+    <string name="FollowMe">Follow Me: #define USE_MSP_WP should be uncomented in config.h; not work with I2C GPS; blinks when phone position is send to MW</string>
     <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
     <string name="convertToKML">Convert to KML (Google Earth)</string>
     <string name="infoDonate">I have spent and will spend many, many hours of my free time to build and extend this program, so if you like and use MultiWii EZ-GUI, please consider donating. This will keep me interested in extending the program.</string>
@@ -227,5 +227,8 @@
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
     <string name="Refresh">Refresh</string>
+    <string name="MockLocationIsWorking">Mock location is working</string>
+    <string name="NoDataRecieved">No data received!</string>
+    <string name="MOCKlocationInfo">When you start MOCK location service this program will be put to background, data from the MultiWii will be used to emulate GPS in Android system so you can use any map app to watch multirotor position. Press EZ-GUI icon in notification bar to come back</string>
 
 </resources>

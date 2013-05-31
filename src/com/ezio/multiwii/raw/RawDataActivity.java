@@ -286,7 +286,7 @@ public class RawDataActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Debug version", Toast.LENGTH_LONG).show();
 			app.Say("Debug version");
 			app.mw.GPS_longitude = 23654111;
-			app.mw.GPS_latitude = 488547500;
+			app.mw.GPS_latitude = 498547500;
 		}
 
 	}

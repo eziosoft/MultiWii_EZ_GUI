@@ -16,12 +16,14 @@
  */
 package com.ezio.multiwii.gps;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -173,6 +175,7 @@ public class GPSActivity extends SherlockActivity {
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
 			CheckBoxFollowHeading.setVisibility(View.GONE);
+			((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.GONE);
 		}
 
 	}
@@ -182,10 +185,11 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxFollowMe.setVisibility(View.VISIBLE);
 		FollowMeInfoTV.setVisibility(View.VISIBLE);
 		CheckBoxFollowHeading.setVisibility(View.VISIBLE);
+		((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.VISIBLE);
 
 		app.AdvancedFunctions = true;
-		
-		Toast.makeText(getApplicationContext(),"Not tested features activated", Toast.LENGTH_LONG).show();
+
+		Toast.makeText(getApplicationContext(), "Not tested features activated", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -219,6 +223,26 @@ public class GPSActivity extends SherlockActivity {
 
 	public void FollowHeadingCheckBoxOnClick(View v) {
 		app.FollowHeading = CheckBoxFollowHeading.isChecked();
+	}
+
+	public void StartMOCKLocationServiceOnClick(View v) {
+		Intent service = new Intent(getApplicationContext(), MOCK_GPS_Service.class);
+		startService(service);
+
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(startMain);
+	}
+
+	public void StopMOCKLocationServiceOnClick(View v) {
+		
+		try {
+			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
 }

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="88"
-    android:versionName="3.42" >
+    android:versionCode="89"
+    android:versionName="3.43" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -140,6 +140,9 @@
             android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
+
+        <service android:name=".gps.MOCK_GPS_Service" >
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -151,5 +154,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
 </manifest>

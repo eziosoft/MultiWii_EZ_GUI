@@ -514,7 +514,41 @@
                     android:layout_height="wrap_content"
                     android:onClick="FollowHeadingCheckBoxOnClick"
                     android:text="@string/Follow_Heading" />
+
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/MockLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MOCKlocationInfo" />
+
+                <Button
+                    android:id="@+id/button1"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="StartMOCKLocationServiceOnClick"
+                    android:text="Start MOCK location service" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="StopMOCKLocationServiceOnClick"
+                    android:text="Stop MOCK location service" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
