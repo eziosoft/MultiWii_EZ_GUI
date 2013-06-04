@@ -40,7 +40,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/Profile" />
-
                 </TableRow>
 
                 <TableRow
@@ -74,7 +73,6 @@
                         android:layout_height="wrap_content"
                         android:onClick="SaveProfileOnClick"
                         android:text="@string/Save" />
-
                 </TableRow>
 
                 <TableRow
@@ -97,17 +95,31 @@
                 android:background="@drawable/frame" >
 
                 <TableRow
-                    android:id="@+id/tableRow1"
+                    android:id="@+id/tableRow12"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
 
                     <TextView
                         android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ClickOnTheNameForInfo"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/HoloBlueDark" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <TextView
                         android:id="@+id/textView1"
@@ -142,25 +154,32 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RATE"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/HoloBlueDark" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow08"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView08"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Roll"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/P1"
@@ -168,8 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I1"
@@ -178,7 +196,6 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                       
                         android:text="8,888" />
 
                     <EditText
@@ -187,8 +204,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editTextRatePitchRoll1"
@@ -196,25 +212,26 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                       />
-
+                        android:inputType="numberDecimal" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow07"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView07"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Pitch"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/P2"
@@ -222,8 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I2"
@@ -231,8 +247,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D2"
@@ -240,8 +255,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editTextRatePitchRoll2"
@@ -257,17 +271,20 @@
                 <TableRow
                     android:id="@+id/TableRow06"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView06"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Yaw"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/P3"
@@ -275,8 +292,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I3"
@@ -284,8 +300,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D3"
@@ -293,8 +308,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editTextRateYaw"
@@ -302,25 +316,26 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                       />
-
+                        android:inputType="numberDecimal" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow05"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView05"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=Altitude_PID"
                         android:text="@string/Alt"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/P4"
@@ -328,8 +343,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I4"
@@ -337,8 +351,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D4"
@@ -346,8 +359,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editText4"
@@ -362,8 +374,7 @@
                 <TableRow
                     android:id="@+id/TableRow04"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView04"
@@ -379,8 +390,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I5"
@@ -388,8 +398,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D5"
@@ -413,8 +422,7 @@
                 <TableRow
                     android:id="@+id/TableRow03"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView03"
@@ -430,8 +438,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I6"
@@ -439,8 +446,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D6"
@@ -449,7 +455,6 @@
                         android:layout_weight="0.8"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                       
                         android:visibility="visible" />
 
                     <EditText
@@ -465,8 +470,7 @@
                 <TableRow
                     android:id="@+id/TableRow02"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView02"
@@ -482,8 +486,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I7"
@@ -491,8 +494,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D7"
@@ -500,8 +502,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editText7"
@@ -516,17 +517,20 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=PID#PID_:_Level"
                         android:text="@string/Level"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/P8"
@@ -534,9 +538,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         >
-
+                        android:inputType="numberDecimal" >
                     </EditText>
 
                     <EditText
@@ -545,8 +547,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/D8"
@@ -554,8 +555,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                        />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/editText8"
@@ -570,8 +570,7 @@
                 <TableRow
                     android:id="@+id/TableRow01"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView01"
@@ -588,8 +587,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                         />
+                        android:inputType="numberDecimal" />
 
                     <EditText
                         android:id="@+id/I9"
@@ -636,8 +634,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:clickable="true"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/ThrMid"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/editTextMIDThrottle"
@@ -645,9 +647,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                       />
-
+                        android:inputType="numberDecimal" />
                 </TableRow>
 
                 <TableRow
@@ -660,8 +660,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:clickable="true"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/ThrExpo"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/editTextEXPOThrottle"
@@ -669,9 +673,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberDecimal"
-                       />
-
+                        android:inputType="numberDecimal" />
                 </TableRow>
 
                 <TableRow
@@ -684,8 +686,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:clickable="true"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RCRate"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/editTextRate2PitchRoll"
@@ -693,9 +699,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned"
-                       />
-
+                        android:inputType="numberSigned" />
                 </TableRow>
 
                 <TableRow
@@ -708,8 +712,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:clickable="true"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RCExpo"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/editTextEXPOPitchRoll"
@@ -717,9 +725,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned"
-                       />
-
+                        android:inputType="numberSigned" />
                 </TableRow>
 
                 <TableRow
@@ -732,7 +738,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/TPA" />
+                        android:clickable="true"
+                        android:onClick="OpenInfoOnClick"
+                        android:tag="http://www.multiwii.com/forum/viewtopic.php?f=18&amp;t=3578&amp;p=36674&amp;hilit=attenuation#p36674"
+                        android:text="@string/TPA"
+                        android:textColor="@color/HoloBlueDark" />
 
                     <EditText
                         android:id="@+id/editTextTPA"
@@ -740,9 +750,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned"
-                       />
-
+                        android:inputType="numberSigned" />
                 </TableRow>
             </TableLayout>
 
@@ -754,7 +762,6 @@
                 android:onClick="SetOnClick"
                 android:tag="DONTASK"
                 android:text="@string/SavetoEEPROM" />
-
         </LinearLayout>
     </ScrollView>
 

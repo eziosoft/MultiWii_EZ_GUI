@@ -11,6 +11,7 @@
     <color name="Red">#CC0000</color>
     <color name="Green">#99FF00</color>
     <color name="Buttons">#000</color>
-     <color name="ButtonsTextColor">#fff</color>
+    <color name="ButtonsTextColor">#fff</color>
+    <color name="HoloBlueDark">#0099cc</color>
 
 </resources>
