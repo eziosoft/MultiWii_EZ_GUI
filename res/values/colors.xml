@@ -12,6 +12,12 @@
     <color name="Green">#99FF00</color>
     <color name="Buttons">#000</color>
     <color name="ButtonsTextColor">#fff</color>
-    <color name="HoloBlueDark">#0099cc</color>
+    <color name="link">#0000FF</color>
+    <color name="tableRows">#CCB6E8</color>
+    <color name="tableRows1">#FFF7BA</color>
+    <color name="tableRows2">#FFD3E8</color>
+    <color name="tableRows3">#95C4CC</color>
+    <color name="tableRows4">#8BADB3</color>
+    <color name="tableRows5">#B8FFA1</color>
 
 </resources>

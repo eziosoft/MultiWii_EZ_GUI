@@ -558,7 +558,7 @@ public class MultiWii210 extends MultirotorData {
 			if (appLogging)
 				Logging();
 		}
-	}
+			}
 
 	@Override
 	public void SendRequestMSP_ACC_CALIBRATION() {

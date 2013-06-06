@@ -106,13 +106,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ClickOnTheNameForInfo"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/frame" >
 
                     <TextView
                         android:id="@+id/textView7"
@@ -160,13 +161,14 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RATE"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow08"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -179,7 +181,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Roll"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/P1"
@@ -218,7 +220,8 @@
                 <TableRow
                     android:id="@+id/TableRow07"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows" >
 
                     <TextView
                         android:id="@+id/TextView07"
@@ -231,7 +234,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Pitch"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/P2"
@@ -271,7 +274,8 @@
                 <TableRow
                     android:id="@+id/TableRow06"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows" >
 
                     <TextView
                         android:id="@+id/TextView06"
@@ -284,7 +288,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning"
                         android:text="@string/Yaw"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/P3"
@@ -322,7 +326,8 @@
                 <TableRow
                     android:id="@+id/TableRow05"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/TextView05"
@@ -332,10 +337,10 @@
                         android:clickable="true"
                         android:gravity="center"
                         android:onClick="OpenInfoOnClick"
-                        android:tag="http://www.multiwii.com/wiki/index.php?title=Altitude_PID"
+                        android:tag="https://dl.dropboxusercontent.com/u/80566205/not%20remove/tutorials/PID%20Alt%20Hold.html"
                         android:text="@string/Alt"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/P4"
@@ -374,7 +379,8 @@
                 <TableRow
                     android:id="@+id/TableRow04"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView04"
@@ -422,7 +428,8 @@
                 <TableRow
                     android:id="@+id/TableRow03"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView03"
@@ -470,7 +477,8 @@
                 <TableRow
                     android:id="@+id/TableRow02"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView02"
@@ -517,7 +525,8 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows4" >
 
                     <TextView
                         android:id="@+id/textView4"
@@ -530,7 +539,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=PID#PID_:_Level"
                         android:text="@string/Level"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/P8"
@@ -570,7 +579,8 @@
                 <TableRow
                     android:id="@+id/TableRow01"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows5" >
 
                     <TextView
                         android:id="@+id/TextView01"
@@ -627,7 +637,8 @@
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/textView8"
@@ -639,7 +650,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/ThrMid"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/editTextMIDThrottle"
@@ -653,7 +664,8 @@
                 <TableRow
                     android:id="@+id/tableRow4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/textView9"
@@ -665,7 +677,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/ThrExpo"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/editTextEXPOThrottle"
@@ -679,7 +691,8 @@
                 <TableRow
                     android:id="@+id/tableRow5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows2" >
 
                     <TextView
                         android:id="@+id/textView10"
@@ -691,7 +704,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RCRate"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/editTextRate2PitchRoll"
@@ -705,7 +718,8 @@
                 <TableRow
                     android:id="@+id/tableRow6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:background="@color/tableRows2" >
 
                     <TextView
                         android:id="@+id/textView11"
@@ -717,7 +731,7 @@
                         android:tag="http://www.multiwii.com/wiki/index.php?title=RC_rates_%26_expo"
                         android:text="@string/RCExpo"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/editTextEXPOPitchRoll"
@@ -731,7 +745,8 @@
                 <TableRow
                     android:id="@+id/tableRow7"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/textView12"
@@ -742,7 +757,7 @@
                         android:onClick="OpenInfoOnClick"
                         android:tag="http://www.multiwii.com/forum/viewtopic.php?f=18&amp;t=3578&amp;p=36674&amp;hilit=attenuation#p36674"
                         android:text="@string/TPA"
-                        android:textColor="@color/HoloBlueDark" />
+                        android:textColor="@color/link" />
 
                     <EditText
                         android:id="@+id/editTextTPA"
@@ -759,9 +774,11 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:onClick="SetOnClick"
                 android:tag="DONTASK"
                 android:text="@string/SavetoEEPROM" />
+
         </LinearLayout>
     </ScrollView>
 
