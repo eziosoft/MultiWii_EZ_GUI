@@ -247,7 +247,7 @@ public class MultiWii210 extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			alt = (float) read32() / 100;
+			alt = ((float) read32() / 100) - AltCorrection;
 			vario = read16();
 			break;
 		case MSP_ANALOG:
@@ -554,7 +554,7 @@ public class MultiWii210 extends MultirotorData {
 
 			ReadFrame();
 			// ProcessSerialData(appLogging);
-			alt = alt - AltCorrection;
+
 			if (appLogging)
 				Logging();
 		}
