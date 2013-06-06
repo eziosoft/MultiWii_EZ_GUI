@@ -137,7 +137,6 @@ public class RawDataActivity extends Activity {
 		log("magy", app.mw.magy);
 		log("magz", app.mw.magz);
 
-		log("baro", app.mw.baro);
 		log("alt", app.mw.alt);
 		log("vario", app.mw.vario);
 		log("head", app.mw.head);
