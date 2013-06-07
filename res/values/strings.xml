@@ -192,7 +192,7 @@
     <string name="EnterDescription">Enter description</string>
     <string name="SetAsPositionHold">Set As Position Hold</string>
     <string name="Follow_Me">FollowMe</string>
-    <string name="Follow_Heading">FollowHeading</string>
+    <string name="Follow_Heading">FollowHeading (readings from Android mag sensor are send to MultiWii. Copter should follow your Android device orientation. Works only when MAG is enabled)</string>
     <string name="Load">Load</string>
     <string name="Profile">Here you can save/load your PID setting to/from file. The files are stored here: /sdcard/MultiWiiLogs and they are compatibile with MultiWiiConf</string>
     <string name="Save">Save</string>
@@ -227,10 +227,12 @@
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
     <string name="Refresh">Refresh</string>
-    <string name="MockLocationIsWorking">Mock location is working</string>
+    <string name="MockLocationIsWorking">GPS emulation is working</string>
     <string name="NoDataRecieved">No data received!</string>
-    <string name="MOCKlocationInfo">When you start MOCK location service this program will be put to background, data from the MultiWii will be used to emulate GPS in Android system so you can use any map app to watch multirotor position. Press EZ-GUI icon in notification bar to come back</string>
-    <string name="PIDInfoPitchRoll"><a href="http://www.multiwii.com/wiki/index.php?title=PID#Basic_PID_Tuning">(i)</a></string>
+    <string name="MOCKlocationInfo">GPS emulation allows to display copter location in any map application.
+        After you start the GPS emulation this program will be put to background, data from the MultiWii will be used to emulate GPS in Android system so you can use any map app to watch multirotor position. Press EZ-GUI icon in notification bar to come back</string>
+    <string name="StartGpsEmulation">Start GPS emulation</string>
     <string name="ClickOnTheNameForInfo">(click name for info)</string>
-    
+    <string name="ClickHereForMoreInfo">Click here for more info</string>
+
 </resources>

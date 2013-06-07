@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -134,6 +136,8 @@ public class AUXActivity extends SherlockActivity {
 
 		app = (App) getApplication();
 
+		getSupportActionBar().setTitle(getString(R.string.SetCheckboxes));
+
 		CreateGUI();
 
 	}
@@ -171,14 +175,28 @@ public class AUXActivity extends SherlockActivity {
 		TextViewInfo = new TextView(this);
 		TextViewInfo.setGravity(Gravity.CENTER);
 		TextViewInfo.setBackgroundResource(R.drawable.frame);
+		TextViewInfo.setTextAppearance(getApplicationContext(), android.R.style.TextAppearance_DeviceDefault_Small);
 
-		HorizontalScrollView s1 = new HorizontalScrollView(this);
-		ScrollView s2 = new ScrollView(this);
+		HorizontalScrollView horizontalSV = new HorizontalScrollView(this);
+		ScrollView verticalSV = new ScrollView(this);
 
-		LinearLayout l = new LinearLayout(this);
+		LinearLayout linearL = new LinearLayout(this);
 
-		TableLayout t = new TableLayout(this);
-		t.setBackgroundResource(R.drawable.frame);
+		TableLayout tableL = new TableLayout(this);
+		tableL.setBackgroundResource(R.drawable.frame);
+
+		// add info text
+		TextView TVClickForInfo = new TextView(this);
+		TVClickForInfo.setText(getString(R.string.ClickHereForMoreInfo));
+		TVClickForInfo.setClickable(true);
+		TVClickForInfo.setTextColor(getResources().getColor(R.color.link));
+		TVClickForInfo.setTag("http://www.multiwii.com/forum/viewtopic.php?f=16&t=3011&p=30010&hilit=combining#p30010");
+		TVClickForInfo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				app.OpenInfoOnClick(v);
+			}
+		});
 
 		// adding tittles
 		TableRow r1 = new TableRow(this);
@@ -212,7 +230,7 @@ public class AUXActivity extends SherlockActivity {
 			tv1.setText("");
 			r1.addView(tv1);
 		}
-		t.addView(r1);
+		tableL.addView(r1);
 
 		r1 = new TableRow(this);
 		for (int zz = 0; zz < 4; zz++) {
@@ -251,7 +269,7 @@ public class AUXActivity extends SherlockActivity {
 				r1.addView(tv1);
 			}
 		}
-		t.addView(r1);
+		tableL.addView(r1);
 		// titles end/////
 		for (int j = 0; j < app.mw.buttonCheckboxLabel.length; j++) {
 			TableRow r = new TableRow(this);
@@ -277,19 +295,20 @@ public class AUXActivity extends SherlockActivity {
 				}
 				r.addView(c);
 			}
-			t.addView(r);
+			tableL.addView(r);
 
 		}
 
 		// l.addView(TextViewInfo);
-		l.addView(t);
-		s2.addView(l);
-		s1.addView(s2);
+		linearL.addView(tableL);
+		verticalSV.addView(linearL);
+		horizontalSV.addView(verticalSV);
 
 		LinearLayout a = new LinearLayout(this);
 		a.setOrientation(LinearLayout.VERTICAL);
+		a.addView(TVClickForInfo);
 		a.addView(TextViewInfo);
-		a.addView(s1);
+		a.addView(horizontalSV);
 		setContentView(a);
 	}
 

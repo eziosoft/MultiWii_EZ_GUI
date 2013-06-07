@@ -108,17 +108,15 @@ public class PIDActivity extends SherlockActivity {
 	// ///
 
 	public void OpenInfoOnClick(View v) {
-		{
-			Log.d("aaa", "OpenInfoOnClick " + v.getTag().toString());
-			final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(v.getTag().toString()));
-			startActivity(intent);
-		}
+		app.OpenInfoOnClick(v);
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pid_layout);
+
+		getSupportActionBar().setTitle(getString(R.string.PID));
 
 		app = (App) getApplication();
 		actionBar = getSherlock();

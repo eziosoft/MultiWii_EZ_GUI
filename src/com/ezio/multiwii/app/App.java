@@ -20,11 +20,14 @@ package com.ezio.multiwii.app;
 import java.util.Locale;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
@@ -550,5 +553,16 @@ public class App extends Application implements Sensors.Listener {
 	public void onSensorsStateGPSStatusChange() {
 
 	}
+	
+	public void OpenInfoOnClick(View v) {
+		{
+			Log.d("aaa", "OpenInfoOnClick " + v.getTag().toString());
+			final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(v.getTag().toString()));
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		}
+	}
+	
+	
 
 }
