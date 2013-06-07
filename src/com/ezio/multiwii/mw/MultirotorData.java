@@ -109,7 +109,7 @@ public abstract class MultirotorData {
 	public int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
 
 	public int version, versionMisMatch;
-	public float gx, gy, gz, ax, ay, az, magx, magy, magz, baro, head, angx, angy, debug1, debug2, debug3, debug4;
+	public float gx, gy, gz, ax, ay, az, magx, magy, magz, head, angx, angy, debug1, debug2, debug3, debug4;
 	public float alt;
 	public int vario;
 
@@ -326,7 +326,7 @@ public abstract class MultirotorData {
 		s += String.valueOf(magy) + ";";
 		s += String.valueOf(magz) + ";";
 
-		s += String.valueOf(baro) + ";";
+		s += String.valueOf(alt) + ";";
 		s += String.valueOf(head) + ";";
 
 		s += String.valueOf(angx) + ";";

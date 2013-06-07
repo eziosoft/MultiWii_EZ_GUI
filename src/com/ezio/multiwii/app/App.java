@@ -20,11 +20,14 @@ package com.ezio.multiwii.app;
 import java.util.Locale;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
@@ -245,6 +248,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		SelectProtocol();
+
 	}
 
 	public void SelectProtocol() {
@@ -299,6 +303,8 @@ public class App extends Application implements Sensors.Listener {
 		CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY, COMMUNICATION_TYPE_BT);
 		SerialPortBaudRateMW = prefs.getString(SERIAL_PORT_BAUD_RATE_MW, "115200");
 		SerialPortBaudRateFrSky = prefs.getString(SERIAL_PORT_BAUD_RATE_FRSKY, "9600");
+
+
 
 	}
 
@@ -381,7 +387,8 @@ public class App extends Application implements Sensors.Listener {
 		// ===================timer every 1sek===============================
 		if (timer3 < System.currentTimeMillis()) {
 			timer3 = System.currentTimeMillis() + timer3Freq;
-
+			
+			
 			// Notifications
 			if (mw.i2cError != tempLastI2CErrorCount) {
 				notifications.displayNotification(getString(R.string.Warning), "I2C Error=" + String.valueOf(mw.i2cError), true, 1, false);
@@ -389,7 +396,7 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			if (mw.DataFlow < 0) {
-				notifications.displayNotification(getString(R.string.Warning), getString(R.string.NoDataRecieved) + " "+String.valueOf(mw.DataFlow), true, 1, false);
+				notifications.displayNotification(getString(R.string.Warning), getString(R.string.NoDataRecieved) + " " + String.valueOf(mw.DataFlow), true, 1, false);
 
 			}
 
@@ -412,8 +419,6 @@ public class App extends Application implements Sensors.Listener {
 
 					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
 						mw.AltCorrection = mw.alt;
-						// mw._1G = (int) Math.sqrt(mw.ax * mw.ax + mw.ay *
-						// mw.ay + mw.az * mw.az);
 					}
 
 					if (!AltCorrection)
@@ -548,5 +553,16 @@ public class App extends Application implements Sensors.Listener {
 	public void onSensorsStateGPSStatusChange() {
 
 	}
+	
+	public void OpenInfoOnClick(View v) {
+		{
+			Log.d("aaa", "OpenInfoOnClick " + v.getTag().toString());
+			final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(v.getTag().toString()));
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		}
+	}
+	
+	
 
 }

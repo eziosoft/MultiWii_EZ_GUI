@@ -31,12 +31,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.ActionBarSherlock;
@@ -96,7 +98,7 @@ public class PIDActivity extends SherlockActivity {
 
 	Spinner spinnerProfile;
 
-	// used for write
+	// used for write to eeprom
 	float[] P;
 	float[] I;
 	float[] D;
@@ -105,10 +107,16 @@ public class PIDActivity extends SherlockActivity {
 
 	// ///
 
+	public void OpenInfoOnClick(View v) {
+		app.OpenInfoOnClick(v);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pid_layout);
+
+		getSupportActionBar().setTitle(getString(R.string.PID));
 
 		app = (App) getApplication();
 		actionBar = getSherlock();
@@ -312,7 +320,7 @@ public class PIDActivity extends SherlockActivity {
 		D[7] = Float.parseFloat(D8.getText().toString().replace(",", "."));
 		D[8] = Float.parseFloat(D9.getText().toString().replace(",", "."));
 
-		if (v!=null) {
+		if (v != null) {
 			app.mw.SendRequestMSP_SET_PID(confRC_RATE, confRC_EXPO, rollPitchRate, yawRate, dynamic_THR_PID, throttle_MID, throttle_EXPO, P, I, D);
 			app.mw.SendRequestMSP_EEPROM_WRITE();
 			Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();

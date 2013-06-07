@@ -537,15 +537,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="StartMOCKLocationServiceOnClick"
-                    android:text="Start MOCK location service" />
-
-                <Button
-                    android:id="@+id/button2"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="StopMOCKLocationServiceOnClick"
-                    android:text="Stop MOCK location service" />
+                    android:text="@string/StartGpsEmulation" />
 
             </LinearLayout>
 

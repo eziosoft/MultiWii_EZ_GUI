@@ -174,8 +174,8 @@ public class GPSActivity extends SherlockActivity {
 		HeadingTV = (TextView) findViewById(R.id.TextViewHeading);
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
-			CheckBoxFollowHeading.setVisibility(View.GONE);
-			((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.GONE);
+			//CheckBoxFollowHeading.setVisibility(View.GONE);
+			//((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.GONE);
 		}
 
 	}
@@ -203,6 +203,13 @@ public class GPSActivity extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
+
+		try {
+			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
@@ -233,16 +240,6 @@ public class GPSActivity extends SherlockActivity {
 		startMain.addCategory(Intent.CATEGORY_HOME);
 		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(startMain);
-	}
-
-	public void StopMOCKLocationServiceOnClick(View v) {
-		
-		try {
-			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
 	}
 
 }
