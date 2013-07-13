@@ -18,12 +18,6 @@ package com.ezio.multiwii.dashboard.dashboard3;
 
 import java.util.Random;
 
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
-import org.osmdroid.views.MapView;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -36,25 +30,27 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
-import com.ezio.multiwii.mapoffline.MapOfflineCirclesOverlay;
+import com.ezio.multiwii.waypoints.MapHelperClass;
 import com.ezio.sec.Sec;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
-public class Dashboard3Activity extends Activity {
+public class Dashboard3Activity extends SherlockFragmentActivity {
 	private boolean killme = false;
+
+	MapHelperClass mapHelperClass;
 
 	Random random = new Random(); // for test
 
 	App app;
 	Handler mHandler = new Handler();
-
-	MapView mapView;
-	private MapController myMapController;
-	private long centerStep = 0;
-	MapOfflineCopterOverlayD3 copter;
-	MapOfflineCirclesOverlay circles;
 
 	HorizonView horizonView;
 	AltitudeView altitudeView;
@@ -71,6 +67,8 @@ public class Dashboard3Activity extends Activity {
 	ProgressBar ProgressBarRx;
 
 	long timer1 = 0;
+	boolean MoveMap = true;
+	private long centerStep = 0;
 
 	private Runnable update = new Runnable() {
 		@Override
@@ -87,31 +85,12 @@ public class Dashboard3Activity extends Activity {
 					app.mw.head++;
 				}
 
-				GeoPoint g = new GeoPoint(app.mw.GPS_latitude / 10, app.mw.GPS_longitude / 10);
-
-				if (centerStep < System.currentTimeMillis()) {
-					if (app.mw.GPS_fix == 1 || app.mw.GPS_numSat > 0) {
-						CenterLocation(g);
-					} else {
-						CenterLocation(app.sensors.geopointOfflineMapCurrentPosition);
-					}
-					centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
-				}
-
-				GeoPoint gHome = new GeoPoint(app.mw.Waypoints[0].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[0].getGeoPoint().getLongitudeE6());
-				GeoPoint gPostionHold = new GeoPoint(app.mw.Waypoints[16].getGeoPoint().getLatitudeE6(), app.mw.Waypoints[16].getGeoPoint().getLongitudeE6());
-
 				String state = "";
 				for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
 					if (app.mw.ActiveModes[i]) {
 						state += " " + app.mw.buttonCheckboxLabel[i];
 					}
 				}
-
-				copter.Set(g, gHome, gPostionHold, app.mw.GPS_numSat, app.mw.GPS_distanceToHome, app.mw.GPS_directionToHome, app.mw.GPS_speed, app.mw.GPS_altitude, app.mw.alt, app.mw.GPS_latitude, app.mw.GPS_longitude, app.mw.angy, app.mw.angx, Functions.map((int) app.mw.head, 180, -180, 0, 360), app.mw.vario, state, app.mw.bytevbat, app.mw.pMeterSum, app.mw.intPowerTrigger, app.frskyProtocol.TxRSSI, app.frskyProtocol.RxRSSI);
-
-				circles.Set(app.sensors.Heading, app.sensors.getNextPredictedLocationOfflineMap());
-				mapView.postInvalidate();
 
 				TextViewd31.setText(String.valueOf(app.mw.GPS_numSat));
 				if (app.mw.GPS_update % 2 == 0) {
@@ -133,13 +112,30 @@ public class Dashboard3Activity extends Activity {
 					ProgressBarTx.setVisibility(View.GONE);
 				}
 				app.Frequentjobs();
-				app.mw.SendRequest();
+				app.mw.SendRequest(app.MainRequestMethod);
 
 				timer1 = System.currentTimeMillis() + app.RefreshRate;
 
 			}
 
 			// ///////////////////////
+
+			LatLng copterPositionLatLng = new LatLng(app.mw.GPS_latitude / Math.pow(10, 7), app.mw.GPS_longitude / Math.pow(10, 7));
+			mapHelperClass.SetCopterLocation(copterPositionLatLng, app.mw.head, app.mw.alt);
+			mapHelperClass.DrawFlightPath(copterPositionLatLng);
+			mapHelperClass.PositionHoldMarker.setPosition(new LatLng(app.mw.Waypoints[16].Lat / Math.pow(10, 7), app.mw.Waypoints[16].Lon / Math.pow(10, 7)));
+			mapHelperClass.HomeMarker.setPosition(new LatLng(app.mw.Waypoints[0].Lat / Math.pow(10, 7), app.mw.Waypoints[0].Lon / Math.pow(10, 7)));
+
+			// Map centering
+			if (MoveMap && centerStep < System.currentTimeMillis()) {
+				if (app.mw.GPS_fix == 1) {
+					mapHelperClass.map.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(copterPositionLatLng, app.MapZoomLevel, 0, app.mw.head)));
+				} else {
+					mapHelperClass.map.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(app.sensors.PhoneLatitude, app.sensors.PhoneLongitude), app.MapZoomLevel, 0, 0)));
+				}
+				centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
+			}
+
 			int a = 1; // used for reverce roll in artificial horyzon
 			if (app.ReverseRoll) {
 				a = -1;
@@ -164,20 +160,9 @@ public class Dashboard3Activity extends Activity {
 		app.ConnectionBug();
 		setContentView(R.layout.dashboard3_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		getSupportActionBar().hide();
 
-		mapView = (MapView) findViewById(R.id.mapViewOSM);
-		mapView.setTileSource(TileSourceFactory.MAPNIK);
-		mapView.setClickable(true);
-		mapView.setBuiltInZoomControls(true);
-
-		myMapController = mapView.getController();
-		myMapController.setZoom(app.MapZoomLevel);
-
-		circles = new MapOfflineCirclesOverlay(getApplicationContext());
-		copter = new MapOfflineCopterOverlayD3(getApplicationContext());
-
-		mapView.getOverlays().add(copter);
-		mapView.getOverlays().add(circles);
+		mapHelperClass = new MapHelperClass(((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap(), 5);
 
 		horizonView = (HorizonView) findViewById(R.id.horizonView1);
 		varioView = (VarioView) findViewById(R.id.varioView1);
@@ -195,12 +180,16 @@ public class Dashboard3Activity extends Activity {
 
 		ProgressBarRx.setMax(110);
 		ProgressBarTx.setMax(110);
+		
+		mapHelperClass.map.setOnCameraChangeListener(new OnCameraChangeListener() {
+			@Override
+			public void onCameraChange(CameraPosition position) {
+				if (app.mw.GPS_fix == 1)
+					app.MapZoomLevel = (int) position.zoom;
+			}
+		});
 
 	}
-
-	private void CenterLocation(GeoPoint centerGeoPoint) {
-		myMapController.animateTo(centerGeoPoint);
-	};
 
 	@Override
 	protected void onResume() {
@@ -209,7 +198,7 @@ public class Dashboard3Activity extends Activity {
 		app.Say(getString(R.string.Dashboard3));
 		killme = false;
 
-		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D3")) {
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
@@ -248,7 +237,6 @@ public class Dashboard3Activity extends Activity {
 		super.onPause();
 		mHandler.removeCallbacks(null);
 		killme = true;
-		app.MapZoomLevel = mapView.getZoomLevel();
 		app.SaveSettings(true);
 	}
 

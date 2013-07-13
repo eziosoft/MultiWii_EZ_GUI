@@ -43,7 +43,7 @@ public class TemplateActivity extends Activity {
 											app.frskyProtocol.ProcessSerialData(false);
 											app.Frequentjobs();
 
-											app.mw.SendRequest();
+											app.mw.SendRequest(app.MainRequestMethod);
 											if (!killme)
 												mHandler.postDelayed(update, app.RefreshRate);
 

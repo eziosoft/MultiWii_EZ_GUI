@@ -28,7 +28,7 @@ import communication.Communication;
 public class MultiWii210 extends MultirotorData {
 
 	public MultiWii210(Communication bt) {
-		EZGUIProtocol = "2.2 r1432";
+		EZGUIProtocol = "2.2";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after connection
@@ -205,6 +205,7 @@ public class MultiWii210 extends MultirotorData {
 			gx = read16() / 8;
 			gy = read16() / 8;
 			gz = read16() / 8;
+
 			magx = read16() / 3;
 			magy = read16() / 3;
 			magz = read16() / 3;
@@ -275,18 +276,6 @@ public class MultiWii210 extends MultirotorData {
 				byteD[i] = read8();
 			}
 			break;
-		case MSP_BOX:
-
-			for (i = 0; i < CHECKBOXITEMS; i++) {
-				activation[i] = read16();
-				for (int aa = 0; aa < 12; aa++) {
-					if ((activation[i] & (1 << aa)) > 0)
-						Checkbox[i][aa] = true;
-					else
-						Checkbox[i][aa] = false;
-				}
-			}
-			break;
 
 		case MSP_BOXNAMES:
 			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
@@ -297,6 +286,7 @@ public class MultiWii210 extends MultirotorData {
 			init();
 			break;
 		case MSP_PIDNAMES:
+			PIDNames = new String(inBuf, 0, dataSize).split(";");
 			/* TODO create GUI elements from this message */
 			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
 			// dataSize));
@@ -369,9 +359,25 @@ public class MultiWii210 extends MultirotorData {
 			Waypoints[WP.Number] = WP;
 
 			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
+			break;
+
+		case MSP_BOX:
+
+			for (i = 0; i < CHECKBOXITEMS; i++) {
+				activation[i] = read16();
+				for (int aa = 0; aa < 12; aa++) {
+					if ((activation[i] & (1 << aa)) > 0)
+						Checkbox[i][aa] = true;
+					else
+						Checkbox[i][aa] = false;
+				}
+			}
+			SendRequest2Confirmation();
 
 			break;
+
 		default:
+			Log.d("aaa", "Error command - unknown replay");
 
 		}
 	}
@@ -551,10 +557,7 @@ public class MultiWii210 extends MultirotorData {
 	@Override
 	public void ProcessSerialData(boolean appLogging) {
 		if (communication.Connected) {
-
 			ReadFrame();
-			// ProcessSerialData(appLogging);
-
 			if (appLogging)
 				Logging();
 		}
@@ -699,8 +702,8 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	// //Main Request//////////////////////////////////////////////////
-	@Override
-	public void SendRequest() {
+
+	public void SendRequest1() {
 		if (communication.Connected) {
 			int[] requests;
 
@@ -710,7 +713,7 @@ public class MultiWii210 extends MultirotorData {
 			} else {
 				if (timer2 != 10) {
 
-					requests = new int[] { MSP_BOXNAMES, MSP_SERVO_CONF };
+					requests = new int[] { MSP_BOXNAMES };
 					sendRequestMSP(requestMSP(requests));
 					timer2 = 10;
 					return;
@@ -737,6 +740,63 @@ public class MultiWii210 extends MultirotorData {
 			timer2 = 0;
 		}
 	}
+
+	// NEW Main requests///////////////////////////////////////////////
+
+	private void SendRequest2Confirmation() {
+		received = true;
+	}
+
+	int timer3 = -1;
+	int timerOutTimer = 0;
+	boolean received = true;
+
+	int[] requests = new int[] { MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, 0, MSP_BOX };
+	// MSP_BOX has to be the last one, "0" will be replaced by one command from
+	// requestsPersiodical
+	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX };
+	final int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
+
+	public void SendRequest2() {
+
+		if (received == false) {
+			timerOutTimer++;
+		} else {
+			timerOutTimer = 0;
+		}
+		if (timerOutTimer > 10) {
+			received = true;
+			timerOutTimer = 0;
+		}
+
+		if (communication.Connected && received) {
+
+			// MSP_WP - in App.java
+
+			if (CHECKBOXITEMS == 0)
+				timer3 = -1;
+
+			switch (timer3) {
+			case -1:
+				sendRequestMSP(requestMSP(requestsOnce));
+				break;
+
+			default:
+				requests[3] = (requestsPeriodical[timer3]);
+				sendRequestMSP(requestMSP(requests));
+				received = false;
+				break;
+			}
+
+			timer3++;
+			if (timer3 >= requestsPeriodical.length)
+				timer3 = 0;
+
+		}
+
+	}
+
+	// /////////////////////////////END NEW requests\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	@Override
 	public void SendRequestMSP_WP(int Number) {
@@ -840,9 +900,11 @@ public class MultiWii210 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestMSP_RAW_GPS() {
-		sendRequestMSP(requestMSP(MSP_ACC_CALIBRATION));
-		Log.d("aaa", "MSP_RAW_GPS ");
+	public void SendRequest(int MainRequestMethod) {
+		if (MainRequestMethod == 1)
+			SendRequest1();
+		if (MainRequestMethod == 2)
+			SendRequest2();
 
 	}
 

@@ -85,19 +85,19 @@ public abstract class MultirotorData {
 
 	public String EZGUIProtocol = "";
 
-	public static final int DATA_FLOW_TIME_OUT = 10;
+	public final int DATA_FLOW_TIME_OUT = 10;
 	public int DataFlow = DATA_FLOW_TIME_OUT;
 
 	public Communication communication;
 	public FileAccess FA;
 	public float AltCorrection = 0;
-	// public int _1G = 256;
-	// /////
+
 	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATP", "OCTOFLATX", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6_H" };
 
 	public int PIDITEMS = 10;
 	public int CHECKBOXITEMS = 11; // in 2.1
 	public String buttonCheckboxLabel[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
+	public String PIDNames[] = { "ROLL", "PITCH", "YAW", "ALT", "Pos", "PosR", "NavR", "LEVEL", "MAG", "VEL" };
 
 	public int multiType;
 	public int MSPversion;
@@ -124,7 +124,6 @@ public abstract class MultirotorData {
 	public float mot[] = new float[8];
 	public float servo[] = new float[8];
 	public float rcThrottle = 1500, rcRoll = 1500, rcPitch = 1500, rcYaw = 1500, rcAUX1 = 1500, rcAUX2 = 1500, rcAUX3 = 1500, rcAUX4 = 1500;
-	// public int nunchukPresent;
 	public int present = 0;
 	public int mode = 0;
 
@@ -135,18 +134,8 @@ public abstract class MultirotorData {
 	public int SonarPresent;
 	int activation[];
 
-	// public int levelMode;
-
 	public float timer1, timer2;
 	public int cycleTime, i2cError;
-	// public int activation1[] = new int[CHECKBOXITEMS];
-	// public int activation2[] = new int[CHECKBOXITEMS];
-	// public int frame_size_read = 108 + 3 * PIDITEMS + 2 * CHECKBOXITEMS;
-
-	// public boolean I2cAccActive;
-	// public boolean I2cBaroActive;
-	// public boolean I2cMagnetoActive;
-	// public boolean GPSActive;
 
 	public boolean[] ActiveModes = new boolean[CHECKBOXITEMS];
 	public Boolean[][] Checkbox = new Boolean[CHECKBOXITEMS][12]; // state of
@@ -179,7 +168,7 @@ public abstract class MultirotorData {
 	/********************************* FUNCTIONS **************************************/
 	public abstract void ProcessSerialData(boolean appLogging);
 
-	public abstract void SendRequest();
+	public abstract void SendRequest(int MainRequestMethod);
 
 	public abstract void SendRequestMSP_PID_MSP_RC_TUNING();
 
@@ -221,7 +210,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
-	public abstract void SendRequestMSP_RAW_GPS();
+	//public abstract void SendRequestMSP_RAW_GPS();
 
 	/********************************* FUNCTIONS END **************************************/
 

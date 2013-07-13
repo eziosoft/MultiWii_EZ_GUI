@@ -111,6 +111,18 @@ public class PIDActivity extends SherlockActivity {
 		app.OpenInfoOnClick(v);
 	}
 
+	public void SetPIDNames() {
+		((TextView) findViewById(R.id.PIDName0)).setText(app.mw.PIDNames[0]);
+		((TextView) findViewById(R.id.PIDName1)).setText(app.mw.PIDNames[1]);
+		((TextView) findViewById(R.id.PIDName2)).setText(app.mw.PIDNames[2]);
+		((TextView) findViewById(R.id.PIDName3)).setText(app.mw.PIDNames[3]);
+		((TextView) findViewById(R.id.PIDName4)).setText(app.mw.PIDNames[4]);
+		((TextView) findViewById(R.id.PIDName5)).setText(app.mw.PIDNames[5]);
+		((TextView) findViewById(R.id.PIDName6)).setText(app.mw.PIDNames[6]);
+		((TextView) findViewById(R.id.PIDName7)).setText(app.mw.PIDNames[7]);
+		((TextView) findViewById(R.id.PIDName8)).setText(app.mw.PIDNames[8]);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -168,6 +180,8 @@ public class PIDActivity extends SherlockActivity {
 		ThrottleRate = (EditText) findViewById(R.id.editTextTPA);
 
 		loadProfileFiles();
+
+		SetPIDNames();
 
 	}
 
@@ -570,101 +584,6 @@ public class PIDActivity extends SherlockActivity {
 		Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_SHORT).show();
 
 	}
-
-	// ////////////////////////dialog slider
-
-	// public void TVOnClick0_250(View v) {
-	// CustomDialog(v, 0.25f);
-	// }
-	//
-	// public void TVOnClick2_50(View v) {
-	// CustomDialog(v, 2.5f);
-	// }
-	//
-	// public void TVOnClick1(View v) {
-	// CustomDialog(v, 1);
-	// }
-	//
-	// public void TVOnClick5(View v) {
-	// CustomDialog(v, 5);
-	// }
-	//
-	// public void TVOnClick20(View v) {
-	// CustomDialog(v, 20);
-	// }
-	//
-	// public void TVOnClick25(View v) {
-	// CustomDialog(v, 25);
-	// }
-	//
-	// public void TVOnClick100(View v) {
-	// CustomDialog(v, 100);
-	// }
-
-	// void CustomDialog(final View v, final float maxValue) {
-	// AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-	//
-	// LayoutInflater inflater = (LayoutInflater)
-	// getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	// View layout = inflater.inflate(R.layout.custom_dialog, (ViewGroup)
-	// findViewById(R.id.your_dialog_root_element));
-	//
-	// SeekBar seekbar = (SeekBar)
-	// layout.findViewById(R.id.seekBarCustomDialog);
-	// seekbar.setMax(1000);
-	// seekbar.setProgress((int) Functions.map(Float.parseFloat(((EditText)
-	// v).getText().toString().replace(",", ".")), 0f, maxValue, 0f, 1000f));
-	//
-	// final TextView tv = (TextView) layout.findViewById(R.id.text);
-	//
-	// tv.setText(((EditText) v).getText().toString());
-	//
-	// seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-	//
-	// @Override
-	// public void onStopTrackingTouch(SeekBar seekBar) {
-	//
-	// }
-	//
-	// @Override
-	// public void onStartTrackingTouch(SeekBar seekBar) {
-	//
-	// }
-	//
-	// @Override
-	// public void onProgressChanged(SeekBar seekBar, int progress, boolean
-	// fromUser) {
-	// float v;
-	// v = Functions.map(progress, 0, 1000, 0, maxValue);
-	// tv.setText(String.valueOf(v));
-	// }
-	// });
-	//
-	// alertDialogBuilder.setView(layout);
-	// alertDialogBuilder.setCancelable(false);
-	// alertDialogBuilder.setPositiveButton("Yes", new
-	// DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int id) {
-	// ((EditText) v).setText(String.valueOf(tv.getText().toString()));
-	// }
-	// });
-	// alertDialogBuilder.setNegativeButton("No", new
-	// DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int id) {
-	//
-	// dialog.cancel();
-	// }
-	// });
-	//
-	// // create alert dialog
-	// AlertDialog alertDialog = alertDialogBuilder.create();
-	//
-	// // show it
-	// alertDialog.show();
-	//
-	// }
-
-	// /////////////////end dialog
 
 	// /////menu////////
 	@Override

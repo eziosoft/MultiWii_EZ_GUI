@@ -161,7 +161,6 @@
   <string name="ShareIt">Sdílej své nastavení</string>
   <string name="SelectSetting">Výběr nastavení</string>
   <string name="RXBIND">Spárovaní RX</string>
-  <string name="FollowMe">Následování (netestováno! musí být použita s #define USE_MSP_WP) bliká, pokud je pozice telefonu posílána do MW</string>
   <string name="InfoDonate">Je pro Vás tato aplikace užitečná? Podpořte její vývoj hodnocením nebo příspěvkem vývojáři!</string>
   <string name="convertToKML">Převést do KML (Google Earth)</string>
   <string name="infoDonate">Strávil jsem a ještě strávím mnoho hodin svého volného času na vývoji a rozšířování této aplikace, takže pokud se vám líbí a používáte MultiWii EZ-GUI, zvažte prosím finanční příspěvek. Pomůže mi to při rozhodování o dalším vylepšování aplikace.</string>
@@ -180,9 +179,7 @@
   <string name="EnterDescription">Zadej popis</string>
   <string name="SetAsPositionHold">Nastavit pozici pro držení</string>
   <string name="Follow_Me">Následovat</string>
-  <string name="Follow_Heading">Natoč. při následování</string>
   <string name="Load">Nahrát</string>
-  <string name="Profile">Profil: (kompatibilní s MultiWiiConf; umístěte soubory do /sdcard/MultiWiiLogs)</string>
   <string name="Save">Uložit</string>
   <string name="EnterFileName">Zadej název souboru</string>
   <string name="ReverseRollDirection">Obrátit směr roll</string>
@@ -208,4 +205,5 @@
   <string name="GreenValuesCanBeChanged">Zelené hodnoty lze změnit</string>
   <string name="Locked">Uzamčeno</string>
   <string name="DoYouWantToUnlock">Chceš ho odemknout?</string>
+  <string name="Cancel">Zrušit</string>
 </resources>

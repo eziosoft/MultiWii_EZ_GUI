@@ -115,7 +115,7 @@ public class MotorsActivity extends SherlockActivity {
 
 											app.Frequentjobs();
 
-											app.mw.SendRequest();
+											app.mw.SendRequest(app.MainRequestMethod);
 											if (!killme)mHandler.postDelayed(update, app.RefreshRate);
 
 											if(app.D)		Log.d(app.TAG, "loop "+this.getClass().getName());

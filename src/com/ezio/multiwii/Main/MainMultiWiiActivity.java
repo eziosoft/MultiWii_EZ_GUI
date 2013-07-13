@@ -47,6 +47,7 @@ import com.ezio.multiwii.aux_pid.PIDActivity;
 import com.ezio.multiwii.config.ConfigActivity;
 import com.ezio.multiwii.dashboard.Dashboard1Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
+import com.ezio.multiwii.dashboard.Dashboard4Activity;
 import com.ezio.multiwii.dashboard.dashboard3.Dashboard3Activity;
 import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.gps.GPSActivity;
@@ -55,12 +56,13 @@ import com.ezio.multiwii.graph.GraphsActivity;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.map.MapActivityMy;
-import com.ezio.multiwii.mapoffline.MapOfflineActivityMy;
 import com.ezio.multiwii.motors.MotorsActivity;
 import com.ezio.multiwii.other.OtherActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
+import com.ezio.multiwii.waypoints.MapWaypointsActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
+import com.ezio.sec.Sec;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class MainMultiWiiActivity extends SherlockActivity {
@@ -74,8 +76,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	private Handler mHandler = new Handler();
 
 	ActionBarSherlock actionBar;
-
-	public static final String MY_PUBLISHER_ID = "a15030365bc09b4";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -106,10 +106,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVinfo = (TextView) findViewById(R.id.TextViewInfo);
 
-		if (app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0) {
-			killme = true;
-			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(), InfoActivity.class));
+		if ((app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0)) {
+			if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
+			} else {
+				killme = true;
+				mHandler.removeCallbacksAndMessages(null);
+				startActivity(new Intent(getApplicationContext(), InfoActivity.class));
+			}
 		}
 
 		app.AppStartCounter++;
@@ -229,7 +232,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			setSupportProgress((int) Functions.map(app.frskyProtocol.TxRSSI, 0, 110, 0, 10000));
 
 			app.Frequentjobs();
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -320,16 +323,36 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		startActivity(new Intent(getApplicationContext(), Dashboard3Activity.class));
 	}
 
+	public void Dashboard4OnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), Dashboard4Activity.class));
+	}
+
+	public void NewMapOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", false));
+	}
+
+	public void WaypointsMapOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", true));
+
+	}
+
 	public void MapOnClick(View v) {
 		killme = true;
-		if (app.UseOfflineMaps) {
-			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(), MapOfflineActivityMy.class));
-		} else {
-			killme = true;
-			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(), MapActivityMy.class));
-		}
+		// if (app.UseOfflineMaps) {
+		// mHandler.removeCallbacksAndMessages(null);
+		// startActivity(new Intent(getApplicationContext(),
+		// MapOfflineActivityMy.class));
+		// } else {
+		// killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), MapActivityMy.class));
+		// }
 	}
 
 	public void AboutOnClick(View v) {

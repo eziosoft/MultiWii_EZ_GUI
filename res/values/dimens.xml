@@ -11,5 +11,7 @@
     <dimen name="HorizonCircleSize">100sp</dimen>
     <dimen name="AngleIndicatorLenght">10sp</dimen>
     <dimen name="AngleIndicatorLenghtLong">10sp</dimen>
+    <dimen name="d4StatesText">18sp</dimen>
+    <dimen name="d4valuesText">15sp</dimen>
 
 </resources>

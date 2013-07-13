@@ -40,7 +40,7 @@ public class LogActivity extends SherlockActivity {
 			app.mw.ProcessSerialData(app.loggingON);
 
 			app.Frequentjobs();
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 			mHandler.postDelayed(update, app.RefreshRate);
 
 			Log.d(app.TAG, "loop " + this.getClass().getName());

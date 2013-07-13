@@ -33,7 +33,7 @@
   <string name="GPS_distanceToHome">距离返航点（米）</string>
   <string name="GPS_directionToHome">返航点方向</string>
   <string name="GPS_numSat">GPS卫星数量</string>
-  <string name="GPS_fix">GPS修正</string>
+  <string name="GPS_fix">GPS 定位成功</string>
   <string name="GPS_update">GPS更新</string>
   <string name="StartLogging">启动日志记录</string>
   <string name="Stop_Logging">停止日志记录并保存到文件</string>
@@ -66,7 +66,7 @@
   <string name="PID">PID</string>
   <string name="Read">读取</string>
   <string name="Write">写入</string>
-  <string name="RATE">评分</string>
+  <string name="RATE">Rate</string>
   <string name="TPA">油门PID衰减</string>
   <string name="Reset">复位</string>
   <string name="AccCalibration">加速度计校准</string>
@@ -82,8 +82,8 @@
   <string name="RCRate">遥控舵量</string>
   <string name="RCExpo">遥控曲线</string>
   <string name="BattVoltage">电池电压</string>
-  <string name="PowerSum">功率总和</string>
-  <string name="PowerMeterAlarm">电压报警</string>
+  <string name="PowerSum">电量测量</string>
+  <string name="PowerMeterAlarm">电量测量告警</string>
   <string name="Level">水平</string>
   <string name="Map">地图</string>
   <string name="Settingssaved">设置已保存</string>
@@ -99,7 +99,7 @@
   <string name="gforce">重力加速度</string>
   <string name="state">状态</string>
   <string name="Battery">电压（伏）</string>
-  <string name="PowerSumPowerTrigger">电压消耗/电压触发</string>
+  <string name="PowerSumPowerTrigger">电量消耗/电量警报</string>
   <string name="Donate">捐赠</string>
   <string name="Loggingstarted">记录已开始</string>
   <string name="Loggingstopedandsaved">记录停止并保存</string>
@@ -163,8 +163,8 @@
   <string name="ShareIt">分享您的配置</string>
   <string name="SelectSetting">选择设置</string>
   <string name="RXBIND">RX 绑定</string>
-  <string name="FollowMe">跟随我 (未测试 ！必须使用 #define USE_MSP_WP)  当手机位置发送到 MW 时闪烁</string>
-  <string name="InfoDonate">你发现此应用程序很有用吗？支持它或给开发人员的捐款支持其发展!</string>
+  <string name="FollowMe">跟随我： #define USE_MSP_WP 应在 config.h 打开。 I2C GPS 不能用 ；闪烁时，手机位置时将发送到MW</string>
+  <string name="InfoDonate">你发现此应用程序很有用吗？支持它或给开发人员的捐款支持其发展! 本软件中文简体版本由fryefryefrye和arvidwen汉化。汉化有问题联系：fryefryefrye@gmail.com</string>
   <string name="convertToKML">转换为 KML (谷歌地球)</string>
   <string name="infoDonate">我已经花了，而且会花很多小时的空闲时间来建立和开发此程序，所以如果你喜欢，并使用 MultiWii EZ-GUI，请考虑捐献。这将使我感兴趣继续开发程序。</string>
   <string name="Debug">调试</string>
@@ -182,13 +182,13 @@
   <string name="EnterDescription">输入描述</string>
   <string name="SetAsPositionHold">设置为 位置保持点。</string>
   <string name="Follow_Me">跟随</string>
-  <string name="Follow_Heading">航向跟随</string>
+  <string name="Follow_Heading">航向跟随 （手机罗盘 传感器的读数发送到 MultiWii。飞行器会跟随 Android 手机的方向。飞行器必须启用 MAG )</string>
   <string name="Load">加载</string>
-  <string name="Profile">配置文件： （与 MultiWiiConf  兼容，把文件放到 sdcard/MultiWiiLogs)</string>
+  <string name="Profile">在这里你可以保存/加载您的 PID 设置文件。这些文件都存储在： /sdcard/MultiWiiLogs，它们是与 MultiWiiConf 兼容</string>
   <string name="Save">保存</string>
   <string name="EnterFileName">输入文件名</string>
   <string name="ReverseRollDirection">反转横滚方向</string>
-  <string name="SetAltitude">设置高度（单位：厘米）：</string>
+  <string name="SetAltitude">设置高度单位为厘米：</string>
   <string name="MapCenterPeriod">地图中点刷新间隔周期</string>
   <string name="VerticalSpeed">垂直速度</string>
   <string name="UseFTDISerial">使用USB Host连接 MultiWii (请在连接前重新启动程序)</string>
@@ -205,6 +205,7 @@
   <string name="MinThrottle">最小油门</string>
   <string name="MaxThrottle">最大油门</string>
   <string name="MinCommand">最小命令</string>
+  <string name="FailsafeThrottle">安全模式的油门</string>
   <string name="VBatScale">电压系数</string>
   <string name="BatWarning1">电压告警1</string>
   <string name="BatWarning2">电压告警2</string>
@@ -213,4 +214,15 @@
   <string name="Locked">锁定</string>
   <string name="DoYouWantToUnlock">你想要将它解锁吗？</string>
   <string name="TakeDeclinationFromPhone">使用来自手机的磁偏角</string>
+  <string name="RateOrUpdate">评价  升级</string>
+  <string name="ArmedCount">解锁计数器</string>
+  <string name="Refresh">刷新</string>
+  <string name="MockLocationIsWorking">仿真GPS正在工作</string>
+  <string name="NoDataRecieved">没有收到的数据 ！</string>
+  <string name="MOCKlocationInfo">GPS 仿真允许在各种地图应用中显示飞行器的位置。启动此功能后，程序会自动后台运行，来自 MultiWii 的数据将发送到Android 系统中的模拟 GPS。所以你可以使用任何地图 app 观看 multirotor 位置。按 EZ GUI在通知栏图标返回。</string>
+  <string name="StartGpsEmulation">启动 GPS 仿真</string>
+  <string name="ClickOnTheNameForInfo">单击名称查看信息</string>
+  <string name="ClickHereForMoreInfo">为更多的信息，请单击此处</string>
+  <string name="NewRequestMethod">新的请求方法</string>
+  <string name="Cancel">取消</string>
 </resources>

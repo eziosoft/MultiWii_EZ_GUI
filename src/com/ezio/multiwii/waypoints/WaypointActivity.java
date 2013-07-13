@@ -74,7 +74,7 @@ public class WaypointActivity extends Activity {
 			TVData.setText("");
 			displayWPs();
 
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 

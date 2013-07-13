@@ -121,7 +121,7 @@ public class GraphsActivity extends SherlockActivity {
 				}
 			}
 
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, 100);
 			

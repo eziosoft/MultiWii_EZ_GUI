@@ -161,7 +161,6 @@
   <string name="ShareIt">分享您的設置</string>
   <string name="SelectSetting">選擇設置</string>
   <string name="RXBIND">接收端綁定</string>
-  <string name="FollowMe">跟隨我 (未測試 ！必須用 # 定義 USE_MSP_WP) 當電話位址發送到MW時閃爍</string>
   <string name="InfoDonate">您發現此應用程式有用嗎？它將由支持或發給開發人員的捐款支援其發展!</string>
   <string name="convertToKML">將轉換為 KML （Google 地球）</string>
   <string name="infoDonate">我已經花了並且還會增加很多很多小時的閒暇時間來建立和擴展此程式，所以如果您喜歡並使用 MultiWii EZ-GUI，請考慮捐助。這會使我感興趣的擴展程式。</string>
@@ -180,9 +179,7 @@
   <string name="EnterDescription">輸入描述</string>
   <string name="SetAsPositionHold">設為停留點</string>
   <string name="Follow_Me">跟隨我</string>
-  <string name="Follow_Heading">跟隨指標</string>
   <string name="Load">讀取</string>
-  <string name="Profile">設定檔： （與 MultiWiiConf相容 ； 檔案放於 /sdcard/MultiWiiLogs)</string>
   <string name="Save">保存</string>
   <string name="EnterFileName">輸入檔案名稱</string>
   <string name="ReverseRollDirection">反轉滾動方向</string>
@@ -191,4 +188,5 @@
   <string name="Dashboard3">控制板3</string>
   <string name="SerialPort">串口</string>
   <string name="SerialPortBaudRate">串口波特率</string>
+  <string name="Cancel">取消</string>
 </resources>

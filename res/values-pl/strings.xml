@@ -163,7 +163,7 @@
   <string name="ShareIt">Podziel się swoją konfiguracją</string>
   <string name="SelectSetting">Select Setting</string>
   <string name="RXBIND">RX BIND</string>
-  <string name="FollowMe">Leć za mną (nie przetestowane!  musi być używany z #define USE_MSP_WP) miga gdy telefon wysyła pozycje do MW</string>
+  <string name="FollowMe">Leć za mną. #devine USE_MSP_WP musi być odkomentowane w congif.h; nie dziala z I2C GPS</string>
   <string name="InfoDonate">Czy uważasz tą aplikację za przydatną? Wesprzyj rozwój przez oddanie pozytywnego głosu lub wyślij darowiznę.</string>
   <string name="convertToKML">Konwersja do formatu KML (Google Earth)</string>
   <string name="infoDonate">Spędziłem i będę spędzał wiele, wiele godzin mojego wolnego czasu aby budować i rozwijać ten program, więc jeśli lubisz i używasz MultiWii EZ-GUI, proszę rozważ wysłanie darowizny. Utrzyma to moje zainteresowanie do ulepszania programu programu.</string>
@@ -182,9 +182,9 @@
   <string name="EnterDescription">Podaj opis</string>
   <string name="SetAsPositionHold">Ustaw jako Position Hold</string>
   <string name="Follow_Me">LećZaMną</string>
-  <string name="Follow_Heading">FollowHeading</string>
+  <string name="Follow_Heading">Podążaj za kompasem telefonu - odczyty z kompasu Androida są wysyłane do MultiWii. Model powinien ustawiać się zgodnie z ruchem telefonu.</string>
   <string name="Load">Załaduj</string>
-  <string name="Profile">Profil: (kompatybilne z MultiWiiConf, umieść pliki w /sdcard/MultiWiiLogs)</string>
+  <string name="Profile">Tutaj możesz zapisać/załadować ustawienia PID z/do pliku. Pliki są przechowywane tutaj: /sdcard/MultiWiiLogs i one są zgodne z MultiWiiConf</string>
   <string name="Save">Zapisz</string>
   <string name="EnterFileName">Wpisz nazwę pliku</string>
   <string name="ReverseRollDirection">Odwróć roll na panelu 2</string>
@@ -216,4 +216,21 @@
   <string name="TakeDeclinationFromPhone">Weź deklinację z telefonu</string>
   <string name="RateOrUpdate">Ocen lub aktualizuj</string>
   <string name="ArmedCount">Całkowita ilość uzbrojeń</string>
+  <string name="Refresh">Odśwież</string>
+  <string name="MockLocationIsWorking">Emulacja GPS działa</string>
+  <string name="NoDataRecieved">Nie otrzymano danych!</string>
+  <string name="MOCKlocationInfo">Emulacja GPS pozwala na wyświetlanie lokalizacji modelu w dowolnej innej aplikacji. Po uruchomieniu emulacji GPS, EZ-GUI zostanie zamknięty i będzie działał w tle, dane z MultiWii będą wykorzystywane do emulowania GPS w systemie Android, dzięki temu możesz używać dowolnej aplikacji do obejrzenia multirotor modelu. Naciśnij iknonę EZ-GUI w pasku powiadomien aby tu powrócić.</string>
+  <string name="StartGpsEmulation">Uruchom emulację GPS</string>
+  <string name="ClickOnTheNameForInfo">(kliknij nazwę dla informacji)</string>
+  <string name="ClickHereForMoreInfo">Kliknij tutaj, aby uzyskać więcej informacji</string>
+  <string name="NewRequestMethod">Nowa metoda zapytań</string>
+  <string name="WaypointsMap">Mapa waypointów</string>
+  <string name="PleaseRestart">Należy ponownie uruchomić aplikację</string>
+  <string name="MoveMapEnable">Centrowanie mapy włączone</string>
+  <string name="MoveMapDissable">Centrowanie mapy wyłączone</string>
+  <string name="AddCirclePath">Dodaj ścieżkę kołową</string>
+  <string name="Cancel">Anuluj</string>
+  <string name="Radius">Promień</string>
+  <string name="EnterRadius">Podaj promień okręgu w metrach</string>
+  <string name="Close">Zamknij</string>
 </resources>

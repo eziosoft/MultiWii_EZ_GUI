@@ -41,9 +41,9 @@ public class InfoActivity extends Activity {
 	public void DonateOnClick(View v) {
 
 		app.DonateButtonPressed++;
-		app.SaveSettings(true);
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
-		startActivity(browserIntent);
+//		app.SaveSettings(true);
+//		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EZ88MU3VKXSGG&lc=GB&item_name=MultiWiiAllinOne&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"));
+//		startActivity(browserIntent);
 	}
 
 	public void CloseOnClick(View v) {

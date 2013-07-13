@@ -171,7 +171,7 @@
                     android:background="@color/tableRows" >
 
                     <TextView
-                        android:id="@+id/TextView08"
+                        android:id="@+id/PIDName0"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -224,7 +224,7 @@
                     android:background="@color/tableRows" >
 
                     <TextView
-                        android:id="@+id/TextView07"
+                        android:id="@+id/PIDName1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -278,7 +278,7 @@
                     android:background="@color/tableRows" >
 
                     <TextView
-                        android:id="@+id/TextView06"
+                        android:id="@+id/PIDName2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -330,7 +330,7 @@
                     android:background="@color/tableRows1" >
 
                     <TextView
-                        android:id="@+id/TextView05"
+                        android:id="@+id/PIDName3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -383,7 +383,7 @@
                     android:background="@color/tableRows3" >
 
                     <TextView
-                        android:id="@+id/TextView04"
+                        android:id="@+id/PIDName4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -432,7 +432,7 @@
                     android:background="@color/tableRows3" >
 
                     <TextView
-                        android:id="@+id/TextView03"
+                        android:id="@+id/PIDName5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -481,7 +481,7 @@
                     android:background="@color/tableRows3" >
 
                     <TextView
-                        android:id="@+id/TextView02"
+                        android:id="@+id/PIDName6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -529,7 +529,7 @@
                     android:background="@color/tableRows4" >
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/PIDName7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -583,7 +583,7 @@
                     android:background="@color/tableRows5" >
 
                     <TextView
-                        android:id="@+id/TextView01"
+                        android:id="@+id/PIDName8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

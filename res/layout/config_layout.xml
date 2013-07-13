@@ -76,6 +76,12 @@
                     android:visibility="gone" />
 
                 <CheckBox
+                    android:id="@+id/checkBoxNewRequestMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NewRequestMethod" />
+
+                <CheckBox
                     android:id="@+id/checkBoxCopyFrskyToMW"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,7 +211,8 @@
                     android:id="@+id/checkBoxUseOfflineMap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/UseOfflineMap" />
+                    android:text="@string/UseOfflineMap"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="match_parent"

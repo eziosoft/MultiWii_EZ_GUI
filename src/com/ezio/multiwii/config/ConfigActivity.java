@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
@@ -55,6 +56,7 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxCopyFrskyToMW;
 	CheckBox CheckBoxReverseRollDirection;
 	CheckBox CheckBoxUseFTDISerial;
+	CheckBox CheckBoxNewRequestMethod;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -74,7 +76,7 @@ public class ConfigActivity extends SherlockActivity {
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		Log.d(BT_old.TAG, "onActivityResult " + resultCode);
+		// Log.d(BT_old.TAG, "onActivityResult " + resultCode);
 		switch (requestCode) {
 
 		case REQUEST_CONNECT_DEVICE_MULTIWII:
@@ -146,12 +148,14 @@ public class ConfigActivity extends SherlockActivity {
 		LayoutSerialFTDI = (LinearLayout) findViewById(R.id.LinearLayoutSerialPort);
 		RadioFTDI = (RadioButton) findViewById(R.id.radioFTDI);
 		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
+		CheckBoxNewRequestMethod = (CheckBox) findViewById(R.id.checkBoxNewRequestMethod);
 
 	}
 
 	@Override
 	protected void onPause() {
 		SaveSettingsOnClick(null);
+		Toast.makeText(getApplicationContext(), getString(R.string.PleaseRestart), Toast.LENGTH_LONG).show();
 		super.onPause();
 	}
 
@@ -207,6 +211,12 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 		EditTextMapCenterPeriod.setText(String.valueOf(app.MapCenterPeriod));
 		EditTextSerialBaudRateMW.setText(app.SerialPortBaudRateMW);
+
+		if (app.MainRequestMethod == 2) {
+			CheckBoxNewRequestMethod.setChecked(true);
+		} else {
+			CheckBoxNewRequestMethod.setChecked(false);
+		}
 
 		app.Say(getString(R.string.Config));
 
@@ -273,9 +283,15 @@ public class ConfigActivity extends SherlockActivity {
 
 		app.SerialPortBaudRateMW = EditTextSerialBaudRateMW.getText().toString();
 
+		if (CheckBoxNewRequestMethod.isChecked()) {
+			app.MainRequestMethod = 2;
+		} else {
+			app.MainRequestMethod = 1;
+		}
+
 		app.SaveSettings(false);
 
-		//app.Init();
+		// app.Init();
 
 	}
 }

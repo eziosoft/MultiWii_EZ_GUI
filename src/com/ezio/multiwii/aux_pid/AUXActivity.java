@@ -14,6 +14,39 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+
+//    "ARM;"
+
+//    "ANGLE;"
+//    "HORIZON;"
+
+//    "BARO;"
+//    "VARIO;"
+//    "MAG;"
+
+//    "HEADFREE;"
+//    "HEADADJ;"  
+
+//    "CAMSTAB;"
+//    "CAMTRIG;"
+
+//    "GPS HOME;"
+//    "GPS HOLD;"
+
+//    "PASSTHRU;"
+
+//    "BEEPER;"
+//    "LEDMAX;"
+//    "LEDLOW;"
+//    "LLIGHTS;"
+
+//    "CALIB;"
+//    "GOVERNOR;"
+
+//    "OSD SW;"
+
+
 package com.ezio.multiwii.aux_pid;
 
 import android.app.AlertDialog;
@@ -34,7 +67,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -62,7 +94,7 @@ public class AUXActivity extends SherlockActivity {
 
 			TextViewInfo.setText("Aux1:" + GetTextValueOfAux(app.mw.rcAUX1) + " " + String.valueOf((int) app.mw.rcAUX1) + " Aux2:" + GetTextValueOfAux(app.mw.rcAUX2) + " " + String.valueOf((int) app.mw.rcAUX2) + " Aux3:" + GetTextValueOfAux(app.mw.rcAUX3) + " " + String.valueOf((int) app.mw.rcAUX3) + " Aux4:" + GetTextValueOfAux(app.mw.rcAUX4) + " " + String.valueOf((int) app.mw.rcAUX4));
 
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 			Log.d(app.TAG, "loop " + this.getClass().getName());

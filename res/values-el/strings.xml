@@ -163,7 +163,7 @@
   <string name="ShareIt">Μοιραστείτε σας Config</string>
   <string name="SelectSetting">Επιλέξτε ρύθμιση</string>
   <string name="RXBIND">ΔΕΣΜΕΎΟΥΝ RX</string>
-  <string name="FollowMe">Συνέχεια μου (που δεν ελέγχονται!  πρέπει να χρησιμοποιείται με #define USE_MSP_WP) αναβοσβήνει όταν η θέση του τηλέφωνο είναι \"Αποστολή προς\" MW</string>
+  <string name="FollowMe">Ακολουθήστε Me: #define USE_MSP_WP πρέπει να uncomented στο config.h? δεν εργασία με I2C GPS? αναβοσβήνει όταν είναι τηλέφωνο θέση αποστολή σε MW</string>
   <string name="InfoDonate">Βρίσκετε αυτή η εφαρμογή χρήσιμα; Υποστήριξη της ανάπτυξης κολακευτικά αυτό ή αποστολή δωρεές στον κύριο του έργου!</string>
   <string name="convertToKML">Μετατροπή σε KML (Google Earth)</string>
   <string name="infoDonate">Έχουν περάσει και θα περάσετε πολλές, πολλές ώρες ελεύθερο χρόνο μου για να οικοδομήσουμε και να επεκτείνουν αυτό το πρόγραμμα, έτσι αν σας αρέσει και χρήση MultiWii EZ-GUI, παρακαλούμε να εξετάσει την αιμοδοσία. Αυτό θα κρατήσει με ενδιαφέρει στην επέκταση του προγράμματος.</string>
@@ -183,9 +183,9 @@
   <string name="SetAsPositionHold">Ορισμός ως θέση κατέχουν</string>
   <string name="Follow_Me">	
 ακολουθησε με</string>
-  <string name="Follow_Heading">Ακολουθήστε Τομέας</string>
+  <string name="Follow_Heading">FollowHeading (αναγνώσεις από Android mag αισθητήρα είναι \"Αποστολή προς\" MultiWii. Copter πρέπει να ακολουθήσετε τον προσανατολισμό σας συσκευή Android. Λειτουργεί μόνο όταν είναι ενεργοποιημένη η MAG)</string>
   <string name="Load">Φορτίο</string>
-  <string name="Profile">Προφίλ: (συμβατό με MultiWiiConf; να τα αρχεία στο/sdcard/MultiWiiLogs)</string>
+  <string name="Profile">Εδώ σας να αποθηκεύσετε/φορτίο σας ρύθμιση PID προς/από το αρχείο. Τα αρχεία αποθηκεύονται εδώ: /sdcard/MultiWiiLogs και είναι συμβατό με MultiWiiConf</string>
   <string name="Save">Αποθήκευση</string>
   <string name="EnterFileName">Πληκτρολογήστε όνομα αρχείου</string>
   <string name="ReverseRollDirection">Ρολό αντίστροφη κατεύθυνση</string>
@@ -206,6 +206,7 @@
   <string name="MinThrottle">MinThrottle</string>
   <string name="MaxThrottle">MaxThrottle</string>
   <string name="MinCommand">MinCommand</string>
+  <string name="FailsafeThrottle">Failsafe γκαζιού</string>
   <string name="VBatScale">VBatScale</string>
   <string name="BatWarning1">BatWarning1</string>
   <string name="BatWarning2">BatWarning2</string>
@@ -214,4 +215,15 @@
   <string name="Locked">Κλειδωμένο</string>
   <string name="DoYouWantToUnlock">Θέλετε να το ξεκλειδώσετε;</string>
   <string name="TakeDeclinationFromPhone">Πάρτε την απόκλιση από το τηλέφωνο</string>
+  <string name="RateOrUpdate">Ποσοστό ή ενημέρωση</string>
+  <string name="ArmedCount">Ένοπλες Count</string>
+  <string name="Refresh">Ανανέωση</string>
+  <string name="MockLocationIsWorking">Άμιλλα GPS λειτουργεί</string>
+  <string name="NoDataRecieved">Δεν υπάρχουν στοιχεία που έλαβε!</string>
+  <string name="MOCKlocationInfo">GPS άμιλλα επιτρέπει να εµφανίσει copter θέση σε οποιαδήποτε εφαρμογή του χάρτη.         Αφού ξεκινήσετε την εξομοίωση ΠΣΤ, αυτό το πρόγραμμα θα τεθεί σε φόντο, δεδομένα από το MultiWii θα χρησιμοποιηθεί για να μιμηθούν το GPS στο Android σύστημα, έτσι μπορείτε να χρησιμοποιήσετε οποιοδήποτε χάρτη app για να παρακολουθήσουν την θέση του multirotor. Πάτημα EZ-GUI εικονίδιο στη γραμμή ειδοποιήσεων για να επανέλθει</string>
+  <string name="StartGpsEmulation">Έναρξη GPS άμιλλα</string>
+  <string name="ClickOnTheNameForInfo">(κάντε κλικ στο όνομα για πληροφορίες)</string>
+  <string name="ClickHereForMoreInfo">Κάντε κλικ εδώ για περισσότερες πληροφορίες</string>
+  <string name="NewRequestMethod">Νέα μέθοδο αίτησης</string>
+  <string name="Cancel">"Άκυρο"</string>
 </resources>

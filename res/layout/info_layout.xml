@@ -13,17 +13,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="DonateOnClick"
-        android:text="@string/Donate" />
-
-    <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="CloseOnClick"
-        android:text="@string/Later" />
+        android:text="Close" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="DonateOnClick"
+        android:text="Do not show me this again" />
 
 </LinearLayout>

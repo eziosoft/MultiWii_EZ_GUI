@@ -163,7 +163,6 @@
   <string name="ShareIt">Konfiguration teilen</string>
   <string name="SelectSetting">Einstellungen wählen</string>
   <string name="RXBIND">Empfänger binden</string>
-  <string name="FollowMe">Folge mir (nicht getestet! Option #define USE_MSP_WP muss aktiv sein). Blinkt wenn Android Position zum Kopter gesendet wird.</string>
   <string name="InfoDonate">Findest du diese App hilfreich? Unterstütze die Entwicklung indem du die App über den Klee lobst oder dem Entwickler eine Spende schickst!</string>
   <string name="convertToKML">Zu KML konvertieren (für Google Earth)</string>
   <string name="infoDonate">Ich habe viele, viele Stunden meiner Freizeit in die Entwicklung dieser App gesteckt und werde dies weiterhin tun. Wenn dir MultiWii EZ GUI also gefällt überlege dir bitte eine Spende. Das wird mich auch weiterhin motivieren das Programm weiter zu entwickeln.</string>
@@ -182,9 +181,7 @@
   <string name="EnterDescription">Beschreibung eingeben</string>
   <string name="SetAsPositionHold">Position halten</string>
   <string name="Follow_Me">Folge mir</string>
-  <string name="Follow_Heading">Folge Richtung</string>
   <string name="Load">Laden</string>
-  <string name="Profile">Profil: (kompatibel mit MultiWiiConf; Dateien werden in /sdcard/MultiWiiLogs abgelegt)</string>
   <string name="Save">Speichern</string>
   <string name="EnterFileName">Dateinamen eingeben</string>
   <string name="ReverseRollDirection">Roll Richtung umkehren</string>
@@ -205,6 +202,7 @@
   <string name="MinThrottle">MinThrottle</string>
   <string name="MaxThrottle">MaxThrottle</string>
   <string name="MinCommand">MinCommand</string>
+  <string name="FailsafeThrottle">Failsafe Gas</string>
   <string name="VBatScale">VBatMaßstab</string>
   <string name="BatWarning1">Batterie Warnung 1</string>
   <string name="BatWarning2">Batterie Warnung 2</string>
@@ -212,4 +210,10 @@
   <string name="GreenValuesCanBeChanged">Grüne Werte können geändert werden</string>
   <string name="Locked">Gesperrt</string>
   <string name="DoYouWantToUnlock">Möchten Sie es entsperren?</string>
+  <string name="TakeDeclinationFromPhone">Deklination von Android Gerät übernehmen</string>
+  <string name="RateOrUpdate">Bewerten oder aktualisieren</string>
+  <string name="ArmedCount">Motorlaufzeit</string>
+  <string name="Refresh">Aktualisieren</string>
+  <string name="NoDataRecieved">Keine Daten empfangen!</string>
+  <string name="Cancel">Abbrechen</string>
 </resources>

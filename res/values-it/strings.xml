@@ -161,7 +161,6 @@
   <string name="ShareIt">Condividere la tua configurazione</string>
   <string name="SelectSetting">Selezionare impostazione</string>
   <string name="RXBIND">RX BIND</string>
-  <string name="FollowMe">Seguimi (non testato!  deve essere utilizzato con #define USE_MSP_WP) lampeggia quando la posizione del telefono è inviata a MW</string>
   <string name="InfoDonate">Trovare questa applicazione utile? Supportarne lo sviluppo recensendola o inviando donazioni allo sviluppatore!</string>
   <string name="convertToKML">Convertire in KML (Google Earth)</string>
   <string name="infoDonate">Ho passato molte, molte ore del mio tempo libero a costruire ed estendere questo programma, così se ti piace e utilizzi MultiWii EZ-GUI, considera una donazione. Questo mi incentiverà ad aggiornare programma.</string>
@@ -180,9 +179,7 @@
   <string name="EnterDescription">Inserire la descrizione</string>
   <string name="SetAsPositionHold">Impostare come Position Hold</string>
   <string name="Follow_Me">Seguimi</string>
-  <string name="Follow_Heading">SeguiDirezione</string>
   <string name="Load">Carico</string>
-  <string name="Profile">Profilo: (compatibile con MultiWiiConf; mettere i file in/sdcard / MultiWiiLogs)</string>
   <string name="Save">Salva</string>
   <string name="EnterFileName">Inserire il nome del file</string>
   <string name="ReverseRollDirection">Inverti la direzione di Roll</string>
@@ -210,4 +207,5 @@
   <string name="GreenValuesCanBeChanged">I valori verdi possono essere cambiati</string>
   <string name="Locked">Bloccato</string>
   <string name="DoYouWantToUnlock">Vuoi sbloccarlo?</string>
+  <string name="Cancel">Annulla</string>
 </resources>

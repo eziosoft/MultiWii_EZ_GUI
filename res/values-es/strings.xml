@@ -3,6 +3,7 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Buscando Dispositivos</string>
+  <string name="select_device">selecciona un dispositivo para conectar</string>
   <string name="none_paired">Ningún dispositivo apareado</string>
   <string name="none_found">Ningún dispositivo encontrado</string>
   <string name="title_paired_devices">Dispositivos vinculados</string>
@@ -161,7 +162,6 @@
   <string name="ShareIt">Compartir el archivo Config</string>
   <string name="SelectSetting">Seleccione Configuración</string>
   <string name="RXBIND">Vincular RX</string>
-  <string name="FollowMe">Follow Me (no probado!  se debe utilizar con #define USE_MSP_WP) parpadea cuando la posición del teléfono es enviada a MW</string>
   <string name="InfoDonate">¿Le parece útil esta aplicación? Apoyar su desarrollo lo halagador o enviando donaciones al desarrollador!</string>
   <string name="convertToKML">Convertir a KML (Google Earth)</string>
   <string name="infoDonate">Han pasado y pasarán muchas, muchas horas de mi tiempo libre para construir y ampliar este programa, así que si te gusta y utiliza MultiWii EZ-GUI, por favor considere donar. Esto me mantendrá interesados en extender el programa.</string>
@@ -180,9 +180,7 @@
   <string name="EnterDescription">Entrar descripción</string>
   <string name="SetAsPositionHold">Fijar posición Estable</string>
   <string name="Follow_Me">Sígueme</string>
-  <string name="Follow_Heading">Seguir dirección</string>
   <string name="Load">Cargar</string>
-  <string name="Profile">Perfiles:( compatible con MultiwiiConf; poner los ficheros dentro de /sdcard/MultiWiiLogs)</string>
   <string name="Save">Salvar</string>
   <string name="EnterFileName">Nombre del Fichero</string>
   <string name="ReverseRollDirection">Invertir Roll </string>
@@ -210,4 +208,5 @@
   <string name="GreenValuesCanBeChanged">Se pueden cambiar los valores en verdes</string>
   <string name="Locked">Bloqueado</string>
   <string name="DoYouWantToUnlock">¿Quieres desbloquearlo?</string>
+  <string name="Cancel">Cancelar</string>
 </resources>

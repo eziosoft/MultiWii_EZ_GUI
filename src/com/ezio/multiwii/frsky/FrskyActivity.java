@@ -50,7 +50,7 @@ public class FrskyActivity extends SherlockActivity {
 
 			app.Frequentjobs();
 
-			app.mw.SendRequest();
+			app.mw.SendRequest(app.MainRequestMethod);
 
 			app.frskyProtocol.ProcessSerialData(false);
 

@@ -11,12 +11,12 @@
         android:background="#333"
         android:orientation="vertical" >
 
-        <org.osmdroid.views.MapView
-            android:id="@+id/mapViewOSM"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-        </org.osmdroid.views.MapView>
+         <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.SupportMapFragment" />
 
         <TableLayout
             android:layout_width="match_parent"

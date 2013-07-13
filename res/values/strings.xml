@@ -234,5 +234,15 @@
     <string name="StartGpsEmulation">Start GPS emulation</string>
     <string name="ClickOnTheNameForInfo">(click name for info)</string>
     <string name="ClickHereForMoreInfo">Click here for more info</string>
+    <string name="NewRequestMethod">New Request Method</string>
+    <string name="WaypointsMap">Waypoints Map</string>
+    <string name="PleaseRestart">Please restart the application</string>
+    <string name="MoveMapEnable">Moving Map enable</string>
+    <string name="MoveMapDissable">Moving Map dissable</string>
+    <string name="AddCirclePath">Add Circle Path</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Radius">Radius</string>
+    <string name="EnterRadius">Enter the radius of the circle in meters</string>
+    <string name="Close">Close</string>
 
 </resources>

@@ -16,9 +16,9 @@
  */
 package com.ezio.multiwii.helpers;
 
-
 public class Functions {
 
+	
 	public static long ConcatInt(int x, int y) {
 		return (int) ((x * Math.pow(10, numberOfDigits(y))) + y);
 	}

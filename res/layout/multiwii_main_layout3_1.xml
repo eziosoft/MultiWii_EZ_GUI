@@ -42,7 +42,6 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="Dashboard2OnClick"
                         android:text="@string/dashboard2" />
-
                 </TableRow>
 
                 <TableRow
@@ -69,6 +68,17 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="MapOnClick"
+                        android:text="@string/Map"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/Button01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="NewMapOnClick"
                         android:text="@string/Map" />
 
                 </TableRow>
@@ -97,7 +107,6 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="RadioOnClick"
                         android:text="@string/Radio" />
-
                 </TableRow>
 
                 <TableRow
@@ -124,7 +133,6 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="GraphsOnClick"
                         android:text="@string/Graphs" />
-
                 </TableRow>
 
                 <TableRow
@@ -132,10 +140,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
+                    <Button
+                        android:id="@+id/button8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="Dashboard4OnClick"
+                        android:text="dashboard 4"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/Button03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="WaypointsMapOnClick"
+                        android:text="@string/WaypointsMap" />
+
                 </TableRow>
-
             </TableLayout>
-
         </LinearLayout>
     </ScrollView>
 
