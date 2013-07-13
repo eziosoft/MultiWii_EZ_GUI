@@ -224,5 +224,13 @@
   <string name="ClickOnTheNameForInfo">单击名称查看信息</string>
   <string name="ClickHereForMoreInfo">为更多的信息，请单击此处</string>
   <string name="NewRequestMethod">新的请求方法</string>
+  <string name="WaypointsMap">航点地图</string>
+  <string name="PleaseRestart">请重新启动应用程序</string>
+  <string name="MoveMapEnable">启用地图自动移动</string>
+  <string name="MoveMapDissable">关闭地图自动移动</string>
+  <string name="AddCirclePath">添加一个环形航线</string>
   <string name="Cancel">取消</string>
+  <string name="Radius">半径</string>
+  <string name="EnterRadius">输入圆的半径（米）</string>
+  <string name="Close">关闭</string>
 </resources>

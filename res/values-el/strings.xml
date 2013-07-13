@@ -225,5 +225,13 @@
   <string name="ClickOnTheNameForInfo">(κάντε κλικ στο όνομα για πληροφορίες)</string>
   <string name="ClickHereForMoreInfo">Κάντε κλικ εδώ για περισσότερες πληροφορίες</string>
   <string name="NewRequestMethod">Νέα μέθοδο αίτησης</string>
+  <string name="WaypointsMap">Waypoints χάρτη</string>
+  <string name="PleaseRestart">Επανεκκινήστε την εφαρμογή</string>
+  <string name="MoveMapEnable">Μετακίνηση χάρτη ενεργοποίηση</string>
+  <string name="MoveMapDissable">Μετακίνηση χάρτη dissable</string>
+  <string name="AddCirclePath">Προσθέστε διαδρομή κύκλο</string>
   <string name="Cancel">"Άκυρο"</string>
+  <string name="Radius">Ακτίνα</string>
+  <string name="EnterRadius">Εισαγάγετε την ακτίνα του κύκλου στο μ</string>
+  <string name="Close">Κλείσιμο</string>
 </resources>

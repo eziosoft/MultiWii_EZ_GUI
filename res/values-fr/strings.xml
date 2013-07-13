@@ -226,5 +226,10 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="ClickOnTheNameForInfo">(cliquez sur le nom pour  + d\'infos)</string>
   <string name="ClickHereForMoreInfo">Cliquez ici pour plus d\'informations</string>
   <string name="NewRequestMethod">Nouvelle méthode de requête</string>
+  <string name="WaypointsMap">Carte des points d\'intérêts</string>
+  <string name="PleaseRestart">Veuillez redémarrer l\'application</string>
   <string name="Cancel">Annuler</string>
+  <string name="Radius">Rayon</string>
+  <string name="EnterRadius">Saisissez le rayon du cercle en mètres</string>
+  <string name="Close">Fermer</string>
 </resources>
