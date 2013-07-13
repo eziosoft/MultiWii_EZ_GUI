@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/MenuMapWaypointAddWP"
+        android:showAsAction="always|withText"
+        android:title="AddWP">
+    </item>
+    <item
+        android:id="@+id/MenuMapWaypointPrevWP"
+        android:showAsAction="always|withText"
+        android:title="PrevWP">
+    </item>
+    <item
+        android:id="@+id/MenuMapWaypointNextWP"
+        android:showAsAction="always|withText"
+        android:title="NextWP">
+    </item>
+    <item
+        android:id="@+id/MenuMapWaypointClean"
+        android:showAsAction="ifRoom|withText"
+        android:title="Clean"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/MenuMapWaypointMoveMap"
+        android:checkable="true"
+        android:checked="true"
+        android:showAsAction="ifRoom|withText"
+        android:title="MoveMap">
+    </item>
+
+</menu>
