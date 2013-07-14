@@ -150,7 +150,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCt6-BmAp5DYniB_kZ9jVjX9YH7J2dPD3w" />
+            android:value="AIzaSyB6skjnJ_aWOdgtw_KQ4mvuUSvm9nYIuJw" />
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

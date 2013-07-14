@@ -244,5 +244,6 @@
     <string name="Radius">Radius</string>
     <string name="EnterRadius">Enter the radius of the circle in meters</string>
     <string name="Close">Close</string>
+    <string name="ForceCzech">Force Czech</string>
 
 </resources>

@@ -63,6 +63,7 @@ public class ConfigActivity extends SherlockActivity {
 	RadioButton RadioForceGerman;
 	RadioButton RadioForceHungarian;
 	RadioButton RadioForcePolish;
+	RadioButton RadioForceCzech;
 
 	EditText EditTextPeriodicSpeaking;
 	EditText EditTextVoltageAlarm;
@@ -136,6 +137,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceGerman = (RadioButton) findViewById(R.id.radioForceGerman);
 		RadioForceHungarian = (RadioButton) findViewById(R.id.radioForceHungarian);
 		RadioForcePolish = (RadioButton) findViewById(R.id.radioForcePolish);
+		RadioForceCzech = (RadioButton) findViewById(R.id.radioForceCzech);
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
 		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
@@ -264,6 +266,8 @@ public class ConfigActivity extends SherlockActivity {
 			app.ForceLanguage = "hu";
 		if (RadioForcePolish.isChecked())
 			app.ForceLanguage = "pl";
+		if (RadioForceCzech.isChecked())
+			app.ForceLanguage = "cs";
 
 		app.PeriodicSpeaking = Integer.parseInt(EditTextPeriodicSpeaking.getText().toString()) * 1000;
 		app.VoltageAlarm = Float.parseFloat(EditTextVoltageAlarm.getText().toString());
