@@ -39,6 +39,9 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 	Menu ActionBarMenu;
 	ActionMode mMode;
 
+	float CircleRadius = 0;
+	int CirclePointsCount = 10;
+
 	boolean ShowWaypointControls = false;
 
 	boolean MoveMap = true;
@@ -139,7 +142,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) != ConnectionResult.SUCCESS) {
-			Toast.makeText(this, "Google Play Servieces error", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.GooglePlayServiecesError), Toast.LENGTH_LONG).show();
 			finish();
 		}
 
@@ -269,7 +272,9 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 		alert.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String value = input.getText().toString();
-				AddCircle(Float.parseFloat(value.replace(",", ".")), 10);
+				CircleRadius = Float.parseFloat(value.replace(",", "."));
+				AddCircle(CircleRadius, CirclePointsCount);
+				mMode = startActionMode(new CircleOptionsActionModeMenu());
 			}
 		});
 
@@ -290,8 +295,6 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 			azimuth += x;
 		}
 
-		mapHelperClass.RemoveMarker(0);
-		mapHelperClass.RedrawLines();
 	}
 
 	// /////menu////////
@@ -317,7 +320,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 			mapHelperClass.AddMarker();
 
 			if (mapHelperClass.markers.size() == 1) {
-				mMode = startActionMode(new AnActionModeMenu());
+				mMode = startActionMode(new AddPatternActionModeMenu());
 			} else {
 				if (mMode != null) {
 					mMode.finish();
@@ -357,7 +360,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 
 	// ///menu end//////
 
-	private final class AnActionModeMenu implements ActionMode.Callback {
+	private final class AddPatternActionModeMenu implements ActionMode.Callback {
 		@Override
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 
@@ -386,6 +389,78 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 
 		@Override
 		public void onDestroyActionMode(ActionMode mode) {
+
+		}
+	}
+
+	private final class CircleOptionsActionModeMenu implements ActionMode.Callback {
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+
+			menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.Bigger)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.Smaller)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.AddWP)).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+			menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.RemWP)).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+			return true;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			if (item.getItemId() == 1) {
+				CircleRadius += 1f;
+				while (mapHelperClass.markers.size() > 1) {
+					mapHelperClass.RemoveMarker(mapHelperClass.markers.size() - 1);
+				}
+
+				AddCircle(CircleRadius, CirclePointsCount);
+				mapHelperClass.RedrawLines();
+			}
+
+			if (item.getItemId() == 2) {
+				CircleRadius -= 1f;
+				while (mapHelperClass.markers.size() > 1) {
+					mapHelperClass.RemoveMarker(mapHelperClass.markers.size() - 1);
+				}
+
+				AddCircle(CircleRadius, CirclePointsCount);
+				mapHelperClass.RedrawLines();
+			}
+
+			if (item.getItemId() == 3) {
+				CirclePointsCount += 1;
+				while (mapHelperClass.markers.size() > 1) {
+					mapHelperClass.RemoveMarker(mapHelperClass.markers.size() - 1);
+				}
+
+				AddCircle(CircleRadius, CirclePointsCount);
+				mapHelperClass.RedrawLines();
+			}
+
+			if (item.getItemId() == 4) {
+				CirclePointsCount -= 1;
+				while (mapHelperClass.markers.size() > 1) {
+					mapHelperClass.RemoveMarker(mapHelperClass.markers.size() - 1);
+				}
+
+				AddCircle(CircleRadius, CirclePointsCount);
+				mapHelperClass.RedrawLines();
+			}
+
+			return true;
+
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			mapHelperClass.RemoveMarker(0);
+			mapHelperClass.RedrawLines();
+
 		}
 	}
 

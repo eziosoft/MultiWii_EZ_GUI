@@ -245,5 +245,16 @@
     <string name="EnterRadius">Enter the radius of the circle in meters</string>
     <string name="Close">Close</string>
     <string name="ForceCzech">Force Czech</string>
+    <string name="Bigger">Bigger</string>
+    <string name="Smaller">Smaller</string>
+    <string name="RemWP">Rem WP</string>
+    <string name="AddWP">Add WP</string>
+    <string name="GooglePlayServiecesError">Google Play Servieces error</string>
+    <string name="NextWP">Next WP</string>
+    <string name="PrevWP">Prev WP</string>
+    <string name="Clean">Clean</string>
+    <string name="MoveMap">Move Map</string>
+    
+    
 
 </resources>

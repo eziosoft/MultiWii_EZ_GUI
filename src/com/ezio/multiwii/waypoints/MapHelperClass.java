@@ -49,7 +49,7 @@ public class MapHelperClass implements LocationSource {
 			WPPathPolyLine.remove();
 			WPPathPolyLine = null;
 		}
-		PolylineOptions polylineOptions = new PolylineOptions().color(Color.argb(100, 255, 0, 0));
+		PolylineOptions polylineOptions = new PolylineOptions().color(Color.CYAN).width(2);
 		for (Marker m : markers) {
 			polylineOptions.add(m.getPosition());
 		}
