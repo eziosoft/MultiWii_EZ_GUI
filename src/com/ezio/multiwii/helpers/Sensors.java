@@ -59,7 +59,8 @@ public class Sensors implements SensorEventListener, LocationListener {
 	public float PhoneAccuracy = 0;
 	public float Declination = 0;
 
-//	public org.osmdroid.util.GeoPoint geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint(0, 0);
+	// public org.osmdroid.util.GeoPoint geopointOfflineMapCurrentPosition = new
+	// org.osmdroid.util.GeoPoint(0, 0);
 	public com.google.android.maps.GeoPoint geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint(0, 0);
 
 	SensorManager m_sensorManager;
@@ -174,7 +175,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 		if (location != null) {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			Declination = geoField.getDeclination();
-//			geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+			// geopointOfflineMapCurrentPosition = new
+			// org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6),
+			// (int) (location.getLongitude() * 1e6));
 			geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 			oldLocation = location;
@@ -215,14 +218,23 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	}
 
-	private void registerListeners() {
+	public void startMagACC() {
 		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
 		m_sensorManager.registerListener(this, m_sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+
+	}
+
+	public void stopMagACC() {
+		m_sensorManager.unregisterListener(this);
+	}
+
+	private void registerListeners() {
 		locationManager.requestLocationUpdates(provider, 0, 0, this);
+		//startMagACC();
 	}
 
 	private void unregisterListeners() {
-		m_sensorManager.unregisterListener(this);
+		stopMagACC();
 		locationManager.removeUpdates(this);
 	}
 
@@ -280,7 +292,9 @@ public class Sensors implements SensorEventListener, LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-//		geopointOfflineMapCurrentPosition = new org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+		// geopointOfflineMapCurrentPosition = new
+		// org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6),
+		// (int) (location.getLongitude() * 1e6));
 		geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
@@ -309,17 +323,20 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	}
 
-//	public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
-//		if (location != null && oldLocation != null) {
-//			// double lat = (location.getLatitude() + (location.getLatitude() -
-//			// oldLocation.getLatitude()));
-//			// double lon = (location.getLongitude() + (location.getLongitude()
-//			// - oldLocation.getLongitude()));
-//
-//			return new org.osmdroid.util.GeoPoint(location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude()), location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude()));
-//		} else
-//			return new org.osmdroid.util.GeoPoint(0, 0);
-//	}
+	// public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
+	// if (location != null && oldLocation != null) {
+	// // double lat = (location.getLatitude() + (location.getLatitude() -
+	// // oldLocation.getLatitude()));
+	// // double lon = (location.getLongitude() + (location.getLongitude()
+	// // - oldLocation.getLongitude()));
+	//
+	// return new org.osmdroid.util.GeoPoint(location.getLatitude() +
+	// (location.getLatitude() - oldLocation.getLatitude()),
+	// location.getLongitude() + (location.getLongitude() -
+	// oldLocation.getLongitude()));
+	// } else
+	// return new org.osmdroid.util.GeoPoint(0, 0);
+	// }
 
 	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
 		if (location != null && oldLocation != null) {

@@ -49,7 +49,7 @@ public class MapHelperClass implements LocationSource {
 			WPPathPolyLine.remove();
 			WPPathPolyLine = null;
 		}
-		PolylineOptions polylineOptions = new PolylineOptions().color(Color.CYAN).width(2);
+		PolylineOptions polylineOptions = new PolylineOptions().color(Color.CYAN).width(4);
 		for (Marker m : markers) {
 			polylineOptions.add(m.getPosition());
 		}
@@ -85,7 +85,7 @@ public class MapHelperClass implements LocationSource {
 
 	public void AddMarker() {
 		LatLng mapCenter = map.getCameraPosition().target;
-		Marker m = map.addMarker(new MarkerOptions().position(mapCenter).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+		Marker m = map.addMarker(new MarkerOptions().position(mapCenter).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 		markers.add(m);
 
 		int i = 1;
@@ -97,7 +97,7 @@ public class MapHelperClass implements LocationSource {
 	}
 
 	public void AddMarker(LatLng position) {
-		Marker m = map.addMarker(new MarkerOptions().position(position).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+		Marker m = map.addMarker(new MarkerOptions().position(position).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 		markers.add(m);
 
 		int i = 1;

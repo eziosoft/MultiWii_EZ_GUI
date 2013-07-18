@@ -197,6 +197,7 @@ public class GPSActivity extends SherlockActivity {
 		super.onPause();
 		mHandler.removeCallbacks(update);
 		killme = true;
+		app.sensors.stopMagACC();
 	}
 
 	@Override
@@ -217,6 +218,8 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxInjectGPS.setChecked(app.InjectGPSEnable);
 
 		app.Say(getString(R.string.GPS));
+		
+		app.sensors.startMagACC();
 
 	}
 

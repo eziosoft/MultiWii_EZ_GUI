@@ -116,6 +116,8 @@ public class Dashboard1Activity extends Activity {
 		baro = (TextView) findViewById(R.id.textViewBaro);
 		BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
 		PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
+		
+		
 
 	}
 
@@ -124,6 +126,7 @@ public class Dashboard1Activity extends Activity {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
+		app.sensors.stopMagACC();
 	}
 
 	@Override
@@ -133,6 +136,7 @@ public class Dashboard1Activity extends Activity {
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 		app.Say(getString(R.string.PitchRoll));
+		app.sensors.startMagACC();
 
 	}
 

@@ -247,7 +247,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 		mapHelperClass.CurrentWPCircle.setCenter(mapHelperClass.markers.get(CurrentWaypointNumber).getPosition());
 
 		for (Marker m : mapHelperClass.markers) {
-			m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+			m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 		}
 
 		mapHelperClass.markers.get(CurrentWaypointNumber).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
