@@ -198,7 +198,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 		app.Say(getString(R.string.Dashboard3));
 		killme = false;
 
-		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);

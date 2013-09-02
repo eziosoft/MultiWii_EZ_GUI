@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="103"
+    android:versionCode="104"
     android:versionName="3.54" >
 
     <uses-sdk

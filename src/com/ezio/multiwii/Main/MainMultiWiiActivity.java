@@ -80,6 +80,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		app = (App) getApplication();
+
 		Log.d("aaa", "MAIN ON CREATE");
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 
@@ -99,8 +101,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
 		titleIndicator.setViewPager(viewPager);
-
-		app = (App) getApplication();
 
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -491,4 +491,5 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	// ///menu end//////
+
 }
