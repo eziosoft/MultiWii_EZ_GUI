@@ -182,8 +182,6 @@ public class PIDActivity extends SherlockActivity {
 
 		SetPIDNames();
 
-		ReadOnClick(null);
-
 	}
 
 	private void loadProfileFiles() {
@@ -226,10 +224,12 @@ public class PIDActivity extends SherlockActivity {
 		app.Say(getString(R.string.PID));
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-		while (app.commMW.dataAvailable()) {
-			app.mw.ProcessSerialData(false);
-		}
-		ShowData();
+		// while (app.commMW.dataAvailable()) {
+		// app.mw.ProcessSerialData(false);
+		// }
+		// ShowData();
+
+		ReadOnClick(null);
 	}
 
 	public void ReadOnClick(View v) {
