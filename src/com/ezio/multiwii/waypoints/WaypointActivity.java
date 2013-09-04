@@ -146,6 +146,12 @@ public class WaypointActivity extends Activity {
 	public void SetWPHomeOnClick(View v) {
 		// TODO alt and heading need to be added
 
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		int alt = Integer.parseInt(EditTextAltitude.getText().toString());
 		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), alt, 0, 0, 0));
 
@@ -155,11 +161,23 @@ public class WaypointActivity extends Activity {
 
 		}
 
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		finish();
 	}
 
 	public void SetWPPositionHoldOnClick(View v) {
 		// TODO alt and heading need to be added
+
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		int alt = Integer.parseInt(EditTextAltitude.getText().toString());
 
@@ -169,6 +187,12 @@ public class WaypointActivity extends Activity {
 
 			app.mw.Waypoints[16].Lat = (int) (SelectedLatitude * 10);
 			app.mw.Waypoints[16].Lon = (int) (SelectedLongitude * 10);
+		}
+
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 		finish();
