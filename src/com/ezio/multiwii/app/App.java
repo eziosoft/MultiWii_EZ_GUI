@@ -188,6 +188,11 @@ public class App extends Application implements Sensors.Listener {
 	public final String ALT = "ALT";
 	public final String HEAD = "HEAD";
 
+	public final String DEBUG1 = "DEBUG1";
+	public final String DEBUG2 = "DEBUG2";
+	public final String DEBUG3 = "DEBUG3";
+	public final String DEBUG4 = "DEBUG4";
+
 	private final static String GRAPHSTOSHOW = "GRAPHSTOSHOW";
 	public String GraphsToShow = ACCROLL + ";" + ACCZ + ";" + ALT + ";" + GYROPITCH;
 

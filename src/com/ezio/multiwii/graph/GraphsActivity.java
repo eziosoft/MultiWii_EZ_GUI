@@ -85,6 +85,12 @@ public class GraphsActivity extends SherlockActivity {
 				//
 				// app.mw.alt = rnd.nextFloat();
 				// app.mw.head = rnd.nextFloat();
+
+				// app.mw.debug1 = rnd.nextFloat();
+				// app.mw.debug2 = rnd.nextFloat();
+				// app.mw.debug3 = rnd.nextFloat();
+				// app.mw.debug4 = rnd.nextFloat();
+
 				// //////
 
 				for (GraphViewSeries s : series) {
@@ -118,14 +124,28 @@ public class GraphsActivity extends SherlockActivity {
 
 					if (s.description.equals(app.HEAD))
 						s.appendData(new GraphViewData(CurentPosition, app.mw.head), true);
+					// /
+					if (s.description.equals(app.DEBUG1))
+						s.appendData(new GraphViewData(CurentPosition, app.mw.debug1), true);
+
+					if (s.description.equals(app.DEBUG2))
+						s.appendData(new GraphViewData(CurentPosition, app.mw.debug2), true);
+
+					if (s.description.equals(app.DEBUG3))
+						s.appendData(new GraphViewData(CurentPosition, app.mw.debug3), true);
+
+					if (s.description.equals(app.DEBUG4))
+						s.appendData(new GraphViewData(CurentPosition, app.mw.debug4), true);
+
 				}
 			}
 
 			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, 100);
-			
-			if(app.D)	Log.d(app.TAG, "loop "+this.getClass().getName());
+
+			if (app.D)
+				Log.d(app.TAG, "loop " + this.getClass().getName());
 
 		}
 	};
@@ -180,6 +200,19 @@ public class GraphsActivity extends SherlockActivity {
 		if (gr.contains(app.HEAD))
 			series.add(new GraphViewSeries(getString(R.string.HEAD), new GraphViewSeriesStyle(Color.rgb(255, 226, 124), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
+		if (gr.contains(app.DEBUG1))
+			series.add(new GraphViewSeries(app.DEBUG1, new GraphViewSeriesStyle(Color.rgb(200, 50, 0), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+
+		if (gr.contains(app.DEBUG2))
+			series.add(new GraphViewSeries(app.DEBUG2, new GraphViewSeriesStyle(Color.rgb(0, 200, 50), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+
+		if (gr.contains(app.DEBUG3))
+			series.add(new GraphViewSeries(app.DEBUG3, new GraphViewSeriesStyle(Color.rgb(50, 0, 200), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+
+		if (gr.contains(app.DEBUG4))
+			series.add(new GraphViewSeries(app.DEBUG4, new GraphViewSeriesStyle(Color.rgb(150, 100, 50), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+
+		// /
 		for (GraphViewSeries s : series) {
 			graphView.addSeries(s);
 		}

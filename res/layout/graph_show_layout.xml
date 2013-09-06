@@ -8,78 +8,101 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
+
             <CheckBox
                 android:id="@+id/checkBoxAccRoll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ACCROLL" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxAccPitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ACCPITCH" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxAccZ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ACCZ" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxGyroRoll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/GYROROLL" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxGyroPitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/GYROPITCH" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxGyroYaw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/GYROYAW" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxMagRoll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/MAGROLL" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxMagPitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/MAGPITCH" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxMagYaw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/MAGYAW" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxAlt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ALT" />
-
+
             <CheckBox
                 android:id="@+id/checkBoxHead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/HEAD" />
 
+            <CheckBox
+                android:id="@+id/checkBoxDEBUG1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEBUG1" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDEBUG2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEBUG2" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDEBUG3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEBUG3" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDEBUG4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEBUG4" />
         </LinearLayout>
     </ScrollView>
 

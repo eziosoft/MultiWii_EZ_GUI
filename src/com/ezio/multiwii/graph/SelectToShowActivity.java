@@ -41,6 +41,11 @@ public class SelectToShowActivity extends SherlockActivity {
 	CheckBox checkBoxAlt;
 	CheckBox checkBoxHead;
 
+	CheckBox checkBoxDebug1;
+	CheckBox checkBoxDebug2;
+	CheckBox checkBoxDebug3;
+	CheckBox checkBoxDebug4;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +68,11 @@ public class SelectToShowActivity extends SherlockActivity {
 		checkBoxAlt = (CheckBox) findViewById(R.id.checkBoxAlt);
 		checkBoxHead = (CheckBox) findViewById(R.id.checkBoxHead);
 
+		checkBoxDebug1 = (CheckBox) findViewById(R.id.checkBoxDEBUG1);
+		checkBoxDebug2 = (CheckBox) findViewById(R.id.checkBoxDEBUG2);
+		checkBoxDebug3 = (CheckBox) findViewById(R.id.checkBoxDEBUG3);
+		checkBoxDebug4 = (CheckBox) findViewById(R.id.checkBoxDEBUG4);
+
 	}
 
 	@Override
@@ -83,6 +93,11 @@ public class SelectToShowActivity extends SherlockActivity {
 
 		checkBoxAlt.setChecked(app.GraphsToShow.contains(app.ALT));
 		checkBoxHead.setChecked(app.GraphsToShow.contains(app.HEAD));
+
+		checkBoxDebug1.setChecked(app.GraphsToShow.contains(app.DEBUG1));
+		checkBoxDebug2.setChecked(app.GraphsToShow.contains(app.DEBUG2));
+		checkBoxDebug3.setChecked(app.GraphsToShow.contains(app.DEBUG3));
+		checkBoxDebug4.setChecked(app.GraphsToShow.contains(app.DEBUG4));
 
 	}
 
@@ -117,9 +132,17 @@ public class SelectToShowActivity extends SherlockActivity {
 		if (checkBoxHead.isChecked())
 			app.GraphsToShow += app.HEAD + ";";
 
-		if (app.GraphsToShow.substring(app.GraphsToShow.length() - 1,
-				app.GraphsToShow.length()).equals(";"))
-			app.GraphsToShow=app.GraphsToShow.substring(0, app.GraphsToShow.length() - 1);
+		if (checkBoxDebug1.isChecked())
+			app.GraphsToShow += app.DEBUG1 + ";";
+		if (checkBoxDebug2.isChecked())
+			app.GraphsToShow += app.DEBUG2 + ";";
+		if (checkBoxDebug3.isChecked())
+			app.GraphsToShow += app.DEBUG3 + ";";
+		if (checkBoxDebug4.isChecked())
+			app.GraphsToShow += app.DEBUG4 + ";";
+
+		if (app.GraphsToShow.substring(app.GraphsToShow.length() - 1, app.GraphsToShow.length()).equals(";"))
+			app.GraphsToShow = app.GraphsToShow.substring(0, app.GraphsToShow.length() - 1);
 
 		app.SaveSettings(false);
 

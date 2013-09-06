@@ -287,27 +287,9 @@ public class MultiWii210 extends MultirotorData {
 			break;
 		case MSP_PIDNAMES:
 			PIDNames = new String(inBuf, 0, dataSize).split(";");
-			/* TODO create GUI elements from this message */
-			// System.out.println("Got PIDNAMES: "+new String(inBuf, 0,
-			// dataSize));
 			break;
 
 		case MSP_MISC:
-
-			// intPowerTrigger1 (16bit)
-
-			// conf.minthrottle (16bit)
-			// MAXTHROTTLE (16bit)
-			// MINCOMMAND (16bit)
-			// conf.failsafe_throttle (16bit)
-			// plog.arm (16bit)
-			// plog.lifetime + (plog.armed_time / 1000000) (32bit)
-			// conf.mag_declination (16bit)
-			// conf.vbatscale; (8bit)
-			// conf.vbatlevel_warn1; (8bit)
-			// conf.vbatlevel_warn2; (8bit)
-			// conf.vbatlevel_crit; (8bit)
-
 			intPowerTrigger = read16();
 
 			minthrottle = read16();
