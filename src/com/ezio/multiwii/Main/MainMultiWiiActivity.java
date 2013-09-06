@@ -55,7 +55,6 @@ import com.ezio.multiwii.gps.MOCK_GPS_Service;
 import com.ezio.multiwii.graph.GraphsActivity;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
-import com.ezio.multiwii.map.MapActivityMy;
 import com.ezio.multiwii.motors.MotorsActivity;
 import com.ezio.multiwii.other.OtherActivity;
 import com.ezio.multiwii.radio.RadioActivity;
@@ -340,19 +339,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", true));
 
-	}
-
-	public void MapOnClick(View v) {
-		killme = true;
-		// if (app.UseOfflineMaps) {
-		// mHandler.removeCallbacksAndMessages(null);
-		// startActivity(new Intent(getApplicationContext(),
-		// MapOfflineActivityMy.class));
-		// } else {
-		// killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), MapActivityMy.class));
-		// }
 	}
 
 	public void AboutOnClick(View v) {
