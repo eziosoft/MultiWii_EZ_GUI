@@ -1,4 +1,3 @@
-package com.ezio.multiwii.notUsed;
 ///*  MultiWii EZ-GUI
 //    Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
 //

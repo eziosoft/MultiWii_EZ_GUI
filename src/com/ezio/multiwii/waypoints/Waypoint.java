@@ -16,7 +16,7 @@
  */
 package com.ezio.multiwii.waypoints;
 
-import com.google.android.maps.GeoPoint;
+import com.google.android.gms.maps.model.LatLng;
 
 public class Waypoint {
 
@@ -59,10 +59,10 @@ public class Waypoint {
 	 *            time to stay (ms)
 	 * @param navFlag
 	 */
-	public Waypoint(int number, GeoPoint geopoint, int alt, int heading, int timeToStay, int navFlag) {
+	public Waypoint(int number, LatLng latLng, int alt, int heading, int timeToStay, int navFlag) {
 		Number = number;
-		Lat = geopoint.getLatitudeE6() * 10;
-		Lon = geopoint.getLongitudeE6() * 10;
+		Lat = (int) (latLng.latitude * 1e7);
+		Lon = (int) (latLng.longitude * 1e7);
 		Heading = heading;
 		TimeToStay = timeToStay;
 		Alt = alt;
@@ -73,8 +73,8 @@ public class Waypoint {
 
 	}
 
-	public GeoPoint getGeoPoint() {
-		return new GeoPoint(Lat / 10, Lon / 10);
+	public LatLng getLatLng() {
+		return new LatLng(Lat / 1e7, Lon / 1e7);
 
 	}
 }
