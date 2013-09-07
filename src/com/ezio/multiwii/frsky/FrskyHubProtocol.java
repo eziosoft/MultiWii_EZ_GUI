@@ -25,7 +25,6 @@ import com.ezio.multiwii.helpers.Functions;
 
 public class FrskyHubProtocol {
 
-	
 	public float Altitude = 0;
 	public float Heading = 0;
 	public int Hour = 0, Minute = 0, Second_ = 0;
