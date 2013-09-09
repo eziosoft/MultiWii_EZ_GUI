@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="106"
+    android:versionCode="107"
     android:versionName="3.55" >
 
     <uses-sdk
@@ -149,7 +149,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCt6-BmAp5DYniB_kZ9jVjX9YH7J2dPD3w" />
+            android:value="AIzaSyDt7krGYo5jP5oG7GNzLfNqiGkl0xmI7Tk" />
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

@@ -9,7 +9,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.ezio.multiwii.app.App;
-import com.google.android.maps.GeoPoint;
 
 public class MOCK_GPS_Service extends Service {
 
