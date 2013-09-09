@@ -59,8 +59,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 	public float PhoneAccuracy = 0;
 	public float Declination = 0;
 
-	// public org.osmdroid.util.GeoPoint geopointOfflineMapCurrentPosition = new
-	// org.osmdroid.util.GeoPoint(0, 0);
 	public com.google.android.maps.GeoPoint geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint(0, 0);
 
 	SensorManager m_sensorManager;
@@ -92,7 +90,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	public void initMOCKLocation() {
 		mocLocationProvider = LocationManager.GPS_PROVIDER;
-		// mocLocationProvider = LocationManager.NETWORK_PROVIDER;
 		locationManager.addTestProvider(mocLocationProvider, false, false, false, false, true, true, true, 0, 5);
 		locationManager.setTestProviderEnabled(mocLocationProvider, true);
 		MockLocationWorking = true;
@@ -175,9 +172,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		if (location != null) {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			Declination = geoField.getDeclination();
-			// geopointOfflineMapCurrentPosition = new
-			// org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6),
-			// (int) (location.getLongitude() * 1e6));
+
 			geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 			oldLocation = location;
@@ -291,17 +286,10 @@ public class Sensors implements SensorEventListener, LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		// geopointOfflineMapCurrentPosition = new
-		// org.osmdroid.util.GeoPoint((int) (location.getLatitude() * 1e6),
-		// (int) (location.getLongitude() * 1e6));
 		geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
-
-		// this is proper way but it doesn't work on some phones
-		// if(location.getExtras()!=null)
-		// PhoneNumSat = (Integer) location.getExtras().get("satellites");
 
 		if (mListener != null)
 			mListener.onSensorsStateGPSLocationChange();
@@ -321,21 +309,6 @@ public class Sensors implements SensorEventListener, LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 
 	}
-
-	// public org.osmdroid.util.GeoPoint getNextPredictedLocationOfflineMap() {
-	// if (location != null && oldLocation != null) {
-	// // double lat = (location.getLatitude() + (location.getLatitude() -
-	// // oldLocation.getLatitude()));
-	// // double lon = (location.getLongitude() + (location.getLongitude()
-	// // - oldLocation.getLongitude()));
-	//
-	// return new org.osmdroid.util.GeoPoint(location.getLatitude() +
-	// (location.getLatitude() - oldLocation.getLatitude()),
-	// location.getLongitude() + (location.getLongitude() -
-	// oldLocation.getLongitude()));
-	// } else
-	// return new org.osmdroid.util.GeoPoint(0, 0);
-	// }
 
 	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
 		if (location != null && oldLocation != null) {
