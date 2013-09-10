@@ -36,6 +36,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Sensors implements SensorEventListener, LocationListener {
 
 	private Listener mListener = null;
@@ -59,7 +61,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 	public float PhoneAccuracy = 0;
 	public float Declination = 0;
 
-	public com.google.android.maps.GeoPoint geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint(0, 0);
+	public LatLng MapCurrentPosition = new LatLng(0, 0);
 
 	SensorManager m_sensorManager;
 	float[] m_lastMagFields = new float[3];;
@@ -173,7 +175,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 			geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 			Declination = geoField.getDeclination();
 
-			geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+			MapCurrentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
 			oldLocation = location;
 
@@ -286,7 +288,7 @@ public class Sensors implements SensorEventListener, LocationListener {
 		PhoneSpeed = location.getSpeed() * 100f;
 		PhoneAccuracy = location.getAccuracy() * 100f;
 
-		geopointOnlineMapCurrentPosition = new com.google.android.maps.GeoPoint((int) (location.getLatitude() * 1e6), (int) (location.getLongitude() * 1e6));
+		MapCurrentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
 		geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
 		Declination = geoField.getDeclination();
@@ -310,13 +312,13 @@ public class Sensors implements SensorEventListener, LocationListener {
 
 	}
 
-	public com.google.android.maps.GeoPoint getNextPredictedLocationOnlineMap() {
+	public LatLng getNextPredictedLocationOnlineMap() {
 		if (location != null && oldLocation != null) {
-			int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())) * 1e6);
-			int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())) * 1e6);
-			return new com.google.android.maps.GeoPoint(lat, lon);
+			int lat = (int) ((location.getLatitude() + (location.getLatitude() - oldLocation.getLatitude())));
+			int lon = (int) ((location.getLongitude() + (location.getLongitude() - oldLocation.getLongitude())));
+			return new LatLng(lat, lon);
 		} else
-			return new com.google.android.maps.GeoPoint(0, 0);
+			return new LatLng(0, 0);
 
 	}
 }
