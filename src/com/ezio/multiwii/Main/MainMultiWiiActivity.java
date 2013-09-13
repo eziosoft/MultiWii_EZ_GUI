@@ -391,6 +391,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
+		menu.findItem(R.id.menu_connect_frsky).setVisible(false);
 		return true;
 	}
 
@@ -444,35 +445,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			return true;
 		}
 
-		if (item.getItemId() == R.id.menu_vote) {
-			RateOnClick(null);
-
-			return true;
-		}
-
-		if (item.getItemId() == R.id.menuDonate) {
-			DonateOnClick(null);
-			return true;
-		}
-
-		if (item.getItemId() == R.id.menuOther) {
-			OtherOnClick(null);
-			return true;
-		}
-
-		if (item.getItemId() == R.id.menuConfig) {
-			ConfigOnClick(null);
-			return true;
-		}
-
-		if (item.getItemId() == R.id.menuAbout) {
-			AboutOnClick(null);
-			return true;
-		}
-
-		if (item.getItemId() == R.id.menuAdvanced) {
-			AdvancedOnClick(null);
-		}
 		return false;
 	}
 

@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -57,6 +59,7 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxReverseRollDirection;
 	CheckBox CheckBoxUseFTDISerial;
 	CheckBox CheckBoxNewRequestMethod;
+	CheckBox CheckBoxFrskySupport;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -152,6 +155,23 @@ public class ConfigActivity extends SherlockActivity {
 		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
 		CheckBoxNewRequestMethod = (CheckBox) findViewById(R.id.checkBoxNewRequestMethod);
 
+		CheckBoxFrskySupport = (CheckBox) findViewById(R.id.checkBoxFrskySupport);
+		CheckBoxFrskySupport.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				ShowFrskySupport(isChecked);
+			}
+		});
+
+	}
+
+	void ShowFrskySupport(boolean visible) {
+		if (visible) {
+			findViewById(R.id.FrskySupportLayout).setVisibility(View.VISIBLE);
+		} else {
+			findViewById(R.id.FrskySupportLayout).setVisibility(View.GONE);
+		}
 	}
 
 	@Override
@@ -206,6 +226,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceGerman.setChecked(app.ForceLanguage.equals("de"));
 		RadioForceHungarian.setChecked(app.ForceLanguage.equals("hu"));
 		RadioForcePolish.setChecked(app.ForceLanguage.equals("pl"));
+		RadioForcePolish.setChecked(app.ForceLanguage.equals("cz"));
 
 		EditTextPeriodicSpeaking.setText(String.valueOf(app.PeriodicSpeaking / 1000));
 
@@ -219,6 +240,9 @@ public class ConfigActivity extends SherlockActivity {
 		} else {
 			CheckBoxNewRequestMethod.setChecked(false);
 		}
+
+		CheckBoxFrskySupport.setChecked(app.FrskySupport);
+		ShowFrskySupport(app.FrskySupport);
 
 		app.Say(getString(R.string.Config));
 
@@ -292,6 +316,8 @@ public class ConfigActivity extends SherlockActivity {
 		} else {
 			app.MainRequestMethod = 1;
 		}
+
+		app.FrskySupport = CheckBoxFrskySupport.isChecked();
 
 		app.SaveSettings(false);
 

@@ -37,7 +37,7 @@ import com.ezio.multiwii.helpers.Notifications;
 import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
-import com.ezio.multiwii.mw.MultiWii210;
+import com.ezio.multiwii.mw.MultiWii220;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.sec.Sec;
@@ -172,6 +172,9 @@ public class App extends Application implements Sensors.Listener {
 	private static final String MAINREQUESTMETHOD = "MAINREQUESTMETHOD";
 	public int MainRequestMethod = 1;
 
+	private static final String FRSKY_SUPPORT = "FRSKY_SUPPORT";
+	public boolean FrskySupport = false;
+
 	// graphs
 	public final String ACCROLL = "ACC ROLL";
 	public final String ACCPITCH = "ACC PITCH";
@@ -243,6 +246,7 @@ public class App extends Application implements Sensors.Listener {
 			commMW = new SerialCDC_ACM(getApplicationContext());
 		}
 
+		// if (FrskySupport) {
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
 			commFrsky = new BT(getApplicationContext());
 		}
@@ -254,6 +258,7 @@ public class App extends Application implements Sensors.Listener {
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
 			commFrsky = new SerialCDC_ACM(getApplicationContext());
 		}
+		// }
 
 		SelectProtocol();
 
@@ -268,13 +273,13 @@ public class App extends Application implements Sensors.Listener {
 		Protocol = 210;
 
 		if (Protocol == 210) {
-			mw = new MultiWii210(commMW);
+			mw = new MultiWii220(commMW);
 		}
 
-		frskyProtocol = new FrskyProtocol(commFrsky);
+		if (FrskySupport)
+			frskyProtocol = new FrskyProtocol(commFrsky);
 
 		oldActiveModes = new boolean[20];// not the best method
-		// mw._1G = _1Gtemp;
 
 	}
 
@@ -312,6 +317,7 @@ public class App extends Application implements Sensors.Listener {
 		SerialPortBaudRateMW = prefs.getString(SERIAL_PORT_BAUD_RATE_MW, "115200");
 		SerialPortBaudRateFrSky = prefs.getString(SERIAL_PORT_BAUD_RATE_FRSKY, "9600");
 		MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 1);
+		FrskySupport = prefs.getBoolean(FRSKY_SUPPORT, false);
 
 	}
 
@@ -326,7 +332,6 @@ public class App extends Application implements Sensors.Listener {
 		editor.putBoolean(ALTCORRECTION, AltCorrection);
 		// editor.putBoolean(ADVANCEDFINCTIONS, AdvancedFunctions);
 		editor.putBoolean(DISABLEBTONEXIT, DisableBTonExit);
-		// editor.putInt(G1, mw._1G);
 		editor.putString(FORCELANGUAGE, ForceLanguage);
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
@@ -342,6 +347,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putInt(COMMUNICATION_TYPE_MW, CommunicationTypeMW);
 		editor.putString(SERIAL_PORT_BAUD_RATE_MW, SerialPortBaudRateMW);
 		editor.putInt(MAINREQUESTMETHOD, MainRequestMethod);
+		editor.putBoolean(FRSKY_SUPPORT, FrskySupport);
 		editor.commit();
 
 		if (!quiet) {

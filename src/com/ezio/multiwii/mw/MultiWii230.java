@@ -25,9 +25,9 @@ import android.util.Log;
 import com.ezio.multiwii.waypoints.Waypoint;
 import communication.Communication;
 
-public class MultiWii210 extends MultirotorData {
+public class MultiWii230 extends MultirotorData {
 
-	public MultiWii210(Communication bt) {
+	public MultiWii230(Communication bt) {
 		EZGUIProtocol = "2.2";
 
 		timer1 = 10; // used to send request every 10 requests
@@ -35,7 +35,6 @@ public class MultiWii210 extends MultirotorData {
 
 		this.communication = bt;
 
-		// changes from 2.0//
 		PIDITEMS = 10;
 		CHECKBOXITEMS = 0;
 		byteP = new int[PIDITEMS];
@@ -43,7 +42,6 @@ public class MultiWii210 extends MultirotorData {
 		byteD = new int[PIDITEMS];
 		buttonCheckboxLabel = new String[0];
 		init();
-		// ////end changes/////////////
 	}
 
 	private void init() {
@@ -123,37 +121,13 @@ public class MultiWii210 extends MultirotorData {
 			multiType = read8();
 			MSPversion = read8(); // MSP version
 			multiCapability = read32();// capability
-			if ((multiCapability & 1) > 0) {
-				// TODO
-			}
+			if ((multiCapability & 1) > 0)
+				multi_Capability.RXBind = true;
+			if ((multiCapability & 4) > 0)
+				multi_Capability.Motors = true;
+			if ((multiCapability & 8) > 0)
+				multi_Capability.Flaps = true;
 			break;
-
-		case MSP_SERVO_CONF:
-
-			// min:2 / max:2 / middle:2 / rate:1
-			for (i = 0; i < 8; i++) {
-				ServoConf[i].Min = read16();
-				ServoConf[i].Max = read16();
-				ServoConf[i].MidPoint = read16();
-				ServoConf[i].Rate = read8();
-			}
-			break;
-
-		// case MSP_MISC_CONF:
-		// minthrottle = read16();
-		// maxthrottle = read16();
-		// mincommand = read16();
-		// midrc = read16();
-		//
-		// armedNum = read16();
-		// lifetime = read32();
-		//
-		// mag_decliniation = ((read16() - 1000f) / 10f);
-		// vbatscale = read8();
-		// vbatlevel_warn1 = (float) (read8() / 10.0);
-		// vbatlevel_warn2 = (float) (read8() / 10.0);
-		// vbatlevel_crit = (float) (read8() / 10.0);
-		// break;
 
 		case MSP_STATUS:
 			cycleTime = read16();
@@ -195,7 +169,6 @@ public class MultiWii210 extends MultirotorData {
 
 			}
 			break;
-
 		case MSP_RAW_IMU:
 
 			ax = read16();
@@ -210,6 +183,7 @@ public class MultiWii210 extends MultirotorData {
 			magy = read16() / 3;
 			magz = read16() / 3;
 			break;
+
 		case MSP_SERVO:
 			for (i = 0; i < 8; i++)
 				servo[i] = read16();
@@ -217,6 +191,12 @@ public class MultiWii210 extends MultirotorData {
 		case MSP_MOTOR:
 			for (i = 0; i < 8; i++)
 				mot[i] = read16();
+			if (multiType == SINGLECOPTER)
+				servo[7] = mot[0];
+			if (multiType == DUALCOPTER) {
+				servo[7] = mot[0];
+				servo[6] = mot[1];
+			}
 			break;
 		case MSP_RC:
 			rcRoll = read16();
@@ -240,7 +220,7 @@ public class MultiWii210 extends MultirotorData {
 		case MSP_COMP_GPS:
 			GPS_distanceToHome = read16();
 			GPS_directionToHome = read16();
-			GPS_update = read16();
+			GPS_update = read8();
 			break;
 		case MSP_ATTITUDE:
 			angx = read16() / 10;
@@ -276,7 +256,18 @@ public class MultiWii210 extends MultirotorData {
 				byteD[i] = read8();
 			}
 			break;
-
+		case MSP_BOX:
+			for (i = 0; i < CHECKBOXITEMS; i++) {
+				activation[i] = read16();
+				for (int aa = 0; aa < 12; aa++) {
+					if ((activation[i] & (1 << aa)) > 0)
+						Checkbox[i][aa] = true;
+					else
+						Checkbox[i][aa] = false;
+				}
+			}
+			SendRequest2Confirmation(); // new request method confirmation
+			break;
 		case MSP_BOXNAMES:
 			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
 			Log.d("aaa", new String(inBuf, 0, dataSize));
@@ -289,24 +280,32 @@ public class MultiWii210 extends MultirotorData {
 			PIDNames = new String(inBuf, 0, dataSize).split(";");
 			break;
 
+		case MSP_SERVO_CONF:
+			// min:2 / max:2 / middle:2 / rate:1
+			for (i = 0; i < 8; i++) {
+				ServoConf[i].Min = read16();
+				ServoConf[i].Max = read16();
+				ServoConf[i].MidPoint = read16();
+				ServoConf[i].Rate = read8();
+			}
+			break;
 		case MSP_MISC:
-			intPowerTrigger = read16();
+			intPowerTrigger = read16(); // a
 
-			minthrottle = read16();
-			maxthrottle = read16();
-			mincommand = read16();
-			failsafe_throttle = read16();
-			armedNum = read16();
+			minthrottle = read16();// b
+			maxthrottle = read16();// c
+			mincommand = read16();// d
+			failsafe_throttle = read16();// e
+			armedNum = read16();// f
+			lifetime = read32();// g
+			mag_decliniation = read16() / 10f;// h
 
-			lifetime = read32();
-
-			mag_decliniation = read16() / 10f;
-
-			vbatscale = read8();
-			vbatlevel_warn1 = (float) (read8() / 10.0f);
-			vbatlevel_warn2 = (float) (read8() / 10.0f);
-			vbatlevel_crit = (float) (read8() / 10.0f);
-
+			vbatscale = read8();// i
+			vbatlevel_warn1 = (float) (read8() / 10.0f);// j
+			vbatlevel_warn2 = (float) (read8() / 10.0f);// k
+			vbatlevel_crit = (float) (read8() / 10.0f);// l
+			if (armedNum < 1)
+				Log_Permanent_Hidden = true;
 			break;
 
 		case MSP_MOTOR_PINS:
@@ -341,21 +340,6 @@ public class MultiWii210 extends MultirotorData {
 			Waypoints[WP.Number] = WP;
 
 			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
-			break;
-
-		case MSP_BOX:
-
-			for (i = 0; i < CHECKBOXITEMS; i++) {
-				activation[i] = read16();
-				for (int aa = 0; aa < 12; aa++) {
-					if ((activation[i] & (1 << aa)) > 0)
-						Checkbox[i][aa] = true;
-					else
-						Checkbox[i][aa] = false;
-				}
-			}
-			SendRequest2Confirmation();
-
 			break;
 
 		default:

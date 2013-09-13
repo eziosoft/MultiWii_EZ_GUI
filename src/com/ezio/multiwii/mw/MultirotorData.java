@@ -92,7 +92,30 @@ public abstract class MultirotorData {
 	public FileAccess FA;
 	public float AltCorrection = 0;
 
-	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATP", "OCTOFLATX", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6_H" };
+	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATX", "OCTOFLATP", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6H", "PPM_TO_SERVO", "DUALCOPTER", "SINGLECOPTER" };
+
+	// Alias for multiTypes
+	int TRI = 1;
+	int QUADP = 2;
+	int QUADX = 3;
+	int BI = 4;
+	int GIMBAL = 5;
+	int Y6 = 6;
+	int HEX6 = 7;
+	int FLYING_WING = 8;
+	int Y4 = 9;
+	int HEX6X = 10;
+	int OCTOX8 = 11;
+	int OCTOFLATX = 12;
+	int OCTOFLATP = 13;
+	int AIRPLANE = 14;
+	int HELI_120_CCPM = 15;
+	int HELI_90_DEG = 16;
+	int VTAIL4 = 17;
+	int HEX6H = 18;
+	int PPM_TO_SERVO = 19;
+	int DUALCOPTER = 20;
+	int SINGLECOPTER = 21;
 
 	public int PIDITEMS = 10;
 	public int CHECKBOXITEMS = 11; // in 2.1
@@ -165,6 +188,10 @@ public abstract class MultirotorData {
 
 	public ServoConfClass[] ServoConf = new ServoConfClass[] { new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass() };
 
+	public MultiCapability multi_Capability = new MultiCapability();
+
+	public boolean Log_Permanent_Hidden = false;
+
 	/********************************* FUNCTIONS **************************************/
 	public abstract void ProcessSerialData(boolean appLogging);
 
@@ -210,7 +237,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_SET_MOTOR(byte motorTogglesByte);
 
-	//public abstract void SendRequestMSP_RAW_GPS();
+	// public abstract void SendRequestMSP_RAW_GPS();
 
 	/********************************* FUNCTIONS END **************************************/
 
