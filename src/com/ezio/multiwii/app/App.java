@@ -139,9 +139,6 @@ public class App extends Application implements Sensors.Listener {
 	private static final String DISABLEBTONEXIT = "DISABLEBTONEXIT";
 	public boolean DisableBTonExit = true;
 
-	// private static String G1 = "G1";
-	// private int _1Gtemp; // 1g value, used for g-force display
-
 	private static final String FORCELANGUAGE = "FORCELANGUAGE";
 	public String ForceLanguage = "";
 
@@ -246,7 +243,6 @@ public class App extends Application implements Sensors.Listener {
 			commMW = new SerialCDC_ACM(getApplicationContext());
 		}
 
-		// if (FrskySupport) {
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
 			commFrsky = new BT(getApplicationContext());
 		}
@@ -258,7 +254,6 @@ public class App extends Application implements Sensors.Listener {
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
 			commFrsky = new SerialCDC_ACM(getApplicationContext());
 		}
-		// }
 
 		SelectProtocol();
 
@@ -266,18 +261,13 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 
-		// if (Protocol == 200) {
-		// mw = new MultiWii200(bt);
-		// }
-
 		Protocol = 210;
 
 		if (Protocol == 210) {
 			mw = new MultiWii220(commMW);
 		}
 
-		if (FrskySupport)
-			frskyProtocol = new FrskyProtocol(commFrsky);
+		frskyProtocol = new FrskyProtocol(commFrsky);
 
 		oldActiveModes = new boolean[20];// not the best method
 
@@ -299,7 +289,6 @@ public class App extends Application implements Sensors.Listener {
 			Toast.makeText(getApplicationContext(), "You are a tester", Toast.LENGTH_SHORT).show();
 
 		DisableBTonExit = prefs.getBoolean(DISABLEBTONEXIT, true);
-		// _1Gtemp = prefs.getInt(G1, 256);
 		ForceLanguage = prefs.getString(FORCELANGUAGE, "");
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 9.9f);

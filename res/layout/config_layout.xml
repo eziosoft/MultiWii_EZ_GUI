@@ -138,6 +138,13 @@
                 android:background="@drawable/frame"
                 android:orientation="vertical" >
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/smalltittle"
+                    android:text="@string/Frsky"
+                    android:textColor="@color/smalltittleText" />
+
                 <Button
                     android:id="@+id/buttonSelectBTDeviceFrsky"
                     android:layout_width="match_parent"

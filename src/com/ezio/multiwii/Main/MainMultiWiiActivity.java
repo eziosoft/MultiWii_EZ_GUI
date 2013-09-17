@@ -391,7 +391,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
-		menu.findItem(R.id.menu_connect_frsky).setVisible(false);
+		menu.findItem(R.id.menu_connect_frsky).setVisible(app.FrskySupport);
 		return true;
 	}
 
