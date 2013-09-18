@@ -266,7 +266,7 @@ public class MultiWii230 extends MultirotorData {
 						Checkbox[i][aa] = false;
 				}
 			}
-			SendRequest2Confirmation(); // new request method confirmation
+
 			break;
 		case MSP_BOXNAMES:
 			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
@@ -448,23 +448,6 @@ public class MultiWii230 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int failsafe_throttle, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
-
-		// MSP_SET_MISC
-		// intPowerTrigger1 (16bit)
-
-		// conf.minthrottle (16bit)
-		// MAXTHROTTLE (16bit)
-		// MINCOMMAND (16bit)
-		// conf.failsafe_throttle (16bit)
-
-		// plog.arm (16bit) not used
-		// plog.lifetime + (plog.armed_time / 1000000) (32bit) not used
-
-		// conf.mag_declination (16bit)
-		// conf.vbatscale; (8bit)
-		// conf.vbatlevel_warn1; (8bit)
-		// conf.vbatlevel_warn2; (8bit)
-		// conf.vbatlevel_crit; (8bit)
 
 		payload = new ArrayList<Character>();
 
@@ -709,48 +692,37 @@ public class MultiWii230 extends MultirotorData {
 
 	// NEW Main requests///////////////////////////////////////////////
 
-	private void SendRequest2Confirmation() {
-		received = true;
-	}
-
 	int timer3 = -1;
-	int timerOutTimer = 0;
-	boolean received = true;
 
-	int[] requests = new int[] { MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, 0, MSP_BOX };
-	// MSP_BOX has to be the last one, "0" will be replaced by one command from
-	// requestsPersiodical
+	int[] requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, MSP_BOX };
 	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX };
-	final int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
+	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 
 	public void SendRequest2() {
-
-		if (received == false) {
-			timerOutTimer++;
-		} else {
-			timerOutTimer = 0;
+		// TODO
+		if (GPSPresent == 0) {
+			requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
+			requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 		}
-		if (timerOutTimer > 10) {
-			received = true;
-			timerOutTimer = 0;
-		}
+		// ////////
 
-		if (communication.Connected && received) {
+		if (communication.Connected) {
 
 			// MSP_WP - in App.java
 
 			if (CHECKBOXITEMS == 0)
 				timer3 = -1;
 
+			Log.d("aaa", "timer3=" + String.valueOf(timer3));
 			switch (timer3) {
 			case -1:
 				sendRequestMSP(requestMSP(requestsOnce));
 				break;
 
 			default:
-				requests[3] = (requestsPeriodical[timer3]);
+				requests[0] = (requestsPeriodical[timer3]);
 				sendRequestMSP(requestMSP(requests));
-				received = false;
+
 				break;
 			}
 

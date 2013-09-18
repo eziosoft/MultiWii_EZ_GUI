@@ -70,7 +70,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	App app;
 
-	TextView TVinfo;
+	// TextView TVinfo;
+	TextView TVInfo;
 
 	private Handler mHandler = new Handler();
 
@@ -95,7 +96,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_1, (ViewGroup) null, false));
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_2, (ViewGroup) null, false));
 		adapter.AddView(inflater.inflate(R.layout.multiwii_main_layout3_3, (ViewGroup) null, false));
-		viewPager.setAdapter(adapter);
+
+		TVInfo = (TextView) adapter.views.get(0).findViewById(R.id.textViewInfoFirstPage);
+
 		viewPager.setAdapter(adapter);
 
 		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
@@ -103,7 +106,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-		TVinfo = (TextView) findViewById(R.id.TextViewInfo);
+		// TVinfo = (TextView) findViewById(R.id.TextViewInfo);
 
 		if ((app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0)) {
 			if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
@@ -144,7 +147,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			e1.printStackTrace();
 		}
 
-		TVinfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
+		TVInfo.setText(getString(R.string.app_name) + " " + app_ver + "." + String.valueOf(app_ver_code));
 
 		if (app.commMW.Connected || app.commFrsky.Connected) {
 
@@ -229,6 +232,19 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 			app.frskyProtocol.ProcessSerialData(false);
 			setSupportProgress((int) Functions.map(app.frskyProtocol.TxRSSI, 0, 110, 0, 10000));
+
+			String t = new String();
+			if (app.mw.BaroPresent == 1)
+				t += "BARO ";
+			if (app.mw.GPSPresent == 1)
+				t += "GPS ";
+			if (app.mw.SonarPresent == 1)
+				t += "SONAR ";
+			if (app.mw.MagPresent == 1)
+				t += "MAG ";
+			if (app.mw.AccPresent == 1)
+				t += "ACC";
+			TVInfo.setText(app.mw.MultiTypeName[app.mw.multiType] + "\n" + t);
 
 			app.Frequentjobs();
 			app.mw.SendRequest(app.MainRequestMethod);

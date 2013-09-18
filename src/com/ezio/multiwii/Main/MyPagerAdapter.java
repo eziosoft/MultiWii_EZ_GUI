@@ -26,17 +26,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class MyPagerAdapter extends PagerAdapter {
-	private ArrayList<View> views;
+	public ArrayList<View> views;
 	private String[] titles = new String[0];
 	Context context;
 
 	public MyPagerAdapter(Context context) {
 		this.context = context;
 		views = new ArrayList<View>();
-		// views.add((View)context.findview);
-		// views.add(new TextViewPage(context));
-		// views.add(new ListView2Page(context));
-		// views.add(new ButtonPage(context));
+	
 	}
 
 	@Override
