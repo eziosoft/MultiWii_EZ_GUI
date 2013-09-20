@@ -76,6 +76,16 @@
                     android:layout_height="wrap_content" >
 
                     <Button
+                        android:id="@+id/Button03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="AdvancedOnClick"
+                        android:text="@string/Advanced" />
+
+                    <Button
                         android:id="@+id/button8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -92,8 +102,8 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="AdvancedOnClick"
-                        android:text="@string/Advanced" />
+                        android:onClick="ServosOnClick"
+                        android:text="@string/Servos" />
                 </TableRow>
 
                 <TableRow

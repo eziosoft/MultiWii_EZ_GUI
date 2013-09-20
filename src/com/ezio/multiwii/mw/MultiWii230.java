@@ -713,7 +713,7 @@ public class MultiWii230 extends MultirotorData {
 			if (CHECKBOXITEMS == 0)
 				timer3 = -1;
 
-			Log.d("aaa", "timer3=" + String.valueOf(timer3));
+			// Log.d("aaa", "timer3=" + String.valueOf(timer3));
 			switch (timer3) {
 			case -1:
 				sendRequestMSP(requestMSP(requestsOnce));
@@ -813,8 +813,9 @@ public class MultiWii230 extends MultirotorData {
 		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
 
 		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Alt) + " " + String.valueOf(w.NavFlag));
-
 	}
+
+	
 
 	@Override
 	public void SendRequestMSP_SET_HEAD(int heading) {
@@ -844,6 +845,30 @@ public class MultiWii230 extends MultirotorData {
 		if (MainRequestMethod == 2)
 			SendRequest2();
 
+	}
+
+	@Override
+	public void SendRequestMSP_SERVO_CONF() {
+		sendRequestMSP(requestMSP(MSP_SERVO_CONF));
+	}
+
+	@Override
+	public void SendRequestMSP_SET_SERVO_CONF() {
+		ArrayList<Character> payload = new ArrayList<Character>();
+
+		for (int i = 0; i < ServoConf.length; i++) {
+			payload.add((char) (ServoConf[i].Min & 0xFF));
+			payload.add((char) ((ServoConf[i].Min >> 8) & 0xFF));
+
+			payload.add((char) (ServoConf[i].Max & 0xFF));
+			payload.add((char) ((ServoConf[i].Max >> 8) & 0xFF));
+
+			payload.add((char) (ServoConf[i].MidPoint & 0xFF));
+			payload.add((char) ((ServoConf[i].MidPoint >> 8) & 0xFF));
+
+			payload.add((char) ServoConf[i].Rate);
+		}
+		sendRequestMSP(requestMSP(MSP_SET_SERVO_CONF, payload.toArray(new Character[payload.size()])));		
 	}
 
 }

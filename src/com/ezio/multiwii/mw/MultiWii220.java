@@ -890,4 +890,16 @@ public class MultiWii220 extends MultirotorData {
 
 	}
 
+	@Override
+	public void SendRequestMSP_SERVO_CONF() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void SendRequestMSP_SET_SERVO_CONF() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

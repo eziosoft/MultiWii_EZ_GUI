@@ -44,6 +44,7 @@ import com.ezio.multiwii.advanced.AdvancedActivity;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.aux_pid.AUXActivity;
 import com.ezio.multiwii.aux_pid.PIDActivity;
+import com.ezio.multiwii.aux_pid.ServosActivity;
 import com.ezio.multiwii.config.ConfigActivity;
 import com.ezio.multiwii.dashboard.Dashboard1Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
@@ -244,7 +245,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 				t += "MAG ";
 			if (app.mw.AccPresent == 1)
 				t += "ACC";
-			TVInfo.setText(app.mw.MultiTypeName[app.mw.multiType] + "\n" + t);
+			TVInfo.setText("MultiWii " + String.valueOf(app.mw.version/100f) + "\n" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + t);
 
 			app.Frequentjobs();
 			app.mw.SendRequest(app.MainRequestMethod);
@@ -400,6 +401,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://maps.google.com/maps?q=http:%2F%2Fezio.ovh.org%2Fkml2.php&hl=pl&sll=48.856612,2.366095&sspn=0.015614,0.042272&t=h&z=3")));
+	}
+
+	public void ServosOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), ServosActivity.class));
 	}
 
 	// /////menu////////

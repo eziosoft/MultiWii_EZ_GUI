@@ -239,6 +239,10 @@ public abstract class MultirotorData {
 
 	// public abstract void SendRequestMSP_RAW_GPS();
 
+	public abstract void SendRequestMSP_SERVO_CONF();
+
+	public abstract void SendRequestMSP_SET_SERVO_CONF();
+
 	/********************************* FUNCTIONS END **************************************/
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
