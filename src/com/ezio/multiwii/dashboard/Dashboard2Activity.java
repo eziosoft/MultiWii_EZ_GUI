@@ -17,6 +17,7 @@
 package com.ezio.multiwii.dashboard;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -72,6 +73,7 @@ public class Dashboard2Activity extends Activity {
 		v = new Dashboard2View(getApplicationContext());
 		setContentView(v);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 	}
 

@@ -27,6 +27,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 
@@ -46,7 +49,7 @@ public class ServosActivity extends SherlockActivity {
 			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
 
-			//app.mw.SendRequest(app.MainRequestMethod);
+			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -70,7 +73,7 @@ public class ServosActivity extends SherlockActivity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Servos));
 		killme = false;
-		mHandler.postDelayed(update, app.RefreshRate);
+		// mHandler.postDelayed(update, app.RefreshRate);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 	}
@@ -122,6 +125,15 @@ public class ServosActivity extends SherlockActivity {
 	public void ServoReadOnClick(View v) {
 		app.mw.SendRequestMSP_SERVO_CONF();
 
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		app.mw.ProcessSerialData(app.loggingON);
+
 		final int ROWS = 8;
 		final int COLS = 4;
 
@@ -165,10 +177,11 @@ public class ServosActivity extends SherlockActivity {
 
 					if (i == 2) {
 						cb2.setVisibility(View.INVISIBLE);
-						if (app.mw.ServoConf[i].Rate == 0)
-							cb1.setChecked(false);
-						if (app.mw.ServoConf[i].Rate == 1)
+						if (app.mw.ServoConf[i].Rate == 1) {
 							cb1.setChecked(true);
+						} else {
+							cb1.setChecked(false);
+						}
 					}
 
 					if (i > 2) {
@@ -186,6 +199,11 @@ public class ServosActivity extends SherlockActivity {
 							cb1.setChecked(true);
 							cb2.setChecked(true);
 						}
+
+						if (app.mw.ServoConf[i].Rate > 3 || app.mw.ServoConf[i].Rate < 0) {
+							cb1.setChecked(false);
+							cb2.setChecked(false);
+						}
 					}
 
 					break;
@@ -193,4 +211,39 @@ public class ServosActivity extends SherlockActivity {
 			}
 		}
 	}
+
+	// /////menu////////
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_servoconf, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.MenuReadPID) {
+			ServoReadOnClick(null);
+			return true;
+		}
+
+		if (item.getItemId() == R.id.MenuSavePID) {
+			ServoWriteOnClick(null);
+			return true;
+		}
+
+		if (item.getItemId() == R.id.MenuResetPID) {
+			// ResetOnClick(null);
+			return true;
+		}
+
+		if (item.getItemId() == R.id.MenuSharePID) {
+			// ShareIt();
+			return true;
+		}
+
+		return false;
+	}
+
+	// ///menu end//////
 }

@@ -41,7 +41,57 @@
                     android:layout_margin="5dp"
                     android:text="@string/InfoDonate"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/White" />
+                    android:textColor="@color/White"
+                    android:visibility="gone" />
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:onClick="TestOnClick"
+                        android:text="Waypoints debug"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/Button01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="CommunityMapOnClick"
+                        android:text="@string/CommunityMap" />
+
+                    <Button
+                        android:id="@+id/Button03"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="AdvancedOnClick"
+                        android:text="@string/Advanced" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo" />
+                </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow2"
@@ -83,35 +133,6 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="AboutOnClick"
                         android:text="@string/About" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" >
-
-                    <ImageView
-                        android:id="@+id/imageView1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:src="@drawable/logo" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" ><Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:onClick="TestOnClick"
-                        android:text="Waypoints debug"
-                        android:visibility="gone" />
-
                 </TableRow>
 
             </TableLayout>

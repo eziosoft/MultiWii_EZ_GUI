@@ -275,7 +275,12 @@ public class RawDataActivity extends Activity {
 	}
 
 	public void SendOnClick(View v) {
+	
+		app.mw.SendRequestMSP_SET_RAW_GPS((byte)1, (byte)5, 488300660, 24414160, 23, 5);
+		
 		ShareIt();
+		
+	
 	}
 
 	public void EnableDebugOnClick(View v) {
@@ -288,6 +293,8 @@ public class RawDataActivity extends Activity {
 			app.mw.GPS_latitude = 488300660;
 			app.mw.Waypoints[0].Lat=488300660;
 			app.mw.Waypoints[0].Lon=24414160;
+			
+			
 		}
 
 	}

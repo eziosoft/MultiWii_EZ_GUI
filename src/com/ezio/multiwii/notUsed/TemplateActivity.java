@@ -1,3 +1,5 @@
+
+
 ///*  MultiWii EZ-GUI
 //  Copyright (C) <2012>  Bartosz Szczygiel (eziosoft)
 //
@@ -58,6 +60,7 @@
 //		app.ConnectionBug();
 //		setContentView(R.layout.motor_layout);
 //		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//setVolumeControlStream(AudioManager.STREAM_MUSIC);
 //
 //	}
 //

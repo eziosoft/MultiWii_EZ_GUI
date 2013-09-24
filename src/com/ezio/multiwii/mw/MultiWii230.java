@@ -699,12 +699,12 @@ public class MultiWii230 extends MultirotorData {
 	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 
 	public void SendRequest2() {
-		// TODO
-		if (GPSPresent == 0) {
-			requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
-			requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
-		}
-		// ////////
+//		// TODO
+//		if (GPSPresent == 0) {
+//			requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
+//			requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
+//		}
+//		// ////////
 
 		if (communication.Connected) {
 

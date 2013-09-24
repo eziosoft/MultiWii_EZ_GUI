@@ -18,6 +18,7 @@ package com.ezio.multiwii.dashboard;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -116,7 +117,7 @@ public class Dashboard1Activity extends Activity {
 		baro = (TextView) findViewById(R.id.textViewBaro);
 		BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
 		PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
-		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		
 
 	}

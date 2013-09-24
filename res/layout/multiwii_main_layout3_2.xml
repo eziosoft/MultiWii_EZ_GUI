@@ -50,6 +50,16 @@
                     android:layout_height="wrap_content" >
 
                     <Button
+                        android:id="@+id/button5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="ServosOnClick"
+                        android:text="@string/Servos" />
+
+                    <Button
                         android:id="@+id/button3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -58,32 +68,12 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="OtherOnClick"
                         android:text="@string/Other" />
-
-                    <Button
-                        android:id="@+id/button4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="LoggingOnClick"
-                        android:text="@string/Logging" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
-
-                    <Button
-                        android:id="@+id/Button03"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="AdvancedOnClick"
-                        android:text="@string/Advanced" />
 
                     <Button
                         android:id="@+id/button8"
@@ -96,14 +86,15 @@
                         android:text="@string/Frsky" />
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/button4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="ServosOnClick"
-                        android:text="@string/Servos" />
+                        android:onClick="LoggingOnClick"
+                        android:text="@string/Logging" />
+
                 </TableRow>
 
                 <TableRow
@@ -120,16 +111,6 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="RawDataOnClick"
                         android:text="@string/RawData" />
-
-                    <Button
-                        android:id="@+id/Button01"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="CommunityMapOnClick"
-                        android:text="@string/CommunityMap" />
 
                 </TableRow>
             </TableLayout>

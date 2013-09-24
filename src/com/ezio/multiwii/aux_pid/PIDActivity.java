@@ -51,7 +51,7 @@ import com.ezio.multiwii.app.App;
 public class PIDActivity extends SherlockActivity {
 
 	App app;
-	ActionBarSherlock actionBar;
+	//ActionBarSherlock actionBar;
 
 	EditText P1;
 	EditText P2;
@@ -130,7 +130,7 @@ public class PIDActivity extends SherlockActivity {
 		getSupportActionBar().setTitle(getString(R.string.PID));
 
 		app = (App) getApplication();
-		actionBar = getSherlock();
+		//actionBar = getSherlock();
 
 		P = new float[app.mw.PIDITEMS];
 		I = new float[app.mw.PIDITEMS];
@@ -224,10 +224,7 @@ public class PIDActivity extends SherlockActivity {
 		app.Say(getString(R.string.PID));
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-		// while (app.commMW.dataAvailable()) {
-		// app.mw.ProcessSerialData(false);
-		// }
-		// ShowData();
+	
 
 		ReadOnClick(null);
 	}

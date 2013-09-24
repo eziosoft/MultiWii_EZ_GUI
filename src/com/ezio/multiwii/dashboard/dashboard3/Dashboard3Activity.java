@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -180,7 +181,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 
 		ProgressBarRx.setMax(110);
 		ProgressBarTx.setMax(110);
-		
+
 		mapHelperClass.map.setOnCameraChangeListener(new OnCameraChangeListener() {
 			@Override
 			public void onCameraChange(CameraPosition position) {
@@ -188,7 +189,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 					app.MapZoomLevel = (int) position.zoom;
 			}
 		});
-
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override
