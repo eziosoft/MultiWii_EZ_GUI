@@ -102,7 +102,7 @@
     <string name="Donate">Donate</string>
     <string name="Loggingstarted">Logging started</string>
     <string name="Loggingstopedandsaved">Logging stoped and saved</string>
-    <string name="ResetALLnotonlyPIDparamstodefault">Reset ALL (not only PID) params to default?</string>
+    <string name="ResetALLnotonlyPIDparamstodefault">This will reset ALL (not only PID) parameters to default values, do you want continue?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="ValuesaresettodefaultPressreadbuttonnow">Values are set to default. Press read button now.</string>
