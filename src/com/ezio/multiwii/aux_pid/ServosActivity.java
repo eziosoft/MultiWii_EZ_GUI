@@ -21,6 +21,7 @@ package com.ezio.multiwii.aux_pid;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
@@ -36,6 +37,8 @@ import com.ezio.multiwii.app.App;
 public class ServosActivity extends SherlockActivity {
 
 	private boolean killme = false;
+	final int ROWS = 8;
+	final int COLS = 4;
 
 	App app;
 	Handler mHandler = new Handler();
@@ -85,10 +88,59 @@ public class ServosActivity extends SherlockActivity {
 		killme = true;
 	}
 
-	public void ServoWriteOnClick(View v) {
+	private void ServoCheckBoxOnClick(View v) {
+		String name = getResources().getResourceEntryName(v.getId());
+		Log.d("aaa", name.substring(3, 5));
 
-		final int ROWS = 8;
-		final int COLS = 4;
+		int i = Integer.parseInt(name.substring(3, 5)) - 1;
+		for (int j = 0; j < COLS; j++) {
+			String a = String.format("%02d", i + 1);
+			String b = String.format("%02d", j + 1);
+			int editTextId = getResources().getIdentifier("box" + a + b, "id", getPackageName());
+			EditText et = (EditText) findViewById(editTextId);
+			switch (j) {
+			// case 0:
+			// et.setText(String.valueOf(app.mw.ServoConf[i].Min));
+			// break;
+			// case 1:
+			// et.setText(String.valueOf(app.mw.ServoConf[i].Max));
+			// break;
+			// case 2:
+			// et.setText(String.valueOf(app.mw.ServoConf[i].MidPoint));
+			// break;
+			case 3:
+				int checkbox1Id = getResources().getIdentifier("box" + a + String.format("%02d", j + 2), "id", getPackageName());
+				CheckBox cb1 = (CheckBox) findViewById(checkbox1Id);
+				int checkbox2Id = getResources().getIdentifier("box" + a + String.format("%02d", j + 3), "id", getPackageName());
+				CheckBox cb2 = (CheckBox) findViewById(checkbox2Id);
+
+				if (i < 2) {
+					if (cb1.isChecked() && Integer.parseInt(et.getText().toString()) != 0) {
+						et.setText(String.valueOf((Math.abs(Integer.parseInt(et.getText().toString()))) * -1));
+					} else {
+						et.setText(String.valueOf((Math.abs(Integer.parseInt(et.getText().toString())))));
+					}
+				}
+
+				if (i == 2) {
+					if (cb1.isChecked()) {
+						et.setText("1");
+					} else {
+						et.setText("0");
+					}
+				}
+
+				if (i > 2) {
+					int x = (cb1.isChecked()) ? 1 : 0;
+					int y = (cb2.isChecked()) ? 2 : 0;
+					et.setText(String.valueOf(x + y));
+				}
+				break;
+			}
+		}
+	}
+
+	private void ServoWriteOnClick() {
 
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
@@ -98,6 +150,7 @@ public class ServosActivity extends SherlockActivity {
 				EditText et = (EditText) findViewById(editTextId);
 				switch (j) {
 				case 0:
+
 					app.mw.ServoConf[i].Min = Integer.parseInt(et.getText().toString());
 					break;
 				case 1:
@@ -122,7 +175,7 @@ public class ServosActivity extends SherlockActivity {
 		app.mw.SendRequestMSP_SET_SERVO_CONF();
 	}
 
-	public void ServoReadOnClick(View v) {
+	public void ServoReadOnClick() {
 		app.mw.SendRequestMSP_SERVO_CONF();
 
 		try {
@@ -133,9 +186,6 @@ public class ServosActivity extends SherlockActivity {
 		}
 
 		app.mw.ProcessSerialData(app.loggingON);
-
-		final int ROWS = 8;
-		final int COLS = 4;
 
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
@@ -212,6 +262,10 @@ public class ServosActivity extends SherlockActivity {
 		}
 	}
 
+	public void OpenInfoOnClick(View v) {
+		app.OpenInfoOnClick(v);
+	}
+
 	// /////menu////////
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,12 +277,12 @@ public class ServosActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.MenuReadPID) {
-			ServoReadOnClick(null);
+			ServoReadOnClick();
 			return true;
 		}
 
 		if (item.getItemId() == R.id.MenuSavePID) {
-			ServoWriteOnClick(null);
+			ServoWriteOnClick();
 			return true;
 		}
 

@@ -7,6 +7,7 @@ import java.util.Random;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -212,6 +213,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 		app.Say(getString(R.string.Map));
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 	}
 

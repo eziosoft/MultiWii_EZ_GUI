@@ -14,14 +14,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/TextView08"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="OpenInfoOnClick"
+                android:tag="http://www.multiwii.com/forum/viewtopic.php?f=8&amp;t=3498"
+                android:text="@string/ClickHereForMoreInfo"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/link" />
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TableRow
                     android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
 
                     <TextView
                         android:id="@+id/textView1"
@@ -59,10 +70,9 @@
                         android:id="@+id/textView5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/Revers" />
-
                 </TableRow>
 
                 <TableRow
@@ -70,6 +80,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S1" />
 
                     <EditText
                         android:id="@+id/box0101"
@@ -106,12 +122,14 @@
                     <CheckBox
                         android:id="@+id/box0105"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0106"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -119,6 +137,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S2" />
 
                     <EditText
                         android:id="@+id/box0201"
@@ -155,12 +179,14 @@
                     <CheckBox
                         android:id="@+id/box0205"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0206"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -168,6 +194,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S3" />
 
                     <EditText
                         android:id="@+id/box0301"
@@ -204,12 +236,14 @@
                     <CheckBox
                         android:id="@+id/box0305"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0306"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -217,6 +251,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S4" />
 
                     <EditText
                         android:id="@+id/box0401"
@@ -253,12 +293,14 @@
                     <CheckBox
                         android:id="@+id/box0405"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0406"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -266,6 +308,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S5" />
 
                     <EditText
                         android:id="@+id/box0501"
@@ -302,12 +350,14 @@
                     <CheckBox
                         android:id="@+id/box0505"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0506"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -315,6 +365,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S6" />
 
                     <EditText
                         android:id="@+id/box0601"
@@ -351,12 +407,14 @@
                     <CheckBox
                         android:id="@+id/box0605"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0606"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -364,6 +422,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView06"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S7" />
 
                     <EditText
                         android:id="@+id/box0701"
@@ -400,12 +464,14 @@
                     <CheckBox
                         android:id="@+id/box0705"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0706"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
 
                 <TableRow
@@ -413,6 +479,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/TextView07"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S8" />
 
                     <EditText
                         android:id="@+id/box0801"
@@ -449,14 +521,15 @@
                     <CheckBox
                         android:id="@+id/box0805"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
 
                     <CheckBox
                         android:id="@+id/box0806"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:onClick="ServoCheckBoxOnClick" />
                 </TableRow>
-
             </TableLayout>
 
         </LinearLayout>
