@@ -12,15 +12,9 @@
         android:title="@string/SavetoEEPROM">
     </item>
     <item
-        android:id="@+id/MenuResetPID"
-        android:showAsAction="never|withText"
-        android:title="@string/Reset">
-    </item>
-    <item
         android:id="@+id/MenuSharePID"
         android:icon="@drawable/social_share"
         android:title="@string/ShareIt">
     </item>
-    
 
 </menu>

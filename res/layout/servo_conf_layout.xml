@@ -18,6 +18,7 @@
                 android:id="@+id/TextView08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:onClick="OpenInfoOnClick"
                 android:tag="http://www.multiwii.com/forum/viewtopic.php?f=8&amp;t=3498"
                 android:text="@string/ClickHereForMoreInfo"

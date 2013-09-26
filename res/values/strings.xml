@@ -13,7 +13,7 @@
     <string name="Pitch">Pitch</string>
     <string name="Roll">Roll</string>
     <string name="Mag">Mag</string>
-    <string name="Config">Config</string>
+    <string name="Config">Settings</string>
     <string name="Logging">Logging</string>
     <string name="RadioMode">Radio Mode</string>
     <string name="Mode1">Mode1</string>
@@ -256,6 +256,7 @@
     <string name="MoveMap">Move Map</string>
     <string name="FrskySupport">Frsky Support</string>
     <string name="Revers">Revers</string>
+    <string name="Factoryreset">Factory reset</string>
     
     
 

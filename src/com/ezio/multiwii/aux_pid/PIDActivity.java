@@ -243,33 +243,7 @@ public class PIDActivity extends SherlockActivity {
 
 	}
 
-	public void ResetOnClick(View v) {
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.ResetALLnotonlyPIDparamstodefault)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int id) {
-
-				app.mw.SendRequestMSP_RESET_CONF();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				ReadOnClick(null);
-				Toast.makeText(getApplicationContext(), getString(R.string.ValuesaresettodefaultPressreadbuttonnow), Toast.LENGTH_LONG).show();
-
-			}
-		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
-
-	}
-
+	
 	void ShareIt() {
 
 		try {
@@ -603,10 +577,7 @@ public class PIDActivity extends SherlockActivity {
 			return true;
 		}
 
-		if (item.getItemId() == R.id.MenuResetPID) {
-			ResetOnClick(null);
-			return true;
-		}
+	
 
 		if (item.getItemId() == R.id.MenuSharePID) {
 			ShareIt();

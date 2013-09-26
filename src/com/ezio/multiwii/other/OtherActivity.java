@@ -98,9 +98,9 @@ public class OtherActivity extends SherlockActivity {
 		TextViewVolt = (TextView) findViewById(R.id.textViewVolt);
 		EditTextDeclination = (EditText) findViewById(R.id.editTextDeclination);
 		textViewArmedCount = (TextView) findViewById(R.id.textViewArmedCount);
-		
-		if(!app.AdvancedFunctions){
-			((LinearLayout)findViewById(R.id.otherExtended)).setVisibility(View.GONE);
+
+		if (!app.AdvancedFunctions) {
+			((LinearLayout) findViewById(R.id.otherExtended)).setVisibility(View.GONE);
 		}
 
 	}
@@ -150,6 +150,27 @@ public class OtherActivity extends SherlockActivity {
 		EditTextBatCritical.setText(String.valueOf(app.mw.vbatlevel_crit));
 		EditTextDeclination.setText(String.valueOf(app.mw.mag_decliniation));
 		textViewArmedCount.setText(String.valueOf(app.mw.armedNum));
+	}
+
+	public void ResetOnClick(View v) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.ResetALLnotonlyPIDparamstodefault)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int id) {
+
+				app.mw.SendRequestMSP_RESET_CONF();
+				Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_LONG).show();
+
+			}
+		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+
 	}
 
 	public void BatteryVoltageRefreshOnClick(View v) {
