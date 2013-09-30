@@ -276,12 +276,12 @@ public class ServosActivity extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.MenuRead) {
+		if (item.getItemId() == R.id.MenuReadServo) {
 			ServoReadOnClick();
 			return true;
 		}
 
-		if (item.getItemId() == R.id.MenuSave) {
+		if (item.getItemId() == R.id.MenuSaveServo) {
 			ServoWriteOnClick();
 			return true;
 		}

@@ -106,7 +106,8 @@
                     android:id="@+id/TextView06"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:text="@string/FactoryResetInfo" />
 
                 <Button
                     android:id="@+id/Button01"

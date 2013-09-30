@@ -261,6 +261,7 @@
     <string name="BindInfo">Bind spektrum satellites</string>
     <string name="PowerTrigger">Power Trigger</string>
     <string name="LiveTime">Live time</string>
+    <string name="FactoryResetInfo">Reset all params to default</string>
     
     
 
