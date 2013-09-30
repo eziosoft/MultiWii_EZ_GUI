@@ -150,6 +150,10 @@
             android:name="com.ezio.multiwii.aux_pid.ServosActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
+        <activity
+            android:name=".other.MiscActivity"
+            android:configChanges="orientation|screenSize" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

@@ -57,6 +57,7 @@ import com.ezio.multiwii.graph.GraphsActivity;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.motors.MotorsActivity;
+import com.ezio.multiwii.other.MiscActivity;
 import com.ezio.multiwii.other.OtherActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
@@ -308,6 +309,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), OtherActivity.class));
 	}
+	
+	public void MiscOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), MiscActivity.class));
+	}
+
 
 	public void FrskyOnClick(View v) {
 		killme = true;

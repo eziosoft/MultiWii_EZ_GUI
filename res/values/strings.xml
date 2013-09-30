@@ -171,7 +171,7 @@
 
     <string name="RawData">Raw Data</string>
     <string name="ShareIt">Share Your Config</string>
-    <string name="SelectSetting">Select Setting</string>
+    <string name="SelectSetting">Select the setting configuration (you can set for instance different pid and rate)</string>
     <string name="RXBIND">RX BIND</string>
     <string name="FollowMe">Follow Me: #define USE_MSP_WP should be uncomented in config.h; not work with I2C GPS; blinks when phone position is send to MW</string>
     <string name="InfoDonate">Do you find this application useful? Support its development by flattering it or sending donations to the developer!</string>
@@ -257,6 +257,10 @@
     <string name="FrskySupport">Frsky Support</string>
     <string name="Revers">Revers</string>
     <string name="Factoryreset">Factory reset</string>
+    <string name="Misc">Misc</string>
+    <string name="BindInfo">Bind spektrum satellites</string>
+    <string name="PowerTrigger">Power Trigger</string>
+    <string name="LiveTime">Live time</string>
     
     
 
