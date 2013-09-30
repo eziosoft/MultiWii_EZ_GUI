@@ -276,23 +276,13 @@ public class ServosActivity extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.MenuReadPID) {
+		if (item.getItemId() == R.id.MenuRead) {
 			ServoReadOnClick();
 			return true;
 		}
 
-		if (item.getItemId() == R.id.MenuSavePID) {
+		if (item.getItemId() == R.id.MenuSave) {
 			ServoWriteOnClick();
-			return true;
-		}
-
-		if (item.getItemId() == R.id.MenuResetPID) {
-			// ResetOnClick(null);
-			return true;
-		}
-
-		if (item.getItemId() == R.id.MenuSharePID) {
-			// ShareIt();
 			return true;
 		}
 

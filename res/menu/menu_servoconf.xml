@@ -2,24 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/MenuReadPID"
+        android:id="@+id/MenuReadServo"
         android:showAsAction="always|withText"
         android:title="@string/Read">
     </item>
     <item
-        android:id="@+id/MenuSavePID"
+        android:id="@+id/MenuSaveServo"
         android:showAsAction="always|withText"
         android:title="@string/SavetoEEPROM">
-    </item>
-    <item
-        android:id="@+id/MenuResetPID"
-        android:showAsAction="never|withText"
-        android:title="@string/Reset" android:visible="false">
-    </item>
-    <item
-        android:id="@+id/MenuSharePID"
-        android:icon="@drawable/social_share"
-        android:title="@string/ShareIt" android:visible="false">
     </item>
     
 
