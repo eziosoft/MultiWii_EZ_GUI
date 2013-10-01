@@ -28,7 +28,7 @@ import communication.Communication;
 public class MultiWii230 extends MultirotorData {
 
 	public MultiWii230(Communication bt) {
-		EZGUIProtocol = "2.2";
+		EZGUIProtocol = "2.3";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after connection
@@ -132,31 +132,31 @@ public class MultiWii230 extends MultirotorData {
 		case MSP_STATUS:
 			cycleTime = read16();
 			i2cError = read16();
-			present = read16();
+			SensorPresent = read16();
 			mode = read32();
 			confSetting = read8();
 
-			if ((present & 1) > 0)
+			if ((SensorPresent & 1) > 0)
 				AccPresent = 1;
 			else
 				AccPresent = 0;
 
-			if ((present & 2) > 0)
+			if ((SensorPresent & 2) > 0)
 				BaroPresent = 1;
 			else
 				BaroPresent = 0;
 
-			if ((present & 4) > 0)
+			if ((SensorPresent & 4) > 0)
 				MagPresent = 1;
 			else
 				MagPresent = 0;
 
-			if ((present & 8) > 0)
+			if ((SensorPresent & 8) > 0)
 				GPSPresent = 1;
 			else
 				GPSPresent = 0;
 
-			if ((present & 16) > 0)
+			if ((SensorPresent & 16) > 0)
 				SonarPresent = 1;
 			else
 				SonarPresent = 0;
@@ -168,6 +168,7 @@ public class MultiWii230 extends MultirotorData {
 					ActiveModes[i] = false;
 
 			}
+
 			break;
 		case MSP_RAW_IMU:
 
@@ -699,12 +700,13 @@ public class MultiWii230 extends MultirotorData {
 	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 
 	public void SendRequest2() {
-//		// TODO
-//		if (GPSPresent == 0) {
-//			requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
-//			requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
-//		}
-//		// ////////
+		// // TODO
+		// if (GPSPresent == 0) {
+		// requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
+		// requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO,
+		// MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
+		// }
+		// // ////////
 
 		if (communication.Connected) {
 
@@ -815,8 +817,6 @@ public class MultiWii230 extends MultirotorData {
 		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Alt) + " " + String.valueOf(w.NavFlag));
 	}
 
-	
-
 	@Override
 	public void SendRequestMSP_SET_HEAD(int heading) {
 		payload = new ArrayList<Character>();
@@ -868,7 +868,7 @@ public class MultiWii230 extends MultirotorData {
 
 			payload.add((char) ServoConf[i].Rate);
 		}
-		sendRequestMSP(requestMSP(MSP_SET_SERVO_CONF, payload.toArray(new Character[payload.size()])));		
+		sendRequestMSP(requestMSP(MSP_SET_SERVO_CONF, payload.toArray(new Character[payload.size()])));
 	}
 
 }

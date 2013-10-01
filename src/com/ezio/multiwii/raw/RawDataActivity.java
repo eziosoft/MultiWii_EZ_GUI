@@ -153,7 +153,7 @@ public class RawDataActivity extends Activity {
 		log("GPSPresent", app.mw.GPSPresent);
 		log("SonarPresent", app.mw.SonarPresent);
 
-		log("present", app.mw.present);
+		log("present", app.mw.SensorPresent);
 		log("mode", app.mw.mode);
 		// log("levelMode", app.mw.levelMode);
 

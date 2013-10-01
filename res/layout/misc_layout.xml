@@ -251,7 +251,7 @@
                             android:text="@string/BatWarning2" />
 
                         <EditText
-                            android:id="@+id/EditTextBalLevelWarn2"
+                            android:id="@+id/EditTextBatLevelWarn2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -302,20 +302,20 @@
                     android:layout_height="wrap_content" >
 
                     <RadioButton
-                        android:id="@+id/radio0"
+                        android:id="@+id/radioSelectSetting0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="0" />
 
                     <RadioButton
-                        android:id="@+id/radio1"
+                        android:id="@+id/radioSelectSetting1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1" />
 
                     <RadioButton
-                        android:id="@+id/radio2"
+                        android:id="@+id/radioSelectSetting2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2" />
@@ -327,7 +327,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:onClick="SelectSettingSetOnClick"
                     android:text="@string/Set" />
+
             </LinearLayout>
 
         </LinearLayout>

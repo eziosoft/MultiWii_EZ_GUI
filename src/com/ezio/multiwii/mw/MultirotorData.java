@@ -147,7 +147,7 @@ public abstract class MultirotorData {
 	public float mot[] = new float[8];
 	public float servo[] = new float[8];
 	public float rcThrottle = 1500, rcRoll = 1500, rcPitch = 1500, rcYaw = 1500, rcAUX1 = 1500, rcAUX2 = 1500, rcAUX3 = 1500, rcAUX4 = 1500;
-	public int present = 0;
+	public int SensorPresent = 0;
 	public int mode = 0;
 
 	public int AccPresent;

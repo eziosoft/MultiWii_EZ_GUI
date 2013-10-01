@@ -20,7 +20,11 @@ package com.ezio.multiwii.other;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -32,6 +36,32 @@ import com.ezio.multiwii.app.App;
 public class MiscActivity extends SherlockActivity {
 
 	private boolean killme = false;
+
+	// intPowerTrigger1
+	// conf.minthrottle
+	// MAXTHROTTLE
+	// MINCOMMAND
+	// conf.failsafe_throttle
+	// plog.arm
+	// plog.lifetime
+	// conf.mag_declination
+	// conf.vbatscale
+	// conf.vbatlevel_warn1
+	// conf.vbatlevel_warn2
+	// conf.vbatlevel_crit
+
+	EditText ETPowerTrigger;
+	EditText ETMinThrottle;
+	EditText ETMaxThrottle;
+	EditText ETMinCommand;
+	EditText ETFailSafeThrottle;
+	EditText ETArmCount;
+	EditText ETLifeTime;
+	EditText ETMagDeclination;
+	EditText ETVBatScale;
+	EditText ETLevelWarn1;
+	EditText ETLevelWarn2;
+	EditText ETLevelCrit;
 
 	App app;
 	Handler mHandler = new Handler();
@@ -62,6 +92,19 @@ public class MiscActivity extends SherlockActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
+		ETPowerTrigger = (EditText) findViewById(R.id.EditTextPowerTrigger);
+		ETMinThrottle = (EditText) findViewById(R.id.EditTextMinThrottle);
+		ETMaxThrottle = (EditText) findViewById(R.id.EditTextMaxThrottle);
+		ETMinCommand = (EditText) findViewById(R.id.EditTextMinCommand);
+		ETFailSafeThrottle = (EditText) findViewById(R.id.EditTextFailsafeThrottle);
+		ETArmCount = (EditText) findViewById(R.id.EditTextArmedCount);
+		ETLifeTime = (EditText) findViewById(R.id.EditTextLiveTime);
+		ETMagDeclination = (EditText) findViewById(R.id.EditTextMagneticDeclination);
+		ETVBatScale = (EditText) findViewById(R.id.EditTextVBatScale);
+		ETLevelWarn1 = (EditText) findViewById(R.id.EditTextBatLevelWarn1);
+		ETLevelWarn2 = (EditText) findViewById(R.id.EditTextBatLevelWarn2);
+		ETLevelCrit = (EditText) findViewById(R.id.editTextBatLevelCrit);
+
 	}
 
 	@Override
@@ -71,6 +114,18 @@ public class MiscActivity extends SherlockActivity {
 		app.Say(getString(R.string.Motors));
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
+
+		switch (app.mw.confSetting) {
+		case 0:
+			((RadioButton) findViewById(R.id.radioSelectSetting0)).setChecked(true);
+			break;
+		case 1:
+			((RadioButton) findViewById(R.id.radioSelectSetting1)).setChecked(true);
+			break;
+		case 2:
+			((RadioButton) findViewById(R.id.radioSelectSetting2)).setChecked(true);
+			break;
+		}
 
 	}
 
@@ -83,6 +138,29 @@ public class MiscActivity extends SherlockActivity {
 
 	private void ReadAndDisplay() {
 		app.mw.SendRequestMSP_MISC();
+
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void SelectSettingSetOnClick(View v) {
+
+		int a = 0;
+		if (((RadioButton) findViewById(R.id.radioSelectSetting0)).isChecked())
+			a = 0;
+		if (((RadioButton) findViewById(R.id.radioSelectSetting1)).isChecked())
+			a = 1;
+		if (((RadioButton) findViewById(R.id.radioSelectSetting2)).isChecked())
+			a = 2;
+
+		app.mw.SendRequestMSP_SELECT_SETTING(a);
+		Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT);
+
 	}
 
 	// /////menu////////

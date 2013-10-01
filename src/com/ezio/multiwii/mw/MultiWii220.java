@@ -139,50 +139,34 @@ public class MultiWii220 extends MultirotorData {
 			}
 			break;
 
-		// case MSP_MISC_CONF:
-		// minthrottle = read16();
-		// maxthrottle = read16();
-		// mincommand = read16();
-		// midrc = read16();
-		//
-		// armedNum = read16();
-		// lifetime = read32();
-		//
-		// mag_decliniation = ((read16() - 1000f) / 10f);
-		// vbatscale = read8();
-		// vbatlevel_warn1 = (float) (read8() / 10.0);
-		// vbatlevel_warn2 = (float) (read8() / 10.0);
-		// vbatlevel_crit = (float) (read8() / 10.0);
-		// break;
-
 		case MSP_STATUS:
 			cycleTime = read16();
 			i2cError = read16();
-			present = read16();
+			SensorPresent = read16();
 			mode = read32();
 			confSetting = read8();
 
-			if ((present & 1) > 0)
+			if ((SensorPresent & 1) > 0)
 				AccPresent = 1;
 			else
 				AccPresent = 0;
 
-			if ((present & 2) > 0)
+			if ((SensorPresent & 2) > 0)
 				BaroPresent = 1;
 			else
 				BaroPresent = 0;
 
-			if ((present & 4) > 0)
+			if ((SensorPresent & 4) > 0)
 				MagPresent = 1;
 			else
 				MagPresent = 0;
 
-			if ((present & 8) > 0)
+			if ((SensorPresent & 8) > 0)
 				GPSPresent = 1;
 			else
 				GPSPresent = 0;
 
-			if ((present & 16) > 0)
+			if ((SensorPresent & 16) > 0)
 				SonarPresent = 1;
 			else
 				SonarPresent = 0;
