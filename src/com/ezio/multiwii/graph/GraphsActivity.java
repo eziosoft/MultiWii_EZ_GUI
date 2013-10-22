@@ -174,31 +174,31 @@ public class GraphsActivity extends SherlockActivity {
 		String gr = app.GraphsToShow;
 
 		if (gr.contains(app.ACCROLL))
-			series.add(new GraphViewSeries(getString(R.string.ACCROLL), new GraphViewSeriesStyle(Color.RED, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.ACCROLL, new GraphViewSeriesStyle(Color.RED, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
 		if (gr.contains(app.ACCPITCH))
-			series.add(new GraphViewSeries(getString(R.string.ACCPITCH), new GraphViewSeriesStyle(Color.GREEN, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.ACCPITCH, new GraphViewSeriesStyle(Color.GREEN, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.ACCZ))
-			series.add(new GraphViewSeries(getString(R.string.ACCZ), new GraphViewSeriesStyle(Color.BLUE, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.ACCZ, new GraphViewSeriesStyle(Color.BLUE, 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
 		if (gr.contains(app.GYROROLL))
-			series.add(new GraphViewSeries(getString(R.string.GYROROLL), new GraphViewSeriesStyle(Color.rgb(196, 201, 0), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.GYROROLL, new GraphViewSeriesStyle(Color.rgb(196, 201, 0), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.GYROPITCH))
-			series.add(new GraphViewSeries(getString(R.string.GYROPITCH), new GraphViewSeriesStyle(Color.rgb(0, 255, 255), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.GYROPITCH, new GraphViewSeriesStyle(Color.rgb(0, 255, 255), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.GYROYAW))
-			series.add(new GraphViewSeries(getString(R.string.GYROYAW), new GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.GYROYAW, new GraphViewSeriesStyle(Color.rgb(255, 0, 255), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
 		if (gr.contains(app.MAGROLL))
-			series.add(new GraphViewSeries(getString(R.string.MAGROLL), new GraphViewSeriesStyle(Color.rgb(52, 101, 144), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.MAGROLL, new GraphViewSeriesStyle(Color.rgb(52, 101, 144), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.MAGPITCH))
-			series.add(new GraphViewSeries(getString(R.string.MAGPITCH), new GraphViewSeriesStyle(Color.rgb(98, 51, 149), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.MAGPITCH, new GraphViewSeriesStyle(Color.rgb(98, 51, 149), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.MAGYAW))
-			series.add(new GraphViewSeries(getString(R.string.MAGYAW), new GraphViewSeriesStyle(Color.rgb(150, 100, 49), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.MAGYAW, new GraphViewSeriesStyle(Color.rgb(150, 100, 49), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
 		if (gr.contains(app.ALT))
-			series.add(new GraphViewSeries(getString(R.string.ALT), new GraphViewSeriesStyle(Color.rgb(130, 122, 125), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.ALT, new GraphViewSeriesStyle(Color.rgb(130, 122, 125), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 		if (gr.contains(app.HEAD))
-			series.add(new GraphViewSeries(getString(R.string.HEAD), new GraphViewSeriesStyle(Color.rgb(255, 226, 124), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
+			series.add(new GraphViewSeries(app.HEAD, new GraphViewSeriesStyle(Color.rgb(255, 226, 124), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
 
 		if (gr.contains(app.DEBUG1))
 			series.add(new GraphViewSeries(app.DEBUG1, new GraphViewSeriesStyle(Color.rgb(200, 50, 0), 3), new GraphViewData[] { new GraphViewData(0, 0) }));
