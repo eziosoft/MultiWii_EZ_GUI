@@ -27,13 +27,16 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/frame" >
 
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@drawable/frame1" >
 
                     <TextView
                         android:id="@+id/textView1"
@@ -94,7 +97,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0102"
@@ -102,7 +107,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0103"
@@ -110,7 +117,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0104"
@@ -118,7 +127,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0105"
@@ -151,7 +162,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0202"
@@ -159,7 +172,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0203"
@@ -167,7 +182,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0204"
@@ -175,7 +192,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0205"
@@ -208,7 +227,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0302"
@@ -216,7 +237,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0303"
@@ -224,7 +247,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0304"
@@ -232,7 +257,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0305"
@@ -265,7 +292,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0402"
@@ -273,7 +302,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0403"
@@ -281,7 +312,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0404"
@@ -289,7 +322,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0405"
@@ -322,7 +357,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0502"
@@ -330,7 +367,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0503"
@@ -338,7 +377,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0504"
@@ -346,7 +387,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0505"
@@ -379,7 +422,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0602"
@@ -387,7 +432,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0603"
@@ -395,7 +442,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0604"
@@ -403,7 +452,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0605"
@@ -436,7 +487,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0702"
@@ -444,7 +497,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0703"
@@ -452,7 +507,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0704"
@@ -460,7 +517,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0705"
@@ -493,7 +552,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="400;1500;5;0" />
 
                     <EditText
                         android:id="@+id/box0802"
@@ -501,7 +562,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1500;2500;5;0" />
 
                     <EditText
                         android:id="@+id/box0803"
@@ -509,7 +572,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="1000;2000;5;0;---/AUX1/AUX2/AUX3/AUX4;1500/4/5/6/7;override" />
 
                     <EditText
                         android:id="@+id/box0804"
@@ -517,7 +582,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="numberSigned" />
+                        android:inputType="numberSigned"
+                        android:onClick="ShowCustomDialogOnClick"
+                        android:tag="-120;120;1;0" />
 
                     <CheckBox
                         android:id="@+id/box0805"

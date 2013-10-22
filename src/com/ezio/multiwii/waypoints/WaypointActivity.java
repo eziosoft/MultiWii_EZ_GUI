@@ -32,6 +32,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
@@ -145,29 +146,45 @@ public class WaypointActivity extends Activity {
 
 	public void SetWPHomeOnClick(View v) {
 		// TODO alt and heading need to be added
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
 
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			public void onClick(DialogInterface dialog, int id) {
 
-		int alt = Integer.parseInt(EditTextAltitude.getText().toString());
-		app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), alt, 0, 0, 0));
+				//
+				try {
+					Thread.sleep(300);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
-		if (app.D) {
-			app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
-			app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
+				int alt = Integer.parseInt(EditTextAltitude.getText().toString());
+				app.mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (SelectedLatitude * 10), (int) (SelectedLongitude * 10), alt, 0, 0, 0));
 
-		}
+				if (app.D) {
+					app.mw.Waypoints[0].Lat = (int) (SelectedLatitude * 10);
+					app.mw.Waypoints[0].Lon = (int) (SelectedLongitude * 10);
 
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+				}
 
-		finish();
+				try {
+					Thread.sleep(300);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				finish();
+				//
+
+			}
+		}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+
 	}
 
 	public void SetWPPositionHoldOnClick(View v) {

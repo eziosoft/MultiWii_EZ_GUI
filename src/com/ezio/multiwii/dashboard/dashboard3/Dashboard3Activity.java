@@ -204,8 +204,9 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-			dlgAlert.setMessage(getString(R.string.Locked));
-			dlgAlert.setTitle(getString(R.string.DoYouWantToUnlock));
+			dlgAlert.setTitle(getString(R.string.Locked));
+			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+
 			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
 			dlgAlert.setCancelable(false);
 			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {

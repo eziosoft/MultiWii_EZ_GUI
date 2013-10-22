@@ -178,8 +178,8 @@ public abstract class MultirotorData {
 	public int maxthrottle = 0;
 	public int mincommand = 0;
 	public int failsafe_throttle = 0;
-	public int armedNum = 0;
-	public int lifetime = 0;
+	public int ArmCount = 0;
+	public int LifeTime = 0;
 	public float mag_decliniation = 0;
 	public int vbatscale = 0;
 	public float vbatlevel_warn1 = 0;
@@ -207,7 +207,7 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_RESET_CONF();
 
-	public abstract void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
+	public abstract void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, int vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit);
 
 	public abstract void SendRequestMSP_SET_PID(float confRC_RATE, float confRC_EXPO, float rollPitchRate, float yawRate, float dynamic_THR_PID, float throttle_MID, float throttle_EXPO, float[] confP, float[] confI, float[] confD);
 

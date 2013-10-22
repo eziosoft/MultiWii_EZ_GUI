@@ -76,7 +76,7 @@
             android:screenOrientation="unspecified" >
         </activity>
         <activity
-            android:name=".other.OtherActivity"
+            android:name=".other.CalibrationActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
@@ -152,6 +152,10 @@
         </activity>
         <activity
             android:name=".other.MiscActivity"
+            android:configChanges="orientation|screenSize" >
+        </activity>
+        <activity
+            android:name=".advanced.AUXControlActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
 

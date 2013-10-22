@@ -14,7 +14,7 @@
   <string name="Pitch">pitch</string>
   <string name="Roll">roll</string>
   <string name="Mag">Mag</string>
-  <string name="Config">Config</string>
+  <string name="Config">Ρυθμίσεις</string>
   <string name="Logging">Καταγραφή</string>
   <string name="RadioMode">Λειτουργία τηλεκατευθινσης</string>
   <string name="Mode1">Mode1</string>
@@ -103,7 +103,7 @@
   <string name="Donate">Δωρίσουν</string>
   <string name="Loggingstarted">Καταγραφή ξεκίνησε</string>
   <string name="Loggingstopedandsaved">Καταγραφή διακόπηκε και αποθηκευμένη</string>
-  <string name="ResetALLnotonlyPIDparamstodefault">Επαναφορά όλων (όχι μόνο PID) params στην προεπιλογή;</string>
+  <string name="ResetALLnotonlyPIDparamstodefault">Αυτό θα μηδενίσει όλα (όχι μόνο PID) παραμέτρων στις προεπιλεγμένες τιμές, θέλετε συνεχίσει;</string>
   <string name="Yes">Ναι</string>
   <string name="No">Όχι</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">Τιμές ορίζονται στις προεπιλεγμένες. Πατήστε το κουμπί διαβάστε τώρα.</string>
@@ -161,7 +161,7 @@
   <string name="page3">Config</string>
   <string name="RawData">Ανεπεξέργαστα δεδομένα</string>
   <string name="ShareIt">Μοιραστείτε σας Config</string>
-  <string name="SelectSetting">Επιλέξτε ρύθμιση</string>
+  <string name="SelectSetting">Επιλέξτε το ρύθμιση παραμέτρων (μπορείτε να ορίσετε για παράδειγμα διαφορετικές pid και ποσοστό)</string>
   <string name="RXBIND">ΔΕΣΜΕΎΟΥΝ RX</string>
   <string name="FollowMe">Ακολουθήστε Me: #define USE_MSP_WP πρέπει να uncomented στο config.h? δεν εργασία με I2C GPS? αναβοσβήνει όταν είναι τηλέφωνο θέση αποστολή σε MW</string>
   <string name="InfoDonate">Βρίσκετε αυτή η εφαρμογή χρήσιμα; Υποστήριξη της ανάπτυξης κολακευτικά αυτό ή αποστολή δωρεές στον κύριο του έργου!</string>
@@ -212,8 +212,6 @@
   <string name="BatWarning2">BatWarning2</string>
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">Πράσινες τιμές μπορεί να αλλάξει</string>
-  <string name="Locked">Κλειδωμένο</string>
-  <string name="DoYouWantToUnlock">Θέλετε να το ξεκλειδώσετε;</string>
   <string name="TakeDeclinationFromPhone">Πάρτε την απόκλιση από το τηλέφωνο</string>
   <string name="RateOrUpdate">Ποσοστό ή ενημέρωση</string>
   <string name="ArmedCount">Ένοπλες Count</string>
@@ -234,4 +232,26 @@
   <string name="Radius">Ακτίνα</string>
   <string name="EnterRadius">Εισαγάγετε την ακτίνα του κύκλου στο μ</string>
   <string name="Close">Κλείσιμο</string>
+  <string name="ForceCzech">Τσεχική δύναμη</string>
+  <string name="Bigger">Μεγαλύτερο</string>
+  <string name="Smaller">Μικρότερα</string>
+  <string name="RemWP">REM WP</string>
+  <string name="AddWP">Προσθέστε WP</string>
+  <string name="GooglePlayServiecesError">Google παίξει Servieces σφάλμα</string>
+  <string name="NextWP">Επόμενη WP</string>
+  <string name="PrevWP">Prev WP</string>
+  <string name="Clean">Καθαρίστε</string>
+  <string name="MoveMap">Μετακινήστε το χάρτη</string>
+  <string name="FrskySupport">Frsky υποστήριξη</string>
+  <string name="Factoryreset">Επαναφορά εργοστασιακών ρυθμίσεων</string>
+  <string name="Misc">Διάφορα</string>
+  <string name="BindInfo">Δεσμεύουν spektrum δορυφόρους</string>
+  <string name="PowerTrigger">Δύναμη ενεργοποίησης</string>
+  <string name="LiveTime">Ζωντανό χρόνο</string>
+  <string name="FactoryResetInfo">Επαναρυθμίστε όλα params στην προεπιλογή</string>
+  <string name="Calibration">Βαθμονόμησης</string>
+  <string name="AUXControl">AUX ελέγχου</string>
+  <string name="EnableControl">Ενεργοποίηση του ελέγχου</string>
+  <string name="Min">Min</string>
+  <string name="Max">Max</string>
 </resources>

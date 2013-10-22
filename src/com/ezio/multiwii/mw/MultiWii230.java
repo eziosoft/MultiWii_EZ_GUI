@@ -127,6 +127,10 @@ public class MultiWii230 extends MultirotorData {
 				multi_Capability.Motors = true;
 			if ((multiCapability & 8) > 0)
 				multi_Capability.Flaps = true;
+
+			if ((multiCapability & 0x80000000) > 0)
+				multi_Capability.ByMis = true;
+
 			break;
 
 		case MSP_STATUS:
@@ -297,15 +301,15 @@ public class MultiWii230 extends MultirotorData {
 			maxthrottle = read16();// c
 			mincommand = read16();// d
 			failsafe_throttle = read16();// e
-			armedNum = read16();// f
-			lifetime = read32();// g
+			ArmCount = read16();// f
+			LifeTime = read32();// g
 			mag_decliniation = read16() / 10f;// h
 
 			vbatscale = read8();// i
 			vbatlevel_warn1 = (float) (read8() / 10.0f);// j
 			vbatlevel_warn2 = (float) (read8() / 10.0f);// k
 			vbatlevel_crit = (float) (read8() / 10.0f);// l
-			if (armedNum < 1)
+			if (ArmCount < 1)
 				Log_Permanent_Hidden = true;
 			break;
 
@@ -344,7 +348,7 @@ public class MultiWii230 extends MultirotorData {
 			break;
 
 		default:
-			Log.d("aaa", "Error command - unknown replay");
+			Log.e("aaa", "Error command - unknown replay " + String.valueOf(icmd));
 
 		}
 	}
@@ -376,7 +380,16 @@ public class MultiWii230 extends MultirotorData {
 
 		while (communication.dataAvailable()) {
 			try {
-				c = (communication.Read());
+				try {
+					c = (communication.Read());
+				} catch (Exception e) {
+					c = 0;
+					Log.e("aaa", "Read Error");
+
+					// TODO inform about refresh rate to low
+					break;
+
+				}
 				// Log.d("21",String.valueOf(c));
 				if (c_state == IDLE) {
 					c_state = (c == '$') ? HEADER_START : IDLE;
@@ -424,12 +437,12 @@ public class MultiWii230 extends MultirotorData {
 					} else {
 						Log.e("Multiwii protocol", "invalid checksum for command " + ((int) (cmd & 0xFF)) + ": " + (checksum & 0xFF) + " expected, got " + (int) (c & 0xFF));
 						Log.e("Multiwii protocol", "<" + (cmd & 0xFF) + " " + (dataSize & 0xFF) + "> {");
-						for (i = 0; i < dataSize; i++) {
-							// if (i != 0) {
-							// Log.e("Multiwii protocol"," ");
-							// }
-							// Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
-						}
+						// for (i = 0; i < dataSize; i++) {
+						// if (i != 0) {
+						// Log.e("Multiwii protocol"," ");
+						// }
+						// Log.e("Multiwii protocol",(inBuf[i] & 0xFF));
+						// }
 						Log.e("Multiwii protocol", "} [" + c + "]");
 						Log.e("Multiwii protocol", new String(inBuf, 0, dataSize));
 					}
@@ -447,12 +460,31 @@ public class MultiWii230 extends MultirotorData {
 		sendRequestMSP(requestMSP(requests));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ezio.multiwii.mw.MultirotorData#SendRequestMSP_SET_MISC(int,
+	 * int, int, int, int, float, byte, float, float, float)
+	 */
 	@Override
-	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int failsafe_throttle, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
+	public void SendRequestMSP_SET_MISC(int PowerTrigger, int minthrottle, int maxthrottle, int mincommand, int failsafe_throttle, float mag_decliniation, int vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
+
+		// intPowerTrigger1 UNIT 16
+		// conf.minthrottle UNIT 16
+		// MAXTHROTTLE UNIT 16
+		// MINCOMMAND UNIT 16
+		// conf.failsafe_throttle UNIT 16
+		// plog.arm UNIT 16
+		// plog.lifetime UNIT 32
+		// conf.mag_declination UNIT 16
+		// conf.vbatscale UNIT 8
+		// conf.vbatlevel_warn1 UNIT 8
+		// conf.vbatlevel_warn2 UNIT 8
+		// conf.vbatlevel_crit UNIT 8
 
 		payload = new ArrayList<Character>();
 
-		intPowerTrigger = (Math.round(confPowerTrigger));
+		intPowerTrigger = (Math.round(PowerTrigger));
 		payload.add((char) (intPowerTrigger % 256));
 		payload.add((char) (intPowerTrigger / 256));
 
@@ -613,11 +645,22 @@ public class MultiWii230 extends MultirotorData {
 		for (int i = 0; i < 8; i++) {
 			payload.add((char) (channels8[i] & 0xFF));
 			payload.add((char) ((channels8[i] >> 8) & 0xFF));
-
-			sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
-
-			sendRequestMSP(requestMSP(new int[] { MSP_RC, MSP_STATUS }));
 		}
+
+		sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
+
+		sendRequestMSP(requestMSP(new int[] { MSP_RC }));
+
+		// rcRoll = read16();
+		// rcPitch = read16();
+		// rcYaw = read16();
+		// rcThrottle = read16();
+		// rcAUX1 = read16();
+		// rcAUX2 = read16();
+		// rcAUX3 = read16();
+		// rcAUX4 = read16();
+
+		Log.d("aaa", "RC:" + String.valueOf(rcRoll) + " " + String.valueOf(rcPitch) + " " + String.valueOf(rcYaw) + " " + String.valueOf(rcThrottle) + " " + String.valueOf(rcAUX1) + " " + String.valueOf(rcAUX2) + " " + String.valueOf(rcAUX3) + " " + String.valueOf(rcAUX4));
 
 	}
 
@@ -696,17 +739,10 @@ public class MultiWii230 extends MultirotorData {
 	int timer3 = -1;
 
 	int[] requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, MSP_BOX };
-	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX };
+	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX, MSP_MISC };
 	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 
 	public void SendRequest2() {
-		// // TODO
-		// if (GPSPresent == 0) {
-		// requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_BOX };
-		// requestsPeriodical = new int[] { MSP_STATUS, MSP_ANALOG, MSP_SERVO,
-		// MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
-		// }
-		// // ////////
 
 		if (communication.Connected) {
 

@@ -19,6 +19,11 @@
 
 package com.ezio.multiwii.aux_pid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -26,6 +31,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -33,6 +39,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.helpers.CustomInputDialog;
+import com.ezio.sec.Sec;
 
 public class ServosActivity extends SherlockActivity {
 
@@ -67,6 +75,7 @@ public class ServosActivity extends SherlockActivity {
 		app.ConnectionBug();
 		setContentView(R.layout.servo_conf_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		getSupportActionBar().setTitle(getString(R.string.Servos));
 
 	}
 
@@ -79,6 +88,42 @@ public class ServosActivity extends SherlockActivity {
 		// mHandler.postDelayed(update, app.RefreshRate);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+		ServoReadOnClick();
+		
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
+			mHandler.postDelayed(update, app.RefreshRate);
+		} else {
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+
+			dlgAlert.setTitle(getString(R.string.Locked));
+			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+
+			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
+			dlgAlert.setCancelable(false);
+			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					try {
+						Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.ezio.ez_gui_unlocker");
+						startActivity(LaunchIntent);
+					} catch (Exception e) {
+						Intent goToMarket = null;
+						goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ezio.ez_gui_unlocker"));
+						startActivity(goToMarket);
+					}
+					finish();
+				}
+			});
+			dlgAlert.setNegativeButton(getString(R.string.No), new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			});
+
+			dlgAlert.create().show();
+		}
+
 	}
 
 	@Override
@@ -88,7 +133,7 @@ public class ServosActivity extends SherlockActivity {
 		killme = true;
 	}
 
-	private void ServoCheckBoxOnClick(View v) {
+	public void ServoCheckBoxOnClick(View v) {
 		String name = getResources().getResourceEntryName(v.getId());
 		Log.d("aaa", name.substring(3, 5));
 
@@ -99,15 +144,6 @@ public class ServosActivity extends SherlockActivity {
 			int editTextId = getResources().getIdentifier("box" + a + b, "id", getPackageName());
 			EditText et = (EditText) findViewById(editTextId);
 			switch (j) {
-			// case 0:
-			// et.setText(String.valueOf(app.mw.ServoConf[i].Min));
-			// break;
-			// case 1:
-			// et.setText(String.valueOf(app.mw.ServoConf[i].Max));
-			// break;
-			// case 2:
-			// et.setText(String.valueOf(app.mw.ServoConf[i].MidPoint));
-			// break;
 			case 3:
 				int checkbox1Id = getResources().getIdentifier("box" + a + String.format("%02d", j + 2), "id", getPackageName());
 				CheckBox cb1 = (CheckBox) findViewById(checkbox1Id);
@@ -193,6 +229,9 @@ public class ServosActivity extends SherlockActivity {
 				String b = String.format("%02d", j + 1);
 				int editTextId = getResources().getIdentifier("box" + a + b, "id", getPackageName());
 				EditText et = (EditText) findViewById(editTextId);
+				//
+				et.setFocusable(false);
+				//
 				switch (j) {
 				case 0:
 					et.setText(String.valueOf(app.mw.ServoConf[i].Min));
@@ -266,6 +305,10 @@ public class ServosActivity extends SherlockActivity {
 		app.OpenInfoOnClick(v);
 	}
 
+	public void ShowCustomDialogOnClick(View vv) {
+		CustomInputDialog.ShowCustomDialogOnClick(vv, this);
+	}
+
 	// /////menu////////
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -282,7 +325,24 @@ public class ServosActivity extends SherlockActivity {
 		}
 
 		if (item.getItemId() == R.id.MenuSaveServo) {
-			ServoWriteOnClick();
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int id) {
+
+					ServoWriteOnClick();
+					Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
+
+				}
+			}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+
 			return true;
 		}
 

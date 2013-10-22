@@ -13,7 +13,6 @@
   <string name="Pitch">Pitch</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Mag</string>
-  <string name="Config">Configurazione</string>
   <string name="Logging">Logging</string>
   <string name="RadioMode">Radio Mode</string>
   <string name="Mode1">Mode1</string>
@@ -101,7 +100,6 @@
   <string name="Donate">Donazione</string>
   <string name="Loggingstarted">Registrazione iniziata</string>
   <string name="Loggingstopedandsaved">Registrazione fermata e salvata</string>
-  <string name="ResetALLnotonlyPIDparamstodefault">Reimposta tutto (non solo PID) alle impostazioni predefinite?</string>
   <string name="Yes">Sì</string>
   <string name="No">No</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">I valori sono reimpostati. Premere il pulsante leggi adesso.</string>
@@ -159,7 +157,6 @@
   <string name="page3">Configurazione</string>
   <string name="RawData">Dati grezzi</string>
   <string name="ShareIt">Condividere la tua configurazione</string>
-  <string name="SelectSetting">Selezionare impostazione</string>
   <string name="RXBIND">RX BIND</string>
   <string name="InfoDonate">Trovare questa applicazione utile? Supportarne lo sviluppo recensendola o inviando donazioni allo sviluppatore!</string>
   <string name="convertToKML">Convertire in KML (Google Earth)</string>
@@ -205,7 +202,5 @@
   <string name="BatWarning2">BatWarning2</string>
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">I valori verdi possono essere cambiati</string>
-  <string name="Locked">Bloccato</string>
-  <string name="DoYouWantToUnlock">Vuoi sbloccarlo?</string>
   <string name="Cancel">Annulla</string>
 </resources>

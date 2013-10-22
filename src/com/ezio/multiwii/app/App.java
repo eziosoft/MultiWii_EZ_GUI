@@ -37,6 +37,8 @@ import com.ezio.multiwii.helpers.Notifications;
 import com.ezio.multiwii.helpers.Sensors;
 import com.ezio.multiwii.helpers.SoundManager;
 import com.ezio.multiwii.helpers.TTS;
+import com.ezio.multiwii.helpers.VarioSoundClass;
+import com.ezio.multiwii.mw.MultiWii220;
 import com.ezio.multiwii.mw.MultiWii230;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
@@ -77,6 +79,7 @@ public class App extends Application implements Sensors.Listener {
 	private Editor editor;
 	public TTS tts;
 	public SoundManager soundManager;
+	public VarioSoundClass varioSoundClass;
 
 	// variables used in FrequentJobs
 	private boolean[] oldActiveModes;
@@ -112,7 +115,7 @@ public class App extends Application implements Sensors.Listener {
 	private static final String RADIOMODE = "RadioMode";
 	public int RadioMode;
 
-	private static final String PROTOCOL = "PROTOCOL1";
+	private static final String PROTOCOL = "PROTOCOL2";
 	public int Protocol;
 
 	private static final String MAGMODE = "MAGMODE";
@@ -166,11 +169,13 @@ public class App extends Application implements Sensors.Listener {
 	private static final String MAPCENTERPERIOD = "MAPCENTERPERIOD";
 	public int MapCenterPeriod = 3;
 
-	private static final String MAINREQUESTMETHOD = "MAINREQUESTMETHOD";
-	public int MainRequestMethod = 1;
+	private static final String MAINREQUESTMETHOD = "MAINREQUESTMETHOD1";
+	public int MainRequestMethod = 2;
 
 	private static final String FRSKY_SUPPORT = "FRSKY_SUPPORT";
 	public boolean FrskySupport = false;
+
+	public boolean VarioSound = false;
 
 	// graphs
 	public final String ACCROLL = "ACC ROLL";
@@ -225,6 +230,8 @@ public class App extends Application implements Sensors.Listener {
 		sensors = new Sensors(getApplicationContext());
 		sensors.registerListener(this);
 		sensors.start();
+
+		varioSoundClass = new VarioSoundClass();
 	}
 
 	public void Init() {
@@ -261,9 +268,10 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 
-		Protocol = 210;
-
-		if (Protocol == 210) {
+		if (Protocol == 220) {
+			mw = new MultiWii220(commMW);
+		}
+		if (Protocol == 230) {
 			mw = new MultiWii230(commMW);
 		}
 
@@ -275,7 +283,7 @@ public class App extends Application implements Sensors.Listener {
 
 	public void ReadSettings() {
 		RadioMode = prefs.getInt(RADIOMODE, 2);
-		Protocol = prefs.getInt(PROTOCOL, 210);
+		Protocol = prefs.getInt(PROTOCOL, 220);
 		MagMode = prefs.getInt(MAGMODE, 1);
 		TextToSpeach = prefs.getBoolean(TEXTTOSPEACH, true);
 		MacAddress = prefs.getString(MACADDERSS, "");
@@ -305,7 +313,7 @@ public class App extends Application implements Sensors.Listener {
 		CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY, COMMUNICATION_TYPE_BT);
 		SerialPortBaudRateMW = prefs.getString(SERIAL_PORT_BAUD_RATE_MW, "115200");
 		SerialPortBaudRateFrSky = prefs.getString(SERIAL_PORT_BAUD_RATE_FRSKY, "9600");
-		MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 1);
+		MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 2);
 		FrskySupport = prefs.getBoolean(FRSKY_SUPPORT, false);
 
 	}
@@ -435,6 +443,10 @@ public class App extends Application implements Sensors.Listener {
 				FollowHeadingBlinkFlag = !FollowHeadingBlinkFlag;
 			}
 
+			if (VarioSound) {
+				varioSoundClass.Play(1000 + mw.vario * 20);
+			}
+
 		}
 		// --------------------END timer every 1sek---------------------------
 
@@ -470,6 +482,14 @@ public class App extends Application implements Sensors.Listener {
 			}
 
 			String t = new String();
+
+			if (mw.version > 0) {
+				if (mw.version > Protocol) {
+					t += getString(R.string.SelectDifferentProtocol);
+
+				}
+			}
+
 			if (sensors.MockLocationWorking)
 				t += getString(R.string.MockLocationIsWorking) + ";";
 			if (FollowMeEnable)

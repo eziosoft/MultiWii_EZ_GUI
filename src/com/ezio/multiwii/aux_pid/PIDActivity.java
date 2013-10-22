@@ -40,18 +40,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.ActionBarSherlock;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.helpers.CustomInputDialog;
 
 public class PIDActivity extends SherlockActivity {
 
 	App app;
-	//ActionBarSherlock actionBar;
+	// ActionBarSherlock actionBar;
 
 	EditText P1;
 	EditText P2;
@@ -130,7 +130,7 @@ public class PIDActivity extends SherlockActivity {
 		getSupportActionBar().setTitle(getString(R.string.PID));
 
 		app = (App) getApplication();
-		//actionBar = getSherlock();
+		// actionBar = getSherlock();
 
 		P = new float[app.mw.PIDITEMS];
 		I = new float[app.mw.PIDITEMS];
@@ -224,8 +224,6 @@ public class PIDActivity extends SherlockActivity {
 		app.Say(getString(R.string.PID));
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-	
-
 		ReadOnClick(null);
 	}
 
@@ -243,7 +241,6 @@ public class PIDActivity extends SherlockActivity {
 
 	}
 
-	
 	void ShareIt() {
 
 		try {
@@ -557,6 +554,10 @@ public class PIDActivity extends SherlockActivity {
 
 	}
 
+	public void ShowCustomDialogOnClick(final View vv) {
+		CustomInputDialog.ShowCustomDialogOnClick(vv, this);
+	}
+
 	// /////menu////////
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -576,8 +577,6 @@ public class PIDActivity extends SherlockActivity {
 			SetOnClick(null);
 			return true;
 		}
-
-	
 
 		if (item.getItemId() == R.id.MenuSharePID) {
 			ShareIt();

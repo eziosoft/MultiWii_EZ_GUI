@@ -14,7 +14,6 @@
   <string name="Pitch">俯仰</string>
   <string name="Roll">横滚</string>
   <string name="Mag">磁罗盘</string>
-  <string name="Config">设置</string>
   <string name="Logging">日志记录</string>
   <string name="RadioMode">遥控器模式</string>
   <string name="Mode1">Mode1 右手油门</string>
@@ -103,7 +102,6 @@
   <string name="Donate">捐赠</string>
   <string name="Loggingstarted">记录已开始</string>
   <string name="Loggingstopedandsaved">记录停止并保存</string>
-  <string name="ResetALLnotonlyPIDparamstodefault">重置所有 （不只 PID） 为默认值的参数吗？</string>
   <string name="Yes">是</string>
   <string name="No">不</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">设置为默认值。现在按读取的按钮。</string>
@@ -161,7 +159,6 @@
   <string name="page3">设置</string>
   <string name="RawData">原始数据</string>
   <string name="ShareIt">分享您的配置</string>
-  <string name="SelectSetting">选择设置</string>
   <string name="RXBIND">RX 绑定</string>
   <string name="FollowMe">跟随我： #define USE_MSP_WP 应在 config.h 打开。 I2C GPS 不能用 ；闪烁时，手机位置时将发送到MW</string>
   <string name="InfoDonate">你发现此应用程序很有用吗？支持它或给开发人员的捐款支持其发展! 本软件中文简体版本由fryefryefrye和arvidwen汉化。汉化有问题联系：fryefryefrye@gmail.com</string>
@@ -211,8 +208,6 @@
   <string name="BatWarning2">电压告警2</string>
   <string name="BatCritical">电压紧急</string>
   <string name="GreenValuesCanBeChanged">只有绿色的值可以更改</string>
-  <string name="Locked">锁定</string>
-  <string name="DoYouWantToUnlock">你想要将它解锁吗？</string>
   <string name="TakeDeclinationFromPhone">使用来自手机的磁偏角</string>
   <string name="RateOrUpdate">评价  升级</string>
   <string name="ArmedCount">解锁计数器</string>
@@ -233,4 +228,14 @@
   <string name="Radius">半径</string>
   <string name="EnterRadius">输入圆的半径（米）</string>
   <string name="Close">关闭</string>
+  <string name="ForceCzech">强制捷克语</string>
+  <string name="Bigger">大于</string>
+  <string name="Smaller">小于</string>
+  <string name="RemWP">删除航点</string>
+  <string name="AddWP">添加航点</string>
+  <string name="GooglePlayServiecesError">Google Play服务错误</string>
+  <string name="NextWP">下一航点</string>
+  <string name="PrevWP">上一航点</string>
+  <string name="Clean">清除</string>
+  <string name="MoveMap">自动移动地图</string>
 </resources>

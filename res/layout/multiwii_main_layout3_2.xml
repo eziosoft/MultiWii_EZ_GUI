@@ -60,14 +60,15 @@
                         android:text="@string/Servos" />
 
                     <Button
-                        android:id="@+id/button3"
+                        android:id="@+id/Button01"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="OtherOnClick"
-                        android:text="@string/Other" />
+                        android:onClick="MiscOnClick"
+                        android:text="@string/Misc" />
+
                 </TableRow>
 
                 <TableRow
@@ -76,14 +77,14 @@
                     android:layout_height="wrap_content" >
 
                     <Button
-                        android:id="@+id/button8"
+                        android:id="@+id/button3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="FrskyOnClick"
-                        android:text="@string/Frsky" />
+                        android:onClick="OtherOnClick"
+                        android:text="@string/Calibration" />
 
                     <Button
                         android:id="@+id/button4"
@@ -103,14 +104,14 @@
                     android:layout_height="wrap_content" >
 
                     <Button
-                        android:id="@+id/Button01"
+                        android:id="@+id/buttonFrsky"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="MiscOnClick"
-                        android:text="@string/Misc" />
+                        android:onClick="FrskyOnClick"
+                        android:text="@string/Frsky" />
 
                     <Button
                         android:id="@+id/Button02"
@@ -123,6 +124,24 @@
                         android:text="@string/RawData" />
 
                 </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/Button03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="VarioSoundOnOffOnClick"
+                        android:text="@string/VarioSoundOnOff" />
+
+                </TableRow>
+
             </TableLayout>
 
         </LinearLayout>

@@ -148,6 +148,17 @@
                         android:onClick="WaypointsMapOnClick"
                         android:text="@string/WaypointsMap" />
 
+                    <Button
+                        android:id="@+id/Button04"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="AuxControlOnClick"
+                        android:text="@string/AUXControl"
+                        android:visibility="gone" />
+
                 </TableRow>
 
                 <TableRow

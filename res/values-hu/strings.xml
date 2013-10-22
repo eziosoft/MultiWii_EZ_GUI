@@ -10,7 +10,6 @@
   <string name="button_scan">Eszköz keresése</string>
   <string name="Radio">Távirányító</string>
   <string name="PitchRoll">Műszerfal 1</string>
-  <string name="Config">Beállítások</string>
   <string name="Logging">Adatrögzítés</string>
   <string name="RadioMode">Távirányító mód</string>
   <string name="Mode1">Mód1</string>
@@ -76,7 +75,6 @@
   <string name="Donate">Támogatás</string>
   <string name="Loggingstarted">Adat rögzítés folyamatban</string>
   <string name="Loggingstopedandsaved">Adatrögzítés vége és mentve</string>
-  <string name="ResetALLnotonlyPIDparamstodefault">Minden beállítás (nem csak PID) nullázása?</string>
   <string name="Yes">Igen</string>
   <string name="No">Nem</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">Az adatok gyári értékre állítva. Olvasd be az adatokat.</string>
@@ -121,7 +119,6 @@
   <string name="page3">Beállítások</string>
   <string name="RawData">Szenzor adatok</string>
   <string name="ShareIt">A konfigurációd megosztása</string>
-  <string name="SelectSetting">nBeállítás kiválasztása</string>
   <string name="RXBIND">RX PÁROSÍTÁS</string>
   <string name="InfoDonate">Hasznosnak találtad az alkalmazást? Támogasd a fejlesztőt!</string>
   <string name="Debug">Hibakeresés</string>

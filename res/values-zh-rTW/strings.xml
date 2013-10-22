@@ -3,6 +3,7 @@
 <resources>
   <string name="app_name">MultiWii EZ GUI</string>
   <string name="scanning">掃描設備......</string>
+  <string name="select_device">選擇連接裝置</string>
   <string name="none_paired">沒有設備配對過</string>
   <string name="none_found">找不到設備</string>
   <string name="title_paired_devices">配對的設備</string>
@@ -13,7 +14,6 @@
   <string name="Pitch">俯仰</string>
   <string name="Roll">翻滾</string>
   <string name="Mag">地磁計</string>
-  <string name="Config">設定</string>
   <string name="Logging">紀錄檔</string>
   <string name="RadioMode">無線電模式</string>
   <string name="Mode1">模式1</string>
@@ -102,7 +102,6 @@
   <string name="Donate">捐贈</string>
   <string name="Loggingstarted">開機記錄</string>
   <string name="Loggingstopedandsaved">停止紀錄並保存</string>
-  <string name="ResetALLnotonlyPIDparamstodefault">重置所有(不只 PID)參數為預設值嗎？</string>
   <string name="Yes">確定</string>
   <string name="No">拒絕</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">參數已設為預設值。現在按讀取的按鈕。</string>
@@ -159,7 +158,6 @@
   <string name="page3">設定</string>
   <string name="RawData">原始資料</string>
   <string name="ShareIt">分享您的設置</string>
-  <string name="SelectSetting">選擇設置</string>
   <string name="RXBIND">接收端綁定</string>
   <string name="InfoDonate">您發現此應用程式有用嗎？它將由支持或發給開發人員的捐款支援其發展!</string>
   <string name="convertToKML">將轉換為 KML （Google 地球）</string>
@@ -188,5 +186,11 @@
   <string name="Dashboard3">控制板3</string>
   <string name="SerialPort">串口</string>
   <string name="SerialPortBaudRate">串口波特率</string>
+  <string name="Refresh">刷新</string>
+  <string name="NoDataRecieved">無接收數據</string>
+  <string name="StartGpsEmulation">啟動GPS模擬</string>
+  <string name="PleaseRestart">請重新啟動軟體</string>
   <string name="Cancel">取消</string>
+  <string name="Radius">半徑</string>
+  <string name="Close">關閉</string>
 </resources>

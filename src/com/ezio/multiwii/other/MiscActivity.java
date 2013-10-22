@@ -17,13 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.ezio.multiwii.other;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -32,23 +38,12 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.helpers.CustomInputDialog;
+import com.ezio.sec.Sec;
 
 public class MiscActivity extends SherlockActivity {
 
 	private boolean killme = false;
-
-	// intPowerTrigger1
-	// conf.minthrottle
-	// MAXTHROTTLE
-	// MINCOMMAND
-	// conf.failsafe_throttle
-	// plog.arm
-	// plog.lifetime
-	// conf.mag_declination
-	// conf.vbatscale
-	// conf.vbatlevel_warn1
-	// conf.vbatlevel_warn2
-	// conf.vbatlevel_crit
 
 	EditText ETPowerTrigger;
 	EditText ETMinThrottle;
@@ -62,6 +57,7 @@ public class MiscActivity extends SherlockActivity {
 	EditText ETLevelWarn1;
 	EditText ETLevelWarn2;
 	EditText ETLevelCrit;
+	EditText ETBatteryVoltage;
 
 	App app;
 	Handler mHandler = new Handler();
@@ -74,6 +70,8 @@ public class MiscActivity extends SherlockActivity {
 
 			app.frskyProtocol.ProcessSerialData(false);
 			app.Frequentjobs();
+
+			ETBatteryVoltage.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
 
 			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
@@ -104,6 +102,11 @@ public class MiscActivity extends SherlockActivity {
 		ETLevelWarn1 = (EditText) findViewById(R.id.EditTextBatLevelWarn1);
 		ETLevelWarn2 = (EditText) findViewById(R.id.EditTextBatLevelWarn2);
 		ETLevelCrit = (EditText) findViewById(R.id.editTextBatLevelCrit);
+		ETBatteryVoltage = (EditText) findViewById(R.id.EditTextBatteryVoltage);
+
+		getSupportActionBar().setTitle(getString(R.string.Misc));
+
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 	}
 
@@ -111,9 +114,16 @@ public class MiscActivity extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		app.Say(getString(R.string.Motors));
+		app.Say(getString(R.string.Misc));
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
+
+		if (app.mw.multi_Capability.ByMis) {
+			((TextView) findViewById(R.id.TextViewMinCommand)).setText(getString(R.string.FSRTHaltitude));
+			((EditText) findViewById(R.id.EditTextMinCommand)).setEnabled(true);
+		}
+
+		ReadAndDisplay();
 
 		switch (app.mw.confSetting) {
 		case 0:
@@ -125,6 +135,40 @@ public class MiscActivity extends SherlockActivity {
 		case 2:
 			((RadioButton) findViewById(R.id.radioSelectSetting2)).setChecked(true);
 			break;
+		}
+
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
+			mHandler.postDelayed(update, app.RefreshRate);
+		} else {
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+
+			dlgAlert.setTitle(getString(R.string.Locked));
+			dlgAlert.setMessage(getString(R.string.DoYouWantToUnlock));
+
+			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
+			dlgAlert.setCancelable(false);
+			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					try {
+						Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.ezio.ez_gui_unlocker");
+						startActivity(LaunchIntent);
+					} catch (Exception e) {
+						Intent goToMarket = null;
+						goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ezio.ez_gui_unlocker"));
+						startActivity(goToMarket);
+					}
+					finish();
+				}
+			});
+			dlgAlert.setNegativeButton(getString(R.string.No), new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			});
+
+			dlgAlert.create().show();
 		}
 
 	}
@@ -146,6 +190,40 @@ public class MiscActivity extends SherlockActivity {
 			e.printStackTrace();
 		}
 
+		app.mw.ProcessSerialData(app.loggingON);
+
+		ETPowerTrigger.setText(String.valueOf(app.mw.intPowerTrigger));
+		ETMinThrottle.setText(String.valueOf(app.mw.minthrottle));
+		ETMaxThrottle.setText(String.valueOf(app.mw.maxthrottle));
+		ETMinCommand.setText(String.valueOf(app.mw.mincommand));
+		ETFailSafeThrottle.setText(String.valueOf(app.mw.failsafe_throttle));
+		ETArmCount.setText(String.valueOf(app.mw.ArmCount));
+		ETLifeTime.setText(String.valueOf(app.mw.LifeTime));
+		ETMagDeclination.setText(String.valueOf(app.mw.mag_decliniation));
+		ETVBatScale.setText(String.valueOf(app.mw.vbatscale));
+		ETLevelWarn1.setText(String.valueOf(app.mw.vbatlevel_warn1));
+		ETLevelWarn2.setText(String.valueOf(app.mw.vbatlevel_warn2));
+		ETLevelCrit.setText(String.valueOf(app.mw.vbatlevel_crit));
+
+	}
+
+	private void Save() {
+		int powerTrigger = Integer.parseInt(ETPowerTrigger.getText().toString());
+		int MinThrottle = Integer.parseInt(ETMinThrottle.getText().toString());
+		int MaxThrottle = Integer.parseInt(ETMaxThrottle.getText().toString());
+		int MinCommand = Integer.parseInt(ETMinCommand.getText().toString());
+		int FailSafhrottle = Integer.parseInt(ETFailSafeThrottle.getText().toString());
+		// int ArmCount = Integer.parseInt(ETArmCount.getText().toString());
+		// int Lifime = Integer.parseInt(ETLifeTime.getText().toString());
+		float MagDeclination = Float.parseFloat(ETMagDeclination.getText().toString());
+		int VBatScale = Integer.parseInt(ETVBatScale.getText().toString());
+		float LevelWarn1 = Float.parseFloat(ETLevelWarn1.getText().toString());
+		float LevelWarn2 = Float.parseFloat(ETLevelWarn2.getText().toString());
+		float LevelCrit = Float.parseFloat(ETLevelCrit.getText().toString());
+
+		app.mw.SendRequestMSP_SET_MISC(powerTrigger, MinThrottle, MaxThrottle, MinCommand, FailSafhrottle, MagDeclination, VBatScale, LevelWarn1, LevelWarn2, LevelCrit);
+
+		Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 	}
 
 	public void SelectSettingSetOnClick(View v) {
@@ -159,8 +237,16 @@ public class MiscActivity extends SherlockActivity {
 			a = 2;
 
 		app.mw.SendRequestMSP_SELECT_SETTING(a);
-		Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT);
+		Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
 
+	}
+
+	public void GetDeclinationOnClick(View v) {
+		ETMagDeclination.setText(String.valueOf(app.sensors.Declination));
+	}
+
+	public void ShowCustomDialogOnClick(View vv) {
+		CustomInputDialog.ShowCustomDialogOnClick(vv, this);
 	}
 
 	// /////menu////////
@@ -179,7 +265,24 @@ public class MiscActivity extends SherlockActivity {
 		}
 
 		if (item.getItemId() == R.id.MenuSave) {
-			// SetOnClick(null);
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.Continue)).setCancelable(false).setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int id) {
+
+					Save();
+					Toast.makeText(getApplicationContext(), getString(R.string.Done), Toast.LENGTH_SHORT).show();
+
+				}
+			}).setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+
 			return true;
 		}
 

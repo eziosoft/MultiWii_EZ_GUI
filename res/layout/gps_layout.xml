@@ -151,7 +151,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_update"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_update"

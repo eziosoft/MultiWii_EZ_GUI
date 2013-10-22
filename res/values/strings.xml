@@ -132,6 +132,7 @@
     <string name="SetCheckboxes">AUX</string>
     <string name="Set">Set</string>
     <string name="SavetoEEPROM">Save to EEPROM</string>
+    <string name="Auto">Auto</string>
 
     <!-- GRAPHS VIEW -->
 
@@ -221,8 +222,8 @@
     <string name="BatWarning2">BatWarning2</string>
     <string name="BatCritical">BatCritical</string>
     <string name="GreenValuesCanBeChanged">Green values can be changed</string>
-    <string name="Locked">Locked</string>
-    <string name="DoYouWantToUnlock">Do you want to unlock it ?</string>
+    <string name="Locked">This function is locked</string>
+    <string name="DoYouWantToUnlock">By buing the unlocker you support the development of this program and encourages me to work harder. Do you want to unlock it ?</string>
     <string name="TakeDeclinationFromPhone">Take declination from the phone</string>
     <string name="RateOrUpdate">Rate or Update</string>
     <string name="ArmedCount">Armed Count</string>
@@ -262,7 +263,19 @@
     <string name="PowerTrigger">Power Trigger</string>
     <string name="LiveTime">Live time</string>
     <string name="FactoryResetInfo">Reset all params to default</string>
-    
+    <string name="SelectedProfile">Profile</string>
+    <string name="Calibration">Calibration</string>
+    <string name="AUXControl">AUX Control</string>
+    <string name="EnableControl">Enable Control</string>
+    <string name="Min">Min</string>
+    <string name="Max">Max</string>
+    <string name="OnlyWithMW23">Available in MW 2.3</string>
+    <string name="SelectDifferentProtocol">Selected protocol version is not compatibile with your MultiWii</string>
+    <string name="VarioSoundOnOff">Vario Sound On/Off</string>
+    <string name="FSRTHaltitude">F/S RTH altitude</string>
+    <string name="OverrideBy">Override by:</string>
+    <string name="Searching">Searching</string>
+    <string name="Locked">Locked</string>
     
 
 </resources>

@@ -32,62 +32,63 @@ import com.ezio.multiwii.radio.StickView;
 
 public class ControlActivity extends Activity {
 
-	private boolean		killme		= false;
+	private boolean killme = false;
 
-	App					app;
-	Handler				mHandler	= new Handler();
+	App app;
+	Handler mHandler = new Handler();
 
-	StickView			s1;
-	StickView			s2;
+	StickView s1;
+	StickView s2;
 
-	SeekBar				SeekBar1;
-	SeekBar				SeekBar2;
-	SeekBar				SeekBar3;
-	SeekBar				SeekBar4;
+	SeekBar SeekBar1;
+	SeekBar SeekBar2;
+	SeekBar SeekBar3;
+	SeekBar SeekBar4;
 
-	int[]				CH8			= { 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500 };
+	int[] CH8 = { 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500 };
 
-	private Runnable	update		= new Runnable() {
-										@Override
-										public void run() {
+	private Runnable update = new Runnable() {
+		@Override
+		public void run() {
 
-											app.mw.ProcessSerialData(app.loggingON);
-
-											Log.d("aaa","Throttle="+String.valueOf(app.mw.rcThrottle));
-											Log.d("aaa","Yaw="+String.valueOf(app.mw.rcYaw));;
-											Log.d("aaa","Pitch="+String.valueOf(app.mw.rcPitch));
-											Log.d("aaa","Roll="+String.valueOf(app.mw.rcRoll));
-											
-											
-											if (app.RadioMode == 2) {
-												s1.SetPosition(app.mw.rcYaw, app.mw.rcThrottle);
-												s2.SetPosition(app.mw.rcRoll, app.mw.rcPitch);
-											}
-
-											if (app.RadioMode == 1) {
-												s1.SetPosition(app.mw.rcYaw, app.mw.rcPitch);
-												s2.SetPosition(app.mw.rcRoll, app.mw.rcThrottle);
-											}
-
-											// * 0rcRoll 1rcPitch 2rcYaw
-											// 3rcThrottle 4rcAUX1 5rcAUX2
-											// 6rcAUX3 7rcAUX4
+			app.mw.ProcessSerialData(app.loggingON);
 //
-											CH8[4] = SeekBar1.getProgress() + 1000;
-											CH8[5] = SeekBar2.getProgress() + 1000;
-											CH8[6] = SeekBar3.getProgress() + 1000;
-											CH8[7] = SeekBar4.getProgress() + 1000;
+//			Log.d("aaa", "Throttle=" + String.valueOf(app.mw.rcThrottle));
+//			Log.d("aaa", "Yaw=" + String.valueOf(app.mw.rcYaw));
+//			;
+//			Log.d("aaa", "Pitch=" + String.valueOf(app.mw.rcPitch));
+//			Log.d("aaa", "Roll=" + String.valueOf(app.mw.rcRoll));
 
-											//app.mw.SendRequestSetRawRC(CH8);
-											app.Frequentjobs();
+			if (app.RadioMode == 2) {
+				s1.SetPosition(app.mw.rcYaw, app.mw.rcThrottle);
+				s2.SetPosition(app.mw.rcRoll, app.mw.rcPitch);
+			}
 
-											//app.mw.SendRequest();
-											app.mw.SendRequestMSP_SET_RAW_RC(CH8);
-											if (!killme)
-												mHandler.postDelayed(update, 70);
+			if (app.RadioMode == 1) {
+				s1.SetPosition(app.mw.rcYaw, app.mw.rcPitch);
+				s2.SetPosition(app.mw.rcRoll, app.mw.rcThrottle);
+			}
 
-										}
-									};
+			// * 0rcRoll 1rcPitch 2rcYaw
+			// 3rcThrottle 4rcAUX1 5rcAUX2
+			// 6rcAUX3 7rcAUX4
+			//
+			CH8[4] = SeekBar1.getProgress() + 1000;
+			CH8[5] = SeekBar2.getProgress() + 1000;
+			CH8[6] = SeekBar3.getProgress() + 1000;
+			CH8[7] = SeekBar4.getProgress() + 1000;
+
+			// app.mw.SendRequestSetRawRC(CH8);
+			app.Frequentjobs();
+
+			// app.mw.SendRequest();
+			app.mw.SendRequestMSP_SET_RAW_RC(CH8);
+
+			if (!killme)
+				mHandler.postDelayed(update, app.RefreshRate);
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,21 +110,22 @@ public class ControlActivity extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_DOWN:
 
-						break;
-					case MotionEvent.ACTION_MOVE:
-						//s1.SetPosition((s1.InputX(event.getX())), s1.InputY(event.getY())); // TODO
-																							// REMOVE
-						CH8[3] = (int) s1.InputY(event.getY()); // throttle
-						CH8[2] = (int) s1.InputX(event.getX()); // yaw
-						break;
-					case MotionEvent.ACTION_UP:
-						//s1.SetPosition(1500, s1.InputY(event.getY()));// TODO
-						// REMOVE
-						CH8[3] = (int) s1.InputY(event.getY()); // throttle
-						CH8[2] = 1500; // yaw
-						break;
+					break;
+				case MotionEvent.ACTION_MOVE:
+					// s1.SetPosition((s1.InputX(event.getX())),
+					// s1.InputY(event.getY())); // TODO
+					// REMOVE
+					CH8[3] = (int) s1.InputY(event.getY()); // throttle
+					CH8[2] = (int) s1.InputX(event.getX()); // yaw
+					break;
+				case MotionEvent.ACTION_UP:
+					// s1.SetPosition(1500, s1.InputY(event.getY()));// TODO
+					// REMOVE
+					CH8[3] = (int) s1.InputY(event.getY()); // throttle
+					CH8[2] = 1500; // yaw
+					break;
 				}
 				return true;
 			}
@@ -134,20 +136,20 @@ public class ControlActivity extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_DOWN:
 
-						break;
-					case MotionEvent.ACTION_MOVE:
-						// s2.SetPosition((s2.InputX(event.getX())),
-						// s2.InputY(event.getY()));
-						CH8[1] = (int) s1.InputY(event.getY()); // pitch
-						CH8[0] = (int) s1.InputX(event.getX());// roll
-						break;
-					case MotionEvent.ACTION_UP:
-						// s2.SetPosition(1500, 1500);
-						CH8[1] = 1500;
-						CH8[0] = 1500;
-						break;
+					break;
+				case MotionEvent.ACTION_MOVE:
+					// s2.SetPosition((s2.InputX(event.getX())),
+					// s2.InputY(event.getY()));
+					CH8[1] = (int) s1.InputY(event.getY()); // pitch
+					CH8[0] = (int) s1.InputX(event.getX());// roll
+					break;
+				case MotionEvent.ACTION_UP:
+					// s2.SetPosition(1500, 1500);
+					CH8[1] = 1500;
+					CH8[0] = 1500;
+					break;
 				}
 				return true;
 			}

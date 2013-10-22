@@ -32,6 +32,7 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="ConfigOnClick"
                         android:text="@string/Config" />
+
                 </TableRow>
 
                 <TextView
@@ -48,25 +49,6 @@
                     android:id="@+id/tableRow5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:onClick="TestOnClick"
-                        android:text="Waypoints debug"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/Button01"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button_yellow"
-                        android:onClick="CommunityMapOnClick"
-                        android:text="@string/CommunityMap" />
 
                     <Button
                         android:id="@+id/Button03"
@@ -133,6 +115,23 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="AboutOnClick"
                         android:text="@string/About" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/Button01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_yellow"
+                        android:onClick="CommunityMapOnClick"
+                        android:text="@string/CommunityMap" />
+
                 </TableRow>
 
             </TableLayout>

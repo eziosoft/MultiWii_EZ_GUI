@@ -17,12 +17,9 @@
 package com.ezio.multiwii.advanced;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
@@ -30,44 +27,26 @@ import com.ezio.multiwii.app.App;
 public class AdvancedActivity extends Activity {
 
 	App app;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.advanced_layout);
-		app=(App)getApplication();
-		app.Say(getString(R.string.AdvancedWarning).toLowerCase());
+		app = (App) getApplication();
+		// app.Say(getString(R.string.AdvancedWarning).toLowerCase());
 	}
 
 	public void ControlOnClick(View v) {
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-		alert.setTitle(getString(R.string.Caution));
-		alert.setMessage((getString(R.string.ControlWarning)));
+		startActivity(new Intent(getApplicationContext(), ControlActivity.class));
 
-		// Set an EditText view to get user input
-		final EditText input = new EditText(this);
-		alert.setView(input);
+	}
 
-		alert.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				String value = input.getText().toString();
-
-				if (value.equals("multiwii")) {
-					// mHandler.removeCallbacksAndMessages(null);
-					startActivity(new Intent(getApplicationContext(), ControlActivity.class));
-				}
-			}
-		});
-
-		alert.setNegativeButton(getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				// Canceled.
-			}
-		});
-
-		alert.show();
-
+	public void AUXControlOnClick(View v) {
+		// killme = true;
+		// mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), AUXControlActivity.class));
 	}
 
 }

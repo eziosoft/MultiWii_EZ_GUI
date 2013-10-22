@@ -100,27 +100,27 @@
                     android:background="@color/smalltittle"
                     android:text="@string/ProtocolVersion"
                     android:textColor="@color/smalltittleText"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <RadioGroup
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone" >
+                    android:visibility="visible" >
 
                     <RadioButton
                         android:id="@+id/radioButtonProtocol20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="2.0"
-                        android:visibility="gone" />
+                        android:text="2.2"
+                        android:visibility="visible" />
 
                     <RadioButton
                         android:id="@+id/radioButtonProtocol21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2.1" />
+                        android:text="2.3" />
 
                     <TextView
                         android:id="@+id/textView5"

@@ -40,6 +40,15 @@
                 android:text="@string/Control"
                 android:textColor="#f00" />
 
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="1"
+                    android:onClick="AUXControlOnClick"
+                    android:text="@string/AUXControl"
+                    android:textColor="#f00" />
+
         </LinearLayout>
     </ScrollView>
 

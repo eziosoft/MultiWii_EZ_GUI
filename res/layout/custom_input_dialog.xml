@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/textViewCustomDialogInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tittle"
+        android:gravity="center"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <Button
+                android:id="@+id/buttonCustomDialogMinus"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="-" />
+
+            <EditText
+                android:id="@+id/editTextCustomDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_vertical|fill"
+                android:inputType="numberDecimal" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/buttonCustomDialogPlus"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="+" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tittle" >
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextViewCustomInputDialogInfoSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000" />
+
+            <Spinner
+                android:id="@+id/spinnerCustomInputDialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

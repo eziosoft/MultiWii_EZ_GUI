@@ -16,8 +16,11 @@
  */
 package com.ezio.multiwii.Main;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -28,6 +31,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.about.AboutActivity;
-import com.ezio.multiwii.about.InfoActivity;
+import com.ezio.multiwii.advanced.AUXControlActivity;
 import com.ezio.multiwii.advanced.AdvancedActivity;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.aux_pid.AUXActivity;
@@ -57,8 +61,9 @@ import com.ezio.multiwii.graph.GraphsActivity;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.motors.MotorsActivity;
+import com.ezio.multiwii.mw.ServoConfClass;
 import com.ezio.multiwii.other.MiscActivity;
-import com.ezio.multiwii.other.OtherActivity;
+import com.ezio.multiwii.other.CalibrationActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
 import com.ezio.multiwii.waypoints.MapWaypointsActivity;
@@ -101,6 +106,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		TVInfo = (TextView) adapter.views.get(0).findViewById(R.id.textViewInfoFirstPage);
 
+		if (!app.FrskySupport) {
+			((Button) adapter.views.get(1).findViewById(R.id.buttonFrsky)).setVisibility(View.GONE);
+		}
+
 		viewPager.setAdapter(adapter);
 
 		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
@@ -110,14 +119,17 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		// TVinfo = (TextView) findViewById(R.id.TextViewInfo);
 
-		if ((app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0)) {
-			if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
-			} else {
-				killme = true;
-				mHandler.removeCallbacksAndMessages(null);
-				startActivity(new Intent(getApplicationContext(), InfoActivity.class));
-			}
-		}
+		// if ((app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0))
+		// {
+		// if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()),
+		// Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
+		// } else {
+		// killme = true;
+		// mHandler.removeCallbacksAndMessages(null);
+		// startActivity(new Intent(getApplicationContext(),
+		// InfoActivity.class));
+		// }
+		// }
 
 		app.AppStartCounter++;
 		app.SaveSettings(true);
@@ -237,16 +249,29 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 			String t = new String();
 			if (app.mw.BaroPresent == 1)
-				t += "BARO ";
+				t += "[BARO] ";
 			if (app.mw.GPSPresent == 1)
-				t += "GPS ";
+				t += "[GPS] ";
 			if (app.mw.SonarPresent == 1)
-				t += "SONAR ";
+				t += "[SONAR] ";
 			if (app.mw.MagPresent == 1)
-				t += "MAG ";
+				t += "[MAG] ";
 			if (app.mw.AccPresent == 1)
-				t += "ACC";
-			TVInfo.setText("MultiWii " + String.valueOf(app.mw.version/100f) + "\n" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + t);
+				t += "[ACC]";
+
+			String t1 = "[" + app.mw.MultiTypeName[app.mw.multiType] + "] ";
+			t1 += "MultiWii " + String.valueOf(app.mw.version / 100f);
+
+			if (app.mw.multi_Capability.ByMis)
+				t += " by Miœ";
+
+			t1 += "\n" + t + "\n";
+			t1 += getString(R.string.SelectedProfile) + ":" + String.valueOf(app.mw.confSetting) + "\n";
+
+			if (app.mw.ArmCount > 0)
+				t1 += getString(R.string.ArmedCount) + ":" + String.valueOf(app.mw.ArmCount) + " " + getString(R.string.LiveTime) + ":" + String.valueOf(app.mw.LifeTime);
+
+			TVInfo.setText(t1);
 
 			app.Frequentjobs();
 			app.mw.SendRequest(app.MainRequestMethod);
@@ -307,15 +332,18 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void OtherOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), OtherActivity.class));
-	}
-	
-	public void MiscOnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), MiscActivity.class));
+		startActivity(new Intent(getApplicationContext(), CalibrationActivity.class));
 	}
 
+	public void MiscOnClick(View v) {
+		if (app.Protocol > 220) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), MiscActivity.class));
+		} else {
+			Toast.makeText(getApplicationContext(), getString(R.string.OnlyWithMW23), Toast.LENGTH_LONG).show();
+		}
+	}
 
 	public void FrskyOnClick(View v) {
 		killme = true;
@@ -412,9 +440,55 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void ServosOnClick(View v) {
+		if (app.Protocol > 220) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), ServosActivity.class));
+		} else {
+			Toast.makeText(getApplicationContext(), getString(R.string.OnlyWithMW23), Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public void AuxControlOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), ServosActivity.class));
+		startActivity(new Intent(getApplicationContext(), AUXControlActivity.class));
+	}
+
+	public void VarioSoundOnOffOnClick(View v) {
+		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
+			app.VarioSound = !app.VarioSound;
+		} else {
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+
+			dlgAlert.setTitle(getString(R.string.Locked));
+			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
+			dlgAlert.setCancelable(false);
+			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					try {
+						Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.ezio.ez_gui_unlocker");
+						startActivity(LaunchIntent);
+					} catch (Exception e) {
+						Intent goToMarket = null;
+						goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ezio.ez_gui_unlocker"));
+						startActivity(goToMarket);
+					}
+					// finish();
+				}
+			});
+			dlgAlert.setNegativeButton(getString(R.string.No), new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// finish();
+				}
+			});
+
+			dlgAlert.create().show();
+		}
+
 	}
 
 	// /////menu////////

@@ -280,9 +280,9 @@ public class MultiWii220 extends MultirotorData {
 			maxthrottle = read16();
 			mincommand = read16();
 			failsafe_throttle = read16();
-			armedNum = read16();
+			ArmCount = read16();
 
-			lifetime = read32();
+			LifeTime = read32();
 
 			mag_decliniation = read16() / 10f;
 
@@ -338,7 +338,6 @@ public class MultiWii220 extends MultirotorData {
 						Checkbox[i][aa] = false;
 				}
 			}
-			SendRequest2Confirmation();
 
 			break;
 
@@ -444,80 +443,6 @@ public class MultiWii220 extends MultirotorData {
 	public void SendRequestMSP_PID_MSP_RC_TUNING() {
 		int[] requests = { MSP_PID, MSP_RC_TUNING };
 		sendRequestMSP(requestMSP(requests));
-	}
-
-	@Override
-	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int failsafe_throttle, float mag_decliniation, byte vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
-
-		// MSP_SET_MISC
-		// intPowerTrigger1 (16bit)
-
-		// conf.minthrottle (16bit)
-		// MAXTHROTTLE (16bit)
-		// MINCOMMAND (16bit)
-		// conf.failsafe_throttle (16bit)
-
-		// plog.arm (16bit) not used
-		// plog.lifetime + (plog.armed_time / 1000000) (32bit) not used
-
-		// conf.mag_declination (16bit)
-		// conf.vbatscale; (8bit)
-		// conf.vbatlevel_warn1; (8bit)
-		// conf.vbatlevel_warn2; (8bit)
-		// conf.vbatlevel_crit; (8bit)
-
-		payload = new ArrayList<Character>();
-
-		intPowerTrigger = (Math.round(confPowerTrigger));
-		payload.add((char) (intPowerTrigger % 256));
-		payload.add((char) (intPowerTrigger / 256));
-
-		payload.add((char) (minthrottle % 256));
-		payload.add((char) (minthrottle / 256));
-
-		payload.add((char) (maxthrottle % 256));
-		payload.add((char) (maxthrottle / 256));
-
-		payload.add((char) (mincommand % 256));
-		payload.add((char) (mincommand / 256));
-
-		payload.add((char) (failsafe_throttle % 256));
-		payload.add((char) (failsafe_throttle / 256));
-
-		payload.add((char) (0));// plog.arm (16bit) not used
-		payload.add((char) (0));// plog.arm (16bit) not used
-		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
-									// (32bit) not used
-		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
-									// (32bit) not used
-		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
-									// (32bit) not used
-		payload.add((char) (0)); // plog.lifetime + (plog.armed_time / 1000000)
-									// (32bit) not used
-
-		int nn = Math.round(mag_decliniation * 10); // mag_decliniation
-		payload.add((char) (nn - ((nn >> 8) << 8))); // mag_decliniation
-		payload.add((char) (nn >> 8)); // mag_decliniation
-
-		nn = Math.round(vbatscale);
-		payload.add((char) (nn)); // VBatscale
-
-		int q = (int) (vbatlevel_warn1 * 10);
-		payload.add((char) (q));
-
-		q = (int) (vbatlevel_warn2 * 10);
-		payload.add((char) (q));
-
-		q = (int) (vbatlevel_crit * 10);
-		payload.add((char) (q));
-
-		sendRequestMSP(requestMSP(MSP_SET_MISC, payload.toArray(new Character[payload.size()])));
-
-		// MSP_EEPROM_WRITE
-		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
-
-		// ///////////////////////////////////////////////////////////
-
 	}
 
 	@Override
@@ -629,12 +554,11 @@ public class MultiWii220 extends MultirotorData {
 		for (int i = 0; i < 8; i++) {
 			payload.add((char) (channels8[i] & 0xFF));
 			payload.add((char) ((channels8[i] >> 8) & 0xFF));
-
-			sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
-
-			sendRequestMSP(requestMSP(new int[] { MSP_RC, MSP_STATUS }));
 		}
 
+		sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
+
+		sendRequestMSP(requestMSP(new int[] { MSP_RC }));
 	}
 
 	@Override
@@ -709,48 +633,31 @@ public class MultiWii220 extends MultirotorData {
 
 	// NEW Main requests///////////////////////////////////////////////
 
-	private void SendRequest2Confirmation() {
-		received = true;
-	}
-
 	int timer3 = -1;
-	int timerOutTimer = 0;
-	boolean received = true;
 
-	int[] requests = new int[] { MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, 0, MSP_BOX };
-	// MSP_BOX has to be the last one, "0" will be replaced by one command from
-	// requestsPersiodical
+	int[] requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, MSP_BOX };
 	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX };
-	final int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
+	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_RAW_IMU, MSP_DEBUG };
 
 	public void SendRequest2() {
 
-		if (received == false) {
-			timerOutTimer++;
-		} else {
-			timerOutTimer = 0;
-		}
-		if (timerOutTimer > 10) {
-			received = true;
-			timerOutTimer = 0;
-		}
-
-		if (communication.Connected && received) {
+		if (communication.Connected) {
 
 			// MSP_WP - in App.java
 
 			if (CHECKBOXITEMS == 0)
 				timer3 = -1;
 
+			// Log.d("aaa", "timer3=" + String.valueOf(timer3));
 			switch (timer3) {
 			case -1:
 				sendRequestMSP(requestMSP(requestsOnce));
 				break;
 
 			default:
-				requests[3] = (requestsPeriodical[timer3]);
+				requests[0] = (requestsPeriodical[timer3]);
 				sendRequestMSP(requestMSP(requests));
-				received = false;
+
 				break;
 			}
 
@@ -882,6 +789,12 @@ public class MultiWii220 extends MultirotorData {
 
 	@Override
 	public void SendRequestMSP_SET_SERVO_CONF() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, int vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
 		// TODO Auto-generated method stub
 
 	}

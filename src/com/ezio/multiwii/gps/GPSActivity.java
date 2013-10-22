@@ -80,8 +80,16 @@ public class GPSActivity extends SherlockActivity {
 			GPS_distanceToHomeTV.setText(String.valueOf(app.mw.GPS_distanceToHome));
 			GPS_directionToHomeTV.setText(String.valueOf(app.mw.GPS_directionToHome));
 			GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
-			GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
-			// GPS_updateTV.setText(String.valueOf(app.mw.GPS_update));
+
+			if (app.mw.GPS_fix == 0) {
+				GPS_fixTV.setText(getString(R.string.Searching));
+				GPS_fixTV.setBackgroundColor(Color.RED);
+			} else {
+				GPS_fixTV.setText(getString(R.string.Locked));
+				GPS_fixTV.setBackgroundColor(Color.GREEN);
+			}
+
+			//GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
 
 			if (app.mw.GPS_update % 2 == 0) {
 				GPS_updateTV.setBackgroundColor(Color.GREEN);
@@ -174,8 +182,9 @@ public class GPSActivity extends SherlockActivity {
 		HeadingTV = (TextView) findViewById(R.id.TextViewHeading);
 		if (!app.AdvancedFunctions) {
 			CheckBoxInjectGPS.setVisibility(View.GONE);
-			//CheckBoxFollowHeading.setVisibility(View.GONE);
-			//((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.GONE);
+			// CheckBoxFollowHeading.setVisibility(View.GONE);
+			// ((LinearLayout)
+			// findViewById(R.id.MockLayout)).setVisibility(View.GONE);
 		}
 
 	}
@@ -218,7 +227,7 @@ public class GPSActivity extends SherlockActivity {
 		CheckBoxInjectGPS.setChecked(app.InjectGPSEnable);
 
 		app.Say(getString(R.string.GPS));
-		
+
 		app.sensors.startMagACC();
 
 	}

@@ -192,7 +192,7 @@ public class ConfigActivity extends SherlockActivity {
 			Mode2.setChecked(true);
 		}
 
-		if (app.Protocol == 200) {
+		if (app.Protocol == 220) {
 			Protocol20.setChecked(true);
 		} else {
 			Protocol21.setChecked(true);
@@ -259,11 +259,11 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		if (Protocol20.isChecked()) {
-			app.Protocol = 200;
+			app.Protocol = 220;
 		}
 
 		if (Protocol21.isChecked()) {
-			app.Protocol = 210;
+			app.Protocol = 230;
 		}
 
 		if (MagMode1.isChecked()) {
