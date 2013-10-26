@@ -66,6 +66,7 @@ import com.ezio.multiwii.other.MiscActivity;
 import com.ezio.multiwii.other.CalibrationActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
+import com.ezio.multiwii.raw.vt100Activity;
 import com.ezio.multiwii.waypoints.MapWaypointsActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.ezio.sec.Sec;
@@ -311,9 +312,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void GPSOnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), GPSActivity.class));
+		if (app.mw.GPSPresent == 1 || app.D) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), GPSActivity.class));
+		} else {
+			Toast.makeText(getApplicationContext(), getString(R.string.GPSnotAvailableInYourConfiguration), Toast.LENGTH_LONG).show();
+		}
 
 	}
 
@@ -370,9 +375,11 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void Dashboard3OnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), Dashboard3Activity.class));
+		if (app.checkGooglePlayServicesAvailability(this)) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), Dashboard3Activity.class));
+		}
 	}
 
 	public void Dashboard4OnClick(View v) {
@@ -382,15 +389,19 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void NewMapOnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", false));
+		if (app.checkGooglePlayServicesAvailability(this)) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", false));
+		}
 	}
 
 	public void WaypointsMapOnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", true));
+		if (app.checkGooglePlayServicesAvailability(this)) {
+			killme = true;
+			mHandler.removeCallbacksAndMessages(null);
+			startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", true));
+		}
 
 	}
 
@@ -449,11 +460,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 	}
 
-	public void AuxControlOnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), AUXControlActivity.class));
-	}
+	
 
 	public void VarioSoundOnOffOnClick(View v) {
 		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
@@ -462,7 +469,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
 			dlgAlert.setTitle(getString(R.string.Locked));
-			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+			dlgAlert.setMessage(getString(R.string.DoYouWantToUnlock));
 			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
 			dlgAlert.setCancelable(false);
 			dlgAlert.setPositiveButton(getString(R.string.Yes), new DialogInterface.OnClickListener() {

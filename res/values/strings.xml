@@ -275,7 +275,8 @@
     <string name="FSRTHaltitude">F/S RTH altitude</string>
     <string name="OverrideBy">Override by:</string>
     <string name="Searching">Searching</string>
-    <string name="Locked">Locked</string>
+    <string name="GPSFixOK">GPS Signal OK</string>
+    <string name="GPSnotAvailableInYourConfiguration">GPS is not available in your configuration</string>
     
 
 </resources>

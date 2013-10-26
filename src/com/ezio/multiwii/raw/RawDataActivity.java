@@ -288,8 +288,15 @@ public class RawDataActivity extends Activity {
 			app.mw.GPS_latitude = 488300660;
 			app.mw.Waypoints[0].Lat = 488300660;
 			app.mw.Waypoints[0].Lon = 24414160;
-
+			app.mw.GPS_fix = 1;
+			app.mw.GPS_numSat = 4;
 		}
-
 	}
+
+	public void SerialMonitorOnClick(View v) {
+		killme = true;
+		mHandler.removeCallbacksAndMessages(null);
+		startActivity(new Intent(getApplicationContext(), vt100Activity.class));
+	}
+
 }

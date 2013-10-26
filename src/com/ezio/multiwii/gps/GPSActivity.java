@@ -79,17 +79,38 @@ public class GPSActivity extends SherlockActivity {
 
 			GPS_distanceToHomeTV.setText(String.valueOf(app.mw.GPS_distanceToHome));
 			GPS_directionToHomeTV.setText(String.valueOf(app.mw.GPS_directionToHome));
+
+			switch (app.mw.GPS_numSat) {
+			case 0:
+				GPS_numSatTV.setBackgroundColor(Color.RED);
+				break;
+			case 1:
+				GPS_numSatTV.setBackgroundColor(Color.RED);
+				break;
+			case 2:
+				GPS_numSatTV.setBackgroundColor(Color.RED);
+				break;
+			case 3:
+				GPS_numSatTV.setBackgroundColor(Color.YELLOW);
+				break;
+			case 4:
+				GPS_numSatTV.setBackgroundColor(Color.YELLOW);
+			default:
+				GPS_numSatTV.setBackgroundColor(Color.GREEN);
+				break;
+			}
+
 			GPS_numSatTV.setText(String.valueOf(app.mw.GPS_numSat));
 
 			if (app.mw.GPS_fix == 0) {
 				GPS_fixTV.setText(getString(R.string.Searching));
 				GPS_fixTV.setBackgroundColor(Color.RED);
 			} else {
-				GPS_fixTV.setText(getString(R.string.Locked));
+				GPS_fixTV.setText(getString(R.string.GPSFixOK));
 				GPS_fixTV.setBackgroundColor(Color.GREEN);
 			}
 
-			//GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
+			// GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
 
 			if (app.mw.GPS_update % 2 == 0) {
 				GPS_updateTV.setBackgroundColor(Color.GREEN);

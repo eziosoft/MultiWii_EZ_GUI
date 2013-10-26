@@ -51,7 +51,8 @@
                 <TableRow
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView02"
@@ -74,7 +75,8 @@
                 <TableRow
                     android:id="@+id/tableRowGPS_directionToHome"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView03"
@@ -97,7 +99,8 @@
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView05"
@@ -120,7 +123,8 @@
                 <TableRow
                     android:id="@+id/tableRow4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView06"
@@ -143,7 +147,8 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView07"
@@ -165,7 +170,8 @@
                 <TableRow
                     android:id="@+id/tableRow5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -188,7 +194,8 @@
                 <TableRow
                     android:id="@+id/tableRow6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -211,7 +218,8 @@
                 <TableRow
                     android:id="@+id/tableRow7"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -234,7 +242,8 @@
                 <TableRow
                     android:id="@+id/tableRow8"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView09"
@@ -257,7 +266,8 @@
                 <TableRow
                     android:id="@+id/TableRow02"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp" >
 
                     <TextView
                         android:id="@+id/TextView12"

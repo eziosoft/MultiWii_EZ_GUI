@@ -37,8 +37,8 @@ public class MapHelperClass implements LocationSource {
 		this.map = map;
 		this.distanceWhenWPReached = distanceWhenWPReached;
 
-		map.setLocationSource(this);
 		map.setMyLocationEnabled(true);
+		map.setLocationSource(this);
 		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
 		CleanMap();

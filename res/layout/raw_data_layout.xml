@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
         <View
             android:id="@+id/UpdateFlash"
             android:layout_width="52dp"
@@ -22,7 +22,6 @@
             android:gravity="center"
             android:text="@string/RawData"
             android:textColor="@color/tittleText" />
-
     </LinearLayout>
 
     <TextView
@@ -63,6 +62,13 @@
                 android:onClick="EnableDebugOnClick"
                 android:text="Enable Debug" />
 
+            <Button
+                android:id="@+id/button3"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SerialMonitorOnClick"
+                android:text="Serial Monitor" />
         </LinearLayout>
     </ScrollView>
 

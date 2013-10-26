@@ -19,6 +19,9 @@ package com.ezio.multiwii.dashboard.dashboard3;
 import java.util.Random;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -26,6 +29,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -37,9 +41,11 @@ import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.waypoints.MapHelperClass;
 import com.ezio.sec.Sec;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -156,6 +162,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		app = (App) getApplication();
 		app.ForceLanguage();
 		app.ConnectionBug();
@@ -205,7 +212,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
 			dlgAlert.setTitle(getString(R.string.Locked));
-			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+			dlgAlert.setMessage(getString(R.string.DoYouWantToUnlock));
 
 			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
 			dlgAlert.setCancelable(false);

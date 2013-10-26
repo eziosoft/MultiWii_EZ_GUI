@@ -19,7 +19,12 @@ package com.ezio.multiwii.app;
 
 import java.util.Locale;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -43,6 +48,8 @@ import com.ezio.multiwii.mw.MultiWii230;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.sec.Sec;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import communication.BT;
 import communication.Communication;
 import communication.SerialCDC_ACM;
@@ -584,6 +591,33 @@ public class App extends Application implements Sensors.Listener {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 		}
+	}
+
+	public boolean checkGooglePlayServicesAvailability(Activity activity) {
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
+		if (resultCode != ConnectionResult.SUCCESS) {
+			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, activity, 69);
+			if (dialog != null) {
+				dialog.show();
+				return false;
+			} else {
+				showOkDialogWithText(activity, "Something went wrong. Please make sure that you have the Play Store installed and that you are connected to the internet.");
+				return false;
+			}
+
+		}
+
+		Log.d("GooglePlayServicesUtil Check", "Result is: " + resultCode);
+		return true;
+	}
+
+	private void showOkDialogWithText(Context context, String messageText) {
+		Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage(messageText);
+		builder.setCancelable(true);
+		builder.setPositiveButton("OK", null);
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 }
