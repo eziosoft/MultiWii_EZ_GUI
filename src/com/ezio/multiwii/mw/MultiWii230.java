@@ -240,6 +240,7 @@ public class MultiWii230 extends MultirotorData {
 			bytevbat = read8();
 			pMeterSum = read16();
 			rssi = read16();
+			amperage = read16();
 			break;
 		case MSP_RC_TUNING:
 			byteRC_RATE = read8();

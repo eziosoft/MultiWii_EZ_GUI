@@ -185,6 +185,7 @@ public abstract class MultirotorData {
 	public float vbatlevel_warn1 = 0;
 	public float vbatlevel_warn2 = 0;
 	public float vbatlevel_crit = 0;
+	public int amperage = 0;
 
 	public ServoConfClass[] ServoConf = new ServoConfClass[] { new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass(), new ServoConfClass() };
 

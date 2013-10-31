@@ -119,7 +119,7 @@
     <string name="ForceHungarian">"Force Hungarian "</string>
     <string name="ForcePolish">Force Polish</string>
     <string name="LanguageInfo">Some languages are not supported by default Text To Speech engine.</string>
-    <string name="periodicspeaking">Periodic speaking interval (s). 0 for dissable.</string>
+    <string name="periodicspeaking">Periodic speaking interval (s). 0 for disable.</string>
     <string name="Control">Copter Control</string>
     <string name="Caution">CAUTION</string>
     <string name="ControlWarning">This function allow to control your multicopter. Everything can go wrong (ie. someone call you). Please remember that BT range is very short. \nMUST BE USED WITH EXTREME CAUTION!\n#define RCSERIAL must be uncommented.\n#define FAILSAFE must be commendted\n Type \"multiwii\" to confirm.</string>
@@ -277,6 +277,5 @@
     <string name="Searching">Searching</string>
     <string name="GPSFixOK">GPS Signal OK</string>
     <string name="GPSnotAvailableInYourConfiguration">GPS is not available in your configuration</string>
-    
 
 </resources>

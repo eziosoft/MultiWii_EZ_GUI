@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="Send2OnClick"
-            android:text="Button" />
+            android:text="Send" />
     </LinearLayout>
 
 </LinearLayout>

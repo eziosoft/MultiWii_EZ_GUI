@@ -104,7 +104,7 @@ public class vt100Activity extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 		app.ForceLanguage();
-		app.Say(getString(R.string.Motors));
+		app.Say("Serial monitor");
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
