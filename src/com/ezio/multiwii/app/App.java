@@ -566,8 +566,8 @@ public class App extends Application implements Sensors.Listener {
 	public void onSensorsStateGPSLocationChange() {
 		if (FollowMeEnable) {
 			// TODO needs more work here
-			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.MapCurrentPosition.latitude * 1e7), (int) (sensors.getNextPredictedLocationOnlineMap().longitude * 1e7), 0, 0, 0, 0));
-			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.MapCurrentPosition.latitude * 1e7), (int) (sensors.getNextPredictedLocationOnlineMap().longitude * 1e7), 0, 0, 0, 0));
+			mw.SendRequestMSP_SET_WP(new Waypoint(0, (int) (sensors.MapCurrentPosition.latitude * 1e7), (int) (sensors.MapCurrentPosition.longitude * 1e7), 0, 0, 0, 0));
+			mw.SendRequestMSP_SET_WP(new Waypoint(16, (int) (sensors.MapCurrentPosition.latitude * 1e7), (int) (sensors.MapCurrentPosition.longitude * 1e7), 0, 0, 0, 0));
 
 			FollowMeBlinkFlag = !FollowMeBlinkFlag;
 		}
