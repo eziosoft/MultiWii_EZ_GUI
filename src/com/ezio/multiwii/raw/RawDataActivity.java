@@ -145,6 +145,7 @@ public class RawDataActivity extends Activity {
 		log("angy", app.mw.angy);
 		log("bytevbat", app.mw.bytevbat);
 		log("pMeterSum", app.mw.pMeterSum);
+		log("amperage", app.mw.amperage);
 
 		// log("nunchukPresent", app.mw.nunchukPresent);
 		log("AccPresent", app.mw.AccPresent);

@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:onClick="OpenInfoOnClick"
-                android:tag="http://www.multiwii.com/forum/viewtopic.php?f=8&amp;t=3498"
+                android:tag="http://www.multiwii.com/wiki/index.php?title=Config.h#Servos_configuration"
                 android:text="@string/ClickHereForMoreInfo"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/link" />
@@ -83,7 +83,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/textView6"
@@ -148,7 +149,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/TextView01"
@@ -213,7 +215,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows1" >
 
                     <TextView
                         android:id="@+id/TextView02"
@@ -278,7 +281,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView03"
@@ -343,7 +347,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView04"
@@ -408,7 +413,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView05"
@@ -473,7 +479,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows3" >
 
                     <TextView
                         android:id="@+id/TextView06"
@@ -538,7 +545,8 @@
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:background="@color/tableRows2" >
 
                     <TextView
                         android:id="@+id/TextView07"
