@@ -263,4 +263,7 @@
   <string name="VarioSoundOnOff">Dzwięk Vario wł/wył</string>
   <string name="FSRTHaltitude">F/S RTH wysokość</string>
   <string name="OverrideBy">Zastąpić przez:</string>
+  <string name="Searching">Wyszukiwanie</string>
+  <string name="GPSFixOK">Sygnał GPS OK</string>
+  <string name="GPSnotAvailableInYourConfiguration">GPS nie jest dostępny w twojej konfiguracji</string>
 </resources>

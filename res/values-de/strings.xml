@@ -212,6 +212,7 @@
   <string name="BatWarning2">Batterie Warnung 2</string>
   <string name="BatCritical">Batterie kritisch</string>
   <string name="GreenValuesCanBeChanged">Grüne Werte können geändert werden</string>
+  <string name="Locked">Diese Funktion ist gesperrt</string>
   <string name="TakeDeclinationFromPhone">Deklination von Android Gerät übernehmen</string>
   <string name="RateOrUpdate">Bewerten oder aktualisieren</string>
   <string name="ArmedCount">Motorlaufzeit</string>
@@ -259,4 +260,9 @@
   <string name="OnlyWithMW23">Verfügbar in MW 2.3</string>
   <string name="SelectDifferentProtocol">Ausgewählte Protokoll-Version ist nicht kompatibel mit MultiWii</string>
   <string name="VarioSoundOnOff">Vario-Ton ein-/ausschalten</string>
+  <string name="FSRTHaltitude">F/S RTH Höhe</string>
+  <string name="OverrideBy">Überschrieben von:</string>
+  <string name="Searching">Suche</string>
+  <string name="GPSFixOK">GPS Signal OK</string>
+  <string name="GPSnotAvailableInYourConfiguration">GPS ist nicht verfügbar in Ihrer Konfiguration</string>
 </resources>

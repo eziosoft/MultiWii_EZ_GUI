@@ -133,6 +133,7 @@
   <string name="SetCheckboxes">AUX</string>
   <string name="Set">Stel in</string>
   <string name="SavetoEEPROM">Opslaan naar EEPROM</string>
+  <string name="Auto">Auto</string>
   <string name="Graphs">Grafieken</string>
   <string name="show">Toon</string>
   <string name="ACCROLL">ACC ROLL</string>
@@ -211,6 +212,8 @@
   <string name="BatWarning2">BatWarning2</string>
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">Groene waarden kunnen worden gewijzigd</string>
+  <string name="Locked">Deze functie is vergrendeld</string>
+  <string name="DoYouWantToUnlock">Door het kopen van de unlocker ondersteun je de ontwikkeling van dit programma en moedig je mij aan om harder te werken. Wil je de software unlocken?</string>
   <string name="TakeDeclinationFromPhone">Neem de declination van de telefoon</string>
   <string name="RateOrUpdate">Rate or Update</string>
   <string name="ArmedCount">Armed Count</string>
@@ -249,9 +252,15 @@
   <string name="PowerTrigger">Power Trigger</string>
   <string name="LiveTime">Live time</string>
   <string name="FactoryResetInfo">Reset alle parameters naar de standaard instellingen</string>
+  <string name="SelectedProfile">Profiel</string>
   <string name="Calibration">Kalibratie</string>
   <string name="AUXControl">AUX Control</string>
   <string name="EnableControl">Enable Control</string>
   <string name="Min">Min</string>
   <string name="Max">Max</string>
+  <string name="OnlyWithMW23">Beschikbaar in MW 2.3</string>
+  <string name="SelectDifferentProtocol">Geselecteerde protocolversie is niet compatibile met uw MultiWii</string>
+  <string name="VarioSoundOnOff">Vario Geluid aan/uit</string>
+  <string name="FSRTHaltitude">F/S RTH altitude</string>
+  <string name="OverrideBy">Override by:</string>
 </resources>

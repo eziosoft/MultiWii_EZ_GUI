@@ -211,6 +211,8 @@
   <string name="BatWarning2">2.Varování Bat</string>
   <string name="BatCritical">Kritická Bat</string>
   <string name="GreenValuesCanBeChanged">Zelené hodnoty lze změnit</string>
+  <string name="Locked">Tano funkce je uzamčena</string>
+  <string name="DoYouWantToUnlock">Koupením unlokeru podporujete vývoj tohoto programu a povzbudíte mě k tvrdší práci. Chcete to odemčít?</string>
   <string name="TakeDeclinationFromPhone">Vzít deklinaci z telefonu</string>
   <string name="RateOrUpdate">Ohodnoť nebo Aktualizuj</string>
   <string name="ArmedCount">Počet armování</string>
@@ -258,4 +260,9 @@
   <string name="OnlyWithMW23">Dostpné v MW 2.3</string>
   <string name="SelectDifferentProtocol">Vybraný protokol není kompatibilní s verzí MW</string>
   <string name="VarioSoundOnOff">Zvuk vária zap/vyp</string>
+  <string name="FSRTHaltitude">F/S RTH výška</string>
+  <string name="OverrideBy">Prepsáno od:</string>
+  <string name="Searching">Hledám</string>
+  <string name="GPSFixOK">GPS signál OK</string>
+  <string name="GPSnotAvailableInYourConfiguration">GPS není k dispozici ve vaši konfiguraci</string>
 </resources>

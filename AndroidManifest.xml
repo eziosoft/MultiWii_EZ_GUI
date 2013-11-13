@@ -24,6 +24,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
@@ -162,7 +165,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDt7krGYo5jP5oG7GNzLfNqiGkl0xmI7Tk" />
-        <activity android:name=".raw.vt100Activity"></activity>
+
+        <activity android:name=".raw.vt100Activity" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

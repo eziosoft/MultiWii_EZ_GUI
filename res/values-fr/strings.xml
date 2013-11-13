@@ -213,6 +213,8 @@ cela me poussera à améliorer constamment cette application.</string>
   <string name="BatWarning2">BatAlarm2</string>
   <string name="BatCritical">BatCritic</string>
   <string name="GreenValuesCanBeChanged">Les valeurs vertes peuvent être modifiées</string>
+  <string name="Locked">Cette fonction est verrouillée</string>
+  <string name="DoYouWantToUnlock">En achetant l\'unlocker, vous supportez le développement de ce programme et m\'encouragez à travailler plus dur. Vous voulez le débloquer ?</string>
   <string name="TakeDeclinationFromPhone">Utiliser la déclinaison du téléphone</string>
   <string name="RateOrUpdate">Voter et MAJ</string>
   <string name="ArmedCount">Compteur d\'armement</string>
@@ -261,4 +263,9 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="OnlyWithMW23">Disponible sur MW 2.3</string>
   <string name="SelectDifferentProtocol">La version du  protocole sélectionné n\'est pas compatibile avec votre MultiWii</string>
   <string name="VarioSoundOnOff">Son du vario marche/arret</string>
+  <string name="FSRTHaltitude">Altitude de RTH F/S</string>
+  <string name="OverrideBy">Remplacer par :</string>
+  <string name="Searching">Recherche en cours</string>
+  <string name="GPSFixOK">Signal GPS OK</string>
+  <string name="GPSnotAvailableInYourConfiguration">Le GPS n\'est pas disponible dans votre configuration</string>
 </resources>

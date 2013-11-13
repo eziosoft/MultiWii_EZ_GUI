@@ -34,8 +34,10 @@ import com.hoho.android.usbserial.util.SerialInputOutputManager;
 public class SerialCDC_ACM extends Communication {
 
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
-
 	private SerialInputOutputManager mSerialIoManager;
+	private UsbManager mUsbManager;
+	UsbSerialDriver mSerial;
+	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
 	private final SerialInputOutputManager.Listener mListener = new SerialInputOutputManager.Listener() {
 
@@ -53,23 +55,22 @@ public class SerialCDC_ACM extends Communication {
 		}
 	};
 
-	private UsbManager mUsbManager;
-	UsbSerialDriver mSerial;
-
-	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
-
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	public SerialCDC_ACM(Context context) {
 		super(context);
-		mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+
 		Enable();
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public void Enable() {
+
 		Toast.makeText(context, "Starting Serial Other Chips", Toast.LENGTH_SHORT).show();
-		mSerial = UsbSerialProber.acquire(mUsbManager);
+
+		mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+		mSerial = UsbSerialProber.findFirstDevice(mUsbManager);
+
 		Log.d(TAG, "Resumed, mSerialDevice=" + mSerial);
 		if (mSerial == null) {
 			Toast.makeText(context, "No serial device.", Toast.LENGTH_LONG).show();
@@ -100,9 +101,8 @@ public class SerialCDC_ACM extends Communication {
 	public void Connect(String address) {
 
 		try {
-			// mSerial.setBaudRate(Integer.parseInt(address));
+
 			mSerial.setParameters(Integer.parseInt(address), UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
-			// setParameters(mBaudRate, mDataBits, mStopBits, mParity);
 		} catch (NumberFormatException e) {
 		} catch (IOException e) {
 		}
