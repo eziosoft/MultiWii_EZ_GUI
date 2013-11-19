@@ -98,11 +98,11 @@ public class SerialCDC_ACM extends Communication {
 	}
 
 	@Override
-	public void Connect(String address) {
+	public void Connect(String address, int speed) {
 
 		try {
 
-			mSerial.setParameters(Integer.parseInt(address), UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
+			mSerial.setParameters(speed, UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
 		} catch (NumberFormatException e) {
 		} catch (IOException e) {
 		}

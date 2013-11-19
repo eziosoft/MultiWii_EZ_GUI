@@ -223,8 +223,8 @@ public class WaypointActivity extends Activity {
 		// "\n");
 		// }
 
-		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[0].Number) + " " + String.valueOf(app.mw.Waypoints[0].Lat) + "x" + String.valueOf(app.mw.Waypoints[0].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[0].Alt) + " NavFlag:" + String.valueOf(app.mw.Waypoints[0].NavFlag) + "\n");
-		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[16].Number) + " " + String.valueOf(app.mw.Waypoints[16].Lat) + "x" + String.valueOf(app.mw.Waypoints[16].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[16].Alt) + " NavFlag:" + String.valueOf(app.mw.Waypoints[16].NavFlag) + "\n");
+		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[0].Number) + " " + String.valueOf(app.mw.Waypoints[0].Lat) + "x" + String.valueOf(app.mw.Waypoints[0].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[0].Altitude) + " NavFlag:" + String.valueOf(app.mw.Waypoints[0].NavFlag) + "\n");
+		TVData.append("WP#" + String.valueOf(app.mw.Waypoints[16].Number) + " " + String.valueOf(app.mw.Waypoints[16].Lat) + "x" + String.valueOf(app.mw.Waypoints[16].Lon) + " Alt:" + String.valueOf(app.mw.Waypoints[16].Altitude) + " NavFlag:" + String.valueOf(app.mw.Waypoints[16].NavFlag) + "\n");
 
 	}
 

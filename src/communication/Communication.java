@@ -41,7 +41,7 @@ public abstract class Communication {
 	 * @param address
 	 *            -address of device
 	 */
-	public abstract void Connect(String address);
+	public abstract void Connect(String address, int speed);
 
 	public abstract boolean dataAvailable();
 

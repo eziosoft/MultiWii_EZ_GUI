@@ -309,7 +309,7 @@ public class ConfigActivity extends SherlockActivity {
 			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT;
 		}
 
-		app.SerialPortBaudRateMW = EditTextSerialBaudRateMW.getText().toString();
+		app.SerialPortBaudRateMW = Integer.parseInt(EditTextSerialBaudRateMW.getText().toString());
 
 		if (CheckBoxNewRequestMethod.isChecked()) {
 			app.MainRequestMethod = 2;

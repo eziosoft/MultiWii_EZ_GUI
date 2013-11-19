@@ -338,14 +338,14 @@ public class MultiWii230 extends MultirotorData {
 			WP.Number = read8();
 			WP.Lat = read32();
 			WP.Lon = read32();
-			WP.Alt = read32();
+			WP.Altitude = read32();
 			WP.Heading = read16();
 			WP.TimeToStay = read16();
 			WP.NavFlag = read8();
 
 			Waypoints[WP.Number] = WP;
 
-			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Alt) + " " + String.valueOf(WP.NavFlag));
+			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Altitude) + " " + String.valueOf(WP.NavFlag));
 			break;
 
 		default:
@@ -836,10 +836,10 @@ public class MultiWii230 extends MultirotorData {
 		payload.add((char) ((w.Lon >> 16) & 0xFF));
 		payload.add((char) ((w.Lon >> 24) & 0xFF));
 
-		payload.add((char) (w.Alt & 0xFF));
-		payload.add((char) ((w.Alt >> 8) & 0xFF));
-		payload.add((char) ((w.Alt >> 16) & 0xFF));
-		payload.add((char) ((w.Alt >> 24) & 0xFF));
+		payload.add((char) (w.Altitude & 0xFF));
+		payload.add((char) ((w.Altitude >> 8) & 0xFF));
+		payload.add((char) ((w.Altitude >> 16) & 0xFF));
+		payload.add((char) ((w.Altitude >> 24) & 0xFF));
 
 		payload.add((char) (w.Heading & 0xFF));
 		payload.add((char) ((w.Heading >> 8) & 0xFF));
@@ -851,7 +851,7 @@ public class MultiWii230 extends MultirotorData {
 
 		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
 
-		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Alt) + " " + String.valueOf(w.NavFlag));
+		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Altitude) + " " + String.valueOf(w.NavFlag));
 	}
 
 	@Override

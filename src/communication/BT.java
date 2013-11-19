@@ -59,7 +59,7 @@ public class BT extends Communication {
 	}
 
 	@Override
-	public void Connect(String address) {
+	public void Connect(String address, int speed ) {
 		// Blocking connect, for a simple client nothing else can
 		// happen until a successful connection is made, so we
 		// don't care if it blocks.

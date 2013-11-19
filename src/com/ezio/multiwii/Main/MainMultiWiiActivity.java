@@ -199,12 +199,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void Connect(String MacAddress) {
 		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			app.commMW.Connect(app.SerialPortBaudRateMW);
+			app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
 		}
 
 		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT) {
 			if (!app.MacAddress.equals("")) {
-				app.commMW.Connect(app.MacAddress);
+				app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
 				app.Say(getString(R.string.menu_connect));
 			} else {
 				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
@@ -218,12 +218,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	public void ConnectFrsky(String MacAddress) {
 		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL_FTDI) {
-			app.commMW.Connect(app.SerialPortBaudRateFrSky);
+			app.commMW.Connect(app.MacAddressFrsky, app.SerialPortBaudRateFrSky);
 		}
 
 		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT) {
 			if (!app.MacAddressFrsky.equals("")) {
-				app.commFrsky.Connect(app.MacAddressFrsky);
+				app.commFrsky.Connect(app.MacAddressFrsky, app.SerialPortBaudRateFrSky);
 				app.Say(getString(R.string.Connect_frsky));
 			} else {
 				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
@@ -456,8 +456,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			Toast.makeText(getApplicationContext(), getString(R.string.OnlyWithMW23), Toast.LENGTH_LONG).show();
 		}
 	}
-
-	
 
 	public void VarioSoundOnOffOnClick(View v) {
 		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {

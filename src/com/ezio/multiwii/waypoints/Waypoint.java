@@ -20,7 +20,24 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Waypoint {
 
-	public int Number = 0, Lat = 0, Lon = 0, Alt = 0, Heading = 0, TimeToStay = 0, NavFlag = 0;
+	// mission_step.number = read8();
+	// mission_step.pos[LAT] = read32();
+	// mission_step.pos[LON] = read32();
+	// mission_step.action = read8();
+	// mission_step.parameter = read16();
+	// mission_step.altitude = read32();
+	// mission_step.flag = read8();
+
+	public int Heading = 0, TimeToStay = 0, NavFlag = 0; //old <=2.3
+
+	//new >2.3
+	public int Number = 0;
+	public int Lat = 0;
+	public int Lon = 0;
+	public int Action = 0;
+	public int Parameter = 0;
+	public int Altitude = 0;
+	public int Flag = 0;
 
 	/**
 	 * 
@@ -39,7 +56,7 @@ public class Waypoint {
 		Number = number;
 		Lat = lat;
 		Lon = lon;
-		Alt = alt; // to set altitude (cm)
+		Altitude = alt; // to set altitude (cm)
 		Heading = heading;// future: to set heading (deg)
 		TimeToStay = timeToStay;// future: to set time to stay (ms)
 		NavFlag = navFlag;
@@ -65,7 +82,7 @@ public class Waypoint {
 		Lon = (int) (latLng.longitude * 1e7);
 		Heading = heading;
 		TimeToStay = timeToStay;
-		Alt = alt;
+		Altitude = alt;
 		NavFlag = navFlag;
 	}
 

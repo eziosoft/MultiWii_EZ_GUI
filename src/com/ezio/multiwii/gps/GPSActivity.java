@@ -136,9 +136,9 @@ public class GPSActivity extends SherlockActivity {
 
 			FollowMeInfoTV.setText("WayPointsDebug:\n");
 			Waypoint w = app.mw.Waypoints[0];
-			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
+			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Altitude) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 			w = app.mw.Waypoints[16];
-			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Alt) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
+			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Altitude) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
 
 			if (app.FollowMeBlinkFlag) {
 				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);

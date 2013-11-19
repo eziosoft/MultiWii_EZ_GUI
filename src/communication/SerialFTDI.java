@@ -62,9 +62,9 @@ public class SerialFTDI extends Communication {
 	}
 
 	@Override
-	public void Connect(String address) {
+	public void Connect(String address, int speed) {
 		// [FTDriver] Open USB Serial
-		if (mSerial.begin(Integer.parseInt(address))) {
+		if (mSerial.begin(speed)) {
 			Connected = true;
 			loopStop = false;
 			startMainLoop();

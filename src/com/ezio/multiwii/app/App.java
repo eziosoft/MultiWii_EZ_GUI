@@ -110,11 +110,11 @@ public class App extends Application implements Sensors.Listener {
 	public static final int COMMUNICATION_TYPE_SERIAL_OTHERCHIPS = 2;
 	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
-	public static final String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW";
-	public String SerialPortBaudRateMW = "115200";
+	public static final String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW1";
+	public int SerialPortBaudRateMW = 115200;
 
-	public static final String SERIAL_PORT_BAUD_RATE_FRSKY = "SerialPortBaudRateFrSky";
-	public String SerialPortBaudRateFrSky = "9600";
+	public static final String SERIAL_PORT_BAUD_RATE_FRSKY = "SerialPortBaudRateFrSky1";
+	public int SerialPortBaudRateFrSky = 9600;
 
 	private static final String COMMUNICATION_TYPE_FRSKY = "CommunicationTypeFrSky";
 	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
@@ -318,8 +318,8 @@ public class App extends Application implements Sensors.Listener {
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
 		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT);
 		CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY, COMMUNICATION_TYPE_BT);
-		SerialPortBaudRateMW = prefs.getString(SERIAL_PORT_BAUD_RATE_MW, "115200");
-		SerialPortBaudRateFrSky = prefs.getString(SERIAL_PORT_BAUD_RATE_FRSKY, "9600");
+		SerialPortBaudRateMW = prefs.getInt(SERIAL_PORT_BAUD_RATE_MW, 115200);
+		SerialPortBaudRateFrSky = prefs.getInt(SERIAL_PORT_BAUD_RATE_FRSKY, 9600);
 		MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 2);
 		FrskySupport = prefs.getBoolean(FRSKY_SUPPORT, false);
 
@@ -349,7 +349,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putFloat(MAPZOOMLEVEL, MapZoomLevel);
 		editor.putInt(MAPCENTERPERIOD, MapCenterPeriod);
 		editor.putInt(COMMUNICATION_TYPE_MW, CommunicationTypeMW);
-		editor.putString(SERIAL_PORT_BAUD_RATE_MW, SerialPortBaudRateMW);
+		editor.putInt(SERIAL_PORT_BAUD_RATE_MW, SerialPortBaudRateMW);
 		editor.putInt(MAINREQUESTMETHOD, MainRequestMethod);
 		editor.putBoolean(FRSKY_SUPPORT, FrskySupport);
 		editor.commit();
@@ -465,7 +465,7 @@ public class App extends Application implements Sensors.Listener {
 			if (commMW.ConnectionLost) {
 				if (commMW.ReconnectTry < 1) {
 					tts.Speak(getString(R.string.Reconnecting));
-					commMW.Connect(MacAddress);
+					commMW.Connect(MacAddress, SerialPortBaudRateMW);
 					commMW.ReconnectTry++;
 				}
 			}
@@ -533,7 +533,7 @@ public class App extends Application implements Sensors.Listener {
 	public void ConnectionBug() { // autoconnect again when new activity is
 									// started
 		if (ConnectOnStart && !commMW.Connected) {
-			commMW.Connect(MacAddress);
+			commMW.Connect(MacAddress, SerialPortBaudRateMW);
 			Say(getString(R.string.menu_connect));
 		}
 	}
