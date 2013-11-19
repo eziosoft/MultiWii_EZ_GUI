@@ -69,7 +69,8 @@ public class CustomInputDialog {
 
 		final EditText ETValue = (EditText) promptView.findViewById(R.id.editTextCustomDialog);
 
-		ETValue.setText(String.valueOf(((EditText) vv).getText()));
+		ETValue.setText(String.valueOf(((EditText) vv).getText().toString()));
+		final String OldValue = String.valueOf(((EditText) vv).getText().toString());
 
 		Button minus = (Button) promptView.findViewById(R.id.buttonCustomDialogMinus);
 		Button plus = (Button) promptView.findViewById(R.id.buttonCustomDialogPlus);
@@ -166,8 +167,13 @@ public class CustomInputDialog {
 		// setup a dialog window
 		alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				// get user input and set it to result
-				((EditText) vv).setText(ETValue.getText());
+				if (!ETValue.getText().toString().equals("")) {
+					// get user input and set it to result
+
+					((EditText) vv).setText(ETValue.getText());
+				} else {
+					((EditText) vv).setText(OldValue);
+				}
 			}
 		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
