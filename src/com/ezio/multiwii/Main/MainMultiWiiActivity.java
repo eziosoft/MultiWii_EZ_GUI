@@ -174,6 +174,18 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		}
 
+		if (app.ConfigHasBeenChange_DisplayRestartInfo) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.PleaseRestart)).setCancelable(false).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int id) {
+					EXIT();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+
 	}
 
 	@Override
@@ -493,6 +505,25 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	}
 
+	void EXIT() {
+		try {
+			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		if (app.DisableBTonExit) {
+			app.commMW.Disable();
+			app.commFrsky.Disable();
+		}
+
+		app.sensors.stop();
+		app.mw.CloseLoggingFile();
+		app.notifications.Cancel(99);
+		Close(null);
+		System.exit(0);
+	}
+
 	// /////menu////////
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -505,23 +536,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
+			EXIT();
 
-			try {
-				stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-			if (app.DisableBTonExit) {
-				app.commMW.Disable();
-				app.commFrsky.Disable();
-			}
-
-			app.sensors.stop();
-			app.mw.CloseLoggingFile();
-			app.notifications.Cancel(99);
-			Close(null);
-			System.exit(0);
 			return true;
 		}
 

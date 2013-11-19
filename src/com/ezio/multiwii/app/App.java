@@ -214,6 +214,8 @@ public class App extends Application implements Sensors.Listener {
 
 	private int tempLastI2CErrorCount = 0;
 
+	public boolean ConfigHasBeenChange_DisplayRestartInfo = false;
+
 	@Override
 	public void onCreate() {
 

@@ -17,6 +17,8 @@
 package com.ezio.multiwii.config;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -177,7 +179,8 @@ public class ConfigActivity extends SherlockActivity {
 	@Override
 	protected void onPause() {
 		SaveSettingsOnClick(null);
-		Toast.makeText(getApplicationContext(), getString(R.string.PleaseRestart), Toast.LENGTH_LONG).show();
+		app.ConfigHasBeenChange_DisplayRestartInfo = true;
+
 		super.onPause();
 	}
 
@@ -233,7 +236,7 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextVoltageAlarm.setText(String.valueOf(app.VoltageAlarm));
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 		EditTextMapCenterPeriod.setText(String.valueOf(app.MapCenterPeriod));
-		EditTextSerialBaudRateMW.setText(app.SerialPortBaudRateMW);
+		EditTextSerialBaudRateMW.setText(String.valueOf(app.SerialPortBaudRateMW));
 
 		if (app.MainRequestMethod == 2) {
 			CheckBoxNewRequestMethod.setChecked(true);
