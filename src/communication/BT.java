@@ -190,6 +190,9 @@ public class BT extends Communication {
 		// are in use on your Android device.
 		try {
 			btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+			
+			//Method m = zee.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
+			//sock = (BluetoothSocket) m.invoke(device, 1);
 		} catch (IOException e) {
 			Log.e(TAG, "ON RESUME: Socket creation failed.", e);
 			Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
