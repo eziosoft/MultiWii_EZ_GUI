@@ -21,9 +21,9 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Application;
 import android.app.Dialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,6 +51,7 @@ import com.ezio.sec.Sec;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import communication.BT;
+import communication.BT_New;
 import communication.Communication;
 import communication.SerialCDC_ACM;
 import communication.SerialFTDI;
@@ -143,7 +144,7 @@ public class App extends Application implements Sensors.Listener {
 	private static final String ALTCORRECTION = "ALTCORRECTION";
 	public boolean AltCorrection = false;
 
-	private static final String ADVANCEDFUNCTIONS = "ADVANCEDFUNCTIONS";
+	// private static final String ADVANCEDFUNCTIONS = "ADVANCEDFUNCTIONS";
 	public boolean AdvancedFunctions = false;
 
 	private static final String DISABLEBTONEXIT = "DISABLEBTONEXIT";
@@ -248,7 +249,7 @@ public class App extends Application implements Sensors.Listener {
 		ForceLanguage();
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
-			commMW = new BT(getApplicationContext());
+			commMW = new BT_New(getApplicationContext());
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_FTDI) {
@@ -260,7 +261,7 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
-			commFrsky = new BT(getApplicationContext());
+			commFrsky = new BT_New(getApplicationContext());
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_FTDI) {
@@ -319,7 +320,8 @@ public class App extends Application implements Sensors.Listener {
 		MapZoomLevel = prefs.getFloat(MAPZOOMLEVEL, 9);
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
 		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT);
-		CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY, COMMUNICATION_TYPE_BT);
+		// CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY,
+		// COMMUNICATION_TYPE_BT);
 		SerialPortBaudRateMW = prefs.getInt(SERIAL_PORT_BAUD_RATE_MW, 115200);
 		SerialPortBaudRateFrSky = prefs.getInt(SERIAL_PORT_BAUD_RATE_FRSKY, 9600);
 		MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 2);

@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,7 +27,7 @@ public class BT extends Communication {
 	// see comments in onResume().
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-	Handler handler;
+	// Handler handler;
 
 	public BT(Context context) {
 		super(context);
@@ -53,13 +53,13 @@ public class BT extends Communication {
 			return;
 		}
 
-		 if (D)
-		 Log.d(TAG, "+++ DONE IN ON CREATE, GOT LOCAL BT ADAPTER +++");
+		if (D)
+			Log.d(TAG, "+++ DONE IN ON CREATE, GOT LOCAL BT ADAPTER +++");
 
 	}
 
 	@Override
-	public void Connect(String address, int speed ) {
+	public void Connect(String address, int speed) {
 		// Blocking connect, for a simple client nothing else can
 		// happen until a successful connection is made, so we
 		// don't care if it blocks.
@@ -166,6 +166,7 @@ public class BT extends Communication {
 
 	}
 
+	@SuppressLint("NewApi")
 	private void GetRemoteDevice(String address) {
 		if (D) {
 			Log.d(TAG, "+ ON RESUME +");
@@ -189,10 +190,9 @@ public class BT extends Communication {
 		// but not always; it depends what other BlueTooth services
 		// are in use on your Android device.
 		try {
+
 			btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-			
-			//Method m = zee.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
-			//sock = (BluetoothSocket) m.invoke(device, 1);
+
 		} catch (IOException e) {
 			Log.e(TAG, "ON RESUME: Socket creation failed.", e);
 			Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
@@ -204,7 +204,8 @@ public class BT extends Communication {
 		// to call it, but it might hurt not to... discovery is a
 		// heavyweight process; you don't want it in progress when
 		// a connection attempt is made.
-		mBluetoothAdapter.cancelDiscovery();
+		if (mBluetoothAdapter.isDiscovering())
+			mBluetoothAdapter.cancelDiscovery();
 	}
 
 	public void CloseSocket() {

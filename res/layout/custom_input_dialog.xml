@@ -41,7 +41,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:ems="10"
-                android:gravity="center_vertical|fill"
+                android:gravity="center_vertical|center_horizontal"
                 android:inputType="numberDecimal" >
 
                 <requestFocus />
