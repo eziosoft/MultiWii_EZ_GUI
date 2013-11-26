@@ -76,17 +76,17 @@ public class SerialFTDI extends Communication {
 	}
 
 	@Override
-	public boolean dataAvailable() {
+	public synchronized boolean dataAvailable() {
 		return !fifo.isEmpty();
 	}
 
 	@Override
-	public byte Read() {
+	public synchronized byte Read() {
 		return (byte) (fifo.get() & 0xff);
 	}
 
 	@Override
-	public void Write(byte[] arr) {
+	public synchronized void Write(byte[] arr) {
 		Connected = mSerial.isConnected();
 
 		if (mSerial.isConnected()) {
@@ -99,7 +99,7 @@ public class SerialFTDI extends Communication {
 	}
 
 	@Override
-	public void Close() {
+	public synchronized void Close() {
 		Connected = false;
 		loopStop = true;
 		mSerial.end();
@@ -138,7 +138,7 @@ public class SerialFTDI extends Communication {
 		}
 	};
 
-	private void readToBuffer() {
+	private synchronized void readToBuffer() {
 		Connected = mSerial.isConnected();
 		// [FTDriver] Create Read Buffer
 		byte[] rbuf = new byte[4096]; // 1byte <--slow-- [Transfer Speed]

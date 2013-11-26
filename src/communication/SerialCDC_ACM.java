@@ -110,18 +110,18 @@ public class SerialCDC_ACM extends Communication {
 	}
 
 	@Override
-	public boolean dataAvailable() {
+	public synchronized boolean dataAvailable() {
 		return !fifo.isEmpty();
 	}
 
 	@Override
-	public byte Read() {
+	public synchronized byte Read() {
 		return (byte) (fifo.get() & 0xff);
 
 	}
 
 	@Override
-	public void Write(byte[] arr) {
+	public synchronized void Write(byte[] arr) {
 
 		if (Connected) {
 			try {
