@@ -10,28 +10,36 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.Main.MainMultiWiiActivity;
 
 public class BT_New extends Communication {
+
+	private static int ConnectingMethod = 2;  //2 to invoke
+
 	// Debugging
 	private static final String TAG = "BluetoothReadService";
 	private static final boolean D = true;
 
 	private static final UUID SerialPortServiceClass_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-	// ///////////////////////////////////////////////////////////////////////00001101-0000-1000-8000-00805F9B34FB
+	// //////////////////////////////////////////////////////////////////////00001101-0000-1000-8000-00805F9B34FB
 
 	// Member fields
 	private final BluetoothAdapter mAdapter;
-	// private final Handler mHandler;
+
 	private ConnectThread mConnectThread;
 	private ConnectedThread mConnectedThread;
 	private int mState;
 
 	private InputStream mmInStream;
 	private OutputStream mmOutStream;
+
+	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
 	// Constants that indicate the current connection state
 	public static final int STATE_NONE = 0; // we're doing nothing
@@ -54,8 +62,8 @@ public class BT_New extends Communication {
 		mState = state;
 
 		// Give the new state to the Handler so the UI Activity can update
-		// mHandler.obtainMessage(BlueTerm.MESSAGE_STATE_CHANGE, state,
-		// -1).sendToTarget();
+		if (mHandler != null)
+			mHandler.obtainMessage(MainMultiWiiActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
 	}
 
 	/**
@@ -148,14 +156,21 @@ public class BT_New extends Communication {
 		mConnectedThread.start();
 
 		// Send the name of the connected device back to the UI Activity
-		// Message msg = mHandler.obtainMessage(BlueTerm.MESSAGE_DEVICE_NAME);
-		// Bundle bundle = new Bundle();
-		// bundle.putString(BlueTerm.DEVICE_NAME, device.getName());
-		// msg.setData(bundle);
-		// mHandler.sendMessage(msg);
+		if (mHandler != null) {
+			Message msg = mHandler.obtainMessage(MainMultiWiiActivity.MESSAGE_DEVICE_NAME);
+			Bundle bundle = new Bundle();
+			bundle.putString(MainMultiWiiActivity.DEVICE_NAME, device.getName());
+			msg.setData(bundle);
+			mHandler.sendMessage(msg);
+		}
 
 		setState(STATE_CONNECTED);
 		Connected = true;
+		// context.runOnUiThread(new Runnable() {
+		// public void run() {
+		// Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
+		// }
+		// });
 	}
 
 	/**
@@ -187,13 +202,16 @@ public class BT_New extends Communication {
 		setState(STATE_NONE);
 		Connected = false;
 		Log.d(TAG, "connectionFailed");
+		//Toast.makeText(context, "Connection Failed", Toast.LENGTH_LONG).show();
 
 		// Send a failure message back to the Activity
-		// Message msg = mHandler.obtainMessage(BlueTerm.MESSAGE_TOAST);
-		// Bundle bundle = new Bundle();
-		// bundle.putString(BlueTerm.TOAST, "Unable to connect device");
-		// msg.setData(bundle);
-		// mHandler.sendMessage(msg);
+		if (mHandler != null) {
+			Message msg = mHandler.obtainMessage(MainMultiWiiActivity.MESSAGE_TOAST);
+			Bundle bundle = new Bundle();
+			bundle.putString(MainMultiWiiActivity.TOAST, "Unable to connect device");
+			msg.setData(bundle);
+			mHandler.sendMessage(msg);
+		}
 	}
 
 	/**
@@ -206,11 +224,13 @@ public class BT_New extends Communication {
 		Log.d(TAG, "connectionLost");
 
 		// Send a failure message back to the Activity
-		// Message msg = mHandler.obtainMessage(BlueTerm.MESSAGE_TOAST);
-		// Bundle bundle = new Bundle();
-		// bundle.putString(BlueTerm.TOAST, "Device connection was lost");
-		// msg.setData(bundle);
-		// mHandler.sendMessage(msg);
+		if (mHandler != null) {
+			Message msg = mHandler.obtainMessage(MainMultiWiiActivity.MESSAGE_TOAST);
+			Bundle bundle = new Bundle();
+			bundle.putString(MainMultiWiiActivity.TOAST, "Device connection was lost");
+			msg.setData(bundle);
+			mHandler.sendMessage(msg);
+		}
 	}
 
 	/**
@@ -231,16 +251,24 @@ public class BT_New extends Communication {
 			// Get a BluetoothSocket for a connection with the
 			// given BluetoothDevice
 
-			try {
-				Method m = device.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
-				tmp = (BluetoothSocket) m.invoke(device, 1);
-			} catch (Exception e) {
+			if (ConnectingMethod == 2) {
+				try {
+					Method m = device.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
+					tmp = (BluetoothSocket) m.invoke(device, 1);
+				} catch (Exception e) {
+					try {
+						tmp = device.createRfcommSocketToServiceRecord(SerialPortServiceClass_UUID);
+					} catch (IOException e1) {
+						Log.e(TAG, "createRfcommSocketToServiceRecord failed", e1);
+					}
+
+				}
+			} else {
 				try {
 					tmp = device.createRfcommSocketToServiceRecord(SerialPortServiceClass_UUID);
 				} catch (IOException e1) {
 					Log.e(TAG, "createRfcommSocketToServiceRecord failed", e1);
 				}
-				Toast.makeText(context, "2", Toast.LENGTH_LONG).show();
 			}
 			mmSocket = tmp;
 		}
@@ -266,6 +294,7 @@ public class BT_New extends Communication {
 				ConnectionLost = false;
 				ReconnectTry = 0;
 				Log.i(TAG, "BT connection established, data transfer link open.");
+
 			} catch (IOException e) {
 				connectionFailed();
 				// Close the socket
@@ -322,31 +351,35 @@ public class BT_New extends Communication {
 
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
+
 		}
 
 		public void run() {
 			Log.i(TAG, "BEGIN mConnectedThread");
-			// byte[] buffer = new byte[1024];
-			// int bytes;
+			byte[] buffer = new byte[1024];
+			int bytes;
 
 			// Keep listening to the InputStream while connected
-			// while (true) {
-			// try {
-			// Read from the InputStream
-			// bytes = mmInStream.read(buffer);
+			while (true) {
+				try {
+					// Read from the InputStream
+					bytes = mmInStream.read(buffer);
 
-			// Send the obtained bytes to the UI Activity
-			// mHandler.obtainMessage(BlueTerm.MESSAGE_READ, bytes, -1,
-			// buffer).sendToTarget();
+					for (int i = 0; i < bytes; i++)
+						fifo.put(Integer.valueOf(buffer[i]));
 
-			// String a = buffer.toString();
-			// a = "";
-			// } catch (IOException e) {
-			// Log.e(TAG, "disconnected", e);
-			// connectionLost();
-			// break;
-			// }
-			// }
+					// Send the obtained bytes to the UI Activity
+					// mHandler.obtainMessage(BlueTerm.MESSAGE_READ, bytes, -1,
+					// buffer).sendToTarget();
+
+					// String a = buffer.toString();
+
+				} catch (IOException e) {
+					Log.e(TAG, "disconnected", e);
+					connectionLost();
+					break;
+				}
+			}
 		}
 
 		/**
@@ -355,17 +388,17 @@ public class BT_New extends Communication {
 		 * @param buffer
 		 *            The bytes to write
 		 */
-		// public void write(byte[] buffer) {
-		// try {
-		// mmOutStream.write(buffer);
-		//
-		// // Share the sent message back to the UI Activity
-		// // mHandler.obtainMessage(BlueTerm.MESSAGE_WRITE, buffer.length,
-		// // -1, buffer).sendToTarget();
-		// } catch (IOException e) {
-		// Log.e(TAG, "Exception during write", e);
-		// }
-		// }
+		public void write(byte[] buffer) {
+			try {
+				mmOutStream.write(buffer);
+
+				// Share the sent message back to the UI Activity
+				// mHandler.obtainMessage(BlueTerm.MESSAGE_WRITE, buffer.length,
+				// -1, buffer).sendToTarget();
+			} catch (IOException e) {
+				Log.e(TAG, "Exception during write", e);
+			}
+		}
 
 		public void cancel() {
 			try {
@@ -390,14 +423,13 @@ public class BT_New extends Communication {
 
 		Enable();
 
-		// mHandler = handler;
 	}
 
 	@Override
 	public void Enable() {
+
 		if (D)
 			Log.d(TAG, "Enable BT");
-		Toast.makeText(context, "Starting Bluetooth", Toast.LENGTH_SHORT).show();
 
 		mState = STATE_NONE;
 
@@ -408,12 +440,10 @@ public class BT_New extends Communication {
 		}
 
 		start();
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void Connect(String address, int speed) {
+	public synchronized void Connect(String address, int speed) {
 		if (D)
 			Log.d(TAG, "Connect");
 		BluetoothDevice device = mAdapter.getRemoteDevice(address);
@@ -422,47 +452,32 @@ public class BT_New extends Communication {
 	}
 
 	@Override
-	public boolean dataAvailable() {
-		boolean a = false;
-
-		try {
-			if (Connected)
-				a = mmInStream.available() > 0;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return a;
+	public synchronized boolean dataAvailable() {
+		return !fifo.isEmpty();
 	}
 
 	@Override
-	public byte Read() {
-		byte a = 0;
-		try {
-			if (mmInStream.available() > 0)
-				a = (byte) mmInStream.read();
-		} catch (IOException e) {
-			connectionLost();
-			Toast.makeText(context, "Read error", Toast.LENGTH_LONG).show();
-		}
-		return (byte) (a);
+	public synchronized byte Read() {
+		return (byte) (fifo.get() & 0xff);
 	}
 
 	@Override
-	public void Write(byte[] arr) {
-		try {
-			if (Connected)
-				mmOutStream.write(arr);
-		} catch (IOException e) {
-			Log.e(TAG, "SEND : Exception during write.", e);
-			Toast.makeText(context, "Write error", Toast.LENGTH_LONG).show();
+	public synchronized void Write(byte[] arr) {
+		// Create temporary object
+		ConnectedThread r;
+		// Synchronize a copy of the ConnectedThread
+		synchronized (this) {
+			if (mState != STATE_CONNECTED)
+				return;
+			r = mConnectedThread;
 		}
-
+		// Perform the write unsynchronized
+		r.write(arr);
 	}
 
 	@Override
-	public void Close() {
+	public synchronized void Close() {
+		Toast.makeText(context, "Disconnecting...", Toast.LENGTH_SHORT).show();
 		if (D)
 			Log.d(TAG, "Close");
 		if (mmOutStream != null) {
@@ -477,7 +492,7 @@ public class BT_New extends Communication {
 	}
 
 	@Override
-	public void Disable() {
+	public synchronized void Disable() {
 		try {
 			if (mAdapter.isEnabled())
 				if (D)

@@ -73,12 +73,53 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	private boolean killme = false;
 
-	App app;
+	private App app;
 
 	// TextView TVinfo;
 	TextView TVInfo;
 
-	private Handler mHandler = new Handler();
+	// Message types sent from the BluetoothChatService Handler
+	public static final int MESSAGE_STATE_CHANGE = 1;
+	public static final int MESSAGE_READ = 2;
+	public static final int MESSAGE_WRITE = 3;
+	public static final int MESSAGE_DEVICE_NAME = 4;
+	public static final int MESSAGE_TOAST = 5;
+
+	// Key names received from the BluetoothChatService Handler
+	public static final String DEVICE_NAME = "device_name";
+	public static final String TOAST = "toast";
+
+	private final static Handler mHandler = new Handler();
+	// {
+	// @Override
+	// public void handleMessage(Message msg) {
+	// switch (msg.what) {
+	// case MESSAGE_STATE_CHANGE:
+	// Log.i("ccc", "MESSAGE_STATE_CHANGE: " + msg.arg1);
+	// switch (msg.arg1) {
+	// case BT_New.STATE_CONNECTED:
+	//
+	// break;
+	// case BT_New.STATE_CONNECTING:
+	// break;
+	// case BT_New.STATE_LISTEN:
+	// case BT_New.STATE_NONE:
+	// break;
+	// }
+	// break;
+	// case MESSAGE_WRITE:
+	// break;
+	// case MESSAGE_READ:
+	// break;
+	// case MESSAGE_DEVICE_NAME:
+	// break;
+	// case MESSAGE_TOAST:
+	// Toast.makeText(app.getApplicationContext(),
+	// msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
+	// break;
+	// }
+	// }
+	// };
 
 	ActionBarSherlock actionBar;
 
@@ -86,6 +127,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		app = (App) getApplication();
+
+		// app.commMW.SetHandler(mHandler);
 
 		Log.d("aaa", "MAIN ON CREATE");
 		requestWindowFeature(Window.FEATURE_PROGRESS);
@@ -209,22 +252,16 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	}
 
-	public void Connect(String MacAddress) {
-		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
+	public void Connect() {
+		if (!app.MacAddress.equals("")) {
 			app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
+			app.Say(getString(R.string.menu_connect));
+		} else {
+			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
 		}
-
-		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT) {
-			if (!app.MacAddress.equals("")) {
-				app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
-				app.Say(getString(R.string.menu_connect));
-			} else {
-				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
-			}
-			try {
-				mHandler.removeCallbacksAndMessages(null);
-			} catch (Exception e) {
-			}
+		try {
+			mHandler.removeCallbacksAndMessages(null);
+		} catch (Exception e) {
 		}
 	}
 
@@ -543,7 +580,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (item.getItemId() == R.id.menu_connect) {
 
-			Connect(app.MacAddress);
+			Connect();
 
 			mHandler.postDelayed(update, 100);
 			return true;

@@ -385,7 +385,7 @@ public class MultiWii230 extends MultirotorData {
 					c = (communication.Read());
 				} catch (Exception e) {
 					c = 0;
-					Log.e("aaa", "Read Error");
+					Log.e("aaa", "Read Error " + e.getMessage().toString());
 
 					// TODO inform about refresh rate to low
 					break;

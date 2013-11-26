@@ -17,8 +17,11 @@
 package communication;
 
 import android.content.Context;
+import android.os.Handler;
 
 public abstract class Communication {
+	protected  Handler mHandler;
+	
 	public static final String TAG = "MULTIWII"; // debug
 
 	public boolean Connected = false;
@@ -29,8 +32,15 @@ public abstract class Communication {
 
 	Context context;
 
+	
+	
 	public Communication(Context context) {
 		this.context = context;
+	}
+	
+	public void SetHandler(Handler handler)
+	{
+		mHandler=handler;
 	}
 
 	public abstract void Enable();

@@ -17,8 +17,6 @@
 package com.ezio.multiwii.config;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +29,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
@@ -62,6 +59,7 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxUseFTDISerial;
 	CheckBox CheckBoxNewRequestMethod;
 	CheckBox CheckBoxFrskySupport;
+	CheckBox CheckBoxBT_New;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -156,6 +154,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioFTDI = (RadioButton) findViewById(R.id.radioFTDI);
 		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
 		CheckBoxNewRequestMethod = (CheckBox) findViewById(R.id.checkBoxNewRequestMethod);
+		CheckBoxBT_New = (CheckBox) findViewById(R.id.CheckBox_BT_New);
 
 		CheckBoxFrskySupport = (CheckBox) findViewById(R.id.checkBoxFrskySupport);
 		CheckBoxFrskySupport.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -247,6 +246,12 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxFrskySupport.setChecked(app.FrskySupport);
 		ShowFrskySupport(app.FrskySupport);
 
+		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT_NEW) {
+			CheckBoxBT_New.setChecked(true);
+		} else {
+			CheckBoxBT_New.setChecked(false);
+		}
+
 		app.Say(getString(R.string.Config));
 
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -309,9 +314,15 @@ public class ConfigActivity extends SherlockActivity {
 				app.CommunicationTypeMW = App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS;
 
 		} else {
-			app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT;
+			if (!CheckBoxBT_New.isChecked())
+				app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT;
+
+			if (CheckBoxBT_New.isChecked())
+				app.CommunicationTypeMW = App.COMMUNICATION_TYPE_BT_NEW;
 		}
 
+		if (EditTextSerialBaudRateMW.getText().toString().equals(""))
+			EditTextSerialBaudRateMW.setText("115200");
 		app.SerialPortBaudRateMW = Integer.parseInt(EditTextSerialBaudRateMW.getText().toString());
 
 		if (CheckBoxNewRequestMethod.isChecked()) {
@@ -323,8 +334,6 @@ public class ConfigActivity extends SherlockActivity {
 		app.FrskySupport = CheckBoxFrskySupport.isChecked();
 
 		app.SaveSettings(false);
-
-		// app.Init();
 
 	}
 }

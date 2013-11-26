@@ -109,6 +109,7 @@ public class App extends Application implements Sensors.Listener {
 	public static final int COMMUNICATION_TYPE_BT = 0;
 	public static final int COMMUNICATION_TYPE_SERIAL_FTDI = 1;
 	public static final int COMMUNICATION_TYPE_SERIAL_OTHERCHIPS = 2;
+	public static final int COMMUNICATION_TYPE_BT_NEW = 4;
 	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
 	public static final String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW1";
@@ -249,7 +250,12 @@ public class App extends Application implements Sensors.Listener {
 		ForceLanguage();
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
+			commMW = new BT(getApplicationContext());
+		}
+
+		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT_NEW) {
 			commMW = new BT_New(getApplicationContext());
+			CommunicationTypeFrSky = COMMUNICATION_TYPE_BT_NEW;
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_FTDI) {
@@ -261,6 +267,10 @@ public class App extends Application implements Sensors.Listener {
 		}
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
+			commFrsky = new BT(getApplicationContext());
+		}
+
+		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT_NEW) {
 			commFrsky = new BT_New(getApplicationContext());
 		}
 
