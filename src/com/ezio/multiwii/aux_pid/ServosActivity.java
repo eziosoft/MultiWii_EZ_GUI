@@ -89,14 +89,14 @@ public class ServosActivity extends SherlockActivity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 		ServoReadOnClick();
-		
+
 		if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D..3")) {
 			mHandler.postDelayed(update, app.RefreshRate);
 		} else {
 			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
 			dlgAlert.setTitle(getString(R.string.Locked));
-			dlgAlert.setMessage (getString(R.string.DoYouWantToUnlock));
+			dlgAlert.setMessage(getString(R.string.DoYouWantToUnlock));
 
 			// dlgAlert.setPositiveButton(getString(R.string.Yes), null);
 			dlgAlert.setCancelable(false);
@@ -222,7 +222,24 @@ public class ServosActivity extends SherlockActivity {
 		}
 
 		app.mw.ProcessSerialData(app.loggingON);
+		for (int i = 0; i < 8; i++) {
 
+			// Check the boundaries, if no servos are defined in config.h then
+			// the servo variables remain uninitailised in EEPROM so expect
+			// gibberis
+			if (app.mw.ServoConf[i].Max == 0)
+				app.mw.ServoConf[i].Max = 2000;
+			if ((app.mw.ServoConf[i].Min < 900) || (app.mw.ServoConf[i].Min > 2100))
+				app.mw.ServoConf[i].Min = 1000;
+			if (app.mw.ServoConf[i].MidPoint == 0)
+				app.mw.ServoConf[i].MidPoint = 1500;
+			if ((app.mw.ServoConf[i].Max < 900) || (app.mw.ServoConf[i].Max > 2100))
+				app.mw.ServoConf[i].Max = 2000;
+//			if (app.mw.ServoConf[i].Rate == 0)
+//				app.mw.ServoConf[i].Rate = 100;
+			if ((app.mw.ServoConf[i].MidPoint < 1000) || (app.mw.ServoConf[i].MidPoint > 2000))
+				app.mw.ServoConf[i].MidPoint = 1500;
+		}
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
 				String a = String.format("%02d", i + 1);
