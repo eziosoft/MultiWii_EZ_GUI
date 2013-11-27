@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii.Main;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +27,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,67 +70,63 @@ import com.ezio.multiwii.waypoints.MapWaypointsActivity;
 import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.ezio.sec.Sec;
 import com.viewpagerindicator.TitlePageIndicator;
+import communication.BT_New;
 
 public class MainMultiWiiActivity extends SherlockActivity {
-
 	private boolean killme = false;
-
 	private App app;
-
-	// TextView TVinfo;
 	TextView TVInfo;
-
-	// Message types sent from the BluetoothChatService Handler
-	public static final int MESSAGE_STATE_CHANGE = 1;
-	public static final int MESSAGE_READ = 2;
-	public static final int MESSAGE_WRITE = 3;
-	public static final int MESSAGE_DEVICE_NAME = 4;
-	public static final int MESSAGE_TOAST = 5;
-
-	// Key names received from the BluetoothChatService Handler
-	public static final String DEVICE_NAME = "device_name";
-	public static final String TOAST = "toast";
-
-	private final static Handler mHandler = new Handler();
-	// {
-	// @Override
-	// public void handleMessage(Message msg) {
-	// switch (msg.what) {
-	// case MESSAGE_STATE_CHANGE:
-	// Log.i("ccc", "MESSAGE_STATE_CHANGE: " + msg.arg1);
-	// switch (msg.arg1) {
-	// case BT_New.STATE_CONNECTED:
-	//
-	// break;
-	// case BT_New.STATE_CONNECTING:
-	// break;
-	// case BT_New.STATE_LISTEN:
-	// case BT_New.STATE_NONE:
-	// break;
-	// }
-	// break;
-	// case MESSAGE_WRITE:
-	// break;
-	// case MESSAGE_READ:
-	// break;
-	// case MESSAGE_DEVICE_NAME:
-	// break;
-	// case MESSAGE_TOAST:
-	// Toast.makeText(app.getApplicationContext(),
-	// msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
-	// break;
-	// }
-	// }
-	// };
-
 	ActionBarSherlock actionBar;
+
+	private final Handler mHandler = new Handler();
+	private final Handler mHandler1 = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case BT_New.MESSAGE_STATE_CHANGE:
+				Log.i("ccc", "MESSAGE_STATE_CHANGE: " + msg.arg1);
+
+				switch (msg.arg1) {
+				case BT_New.STATE_CONNECTED:
+					// setStatus("Connected");
+					break;
+				case BT_New.STATE_CONNECTING:
+					setStatus(getString(R.string.Connecting));
+					break;
+				case BT_New.STATE_NONE:
+					break;
+				}
+
+				break;
+			case BT_New.MESSAGE_WRITE:
+				break;
+			case BT_New.MESSAGE_READ:
+				break;
+			case BT_New.MESSAGE_DEVICE_NAME:
+				String deviceName = msg.getData().getString(BT_New.DEVICE_NAME);
+				setStatus(getString(R.string.Connected) + "->" + deviceName);
+				Log.d("ccc", "Device Name=" + deviceName);
+				break;
+			case BT_New.MESSAGE_TOAST:
+				Log.i("ccc", "MESSAGE_TOAST:" + msg.getData().getString(BT_New.TOAST));
+				Toast.makeText(getApplicationContext(), msg.getData().getString(BT_New.TOAST), Toast.LENGTH_SHORT).show();
+				break;
+			}
+		}
+	};
+
+	private final void setStatus(String message) {
+		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+	}
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		app = (App) getApplication();
 
-		// app.commMW.SetHandler(mHandler);
+		app.commMW.SetHandler(mHandler1);
+		app.commFrsky.SetHandler(mHandler1);
 
 		Log.d("aaa", "MAIN ON CREATE");
 		requestWindowFeature(Window.FEATURE_PROGRESS);
@@ -157,20 +155,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		titleIndicator.setViewPager(viewPager);
 
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-		// TVinfo = (TextView) findViewById(R.id.TextViewInfo);
-
-		// if ((app.AppStartCounter % 10 == 0 && app.DonateButtonPressed == 0))
-		// {
-		// if (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()),
-		// Sec.TestersIDs) || Sec.Verify(getApplicationContext(), "D.3")) {
-		// } else {
-		// killme = true;
-		// mHandler.removeCallbacksAndMessages(null);
-		// startActivity(new Intent(getApplicationContext(),
-		// InfoActivity.class));
-		// }
-		// }
 
 		app.AppStartCounter++;
 		app.SaveSettings(true);
@@ -292,7 +276,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			app.mw.ProcessSerialData(app.loggingON);
 
 			app.frskyProtocol.ProcessSerialData(false);
-			setSupportProgress((int) Functions.map(app.frskyProtocol.TxRSSI, 0, 110, 0, 10000));
+			if (app.commFrsky.Connected)
+				setSupportProgress((int) Functions.map(app.frskyProtocol.TxRSSI, 0, 110, 0, 10000));
 
 			String t = new String();
 			if (app.mw.BaroPresent == 1)
@@ -318,7 +303,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			if (app.mw.ArmCount > 0)
 				t1 += getString(R.string.ArmedCount) + ":" + String.valueOf(app.mw.ArmCount) + " " + getString(R.string.LiveTime) + ":" + String.valueOf(app.mw.LifeTime);
 
-			TVInfo.setText(t1);
+			if (app.commMW.Connected)
+				TVInfo.setText(t1);
+			else
+				TVInfo.setText(getString(R.string.NotConnected));
 
 			app.Frequentjobs();
 			app.mw.SendRequest(app.MainRequestMethod);

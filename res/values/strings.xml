@@ -277,5 +277,7 @@
     <string name="Searching">Searching</string>
     <string name="GPSFixOK">GPS Signal OK</string>
     <string name="GPSnotAvailableInYourConfiguration">GPS is not available in your configuration</string>
+    <string name="NotConnected">Not Connected</string>
+    <string name="ConnectionLost">Connection Lost</string>
 
 </resources>
