@@ -42,8 +42,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberDecimal" />
-
+                            android:focusable="false"
+                            android:inputType="numberDecimal"
+                            android:onClick="ShowCustomDialogOnClick"
+                            android:tag="0;65535;5;0" />
                     </TableRow>
 
                     <TableRow
@@ -67,7 +69,6 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="1000;1500;5;0" />
-
                     </TableRow>
 
                     <TableRow
@@ -89,7 +90,6 @@
                             android:ems="10"
                             android:enabled="false"
                             android:inputType="numberDecimal" />
-
                     </TableRow>
 
                     <TableRow
@@ -111,7 +111,6 @@
                             android:ems="10"
                             android:enabled="false"
                             android:inputType="numberDecimal" />
-
                     </TableRow>
 
                     <TableRow
@@ -135,7 +134,6 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="1000;2000;5;0" />
-
                     </TableRow>
 
                     <TableRow
@@ -157,7 +155,6 @@
                             android:ems="10"
                             android:enabled="false"
                             android:inputType="numberDecimal" />
-
                     </TableRow>
 
                     <TableRow
@@ -179,7 +176,6 @@
                             android:ems="10"
                             android:enabled="false"
                             android:inputType="numberDecimal" />
-
                     </TableRow>
 
                     <TableRow
@@ -208,7 +204,6 @@
                             android:layout_height="wrap_content"
                             android:onClick="GetDeclinationOnClick"
                             android:text="@string/Auto" />
-
                     </TableRow>
 
                     <TableRow
@@ -232,7 +227,6 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="0;200;1;0" />
-
                     </TableRow>
 
                     <TableRow
@@ -258,7 +252,6 @@
 
                             <requestFocus />
                         </EditText>
-
                     </TableRow>
 
                     <TableRow
@@ -282,7 +275,6 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="0;20;0.1;1" />
-
                     </TableRow>
 
                     <TableRow
@@ -306,7 +298,6 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="0;20;0.1;1" />
-
                     </TableRow>
 
                     <TableRow
@@ -330,9 +321,7 @@
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
                             android:tag="0;20;0.1;1" />
-
                     </TableRow>
-
                 </TableLayout>
             </LinearLayout>
 
@@ -382,9 +371,7 @@
                     android:layout_gravity="right"
                     android:onClick="SelectSettingSetOnClick"
                     android:text="@string/Set" />
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

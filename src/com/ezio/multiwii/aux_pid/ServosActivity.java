@@ -224,21 +224,23 @@ public class ServosActivity extends SherlockActivity {
 		app.mw.ProcessSerialData(app.loggingON);
 		for (int i = 0; i < 8; i++) {
 
+			// TODO
 			// Check the boundaries, if no servos are defined in config.h then
 			// the servo variables remain uninitailised in EEPROM so expect
 			// gibberis
-			if (app.mw.ServoConf[i].Max == 0)
-				app.mw.ServoConf[i].Max = 2000;
-			if ((app.mw.ServoConf[i].Min < 900) || (app.mw.ServoConf[i].Min > 2100))
+
+			if ((app.mw.ServoConf[i].Min < 400) || (app.mw.ServoConf[i].Min > 1500))
 				app.mw.ServoConf[i].Min = 1000;
-			if (app.mw.ServoConf[i].MidPoint == 0)
-				app.mw.ServoConf[i].MidPoint = 1500;
-			if ((app.mw.ServoConf[i].Max < 900) || (app.mw.ServoConf[i].Max > 2100))
+
+			if ((app.mw.ServoConf[i].Max < 1500) || (app.mw.ServoConf[i].Max > 2500))
 				app.mw.ServoConf[i].Max = 2000;
-//			if (app.mw.ServoConf[i].Rate == 0)
-//				app.mw.ServoConf[i].Rate = 100;
-			if ((app.mw.ServoConf[i].MidPoint < 1000) || (app.mw.ServoConf[i].MidPoint > 2000))
+
+			if ((app.mw.ServoConf[i].MidPoint < 0) || (app.mw.ServoConf[i].MidPoint > 2000))
 				app.mw.ServoConf[i].MidPoint = 1500;
+
+			// if (app.mw.ServoConf[i].Rate == 0)
+			// app.mw.ServoConf[i].Rate = 100;
+
 		}
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
