@@ -27,6 +27,7 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ezio.multiwii.R;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
@@ -50,7 +51,9 @@ public class SerialCDC_ACM extends Communication {
 		public void onNewData(final byte[] data) {
 			for (int i = 0; i < data.length; i++)
 				fifo.put(Integer.valueOf(data[i]));
-			Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
+
+			mHandler.obtainMessage(MESSAGE_READ, data.length, -1, data).sendToTarget();
+			// Log.d("aaa", "FiFo count:" + String.valueOf(fifo.size()));
 
 		}
 	};
@@ -66,7 +69,7 @@ public class SerialCDC_ACM extends Communication {
 	@Override
 	public void Enable() {
 
-		Toast.makeText(context, "Starting Serial Other Chips", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "Starting Serial", Toast.LENGTH_SHORT).show();
 
 		mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
 		mSerial = UsbSerialProber.findFirstDevice(mUsbManager);
@@ -101,12 +104,18 @@ public class SerialCDC_ACM extends Communication {
 	public void Connect(String address, int speed) {
 
 		try {
-
 			mSerial.setParameters(speed, UsbSerialDriver.DATABITS_8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
-		} catch (NumberFormatException e) {
+			Connected = true;
+			sendDeviceName("Serial Port " + String.valueOf(speed));
+			setState(STATE_CONNECTED);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Connected = false;
+			setState(STATE_NONE);
+			sendMessageToUI_Toast(context.getString(R.string.Unabletoconnect));
 		}
-		Connected = true;
+
 	}
 
 	@Override
@@ -148,23 +157,13 @@ public class SerialCDC_ACM extends Communication {
 			// mSerial = null;
 		}
 		Connected = false;
-
-		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
-
+		sendMessageToUI_Toast(context.getString(R.string.Disconnected));
+		setState(STATE_NONE);
 	}
 
 	@Override
 	public void Disable() {
-
-		try {
-			if (mSerial != null)
-				mSerial.close();
-			Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
-			Connected = false;
-		} catch (IOException e) {
-			// e.printStackTrace();
-		}
-
+		Close();
 	}
 
 	private void stopIoManager() {

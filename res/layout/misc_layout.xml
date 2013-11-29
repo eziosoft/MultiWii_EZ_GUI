@@ -89,6 +89,7 @@
                             android:layout_weight="1"
                             android:ems="10"
                             android:enabled="false"
+                            android:focusable="false"
                             android:inputType="numberDecimal" />
                     </TableRow>
 
@@ -110,6 +111,7 @@
                             android:layout_weight="1"
                             android:ems="10"
                             android:enabled="false"
+                            android:focusable="false"
                             android:inputType="numberDecimal" />
                     </TableRow>
 
@@ -154,6 +156,7 @@
                             android:layout_weight="1"
                             android:ems="10"
                             android:enabled="false"
+                            android:focusable="false"
                             android:inputType="numberDecimal" />
                     </TableRow>
 
@@ -175,6 +178,7 @@
                             android:layout_weight="1"
                             android:ems="10"
                             android:enabled="false"
+                            android:focusable="false"
                             android:inputType="numberDecimal" />
                     </TableRow>
 
@@ -195,7 +199,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberDecimal" />
+                            android:focusable="false"
+                            android:inputType="numberDecimal"
+                            android:onClick="ShowCustomDialogOnClick"
+                            android:tag="-180;180;0.1;2" />
 
                         <Button
                             android:id="@+id/button2"

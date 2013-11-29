@@ -61,16 +61,10 @@
                     android:visibility="gone" />
 
                 <CheckBox
-                    android:id="@+id/checkBoxNewRequestMethod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/NewRequestMethod" />
-
-                <CheckBox
                     android:id="@+id/CheckBox_BT_New"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BT NEW" />
+                    android:text="BT NEW(experimental - if you can&apos;t connect disable this)" />
 
                 <CheckBox
                     android:id="@+id/checkBoxDisableBTonExit"

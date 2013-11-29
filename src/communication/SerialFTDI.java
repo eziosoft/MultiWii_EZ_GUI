@@ -27,6 +27,8 @@ import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.widget.Toast;
 
+import com.ezio.multiwii.R;
+
 public class SerialFTDI extends Communication {
 
 	// [FTDriver] Permission String
@@ -68,10 +70,13 @@ public class SerialFTDI extends Communication {
 			Connected = true;
 			loopStop = false;
 			startMainLoop();
-			Toast.makeText(context, "Serial connected", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context, "Serial connected",
+			// Toast.LENGTH_SHORT).show();
+			setState(STATE_CONNECTED);
+			sendDeviceName("Serial Port " + String.valueOf(speed));
 		} else {
 			Connected = false;
-			Toast.makeText(context, "Serial cannot connect", Toast.LENGTH_SHORT).show();
+			sendMessageToUI_Toast(context.getString(R.string.Unabletoconnect));
 		}
 	}
 
@@ -103,7 +108,8 @@ public class SerialFTDI extends Communication {
 		Connected = false;
 		loopStop = true;
 		mSerial.end();
-		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
+		sendMessageToUI_Toast(context.getString(R.string.Disconnected));
+		setState(STATE_NONE);
 	}
 
 	@Override
@@ -112,7 +118,8 @@ public class SerialFTDI extends Communication {
 		loopStop = true;
 		mSerial.end();
 		context.unregisterReceiver(mUsbReceiver);
-		Toast.makeText(context, "Serial port disconnected", Toast.LENGTH_SHORT).show();
+		sendMessageToUI_Toast(context.getString(R.string.Disconnected));
+		setState(STATE_NONE);
 
 	}
 
@@ -147,6 +154,8 @@ public class SerialFTDI extends Communication {
 		if (mSerial.isConnected()) {
 			// [FTDriver] Read from USB Serial
 			int len = mSerial.read(rbuf);
+
+			mHandler.obtainMessage(MESSAGE_READ, len, -1, rbuf).sendToTarget();
 
 			// Log.d("aaa", "ReadtoBuffer:" + String.valueOf(rbuf));
 			for (int i = 0; i < len; i++)

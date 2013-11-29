@@ -57,7 +57,6 @@ public class ConfigActivity extends SherlockActivity {
 	CheckBox CheckBoxCopyFrskyToMW;
 	CheckBox CheckBoxReverseRollDirection;
 	CheckBox CheckBoxUseFTDISerial;
-	CheckBox CheckBoxNewRequestMethod;
 	CheckBox CheckBoxFrskySupport;
 	CheckBox CheckBoxBT_New;
 
@@ -153,7 +152,6 @@ public class ConfigActivity extends SherlockActivity {
 		LayoutSerialFTDI = (LinearLayout) findViewById(R.id.LinearLayoutSerialPort);
 		RadioFTDI = (RadioButton) findViewById(R.id.radioFTDI);
 		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
-		CheckBoxNewRequestMethod = (CheckBox) findViewById(R.id.checkBoxNewRequestMethod);
 		CheckBoxBT_New = (CheckBox) findViewById(R.id.CheckBox_BT_New);
 
 		CheckBoxFrskySupport = (CheckBox) findViewById(R.id.checkBoxFrskySupport);
@@ -162,6 +160,16 @@ public class ConfigActivity extends SherlockActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				ShowFrskySupport(isChecked);
+			}
+		});
+
+		CheckBoxUseFTDISerial.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					RadioFTDI.setChecked(true);
+					RadioOtherChips.setChecked(false);
+				}
 			}
 		});
 
@@ -214,8 +222,10 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
 		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
-		RadioFTDI.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT);
-		RadioOtherChips.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
+		if (CheckBoxUseFTDISerial.isChecked()) {
+			RadioFTDI.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT);
+			RadioOtherChips.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
+		}
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
 			LayoutSerialFTDI.setVisibility(View.GONE);
 		}
@@ -236,12 +246,6 @@ public class ConfigActivity extends SherlockActivity {
 		EditTextRefreshRate.setText(String.valueOf(app.RefreshRate));
 		EditTextMapCenterPeriod.setText(String.valueOf(app.MapCenterPeriod));
 		EditTextSerialBaudRateMW.setText(String.valueOf(app.SerialPortBaudRateMW));
-
-		if (app.MainRequestMethod == 2) {
-			CheckBoxNewRequestMethod.setChecked(true);
-		} else {
-			CheckBoxNewRequestMethod.setChecked(false);
-		}
 
 		CheckBoxFrskySupport.setChecked(app.FrskySupport);
 		ShowFrskySupport(app.FrskySupport);
@@ -324,12 +328,6 @@ public class ConfigActivity extends SherlockActivity {
 		if (EditTextSerialBaudRateMW.getText().toString().equals(""))
 			EditTextSerialBaudRateMW.setText("115200");
 		app.SerialPortBaudRateMW = Integer.parseInt(EditTextSerialBaudRateMW.getText().toString());
-
-		if (CheckBoxNewRequestMethod.isChecked()) {
-			app.MainRequestMethod = 2;
-		} else {
-			app.MainRequestMethod = 1;
-		}
 
 		app.FrskySupport = CheckBoxFrskySupport.isChecked();
 

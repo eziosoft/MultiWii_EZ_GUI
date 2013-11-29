@@ -19,6 +19,8 @@ package com.ezio.multiwii.helpers;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +35,8 @@ public class FileAccess {
 	File root;
 	FileWriter filewriter;
 	BufferedWriter out;
+	
+	
 
 	public static String ReadFile(String fileName) {
 		File sdcard = Environment.getExternalStorageDirectory();
@@ -98,6 +102,7 @@ public class FileAccess {
 		if (root.canWrite()) {
 			try {
 				out.write(s + "\n");
+
 				Log.d("plik", "write OK");
 			} catch (IOException e) {
 

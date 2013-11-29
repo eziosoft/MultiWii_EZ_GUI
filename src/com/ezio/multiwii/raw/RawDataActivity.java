@@ -240,8 +240,6 @@ public class RawDataActivity extends Activity {
 		log("timer2", app.mw.timer2);
 		log("dataFlow", app.mw.DataFlow);
 
-		log("bt.ConnectionLost", String.valueOf(app.mw.communication.ConnectionLost));
-		log("bt.ReconnectTry", String.valueOf(app.mw.communication.ReconnectTry));
 		log("AppStartCounter", String.valueOf(app.AppStartCounter));
 		log("DonationButtonPressed", String.valueOf(app.DonateButtonPressed));
 		log("Andorid version", String.valueOf(Build.VERSION.SDK_INT));

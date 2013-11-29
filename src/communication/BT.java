@@ -71,8 +71,7 @@ public class BT extends Communication {
 				GetRemoteDevice(address);
 				btSocket.connect();
 				Connected = true;
-				ConnectionLost = false;
-				ReconnectTry = 0;
+
 				Log.d(TAG, "BT connection established, data transfer link open.");
 				Toast.makeText(context, context.getString(R.string.Connected), Toast.LENGTH_LONG).show();
 
@@ -82,7 +81,7 @@ public class BT extends Communication {
 				try {
 					btSocket.close();
 					Connected = false;
-					ConnectionLost = true;
+
 					Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
 					// app.Speak("Unable to connect");
 
@@ -144,7 +143,7 @@ public class BT extends Communication {
 		} catch (IOException e) {
 			Log.e(TAG, "SEND : Exception during write.", e);
 			CloseSocket();
-			ConnectionLost = true;
+
 			Toast.makeText(context, "Write error", Toast.LENGTH_LONG).show();
 		}
 

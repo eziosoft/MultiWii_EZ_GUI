@@ -16,7 +16,6 @@
  */
 package com.ezio.multiwii.Main;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,6 +58,7 @@ import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.gps.GPSActivity;
 import com.ezio.multiwii.gps.MOCK_GPS_Service;
 import com.ezio.multiwii.graph.GraphsActivity;
+import com.ezio.multiwii.helpers.BinaryFileAccess;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.motors.MotorsActivity;
@@ -80,6 +80,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	private final Handler mHandler = new Handler();
 	private final Handler mHandler1 = new Handler() {
+		//BinaryFileAccess file = new BinaryFileAccess("/MultiWiiLogs/dump1.txt", true);
+
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -101,6 +103,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			case BT_New.MESSAGE_WRITE:
 				break;
 			case BT_New.MESSAGE_READ:
+//				byte[] readBuf = (byte[]) msg.obj;
+//				String readMessage = new String(readBuf, 0, msg.arg1);
+//				//file.WriteBytes(readBuf);
+				
 				break;
 			case BT_New.MESSAGE_DEVICE_NAME:
 				String deviceName = msg.getData().getString(BT_New.DEVICE_NAME);
@@ -223,11 +229,13 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	}
 
-	public void Close(View v) {
+	public void Close() {
 		try {
 			mHandler.removeCallbacksAndMessages(null);
-			app.commMW.Close();
-			app.commFrsky.Close();
+			if (app.commMW.Connected)
+				app.commMW.Close();
+			if (app.commFrsky.Connected)
+				app.commFrsky.Close();
 		}
 
 		catch (Exception e) {
@@ -237,15 +245,20 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void Connect() {
-		if (!app.MacAddress.equals("")) {
+		if (app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_BT_NEW) {
+			if (!app.MacAddress.equals("")) {
+				app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
+				app.Say(getString(R.string.menu_connect));
+			} else {
+				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
+			}
+			try {
+				mHandler.removeCallbacksAndMessages(null);
+			} catch (Exception e) {
+			}
+		} else {
 			app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
 			app.Say(getString(R.string.menu_connect));
-		} else {
-			Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device", Toast.LENGTH_LONG).show();
-		}
-		try {
-			mHandler.removeCallbacksAndMessages(null);
-		} catch (Exception e) {
 		}
 	}
 
@@ -545,7 +558,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		app.sensors.stop();
 		app.mw.CloseLoggingFile();
 		app.notifications.Cancel(99);
-		Close(null);
+		Close();
 		System.exit(0);
 	}
 
@@ -587,9 +600,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (item.getItemId() == R.id.menu_disconnect) {
 			app.Say(getString(R.string.menu_disconnect));
-			app.commMW.ConnectionLost = false;
-			app.commFrsky.ConnectionLost = false;
-			Close(null);
+			Close();
 			return true;
 		}
 

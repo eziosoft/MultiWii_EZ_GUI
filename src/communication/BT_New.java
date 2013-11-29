@@ -32,56 +32,11 @@ public class BT_New extends Communication {
 
 	private ConnectThread mConnectThread;
 	private ConnectedThread mConnectedThread;
-	private int mState;
 
 	private InputStream mmInStream;
 	private OutputStream mmOutStream;
 
 	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
-
-	// Constants that indicate the current connection state
-	public static final int STATE_NONE = 0; // we're doing nothing
-	public static final int STATE_CONNECTING = 2; // now initiating an outgoing
-													// connection
-	public static final int STATE_CONNECTED = 3; // now connected to a remote
-													// device
-
-	// Message types sent from the BluetoothChatService Handler
-	public static final int MESSAGE_STATE_CHANGE = 1;
-	public static final int MESSAGE_READ = 2;
-	public static final int MESSAGE_WRITE = 3;
-	public static final int MESSAGE_DEVICE_NAME = 4;
-	public static final int MESSAGE_TOAST = 5;
-
-	// Key names received from the BluetoothChatService Handler
-	public static final String DEVICE_NAME = "device_name";
-	public static final String TOAST = "toast";
-
-	/**
-	 * Set the current state of the chat connection
-	 * 
-	 * @param state
-	 *            An integer defining the current connection state
-	 */
-	private synchronized void setState(int state) {
-		if (D)
-			Log.d(TAG, "setState() " + mState + " -> " + state);
-		mState = state;
-
-		// Give the new state to the Handler so the UI Activity can update
-		if (mHandler != null)
-			mHandler.obtainMessage(MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
-		else
-			Log.d("ccc", "setState() Handle=null error state" + " -> " + state);
-
-	}
-
-	/**
-	 * Return the current connection state.
-	 */
-	public synchronized int getState() {
-		return mState;
-	}
 
 	/**
 	 * Start the chat service. Specifically start AcceptThread to begin a
@@ -166,14 +121,7 @@ public class BT_New extends Communication {
 		mConnectedThread = new ConnectedThread(socket);
 		mConnectedThread.start();
 
-		// Send the name of the connected device back to the UI Activity
-		if (mHandler != null) {
-			Message msg = mHandler.obtainMessage(MESSAGE_DEVICE_NAME);
-			Bundle bundle = new Bundle();
-			bundle.putString(DEVICE_NAME, device.getName());
-			msg.setData(bundle);
-			mHandler.sendMessage(msg);
-		}
+		sendDeviceName(device.getName());
 
 		setState(STATE_CONNECTED);
 		Connected = true;
@@ -216,28 +164,12 @@ public class BT_New extends Communication {
 	}
 
 	/**
-	 * Sends Message to UI via Handler
-	 * 
-	 * @param message
-	 */
-	private void sendMessageToUI_Toast(String message) {
-		// Send a failure message back to the Activity
-		if (mHandler != null) {
-			Message msg = mHandler.obtainMessage(MESSAGE_TOAST);
-			Bundle bundle = new Bundle();
-			bundle.putString(TOAST, message);
-			msg.setData(bundle);
-			mHandler.sendMessage(msg);
-		}
-	}
-
-	/**
 	 * Indicate that the connection was lost and notify the UI Activity.
 	 */
 	private void connectionLost() {
 		setState(STATE_NONE);
 		Connected = false;
-		ConnectionLost = true;
+
 		Log.d(TAG, "connectionLost");
 
 		sendMessageToUI_Toast(context.getString(R.string.ConnectionLost));
@@ -301,8 +233,7 @@ public class BT_New extends Communication {
 				Log.i(TAG, "trying to connect");
 				mmSocket.connect();
 				Connected = true;
-				ConnectionLost = false;
-				ReconnectTry = 0;
+
 				Log.i(TAG, "BT connection established, data transfer link open.");
 
 			} catch (IOException e) {
@@ -378,8 +309,7 @@ public class BT_New extends Communication {
 						fifo.put(Integer.valueOf(buffer[i]));
 
 					// Send the obtained bytes to the UI Activity
-					// mHandler.obtainMessage(BlueTerm.MESSAGE_READ, bytes, -1,
-					// buffer).sendToTarget();
+					mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer).sendToTarget();
 
 					// String a = buffer.toString();
 
