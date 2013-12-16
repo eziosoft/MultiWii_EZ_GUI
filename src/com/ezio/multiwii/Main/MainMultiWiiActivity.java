@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii.Main;
 
+import nav.NavActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,7 +59,6 @@ import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.gps.GPSActivity;
 import com.ezio.multiwii.gps.MOCK_GPS_Service;
 import com.ezio.multiwii.graph.GraphsActivity;
-import com.ezio.multiwii.helpers.BinaryFileAccess;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.log.LogActivity;
 import com.ezio.multiwii.motors.MotorsActivity;
@@ -67,7 +67,6 @@ import com.ezio.multiwii.other.MiscActivity;
 import com.ezio.multiwii.radio.RadioActivity;
 import com.ezio.multiwii.raw.RawDataActivity;
 import com.ezio.multiwii.waypoints.MapWaypointsActivity;
-import com.ezio.multiwii.waypoints.WaypointActivity;
 import com.ezio.sec.Sec;
 import com.viewpagerindicator.TitlePageIndicator;
 import communication.BT_New;
@@ -80,7 +79,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	private final Handler mHandler = new Handler();
 	private final Handler mHandler1 = new Handler() {
-		//BinaryFileAccess file = new BinaryFileAccess("/MultiWiiLogs/dump1.txt", true);
+		// BinaryFileAccess file = new
+		// BinaryFileAccess("/MultiWiiLogs/dump1.txt", true);
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -103,10 +103,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			case BT_New.MESSAGE_WRITE:
 				break;
 			case BT_New.MESSAGE_READ:
-//				byte[] readBuf = (byte[]) msg.obj;
-//				String readMessage = new String(readBuf, 0, msg.arg1);
-//				//file.WriteBytes(readBuf);
-				
+				// byte[] readBuf = (byte[]) msg.obj;
+				// String readMessage = new String(readBuf, 0, msg.arg1);
+				// //file.WriteBytes(readBuf);
+
 				break;
 			case BT_New.MESSAGE_DEVICE_NAME:
 				String deviceName = msg.getData().getString(BT_New.DEVICE_NAME);
@@ -263,11 +263,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	public void ConnectFrsky(String MacAddress) {
-		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL_FTDI) {
-			app.commMW.Connect(app.MacAddressFrsky, app.SerialPortBaudRateFrSky);
-		}
+		// if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_SERIAL_FTDI)
+		// {
+		// app.commMW.Connect(app.MacAddressFrsky, app.SerialPortBaudRateFrSky);
+		// }
 
-		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT) {
+		if (app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT || app.CommunicationTypeFrSky == App.COMMUNICATION_TYPE_BT_NEW) {
 			if (!app.MacAddressFrsky.equals("")) {
 				app.commFrsky.Connect(app.MacAddressFrsky, app.SerialPortBaudRateFrSky);
 				app.Say(getString(R.string.Connect_frsky));
@@ -447,7 +448,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		if (app.checkGooglePlayServicesAvailability(this)) {
 			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", true));
+			// startActivity(new Intent(getApplicationContext(),
+			// MapWaypointsActivity.class).putExtra("WAYPOINT", true));
+			startActivity(new Intent(getApplicationContext(), NavActivity.class));
 		}
 
 	}
@@ -488,7 +491,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void TestOnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), WaypointActivity.class));
+		startActivity(new Intent(getApplicationContext(), NavActivity.class));
 	}
 
 	public void CommunityMapOnClick(View v) {

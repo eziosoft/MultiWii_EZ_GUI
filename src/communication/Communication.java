@@ -33,6 +33,9 @@ public abstract class Communication {
 	Context context;
 
 	protected int mState;
+	
+	public long BytesSent=0;
+	public long BytesRecieved=0;
 
 	// Constants that indicate the current connection state
 	public static final int STATE_NONE = 0; // we're doing nothing
@@ -128,7 +131,9 @@ public abstract class Communication {
 
 	public abstract byte Read();
 
-	public abstract void Write(byte[] arr);
+	public  void Write(byte[] arr){
+		BytesSent+=arr.length;
+	}
 
 	public abstract void Close();
 

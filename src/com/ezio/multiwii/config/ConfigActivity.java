@@ -39,8 +39,9 @@ public class ConfigActivity extends SherlockActivity {
 	App app;
 	RadioButton Mode1;
 	RadioButton Mode2;
-	RadioButton Protocol20;
-	RadioButton Protocol21;
+	RadioButton Protocol220;
+	RadioButton Protocol230;
+	RadioButton Protocol231;
 	RadioButton MagMode1;
 	RadioButton MagMode2;
 	RadioButton RadioFTDI;
@@ -124,8 +125,9 @@ public class ConfigActivity extends SherlockActivity {
 
 		Mode1 = (RadioButton) findViewById(R.id.radioButton1);
 		Mode2 = (RadioButton) findViewById(R.id.radioButton2);
-		Protocol20 = (RadioButton) findViewById(R.id.radioButtonProtocol20);
-		Protocol21 = (RadioButton) findViewById(R.id.radioButtonProtocol21);
+		Protocol220 = (RadioButton) findViewById(R.id.radioButtonProtocol220);
+		Protocol230 = (RadioButton) findViewById(R.id.radioButtonProtocol230);
+		Protocol231 = (RadioButton) findViewById(R.id.radioButtonProtocol231);
 		MagMode1 = (RadioButton) findViewById(R.id.radioButtonMagMode1);
 		MagMode2 = (RadioButton) findViewById(R.id.radioButtonMagMode2);
 		CheckBoxTTS = (CheckBox) findViewById(R.id.checkBoxTTS);
@@ -202,10 +204,19 @@ public class ConfigActivity extends SherlockActivity {
 			Mode2.setChecked(true);
 		}
 
-		if (app.Protocol == 220) {
-			Protocol20.setChecked(true);
-		} else {
-			Protocol21.setChecked(true);
+		switch (app.Protocol) {
+		case 220:
+			Protocol220.setChecked(true);
+			break;
+		case 230:
+			Protocol230.setChecked(true);
+			break;
+		case 231:
+			Protocol231.setChecked(true);
+			break;
+
+		default:
+			break;
 		}
 
 		if (app.MagMode == 1) {
@@ -270,12 +281,16 @@ public class ConfigActivity extends SherlockActivity {
 			app.RadioMode = 2;
 		}
 
-		if (Protocol20.isChecked()) {
+		if (Protocol220.isChecked()) {
 			app.Protocol = 220;
 		}
 
-		if (Protocol21.isChecked()) {
+		if (Protocol230.isChecked()) {
 			app.Protocol = 230;
+		}
+
+		if (Protocol231.isChecked()) {
+			app.Protocol = 231;
 		}
 
 		if (MagMode1.isChecked()) {

@@ -74,7 +74,7 @@ public class RawDataActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+
 		setContentView(R.layout.raw_data_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		TVData = (TextView) findViewById(R.id.textViewData);
@@ -124,6 +124,11 @@ public class RawDataActivity extends Activity {
 		TVMWInfo.setText("MW Version:" + String.valueOf(app.mw.version) + "\n" + "MultiType:" + app.mw.MultiTypeName[app.mw.multiType] + "\n" + "CycleTime:" + String.valueOf(app.mw.cycleTime) + "\n" + "i2cError:" + String.valueOf(app.mw.i2cError) + "\n" + t + "\n MSP_ver:" + String.valueOf(app.mw.MSPversion));
 
 		TVData.setText("");
+
+		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
+		log("EZ-Gui Protocol", app.mw.EZGUIProtocol);
+		log("BytesSent", app.mw.communication.BytesSent);
+		log("BytesRecieved", app.mw.communication.BytesRecieved);
 
 		log("gx", app.mw.gx);
 		log("gy", app.mw.gy);
@@ -219,8 +224,6 @@ public class RawDataActivity extends Activity {
 
 		log("---", 0);
 
-		log("EZ-Gui Protocol", app.mw.EZGUIProtocol);
-
 		String app_ver = "";
 		int app_ver_code = 0;
 		try {
@@ -246,7 +249,6 @@ public class RawDataActivity extends Activity {
 		log("CommunicationTypeMW", app.CommunicationTypeMW);
 		log("comm Connected", String.valueOf(app.commMW.Connected));
 		log("commFrsky Connected", String.valueOf(app.commFrsky.Connected));
-		log("DeviceID", Sec.GetDeviceID(getApplicationContext()));
 
 	}
 

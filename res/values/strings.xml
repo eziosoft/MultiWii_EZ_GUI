@@ -280,4 +280,33 @@
     <string name="NotConnected">Not Connected</string>
     <string name="ConnectionLost">Connection Lost</string>
 
+    <string-array name="wp_actions">
+        <item>WayPoint</item>
+        <item>PosHold Unlimited</item>
+        <item>PosHold Time</item>
+        <item>RTH</item>
+        <item>Set POI</item>
+        <item>Jump</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="Navigation">Navigation</string>
+    <string name="RemoveWP">Remove this WP</string>
+   
+    <string name="SelectAfile">Select a File:</string>
+    <string name="Open">Open</string>
+    <string name="Options">Options</string>
+    
+    <string name="MaxNumberOfWP">Max number of WP:</string>
+    <string name="WPError">WP Error</string>
+    <string name="isNotCorrect">is not correct</string>
+    <string name="CRCisNotCorrect">CRC is not correct</string>
+    <string name="Downloading">Downloading</string>
+    <string name="PleaseWait">Please wait ...</string>
+    <string name="Uploading">Uploading</string>
+    <string name="MaxNumberWPreached">Cannot add mission step. Maximum number of mission steps reached</string>
+    <string name="Info">Info</string>
+    <string name="FileVersionMismach">Version of mission is not made for this version of WinGUI</string>
+
 </resources>

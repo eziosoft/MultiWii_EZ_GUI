@@ -125,6 +125,7 @@ public class BT extends Communication {
 
 	@Override
 	public byte Read() {
+		BytesRecieved+=1;
 		byte a = 0;
 		try {
 			a = (byte) inStream.read();
@@ -137,6 +138,7 @@ public class BT extends Communication {
 
 	@Override
 	public void Write(byte[] arr) {
+		super.Write(arr);
 		try {
 			if (Connected)
 				outStream.write(arr);

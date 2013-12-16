@@ -27,10 +27,10 @@ import android.util.Log;
 import com.ezio.multiwii.waypoints.Waypoint;
 import communication.Communication;
 
-public class MultiWii230 extends MultirotorData {
+public class MultiWii230NAV extends MultirotorData {
 
-	public MultiWii230(Communication bt) {
-		EZGUIProtocol = "2.3";
+	public MultiWii230NAV(Communication bt) {
+		EZGUIProtocol = "2.3 NAV";
 
 		timer1 = 10; // used to send request every 10 requests
 		timer2 = 0; // used to send requests once after connection
@@ -336,20 +336,37 @@ public class MultiWii230 extends MultirotorData {
 			}
 			break;
 		case MSP_WP:
-			Waypoint WP = new Waypoint();
+			WaypointNav WP = new WaypointNav();
 			WP.Number = read8();
+			WP.Action = read8();
 			WP.Lat = read32();
 			WP.Lon = read32();
-			WP.Altitude = read32();
-			WP.Heading = read16();
-			WP.TimeToStay = read16();
-			WP.NavFlag = read8();
+			WP.Altitude = read32() / 100;
+			WP.Parameter = read16();
+			WP.Flag = read8();
 
-			Waypoints[WP.Number] = WP;
+			WaypointsList.add(WP);
 
-			Log.d("aaa", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " " + String.valueOf(WP.Altitude) + " " + String.valueOf(WP.NavFlag));
+			Log.d("nav", "MSP_WP (get) " + String.valueOf(WP.Number) + "  " + String.valueOf(WP.Lat) + "x" + String.valueOf(WP.Lon) + " A" + String.valueOf(WP.Action) + " F" + String.valueOf(WP.Flag));
 			break;
 
+		case MSP_NAV_CONFIG:
+			NAVmaxWpNumber = read8();
+			break;
+
+		case MSP_NAV_STATUS: {
+			NAVGPSMode = read8();
+			NAVstate = read8();// serialize8(NAV_state);
+			NAVcurrentAction = read8();// serialize8(mission_step.action);
+			NAVcurrentWPNumber = read8();// serialize8(mission_step.number);
+			NAVerror = read8();// serialize8(NAV_error);
+			//
+			NAVoriginalAltitude = read32();// serialize32(original_altitude);
+			NAVtargetAltitude = read32();// serialize32(target_altitude);
+			NAValtToHold = read32();// serialize32(alt_to_hold);
+			NAValtChangeFlag = read8();// serialize8(alt_change_flag);
+		}
+			break;
 		default:
 			Log.e("aaa", "Error command - unknown replay " + String.valueOf(icmd));
 
@@ -610,6 +627,12 @@ public class MultiWii230 extends MultirotorData {
 	}
 
 	@Override
+	public void SendRequestMSP_NAV_CONFIG() {
+		sendRequestMSP(requestMSP(MSP_NAV_CONFIG));
+
+	}
+
+	@Override
 	public void SendRequestMSP_MISC() {
 		sendRequestMSP(requestMSP(MSP_MISC));
 
@@ -653,18 +676,7 @@ public class MultiWii230 extends MultirotorData {
 		sendRequestMSP(requestMSP(MSP_SET_RAW_RC, payload.toArray(new Character[payload.size()])));
 
 		sendRequestMSP(requestMSP(new int[] { MSP_RC }));
-
-		// rcRoll = read16();
-		// rcPitch = read16();
-		// rcYaw = read16();
-		// rcThrottle = read16();
-		// rcAUX1 = read16();
-		// rcAUX2 = read16();
-		// rcAUX3 = read16();
-		// rcAUX4 = read16();
-
 		Log.d("aaa", "RC:" + String.valueOf(rcRoll) + " " + String.valueOf(rcPitch) + " " + String.valueOf(rcYaw) + " " + String.valueOf(rcThrottle) + " " + String.valueOf(rcAUX1) + " " + String.valueOf(rcAUX2) + " " + String.valueOf(rcAUX3) + " " + String.valueOf(rcAUX4));
-
 	}
 
 	@Override
@@ -680,9 +692,6 @@ public class MultiWii230 extends MultirotorData {
 			activation[i] = 0;
 			for (int aa = 0; aa < 12; aa++) {
 				activation[i] += (int) (((int) (Checkbox[i][aa] ? 1 : 0)) * (1 << aa));
-				// activation[i] += (int) (checkbox[i].arrayValue()[aa] * (1 <<
-				// aa));
-
 			}
 			payload.add((char) (activation[i] % 256));
 			payload.add((char) (activation[i] / 256));
@@ -697,54 +706,10 @@ public class MultiWii230 extends MultirotorData {
 		sendRequestMSP(requestMSP(MSP_EEPROM_WRITE));
 	}
 
-	// //Main Request//////////////////////////////////////////////////
-
-	// public void SendRequest1() {
-	// if (communication.Connected) {
-	// int[] requests;
-	//
-	// // this is fired only once////////
-	// if (timer2 < 5) {
-	// timer2++;
-	// } else {
-	// if (timer2 != 10) {
-	//
-	// requests = new int[] { MSP_BOXNAMES };
-	// sendRequestMSP(requestMSP(requests));
-	// timer2 = 10;
-	// return;
-	// }
-	// }
-	// // ///////////////////////////////////////
-	//
-	// timer1++;
-	// if (timer1 > 10) { // fired every 10 requests
-	// requests = new int[] { MSP_ANALOG, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
-	// sendRequestMSP(requestMSP(requests));
-	// timer1 = 0;
-	//
-	// if (CHECKBOXITEMS == 0)
-	// timer2 = 0;
-	// return;
-	// }
-	//
-	// requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO, MSP_MOTOR,
-	// MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE, MSP_ATTITUDE, MSP_DEBUG
-	// };
-	// sendRequestMSP(requestMSP(requests));
-	//
-	// } else {
-	// timer1 = 10;
-	// timer2 = 0;
-	// }
-	// }
-
-	// NEW Main requests///////////////////////////////////////////////
-
 	int timer3 = -1;
 
 	int[] requests = new int[] { 0, MSP_ATTITUDE, MSP_ALTITUDE, MSP_RAW_GPS, MSP_BOX, MSP_RAW_IMU };
-	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX, MSP_MISC };
+	final int[] requestsOnce = new int[] { MSP_IDENT, MSP_BOXNAMES, MSP_PID, MSP_BOX, MSP_MISC, MSP_NAV_CONFIG };
 	int[] requestsPeriodical = new int[] { MSP_STATUS, MSP_COMP_GPS, MSP_ANALOG, MSP_SERVO, MSP_MOTOR, MSP_RC, MSP_DEBUG };
 
 	public void SendRequest2() {
@@ -827,38 +792,6 @@ public class MultiWii230 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestMSP_SET_WP(Waypoint w) {
-		ArrayList<Character> payload = new ArrayList<Character>();
-		payload.add((char) w.Number);
-		payload.add((char) (w.Lat & 0xFF));
-		payload.add((char) ((w.Lat >> 8) & 0xFF));
-		payload.add((char) ((w.Lat >> 16) & 0xFF));
-		payload.add((char) ((w.Lat >> 24) & 0xFF));
-
-		payload.add((char) (w.Lon & 0xFF));
-		payload.add((char) ((w.Lon >> 8) & 0xFF));
-		payload.add((char) ((w.Lon >> 16) & 0xFF));
-		payload.add((char) ((w.Lon >> 24) & 0xFF));
-
-		payload.add((char) (w.Altitude & 0xFF));
-		payload.add((char) ((w.Altitude >> 8) & 0xFF));
-		payload.add((char) ((w.Altitude >> 16) & 0xFF));
-		payload.add((char) ((w.Altitude >> 24) & 0xFF));
-
-		payload.add((char) (w.Heading & 0xFF));
-		payload.add((char) ((w.Heading >> 8) & 0xFF));
-
-		payload.add((char) (w.TimeToStay & 0xFF));
-		payload.add((char) ((w.TimeToStay >> 8) & 0xFF));
-
-		payload.add((char) w.NavFlag);
-
-		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
-
-		Log.d("aaa", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Altitude) + " " + String.valueOf(w.NavFlag));
-	}
-
-	@Override
 	public void SendRequestMSP_SET_HEAD(int heading) {
 		payload = new ArrayList<Character>();
 		payload.add((char) (heading & 0xFF));
@@ -913,15 +846,51 @@ public class MultiWii230 extends MultirotorData {
 	}
 
 	@Override
-	public void SendRequestMSP_SET_WP_NAV(WaypointNav w) {
-		// TODO Auto-generated method stub
-		
+	public void SendRequestMSP_SET_WP(Waypoint waypoint) {
+		// Not used with NAV
+
 	}
 
 	@Override
-	public void SendRequestMSP_NAV_CONFIG() {
-		// TODO Auto-generated method stub
-		
+	public void SendRequestMSP_SET_WP_NAV(WaypointNav w) {
+		w.Altitude *= 100;
+
+		// mission_step.number = wp_no;
+		// mission_step.action = read8();
+		// mission_step.pos[LAT] = read32();
+		// mission_step.pos[LON] = read32();
+		// mission_step.altitude = read32();
+		// mission_step.parameter = read16();
+		// mission_step.flag = read8();
+
+		ArrayList<Character> payload = new ArrayList<Character>();
+		payload.add((char) w.Number);
+
+		payload.add((char) w.Action);
+
+		payload.add((char) (w.Lat & 0xFF));
+		payload.add((char) ((w.Lat >> 8) & 0xFF));
+		payload.add((char) ((w.Lat >> 16) & 0xFF));
+		payload.add((char) ((w.Lat >> 24) & 0xFF));
+
+		payload.add((char) (w.Lon & 0xFF));
+		payload.add((char) ((w.Lon >> 8) & 0xFF));
+		payload.add((char) ((w.Lon >> 16) & 0xFF));
+		payload.add((char) ((w.Lon >> 24) & 0xFF));
+
+		payload.add((char) (w.Altitude & 0xFF));
+		payload.add((char) ((w.Altitude >> 8) & 0xFF));
+		payload.add((char) ((w.Altitude >> 16) & 0xFF));
+		payload.add((char) ((w.Altitude >> 24) & 0xFF));
+
+		payload.add((char) (w.Parameter & 0xFF));
+		payload.add((char) ((w.Parameter >> 8) & 0xFF));
+
+		payload.add((char) w.Flag);
+
+		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
+
+		Log.d("nav", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Altitude) + " " + String.valueOf(w.Flag));
 	}
 
 }

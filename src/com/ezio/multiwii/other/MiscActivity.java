@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.ezio.multiwii.other;
 
+import java.text.NumberFormat;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -85,7 +87,7 @@ public class MiscActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+		
 		setContentView(R.layout.misc_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -242,7 +244,11 @@ public class MiscActivity extends SherlockActivity {
 	}
 
 	public void GetDeclinationOnClick(View v) {
-		ETMagDeclination.setText(String.valueOf(app.sensors.Declination));
+		final NumberFormat format = NumberFormat.getNumberInstance();
+		format.setMinimumFractionDigits(1);
+		format.setMaximumFractionDigits(1);
+		format.setGroupingUsed(false);
+		ETMagDeclination.setText(format.format(app.sensors.Declination));
 	}
 
 	public void ShowCustomDialogOnClick(View vv) {

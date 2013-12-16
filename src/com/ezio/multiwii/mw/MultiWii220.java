@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import nav.WaypointNav;
+
 import android.util.Log;
 
 import com.ezio.multiwii.waypoints.Waypoint;
@@ -797,6 +799,18 @@ public class MultiWii220 extends MultirotorData {
 	public void SendRequestMSP_SET_MISC(int confPowerTrigger, int minthrottle, int maxthrottle, int mincommand, int midrc, float mag_decliniation, int vbatscale, float vbatlevel_warn1, float vbatlevel_warn2, float vbatlevel_crit) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void SendRequestMSP_SET_WP_NAV(WaypointNav w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void SendRequestMSP_NAV_CONFIG() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

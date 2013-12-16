@@ -10,8 +10,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 
 import com.ezio.multiwii.R;
@@ -402,11 +400,13 @@ public class BT_New extends Communication {
 
 	@Override
 	public synchronized byte Read() {
+		BytesRecieved+=1;
 		return (byte) (fifo.get() & 0xff);
 	}
 
 	@Override
 	public synchronized void Write(byte[] arr) {
+		super.Write(arr);
 		// Create temporary object
 		ConnectedThread r;
 		// Synchronize a copy of the ConnectedThread

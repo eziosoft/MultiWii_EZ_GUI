@@ -72,7 +72,7 @@ public class ServosActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+		
 		setContentView(R.layout.servo_conf_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		getSupportActionBar().setTitle(getString(R.string.Servos));

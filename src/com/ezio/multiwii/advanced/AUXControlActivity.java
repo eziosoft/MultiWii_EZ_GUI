@@ -111,7 +111,7 @@ public class AUXControlActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+		
 		setContentView(R.layout.aux_control);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);

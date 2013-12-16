@@ -91,21 +91,13 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 				centerStep = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
 			}
 
-			// State dissplaying ////////////////////
-			// String state = "";
-			// for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
-			// if (app.mw.ActiveModes[i]) {
-			// state += " " + app.mw.buttonCheckboxLabel[i];
-			// }
-			// }
-
 			if (distanceToNextWaypoint < 5)
 				SetNextWaypoint(false);
 
 			mapHelperClass.SetCopterLocation(copterPositionLatLng, app.mw.head, app.mw.alt);
 			mapHelperClass.DrawFlightPath(copterPositionLatLng);
-			mapHelperClass.PositionHoldMarker.setPosition(new LatLng(app.mw.Waypoints[16].Lat / Math.pow(10, 7), app.mw.Waypoints[16].Lon / Math.pow(10, 7)));
-			mapHelperClass.HomeMarker.setPosition(new LatLng(app.mw.Waypoints[0].Lat / Math.pow(10, 7), app.mw.Waypoints[0].Lon / Math.pow(10, 7)));
+			mapHelperClass.PositionHoldMarker.setPosition(app.mw.Waypoints[16].Lat_Lng());
+			mapHelperClass.HomeMarker.setPosition(app.mw.Waypoints[0].Lat_Lng());
 
 			if (CurrentWaypointNumber >= 0) {
 				distanceToNextWaypoint = (float) MapHelperClass.gps2m(copterPositionLatLng.latitude, copterPositionLatLng.longitude, mapHelperClass.markers.get(CurrentWaypointNumber).getPosition().latitude, mapHelperClass.markers.get(CurrentWaypointNumber).getPosition().longitude);
@@ -149,7 +141,7 @@ public class MapWaypointsActivity extends SherlockFragmentActivity {
 
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+		
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.waypoints_map_layout);

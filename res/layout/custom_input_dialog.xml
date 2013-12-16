@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="center_vertical|center_horizontal"
-                android:inputType="numberDecimal" >
+                android:inputType="numberSigned|numberDecimal" >
 
                 <requestFocus />
             </EditText>

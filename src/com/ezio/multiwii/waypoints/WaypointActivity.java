@@ -32,7 +32,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
@@ -89,7 +88,7 @@ public class WaypointActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+
 		setContentView(R.layout.waypoint_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 

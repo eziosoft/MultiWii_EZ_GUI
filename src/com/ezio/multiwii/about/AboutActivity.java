@@ -39,6 +39,11 @@ public class AboutActivity extends SherlockActivity {
 
 		TextViewCopyRights.setText(Html.fromHtml(s));
 
-		TextViewCopyRights.append(GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(this));
+		try {
+			TextViewCopyRights.append(GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(this));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 }

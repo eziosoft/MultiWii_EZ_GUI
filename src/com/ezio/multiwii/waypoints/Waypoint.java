@@ -16,6 +16,7 @@
  */
 package com.ezio.multiwii.waypoints;
 
+import com.ezio.multiwii.dashboard.dashboard3.AltitudeView;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Waypoint {
@@ -28,9 +29,9 @@ public class Waypoint {
 	// mission_step.altitude = read32();
 	// mission_step.flag = read8();
 
-	public int Heading = 0, TimeToStay = 0, NavFlag = 0; //old <=2.3
+	public int Heading = 0, TimeToStay = 0, NavFlag = 0; // old <=2.3
 
-	//new >2.3
+	// new >2.3
 	public int Number = 0;
 	public int Lat = 0;
 	public int Lon = 0;
@@ -38,6 +39,14 @@ public class Waypoint {
 	public int Parameter = 0;
 	public int Altitude = 0;
 	public int Flag = 0;
+
+	public String toString() {
+		return String.valueOf(Number) + " - " + String.valueOf(Lat / Math.pow(10, 7)) + "x" + String.valueOf(Lon / Math.pow(10, 7)) + " A" + String.valueOf(Action) + " P" + String.valueOf(Parameter) + " Alt" + String.valueOf(Altitude) + " F" + String.valueOf(Flag);
+	}
+
+	public LatLng Lat_Lng() {
+		return new LatLng(Lat / Math.pow(10, 7), Lon / Math.pow(10, 7));
+	}
 
 	/**
 	 * 

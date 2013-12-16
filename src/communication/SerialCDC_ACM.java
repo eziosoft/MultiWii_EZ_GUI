@@ -125,12 +125,14 @@ public class SerialCDC_ACM extends Communication {
 
 	@Override
 	public synchronized byte Read() {
+		BytesRecieved+=1;
 		return (byte) (fifo.get() & 0xff);
 
 	}
 
 	@Override
 	public synchronized void Write(byte[] arr) {
+		super.Write(arr);
 
 		if (Connected) {
 			try {

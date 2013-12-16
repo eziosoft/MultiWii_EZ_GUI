@@ -45,6 +45,7 @@ import com.ezio.multiwii.helpers.TTS;
 import com.ezio.multiwii.helpers.VarioSoundClass;
 import com.ezio.multiwii.mw.MultiWii220;
 import com.ezio.multiwii.mw.MultiWii230;
+import com.ezio.multiwii.mw.MultiWii230NAV;
 import com.ezio.multiwii.mw.MultirotorData;
 import com.ezio.multiwii.waypoints.Waypoint;
 import com.ezio.sec.Sec;
@@ -124,7 +125,7 @@ public class App extends Application implements Sensors.Listener {
 	private static final String RADIOMODE = "RadioMode";
 	public int RadioMode;
 
-	private static final String PROTOCOL = "PROTOCOL2";
+	private static final String PROTOCOL = "PROTOCOL4";
 	public int Protocol;
 
 	private static final String MAGMODE = "MAGMODE";
@@ -251,6 +252,7 @@ public class App extends Application implements Sensors.Listener {
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT) {
 			commMW = new BT(getApplicationContext());
+			CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
 		}
 
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_BT_NEW) {
@@ -265,6 +267,7 @@ public class App extends Application implements Sensors.Listener {
 		if (CommunicationTypeMW == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
 			commMW = new SerialCDC_ACM(getApplicationContext());
 		}
+		// ////////////
 
 		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_BT) {
 			commFrsky = new BT(getApplicationContext());
@@ -274,13 +277,13 @@ public class App extends Application implements Sensors.Listener {
 			commFrsky = new BT_New(getApplicationContext());
 		}
 
-		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_FTDI) {
-			commFrsky = new SerialFTDI(getApplicationContext());
-		}
-
-		if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
-			commFrsky = new SerialCDC_ACM(getApplicationContext());
-		}
+		// if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_FTDI) {
+		// commFrsky = new SerialFTDI(getApplicationContext());
+		// }
+		//
+		// if (CommunicationTypeFrSky == COMMUNICATION_TYPE_SERIAL_OTHERCHIPS) {
+		// commFrsky = new SerialCDC_ACM(getApplicationContext());
+		// }
 
 		SelectProtocol();
 
@@ -294,6 +297,11 @@ public class App extends Application implements Sensors.Listener {
 		if (Protocol == 230) {
 			mw = new MultiWii230(commMW);
 		}
+		
+		if (Protocol == 231) {
+			mw = new MultiWii230NAV(commMW);
+		}
+
 
 		frskyProtocol = new FrskyProtocol(commFrsky);
 
@@ -485,7 +493,7 @@ public class App extends Application implements Sensors.Listener {
 			// }
 
 			// update Home position
-			if (commMW.Connected) {
+			if (commMW.Connected && Protocol<231) {
 				mw.SendRequestMSP_WP(0);
 
 				for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
@@ -544,13 +552,13 @@ public class App extends Application implements Sensors.Listener {
 		}
 	}
 
-	public void ConnectionBug() { // autoconnect again when new activity is
-									// started
-		if (ConnectOnStart && !commMW.Connected) {
-			commMW.Connect(MacAddress, SerialPortBaudRateMW);
-			Say(getString(R.string.menu_connect));
-		}
-	}
+	// public void ConnectionBug() { // autoconnect again when new activity is
+	// // started
+	// if (ConnectOnStart && !commMW.Connected) {
+	// commMW.Connect(MacAddress, SerialPortBaudRateMW);
+	// Say(getString(R.string.menu_connect));
+	// }
+	// }
 
 	private void FrskyToMW() {
 		mw.angx = frskyProtocol.frskyHubProtocol.angX;

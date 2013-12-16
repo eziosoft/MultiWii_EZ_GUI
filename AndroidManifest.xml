@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="114"
-    android:versionName="3.64" >
+    android:versionCode="118"
+    android:versionName="3.7" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -172,6 +172,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <activity android:name="nav.NavActivity"></activity>
+        <activity android:name="nav.WPEditorActivity" android:theme="@android:style/Theme.Dialog"></activity>
+        <activity android:name=".helpers.FilePickerActivity" android:theme="@android:style/Theme.Dialog"></activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

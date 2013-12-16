@@ -109,7 +109,7 @@
                     android:visibility="visible" >
 
                     <RadioButton
-                        android:id="@+id/radioButtonProtocol20"
+                        android:id="@+id/radioButtonProtocol220"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -117,16 +117,17 @@
                         android:visibility="visible" />
 
                     <RadioButton
-                        android:id="@+id/radioButtonProtocol21"
+                        android:id="@+id/radioButtonProtocol230"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2.3" />
 
-                    <TextView
-                        android:id="@+id/textView5"
+                    <RadioButton
+                        android:id="@+id/radioButtonProtocol231"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/RestartInfo" />
+                        android:text="NAV" />
+
                 </RadioGroup>
             </LinearLayout>
 

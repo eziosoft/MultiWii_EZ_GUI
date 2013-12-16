@@ -18,7 +18,11 @@ package com.ezio.multiwii.mw;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import nav.WaypointNav;
 
 import android.os.Environment;
 import android.util.Log;
@@ -53,6 +57,11 @@ public abstract class MultirotorData {
 	public static final int MSP_WP = 118;
 	public static final int MSP_BOXIDS = 119;
 	public static final int MSP_SERVO_CONF = 120; // out message Servo settings
+
+	public static final int MSP_NAV_STATUS = 121; // out message Returns
+													// navigation status
+	public static final int MSP_NAV_CONFIG = 122; // out message Returns
+													// navigation parameters
 
 	public static final int MSP_SET_RAW_RC = 200;
 	public static final int MSP_SET_RAW_GPS = 201;
@@ -140,6 +149,17 @@ public abstract class MultirotorData {
 	public int GPS_numSat, GPS_fix, GPS_update;
 	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, GPS_ground_course;
 	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
+	public List<nav.WaypointNav> WaypointsList = new ArrayList<nav.WaypointNav>();
+	public int NAVmaxWpNumber = 16;
+	public int NAVGPSMode = 0;
+	public int NAVstate = 0;
+	public int NAVcurrentAction = 0;
+	public int NAVcurrentWPNumber = 0;
+	public int NAVerror = 0;
+	public int NAVoriginalAltitude = 0;
+	public int NAVtargetAltitude = 0;
+	public int NAValtToHold = 0;
+	public int NAValtChangeFlag = 0;
 
 	public int init_com, graph_on, pMeterSum = 0, intPowerTrigger = 0, bytevbat = 0;
 	public int rssi;
@@ -228,7 +248,13 @@ public abstract class MultirotorData {
 
 	public abstract void SendRequestMSP_BIND();
 
-	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint);
+	public abstract void SendRequestMSP_SET_WP(Waypoint waypoint); // TODO
+																	// remove
+																	// when
+																	// navigation
+																	// ready
+
+	public abstract void SendRequestMSP_SET_WP_NAV(WaypointNav w);
 
 	public abstract void SendRequestMSP_SET_SERIAL_BAUDRATE(int baudRate);
 
@@ -243,6 +269,8 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SERVO_CONF();
 
 	public abstract void SendRequestMSP_SET_SERVO_CONF();
+	
+	public abstract void SendRequestMSP_NAV_CONFIG();
 
 	/********************************* FUNCTIONS END **************************************/
 

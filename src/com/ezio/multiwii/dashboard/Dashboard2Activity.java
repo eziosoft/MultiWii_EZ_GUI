@@ -95,7 +95,7 @@ public class Dashboard2Activity extends Activity {
 		app.ForceLanguage();
 		super.onResume();
 
-		app.ConnectionBug();
+		
 
 		app.Say(getString(R.string.dashboard2));
 		mHandler.postDelayed(update, app.RefreshRate);

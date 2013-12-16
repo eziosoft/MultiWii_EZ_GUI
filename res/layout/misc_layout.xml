@@ -202,7 +202,7 @@
                             android:focusable="false"
                             android:inputType="numberDecimal"
                             android:onClick="ShowCustomDialogOnClick"
-                            android:tag="-180;180;0.1;2" />
+                            android:tag="-20;20;0.1;1" />
 
                         <Button
                             android:id="@+id/button2"

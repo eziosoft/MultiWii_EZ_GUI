@@ -165,7 +165,7 @@ public class Dashboard3Activity extends SherlockFragmentActivity {
 
 		app = (App) getApplication();
 		app.ForceLanguage();
-		app.ConnectionBug();
+	
 		setContentView(R.layout.dashboard3_layout);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		getSupportActionBar().hide();
