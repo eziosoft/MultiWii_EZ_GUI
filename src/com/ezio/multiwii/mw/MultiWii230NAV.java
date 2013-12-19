@@ -342,7 +342,9 @@ public class MultiWii230NAV extends MultirotorData {
 			WP.Lat = read32();
 			WP.Lon = read32();
 			WP.Altitude = read32() / 100;
-			WP.Parameter = read16();
+			WP.Parameter1 = read16();
+			WP.Parameter2 = read16();
+			WP.Parameter3 = read16();
 			WP.Flag = read8();
 
 			WaypointsList.add(WP);
@@ -855,14 +857,6 @@ public class MultiWii230NAV extends MultirotorData {
 	public void SendRequestMSP_SET_WP_NAV(WaypointNav w) {
 		w.Altitude *= 100;
 
-		// mission_step.number = wp_no;
-		// mission_step.action = read8();
-		// mission_step.pos[LAT] = read32();
-		// mission_step.pos[LON] = read32();
-		// mission_step.altitude = read32();
-		// mission_step.parameter = read16();
-		// mission_step.flag = read8();
-
 		ArrayList<Character> payload = new ArrayList<Character>();
 		payload.add((char) w.Number);
 
@@ -883,8 +877,14 @@ public class MultiWii230NAV extends MultirotorData {
 		payload.add((char) ((w.Altitude >> 16) & 0xFF));
 		payload.add((char) ((w.Altitude >> 24) & 0xFF));
 
-		payload.add((char) (w.Parameter & 0xFF));
-		payload.add((char) ((w.Parameter >> 8) & 0xFF));
+		payload.add((char) (w.Parameter1 & 0xFF));
+		payload.add((char) ((w.Parameter1 >> 8) & 0xFF));
+
+		payload.add((char) (w.Parameter2 & 0xFF));
+		payload.add((char) ((w.Parameter2 >> 8) & 0xFF));
+
+		payload.add((char) (w.Parameter3 & 0xFF));
+		payload.add((char) ((w.Parameter3 >> 8) & 0xFF));
 
 		payload.add((char) w.Flag);
 

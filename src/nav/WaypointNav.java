@@ -16,47 +16,54 @@
  */
 package nav;
 
-import android.R.integer;
-
 import com.google.android.gms.maps.model.LatLng;
 
 public class WaypointNav implements Comparable<WaypointNav> {
 
-	// mission_step.number = read8();
-	// mission_step.pos[LAT] = read32();
-	// mission_step.pos[LON] = read32();
-	// mission_step.action = read8();
-	// mission_step.parameter = read16();
-	// mission_step.altitude = read32();
-	// mission_step.flag = read8();
-
 	public static final int WP_ACTION_WAYPOINT = 1; // Set waypoint
-	public static final int WP_ACTION_HOLD_UNLIM = 2; // Poshold unlimited
-	public static final int WP_ACTION_HOLD_TIME = 3; // Hold for a predetermined
+	public static final int WP_ACTION_POSHOLD_UNLIM = 2; // Poshold unlimited
+	public static final int WP_ACTION_POSHOLD_TIME = 3; // Hold for a
+														// predetermined
 														// time
 	public static final int WP_ACTION_RTH = 4; // Return to HOME
 	public static final int WP_ACTION_SET_POI = 5; // Set POINT of interest (not
 													// implemented jet)
 	public static final int WP_ACTION_JUMP = 6; // jump to the given WP and
 												// (number of times)
+	public static final int WP_ACTION_SET_HEAD = 7; // fixes copter heading (-1
+													// clears the
+	// setting)
+
+	public static final String[] WP_ACTION_NAMES = { "---", "WAYPOINT", "POSHOLD_UNLIM", "POSHOLD_TIME", "RTH", "SET_POI", "JUMP", "SET_HEAD" };
 
 	public static final int MISSION_FLAG_END = 0xa5;
 
 	public static final int ERROR_ERROR = 1;
 	public static final int ERROR_CRC = 2;
 
-	public static final String[] WP_ACTION_NAMES = { "---", "WAYPOINT", "HOLD_UNLIM", "HOLD_TIME", "RTH", "SET_POI", "JUMP" };
+	public int Number = 0;
+	public int Lat = 0;
+	public int Lon = 0;
+	public int Action = 1;
+	public int Parameter1 = 0;
+	public int Parameter2 = 0;
+	public int Parameter3 = 0;
+	public int Altitude = 25;
+	public int Flag = 0;
+	public String MarkerId = "";
+	public int Error = 0;
+
 
 	public boolean ShowMarkerForThisWP() {
 		boolean show = true;
 		switch (Action) {
 		case WP_ACTION_RTH:
 			show = false;
-			Lat = 0;
-			Lon = 0;
-
 			break;
 		case WP_ACTION_JUMP:
+			show = false;
+			break;
+		case WP_ACTION_SET_HEAD:
 			show = false;
 			break;
 
@@ -66,16 +73,6 @@ public class WaypointNav implements Comparable<WaypointNav> {
 		}
 		return show;
 	}
-
-	public int Number = 0;
-	public int Lat = 0;
-	public int Lon = 0;
-	public int Action = 1;
-	public int Parameter = 0;
-	public int Altitude = 25;
-	public int Flag = 0;
-	public String MarkerId = "";
-	public int Error = 0;
 
 	public String toString() {
 		return "[" + getMarkerTitle() + "]\n" + getMarkerSnippet() + String.valueOf(getLatLng().latitude) + "x" + String.valueOf(getLatLng().longitude) + " F" + Integer.toHexString(Flag);
@@ -95,12 +92,14 @@ public class WaypointNav implements Comparable<WaypointNav> {
 	 *            time to stay (ms)
 	 * @param navFlag
 	 */
-	public WaypointNav(int number, int lat, int lon, int action, int parameter, int altitude, int flag) {
+	public WaypointNav(int number, int lat, int lon, int action, int parameter1, int parameter2, int parameter3, int altitude, int flag) {
 		Number = number;
 		Lat = lat;
 		Lon = lon;
 		Action = action;
-		Parameter = parameter;
+		Parameter1 = parameter1;
+		Parameter2 = parameter2;
+		Parameter3 = parameter3;
 		Altitude = altitude; // to set altitude (cm)
 		Flag = flag;
 	}
@@ -118,22 +117,26 @@ public class WaypointNav implements Comparable<WaypointNav> {
 	 *            time to stay (ms)
 	 * @param navFlag
 	 */
-	public WaypointNav(int number, LatLng latLng, int action, int parameter, int altitude, int flag) {
+	public WaypointNav(int number, LatLng latLng, int action, int parameter1, int parameter2, int parameter3, int altitude, int flag) {
 		Number = number;
 		Lat = (int) (latLng.latitude * 1e7);
 		Lon = (int) (latLng.longitude * 1e7);
 		Action = action;
-		Parameter = parameter;
+		Parameter1 = parameter1;
+		Parameter2 = parameter2;
+		Parameter3 = parameter3;
 		Altitude = altitude; // to set altitude (cm)
 		Flag = flag;
 	}
 
-	public WaypointNav(int number, LatLng latLng, int action, int parameter, int altitude, int flag, String MarkerID) {
+	public WaypointNav(int number, LatLng latLng, int action, int parameter1, int parameter2, int parameter3, int altitude, int flag, String MarkerID) {
 		Number = number;
 		Lat = (int) (latLng.latitude * 1e7);
 		Lon = (int) (latLng.longitude * 1e7);
 		Action = action;
-		Parameter = parameter;
+		Parameter1 = parameter1;
+		Parameter2 = parameter2;
+		Parameter3 = parameter3;
 		Altitude = altitude; // to set altitude (cm)
 		Flag = flag;
 		MarkerId = MarkerID;
@@ -162,7 +165,7 @@ public class WaypointNav implements Comparable<WaypointNav> {
 	public String getMarkerSnippet() {
 		String t = "";
 		t += "Action:" + WP_ACTION_NAMES[Action] + "\n";
-		t += "Parameter:" + String.valueOf(Parameter) + "\n";
+		t += "Parameters:" + String.valueOf(Parameter1) + " " + String.valueOf(Parameter2) + " " + String.valueOf(Parameter3) + "\n";
 		t += "Altitude:" + String.valueOf(Altitude) + "\n";
 		return t;
 	}

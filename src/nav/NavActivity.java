@@ -69,7 +69,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class NavActivity extends SherlockFragmentActivity {
 
-	String supportedWinGuiMissionFiles = "2.3 pre5";
+	String supportedWinGuiMissionFiles = "2.3 pre6";
 
 	MapHelperClass mapHelperClass;
 	Menu ActionBarMenu;
@@ -133,9 +133,9 @@ public class NavActivity extends SherlockFragmentActivity {
 				centerPeriod = System.currentTimeMillis() + app.MapCenterPeriod * 1000;
 			}
 
-			// mapHelperClass.SetCopterLocation(copterPositionLatLng,
-			// app.mw.head, app.mw.alt);
-			mapHelperClass.SetCopterLocation(app.sensors.MapCurrentPosition, app.sensors.Heading, 0);
+			mapHelperClass.SetCopterLocation(copterPositionLatLng, app.mw.head, app.mw.alt);
+			// mapHelperClass.SetCopterLocation(app.sensors.MapCurrentPosition,
+			// app.sensors.Heading, 0);
 			mapHelperClass.DrawFlightPath(copterPositionLatLng);
 			mapHelperClass.PositionHoldMarker.setPosition(app.mw.Waypoints[16].Lat_Lng());
 			mapHelperClass.HomeMarker.setPosition(app.mw.Waypoints[0].Lat_Lng());
@@ -220,7 +220,7 @@ public class NavActivity extends SherlockFragmentActivity {
 		});
 
 		// mapHelperClass////////////////////////////////////////////////
-		mapHelperClass = new MapHelperClass(((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap(), CircleAroundWPinMeters);
+		mapHelperClass = new MapHelperClass(getApplicationContext(), ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap(), CircleAroundWPinMeters, app.mw.multiType);
 
 		mapHelperClass.map.setOnCameraChangeListener(new OnCameraChangeListener() {
 			@Override
@@ -268,7 +268,7 @@ public class NavActivity extends SherlockFragmentActivity {
 			@Override
 			public void onMapLongClick(LatLng point) {
 
-				if (app.mw.WaypointsList.size() <= app.mw.NAVmaxWpNumber) {
+				if (app.mw.NAVmaxWpNumber == 0 || app.mw.WaypointsList.size() <= app.mw.NAVmaxWpNumber) {
 					AddNewWP(point);
 					Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 					if (vibrator != null) {
@@ -355,6 +355,8 @@ public class NavActivity extends SherlockFragmentActivity {
 
 			dlgAlert.create().show();
 		}
+
+		app.sensors.startMagACC();
 	}
 
 	@Override
@@ -367,13 +369,8 @@ public class NavActivity extends SherlockFragmentActivity {
 			app.MapZoomLevel = mapHelperClass.map.getCameraPosition().zoom;
 			app.SaveSettings(true);
 		}
-	}
 
-	void openMWEditor(String markerId) {
-		Intent i = new Intent(getApplicationContext(), WPEditorActivity.class);
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		i.putExtra("MARKERID", markerId);
-		startActivity(i);
+		app.sensors.stopMagACC();
 	}
 
 	private WaypointNav getWPfromMarkerId(String markerId) {
@@ -386,7 +383,7 @@ public class NavActivity extends SherlockFragmentActivity {
 	}
 
 	void AddNewWP(LatLng point) {
-		app.mw.WaypointsList.add(new WaypointNav(app.mw.WaypointsList.size() + 1, point, defaultAction, 0, defaultAltitude, 0));
+		app.mw.WaypointsList.add(new WaypointNav(app.mw.WaypointsList.size() + 1, point, defaultAction, 0, 0, 0, defaultAltitude, 0));
 		LoadMarkersFromWPlist();
 	}
 
@@ -472,7 +469,6 @@ public class NavActivity extends SherlockFragmentActivity {
 					try {
 						Thread.sleep(app.RefreshRate);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -489,7 +485,7 @@ public class NavActivity extends SherlockFragmentActivity {
 						try {
 							Thread.sleep(app.RefreshRate);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
+							//
 							e.printStackTrace();
 						}
 
@@ -556,13 +552,13 @@ public class NavActivity extends SherlockFragmentActivity {
 					try {
 						Thread.sleep(app.RefreshRate);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						//
 						e.printStackTrace();
 					}
 				}
 
 				if (app.mw.WaypointsList.size() == 0) {
-					app.mw.SendRequestMSP_SET_WP_NAV(new WaypointNav(1, 0, 0, WaypointNav.WP_ACTION_RTH, 0, 25, WaypointNav.MISSION_FLAG_END));
+					app.mw.SendRequestMSP_SET_WP_NAV(new WaypointNav(1, 0, 0, WaypointNav.WP_ACTION_RTH, 0, 0, 0, defaultAltitude, WaypointNav.MISSION_FLAG_END));
 					Log.d("nav", "RTH upladed");
 					killme = false;
 					mHandler.postDelayed(update, app.RefreshRate);
@@ -576,7 +572,7 @@ public class NavActivity extends SherlockFragmentActivity {
 						try {
 							Thread.sleep(app.RefreshRate);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
+							//
 							e.printStackTrace();
 						}
 					}
@@ -601,10 +597,12 @@ public class NavActivity extends SherlockFragmentActivity {
 
 		if (app.mw.WaypointsList.size() > 0) {
 			for (WaypointNav WP : app.mw.WaypointsList) {
-				if (WP.Action == WaypointNav.WP_ACTION_RTH)
-					return;
+
 				if (WP.ShowMarkerForThisWP())
 					WP.MarkerId = mapHelperClass.AddMarker(WP.getLatLng(), WP.getMarkerTitle(), WP.getMarkerSnippet(), WP.Action);
+
+				if (WP.Action == WaypointNav.WP_ACTION_RTH || WP.Action == WaypointNav.WP_ACTION_POSHOLD_UNLIM)
+					return;
 			}
 		}
 		DisplayInfo();
@@ -630,16 +628,22 @@ public class NavActivity extends SherlockFragmentActivity {
 	}
 
 	public void LoadMissionOnClick(View v) {
-
 		Intent i = new Intent(this, FilePickerActivity.class);
 		startActivityForResult(i, 1);
+	}
 
+	void openMWEditor(String markerId) {
+		Intent i = new Intent(getApplicationContext(), WPEditorActivity.class);
+		// i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		i.putExtra("MARKERID", markerId);
+		startActivityForResult(i, 2);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
+		Log.d("nav", "onActivityResult");
 		if (requestCode == 1) {
 
 			if (resultCode == RESULT_OK) {
@@ -648,12 +652,23 @@ public class NavActivity extends SherlockFragmentActivity {
 
 					LoadMission(result);
 				} catch (XmlPullParserException e) {
-					// TODO Auto-generated catch block
+					//
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					//
 					e.printStackTrace();
 				}
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		}
+
+		if (requestCode == 2) {
+
+			if (resultCode == RESULT_OK) {
+
+				createCircle(data.getStringExtra("MarkerId"), data.getStringExtra("RADIUS"), data.getStringExtra("NRPOINTS"), data.getStringExtra("DIRECTION"));
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -687,15 +702,17 @@ public class NavActivity extends SherlockFragmentActivity {
 
 						int no = Integer.parseInt(attributes.get("no"));
 						String action = attributes.get("action");
-						int parameter = Integer.parseInt(attributes.get("parameter"));
+						int parameter1 = Integer.parseInt(attributes.get("parameter1"));
+						int parameter2 = Integer.parseInt(attributes.get("parameter2"));
+						int parameter3 = Integer.parseInt(attributes.get("parameter3"));
 						double lat = Double.parseDouble(attributes.get("lat").replace(",", "."));
 						double lon = Double.parseDouble(attributes.get("lon").replace(",", "."));
 						int alt = Integer.parseInt(attributes.get("alt"));
 
-						app.mw.WaypointsList.add(new WaypointNav(no, new LatLng(lat, lon), WaypointNav.getActionNumberFromString(action), parameter, alt, 0));
+						app.mw.WaypointsList.add(new WaypointNav(no, new LatLng(lat, lon), WaypointNav.getActionNumberFromString(action), parameter1, parameter2, parameter3, alt, 0));
 
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						//
 						e.printStackTrace();
 					}
 				}
@@ -709,10 +726,11 @@ public class NavActivity extends SherlockFragmentActivity {
 
 						if (!version.equals(supportedWinGuiMissionFiles)) {
 							DisplayInfoDialog(getString(R.string.Info), getString(R.string.FileVersionMismach), getString(R.string.OK));
+							return;
 						}
 
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						//
 						e.printStackTrace();
 					}
 				}
@@ -727,6 +745,7 @@ public class NavActivity extends SherlockFragmentActivity {
 
 		LoadMarkersFromWPlist();
 		ZoomToShawAllMarkers();
+		mDrawerLayout.closeDrawers();
 	}
 
 	private Map<String, String> getAttributes(XmlPullParser parser) throws Exception {
@@ -777,7 +796,9 @@ public class NavActivity extends SherlockFragmentActivity {
 			s.startTag("", "MISSIONITEM");
 			s.attribute("", "no", String.valueOf(wp.Number));
 			s.attribute("", "action", WaypointNav.WP_ACTION_NAMES[wp.Action]);
-			s.attribute("", "parameter", String.valueOf(wp.Parameter));
+			s.attribute("", "parameter1", String.valueOf(wp.Parameter1));
+			s.attribute("", "parameter2", String.valueOf(wp.Parameter2));
+			s.attribute("", "parameter3", String.valueOf(wp.Parameter3));
 			s.attribute("", "lat", String.valueOf(wp.getLatLng().latitude));
 			s.attribute("", "lon", String.valueOf(wp.getLatLng().longitude));
 			s.attribute("", "alt", String.valueOf(wp.Altitude));
@@ -792,6 +813,28 @@ public class NavActivity extends SherlockFragmentActivity {
 
 	}
 
+	// String showInputDialog()
+	// {
+	// AlertDialog.Builder alert = new AlertDialog.Builder(this);
+	// alert.setTitle(getString(R.string.EnterFileName));
+	// final EditText input = new EditText(this);
+	// input.setText(s);
+	// alert.setView(input);
+	// alert.setPositiveButton(getString(R.string.Save), new
+	// DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int whichButton) {
+	//
+	// try {
+	// saveMission(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/"
+	// + input.getText().toString() + ".mission");
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	//
+	// }
+	// });
+	// }
+
 	public void SaveMissionOnClick(View v) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle(getString(R.string.EnterFileName));
@@ -799,7 +842,6 @@ public class NavActivity extends SherlockFragmentActivity {
 		final EditText input = new EditText(this);
 
 		Calendar c = Calendar.getInstance();
-		int seconds = c.get(Calendar.SECOND);
 		final String s = String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + String.valueOf(c.get(Calendar.MONTH) + 1) + String.valueOf(c.get(Calendar.YEAR)) + "-" + String.valueOf(c.get(Calendar.HOUR)) + String.valueOf(c.get(Calendar.MINUTE));
 
 		input.setText(s);
@@ -810,7 +852,7 @@ public class NavActivity extends SherlockFragmentActivity {
 			public void onClick(DialogInterface dialog, int whichButton) {
 
 				try {
-					saveMission(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + s + ".mission");
+					saveMission(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/" + input.getText().toString() + ".mission");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -838,4 +880,62 @@ public class NavActivity extends SherlockFragmentActivity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
+
+	private void createCircle(String MarkerId, String RadiusIn, String Pointsin, String Directionin) {
+
+		Log.d("nav", "create circle");
+		LatLng center = getWPfromMarkerId(MarkerId).getLatLng();
+
+		int Points = 0;
+		int Radius = 0;
+		int Direction = 1;
+
+		Radius = Integer.parseInt(RadiusIn);
+
+		if (Radius < 20) {
+			DisplayInfoDialog(getString(R.string.Info), "Invalid Radius", getString(R.string.OK));
+			return;
+		}
+
+		Points = Integer.parseInt(Pointsin);
+
+		if (Points < 5 || Points > 30) {
+			DisplayInfoDialog(getString(R.string.Info), "Invalid Number of points", getString(R.string.OK));
+			return;
+		}
+
+		Direction = Integer.parseInt(Directionin);
+
+		if (Direction != -1 && Direction != 1) {
+			DisplayInfoDialog(getString(R.string.Info), "Invalid Direction value", getString(R.string.OK));
+			return;
+		}
+
+		double a = 0;
+		double step = 360.0f / Points;
+		if (Direction == -1) {
+			a = 360;
+			step *= -1;
+		}
+		for (; a <= 360 && a >= 0; a += step) {
+
+			float d = Radius;
+			float R = 6371000;
+
+			final float rad2deg = (float) (180 / Math.PI);
+			final float deg2rad = (float) (1.0 / rad2deg);
+
+			double lat2 = Math.asin(Math.sin(center.latitude * deg2rad) * Math.cos(d / R) + Math.cos(center.latitude * deg2rad) * Math.sin(d / R) * Math.cos(a * deg2rad));
+			double lon2 = center.longitude * deg2rad + Math.atan2(Math.sin(a * deg2rad) * Math.sin(d / R) * Math.cos(center.latitude * deg2rad), Math.cos(d / R) - Math.sin(center.latitude * deg2rad) * Math.sin(lat2));
+
+			LatLng pll = new LatLng(lat2 * rad2deg, lon2 * rad2deg);
+			app.mw.WaypointsList.add(new WaypointNav(app.mw.WaypointsList.size() + 1, pll, defaultAction, 0, 0, 0, defaultAltitude, 0));
+
+			// AddNewWP(pll);
+		}
+
+		LoadMarkersFromWPlist();
+		ZoomToShawAllMarkers();
+	}
+
 }

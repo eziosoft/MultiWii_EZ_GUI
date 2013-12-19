@@ -3,16 +3,15 @@ package nav;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.drm.DrmStore.Action;
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
+import com.ezio.multiwii.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -20,12 +19,15 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapHelperClass implements LocationSource {
+	private final Context context;
 	public final GoogleMap map;
 	private Polyline WPPathPolyLine;
 	public Marker HomeMarker;
 	public Marker PositionHoldMarker;
+	public Marker ModelMarker;
+
 	public List<Marker> markers = new ArrayList<Marker>();
-	public Circle CurrentWPCircle;
+	// public Circle CurrentWPCircle;
 	private List<LatLng> FlyingPathPoints = new ArrayList<LatLng>();
 	private int FlyingPathPointsCount = 20;
 	private Polyline FlightPathPolyLine;
@@ -34,17 +36,112 @@ public class MapHelperClass implements LocationSource {
 
 	private final int CircleAroundWPinMeters;
 
-	public MapHelperClass(GoogleMap map, int CircleAroundWPinMeters) {
+	private BitmapDescriptor ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_quadx);
 
+	public MapHelperClass(Context context, GoogleMap map, int CircleAroundWPinMeters, int modelType) {
+
+		this.context = context;
 		this.map = map;
 		this.CircleAroundWPinMeters = CircleAroundWPinMeters;
 
+		setModelType(modelType);
 		map.setMyLocationEnabled(true);
 		map.setLocationSource(this);
 		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
 		CleanMap();
 
+	}
+
+	private void setModelType(int modelType) {
+		final int TRI = 1;
+		final int QUADP = 2;
+		final int QUADX = 3;
+		final int BI = 4;
+		final int GIMBAL = 5;
+		final int Y6 = 6;
+		final int HEX6 = 7;
+		final int FLYING_WING = 8;
+		final int Y4 = 9;
+		final int HEX6X = 10;
+		final int OCTOX8 = 11;
+		final int OCTOFLATX = 12;
+		final int OCTOFLATP = 13;
+		final int AIRPLANE = 14;
+		final int HELI_120_CCPM = 15;
+		final int HELI_90_DEG = 16;
+		final int VTAIL4 = 17;
+		final int HEX6H = 18;
+		final int PPM_TO_SERVO = 19;
+		final int DUALCOPTER = 20;
+		final int SINGLECOPTER = 21;
+
+		switch (modelType) {
+		case TRI:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_tri);
+			break;
+		case QUADP:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_quadp);
+			break;
+		case QUADX:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_quadx);
+			break;
+		case BI:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_bi);
+			break;
+		case GIMBAL:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_quadx);
+			break;
+		case Y6:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_y6);
+			break;
+		case HEX6:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_hex6p);
+			break;
+		case FLYING_WING:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_fwing);
+			break;
+		case Y4:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_y4);
+			break;
+		case HEX6X:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_hex6x);
+			break;
+		case OCTOX8:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_octox8);
+			break;
+		case OCTOFLATX:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_octoflatx);
+			break;
+		case OCTOFLATP:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_oktoflatp);
+			break;
+		case AIRPLANE:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_airplane);
+			break;
+		case HELI_120_CCPM:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_heli);
+			break;
+		case HELI_90_DEG:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_heli);
+			break;
+		case VTAIL4:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_vtail4);
+			break;
+		case HEX6H:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_hex6p);
+			break;
+		case DUALCOPTER:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_bi);
+			break;
+		case SINGLECOPTER:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_heli);
+			break;
+
+		default:
+			ModelIcon = BitmapDescriptorFactory.fromResource(R.drawable.marker_quadx);
+			break;
+		}
 	}
 
 	public void RedrawLines() {
@@ -54,7 +151,9 @@ public class MapHelperClass implements LocationSource {
 		}
 		PolylineOptions polylineOptions = new PolylineOptions().color(Color.CYAN).width(4);
 		for (Marker m : markers) {
-			polylineOptions.add(m.getPosition());
+			if (!m.getSnippet().contains("SET_POI")) {
+				polylineOptions.add(m.getPosition());
+			}
 		}
 		WPPathPolyLine = map.addPolyline(polylineOptions);
 
@@ -121,22 +220,28 @@ public class MapHelperClass implements LocationSource {
 									// BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
 		switch (action) {
 		case WaypointNav.WP_ACTION_WAYPOINT:
-			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
+			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.waypoint);
 			break;
 
-		case WaypointNav.WP_ACTION_HOLD_TIME:
-			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE);
+		case WaypointNav.WP_ACTION_POSHOLD_TIME:
+			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.poshold_time);
 			break;
 
-		case WaypointNav.WP_ACTION_HOLD_UNLIM:
-			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET);
+		case WaypointNav.WP_ACTION_POSHOLD_UNLIM:
+			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.poshold_unlim);
 			break;
 
-		case WaypointNav.WP_ACTION_RTH:
-			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
-			break;
-		case WaypointNav.WP_ACTION_JUMP:
-			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
+		// case WaypointNav.WP_ACTION_RTH:
+		// IconColor =
+		// BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
+		// break;
+		// case WaypointNav.WP_ACTION_JUMP:
+		// IconColor =
+		// BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
+		// break;
+
+		case WaypointNav.WP_ACTION_SET_POI:
+			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.poi);
 			break;
 		default:
 			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
@@ -164,10 +269,15 @@ public class MapHelperClass implements LocationSource {
 
 	void addDefaultMarkersToMap() {
 		LatLng mapCenter = map.getCameraPosition().target;
-		HomeMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Home").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).draggable(true));
-		PositionHoldMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("PositionHold").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-		CurrentWPCircle = map.addCircle(new CircleOptions().center(mapCenter).radius(CircleAroundWPinMeters).fillColor(Color.argb(50, 0, 255, 50)));
-		CurrentWPCircle.setStrokeWidth(2);
+		HomeMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Home").icon(BitmapDescriptorFactory.fromResource(R.drawable.home)).draggable(false));
+		ModelMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Model").icon(ModelIcon).draggable(false).anchor(0.5f, 0.5f).flat(true));
+
+		PositionHoldMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("PositionHold").icon(BitmapDescriptorFactory.fromResource(R.drawable.poshold)).draggable(false));
+
+		// CurrentWPCircle = map.addCircle(new
+		// CircleOptions().center(mapCenter).radius(CircleAroundWPinMeters).fillColor(Color.argb(50,
+		// 0, 255, 50)));
+		// CurrentWPCircle.setStrokeWidth(2);
 	}
 
 	@Override
@@ -200,6 +310,9 @@ public class MapHelperClass implements LocationSource {
 			copterLocation.setBearing(head);
 			copterLocation.setAccuracy(2);
 			copterLocation.setAltitude(alt);
+
+			ModelMarker.setPosition(copterPositionLatLng);
+			ModelMarker.setRotation(head);
 			onLocationChangedListener.onLocationChanged(copterLocation);
 		}
 	}

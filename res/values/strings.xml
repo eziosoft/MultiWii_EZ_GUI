@@ -287,17 +287,16 @@
         <item>RTH</item>
         <item>Set POI</item>
         <item>Jump</item>
+        <item>Set heading</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="Navigation">Navigation</string>
     <string name="RemoveWP">Remove this WP</string>
-   
     <string name="SelectAfile">Select a File:</string>
     <string name="Open">Open</string>
     <string name="Options">Options</string>
-    
     <string name="MaxNumberOfWP">Max number of WP:</string>
     <string name="WPError">WP Error</string>
     <string name="isNotCorrect">is not correct</string>
@@ -307,6 +306,16 @@
     <string name="Uploading">Uploading</string>
     <string name="MaxNumberWPreached">Cannot add mission step. Maximum number of mission steps reached</string>
     <string name="Info">Info</string>
-    <string name="FileVersionMismach">Version of mission is not made for this version of WinGUI</string>
+    <string name="FileVersionMismach">Version of the file is not supported</string>
+    <string name="CircleNumberOfPoints">Number of points(min 5 - max 30)</string>
+    <string name="CircleDirection">Direction (1 or -1)</string>
+    <string name="CircleRarius">Radius in meters (min 20)</string>
+    <string name="UseAsCircleCenter">Use as circle center</string>
+    <string name="Circle">Circle</string>
+    <string name="Parameter1">Parameter1</string>
+    <string name="Parameter2">Parameter2</string>
+    <string name="Parameter3">Parameter3</string>
+    <string name="Altitude">Altitude</string>
+    <string name="Action">Action</string>
 
 </resources>

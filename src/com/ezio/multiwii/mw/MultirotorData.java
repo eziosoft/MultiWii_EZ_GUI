@@ -104,27 +104,27 @@ public abstract class MultirotorData {
 	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATX", "OCTOFLATP", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6H", "PPM_TO_SERVO", "DUALCOPTER", "SINGLECOPTER" };
 
 	// Alias for multiTypes
-	int TRI = 1;
-	int QUADP = 2;
-	int QUADX = 3;
-	int BI = 4;
-	int GIMBAL = 5;
-	int Y6 = 6;
-	int HEX6 = 7;
-	int FLYING_WING = 8;
-	int Y4 = 9;
-	int HEX6X = 10;
-	int OCTOX8 = 11;
-	int OCTOFLATX = 12;
-	int OCTOFLATP = 13;
-	int AIRPLANE = 14;
-	int HELI_120_CCPM = 15;
-	int HELI_90_DEG = 16;
-	int VTAIL4 = 17;
-	int HEX6H = 18;
-	int PPM_TO_SERVO = 19;
-	int DUALCOPTER = 20;
-	int SINGLECOPTER = 21;
+	final int TRI = 1;
+	final int QUADP = 2;
+	final int QUADX = 3;
+	final int BI = 4;
+	final int GIMBAL = 5;
+	final int Y6 = 6;
+	final int HEX6 = 7;
+	final int FLYING_WING = 8;
+	final int Y4 = 9;
+	final int HEX6X = 10;
+	final int OCTOX8 = 11;
+	final int OCTOFLATX = 12;
+	final int OCTOFLATP = 13;
+	final int AIRPLANE = 14;
+	final int HELI_120_CCPM = 15;
+	final int HELI_90_DEG = 16;
+	final int VTAIL4 = 17;
+	final int HEX6H = 18;
+	final int PPM_TO_SERVO = 19;
+	final int DUALCOPTER = 20;
+	final int SINGLECOPTER = 21;
 
 	public int PIDITEMS = 10;
 	public int CHECKBOXITEMS = 11; // in 2.1
@@ -150,7 +150,7 @@ public abstract class MultirotorData {
 	public int GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, GPS_ground_course;
 	public Waypoint[] Waypoints = { new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint(), new Waypoint() };
 	public List<nav.WaypointNav> WaypointsList = new ArrayList<nav.WaypointNav>();
-	public int NAVmaxWpNumber = 16;
+	public int NAVmaxWpNumber = 0;
 	public int NAVGPSMode = 0;
 	public int NAVstate = 0;
 	public int NAVcurrentAction = 0;
@@ -269,7 +269,7 @@ public abstract class MultirotorData {
 	public abstract void SendRequestMSP_SERVO_CONF();
 
 	public abstract void SendRequestMSP_SET_SERVO_CONF();
-	
+
 	public abstract void SendRequestMSP_NAV_CONFIG();
 
 	/********************************* FUNCTIONS END **************************************/

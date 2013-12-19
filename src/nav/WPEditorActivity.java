@@ -20,12 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package nav;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TableLayout;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,7 +46,9 @@ public class WPEditorActivity extends Activity {
 	TextView TVWPTitle;
 	Spinner SpinnerAction;
 	EditText ETAltitude;
-	EditText ETParameter;
+	EditText ETParameter1;
+	EditText ETParameter2;
+	EditText ETParameter3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +69,29 @@ public class WPEditorActivity extends Activity {
 
 		TVWPTitle = (TextView) findViewById(R.id.textViewWPTitle);
 		ETAltitude = (EditText) findViewById(R.id.editTextAltitude);
-		ETParameter = (EditText) findViewById(R.id.editTextParameter);
+		ETParameter1 = (EditText) findViewById(R.id.editTextParameter1);
+		ETParameter2 = (EditText) findViewById(R.id.editTextParameter2);
+		ETParameter3 = (EditText) findViewById(R.id.editTextParameter3);
 		SpinnerAction = (Spinner) findViewById(R.id.spinnerAction);
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wp_actions, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		SpinnerAction.setAdapter(adapter);
+
+		((CheckBox) findViewById(R.id.checkBoxCircle)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					((TableLayout) findViewById(R.id.TLCircle)).setVisibility(View.VISIBLE);
+					((TableLayout) findViewById(R.id.TLWP)).setVisibility(View.GONE);
+				} else {
+					((TableLayout) findViewById(R.id.TLCircle)).setVisibility(View.GONE);
+					((TableLayout) findViewById(R.id.TLWP)).setVisibility(View.VISIBLE);
+				}
+
+			}
+		});
 
 		loadWPData();
 
@@ -78,7 +102,9 @@ public class WPEditorActivity extends Activity {
 			if (WP.MarkerId.equals(MarkerId)) {
 				TVWPTitle.setText(WP.getMarkerTitle());
 				ETAltitude.setText(String.valueOf(WP.Altitude));
-				ETParameter.setText(String.valueOf(WP.Parameter));
+				ETParameter1.setText(String.valueOf(WP.Parameter1));
+				ETParameter2.setText(String.valueOf(WP.Parameter2));
+				ETParameter3.setText(String.valueOf(WP.Parameter3));
 				SpinnerAction.setSelection(WP.Action - 1);
 				return;
 			}
@@ -89,7 +115,9 @@ public class WPEditorActivity extends Activity {
 		for (WaypointNav WP : app.mw.WaypointsList) {
 			if (WP.MarkerId.equals(MarkerId)) {
 				WP.Altitude = Integer.parseInt(ETAltitude.getText().toString());
-				WP.Parameter = Integer.parseInt(ETParameter.getText().toString());
+				WP.Parameter1 = Integer.parseInt(ETParameter1.getText().toString());
+				WP.Parameter2 = Integer.parseInt(ETParameter2.getText().toString());
+				WP.Parameter3 = Integer.parseInt(ETParameter3.getText().toString());
 				WP.Action = SpinnerAction.getSelectedItemPosition() + 1;
 				return;
 			}
@@ -112,6 +140,19 @@ public class WPEditorActivity extends Activity {
 
 	public void OKOnClick(View v) {
 		// updateWPData();
+		finish();
+	}
+
+	public void CircleOnClick(View v) {
+
+		Intent returnIntent = new Intent();
+		returnIntent.putExtra("MarkerId", MarkerId);
+
+		returnIntent.putExtra("RADIUS", ((EditText) findViewById(R.id.editTextRadius)).getText().toString());
+		returnIntent.putExtra("NRPOINTS", ((EditText) findViewById(R.id.editTextNrOfPoints)).getText().toString());
+		returnIntent.putExtra("DIRECTION", ((EditText) findViewById(R.id.editTextDirection)).getText().toString());
+
+		setResult(RESULT_OK, returnIntent);
 		finish();
 	}
 
