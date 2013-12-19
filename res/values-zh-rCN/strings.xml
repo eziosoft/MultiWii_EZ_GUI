@@ -238,4 +238,13 @@
   <string name="PrevWP">上一航点</string>
   <string name="Clean">清除</string>
   <string name="MoveMap">自动移动地图</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

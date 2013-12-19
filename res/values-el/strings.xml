@@ -254,4 +254,13 @@
   <string name="EnableControl">Ενεργοποίηση του ελέγχου</string>
   <string name="Min">Min</string>
   <string name="Max">Max</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

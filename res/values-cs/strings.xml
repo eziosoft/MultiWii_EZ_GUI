@@ -265,4 +265,29 @@
   <string name="Searching">Hledám</string>
   <string name="GPSFixOK">GPS signál OK</string>
   <string name="GPSnotAvailableInYourConfiguration">GPS není k dispozici ve vaši konfiguraci</string>
+  <string name="NotConnected">Nepřipojeno</string>
+  <string name="ConnectionLost">Připojení ztraceno</string>
+  <string name="Navigation">Navigace</string>
+  <string name="RemoveWP">Odstranit tento WP</string>
+  <string name="SelectAfile">Vyber soubor:</string>
+  <string name="Open">Otevřít</string>
+  <string name="Options">Možnosti</string>
+  <string name="MaxNumberOfWP">Maximální počet WP:</string>
+  <string name="WPError">chyba WP</string>
+  <string name="isNotCorrect">není správné</string>
+  <string name="CRCisNotCorrect">CRC není správné</string>
+  <string name="Downloading">Stahuji</string>
+  <string name="PleaseWait">Počkejte prosím ...</string>
+  <string name="Uploading">Nahrávám</string>
+  <string name="MaxNumberWPreached">Nelze přidat další krok. Dosažen maximální počet.</string>
+  <string name="Info">Info</string>
+  <string-array name="wp_actions">
+    <item>Trasový bod</item>
+    <item>PosHold neomezený</item>
+    <item>PosHold čas</item>
+    <item>RTH</item>
+    <item>Nastavit POI</item>
+    <item>Skok</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

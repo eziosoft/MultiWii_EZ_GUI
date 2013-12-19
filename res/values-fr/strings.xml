@@ -268,4 +268,31 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="Searching">Recherche en cours</string>
   <string name="GPSFixOK">Signal GPS OK</string>
   <string name="GPSnotAvailableInYourConfiguration">Le GPS n\'est pas disponible dans votre configuration</string>
+  <string name="NotConnected">Non connecté</string>
+  <string name="ConnectionLost">Connexion perdue</string>
+  <string name="drawer_open">Ouvrir le volet de navigation</string>
+  <string name="drawer_close">Fermer le volet de navigation</string>
+  <string name="Navigation">Navigation</string>
+  <string name="RemoveWP">Supprimer ce WP</string>
+  <string name="SelectAfile">Sélectionnez un fichier :</string>
+  <string name="Open">Ouvrir</string>
+  <string name="Options">Options</string>
+  <string name="MaxNumberOfWP">Nombre max de WP :</string>
+  <string name="WPError">Erreur de WP</string>
+  <string name="isNotCorrect">n\'est pas correct</string>
+  <string name="CRCisNotCorrect">Le CRC n\'est pas correct</string>
+  <string name="Downloading">téléchargement en cours</string>
+  <string name="PleaseWait">Veuillez patienter ...</string>
+  <string name="Uploading">Transfert en cours</string>
+  <string name="MaxNumberWPreached">Ne peut pas ajouter l\'étape de la mission. Nombre maximal d\'étapes de la mission atteint</string>
+  <string name="Info">Infos</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold illimité</item>
+    <item>PosHold temps</item>
+    <item>RTH</item>
+    <item>Définir POI</item>
+    <item>Sauter</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

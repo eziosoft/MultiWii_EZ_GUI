@@ -195,4 +195,13 @@ Apontar frente do multi</string>
   <string name="BatCritical">BatCrítico</string>
   <string name="TakeDeclinationFromPhone">Tomar a declinação do telefone</string>
   <string name="Cancel">Cancelar</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

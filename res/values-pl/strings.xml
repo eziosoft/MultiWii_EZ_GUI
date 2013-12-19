@@ -266,4 +266,40 @@
   <string name="Searching">Wyszukiwanie</string>
   <string name="GPSFixOK">Sygnał GPS OK</string>
   <string name="GPSnotAvailableInYourConfiguration">GPS nie jest dostępny w twojej konfiguracji</string>
+  <string name="NotConnected">Nie podłączony</string>
+  <string name="ConnectionLost">Utracono połączenie</string>
+  <string name="Navigation">Nawigacja</string>
+  <string name="RemoveWP">Usunąć ten WP</string>
+  <string name="SelectAfile">Wybierz plik:</string>
+  <string name="Open">Otwórz</string>
+  <string name="Options">Opcje</string>
+  <string name="MaxNumberOfWP">Maksymalna liczba WP:</string>
+  <string name="WPError">WP błąd</string>
+  <string name="isNotCorrect">nie jest poprawny</string>
+  <string name="CRCisNotCorrect">CRC nie jest poprawna</string>
+  <string name="Downloading">Pobieranie</string>
+  <string name="PleaseWait">Proszę czekać ...</string>
+  <string name="Uploading">Wysyłanie</string>
+  <string name="MaxNumberWPreached">Nie można dodać następnego kroku. Osiągnięta maksymalna liczba kroków.</string>
+  <string name="Info">Info</string>
+  <string name="FileVersionMismach">Ta wersja pliku nie jest obsługiwana</string>
+  <string name="CircleNumberOfPoints">Liczba punktów (min 5 - max 30)</string>
+  <string name="CircleDirection">Kierunek (1 lub -1)</string>
+  <string name="CircleRarius">Promień w metrach (min 20)</string>
+  <string name="UseAsCircleCenter">Użyj jako srodek okręgu</string>
+  <string name="Circle">Okrąg</string>
+  <string name="Parameter1">Parametr1</string>
+  <string name="Parameter2">Parametr2</string>
+  <string name="Parameter3">Parametr3</string>
+  <string name="Altitude">Wysokość</string>
+  <string name="Action">Akcja</string>
+  <string-array name="wp_actions">
+    <item>Punkt Nawigacyjny</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

@@ -203,4 +203,13 @@
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">I valori verdi possono essere cambiati</string>
   <string name="Cancel">Annulla</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

@@ -263,4 +263,13 @@
   <string name="VarioSoundOnOff">Vario Geluid aan/uit</string>
   <string name="FSRTHaltitude">F/S RTH altitude</string>
   <string name="OverrideBy">Override by:</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

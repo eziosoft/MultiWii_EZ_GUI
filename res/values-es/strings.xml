@@ -240,4 +240,13 @@ Pulse el icono  EZ-GUI para volver atras</string>
   <string name="PrevWP">Previsualizar WP</string>
   <string name="Clean">Limpiar</string>
   <string name="MoveMap">Mover mapa</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>

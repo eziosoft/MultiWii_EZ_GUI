@@ -193,4 +193,13 @@
   <string name="Cancel">取消</string>
   <string name="Radius">半徑</string>
   <string name="Close">關閉</string>
+  <string-array name="wp_actions">
+    <item>WayPoint</item>
+    <item>PosHold Unlimited</item>
+    <item>PosHold Time</item>
+    <item>RTH</item>
+    <item>Set POI</item>
+    <item>Jump</item>
+    <item>Set heading</item>
+  </string-array>
 </resources>
