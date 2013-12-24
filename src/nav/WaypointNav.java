@@ -53,7 +53,6 @@ public class WaypointNav implements Comparable<WaypointNav> {
 	public String MarkerId = "";
 	public int Error = 0;
 
-
 	public boolean ShowMarkerForThisWP() {
 		boolean show = true;
 		switch (Action) {

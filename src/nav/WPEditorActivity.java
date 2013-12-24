@@ -85,6 +85,7 @@ public class WPEditorActivity extends Activity {
 				if (isChecked) {
 					((TableLayout) findViewById(R.id.TLCircle)).setVisibility(View.VISIBLE);
 					((TableLayout) findViewById(R.id.TLWP)).setVisibility(View.GONE);
+					SpinnerAction.setSelection(WaypointNav.WP_ACTION_SET_POI - 1);
 				} else {
 					((TableLayout) findViewById(R.id.TLCircle)).setVisibility(View.GONE);
 					((TableLayout) findViewById(R.id.TLWP)).setVisibility(View.VISIBLE);
@@ -151,7 +152,6 @@ public class WPEditorActivity extends Activity {
 		returnIntent.putExtra("RADIUS", ((EditText) findViewById(R.id.editTextRadius)).getText().toString());
 		returnIntent.putExtra("NRPOINTS", ((EditText) findViewById(R.id.editTextNrOfPoints)).getText().toString());
 		returnIntent.putExtra("DIRECTION", ((EditText) findViewById(R.id.editTextDirection)).getText().toString());
-
 		setResult(RESULT_OK, returnIntent);
 		finish();
 	}

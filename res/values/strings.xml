@@ -317,5 +317,11 @@
     <string name="Parameter3">Parameter3</string>
     <string name="Altitude">Altitude</string>
     <string name="Action">Action</string>
+    <string name="UploadMission">Upload Mission</string>
+    <string name="DownloadMission">Download Mission</string>
+    <string name="SaveMission">Save Mission</string>
+    <string name="LoadMission">Load Mission</string>
+    <string name="ClearMap">Clear Map</string>
+    <string name="ZoomIn">Zoom in</string>
 
 </resources>

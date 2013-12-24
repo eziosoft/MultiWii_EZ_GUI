@@ -19,10 +19,12 @@ import org.xmlpull.v1.XmlSerializer;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,12 +36,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.util.Xml;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -159,7 +164,59 @@ public class NavActivity extends SherlockFragmentActivity {
 		TVWPInfo.setText("");
 		TVWPInfo.setText(getString(R.string.MaxNumberOfWP) + String.valueOf(app.mw.NAVmaxWpNumber));
 
-		mDrawerList.setAdapter(new ArrayAdapter<WaypointNav>(this, R.layout.drawer_list_item, app.mw.WaypointsList));
+		mDrawerList.setAdapter(new ArrayAdapter<WaypointNav>(this, R.layout.drawer_list_item, app.mw.WaypointsList) {
+			//
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+
+				// 1. Create inflater
+				LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+				// 2. Get rowView from inflater
+
+				View rowView = null;
+
+				// if(!modelsArrayList.get(position).isGroupHeader()){
+				rowView = inflater.inflate(R.layout.drawer_list_item, parent, false);
+
+				// 3. Get icon,title & counter views from the rowView
+				ImageView imgView = (ImageView) rowView.findViewById(R.id.item_icon);
+				TextView titleView = (TextView) rowView.findViewById(R.id.item_title);
+
+				// 4. Set the text for textView
+				switch (app.mw.WaypointsList.get(position).Action) {
+
+				case WaypointNav.WP_ACTION_POSHOLD_UNLIM:
+					imgView.setImageResource(R.drawable.poshold_unlim);
+					break;
+
+				case WaypointNav.WP_ACTION_POSHOLD_TIME:
+					imgView.setImageResource(R.drawable.poshold_time);
+					break;
+
+				case WaypointNav.WP_ACTION_JUMP:
+					imgView.setImageResource(R.drawable.jump);
+					break;
+
+				case WaypointNav.WP_ACTION_WAYPOINT:
+					imgView.setImageResource(R.drawable.waypoint);
+					break;
+
+				case WaypointNav.WP_ACTION_SET_POI:
+					imgView.setImageResource(R.drawable.poi);
+					break;
+
+				default:
+					imgView.setImageResource(R.drawable.green_light);
+					break;
+				}
+
+				titleView.setText(app.mw.WaypointsList.get(position).toString());
+
+				return rowView;
+			}
+
+		});
 	}
 
 	@Override
@@ -450,86 +507,89 @@ public class NavActivity extends SherlockFragmentActivity {
 	}
 
 	void DownloadMission() {
-		Log.d("nav", "download mission");
-		ClearMap();
+		if (app.commMW.Connected) {
+			Log.d("nav", "download mission");
+			ClearMap();
 
-		final ProgressDialog progress = ProgressDialog.show(this, getString(R.string.Downloading), getString(R.string.PleaseWait), true);
+			final ProgressDialog progress = ProgressDialog.show(this, getString(R.string.Downloading), getString(R.string.PleaseWait), true);
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				boolean finished = false;
-				int i = 1;
-				boolean error = false;
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					boolean finished = false;
+					int i = 1;
+					boolean error = false;
 
-				killme = true;
-				killed = false;
-				mHandler.removeCallbacks(null);
-				while (!killed) {
-					try {
-						Thread.sleep(app.RefreshRate);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-
-				while (!finished) {
-					app.mw.SendRequestMSP_WP(i);
-					Log.d("nav", "send request " + String.valueOf(i));
-
-					int t = 0;
-					int t1 = 0;
-
-					while (isWPhasBeenDownloaded(i) < 0) {
-						Log.d("nav", "waiting..." + String.valueOf(i));
+					killme = true;
+					killed = false;
+					mHandler.removeCallbacks(null);
+					while (!killed) {
 						try {
 							Thread.sleep(app.RefreshRate);
 						} catch (InterruptedException e) {
-							//
 							e.printStackTrace();
 						}
+					}
 
-						app.mw.ProcessSerialData(false);
+					while (!finished) {
+						app.mw.SendRequestMSP_WP(i);
+						Log.d("nav", "send request " + String.valueOf(i));
 
-						t++;
-						if (t > 20) {
-							app.mw.SendRequestMSP_WP(i);
-							Log.d("nav", "send request " + String.valueOf(i));
-							t = 0;
-							t1++;
+						int t = 0;
+						int t1 = 0;
 
-							if (t1 > 5) {
-								finished = true;
-								error = true;
+						while (isWPhasBeenDownloaded(i) < 0) {
+							Log.d("nav", "waiting..." + String.valueOf(i));
+							try {
+								Thread.sleep(app.RefreshRate);
+							} catch (InterruptedException e) {
+								//
+								e.printStackTrace();
 							}
+
+							app.mw.ProcessSerialData(false);
+
+							t++;
+							if (t > 20) {
+								app.mw.SendRequestMSP_WP(i);
+								Log.d("nav", "send request " + String.valueOf(i));
+								t = 0;
+								t1++;
+
+								if (t1 > 5) {
+									finished = true;
+									error = true;
+								}
+							}
+
 						}
 
+						Log.d("nav", "2");
+						if (IsWPLastToDownload(i))
+							finished = true;
+
+						i++;
+						if (i > 255)
+							finished = true;
 					}
 
-					Log.d("nav", "2");
-					if (IsWPLastToDownload(i))
-						finished = true;
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							CheckWPErrors();
+							LoadMarkersFromWPlist();
+							progress.dismiss();
+							ZoomToShawAllMarkers();
+							DisplayInfo();
+							killme = false;
+							killed = false;
+							mHandler.postDelayed(update, app.RefreshRate);
 
-					i++;
-					if (i > 255)
-						finished = true;
+						}
+					});
 				}
-
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						CheckWPErrors();
-						LoadMarkersFromWPlist();
-						progress.dismiss();
-						ZoomToShawAllMarkers();
-						killme = false;
-						killed = false;
-						mHandler.postDelayed(update, app.RefreshRate);
-
-					}
-				});
-			}
-		}).start();
+			}).start();
+		}
 
 	}
 
@@ -667,7 +727,6 @@ public class NavActivity extends SherlockFragmentActivity {
 		if (requestCode == 2) {
 
 			if (resultCode == RESULT_OK) {
-
 				createCircle(data.getStringExtra("MarkerId"), data.getStringExtra("RADIUS"), data.getStringExtra("NRPOINTS"), data.getStringExtra("DIRECTION"));
 			}
 			if (resultCode == RESULT_CANCELED) {

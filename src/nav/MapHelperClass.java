@@ -25,6 +25,8 @@ public class MapHelperClass implements LocationSource {
 	public Marker HomeMarker;
 	public Marker PositionHoldMarker;
 	public Marker ModelMarker;
+	final private float markerAnchorX = 0.17f;
+	final private float markerAnchorY = 1f;
 
 	public List<Marker> markers = new ArrayList<Marker>();
 	// public Circle CurrentWPCircle;
@@ -247,7 +249,7 @@ public class MapHelperClass implements LocationSource {
 			IconColor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
 			break;
 		}
-		Marker m = map.addMarker(new MarkerOptions().position(position).draggable(true).icon(IconColor));
+		Marker m = map.addMarker(new MarkerOptions().position(position).draggable(true).icon(IconColor).anchor(markerAnchorX, markerAnchorY));
 		markers.add(m);
 
 		m.setTitle(title);
@@ -269,10 +271,10 @@ public class MapHelperClass implements LocationSource {
 
 	void addDefaultMarkersToMap() {
 		LatLng mapCenter = map.getCameraPosition().target;
-		HomeMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Home").icon(BitmapDescriptorFactory.fromResource(R.drawable.home)).draggable(false));
+		HomeMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Home").icon(BitmapDescriptorFactory.fromResource(R.drawable.home)).draggable(false).anchor(markerAnchorX, markerAnchorY));
 		ModelMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("Model").icon(ModelIcon).draggable(false).anchor(0.5f, 0.5f).flat(true));
 
-		PositionHoldMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("PositionHold").icon(BitmapDescriptorFactory.fromResource(R.drawable.poshold)).draggable(false));
+		PositionHoldMarker = map.addMarker(new MarkerOptions().position(mapCenter).title("PositionHold").icon(BitmapDescriptorFactory.fromResource(R.drawable.poshold)).draggable(false).anchor(markerAnchorX, markerAnchorY));
 
 		// CurrentWPCircle = map.addCircle(new
 		// CircleOptions().center(mapCenter).radius(CircleAroundWPinMeters).fillColor(Color.argb(50,

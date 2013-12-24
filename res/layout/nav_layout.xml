@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="UploadMissionOnClick"
-                    android:text="Upload Mission" />
+                    android:text="@string/UploadMission" />
 
                 <Button
                     android:id="@+id/button1"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="DownloadMissionOnClick"
-                    android:text="Download Mission" />
+                    android:text="@string/DownloadMission" />
             </TableRow>
 
             <TableRow
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="LoadMissionOnClick"
-                    android:text="Load mission" />
+                    android:text="@string/LoadMission" />
 
                 <Button
                     android:id="@+id/button1"
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="SaveMissionOnClick"
-                    android:text="Save mission" />
+                    android:text="@string/SaveMission" />
             </TableRow>
 
             <TableRow
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="ClearMapOnClick"
-                    android:text="Clear Map" />
+                    android:text="@string/ClearMap" />
 
                 <Button
                     android:id="@+id/button1"
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="ZoomInOnClick"
-                    android:text="Zoom in" />
+                    android:text="@string/ZoomIn" />
             </TableRow>
 
             <TableRow

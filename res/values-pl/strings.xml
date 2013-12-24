@@ -293,13 +293,19 @@
   <string name="Parameter3">Parametr3</string>
   <string name="Altitude">Wysokość</string>
   <string name="Action">Akcja</string>
+  <string name="UploadMission">Prześlij misję</string>
+  <string name="DownloadMission">Pobierz misję</string>
+  <string name="SaveMission">Zapisz misję</string>
+  <string name="LoadMission">Otwórz misję</string>
+  <string name="ClearMap">Wyczyść mapę</string>
+  <string name="ZoomIn">Powiększ</string>
   <string-array name="wp_actions">
     <item>Punkt Nawigacyjny</item>
-    <item>PosHold Unlimited</item>
-    <item>PosHold Time</item>
+    <item>PosHold nieograniczony</item>
+    <item>PosHold czasowy</item>
     <item>RTH</item>
-    <item>Set POI</item>
-    <item>Jump</item>
+    <item>POI</item>
+    <item>Skok</item>
     <item>Set heading</item>
   </string-array>
 </resources>
