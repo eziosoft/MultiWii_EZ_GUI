@@ -51,7 +51,7 @@ public class ConfigActivity extends SherlockActivity {
 	TextView MacAddressBTFrskyTV;
 
 	CheckBox CheckBoxTTS;
-	CheckBox CheckBoxUseOfflineMap;
+	// CheckBox CheckBoxUseOfflineMap;
 	CheckBox CheckBoxConnectOnStart;
 	CheckBox CheckBoxAltCorrection;
 	CheckBox CheckBoxDisableBTonExit;
@@ -144,7 +144,8 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceCzech = (RadioButton) findViewById(R.id.radioForceCzech);
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
-		CheckBoxUseOfflineMap = (CheckBox) findViewById(R.id.checkBoxUseOfflineMap);
+		// CheckBoxUseOfflineMap = (CheckBox)
+		// findViewById(R.id.checkBoxUseOfflineMap);
 		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
 		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
 		CheckBoxReverseRollDirection = (CheckBox) findViewById(R.id.checkBoxReverseRollDirection);
@@ -205,13 +206,13 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		switch (app.Protocol) {
-		case 220:
+		case App.PROTOCOL_220:
 			Protocol220.setChecked(true);
 			break;
-		case 230:
+		case App.PROTOCOL_230:
 			Protocol230.setChecked(true);
 			break;
-		case 231:
+		case App.PROTOCOL_NAV:
 			Protocol231.setChecked(true);
 			break;
 
@@ -230,7 +231,7 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
-		CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
+		// CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
 		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
 		if (CheckBoxUseFTDISerial.isChecked()) {
@@ -282,15 +283,15 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		if (Protocol220.isChecked()) {
-			app.Protocol = 220;
+			app.Protocol = App.PROTOCOL_220;
 		}
 
 		if (Protocol230.isChecked()) {
-			app.Protocol = 230;
+			app.Protocol = App.PROTOCOL_230;
 		}
 
 		if (Protocol231.isChecked()) {
-			app.Protocol = 231;
+			app.Protocol = App.PROTOCOL_NAV;
 		}
 
 		if (MagMode1.isChecked()) {
@@ -303,7 +304,7 @@ public class ConfigActivity extends SherlockActivity {
 		app.ConnectOnStart = CheckBoxConnectOnStart.isChecked();
 		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
-		app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
+		// app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
 		app.ReverseRoll = CheckBoxReverseRollDirection.isChecked();
 

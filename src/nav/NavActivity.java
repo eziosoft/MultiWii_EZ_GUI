@@ -164,7 +164,7 @@ public class NavActivity extends SherlockFragmentActivity {
 		TVWPInfo.setText("");
 		TVWPInfo.setText(getString(R.string.MaxNumberOfWP) + String.valueOf(app.mw.NAVmaxWpNumber));
 
-		mDrawerList.setAdapter(new ArrayAdapter<WaypointNav>(this, R.layout.drawer_list_item, app.mw.WaypointsList) {
+		mDrawerList.setAdapter(new ArrayAdapter<WaypointNav>(this, R.layout.nav_drawer_list_item, app.mw.WaypointsList) {
 			//
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -177,7 +177,7 @@ public class NavActivity extends SherlockFragmentActivity {
 				View rowView = null;
 
 				// if(!modelsArrayList.get(position).isGroupHeader()){
-				rowView = inflater.inflate(R.layout.drawer_list_item, parent, false);
+				rowView = inflater.inflate(R.layout.nav_drawer_list_item, parent, false);
 
 				// 3. Get icon,title & counter views from the rowView
 				ImageView imgView = (ImageView) rowView.findViewById(R.id.item_icon);
@@ -185,6 +185,14 @@ public class NavActivity extends SherlockFragmentActivity {
 
 				// 4. Set the text for textView
 				switch (app.mw.WaypointsList.get(position).Action) {
+
+				case WaypointNav.WP_ACTION_SET_HEAD:
+					imgView.setImageResource(R.drawable.set_heading);
+					break;
+
+				case WaypointNav.WP_ACTION_RTH:
+					imgView.setImageResource(R.drawable.rth);
+					break;
 
 				case WaypointNav.WP_ACTION_POSHOLD_UNLIM:
 					imgView.setImageResource(R.drawable.poshold_unlim);
@@ -414,6 +422,10 @@ public class NavActivity extends SherlockFragmentActivity {
 		}
 
 		app.sensors.startMagACC();
+
+		if (app.Protocol != App.PROTOCOL_NAV) {
+			DisplayInfoDialog("Protocol", "This requires selected NAV Protocol in Settings", getString(R.string.OK));
+		}
 	}
 
 	@Override
@@ -929,7 +941,7 @@ public class NavActivity extends SherlockFragmentActivity {
 
 	}
 
-	public final void DisplayInfoDialog(String title, String text, String buttonText) {
+	private final void DisplayInfoDialog(String title, String text, String buttonText) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(title).setMessage(text).setCancelable(false).setNegativeButton(buttonText, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {

@@ -209,10 +209,10 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		if (app.ConfigHasBeenChange_DisplayRestartInfo) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.PleaseRestart)).setCancelable(false).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+			builder.setMessage(getString(R.string.PressOKToRestart)).setCancelable(false).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int id) {
-					EXIT();
+					EXIT(true);
 				}
 			});
 			AlertDialog alert = builder.create();
@@ -546,7 +546,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 	}
 
-	void EXIT() {
+	void EXIT(boolean restart) {
 		try {
 			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
 		} catch (Exception e) {
@@ -561,6 +561,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		app.sensors.stop();
 		app.mw.CloseLoggingFile();
 		app.notifications.Cancel(99);
+
+		if (restart)
+			app.RestartApp();
 		Close();
 		System.exit(0);
 	}
@@ -577,7 +580,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
-			EXIT();
+			EXIT(false);
 
 			return true;
 		}

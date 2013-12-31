@@ -20,10 +20,12 @@ package com.ezio.multiwii.app;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +38,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ezio.multiwii.R;
+import com.ezio.multiwii.Main.MainMultiWiiActivity;
 import com.ezio.multiwii.frsky.FrskyProtocol;
 import com.ezio.multiwii.helpers.Functions;
 import com.ezio.multiwii.helpers.Notifications;
@@ -58,6 +61,10 @@ import communication.SerialCDC_ACM;
 import communication.SerialFTDI;
 
 public class App extends Application implements Sensors.Listener {
+
+	public static final int PROTOCOL_220 = 220;
+	public static final int PROTOCOL_230 = 230;
+	public static final int PROTOCOL_NAV = 231;
 
 	// debug
 	public boolean D = false; // debug
@@ -161,8 +168,8 @@ public class App extends Application implements Sensors.Listener {
 	private static final String VOLTAGEALARM = "VOLTAGEALARM";
 	public float VoltageAlarm = 0;
 
-	private static final String USEOFFLINEMAPS = "USEOFFLINEMAPS";
-	public boolean UseOfflineMaps = false;
+	// private static final String USEOFFLINEMAPS = "USEOFFLINEMAPS";
+	// public boolean UseOfflineMaps = false;
 
 	private static final String APPSTARTCOUNTER = "APPSTARTCOUNTER";
 	public int AppStartCounter = 0;
@@ -291,17 +298,16 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 
-		if (Protocol == 220) {
+		if (Protocol == PROTOCOL_220) {
 			mw = new MultiWii220(commMW);
 		}
-		if (Protocol == 230) {
+		if (Protocol == PROTOCOL_230) {
 			mw = new MultiWii230(commMW);
 		}
-		
-		if (Protocol == 231) {
+
+		if (Protocol == PROTOCOL_NAV) {
 			mw = new MultiWii230NAV(commMW);
 		}
-
 
 		frskyProtocol = new FrskyProtocol(commFrsky);
 
@@ -329,7 +335,7 @@ public class App extends Application implements Sensors.Listener {
 		PeriodicSpeaking = prefs.getInt(PERIODICSPEAKING, 20000);
 		VoltageAlarm = prefs.getFloat(VOLTAGEALARM, 9.9f);
 		GraphsToShow = prefs.getString(GRAPHSTOSHOW, GraphsToShow);
-		UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
+		// UseOfflineMaps = prefs.getBoolean(USEOFFLINEMAPS, false);
 		RefreshRate = prefs.getInt(REFRESHRATE, 100);
 		CopyFrskyToMW = prefs.getBoolean(COPYFRSKYTOMW, false);
 		AppStartCounter = prefs.getInt(APPSTARTCOUNTER, 0);
@@ -362,7 +368,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
-		editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
+		// editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.putInt(REFRESHRATE, RefreshRate);
 		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
 		editor.putInt(APPSTARTCOUNTER, AppStartCounter);
@@ -378,7 +384,7 @@ public class App extends Application implements Sensors.Listener {
 
 		if (!quiet) {
 			Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
-			Say(getString(R.string.Settingssaved));
+			// Say(getString(R.string.Settingssaved));
 		}
 	}
 
@@ -450,7 +456,7 @@ public class App extends Application implements Sensors.Listener {
 						s = getString(R.string.isOFF);
 					}
 
-					Say((mw.buttonCheckboxLabel[i] + s).toLowerCase());
+					Say((mw.buttonCheckboxLabel[i] + s).toLowerCase(Locale.ENGLISH));
 
 					if (mw.buttonCheckboxLabel[i].equals("ARM")) {
 						soundManager.playSound(1);
@@ -493,7 +499,7 @@ public class App extends Application implements Sensors.Listener {
 			// }
 
 			// update Home position
-			if (commMW.Connected && Protocol<231) {
+			if (commMW.Connected && Protocol < 231) {
 				mw.SendRequestMSP_WP(0);
 
 				for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
@@ -640,6 +646,15 @@ public class App extends Application implements Sensors.Listener {
 		builder.setPositiveButton("OK", null);
 		AlertDialog dialog = builder.create();
 		dialog.show();
+	}
+
+	public void RestartApp() {
+		Intent mStartActivity = new Intent(getApplicationContext(), MainMultiWiiActivity.class);
+		int mPendingIntentId = 123456;
+		PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+		AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 200, mPendingIntent);
+		System.exit(0);
 	}
 
 }

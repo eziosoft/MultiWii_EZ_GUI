@@ -135,6 +135,9 @@ public class WaypointActivity extends Activity {
 			l.setVisibility(View.GONE);
 		}
 
+		if (app.Protocol == App.PROTOCOL_NAV)
+			((LinearLayout) findViewById(R.id.LinearLayoutNotNav)).setVisibility(View.GONE);
+
 	}
 
 	public void GetWPOnClick(View v) {

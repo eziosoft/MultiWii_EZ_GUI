@@ -24,15 +24,19 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TableLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.ezio.multiwii.R;
@@ -50,9 +54,16 @@ public class WPEditorActivity extends Activity {
 	EditText ETParameter2;
 	EditText ETParameter3;
 
+	TextView TVPar1;
+	TextView TVPar2;
+	TextView TVPar3;
+
+	ImageView IVActionIcon;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		app = (App) getApplication();
 		app.ForceLanguage();
 
@@ -74,9 +85,29 @@ public class WPEditorActivity extends Activity {
 		ETParameter3 = (EditText) findViewById(R.id.editTextParameter3);
 		SpinnerAction = (Spinner) findViewById(R.id.spinnerAction);
 
+		TVPar1 = (TextView) findViewById(R.id.textViewPar1);
+		TVPar2 = (TextView) findViewById(R.id.textViewPar2);
+		TVPar3 = (TextView) findViewById(R.id.textViewPar3);
+
+		IVActionIcon = (ImageView) findViewById(R.id.imageViewActionIcon);
+
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wp_actions, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		SpinnerAction.setAdapter(adapter);
+		SpinnerAction.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				setParametersDesc(position + 1);
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		((CheckBox) findViewById(R.id.checkBoxCircle)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -98,6 +129,123 @@ public class WPEditorActivity extends Activity {
 
 	}
 
+	private void setActionIcon(int Action) {
+		switch (Action) {
+
+		case WaypointNav.WP_ACTION_SET_HEAD:
+			IVActionIcon.setImageResource(R.drawable.set_heading);
+			break;
+
+		case WaypointNav.WP_ACTION_RTH:
+			IVActionIcon.setImageResource(R.drawable.rth);
+			break;
+
+		case WaypointNav.WP_ACTION_POSHOLD_UNLIM:
+			IVActionIcon.setImageResource(R.drawable.poshold_unlim);
+			break;
+
+		case WaypointNav.WP_ACTION_POSHOLD_TIME:
+			IVActionIcon.setImageResource(R.drawable.poshold_time);
+			break;
+
+		case WaypointNav.WP_ACTION_JUMP:
+			IVActionIcon.setImageResource(R.drawable.jump);
+			break;
+
+		case WaypointNav.WP_ACTION_WAYPOINT:
+			IVActionIcon.setImageResource(R.drawable.waypoint);
+			break;
+
+		case WaypointNav.WP_ACTION_SET_POI:
+			IVActionIcon.setImageResource(R.drawable.poi);
+			break;
+
+		default:
+			IVActionIcon.setImageResource(R.drawable.green_light);
+			break;
+		}
+
+	}
+
+	private void setParametersDesc(int Action) {
+
+		setActionIcon(Action);
+
+		switch (Action) {
+		case WaypointNav.WP_ACTION_POSHOLD_TIME:
+			TVPar1.setText(R.string.TimeSec);
+			TVPar1.setVisibility(View.VISIBLE);
+			// ETParameter1.setText("10");
+			ETParameter1.setVisibility(View.VISIBLE);
+
+			// TVPar2.setText(R.string.TimeSec);
+			TVPar2.setVisibility(View.GONE);
+			// ETParameter2.setText("10");
+			ETParameter2.setVisibility(View.GONE);
+
+			// TVPar3.setText(R.string.TimeSec);
+			TVPar3.setVisibility(View.GONE);
+			// ETParameter3.setText("10");
+			ETParameter3.setVisibility(View.GONE);
+
+			break;
+
+		case WaypointNav.WP_ACTION_JUMP:
+			TVPar1.setText(R.string.WP);
+			TVPar1.setVisibility(View.VISIBLE);
+			// ETParameter1.setText("1");
+			ETParameter1.setVisibility(View.VISIBLE);
+
+			TVPar2.setText(R.string.Repetition);
+			TVPar2.setVisibility(View.VISIBLE);
+			// ETParameter2.setText("1");
+			ETParameter2.setVisibility(View.VISIBLE);
+
+			// TVPar3.setText(R.string.TimeSec);
+			TVPar3.setVisibility(View.GONE);
+			// ETParameter3.setText("10");
+			ETParameter3.setVisibility(View.GONE);
+
+			break;
+
+		case WaypointNav.WP_ACTION_SET_HEAD:
+			TVPar1.setText(R.string.Heading);
+			TVPar1.setVisibility(View.VISIBLE);
+			// ETParameter1.setText("0");
+			ETParameter1.setVisibility(View.VISIBLE);
+
+			// TVPar2.setText(R.string.Repetition);
+			TVPar2.setVisibility(View.GONE);
+			// ETParameter2.setText("1");
+			ETParameter2.setVisibility(View.GONE);
+
+			// TVPar3.setText(R.string.TimeSec);
+			TVPar3.setVisibility(View.GONE);
+			// ETParameter3.setText("10");
+			ETParameter3.setVisibility(View.GONE);
+
+			break;
+
+		default:
+
+			// TVPar1.setText(R.string.HEAD);
+			TVPar1.setVisibility(View.GONE);
+			// ETParameter1.setText("0");
+			ETParameter1.setVisibility(View.GONE);
+
+			// TVPar2.setText(R.string.Repetition);
+			TVPar2.setVisibility(View.GONE);
+			// ETParameter2.setText("0");
+			ETParameter2.setVisibility(View.GONE);
+
+			// TVPar3.setText(R.string.TimeSec);
+			TVPar3.setVisibility(View.GONE);
+			// ETParameter3.setText("0");
+			ETParameter3.setVisibility(View.GONE);
+			break;
+		}
+	}
+
 	void loadWPData() {
 		for (WaypointNav WP : app.mw.WaypointsList) {
 			if (WP.MarkerId.equals(MarkerId)) {
@@ -107,6 +255,7 @@ public class WPEditorActivity extends Activity {
 				ETParameter2.setText(String.valueOf(WP.Parameter2));
 				ETParameter3.setText(String.valueOf(WP.Parameter3));
 				SpinnerAction.setSelection(WP.Action - 1);
+				setParametersDesc(WP.Action);
 				return;
 			}
 		}

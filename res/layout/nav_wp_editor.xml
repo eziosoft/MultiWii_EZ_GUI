@@ -14,19 +14,45 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textViewWPTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
             <TableLayout
                 android:id="@+id/TLWP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/frame1" >
+                android:layout_margin="5dp" >
+
+                <TableRow
+                    android:id="@+id/tableRow10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textViewWPTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Large Text"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <Button
+                        android:id="@+id/button1"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="@drawable/btn_default_normal_red"
+                        android:onClick="RemoveWPOnClick"
+                        android:text="@string/RemoveWP" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@color/tittle"
+                    android:minHeight="1dp" >
+
+                </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow1"
@@ -44,6 +70,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/imageViewActionIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/green_light" />
+
                 </TableRow>
 
                 <TableRow
@@ -52,7 +86,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/textViewPar1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Parameter1" />
@@ -72,7 +106,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/TextView02"
+                        android:id="@+id/textViewPar2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Parameter2" />
@@ -92,7 +126,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/TextView01"
+                        android:id="@+id/textViewPar3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Parameter3" />
@@ -140,6 +174,7 @@
                         android:onClick="OKOnClick"
                         android:text="@string/OK" />
                 </TableRow>
+
             </TableLayout>
 
             <TableLayout
@@ -147,7 +182,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/frame1"
                 android:visibility="gone" >
 
                 <TableRow
@@ -257,14 +291,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/UseAsCircleCenter" />
-
-            <Button
-                android:id="@+id/button1"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="RemoveWPOnClick"
-                android:text="@string/RemoveWP" />
 
         </LinearLayout>
 

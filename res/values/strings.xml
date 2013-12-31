@@ -323,5 +323,10 @@
     <string name="LoadMission">Load Mission</string>
     <string name="ClearMap">Clear Map</string>
     <string name="ZoomIn">Zoom in</string>
+    <string name="TimeSec">Time (Sec)</string>
+    <string name="WP">WP#</string>
+    <string name="Repetition">Repetition</string>
+    <string name="Heading">Heading</string>
+    <string name="PressOKToRestart">Press OK to restart the application</string>
 
 </resources>

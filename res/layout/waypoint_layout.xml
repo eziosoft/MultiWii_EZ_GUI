@@ -46,58 +46,78 @@
                 android:textColor="@color/tittleText" />
 
             <LinearLayout
-                android:id="@+id/SetAltitudeGroup"
+                android:id="@+id/LinearLayoutNotNav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/textView3"
+                <LinearLayout
+                    android:id="@+id/SetAltitudeGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/SetAltitude"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/editTextAltitude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:text="0"
+                        android:visibility="visible" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <SeekBar
+                        android:id="@+id/seekBarAltitude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/Button02"
+                    style="android:buttonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="SetWPPositionHoldOnClick"
+                    android:text="@string/SetAsPositionHold" />
+
+                <Button
+                    android:id="@+id/Button01"
+                    style="android:buttonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/SetAltitude"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:visibility="visible" />
+                    android:onClick="SetWPHomeOnClick"
+                    android:text="@string/SetAsHome" />
 
-                <EditText
-                    android:id="@+id/editTextAltitude"
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:id="@+id/checkBoxFollowMe"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="0"
-                    android:visibility="visible" />
+                    android:onClick="FollowMeCheckBoxOnClick"
+                    android:text="@string/FollowMe" />
 
-                <SeekBar
-                    android:id="@+id/seekBarAltitude"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Debug" />
 
+                <TextView
+                    android:id="@+id/textViewData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="---" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/Button02"
-                style="android:buttonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="SetWPPositionHoldOnClick"
-                android:text="@string/SetAsPositionHold" />
-
-            <Button
-                android:id="@+id/Button01"
-                style="android:buttonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="SetWPHomeOnClick"
-                android:text="@string/SetAsHome" />
-
-            <CheckBox
-                android:id="@+id/checkBoxFollowMe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="FollowMeCheckBoxOnClick"
-                android:text="@string/FollowMe" />
 
             <Button
                 android:id="@+id/button2"
@@ -107,17 +127,6 @@
                 android:text="@string/AddToCommunityMap"
                 android:visibility="visible" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Debug" />
-
-            <TextView
-                android:id="@+id/textViewData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="---" />
         </LinearLayout>
     </ScrollView>
 
