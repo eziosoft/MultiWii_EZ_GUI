@@ -288,6 +288,7 @@
         <item>Set POI</item>
         <item>Jump</item>
         <item>Set heading</item>
+        <item>Land</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -328,5 +329,9 @@
     <string name="Repetition">Repetition</string>
     <string name="Heading">Heading</string>
     <string name="PressOKToRestart">Press OK to restart the application</string>
+    <string name="Next">Next</string>
+    <string name="Connection">Connection</string>
+    <string name="Protocol">Protocol</string>
+    <string name="SelectMultiWiiVersion">Select your MultiWii version</string>
 
 </resources>

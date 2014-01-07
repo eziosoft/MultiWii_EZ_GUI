@@ -28,13 +28,17 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 
 public class ConfigActivity extends SherlockActivity {
+
+	ViewFlipper VF;
 
 	App app;
 	RadioButton Mode1;
@@ -51,8 +55,6 @@ public class ConfigActivity extends SherlockActivity {
 	TextView MacAddressBTFrskyTV;
 
 	CheckBox CheckBoxTTS;
-	// CheckBox CheckBoxUseOfflineMap;
-	CheckBox CheckBoxConnectOnStart;
 	CheckBox CheckBoxAltCorrection;
 	CheckBox CheckBoxDisableBTonExit;
 	CheckBox CheckBoxCopyFrskyToMW;
@@ -80,11 +82,8 @@ public class ConfigActivity extends SherlockActivity {
 	private static final int REQUEST_CONNECT_DEVICE_FRSKY = 2;
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Log.d(BT_old.TAG, "onActivityResult " + resultCode);
 		switch (requestCode) {
-
 		case REQUEST_CONNECT_DEVICE_MULTIWII:
-			// When DeviceListActivity returns with a device to connect
 			if (resultCode == Activity.RESULT_OK) {
 				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddress = address;
@@ -93,7 +92,6 @@ public class ConfigActivity extends SherlockActivity {
 			break;
 
 		case REQUEST_CONNECT_DEVICE_FRSKY:
-			// When DeviceListActivity returns with a device to connect
 			if (resultCode == Activity.RESULT_OK) {
 				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddressFrsky = address;
@@ -119,9 +117,13 @@ public class ConfigActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.config_layout);
+		setContentView(R.layout.copy_config_layout);
 
 		app = (App) getApplication();
+
+		VF = (ViewFlipper) findViewById(R.id.viewFlipperConfig);
+		VF.setInAnimation(this, android.R.anim.slide_in_left);
+		VF.setOutAnimation(this, android.R.anim.slide_out_right);
 
 		Mode1 = (RadioButton) findViewById(R.id.radioButton1);
 		Mode2 = (RadioButton) findViewById(R.id.radioButton2);
@@ -133,7 +135,6 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxTTS = (CheckBox) findViewById(R.id.checkBoxTTS);
 		MacAddressBTTV = (TextView) findViewById(R.id.textViewMacAddress);
 		MacAddressBTFrskyTV = (TextView) findViewById(R.id.textViewMacAddressFrsky);
-		CheckBoxConnectOnStart = (CheckBox) findViewById(R.id.checkBoxConnectOnStart);
 		CheckBoxAltCorrection = (CheckBox) findViewById(R.id.checkBoxAltCorrection);
 		CheckBoxDisableBTonExit = (CheckBox) findViewById(R.id.checkBoxDisableBTonExit);
 		RadioNotForce = (RadioButton) findViewById(R.id.RadioDontForce);
@@ -144,8 +145,6 @@ public class ConfigActivity extends SherlockActivity {
 		RadioForceCzech = (RadioButton) findViewById(R.id.radioForceCzech);
 		EditTextPeriodicSpeaking = (EditText) findViewById(R.id.editTextPeriodicSpeaking);
 		EditTextVoltageAlarm = (EditText) findViewById(R.id.editTextVoltageAlarm);
-		// CheckBoxUseOfflineMap = (CheckBox)
-		// findViewById(R.id.checkBoxUseOfflineMap);
 		EditTextRefreshRate = (EditText) findViewById(R.id.editTextRefreshRate);
 		CheckBoxCopyFrskyToMW = (CheckBox) findViewById(R.id.checkBoxCopyFrskyToMW);
 		CheckBoxReverseRollDirection = (CheckBox) findViewById(R.id.checkBoxReverseRollDirection);
@@ -227,11 +226,9 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		CheckBoxTTS.setChecked(app.TextToSpeach);
-		CheckBoxConnectOnStart.setChecked(app.ConnectOnStart);
 		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
-		// CheckBoxUseOfflineMap.setChecked(app.UseOfflineMaps);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
 		CheckBoxUseFTDISerial.setChecked(app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_FTDI || app.CommunicationTypeMW == App.COMMUNICATION_TYPE_SERIAL_OTHERCHIPS);
 		if (CheckBoxUseFTDISerial.isChecked()) {
@@ -301,10 +298,8 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		app.TextToSpeach = CheckBoxTTS.isChecked();
-		app.ConnectOnStart = CheckBoxConnectOnStart.isChecked();
 		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
-		// app.UseOfflineMaps = CheckBoxUseOfflineMap.isChecked();
 		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
 		app.ReverseRoll = CheckBoxReverseRollDirection.isChecked();
 
@@ -349,5 +344,15 @@ public class ConfigActivity extends SherlockActivity {
 
 		app.SaveSettings(false);
 
+	}
+
+	public void NextOnClick(View v) {
+
+		if (VF.getDisplayedChild() == VF.getChildCount() - 1) {
+			finish();
+		} else {
+			VF.showNext();
+			((ScrollView) findViewById(R.id.scrollViewConfig)).fullScroll(ScrollView.FOCUS_UP);
+		}
 	}
 }

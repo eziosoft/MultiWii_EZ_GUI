@@ -34,7 +34,9 @@ public class WaypointNav implements Comparable<WaypointNav> {
 													// clears the
 	// setting)
 
-	public static final String[] WP_ACTION_NAMES = { "---", "WAYPOINT", "POSHOLD_UNLIM", "POSHOLD_TIME", "RTH", "SET_POI", "JUMP", "SET_HEAD" };
+	public static final int WP_ACTION_LAND = 8;
+
+	public static final String[] WP_ACTION_NAMES = { "---", "WAYPOINT", "POSHOLD_UNLIM", "POSHOLD_TIME", "RTH", "SET_POI", "JUMP", "SET_HEAD", "LAND" };
 
 	public static final int MISSION_FLAG_END = 0xa5;
 

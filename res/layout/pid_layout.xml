@@ -30,71 +30,6 @@
                 android:background="@drawable/frame" >
 
                 <TableRow
-                    android:id="@+id/tableRow8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Profile" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
-
-                    <Spinner
-                        android:id="@+id/spinnerProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/button4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="LoadProfilePIDOnClick"
-                        android:text="@string/Load" />
-
-                    <Button
-                        android:id="@+id/button5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/button6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="SaveProfileOnClick"
-                        android:text="@string/Save" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-                </TableRow>
-            </TableLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/frame" >
-
-                <TableRow
                     android:id="@+id/tableRow12"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -228,7 +163,6 @@
                         android:inputType="numberDecimal"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -356,7 +290,6 @@
                         android:inputType="numberDecimal"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -620,7 +553,6 @@
                         android:inputType="numberDecimal"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;20;0.1;1" >
-
                     </EditText>
 
                     <EditText
@@ -746,7 +678,6 @@
                         android:inputType="numberDecimal"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -777,7 +708,6 @@
                         android:inputType="numberDecimal"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -808,7 +738,6 @@
                         android:inputType="numberSigned"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;2.5;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -839,7 +768,6 @@
                         android:inputType="numberSigned"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
-
                 </TableRow>
 
                 <TableRow
@@ -869,7 +797,71 @@
                         android:inputType="numberSigned"
                         android:onClick="ShowCustomDialogOnClick"
                         android:tag="0;1;0.01;2" />
+                </TableRow>
+            </TableLayout>
 
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/frame" >
+
+                <TableRow
+                    android:id="@+id/tableRow8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/Profile" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <Spinner
+                        android:id="@+id/spinnerProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="LoadProfilePIDOnClick"
+                        android:text="@string/Load" />
+
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/button6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="SaveProfileOnClick"
+                        android:text="@string/Save" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
                 </TableRow>
             </TableLayout>
 
@@ -882,7 +874,6 @@
                 android:onClick="SetOnClick"
                 android:tag="DONTASK"
                 android:text="@string/SavetoEEPROM" />
-
         </LinearLayout>
     </ScrollView>
 

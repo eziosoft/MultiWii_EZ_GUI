@@ -110,6 +110,7 @@ public class App extends Application implements Sensors.Listener {
 
 	public boolean loggingON = false;
 	// ----settings-----
+
 	private static final String COPYFRSKYTOMW = "COPYFRSKYTOMW";
 	public boolean CopyFrskyToMW;
 

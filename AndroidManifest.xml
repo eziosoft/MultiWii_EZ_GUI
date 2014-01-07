@@ -175,6 +175,7 @@
         <activity android:name="nav.NavActivity"></activity>
         <activity android:name="nav.WPEditorActivity" android:theme="@android:style/Theme.Dialog"></activity>
         <activity android:name=".helpers.FilePickerActivity" android:theme="@android:style/Theme.Dialog"></activity>
+        <activity android:name=".about.WizardActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

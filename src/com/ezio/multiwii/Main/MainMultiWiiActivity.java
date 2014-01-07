@@ -45,6 +45,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.about.AboutActivity;
+import com.ezio.multiwii.about.WizardActivity;
 import com.ezio.multiwii.advanced.AdvancedActivity;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.aux_pid.AUXActivity;
@@ -166,6 +167,9 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		app.SaveSettings(true);
 
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+		if (app.AppStartCounter==1)
+			startActivity(new Intent(getApplicationContext(), WizardActivity.class));
 
 	}
 

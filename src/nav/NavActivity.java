@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,7 +73,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class NavActivity extends SherlockFragmentActivity {
 
-	String supportedWinGuiMissionFiles = "2.3 pre6";
+	String supportedWinGuiMissionFiles = "2.3 pre7";
 
 	MapHelperClass mapHelperClass;
 	Menu ActionBarMenu;
@@ -884,27 +883,7 @@ public class NavActivity extends SherlockFragmentActivity {
 
 	}
 
-	// String showInputDialog()
-	// {
-	// AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	// alert.setTitle(getString(R.string.EnterFileName));
-	// final EditText input = new EditText(this);
-	// input.setText(s);
-	// alert.setView(input);
-	// alert.setPositiveButton(getString(R.string.Save), new
-	// DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	//
-	// try {
-	// saveMission(Environment.getExternalStorageDirectory() + "/MultiWiiLogs/"
-	// + input.getText().toString() + ".mission");
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// }
-	// });
-	// }
+
 
 	public void SaveMissionOnClick(View v) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
