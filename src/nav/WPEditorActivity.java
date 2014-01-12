@@ -132,6 +132,10 @@ public class WPEditorActivity extends Activity {
 	private void setActionIcon(int Action) {
 		switch (Action) {
 
+		case WaypointNav.WP_ACTION_LAND:
+			IVActionIcon.setImageResource(R.drawable.land);
+			break;
+
 		case WaypointNav.WP_ACTION_SET_HEAD:
 			IVActionIcon.setImageResource(R.drawable.set_heading);
 			break;

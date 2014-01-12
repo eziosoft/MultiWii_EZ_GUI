@@ -528,7 +528,7 @@
                     android:id="@+id/CheckBox_BT_New"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BT NEW(experimental - if you can&apos;t connect disable this)" />
+                    android:text="BT_NEW - check only if BLuetooth connection doesn't work. On some devices it solves problem of the BT connection. But on others it makes the connection very unstable" />
 
                 <CheckBox
                     android:id="@+id/checkBoxDisableBTonExit"

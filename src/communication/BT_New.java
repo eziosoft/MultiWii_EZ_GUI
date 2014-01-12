@@ -23,9 +23,7 @@ public class BT_New extends Communication {
 	private static final boolean D = true;
 
 	private static final UUID SerialPortServiceClass_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-	// //////////////////////////////////////////////////////////////////////00001101-0000-1000-8000-00805F9B34FB
 
-	// Member fields
 	private final BluetoothAdapter mAdapter;
 
 	private ConnectThread mConnectThread;
@@ -36,10 +34,6 @@ public class BT_New extends Communication {
 
 	SimpleQueue<Integer> fifo = new SimpleQueue<Integer>();
 
-	/**
-	 * Start the chat service. Specifically start AcceptThread to begin a
-	 * session in listening (server) mode. Called by the Activity onResume()
-	 */
 	public synchronized void start() {
 		if (D)
 			Log.d(TAG, "start");
@@ -60,12 +54,6 @@ public class BT_New extends Communication {
 		Connected = false;
 	}
 
-	/**
-	 * Start the ConnectThread to initiate a connection to a remote device.
-	 * 
-	 * @param device
-	 *            The BluetoothDevice to connect
-	 */
 	public synchronized void connect(BluetoothDevice device) {
 		if (D)
 			Log.d(TAG, "connecting to: " + device);

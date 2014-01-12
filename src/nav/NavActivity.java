@@ -185,6 +185,10 @@ public class NavActivity extends SherlockFragmentActivity {
 				// 4. Set the text for textView
 				switch (app.mw.WaypointsList.get(position).Action) {
 
+				case WaypointNav.WP_ACTION_LAND:
+					imgView.setImageResource(R.drawable.land);
+					break;
+
 				case WaypointNav.WP_ACTION_SET_HEAD:
 					imgView.setImageResource(R.drawable.set_heading);
 					break;
@@ -882,8 +886,6 @@ public class NavActivity extends SherlockFragmentActivity {
 		// Log.d("xml", writer.toString());
 
 	}
-
-
 
 	public void SaveMissionOnClick(View v) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);

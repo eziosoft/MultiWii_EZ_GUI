@@ -22,12 +22,7 @@ public class BT extends Communication {
 	private BluetoothSocket btSocket = null;
 	private OutputStream outStream = null;
 	private InputStream inStream = null;
-	// Well known SPP UUID (will *probably* map to
-	// RFCOMM channel 1 (default) if not in use);
-	// see comments in onResume().
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
-	// Handler handler;
 
 	public BT(Context context) {
 		super(context);
@@ -60,35 +55,25 @@ public class BT extends Communication {
 
 	@Override
 	public void Connect(String address, int speed) {
-		// Blocking connect, for a simple client nothing else can
-		// happen until a successful connection is made, so we
-		// don't care if it blocks.
 		Toast.makeText(context, context.getString(R.string.Connecting), Toast.LENGTH_LONG).show();
 
 		if (mBluetoothAdapter.isEnabled()) {
 			try {
-
 				GetRemoteDevice(address);
 				btSocket.connect();
 				Connected = true;
 
 				Log.d(TAG, "BT connection established, data transfer link open.");
 				Toast.makeText(context, context.getString(R.string.Connected), Toast.LENGTH_LONG).show();
-
-				// app.Speak("Connected");
-
 			} catch (IOException e) {
 				try {
 					btSocket.close();
 					Connected = false;
 
 					Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
-					// app.Speak("Unable to connect");
-
 				} catch (IOException e2) {
 					Log.e(TAG, "ON RESUME: Unable to close socket during connection failure", e2);
 					Toast.makeText(context, "Connection failure", Toast.LENGTH_LONG).show();
-
 				}
 			}
 
@@ -125,7 +110,7 @@ public class BT extends Communication {
 
 	@Override
 	public byte Read() {
-		BytesRecieved+=1;
+		BytesRecieved += 1;
 		byte a = 0;
 		try {
 			a = (byte) inStream.read();
@@ -154,7 +139,6 @@ public class BT extends Communication {
 	@Override
 	public void Close() {
 		CloseSocket();
-
 	}
 
 	@Override
@@ -164,7 +148,6 @@ public class BT extends Communication {
 		} catch (Exception e) {
 			Toast.makeText(context, "Can't dissable BT", Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	@SuppressLint("NewApi")
@@ -174,22 +157,7 @@ public class BT extends Communication {
 			Log.d(TAG, "+ ABOUT TO ATTEMPT CLIENT CONNECT +");
 		}
 
-		// When this returns, it will 'know' about the server,
-		// via it's MAC address.
 		BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-
-		// We need two things before we can successfully connect
-		// (authentication issues aside): a MAC address, which we
-		// already have, and an RFCOMM channel.
-		// Because RFCOMM channels (aka ports) are limited in
-		// number, Android doesn't allow you to use them directly;
-		// instead you request a RFCOMM mapping based on a service
-		// ID. In our case, we will use the well-known SPP Service
-		// ID. This ID is in UUID (GUID to you Microsofties)
-		// format. Given the UUID, Android will handle the
-		// mapping for you. Generally, this will return RFCOMM 1,
-		// but not always; it depends what other BlueTooth services
-		// are in use on your Android device.
 		try {
 
 			btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
@@ -199,12 +167,6 @@ public class BT extends Communication {
 			Toast.makeText(context, context.getString(R.string.Unabletoconnect), Toast.LENGTH_LONG).show();
 		}
 
-		// Discovery may be going on, e.g., if you're running a
-		// 'scan for devices' search from your handset's Bluetooth
-		// settings, so we call cancelDiscovery(). It doesn't hurt
-		// to call it, but it might hurt not to... discovery is a
-		// heavyweight process; you don't want it in progress when
-		// a connection attempt is made.
 		if (mBluetoothAdapter.isDiscovering())
 			mBluetoothAdapter.cancelDiscovery();
 	}
@@ -225,7 +187,6 @@ public class BT extends Communication {
 			Connected = false;
 
 			Toast.makeText(context, context.getString(R.string.Disconnected), Toast.LENGTH_LONG).show();
-			// app.Speak("Disconnected");
 
 		} catch (Exception e2) {
 			Log.e(TAG, "ON PAUSE: Unable to close socket.", e2);

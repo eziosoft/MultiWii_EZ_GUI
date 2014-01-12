@@ -114,12 +114,13 @@ public class App extends Application implements Sensors.Listener {
 	private static final String COPYFRSKYTOMW = "COPYFRSKYTOMW";
 	public boolean CopyFrskyToMW;
 
-	private static final String COMMUNICATION_TYPE_MW = "CommunicationTypeMW1";
+	private static final String COMMUNICATION_TYPE_MW = "CommunicationTypeMW2";
 	public static final int COMMUNICATION_TYPE_BT = 0;
 	public static final int COMMUNICATION_TYPE_SERIAL_FTDI = 1;
 	public static final int COMMUNICATION_TYPE_SERIAL_OTHERCHIPS = 2;
 	public static final int COMMUNICATION_TYPE_BT_NEW = 4;
-	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT_NEW;
+	
+	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
 	public static final String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW1";
 	public int SerialPortBaudRateMW = 115200;
@@ -127,8 +128,8 @@ public class App extends Application implements Sensors.Listener {
 	public static final String SERIAL_PORT_BAUD_RATE_FRSKY = "SerialPortBaudRateFrSky1";
 	public int SerialPortBaudRateFrSky = 9600;
 
-	private static final String COMMUNICATION_TYPE_FRSKY = "CommunicationTypeFrSky1";
-	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT_NEW;
+	private static final String COMMUNICATION_TYPE_FRSKY = "CommunicationTypeFrSky2";
+	public int CommunicationTypeFrSky = COMMUNICATION_TYPE_BT;
 
 	private static final String RADIOMODE = "RadioMode";
 	public int RadioMode;
@@ -344,7 +345,7 @@ public class App extends Application implements Sensors.Listener {
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 		MapZoomLevel = prefs.getFloat(MAPZOOMLEVEL, 9);
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
-		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT_NEW);
+		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT);
 		// CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY,
 		// COMMUNICATION_TYPE_BT);
 		SerialPortBaudRateMW = prefs.getInt(SERIAL_PORT_BAUD_RATE_MW, 115200);

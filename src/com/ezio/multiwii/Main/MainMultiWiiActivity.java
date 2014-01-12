@@ -168,8 +168,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		if (app.AppStartCounter==1)
-			startActivity(new Intent(getApplicationContext(), WizardActivity.class));
+		if (app.AppStartCounter == 1)
+			startActivity(new Intent(getApplicationContext(), ConfigActivity.class));
 
 	}
 
@@ -302,6 +302,8 @@ public class MainMultiWiiActivity extends SherlockActivity {
 				t += "[BARO] ";
 			if (app.mw.GPSPresent == 1)
 				t += "[GPS] ";
+			if (app.mw.multi_Capability.Nav)
+				t += "[NAV" + String.valueOf(app.mw.multi_Capability.getNavVersion(app.mw.multiCapability)) + "] ";
 			if (app.mw.SonarPresent == 1)
 				t += "[SONAR] ";
 			if (app.mw.MagPresent == 1)
@@ -557,7 +559,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			// TODO: handle exception
 		}
 
-		if (app.DisableBTonExit) {
+		if (app.DisableBTonExit && app.ConfigHasBeenChange_DisplayRestartInfo == false) {
 			app.commMW.Disable();
 			app.commFrsky.Disable();
 		}
