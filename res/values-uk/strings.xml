@@ -258,6 +258,30 @@
   <string name="Searching">Пошук</string>
   <string name="GPSFixOK">Сигнал GPS OK </string>
   <string name="GPSnotAvailableInYourConfiguration">GPS недоступний у вашій конфігурації</string>
+  <string name="NotConnected">Немає підключення</string>
+  <string name="ConnectionLost">Зв’язок втрачено</string>
+  <string name="drawer_open">Відкрити вікно навігації</string>
+  <string name="drawer_close">Закрити вікно навігації</string>
+  <string name="Navigation">Навігація</string>
+  <string name="RemoveWP">Видалити цей WP</string>
+  <string name="SelectAfile">Виберіть файл:</string>
+  <string name="Open">Відкрити</string>
+  <string name="Options">Параметри</string>
+  <string name="MaxNumberOfWP">Максимальна кількість WP:</string>
+  <string name="WPError"> Помилка WP</string>
+  <string name="isNotCorrect">неправильне</string>
+  <string name="CRCisNotCorrect">CRC неправильне</string>
+  <string name="Downloading">Завантаження</string>
+  <string name="PleaseWait">Будь ласка, зачекайте ...</string>
+  <string name="Uploading">Вивантаження</string>
+  <string name="MaxNumberWPreached">Не вдалося додати точку місії. Досягнуто максимальної кількості точок місії</string>
+  <string name="Info">Інформація</string>
+  <string name="FileVersionMismach">Версія файлу не підтримується</string>
+  <string name="CircleNumberOfPoints">Кількість точок (min 5 - max 30)</string>
+  <string name="CircleDirection">Напрямок (1 або -1)</string>
+  <string name="CircleRarius">Радіус у метрах (min 20)</string>
+  <string name="UseAsCircleCenter">Використовувати як центр кола</string>
+  <string name="Circle">Коло</string>
   <string-array name="wp_actions">
     <item>WayPoint</item>
     <item>PosHold Unlimited</item>
@@ -266,5 +290,6 @@
     <item>Set POI</item>
     <item>Jump</item>
     <item>Set heading</item>
+    <item>Land</item>
   </string-array>
 </resources>

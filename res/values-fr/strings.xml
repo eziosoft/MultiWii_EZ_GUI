@@ -286,6 +286,23 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="Uploading">Transfert en cours</string>
   <string name="MaxNumberWPreached">Ne peut pas ajouter l\'étape de la mission. Nombre maximal d\'étapes de la mission atteint</string>
   <string name="Info">Infos</string>
+  <string name="FileVersionMismach">Version du fichier n\'est pas prise en charge</string>
+  <string name="CircleNumberOfPoints">Nombre de points (min 5 - max 30)</string>
+  <string name="CircleDirection">Direction (1 ou -1)</string>
+  <string name="CircleRarius">Rayon en mètres (min 20)</string>
+  <string name="UseAsCircleCenter">Utiliser comme centre de cercle</string>
+  <string name="Circle">Cercle</string>
+  <string name="Parameter1">Paramètre 1</string>
+  <string name="Parameter2">Paramètre 2</string>
+  <string name="Parameter3">Paramètre 3</string>
+  <string name="Altitude">Altitude</string>
+  <string name="Action">Action</string>
+  <string name="UploadMission">Télécharger Mission</string>
+  <string name="DownloadMission">Télécharger la Mission</string>
+  <string name="SaveMission">Sauver la Mission</string>
+  <string name="LoadMission">Charge la Mission</string>
+  <string name="ClearMap">Effacer la carte</string>
+  <string name="ZoomIn">Zoom +</string>
   <string-array name="wp_actions">
     <item>WayPoint</item>
     <item>PosHold illimité</item>
@@ -293,6 +310,7 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
     <item>RTH</item>
     <item>Définir POI</item>
     <item>Sauter</item>
-    <item>Set heading</item>
+    <item>Définir la position</item>
+    <item>Land</item>
   </string-array>
 </resources>

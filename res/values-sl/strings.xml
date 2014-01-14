@@ -222,5 +222,6 @@ Ko zaženete GPS emulacijo, se bo program izvajal v ozadju, podatki prejeti iz M
     <item>Nastavi POI</item>
     <item>Skoči</item>
     <item>Set heading</item>
+    <item>Land</item>
   </string-array>
 </resources>

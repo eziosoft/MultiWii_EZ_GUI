@@ -3,13 +3,15 @@
 <resources>
   <string name="scanning">поиск устройств...</string>
   <string name="select_device">выберите устройство для подключения</string>
-  <string name="none_paired">Нету спаренных устройств</string>
-  <string name="none_found">Устройств не найдено</string>
+  <string name="none_paired">Нет спаренных устройств</string>
+  <string name="none_found">Устройства не найдены</string>
   <string name="title_paired_devices">Спаренные устройства</string>
   <string name="title_other_devices">Другие доступные устройства</string>
   <string name="button_scan">Поиск устройств</string>
   <string name="Radio">Радио</string>
-  <string name="PitchRoll">Приборка 1</string>
+  <string name="PitchRoll">Прибор. панель 1</string>
+  <string name="Mag">Магнитометр</string>
+  <string name="Config">Настройки</string>
   <string name="Logging">Лог</string>
   <string name="RadioMode">Режим Радио</string>
   <string name="SaveSettings">Сохранить Настройки</string>
@@ -18,9 +20,11 @@
   <string name="MagMode">Режим Компаса</string>
   <string name="PointNorth">Указывать на Север</string>
   <string name="Point_multirotor_front">Указывать на \"перед\" модели</string>
+  <string name="PhoneMag">ТелМаг</string>
   <string name="PitchRollCircleView">Pitch Roll Обзор</string>
   <string name="pointFrontHelp">Указывает \"перед\" модели сравнивая данные компаса телефона и модели. Указывает на \"перед\" модели независимо от местоположения телефона.</string>
   <string name="TTS">Синтезатор речи</string>
+  <string name="GPS">GPS</string>
   <string name="GPS_distanceToHome">Расст.доДома(м)</string>
   <string name="GPS_directionToHome">Направление к Дому</string>
   <string name="GPS_numSat">Спутники</string>
@@ -37,7 +41,7 @@
   <string name="menu_disconnect">Разорвать связь</string>
   <string name="SelectBTdevice">Выберите BT вашей модели</string>
   <string name="MacNotSet">Перейдите в конфигурации и выберите сперва bluetooth вашей модели\n\nМожет работать, а может и нет, может разрушить мир, или что то еще. \nUИспользовать на свой собственный риск.\nЕсли вам нравится эта программа купить мне пива (Пожертвовать).</string>
-  <string name="InfoNotConnected">Может работать, а может и нет, может разрушить мир, или что то еще. \n\nИспользовать на свой собственный риск. \nЕсли вам нравится эта программа, купить мне пива (Пожертвовать).</string>
+  <string name="InfoNotConnected">Может работать, а может и нет, может разрушить мир, или что то еще. \n\nИспользовать на свой собственный риск. \nЕсли вам нравится эта программа, купите мне пива (Пожертвовать).</string>
   <string name="BTDevice">Устройства Bluetooth</string>
   <string name="menu_vote">Оценить программу</string>
   <string name="PhoneLatitude">ШиротаТелеф.</string>
@@ -47,9 +51,16 @@
   <string name="Motors">Двигатели</string>
   <string name="Servos">Сервы</string>
   <string name="AltCorrection">Коррекция высоты</string>
-  <string name="AltCorrectionInfo">Высота устанавливается в 0 при активации</string>
+  <string name="AltCorrectionInfo">Высота устанавливается 0 при активации</string>
+  <string name="Alt">Выс</string>
+  <string name="Pos">Удерживать позицию</string>
+  <string name="PosR">Скорость удержания позиции</string>
+  <string name="NavR">Nav Rate</string>
+  <string name="PID">ПИД</string>
   <string name="Read">Прочесть</string>
   <string name="Write">Записать</string>
+  <string name="RATE">Скорость</string>
+  <string name="TPA">Thr ПИД затухание</string>
   <string name="Reset">Сброс</string>
   <string name="AccCalibration">Калибровать Акселерометр</string>
   <string name="MagCalibration">Калибровать Компас</string>
@@ -59,9 +70,14 @@
   <string name="dashboard2">Приборка 2</string>
   <string name="disableBTonExit">Отключить BT при выходе</string>
   <string name="Declination">ОтклонениеКомпаса</string>
+  <string name="ThrMid">Thr Mid</string>
+  <string name="ThrExpo">Thr Expo</string>
+  <string name="RCRate">RC Rate</string>
+  <string name="RCExpo">RC Expo</string>
   <string name="BattVoltage">Напряжение</string>
   <string name="PowerSum">Ток</string>
   <string name="PowerMeterAlarm">Тривога батареи</string>
+  <string name="Level">Горизонт</string>
   <string name="Map">Карта</string>
   <string name="Settingssaved">Настройки сохранены</string>
   <string name="isON">Включен</string>
@@ -73,11 +89,14 @@
   <string name="Disconnected">Отключено</string>
   <string name="Satellites">Спутники</string>
   <string name="Azimuth">Азимут</string>
+  <string name="gforce">Гравит.-сила</string>
+  <string name="state">Состояние</string>
   <string name="Battery">Батарея(Вольт)</string>
   <string name="PowerSumPowerTrigger">Ток/Тригер</string>
   <string name="Donate">Пожертвовать</string>
   <string name="Loggingstarted">Лог начато</string>
   <string name="Loggingstopedandsaved">Лог остановлен и сохранен</string>
+  <string name="ResetALLnotonlyPIDparamstodefault">Это сбросит все параметры (не только ПИД) к значениям по умолчанию, вы хотите продолжить?</string>
   <string name="Yes">Да</string>
   <string name="No">Нет</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">Значения установлены по умолчанию. Нажмите Прочесть.</string>
@@ -104,12 +123,17 @@
   <string name="AdvancedWarning">Этот раздел содержит опасные и не очень хорошо протестированы функции. Используйте его только тогда, когда вы знаете, что вы делаете. \nЭТИМИ НАСТРОЙКАМИ ПОЛЬЗОВАТЬСЯ С БОЛЬШОЙ ОСТОРОЖНОСТЬЮ! \n\n!ИСПОЛЬЗОВАТЬ НА СВОЙ СТРАХ И РИСК!</string>
   <string name="Advanced">Расширенные</string>
   <string name="PhoneAccuracy">ТочностьТелефона(см)</string>
+  <string name="SetCheckboxes">AUX</string>
   <string name="Set">Задать временно</string>
   <string name="SavetoEEPROM">Сохранить в EEPROM</string>
+  <string name="Auto">Авто</string>
   <string name="Graphs">Графики</string>
   <string name="show">Показывать</string>
   <string name="Pause">Пауза</string>
   <string name="SelectBTdeviceFrsky">Выберите Frsky BT</string>
+  <string name="Frsky">Frsky</string>
+  <string name="TxRSSI">TxRSSI</string>
+  <string name="RxRSSI">RxRSSI</string>
   <string name="Connect_frsky">Подключ.Frsky</string>
   <string name="UseOfflineMap">Использовать кэшированные карты</string>
   <string name="RefreshRate">Частота обновления в мс (должно быть &gt;=100)</string>
@@ -120,6 +144,8 @@
   <string name="page3">Конфигурации</string>
   <string name="RawData">Поток Данных</string>
   <string name="ShareIt">Отправить свои настройки</string>
+  <string name="SelectSetting">Выберите параметры конфигурации (вы можете установить к примеру различные ПИД и скорость)</string>
+  <string name="RXBIND">Связать ресивер</string>
   <string name="FollowMe">Follow Me (Не тестировано! Должен использоваться с #define USE_MSP_WP) моргает когда телефон отсылает данные в MW</string>
   <string name="InfoDonate">Вы нашли эту программу полезной? Поддержите разработчика, не жалейте несколько баксов!</string>
   <string name="convertToKML">Конвертировать в KML (Google Earth)</string>
@@ -145,6 +171,7 @@
   <string name="EnterFileName">Введите имя файла</string>
   <string name="ReverseRollDirection">Реверсировать направление Roll</string>
   <string name="SetAltitude">Установить высоту в см:</string>
+  <string name="MapCenterPeriod">Период карты центра</string>
   <string name="VerticalSpeed">Вертикальная скорость</string>
   <string name="UseFTDISerial">Использовать Серийный Порт в MultiWii (перезагрузите приложение перед подключениям порта )</string>
   <string name="Dashboard3">Приборка 3</string>
@@ -159,14 +186,101 @@
   <string name="BatWarning1">ТривогаБатар1</string>
   <string name="BatWarning2">ТривогаБатар2</string>
   <string name="BatCritical">ОпасностьБатар</string>
+  <string name="GreenValuesCanBeChanged">Значения, подсвечены зеленым, могут быть изменены</string>
+  <string name="Locked">Функция заблокирована</string>
+  <string name="DoYouWantToUnlock">Покупая разблокировщик вы поддерживаете разработку этой программы и побуждаете меня больше работать.Вы хотите разблокировать ?</string>
+  <string name="TakeDeclinationFromPhone">Использовать отклонение от телефона</string>
+  <string name="RateOrUpdate">Оцените или обновити</string>
+  <string name="ArmedCount">Счетчик активаций</string>
+  <string name="Refresh">Обновить</string>
+  <string name="MockLocationIsWorking">Работает GPS эмуляции</string>
+  <string name="NoDataRecieved">Не получены данные!</string>
+  <string name="MOCKlocationInfo">GPS эмуляция позволяет отображать местоположение коптера в любом приложении карт.         После запуска эмуляции GPS, эта программа будет свернута, данные из MultiWii будут использоваться для имитации GPS в системе Android, поэтому вы можете использовать любое приложение карт для того чтобы видеть позицию коптера. Нажмите EZ-GUI значок в панели уведомлений, чтобы восстановить окно</string>
+  <string name="StartGpsEmulation">Запуск GPS эмуляции</string>
+  <string name="ClickOnTheNameForInfo">(нажмите на название для информации)</string>
+  <string name="ClickHereForMoreInfo">Нажмите здесь для получения дополнительной информации</string>
+  <string name="NewRequestMethod">Новый метод запроса</string>
+  <string name="WaypointsMap">Карта точек</string>
+  <string name="PleaseRestart">Пожалуйста, перезапустите приложение</string>
+  <string name="MoveMapEnable">Включено перемещение карты</string>
+  <string name="MoveMapDissable">Выключено перемещение карты</string>
+  <string name="AddCirclePath">Добавить круговой путь</string>
   <string name="Cancel">Отмена</string>
+  <string name="Radius">Радиус</string>
+  <string name="EnterRadius">Введите радиус круга в метрах</string>
+  <string name="Close">Закрыть</string>
+  <string name="ForceCzech">Принудительно Чешская</string>
+  <string name="Bigger">Больше</string>
+  <string name="Smaller">Меньше</string>
+  <string name="RemWP">Удалить путевую точку</string>
+  <string name="AddWP">Добавить путевую точку</string>
+  <string name="GooglePlayServiecesError">Ошибка Google Play Serviece</string>
+  <string name="NextWP">Следующая путевая точка</string>
+  <string name="PrevWP">Предыдущая путевая точка</string>
+  <string name="Clean">Очистить</string>
+  <string name="MoveMap">Переместить карту</string>
+  <string name="FrskySupport">Поддержка Frsky</string>
+  <string name="Revers">Поменять местами</string>
+  <string name="Factoryreset">Фабричный сброс</string>
+  <string name="Misc">Разное</string>
+  <string name="BindInfo">Привязка спутников spektrum</string>
+  <string name="LiveTime">Реальное время</string>
+  <string name="FactoryResetInfo">Сбросить все параметры по умолчанию</string>
+  <string name="SelectedProfile">Профиль</string>
+  <string name="Calibration">Калибровка</string>
+  <string name="AUXControl">УправлениЕ AUX</string>
+  <string name="EnableControl">Включить управление</string>
+  <string name="Min">Мин.</string>
+  <string name="Max">Макс.</string>
+  <string name="OnlyWithMW23">Доступен в MW 2.3</string>
+  <string name="SelectDifferentProtocol">Выбранная версия протокола не совместима с вашей MultiWii</string>
+  <string name="VarioSoundOnOff">Звуки Вкл/Выкл</string>
+  <string name="FSRTHaltitude">Высота RTH F/S</string>
+  <string name="OverrideBy">Переопределть:</string>
+  <string name="Searching">Поиск</string>
+  <string name="GPSFixOK">GPS сигнал ОК</string>
+  <string name="GPSnotAvailableInYourConfiguration">GPS не доступен в вашей конфигурации</string>
+  <string name="NotConnected">Не подключено</string>
+  <string name="ConnectionLost">Соединение потеряно</string>
+  <string name="Navigation">Навигация</string>
+  <string name="RemoveWP">Удалить эту путевую точку</string>
+  <string name="SelectAfile">Выберите файл:</string>
+  <string name="Open">Открыть</string>
+  <string name="Options">Параметры</string>
+  <string name="MaxNumberOfWP">Максимальное количество ПТ:</string>
+  <string name="WPError">Ошибка путевой точки</string>
+  <string name="isNotCorrect">не верно</string>
+  <string name="CRCisNotCorrect">CRC не правильный</string>
+  <string name="Downloading">Загрузка…</string>
+  <string name="PleaseWait">Пожалуйста подождите ...</string>
+  <string name="Uploading">Загрузка</string>
+  <string name="MaxNumberWPreached">Не удается добавить точку миссии. Достигнуто максимальное количество точек миссий</string>
+  <string name="Info">Инфо</string>
+  <string name="FileVersionMismach">Версия файла не поддерживается</string>
+  <string name="CircleNumberOfPoints">Количество точек (мин 5 - макс 30)</string>
+  <string name="CircleDirection">Направление (1 или -1)</string>
+  <string name="CircleRarius">Радиус в метрах (мин 20)</string>
+  <string name="UseAsCircleCenter">Использовать в качестве центра окружности</string>
+  <string name="Circle">Круг</string>
+  <string name="Parameter1">Параметр1</string>
+  <string name="Parameter2">Параметр2</string>
+  <string name="Parameter3">Параметр3</string>
+  <string name="Altitude">Высота</string>
+  <string name="Action">Действия</string>
+  <string name="UploadMission">Загрузить маршрут</string>
+  <string name="DownloadMission">Скачать маршрут</string>
+  <string name="SaveMission">Сохранить маршрут</string>
+  <string name="LoadMission">Загрузить маршрут</string>
+  <string name="ClearMap">Очистить карту</string>
+  <string name="ZoomIn">Увеличить масштаб</string>
   <string-array name="wp_actions">
-    <item>WayPoint</item>
-    <item>PosHold Unlimited</item>
-    <item>PosHold Time</item>
+    <item>Путевая точка</item>
+    <item>Бесконечное удержание позиции</item>
+    <item>Время удержания позиции</item>
     <item>RTH</item>
-    <item>Set POI</item>
-    <item>Jump</item>
-    <item>Set heading</item>
+    <item>Выбрать POI</item>
+    <item>Перейти</item>
+    <item>Задать преследование</item>
+    <item>Land</item>
   </string-array>
 </resources>

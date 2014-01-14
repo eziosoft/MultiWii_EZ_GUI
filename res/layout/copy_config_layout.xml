@@ -583,7 +583,7 @@
                         android:id="@+id/CheckBox_BT_New"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BT NEW(experimental - if you can&apos;t connect disable this)" />
+                        android:text="@string/BT_NEW_info" />
 
                     <CheckBox
                         android:id="@+id/checkBoxDisableBTonExit"

@@ -299,6 +299,16 @@
   <string name="LoadMission">Otwórz misję</string>
   <string name="ClearMap">Wyczyść mapę</string>
   <string name="ZoomIn">Powiększ</string>
+  <string name="TimeSec">Czas (s)</string>
+  <string name="WP">WP #</string>
+  <string name="Repetition">Powtarzania</string>
+  <string name="Heading">Kurs</string>
+  <string name="PressOKToRestart">Naciśnij przycisk OK, aby ponownie uruchomić aplikację</string>
+  <string name="Next">Następny</string>
+  <string name="Connection">Połączenie</string>
+  <string name="Protocol">Protokół</string>
+  <string name="SelectMultiWiiVersion">Wybierz wersję MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW - Włącz tylko wtedy gdy połączenie Bluetooth nie działa prawidłowo. Na niektórych urządzeniach rozwiązuje to problem połączenia ale na innych urządzeniach powoduje ze połączenie zostaje zrywane i program działa niestabilnie.</string>
   <string-array name="wp_actions">
     <item>Punkt Nawigacyjny</item>
     <item>PosHold nieograniczony</item>
@@ -306,6 +316,7 @@
     <item>RTH</item>
     <item>POI</item>
     <item>Skok</item>
-    <item>Set heading</item>
+    <item>Ustaw kurs</item>
+    <item>Ląduj</item>
   </string-array>
 </resources>

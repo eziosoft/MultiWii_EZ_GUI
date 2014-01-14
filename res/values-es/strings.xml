@@ -248,5 +248,6 @@ Pulse el icono  EZ-GUI para volver atras</string>
     <item>Set POI</item>
     <item>Jump</item>
     <item>Set heading</item>
+    <item>Land</item>
   </string-array>
 </resources>

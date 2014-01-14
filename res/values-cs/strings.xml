@@ -281,6 +281,23 @@
   <string name="Uploading">Nahrávám</string>
   <string name="MaxNumberWPreached">Nelze přidat další krok. Dosažen maximální počet.</string>
   <string name="Info">Info</string>
+  <string name="FileVersionMismach">Verze souboru není podporována</string>
+  <string name="CircleNumberOfPoints">Počet bodů (min 5 - max 30)</string>
+  <string name="CircleDirection">Směr (1 nebo -1)</string>
+  <string name="CircleRarius">Poloměr v metrech (min 20)</string>
+  <string name="UseAsCircleCenter">Slouží jako centrum kruhu</string>
+  <string name="Circle">Kruh</string>
+  <string name="Parameter1">Parametr1</string>
+  <string name="Parameter2">Parametr2</string>
+  <string name="Parameter3">Parametr3</string>
+  <string name="Altitude">Výška</string>
+  <string name="Action">Akce</string>
+  <string name="UploadMission">Nahrát misi</string>
+  <string name="DownloadMission">Stáhnout misi</string>
+  <string name="SaveMission">Uložit misi</string>
+  <string name="LoadMission">Nahrát misi</string>
+  <string name="ClearMap">Vymazat mapu</string>
+  <string name="ZoomIn">Přiblížit</string>
   <string-array name="wp_actions">
     <item>Trasový bod</item>
     <item>PosHold neomezený</item>
@@ -288,6 +305,7 @@
     <item>RTH</item>
     <item>Nastavit POI</item>
     <item>Skok</item>
-    <item>Set heading</item>
+    <item>Nastavit kurs</item>
+    <item>Land</item>
   </string-array>
 </resources>

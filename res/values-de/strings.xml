@@ -273,5 +273,6 @@
     <item>Set POI</item>
     <item>Jump</item>
     <item>Set heading</item>
+    <item>Land</item>
   </string-array>
 </resources>
