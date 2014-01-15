@@ -424,7 +424,7 @@ public class NavActivity extends SherlockFragmentActivity {
 			dlgAlert.create().show();
 		}
 
-		app.sensors.startMagACC();
+		//app.sensors.startMagACC();
 
 		if (app.Protocol != App.PROTOCOL_NAV) {
 			DisplayInfoDialog("Protocol", "This requires selected NAV Protocol in Settings", getString(R.string.OK));
@@ -442,7 +442,7 @@ public class NavActivity extends SherlockFragmentActivity {
 			app.SaveSettings(true);
 		}
 
-		app.sensors.stopMagACC();
+		//app.sensors.stopMagACC();
 	}
 
 	private WaypointNav getWPfromMarkerId(String markerId) {
@@ -676,7 +676,7 @@ public class NavActivity extends SherlockFragmentActivity {
 				if (WP.ShowMarkerForThisWP())
 					WP.MarkerId = mapHelperClass.AddMarker(WP.getLatLng(), WP.getMarkerTitle(), WP.getMarkerSnippet(), WP.Action);
 
-				if (WP.Action == WaypointNav.WP_ACTION_RTH || WP.Action == WaypointNav.WP_ACTION_POSHOLD_UNLIM)
+				if (WP.Action == WaypointNav.WP_ACTION_RTH || WP.Action == WaypointNav.WP_ACTION_POSHOLD_UNLIM || WP.Action == WaypointNav.WP_ACTION_LAND)
 					return;
 			}
 		}

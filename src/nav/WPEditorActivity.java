@@ -176,6 +176,24 @@ public class WPEditorActivity extends Activity {
 		setActionIcon(Action);
 
 		switch (Action) {
+		case WaypointNav.WP_ACTION_RTH:
+			TVPar1.setText(R.string.Land);
+			TVPar1.setVisibility(View.VISIBLE);
+			ETParameter1.setText("0");
+			ETParameter1.setVisibility(View.VISIBLE);
+
+			// TVPar2.setText(R.string.TimeSec);
+			TVPar2.setVisibility(View.GONE);
+			// ETParameter2.setText("10");
+			ETParameter2.setVisibility(View.GONE);
+
+			// TVPar3.setText(R.string.TimeSec);
+			TVPar3.setVisibility(View.GONE);
+			// ETParameter3.setText("10");
+			ETParameter3.setVisibility(View.GONE);
+
+			break;
+
 		case WaypointNav.WP_ACTION_POSHOLD_TIME:
 			TVPar1.setText(R.string.TimeSec);
 			TVPar1.setVisibility(View.VISIBLE);

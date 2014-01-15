@@ -192,30 +192,6 @@ public class MapHelperClass implements LocationSource {
 	 * @return marker ID
 	 */
 
-	// public String AddMarkerOnCenter() {
-	// LatLng mapCenter = map.getCameraPosition().target;
-	//
-	//
-	//
-	// Marker m = map.addMarker(new
-	// MarkerOptions().position(mapCenter).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-	// m.showInfoWindow();
-	// markers.add(m);
-	//
-	// int i = 1;
-	// for (Marker mm : markers) {
-	// mm.setTitle("WP#" + String.valueOf(i));
-	// i++;
-	// }
-	// RedrawLines();
-	// return m.getId();
-	// }
-
-	/**
-	 * 
-	 * @return marker ID
-	 */
-
 	public String AddMarker(LatLng position, String title, String snippet, int action) {
 
 		BitmapDescriptor IconColor;// =
@@ -233,14 +209,9 @@ public class MapHelperClass implements LocationSource {
 			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.poshold_unlim);
 			break;
 
-		// case WaypointNav.WP_ACTION_RTH:
-		// IconColor =
-		// BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
-		// break;
-		// case WaypointNav.WP_ACTION_JUMP:
-		// IconColor =
-		// BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
-		// break;
+		case WaypointNav.WP_ACTION_LAND:
+			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.land);
+			break;
 
 		case WaypointNav.WP_ACTION_SET_POI:
 			IconColor = BitmapDescriptorFactory.fromResource(R.drawable.poi);

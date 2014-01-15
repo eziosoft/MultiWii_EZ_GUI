@@ -334,5 +334,6 @@
     <string name="Protocol">Protocol</string>
     <string name="SelectMultiWiiVersion">Select your MultiWii version</string>
     <string name="BT_NEW_info">BT_NEW - check only if Bluetooth connection doesn\'t work. On some devices it solves problem of the BT connection. But on others it makes the connection very unstable and program unusable.</string>
+    <string name="Land">Land</string>
 
 </resources>
