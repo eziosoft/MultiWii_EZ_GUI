@@ -45,14 +45,13 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.about.AboutActivity;
-import com.ezio.multiwii.about.WizardActivity;
 import com.ezio.multiwii.advanced.AdvancedActivity;
 import com.ezio.multiwii.app.App;
 import com.ezio.multiwii.aux_pid.AUXActivity;
 import com.ezio.multiwii.aux_pid.PIDActivity;
 import com.ezio.multiwii.aux_pid.ServosActivity;
 import com.ezio.multiwii.config.ConfigActivity;
-import com.ezio.multiwii.dashboard.Dashboard1Activity;
+import com.ezio.multiwii.dashboard.Dashboard11Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
 import com.ezio.multiwii.dashboard.Dashboard4Activity;
 import com.ezio.multiwii.dashboard.dashboard3.Dashboard3Activity;
@@ -77,6 +76,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	private App app;
 	TextView TVInfo;
 	ActionBarSherlock actionBar;
+	MyPagerAdapter adapter;
 
 	private final Handler mHandler = new Handler();
 	private final Handler mHandler1 = new Handler() {
@@ -142,7 +142,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		setContentView(R.layout.multiwii_main_layout3);
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-		MyPagerAdapter adapter = new MyPagerAdapter(this);
+		adapter = new MyPagerAdapter(this);
 
 		adapter.SetTitles(new String[] { getString(R.string.page1), getString(R.string.page2), getString(R.string.page3) });
 		final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -328,6 +328,12 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			else
 				TVInfo.setText(getString(R.string.NotConnected));
 
+			if (!app.mw.multi_Capability.Nav) {
+				((Button) adapter.views.get(0).findViewById(R.id.ButtonNavigation)).setVisibility(View.GONE);
+			} else {
+				((Button) adapter.views.get(0).findViewById(R.id.ButtonNavigation)).setVisibility(View.VISIBLE);
+			}
+
 			app.Frequentjobs();
 			app.mw.SendRequest(app.MainRequestMethod);
 			if (!killme)
@@ -371,7 +377,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(), GPSActivity.class));
 		} else {
-			Toast.makeText(getApplicationContext(), getString(R.string.GPSnotAvailableInYourConfiguration), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.NotAvailableInYourConfiguration), Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -419,7 +425,7 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	public void Dashboard1OnClick(View v) {
 		killme = true;
 		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), Dashboard1Activity.class));
+		startActivity(new Intent(getApplicationContext(), Dashboard11Activity.class));
 	}
 
 	public void Dashboard2OnClick(View v) {
@@ -450,13 +456,17 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		}
 	}
 
-	public void WaypointsMapOnClick(View v) {
+	public void NavigationOnClick(View v) {
 		if (app.checkGooglePlayServicesAvailability(this)) {
-			killme = true;
-			mHandler.removeCallbacksAndMessages(null);
-			// startActivity(new Intent(getApplicationContext(),
-			// MapWaypointsActivity.class).putExtra("WAYPOINT", true));
-			startActivity(new Intent(getApplicationContext(), NavActivity.class));
+
+			if (app.mw.multi_Capability.Nav || app.D) {
+				killme = true;
+				mHandler.removeCallbacksAndMessages(null);
+				startActivity(new Intent(getApplicationContext(), NavActivity.class));
+			} else {
+				Toast.makeText(getApplicationContext(), getString(R.string.NotAvailableInYourConfiguration), Toast.LENGTH_LONG).show();
+			}
+
 		}
 
 	}

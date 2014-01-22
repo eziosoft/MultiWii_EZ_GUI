@@ -384,7 +384,8 @@ public class NavActivity extends SherlockFragmentActivity {
 		app.ForceLanguage();
 		app.Say(getString(R.string.Navigation));
 		killme = false;
-		mHandler.postDelayed(update, app.RefreshRate);
+		mHandler.removeCallbacksAndMessages(null);
+	
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		LoadMarkersFromWPlist();

@@ -130,6 +130,9 @@ public class MultiWii230 extends MultirotorData {
 			if ((multiCapability & 8) > 0)
 				multi_Capability.Flaps = true;
 
+			if ((multiCapability & 16) > 0)
+				multi_Capability.Nav = true;
+
 			if ((multiCapability & 0x80000000) > 0)
 				multi_Capability.ByMis = true;
 

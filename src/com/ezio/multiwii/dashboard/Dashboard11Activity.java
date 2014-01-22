@@ -16,31 +16,29 @@
  */
 package com.ezio.multiwii.dashboard;
 
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
 
-public class Dashboard1Activity extends SherlockActivity {
+public class Dashboard11Activity extends SherlockActivity {
 
 	private boolean killme = false;
 
 	App app;
-	LevelView PRVp;
-	LevelView PRVr;
-	CompassView compass;
-	CompassView myCompass;
-	PitchRollCircleView pitchRollCircle;
-	TextView baro;
-
-	TextView BattVoltageTV;
-	TextView PowerSumTV;
+	PitchRollView PRVp;
+	PitchRollView PRVr;
+	// CompassView compass;
+	// CompassView myCompass;
+	// PitchRollCircleView pitchRollCircle;
+	// TextView baro;
+	//
+	// TextView BattVoltageTV;
+	// TextView PowerSumTV;
 
 	Handler mHandler = new Handler();
 
@@ -59,25 +57,26 @@ public class Dashboard1Activity extends SherlockActivity {
 				app.mw.angx = app.sensors.Roll;
 			}
 
-			PRVp.SetAngle(app.mw.angy);
-			PRVr.SetAngle(app.mw.angx);
+			PRVp.Set(app.mw.angy);
+			PRVr.Set(app.mw.angx);
 
-			pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
+			// pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
 
-			if (app.MagMode == 1) {
-				compass.SetHeading(-app.mw.head);
-				compass.SetText("");
+			// if (app.MagMode == 1) {
+			// compass.SetHeading(-app.mw.head);
+			// compass.SetText("");
+			//
+			// } else {
+			// compass.SetHeading(myAzimuth - app.mw.head);
+			// compass.SetText("FRONT");
+			// }
 
-			} else {
-				compass.SetHeading(myAzimuth - app.mw.head);
-				compass.SetText("FRONT");
-			}
-
-			myCompass.SetHeading(myAzimuth);
-
-			baro.setText(String.format("%.2f", app.mw.alt));
-			BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat / 10.0)));
-			PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
+			// myCompass.SetHeading(myAzimuth);
+			//
+			// baro.setText(String.format("%.2f", app.mw.alt));
+			// BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat /
+			// 10.0)));
+			// PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
 
 			app.Frequentjobs();
 
@@ -94,30 +93,32 @@ public class Dashboard1Activity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dashboard1_layout);
+		setContentView(R.layout.dashboard11);
 
 		app = (App) getApplication();
 
-		PRVp = (LevelView) findViewById(R.id.PRVp);
+		PRVp = (PitchRollView) findViewById(R.id.PitchView);
 		PRVp.arrow = true;
+		PRVp.init();
 
-		PRVr = (LevelView) findViewById(R.id.PRVr);
+		PRVr = (PitchRollView) findViewById(R.id.RollView);
 
-		pitchRollCircle = (PitchRollCircleView) findViewById(R.id.PitchRollCircle);
-		pitchRollCircle.SetColor(Color.GREEN);
-
-		compass = (CompassView) findViewById(R.id.Mag);
-		compass.SetColor(Color.GREEN, Color.YELLOW);
-
-		myCompass = (CompassView) findViewById(R.id.CompassView02);
-		myCompass.SetColor(Color.GRAY, Color.LTGRAY);
-		myCompass.SetText("N");
-
-		baro = (TextView) findViewById(R.id.textViewBaro);
-		BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
-		PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
+		// pitchRollCircle = (PitchRollCircleView)
+		// findViewById(R.id.PitchRollCircle);
+		// pitchRollCircle.SetColor(Color.GREEN);
+		//
+		// compass = (CompassView) findViewById(R.id.Mag);
+		// compass.SetColor(Color.GREEN, Color.YELLOW);
+		//
+		// myCompass = (CompassView) findViewById(R.id.CompassView02);
+		// myCompass.SetColor(Color.GRAY, Color.LTGRAY);
+		// myCompass.SetText("N");
+		//
+		// baro = (TextView) findViewById(R.id.textViewBaro);
+		// BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
+		// PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		
+
 		getSupportActionBar().setTitle(getString(R.string.Dashboard1));
 
 	}

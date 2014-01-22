@@ -15,15 +15,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/tittle"
-                android:gravity="center"
-                android:text="@string/PitchRoll"
-                android:textColor="@color/tittleText" />
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
@@ -56,18 +47,19 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
 
-                    <com.ezio.multiwii.dashboard.PitchRollView
+                    <com.ezio.multiwii.dashboard.LevelView
                         android:id="@+id/PRVp"
-                        android:layout_width="fill_parent"
-                        android:layout_height="92dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <com.ezio.multiwii.dashboard.PitchRollView
+                    <com.ezio.multiwii.dashboard.LevelView
                         android:id="@+id/PRVr"
-                        android:layout_width="fill_parent"
-                        android:layout_height="92dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </TableRow>
 

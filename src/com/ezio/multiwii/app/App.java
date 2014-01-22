@@ -119,7 +119,7 @@ public class App extends Application implements Sensors.Listener {
 	public static final int COMMUNICATION_TYPE_SERIAL_FTDI = 1;
 	public static final int COMMUNICATION_TYPE_SERIAL_OTHERCHIPS = 2;
 	public static final int COMMUNICATION_TYPE_BT_NEW = 4;
-	
+
 	public int CommunicationTypeMW = COMMUNICATION_TYPE_BT;
 
 	public static final String SERIAL_PORT_BAUD_RATE_MW = "SerialPortBaudRateMW1";
@@ -525,6 +525,12 @@ public class App extends Application implements Sensors.Listener {
 					t += getString(R.string.SelectDifferentProtocol);
 
 				}
+			}
+
+			if (mw.multi_Capability.Nav && Protocol != PROTOCOL_NAV) {
+				Protocol = PROTOCOL_NAV;
+				SaveSettings(true);
+				RestartApp();
 			}
 
 			if (sensors.MockLocationWorking)

@@ -32,7 +32,7 @@
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="Dashboard1OnClick"
                         android:tag="TagDashboard1"
-                        android:text="@string/PitchRoll" />
+                        android:text="@string/Dashboard1" />
 
                     <Button
                         android:id="@+id/button2"
@@ -131,21 +131,13 @@
                     android:layout_height="wrap_content" >
 
                     <Button
-                        android:id="@+id/button8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="Dashboard4OnClick"
-                        android:text="dashboard 4"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/Button03"
+                        android:id="@+id/ButtonNavigation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
-                        android:onClick="WaypointsMapOnClick"
+                        android:onClick="NavigationOnClick"
                         android:text="@string/Navigation" />
 
                 </TableRow>
@@ -169,6 +161,8 @@
                     android:id="@+id/textViewInfoFirstPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:shadowColor="#000"
                     android:shadowDx="0"

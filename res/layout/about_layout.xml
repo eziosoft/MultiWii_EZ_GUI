@@ -10,7 +10,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:src="@drawable/icon" />
+        android:src="@drawable/web_hi_res_512" />
 
     <ScrollView
         android:id="@+id/scrollView1"

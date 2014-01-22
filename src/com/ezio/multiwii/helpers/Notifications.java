@@ -45,7 +45,7 @@ public class Notifications {
 		if (Id == 0) {
 			Id = rnd.nextInt();
 		}
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.icon_notification).setContentTitle(title).setContentText(text);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.ic_launcher).setContentTitle(title).setContentText(text);
 		if (Sound)
 			mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 		// mBuilder.setOnlyAlertOnce(false);
