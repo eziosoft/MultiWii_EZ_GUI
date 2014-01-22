@@ -458,13 +458,13 @@ public class App extends Application implements Sensors.Listener {
 						s = getString(R.string.isOFF);
 					}
 
-					Say((mw.buttonCheckboxLabel[i] + s).toLowerCase(Locale.ENGLISH));
+					Say((mw.BoxNames[i] + s).toLowerCase(Locale.ENGLISH));
 
-					if (mw.buttonCheckboxLabel[i].equals("ARM")) {
+					if (mw.BoxNames[i].equals("ARM")) {
 						soundManager.playSound(1);
 					}
 
-					if (mw.buttonCheckboxLabel[i].equals("ARM") && AltCorrection) {
+					if (mw.BoxNames[i].equals("ARM") && AltCorrection) {
 						mw.AltCorrection = mw.alt;
 					}
 
@@ -505,7 +505,7 @@ public class App extends Application implements Sensors.Listener {
 				mw.SendRequestMSP_WP(0);
 
 				for (int i = 0; i < mw.CHECKBOXITEMS; i++) {
-					if (mw.buttonCheckboxLabel[i].equals("GPS HOLD")) {
+					if (mw.BoxNames[i].equals("GPS HOLD")) {
 						if (mw.ActiveModes[i]) {
 							// update Position hold
 							mw.SendRequestMSP_WP(16);

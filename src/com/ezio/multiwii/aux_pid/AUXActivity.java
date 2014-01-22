@@ -113,7 +113,7 @@ public class AUXActivity extends SherlockActivity {
 	}
 
 	void SetAllChexboxes() {
-		for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
+		for (int i = 0; i < app.mw.BoxNames.length; i++) {
 			for (int j = 0; j < 12; j++) {
 				SetCheckbox(i * 100 + j, app.mw.Checkbox[i][j]);
 			}
@@ -140,7 +140,7 @@ public class AUXActivity extends SherlockActivity {
 
 			public void onClick(DialogInterface dialog, int id) {
 
-				for (int i = 0; i < app.mw.buttonCheckboxLabel.length; i++) {
+				for (int i = 0; i < app.mw.BoxNames.length; i++) {
 					for (int j = 0; j < 12; j++) {
 						app.mw.Checkbox[i][j] = GetCheckbox(i * 100 + j);
 					}
@@ -198,7 +198,7 @@ public class AUXActivity extends SherlockActivity {
 	}
 
 	private void SetActiveStates() {
-		for (int j = 0; j < app.mw.buttonCheckboxLabel.length; j++) {
+		for (int j = 0; j < app.mw.BoxNames.length; j++) {
 			SetActive(250 + j, app.mw.ActiveModes[j]);
 		}
 	}
@@ -303,10 +303,10 @@ public class AUXActivity extends SherlockActivity {
 		}
 		tableL.addView(r1);
 		// titles end/////
-		for (int j = 0; j < app.mw.buttonCheckboxLabel.length; j++) {
+		for (int j = 0; j < app.mw.BoxNames.length; j++) {
 			TableRow r = new TableRow(this);
 			TextView tv = new TextView(this);
-			tv.setText(app.mw.buttonCheckboxLabel[j]);
+			tv.setText(app.mw.BoxNames[j]);
 
 			tv.setId(j + 250);
 

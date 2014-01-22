@@ -128,7 +128,7 @@ public abstract class MultirotorData {
 
 	public int PIDITEMS = 10;
 	public int CHECKBOXITEMS = 11; // in 2.1
-	public String buttonCheckboxLabel[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
+	public String BoxNames[] = { "LEVEL", "BARO", "MAG", "CAMSTAB", "CAMTRIG", "ARM", "GPS HOME", "GPS HOLD", "PASSTHRU", "HEADFREE", "BEEPER" }; // compatibility
 	public String PIDNames[] = { "ROLL", "PITCH", "YAW", "ALT", "Pos", "PosR", "NavR", "LEVEL", "MAG", "VEL" };
 
 	public int multiType;

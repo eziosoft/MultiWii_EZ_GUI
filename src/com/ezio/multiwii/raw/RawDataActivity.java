@@ -208,7 +208,7 @@ public class RawDataActivity extends Activity {
 
 		log("declination", app.mw.mag_decliniation);
 
-		for (String s : app.mw.buttonCheckboxLabel) {
+		for (String s : app.mw.BoxNames) {
 			log("buttonCheckboxLabel", s);
 
 		}

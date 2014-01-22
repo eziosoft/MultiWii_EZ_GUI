@@ -41,7 +41,7 @@ public class Dashboard2Activity extends Activity {
 			String state = "";
 			for (int i = 0; i < app.mw.CHECKBOXITEMS; i++) {
 				if (app.mw.ActiveModes[i]) {
-					state += " " + app.mw.buttonCheckboxLabel[i];
+					state += " " + app.mw.BoxNames[i];
 				}
 			}
 

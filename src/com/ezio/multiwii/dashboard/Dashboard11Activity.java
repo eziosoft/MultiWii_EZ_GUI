@@ -20,6 +20,8 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
@@ -32,6 +34,8 @@ public class Dashboard11Activity extends SherlockActivity {
 	App app;
 	PitchRollView PRVp;
 	PitchRollView PRVr;
+
+	LinearLayout boxesLayout;
 	// CompassView compass;
 	// CompassView myCompass;
 	// PitchRollCircleView pitchRollCircle;
@@ -59,6 +63,8 @@ public class Dashboard11Activity extends SherlockActivity {
 
 			PRVp.Set(app.mw.angy);
 			PRVr.Set(app.mw.angx);
+
+			setActiveBoxes();
 
 			// pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
 
@@ -93,7 +99,7 @@ public class Dashboard11Activity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dashboard11);
+		setContentView(R.layout.dashboard12);
 
 		app = (App) getApplication();
 
@@ -123,12 +129,43 @@ public class Dashboard11Activity extends SherlockActivity {
 
 	}
 
+	Button boxes[];
+
+	void createBoxes() {
+		boxes = new Button[app.mw.BoxNames.length];
+
+		boxesLayout = (LinearLayout) findViewById(R.id.LinearLayoutBoxes);
+
+		for (int i = 0; i < app.mw.BoxNames.length; i++) {
+			boxes[i] = new Button(getApplicationContext());
+			boxes[i].setText(app.mw.BoxNames[i]);
+			// boxes[i].setBackgroundResource(R.drawable.button_0);
+
+		}
+
+		for (int i = 0; i < app.mw.BoxNames.length; i++) {
+			boxesLayout.addView(boxes[i]);
+		}
+
+	}
+
+	void setActiveBoxes() {
+		for (int i = 0; i < app.mw.BoxNames.length; i++) {
+			if (app.mw.ActiveModes[i]) {
+				boxes[i].setBackgroundResource(R.drawable.button_0);
+			} else {
+				boxes[i].setBackgroundResource(R.drawable.button_01);
+			}
+
+		}
+	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 		killme = true;
 		mHandler.removeCallbacks(update);
-		app.sensors.stopMagACC();
+		// app.sensors.stopMagACC();
 	}
 
 	@Override
@@ -138,7 +175,9 @@ public class Dashboard11Activity extends SherlockActivity {
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 		app.Say(getString(R.string.Dashboard1));
-		app.sensors.startMagACC();
+		// app.sensors.startMagACC();
+
+		createBoxes();
 
 	}
 

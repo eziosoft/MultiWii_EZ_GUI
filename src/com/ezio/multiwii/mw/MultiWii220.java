@@ -43,13 +43,13 @@ public class MultiWii220 extends MultirotorData {
 		byteP = new int[PIDITEMS];
 		byteI = new int[PIDITEMS];
 		byteD = new int[PIDITEMS];
-		buttonCheckboxLabel = new String[0];
+		BoxNames = new String[0];
 		init();
 		// ////end changes/////////////
 	}
 
 	private void init() {
-		CHECKBOXITEMS = buttonCheckboxLabel.length;
+		CHECKBOXITEMS = BoxNames.length;
 		activation = new int[CHECKBOXITEMS];
 		ActiveModes = new boolean[CHECKBOXITEMS];
 		Checkbox = new Boolean[CHECKBOXITEMS][12];
@@ -57,7 +57,7 @@ public class MultiWii220 extends MultirotorData {
 	}
 
 	private void ResetAllChexboxes() {
-		for (int i = 0; i < buttonCheckboxLabel.length; i++) {
+		for (int i = 0; i < BoxNames.length; i++) {
 			for (int j = 0; j < 12; j++) {
 				Checkbox[i][j] = false;
 			}
@@ -264,9 +264,9 @@ public class MultiWii220 extends MultirotorData {
 			break;
 
 		case MSP_BOXNAMES:
-			buttonCheckboxLabel = new String(inBuf, 0, dataSize).split(";");
+			BoxNames = new String(inBuf, 0, dataSize).split(";");
 			Log.d("aaa", new String(inBuf, 0, dataSize));
-			for (String s : buttonCheckboxLabel) {
+			for (String s : BoxNames) {
 				Log.d("aaa", s);
 			}
 			init();
