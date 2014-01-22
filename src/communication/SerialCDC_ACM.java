@@ -108,7 +108,7 @@ public class SerialCDC_ACM extends Communication {
 			Connected = true;
 			sendDeviceName("Serial Port " + String.valueOf(speed));
 			setState(STATE_CONNECTED);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Connected = false;
@@ -125,7 +125,7 @@ public class SerialCDC_ACM extends Communication {
 
 	@Override
 	public synchronized byte Read() {
-		BytesRecieved+=1;
+		BytesRecieved += 1;
 		return (byte) (fifo.get() & 0xff);
 
 	}
