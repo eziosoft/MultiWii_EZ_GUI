@@ -169,8 +169,14 @@ public class CustomInputDialog {
 			public void onClick(DialogInterface dialog, int id) {
 				if (!ETValue.getText().toString().equals("")) {
 					// get user input and set it to result
+					float CurrentValue = Float.parseFloat(((EditText) ETValue).getText().toString().replace(",", "."));
 
-					((EditText) vv).setText(ETValue.getText());
+					if (CurrentValue > max)
+						CurrentValue = max;
+					if (CurrentValue < min)
+						CurrentValue = min;
+
+					((EditText) vv).setText(format.format(CurrentValue));
 				} else {
 					((EditText) vv).setText(OldValue);
 				}
