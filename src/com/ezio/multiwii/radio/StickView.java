@@ -126,15 +126,4 @@ public class StickView extends View {
 
 	}
 
-	@Override
-	protected void onAttachedToWindow() {
-
-		super.onAttachedToWindow();
-	}
-
-	@Override
-	protected void onDetachedFromWindow() {
-
-		super.onDetachedFromWindow();
-	}
 }

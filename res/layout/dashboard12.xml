@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/brushed"
     android:gravity="bottom"
-    android:onClick="AddCircleOnClick"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -14,12 +13,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
+
     </LinearLayout>
 
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/LinearLayoutBoxes" >
@@ -46,20 +46,32 @@
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <com.ezio.multiwii.dashboard.dashboard3.HeadingView
+                android:id="@+id/headingView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textViewInfoD1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="---"
+                android:textColor="#fff" />
+
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
     </TableLayout>
 
 </RelativeLayout>

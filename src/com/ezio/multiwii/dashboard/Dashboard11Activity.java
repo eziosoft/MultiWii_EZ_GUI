@@ -22,10 +22,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.dashboard.dashboard3.HeadingView;
 
 public class Dashboard11Activity extends SherlockActivity {
 
@@ -34,15 +36,11 @@ public class Dashboard11Activity extends SherlockActivity {
 	App app;
 	PitchRollView PRVp;
 	PitchRollView PRVr;
+	HeadingView headingView;
 
 	LinearLayout boxesLayout;
-	// CompassView compass;
-	// CompassView myCompass;
-	// PitchRollCircleView pitchRollCircle;
-	// TextView baro;
-	//
-	// TextView BattVoltageTV;
-	// TextView PowerSumTV;
+
+	TextView TVInfo;
 
 	Handler mHandler = new Handler();
 
@@ -63,26 +61,18 @@ public class Dashboard11Activity extends SherlockActivity {
 
 			PRVp.Set(app.mw.angy);
 			PRVr.Set(app.mw.angx);
+			headingView.Set(app.mw.head);
 
 			setActiveBoxes();
 
-			// pitchRollCircle.SetRollPitch(app.mw.angx, app.mw.angy);
+			String s = "";
 
-			// if (app.MagMode == 1) {
-			// compass.SetHeading(-app.mw.head);
-			// compass.SetText("");
-			//
-			// } else {
-			// compass.SetHeading(myAzimuth - app.mw.head);
-			// compass.SetText("FRONT");
-			// }
-
-			// myCompass.SetHeading(myAzimuth);
-			//
-			// baro.setText(String.format("%.2f", app.mw.alt));
-			// BattVoltageTV.setText(String.valueOf((float) (app.mw.bytevbat /
-			// 10.0)));
-			// PowerSumTV.setText(String.valueOf(app.mw.pMeterSum));
+			s += getString(R.string.Altitude) + ":" + String.valueOf(app.mw.alt) + "\n";
+			s += getString(R.string.Battery) + ":" + String.valueOf((float) (app.mw.bytevbat / 10.0)) + "\n";
+			s += getString(R.string.Satellites) + ":" + String.valueOf(app.mw.GPS_numSat) + "\n";
+			s += getString(R.string.GPS_speed) + ":" + String.valueOf(app.mw.GPS_speed) + "\n";
+			s += getString(R.string.CycleTime) + ":" + String.valueOf(app.mw.cycleTime) + "\n";
+			TVInfo.setText(s);
 
 			app.Frequentjobs();
 
@@ -109,23 +99,15 @@ public class Dashboard11Activity extends SherlockActivity {
 
 		PRVr = (PitchRollView) findViewById(R.id.RollView);
 
-		// pitchRollCircle = (PitchRollCircleView)
-		// findViewById(R.id.PitchRollCircle);
-		// pitchRollCircle.SetColor(Color.GREEN);
-		//
-		// compass = (CompassView) findViewById(R.id.Mag);
-		// compass.SetColor(Color.GREEN, Color.YELLOW);
-		//
-		// myCompass = (CompassView) findViewById(R.id.CompassView02);
-		// myCompass.SetColor(Color.GRAY, Color.LTGRAY);
-		// myCompass.SetText("N");
-		//
-		// baro = (TextView) findViewById(R.id.textViewBaro);
-		// BattVoltageTV = (TextView) findViewById(R.id.TextViewBattVoltage);
-		// PowerSumTV = (TextView) findViewById(R.id.TextViewPowerSum);
+		TVInfo = (TextView) findViewById(R.id.textViewInfoD1);
+
+		headingView = (HeadingView) findViewById(R.id.headingView1);
+
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		getSupportActionBar().setTitle(getString(R.string.Dashboard1));
+
+		getSupportActionBar().hide();
 
 	}
 

@@ -335,5 +335,11 @@
     <string name="BT_NEW_info">BT_NEW - check only if Bluetooth connection doesn\'t work. On some devices it solves problem of the BT connection. But on others it makes the connection very unstable and program unusable.</string>
     <string name="Land">Land</string>
     <string name="Dashboard1">Dashboard 1</string>
+    <string name="CycleTime">Cycle Time</string>
+    <string name="Throttle">Throttle</string>
+    <string name="AUX1">AUX1</string>
+    <string name="AUX2">AUX2</string>
+    <string name="AUX3">AUX3</string>
+    <string name="AUX4">AUX4</string>
 
 </resources>

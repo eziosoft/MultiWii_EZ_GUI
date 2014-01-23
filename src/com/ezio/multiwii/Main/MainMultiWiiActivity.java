@@ -53,7 +53,6 @@ import com.ezio.multiwii.aux_pid.ServosActivity;
 import com.ezio.multiwii.config.ConfigActivity;
 import com.ezio.multiwii.dashboard.Dashboard11Activity;
 import com.ezio.multiwii.dashboard.Dashboard2Activity;
-import com.ezio.multiwii.dashboard.Dashboard4Activity;
 import com.ezio.multiwii.dashboard.dashboard3.Dashboard3Activity;
 import com.ezio.multiwii.frsky.FrskyActivity;
 import com.ezio.multiwii.gps.GPSActivity;
@@ -440,12 +439,6 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			mHandler.removeCallbacksAndMessages(null);
 			startActivity(new Intent(getApplicationContext(), Dashboard3Activity.class));
 		}
-	}
-
-	public void Dashboard4OnClick(View v) {
-		killme = true;
-		mHandler.removeCallbacksAndMessages(null);
-		startActivity(new Intent(getApplicationContext(), Dashboard4Activity.class));
 	}
 
 	public void NewMapOnClick(View v) {

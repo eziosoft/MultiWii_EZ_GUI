@@ -111,12 +111,12 @@ public class HorizonClass {
 		float factorH = height / (float) b.getWidth();
 		float factorW = width / (float) b.getWidth();
 		float factorToUse = (factorH > factorW) ? factorW : factorH;
-		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse), (int) (b.getHeight() * factorToUse), false);
+		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse), (int) (b.getHeight() * factorToUse), true);
 	}
 
 	// Scale and keep aspect ratio
 	private Bitmap scaleToFill(Bitmap b, float factorToUse) {
-		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse), (int) (b.getHeight() * factorToUse), false);
+		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse), (int) (b.getHeight() * factorToUse), true);
 	}
 
 	float getFactor(Bitmap b, int width, int height) {
