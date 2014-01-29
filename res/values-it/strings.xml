@@ -3,16 +3,17 @@
 <resources>
   <string name="app_name">MultiWii EZ-GUI</string>
   <string name="scanning">Cerco dispositivi...</string>
+  <string name="select_device">Selezionare dispositivo da connettere</string>
   <string name="none_paired">Nessun dispositivo abbinato</string>
   <string name="none_found">Nessun dispositivo trovato</string>
   <string name="title_paired_devices">Dispositivi abbinati</string>
   <string name="title_other_devices">Altri dispositivi disponibili</string>
   <string name="button_scan">Cerco dispositivi</string>
   <string name="Radio">Radio</string>
-  <string name="PitchRoll">Dashboard 1</string>
   <string name="Pitch">Pitch</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Mag</string>
+  <string name="Config">Impostazioni</string>
   <string name="Logging">Logging</string>
   <string name="RadioMode">Radio Mode</string>
   <string name="Mode1">Mode1</string>
@@ -47,6 +48,7 @@
   <string name="MacNotSet">Vai a configurazione e selezionare il vostro bluetooth prima\n\npuò funzionare, o no, può distruggere il mondo o qualsiasi altra cosa. \nUsa a tuo rischio e pericolo!\n\n se ti piace questa app offrimi una birra (Donate).</string>
   <string name="InfoNotConnected">\n\nPuò funzionare, o no, può distruggere il mondo o qualsiasi altra cosa. \nUsa a tuo rischio e pericolo!\n\n se ti piace questa app offrimi una birra (Donate).</string>
   <string name="BTDevice">Dispositivo Bluetooth</string>
+  <string name="menu_vote">Votala!</string>
   <string name="PhoneLatitude">PhoneLatitude</string>
   <string name="PhoneLongitude">Longitudine Telefono</string>
   <string name="PhoneAltitude">AltiudineTelefono(m)</string>
@@ -100,6 +102,7 @@
   <string name="Donate">Donazione</string>
   <string name="Loggingstarted">Registrazione iniziata</string>
   <string name="Loggingstopedandsaved">Registrazione fermata e salvata</string>
+  <string name="ResetALLnotonlyPIDparamstodefault">Questo resetterà tutti i parametri (non solo PID) ai valori predefiniti, volete continuare?</string>
   <string name="Yes">Sì</string>
   <string name="No">No</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">I valori sono reimpostati. Premere il pulsante leggi adesso.</string>
@@ -129,6 +132,7 @@
   <string name="SetCheckboxes">AUX</string>
   <string name="Set">Set</string>
   <string name="SavetoEEPROM">Salvare in EEPROM</string>
+  <string name="Auto">Auto</string>
   <string name="Graphs">Grafici</string>
   <string name="show">Visualizza</string>
   <string name="ACCROLL">ACC ROLL</string>
@@ -157,7 +161,9 @@
   <string name="page3">Configurazione</string>
   <string name="RawData">Dati grezzi</string>
   <string name="ShareIt">Condividere la tua configurazione</string>
+  <string name="SelectSetting">Seleziona l\'impostazione di configurazione (è possibile impostare per esempio diversi pid e rate)</string>
   <string name="RXBIND">RX BIND</string>
+  <string name="FollowMe">Seguimi: #define USE_MSP_WP dovrebbe essere decommentato in config.h; non funziona con GPS I2C; lampeggia quando la posizione del telefono è inviata a MW</string>
   <string name="InfoDonate">Trovare questa applicazione utile? Supportarne lo sviluppo recensendola o inviando donazioni allo sviluppatore!</string>
   <string name="convertToKML">Convertire in KML (Google Earth)</string>
   <string name="infoDonate">Ho passato molte, molte ore del mio tempo libero a costruire ed estendere questo programma, così se ti piace e utilizzi MultiWii EZ-GUI, considera una donazione. Questo mi incentiverà ad aggiornare programma.</string>
@@ -176,7 +182,9 @@
   <string name="EnterDescription">Inserire la descrizione</string>
   <string name="SetAsPositionHold">Impostare come Position Hold</string>
   <string name="Follow_Me">Seguimi</string>
+  <string name="Follow_Heading">FollowHeading (letture da sensore Android mag sono inviare a MultiWii. Elicottero dovrebbe seguire l\'orientamento del dispositivo Android. Funziona solo quando è attivato MAG)</string>
   <string name="Load">Carico</string>
+  <string name="Profile">Qui si può salvare/caricare l\'impostazione PID da file. I file vengono archiviati qui: /sdcard/MultiWiiLogs e sono compatibili con MultiWiiConf</string>
   <string name="Save">Salva</string>
   <string name="EnterFileName">Inserire il nome del file</string>
   <string name="ReverseRollDirection">Inverti la direzione di Roll</string>
@@ -197,20 +205,117 @@
   <string name="MinThrottle">MinThrottle</string>
   <string name="MaxThrottle">MaxThrottle</string>
   <string name="MinCommand">MinCommand</string>
+  <string name="FailsafeThrottle">Failsafe Throttle</string>
   <string name="VBatScale">VBatScale</string>
   <string name="BatWarning1">BatWarning1</string>
   <string name="BatWarning2">BatWarning2</string>
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">I valori verdi possono essere cambiati</string>
+  <string name="Locked">Questa funzione è bloccata</string>
+  <string name="DoYouWantToUnlock">Comprando l\'unlocker puoi sostenere lo sviluppo di questo programma e mi incoraggia a lavorare di più. Vuoi sbloccarlo?</string>
+  <string name="TakeDeclinationFromPhone">Prendere la declinazione dal telefono cellulare</string>
+  <string name="RateOrUpdate">Vota o aggiorna</string>
+  <string name="ArmedCount">Armed Count</string>
+  <string name="Refresh">Aggiorna</string>
+  <string name="MockLocationIsWorking">Emulazione GPS accesa</string>
+  <string name="NoDataRecieved">Nessun dato ricevuto!</string>
+  <string name="MOCKlocationInfo">Emulazione GPS permette di visualizzare la posizione dell\'elicottero in qualsiasi applicazione Mappa.
+Dopo aver avviato l\'emulazione del GPS questo programma andrà in background, i dati dal MultiWii serviranno per emulare il GPS nel sistema Android, quindi è possibile utilizzare qualsiasi applicazione mappa per guardare la posizione del multirotore. Premere sull\'icona EZ-GUI nella barra di notifica per tornare</string>
+  <string name="StartGpsEmulation">Avviare l\'emulazione del GPS</string>
+  <string name="ClickOnTheNameForInfo">(fare clic sul nome per informazioni)</string>
+  <string name="ClickHereForMoreInfo">Clicca qui per maggiori informazioni</string>
+  <string name="NewRequestMethod">Nuovo metodo di richiesta</string>
+  <string name="WaypointsMap">Mappa di waypoint</string>
+  <string name="PleaseRestart">Si prega di riavviare l\'applicazione</string>
+  <string name="MoveMapEnable">Abilita mappa in movimento</string>
+  <string name="MoveMapDissable">Disabilita mappa in movimento</string>
+  <string name="AddCirclePath">Aggiungere percorso in cerchio</string>
   <string name="Cancel">Annulla</string>
+  <string name="Radius">Raggio</string>
+  <string name="EnterRadius">Inserisci il raggio del cerchio in metri</string>
+  <string name="Close">Chiudi</string>
+  <string name="ForceCzech">Forza Cecoslovacco</string>
+  <string name="Bigger">Più grande</string>
+  <string name="Smaller">Più piccolo</string>
+  <string name="RemWP">Rem WP</string>
+  <string name="AddWP">Aggiungi WP</string>
+  <string name="GooglePlayServiecesError">Errore Google Play servieces</string>
+  <string name="NextWP">Prossimo WP</string>
+  <string name="PrevWP">WP Precedente</string>
+  <string name="Clean">Cancella</string>
+  <string name="MoveMap">Spostare la mappa</string>
+  <string name="FrskySupport">Supporto Frsky</string>
+  <string name="Revers">Invertito</string>
+  <string name="Factoryreset">Reset di fabbrica</string>
+  <string name="Misc">Varie</string>
+  <string name="BindInfo">Associare i satelliti spektrum</string>
+  <string name="PowerTrigger">Power Trigger</string>
+  <string name="LiveTime">Tempo attivo</string>
+  <string name="FactoryResetInfo">Ripristinare tutti i parametri di default</string>
+  <string name="SelectedProfile">Profilo</string>
+  <string name="Calibration">Calibrazione</string>
+  <string name="AUXControl">Controllo AUX</string>
+  <string name="EnableControl">Abilitare il controllo</string>
+  <string name="Min">Min</string>
+  <string name="Max">Max</string>
+  <string name="OnlyWithMW23">Disponibile in MW 2.3</string>
+  <string name="SelectDifferentProtocol">La versione del protocollo selezionato non è compatibile con il tuo MultiWii</string>
+  <string name="VarioSoundOnOff">Suono variometro On/Off</string>
+  <string name="FSRTHaltitude">F/S RTH Altitudine</string>
+  <string name="OverrideBy">Override da:</string>
+  <string name="Searching">Ricerca</string>
+  <string name="GPSFixOK">Segnale GPS OK</string>
+  <string name="NotConnected">Non connesso</string>
+  <string name="ConnectionLost">Connessione persa</string>
+  <string name="Navigation">Navigazione</string>
+  <string name="RemoveWP">Rimuovere questo WP</string>
+  <string name="SelectAfile">Selezionare un File:</string>
+  <string name="Open">Apri</string>
+  <string name="Options">Opzioni</string>
+  <string name="MaxNumberOfWP">Numero max di WP:</string>
+  <string name="WPError">Errore WP</string>
+  <string name="isNotCorrect">non è corretto</string>
+  <string name="CRCisNotCorrect">CRC non è corretto</string>
+  <string name="Downloading">Downloading</string>
+  <string name="PleaseWait">Attendere prego ...</string>
+  <string name="Uploading">Caricamento</string>
+  <string name="MaxNumberWPreached">Non è possibile aggiungere passaggio alla missione. Raggiunto il numero massimo di passaggi per la missione</string>
+  <string name="Info">Info</string>
+  <string name="FileVersionMismach">Versione del file non supportata</string>
+  <string name="CircleNumberOfPoints">Numero di punti (min 5 - max 30)</string>
+  <string name="CircleDirection">Direzione (1 o -1)</string>
+  <string name="CircleRarius">Raggio in metri (min. 20)</string>
+  <string name="UseAsCircleCenter">Utilizzare come centro del cerchio</string>
+  <string name="Circle">Cerchio</string>
+  <string name="Parameter1">Parameter1</string>
+  <string name="Parameter2">Parameter2</string>
+  <string name="Parameter3">Parameter3</string>
+  <string name="Altitude">Altitudine</string>
+  <string name="Action">Azione</string>
+  <string name="UploadMission">Caricare la missione</string>
+  <string name="DownloadMission">Scarica la missione</string>
+  <string name="SaveMission">Salvare la missione</string>
+  <string name="LoadMission">Carico Missione</string>
+  <string name="ClearMap">Cancella mappa</string>
+  <string name="ZoomIn">Zoomare</string>
+  <string name="TimeSec">Tempo (Sec)</string>
+  <string name="WP">WP#</string>
+  <string name="Repetition">Ripetizione</string>
+  <string name="Heading">Heading</string>
+  <string name="PressOKToRestart">Premere OK per riavviare l\'applicazione</string>
+  <string name="Next">Prossimo</string>
+  <string name="Connection">Connessione</string>
+  <string name="Protocol">Protocollo</string>
+  <string name="SelectMultiWiiVersion">Seleziona la tua versione di MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW - spuntare solo se non funziona la connessione Bluetooth. Su alcuni dispositivi risolve il problema della connessione BT. Ma in altri rende la connessione molto instabile e il programma inutilizzabile.</string>
   <string-array name="wp_actions">
     <item>WayPoint</item>
-    <item>PosHold Unlimited</item>
-    <item>PosHold Time</item>
+    <item>PosHold illimitato</item>
+    <item>PosHold tempo</item>
     <item>RTH</item>
     <item>Set POI</item>
-    <item>Jump</item>
-    <item>Set heading</item>
-    <item>Land</item>
+    <item>Salta</item>
+    <item>Impostare heading</item>
+    <item>Atterra</item>
   </string-array>
 </resources>

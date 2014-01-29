@@ -14,15 +14,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/TextView09"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/tittle"
-                android:gravity="center"
-                android:text="@string/PID"
-                android:textColor="@color/tittleText" />
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -873,7 +864,9 @@
                 android:layout_gravity="right"
                 android:onClick="SetOnClick"
                 android:tag="DONTASK"
-                android:text="@string/SavetoEEPROM" />
+                android:text="@string/SavetoEEPROM"
+                android:visibility="invisible" />
+
         </LinearLayout>
     </ScrollView>
 

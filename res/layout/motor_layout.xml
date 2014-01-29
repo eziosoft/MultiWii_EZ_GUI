@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/TextViewInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/tittle"
-        android:gravity="center"
-        android:text="@string/Motors"
-        android:textColor="@color/tittleText" />
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"

@@ -10,7 +10,6 @@
   <string name="title_other_devices">Druge naprave na voljo</string>
   <string name="button_scan">Išči naprave</string>
   <string name="Radio">Radio</string>
-  <string name="PitchRoll">Kontrolna plošča 1</string>
   <string name="Pitch">Nagib naprej/nazaj</string>
   <string name="Roll">Nagib levo/desno</string>
   <string name="Mag">Azimut</string>
@@ -195,7 +194,6 @@ Ko zaženete GPS emulacijo, se bo program izvajal v ozadju, podatki prejeti iz M
   <string name="OverrideBy">Preglasil:</string>
   <string name="Searching">Iskanje</string>
   <string name="GPSFixOK">GPS Signal OK</string>
-  <string name="GPSnotAvailableInYourConfiguration">GPS v vaši konfiguraciji ni na voljo</string>
   <string name="NotConnected">Ni povezan</string>
   <string name="ConnectionLost">Povezava je prekinjena</string>
   <string name="drawer_open">Odpri navigacijsko okno</string>

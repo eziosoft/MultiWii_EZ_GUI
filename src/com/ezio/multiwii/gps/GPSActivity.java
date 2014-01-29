@@ -16,21 +16,16 @@
  */
 package com.ezio.multiwii.gps;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
-import com.ezio.multiwii.waypoints.Waypoint;
 
 public class GPSActivity extends SherlockActivity {
 
@@ -57,10 +52,6 @@ public class GPSActivity extends SherlockActivity {
 	TextView PhoneNumSatTV;
 	TextView DeclinationTV;
 	TextView PhoneAccuracyTV;
-
-	CheckBox CheckBoxInjectGPS;
-	CheckBox CheckBoxFollowMe;
-	CheckBox CheckBoxFollowHeading;
 
 	TextView FollowMeInfoTV;
 
@@ -110,12 +101,12 @@ public class GPSActivity extends SherlockActivity {
 				GPS_fixTV.setBackgroundColor(Color.GREEN);
 			}
 
-			// GPS_fixTV.setText(String.valueOf(app.mw.GPS_fix));
-
 			if (app.mw.GPS_update % 2 == 0) {
-				GPS_updateTV.setBackgroundColor(Color.GREEN);
+				// GPS_updateTV.setVisibility(View.VISIBLE);
+				GPS_updateTV.setBackgroundResource(R.drawable.green_light);
 			} else {
-				GPS_updateTV.setBackgroundColor(Color.TRANSPARENT);
+				// GPS_updateTV.setVisibility(View.INVISIBLE);
+				GPS_updateTV.setBackgroundResource(R.drawable.red_light);
 			}
 
 			GPS_altitudeTV.setText(String.valueOf(app.mw.GPS_altitude));
@@ -134,32 +125,9 @@ public class GPSActivity extends SherlockActivity {
 			PhoneHeadingTV.setText(String.valueOf(app.sensors.Heading));
 			HeadingTV.setText(String.valueOf(app.mw.head));
 
-			FollowMeInfoTV.setText("WayPointsDebug:\n");
-			Waypoint w = app.mw.Waypoints[0];
-			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Altitude) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
-			w = app.mw.Waypoints[16];
-			FollowMeInfoTV.append("No:" + String.valueOf(w.Number) + " Lat:" + String.valueOf(w.Lat) + " Lon:" + String.valueOf(w.Lon) + " Alt:" + String.valueOf(w.Altitude) + " NavFlag:" + String.valueOf(w.NavFlag) + "\n");
-
-			if (app.FollowMeBlinkFlag) {
-				CheckBoxFollowMe.setBackgroundColor(Color.GREEN);
-			} else {
-				CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT);
-			}
-			if (app.InjectGPSBlinkFlag) {
-				CheckBoxInjectGPS.setBackgroundColor(Color.GREEN);
-			} else {
-				CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT);
-			}
-			if (app.FollowHeadingBlinkFlag) {
-				CheckBoxFollowHeading.setBackgroundColor(Color.GREEN);
-			} else {
-				CheckBoxFollowHeading.setBackgroundColor(Color.TRANSPARENT);
-			}
-
 			app.Frequentjobs();
 
 			app.mw.SendRequest(app.MainRequestMethod);
-			// app.mw.SendRequestGetWayPoint(0);
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -173,6 +141,8 @@ public class GPSActivity extends SherlockActivity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gps_layout);
+
+		getSupportActionBar().setTitle(getString(R.string.GPSInfo));
 
 		app = (App) getApplication();
 
@@ -194,32 +164,11 @@ public class GPSActivity extends SherlockActivity {
 		PhoneNumSatTV = (TextView) findViewById(R.id.textViewPhoneNumSat);
 		PhoneAccuracyTV = (TextView) findViewById(R.id.textViewPhoneAccuracy);
 
-		CheckBoxInjectGPS = (CheckBox) findViewById(R.id.checkBoxInjectGPS);
-		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
-		CheckBoxFollowHeading = (CheckBox) findViewById(R.id.checkBoxFollowHeading);
 		DeclinationTV = (TextView) findViewById(R.id.textViewDeclination);
 		FollowMeInfoTV = (TextView) findViewById(R.id.textViewFollowMeInfo);
 		PhoneHeadingTV = (TextView) findViewById(R.id.TextViewPhoneHead);
 		HeadingTV = (TextView) findViewById(R.id.TextViewHeading);
-		if (!app.AdvancedFunctions) {
-			CheckBoxInjectGPS.setVisibility(View.GONE);
-			// CheckBoxFollowHeading.setVisibility(View.GONE);
-			// ((LinearLayout)
-			// findViewById(R.id.MockLayout)).setVisibility(View.GONE);
-		}
 
-	}
-
-	public void SHOWHIDDENOncLick(View v) {
-		CheckBoxInjectGPS.setVisibility(View.VISIBLE);
-		CheckBoxFollowMe.setVisibility(View.VISIBLE);
-		FollowMeInfoTV.setVisibility(View.VISIBLE);
-		CheckBoxFollowHeading.setVisibility(View.VISIBLE);
-		((LinearLayout) findViewById(R.id.MockLayout)).setVisibility(View.VISIBLE);
-
-		app.AdvancedFunctions = true;
-
-		Toast.makeText(getApplicationContext(), "Not tested features activated", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -235,44 +184,12 @@ public class GPSActivity extends SherlockActivity {
 		super.onResume();
 		app.ForceLanguage();
 
-		try {
-			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
 		killme = false;
 		mHandler.postDelayed(update, app.RefreshRate);
 
-		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
-		CheckBoxInjectGPS.setChecked(app.InjectGPSEnable);
-
 		app.Say(getString(R.string.GPS));
-
 		app.sensors.startMagACC();
 
-	}
-
-	public void FollowMeCheckBoxOnClick(View v) {
-		app.FollowMeEnable = CheckBoxFollowMe.isChecked();
-	}
-
-	public void InjectGPSCheckBoxOnClick(View v) {
-		app.InjectGPSEnable = CheckBoxInjectGPS.isChecked();
-	}
-
-	public void FollowHeadingCheckBoxOnClick(View v) {
-		app.FollowHeading = CheckBoxFollowHeading.isChecked();
-	}
-
-	public void StartMOCKLocationServiceOnClick(View v) {
-		Intent service = new Intent(getApplicationContext(), MOCK_GPS_Service.class);
-		startService(service);
-
-		Intent startMain = new Intent(Intent.ACTION_MAIN);
-		startMain.addCategory(Intent.CATEGORY_HOME);
-		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(startMain);
 	}
 
 }

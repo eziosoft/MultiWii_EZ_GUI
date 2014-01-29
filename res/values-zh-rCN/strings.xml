@@ -10,7 +10,6 @@
   <string name="title_other_devices">其他可用的设备</string>
   <string name="button_scan">扫描设备</string>
   <string name="Radio">遥控</string>
-  <string name="PitchRoll">仪表板 1</string>
   <string name="Pitch">俯仰</string>
   <string name="Roll">横滚</string>
   <string name="Mag">磁罗盘</string>

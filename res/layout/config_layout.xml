@@ -2,32 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/tittle"
-        android:gravity="center"
-        android:text="@string/Config"
-        android:textColor="@color/tittleText" />
+        android:layout_gravity="right"
+        android:onClick="NextOnClick"
+        android:text="@string/Next" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#000" />
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/scrollViewConfig"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
+        <ViewFlipper
+            android:id="@+id/viewFlipperConfig"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp" >
 
             <LinearLayout
                 android:id="@+id/connection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/Connection"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
                     android:id="@+id/connectionBT"
@@ -115,7 +131,6 @@
                         android:hint="do NOT leave empty or 0 - default 115200"
                         android:inputType="number" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -125,40 +140,55 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Protocol"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/smalltittle"
-                    android:text="@string/ProtocolVersion"
-                    android:textColor="@color/smalltittleText"
-                    android:visibility="visible" />
+                    android:layout_margin="5dp"
+                    android:background="@drawable/frame"
+                    android:orientation="vertical" >
 
-                <RadioGroup
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible" >
-
-                    <RadioButton
-                        android:id="@+id/radioButtonProtocol220"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="2.2"
+                        android:background="@color/smalltittle"
+                        android:text="@string/SelectMultiWiiVersion"
+                        android:textColor="@color/smalltittleText"
                         android:visibility="visible" />
 
-                    <RadioButton
-                        android:id="@+id/radioButtonProtocol230"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="2.3" />
+                        android:orientation="vertical"
+                        android:visibility="visible" >
 
-                    <RadioButton
-                        android:id="@+id/radioButtonProtocol231"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="NAV" />
-                </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/radioButtonProtocol220"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="2.2"
+                            android:visibility="visible" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonProtocol230"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2.3" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonProtocol231"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NAV" />
+                    </RadioGroup>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -166,6 +196,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Frsky"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <CheckBox
                     android:id="@+id/checkBoxFrskySupport"
@@ -209,7 +246,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/CopyFrskyToMW" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -217,6 +253,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Other"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/frame"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/smalltittle"
+                        android:text="@string/NoDataReceivedWarning"
+                        android:textColor="@color/smalltittleText" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNoDataReceivedWarning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/NoDataReceivedWarning" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/map"
@@ -380,7 +445,8 @@
                         android:id="@+id/checkBoxAltCorrection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/AltCorrection" />
+                        android:text="@string/AltCorrection"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -497,7 +563,6 @@
                             android:text="@string/ForceCzech" />
                     </RadioGroup>
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -507,38 +572,48 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/smalltittle"
-                    android:text="@string/RefreshRate"
-                    android:textColor="@color/smalltittleText" />
-
-                <EditText
-                    android:id="@+id/editTextRefreshRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="do NOT leave empty or 0 - default 100"
-                    android:inputType="number" >
-
-                    <requestFocus />
-                </EditText>
-
-                <CheckBox
-                    android:id="@+id/CheckBox_BT_New"
+                    android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BT_NEW - check only if BLuetooth connection doesn't work. On some devices it solves problem of the BT connection. But on others it makes the connection very unstable" />
+                    android:text="@string/Advanced"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <CheckBox
-                    android:id="@+id/checkBoxDisableBTonExit"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/disableBTonExit" />
+                    android:layout_margin="5dp"
+                    android:background="@drawable/frame"
+                    android:orientation="vertical" >
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/smalltittle"
+                        android:text="@string/RefreshRate"
+                        android:textColor="@color/smalltittleText" />
+
+                    <EditText
+                        android:id="@+id/editTextRefreshRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="do NOT leave empty or 0 - default 100"
+                        android:inputType="number" />
+
+                    <CheckBox
+                        android:id="@+id/CheckBox_BT_New"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/BT_NEW_info" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxDisableBTonExit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disableBTonExit" />
+                </LinearLayout>
             </LinearLayout>
-
-        </LinearLayout>
+        </ViewFlipper>
     </ScrollView>
 
 </LinearLayout>

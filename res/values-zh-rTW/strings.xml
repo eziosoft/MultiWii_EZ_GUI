@@ -10,7 +10,6 @@
   <string name="title_other_devices">其他可用的設備</string>
   <string name="button_scan">掃描設備</string>
   <string name="Radio">無線電</string>
-  <string name="PitchRoll">控制板1</string>
   <string name="Pitch">俯仰</string>
   <string name="Roll">翻滾</string>
   <string name="Mag">地磁計</string>

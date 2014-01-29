@@ -99,7 +99,6 @@ public abstract class MultirotorData {
 
 	public Communication communication;
 	public FileAccess FA;
-	public float AltCorrection = 0;
 
 	public String[] MultiTypeName = { "", "TRI", "QUADP", "QUADX", "BI", "GIMBAL", "Y6", "HEX6", "FLYING_WING", "Y4", "HEX6X", "OCTOX8", "OCTOFLATX", "OCTOFLATP", "AIRPLANE", "HELI_120_CCPM", "HELI_90_DEG", "VTAIL4", "HEX6H", "PPM_TO_SERVO", "DUALCOPTER", "SINGLECOPTER" };
 
@@ -217,6 +216,10 @@ public abstract class MultirotorData {
 	public abstract void ProcessSerialData(boolean appLogging);
 
 	public abstract void SendRequest(int MainRequestMethod);
+
+	public abstract void SendRequestMSP(int MSPCommand);
+
+	public abstract void ZeroConnection();
 
 	public abstract void SendRequestMSP_PID_MSP_RC_TUNING();
 

@@ -9,7 +9,6 @@
   <string name="title_other_devices">Другие доступные устройства</string>
   <string name="button_scan">Поиск устройств</string>
   <string name="Radio">Радио</string>
-  <string name="PitchRoll">Прибор. панель 1</string>
   <string name="Mag">Магнитометр</string>
   <string name="Config">Настройки</string>
   <string name="Logging">Лог</string>
@@ -239,7 +238,7 @@
   <string name="OverrideBy">Переопределть:</string>
   <string name="Searching">Поиск</string>
   <string name="GPSFixOK">GPS сигнал ОК</string>
-  <string name="GPSnotAvailableInYourConfiguration">GPS не доступен в вашей конфигурации</string>
+  <string name="NotAvailableInYourConfiguration">Не доступен в вашей конфигурации</string>
   <string name="NotConnected">Не подключено</string>
   <string name="ConnectionLost">Соединение потеряно</string>
   <string name="Navigation">Навигация</string>
@@ -273,6 +272,25 @@
   <string name="LoadMission">Загрузить маршрут</string>
   <string name="ClearMap">Очистить карту</string>
   <string name="ZoomIn">Увеличить масштаб</string>
+  <string name="TimeSec">Время (сек)</string>
+  <string name="WP">путевая точка №</string>
+  <string name="Repetition">повторение</string>
+  <string name="Heading">Курс</string>
+  <string name="PressOKToRestart">Нажмите кнопку OK для перезапуска приложения</string>
+  <string name="Next">Следующий</string>
+  <string name="Connection">Соединение</string>
+  <string name="Protocol">Протокол</string>
+  <string name="SelectMultiWiiVersion">Выберите вашу версию MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW выберите только если BT соединение НЕ РАБОТАЕТ.На некоторых устройствах это помогает решить проблему BT соединения,но на других это делает соединение очень неустойчиво и программа непригодным для использования.</string>
+  <string name="Land">Приземлиться</string>
+  <string name="Dashboard1">Прибор. панель 1</string>
+  <string name="CycleTime">Время цикла</string>
+  <string name="Throttle">Throttle</string>
+  <string name="AUX1">AUX1</string>
+  <string name="AUX2">AUX2</string>
+  <string name="AUX3">AUX3</string>
+  <string name="AUX4">AUX4</string>
+  <string name="GPSInfo">Информация о GPS</string>
   <string-array name="wp_actions">
     <item>Путевая точка</item>
     <item>Бесконечное удержание позиции</item>
@@ -281,6 +299,6 @@
     <item>Выбрать POI</item>
     <item>Перейти</item>
     <item>Задать преследование</item>
-    <item>Land</item>
+    <item>Приземлиться</item>
   </string-array>
 </resources>

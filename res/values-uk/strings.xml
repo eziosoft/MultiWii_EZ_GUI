@@ -10,7 +10,6 @@
   <string name="title_other_devices">Інші доступні пристрої</string>
   <string name="button_scan">Пошук пристроїв</string>
   <string name="Radio">Радіо</string>
-  <string name="PitchRoll">Приборка 1</string>
   <string name="Pitch">Тангаж</string>
   <string name="Roll">Крен</string>
   <string name="Mag">Компас</string>
@@ -257,7 +256,6 @@
   <string name="OverrideBy">Змінено шляхом:</string>
   <string name="Searching">Пошук</string>
   <string name="GPSFixOK">Сигнал GPS OK </string>
-  <string name="GPSnotAvailableInYourConfiguration">GPS недоступний у вашій конфігурації</string>
   <string name="NotConnected">Немає підключення</string>
   <string name="ConnectionLost">Зв’язок втрачено</string>
   <string name="drawer_open">Відкрити вікно навігації</string>

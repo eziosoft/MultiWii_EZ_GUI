@@ -10,10 +10,10 @@
   <string name="title_other_devices">Otros dispositivos disponibles</string>
   <string name="button_scan">Buscar dispositivos</string>
   <string name="Radio">Radio</string>
-  <string name="PitchRoll">Panel 1</string>
   <string name="Pitch">Elevador</string>
   <string name="Roll">Alerón</string>
   <string name="Mag">Magnetómetro</string>
+  <string name="Config">Configuración</string>
   <string name="Logging">Registro</string>
   <string name="RadioMode">Modo de Radio</string>
   <string name="Mode1">Modo 1</string>
@@ -35,8 +35,8 @@
   <string name="GPS_fix">Fijar</string>
   <string name="GPS_update">Actualizar</string>
   <string name="StartLogging">Iniciar el registro</string>
-  <string name="Stop_Logging">Parar el registro y guardar</string>
-  <string name="LoggingInfo">Los reguistros son guardados aquí: /sdcard/MultiWiiLogs</string>
+  <string name="Stop_Logging">Detener el registro y guardar en archivo</string>
+  <string name="LoggingInfo">Los registros se guardan aquí: / sdcard/MultiWiiLogs</string>
   <string name="GPS_altitude">Altitud(m)</string>
   <string name="GPS_speed">Velocidad(cm/s)</string>
   <string name="GPS_latitude">Latitud</string>
@@ -102,6 +102,7 @@
   <string name="Donate">Donar</string>
   <string name="Loggingstarted">Comenzado el registro</string>
   <string name="Loggingstopedandsaved">Registro parado y guardado</string>
+  <string name="ResetALLnotonlyPIDparamstodefault">Esto repondrá todos los parámetros (no sólo PID) a sus valores predeterminados, ¿quieres continuar?</string>
   <string name="Yes">Sí</string>
   <string name="No">No</string>
   <string name="ValuesaresettodefaultPressreadbuttonnow">Los valores se establecen por defecto. Presione el botón de lectura ahora.</string>
@@ -131,6 +132,7 @@
   <string name="SetCheckboxes">AUX</string>
   <string name="Set">Fijar</string>
   <string name="SavetoEEPROM">Guardar en EEPROM</string>
+  <string name="Auto">Automático</string>
   <string name="Graphs">Gráficos</string>
   <string name="show">Mostrar</string>
   <string name="ACCROLL">ALERON DE ACC</string>
@@ -159,6 +161,7 @@
   <string name="page3">Configurar</string>
   <string name="RawData">Datos en bruto</string>
   <string name="ShareIt">Compartir el archivo Config</string>
+  <string name="SelectSetting">Seleccione la configuración de ajuste (usted puede fijar por ejemplo diferentes pid y ratio)</string>
   <string name="RXBIND">Vincular RX</string>
   <string name="FollowMe">Sigue me: #define USE_MSP_WP Descomentalo en config.h; no funciona con I2C GPS; Parpadea cuando el telefono envia la posicion a la MW</string>
   <string name="InfoDonate">¿Le parece útil esta aplicación? Apoyar su desarrollo lo halagador o enviando donaciones al desarrollador!</string>
@@ -208,6 +211,8 @@
   <string name="BatWarning2">BatAdvertencia2</string>
   <string name="BatCritical">BatCritical</string>
   <string name="GreenValuesCanBeChanged">Se pueden cambiar los valores en verdes</string>
+  <string name="Locked">Esta función está bloqueada</string>
+  <string name="DoYouWantToUnlock">Comprando el desbloqueador puede apoyar el desarrollo de este programa y me anima a trabajar más duro. ¿Quieres desbloquearlo?</string>
   <string name="TakeDeclinationFromPhone">Adquiere la declinación del telefono</string>
   <string name="RateOrUpdate">Cambia o actualiza</string>
   <string name="ArmedCount">Tiempo armado</string>
@@ -240,14 +245,87 @@ Pulse el icono  EZ-GUI para volver atras</string>
   <string name="PrevWP">Previsualizar WP</string>
   <string name="Clean">Limpiar</string>
   <string name="MoveMap">Mover mapa</string>
+  <string name="FrskySupport">Soporte Frsky</string>
+  <string name="Revers">Invertir</string>
+  <string name="Factoryreset">Restablecimiento de fábrica</string>
+  <string name="Misc">Miscelania</string>
+  <string name="BindInfo">Enlazar satélites Spektrum</string>
+  <string name="LiveTime">Tiempo activo</string>
+  <string name="FactoryResetInfo">Restablecer los parámetros por defecto</string>
+  <string name="SelectedProfile">Perfil</string>
+  <string name="Calibration">Calibración</string>
+  <string name="AUXControl">Control AUX</string>
+  <string name="EnableControl">Habilitar el Control</string>
+  <string name="Min">Min</string>
+  <string name="Max">Max</string>
+  <string name="OnlyWithMW23">Disponible en MW 2.3</string>
+  <string name="SelectDifferentProtocol">Versión de protocolo seleccionado no es compatible con tu MultiWii</string>
+  <string name="VarioSoundOnOff">Vario Sound encendido/apagado</string>
+  <string name="FSRTHaltitude">F/S RTH Altitud</string>
+  <string name="OverrideBy">Reemplazar por:</string>
+  <string name="Searching">Buscando</string>
+  <string name="GPSFixOK">Señal GPS OK</string>
+  <string name="NotAvailableInYourConfiguration">No está disponible para su configuración</string>
+  <string name="NotConnected">No conectado</string>
+  <string name="ConnectionLost">Se ha perdido la conexión</string>
+  <string name="Navigation">Navegación</string>
+  <string name="RemoveWP">Quitar este WP</string>
+  <string name="SelectAfile">Seleccione un archivo:</string>
+  <string name="Open">Abrir</string>
+  <string name="Options">Opciones</string>
+  <string name="MaxNumberOfWP">Número máx. de WP:</string>
+  <string name="WPError">Error en WP</string>
+  <string name="isNotCorrect">no es correcto</string>
+  <string name="CRCisNotCorrect">CRC no es correcto</string>
+  <string name="Downloading">Descargando</string>
+  <string name="PleaseWait">Espera, por favor ...</string>
+  <string name="Uploading">Cargando</string>
+  <string name="MaxNumberWPreached">No se puede agregar el paso a la misión. Alcanzado el número máximo de pasos de misión</string>
+  <string name="Info">Información</string>
+  <string name="FileVersionMismach">Versión del archivo no esta soportada</string>
+  <string name="CircleNumberOfPoints">Número de puntos (5 mín - 30 máx)</string>
+  <string name="CircleDirection">Dirección (1 o -1)</string>
+  <string name="CircleRarius">Radio en metros (min 20)</string>
+  <string name="UseAsCircleCenter">Usar como centro del círculo</string>
+  <string name="Circle">Círculo</string>
+  <string name="Parameter1">Parámetro 1</string>
+  <string name="Parameter2">Parámetro 2</string>
+  <string name="Parameter3">Parámetro 3</string>
+  <string name="Altitude">Altitud</string>
+  <string name="Action">Acción</string>
+  <string name="UploadMission">Subir Misión</string>
+  <string name="DownloadMission">Descargar Misión</string>
+  <string name="SaveMission">Guardar Misión</string>
+  <string name="LoadMission">Cargar Misión</string>
+  <string name="ClearMap">Limpiar Mapa</string>
+  <string name="ZoomIn">Acercar</string>
+  <string name="TimeSec">Tiempo (seg)</string>
+  <string name="WP">WP #</string>
+  <string name="Repetition">Repetición</string>
+  <string name="Heading">Rumbo</string>
+  <string name="PressOKToRestart">Pulse OK para reiniciar la aplicación</string>
+  <string name="Next">Siguiente</string>
+  <string name="Connection">Conexión</string>
+  <string name="Protocol">Protocolo</string>
+  <string name="SelectMultiWiiVersion">Seleccione su versión MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW - selecciona sólo si no funciona la conexión Bluetooth. En algunos dispositivos soluciona el problema de la conexión de BT. Pero en otros hace la conexión muy inestable y el programa inutilizable.</string>
+  <string name="Land">Aterrizar</string>
+  <string name="Dashboard1">Panel de Instrumentos 1</string>
+  <string name="CycleTime">Tiempo de ciclo</string>
+  <string name="Throttle">Throttle</string>
+  <string name="AUX1">AUX1</string>
+  <string name="AUX2">AUX2</string>
+  <string name="AUX3">AUX3</string>
+  <string name="AUX4">AUX4</string>
+  <string name="GPSInfo">Información GPS</string>
   <string-array name="wp_actions">
     <item>WayPoint</item>
-    <item>PosHold Unlimited</item>
-    <item>PosHold Time</item>
+    <item>PosHold ilimitado</item>
+    <item>PosHold tiempo</item>
     <item>RTH</item>
     <item>Set POI</item>
-    <item>Jump</item>
-    <item>Set heading</item>
-    <item>Land</item>
+    <item>Saltar</item>
+    <item>Establezca rumbo</item>
+    <item>Aterrizar</item>
   </string-array>
 </resources>

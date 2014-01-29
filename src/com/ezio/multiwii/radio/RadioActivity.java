@@ -31,8 +31,8 @@ public class RadioActivity extends SherlockActivity {
 	private boolean killme = false;
 
 	App app;
-	StickView SV1;
-	StickView SV2;
+	Stick2View SV1;
+	Stick2View SV2;
 	ProgressBar pb1;
 	ProgressBar pb2;
 	ProgressBar pb3;
@@ -90,6 +90,8 @@ public class RadioActivity extends SherlockActivity {
 			app.Frequentjobs();
 
 			app.mw.SendRequest(app.MainRequestMethod);
+			app.mw.SendRequestMSP(app.mw.MSP_RC);
+
 			if (!killme)
 				mHandler.postDelayed(update, app.RefreshRate);
 
@@ -107,8 +109,8 @@ public class RadioActivity extends SherlockActivity {
 
 		app = (App) getApplication();
 
-		SV1 = (StickView) findViewById(R.id.StickView1);
-		SV2 = (StickView) findViewById(R.id.StickView2);
+		SV1 = (Stick2View) findViewById(R.id.StickView1);
+		SV2 = (Stick2View) findViewById(R.id.StickView2);
 
 		pb1 = (ProgressBar) findViewById(R.id.ProgressBar01);
 		pb2 = (ProgressBar) findViewById(R.id.ProgressBar02);

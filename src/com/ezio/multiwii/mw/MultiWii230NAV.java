@@ -238,7 +238,7 @@ public class MultiWii230NAV extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			alt = ((float) read32() / 100) - AltCorrection;
+			alt = ((float) read32() / 100);
 			vario = read16();
 			break;
 		case MSP_ANALOG:
@@ -743,6 +743,12 @@ public class MultiWii230NAV extends MultirotorData {
 
 	}
 
+	@Override
+	public void ZeroConnection() {
+		timer3 = -1;
+
+	}
+
 	// /////////////////////////////END NEW requests\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	@Override
@@ -890,6 +896,11 @@ public class MultiWii230NAV extends MultirotorData {
 		sendRequestMSP(requestMSP(MSP_SET_WP, payload.toArray(new Character[payload.size()])));
 
 		Log.d("nav", "MSP_SET_WP " + String.valueOf(w.Number) + "  " + String.valueOf(w.Lat) + "x" + String.valueOf(w.Lon) + " " + String.valueOf(w.Altitude) + " " + String.valueOf(w.Flag));
+	}
+
+	@Override
+	public void SendRequestMSP(int MSPCommand) {
+		sendRequestMSP(requestMSP(MSPCommand));
 	}
 
 }

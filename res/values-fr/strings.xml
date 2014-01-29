@@ -10,7 +10,6 @@
   <string name="title_other_devices">Autres périphériques disponibles</string>
   <string name="button_scan">Recherche de périphériques</string>
   <string name="Radio">Radio</string>
-  <string name="PitchRoll">Tableau de bord 1</string>
   <string name="Pitch">Tangage</string>
   <string name="Roll">Roulis</string>
   <string name="Mag">Mag</string>
@@ -200,7 +199,9 @@ cela me poussera à améliorer constamment cette application.</string>
   <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
   <string name="OtherSerialChips">Autre (CDC/ACM)</string>
   <string name="ACCcalibrationInfo">Placer le châssis sur une surface plane, appuyez sur le bouton AccCalibration, s\'assurer qu\'il ne bouge pas pendant cette période</string>
+  <string name="ACCcalibrationDialogInfo">Ne déplacez pas votre modèle</string>
   <string name="MagCalibrationInfo">Appuyez sur le bouton MagCalibration, déplacer le multirotor au moins à 360 degrés sur tous les axes de rotation. Vous avez 30 secondes pour effectuer cette tâche.</string>
+  <string name="MagCalibrationDialogInfo">Déplacer multirotor au moins de 360 degrés sur tous les axes de rotation.</string>
   <string name="TTS_Volts">Volts</string>
   <string name="TTS_Meters">Mètres</string>
   <string name="TTS_Altitude">Altitude</string>
@@ -267,7 +268,7 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="OverrideBy">Remplacer par :</string>
   <string name="Searching">Recherche en cours</string>
   <string name="GPSFixOK">Signal GPS OK</string>
-  <string name="GPSnotAvailableInYourConfiguration">Le GPS n\'est pas disponible dans votre configuration</string>
+  <string name="NotAvailableInYourConfiguration">Non disponible dans votre configuration</string>
   <string name="NotConnected">Non connecté</string>
   <string name="ConnectionLost">Connexion perdue</string>
   <string name="drawer_open">Ouvrir le volet de navigation</string>
@@ -303,6 +304,26 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
   <string name="LoadMission">Charge la Mission</string>
   <string name="ClearMap">Effacer la carte</string>
   <string name="ZoomIn">Zoom +</string>
+  <string name="TimeSec">Durée (Sec)</string>
+  <string name="WP">WP #</string>
+  <string name="Repetition">Fréquence</string>
+  <string name="Heading">Entête</string>
+  <string name="PressOKToRestart">Appuyez sur OK pour redémarrer l\'application</string>
+  <string name="Next">Suivant</string>
+  <string name="Connection">Connexion</string>
+  <string name="Protocol">Protocole </string>
+  <string name="SelectMultiWiiVersion">Sélectionnez votre version de MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW - cocher uniquement si la connexion Bluetooth ne fonctionne pas. Sur certains appareils, il résout le problème de la connexion BT. Mais sur d\'autres rend la connexion très instable et le programme inutilisable.</string>
+  <string name="Land">Atterir</string>
+  <string name="Dashboard1">Tableau de bord 1</string>
+  <string name="CycleTime">Cycle de temps</string>
+  <string name="Throttle">Manette des gaz</string>
+  <string name="AUX1">AUX1</string>
+  <string name="AUX2">AUX2</string>
+  <string name="AUX3">AUX3</string>
+  <string name="AUX4">AUX4</string>
+  <string name="GPSInfo">Info GPS</string>
+  <string name="PressBackAgainToExit">S\'il vous plaît cliquez sur retour pour quitter</string>
   <string-array name="wp_actions">
     <item>WayPoint</item>
     <item>PosHold illimité</item>
@@ -311,6 +332,6 @@ Après avoir démarré l\'émulation GPS, l\'application sera mise en arrière-p
     <item>Définir POI</item>
     <item>Sauter</item>
     <item>Définir la position</item>
-    <item>Land</item>
+    <item>Atterir</item>
   </string-array>
 </resources>

@@ -10,7 +10,6 @@
   <string name="title_other_devices">Jiná dostupná zařízení</string>
   <string name="button_scan">Hledej zařízení</string>
   <string name="Radio">Rádio</string>
-  <string name="PitchRoll">Přístr. deska 1</string>
   <string name="Pitch">Pitch</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Kompas</string>
@@ -264,7 +263,7 @@
   <string name="OverrideBy">Prepsáno od:</string>
   <string name="Searching">Hledám</string>
   <string name="GPSFixOK">GPS signál OK</string>
-  <string name="GPSnotAvailableInYourConfiguration">GPS není k dispozici ve vaši konfiguraci</string>
+  <string name="NotAvailableInYourConfiguration">Není k dispozici v tvé konfiguraci</string>
   <string name="NotConnected">Nepřipojeno</string>
   <string name="ConnectionLost">Připojení ztraceno</string>
   <string name="Navigation">Navigace</string>
@@ -298,6 +297,25 @@
   <string name="LoadMission">Nahrát misi</string>
   <string name="ClearMap">Vymazat mapu</string>
   <string name="ZoomIn">Přiblížit</string>
+  <string name="TimeSec">Čas (sekundy)</string>
+  <string name="WP">WP #</string>
+  <string name="Repetition">Opakování</string>
+  <string name="Heading">Směr</string>
+  <string name="PressOKToRestart">Klepnutím na tlačítko OK restartujte aplikaci</string>
+  <string name="Next">Další</string>
+  <string name="Connection">Připojení</string>
+  <string name="Protocol">Protokol</string>
+  <string name="SelectMultiWiiVersion">Vyberte verzi MultiWii</string>
+  <string name="BT_NEW_info">BT_NEW - satrhněte pouze v případě, že připojení Bluetooth nefunguje. Na některých zařízeních řeší problém připojení BT. A na některých to může způsobit velmi nestabilní připojení a nepoužitelný program.</string>
+  <string name="Land">Přistání</string>
+  <string name="Dashboard1">Přístr. deska 1</string>
+  <string name="CycleTime">Čas cyklu</string>
+  <string name="Throttle">Plyn</string>
+  <string name="AUX1">AUX1</string>
+  <string name="AUX2">AUX2</string>
+  <string name="AUX3">AUX3</string>
+  <string name="AUX4">AUX4</string>
+  <string name="GPSInfo">GPS Info</string>
   <string-array name="wp_actions">
     <item>Trasový bod</item>
     <item>PosHold neomezený</item>
@@ -306,6 +324,6 @@
     <item>Nastavit POI</item>
     <item>Skok</item>
     <item>Nastavit kurs</item>
-    <item>Land</item>
+    <item>Přistání</item>
   </string-array>
 </resources>

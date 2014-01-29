@@ -238,7 +238,7 @@ public class MultiWii230 extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			alt = ((float) read32() / 100) - AltCorrection;
+			alt = ((float) read32() / 100) ;
 			vario = read16();
 			break;
 		case MSP_ANALOG:
@@ -698,46 +698,6 @@ public class MultiWii230 extends MultirotorData {
 
 	// //Main Request//////////////////////////////////////////////////
 
-	// public void SendRequest1() {
-	// if (communication.Connected) {
-	// int[] requests;
-	//
-	// // this is fired only once////////
-	// if (timer2 < 5) {
-	// timer2++;
-	// } else {
-	// if (timer2 != 10) {
-	//
-	// requests = new int[] { MSP_BOXNAMES };
-	// sendRequestMSP(requestMSP(requests));
-	// timer2 = 10;
-	// return;
-	// }
-	// }
-	// // ///////////////////////////////////////
-	//
-	// timer1++;
-	// if (timer1 > 10) { // fired every 10 requests
-	// requests = new int[] { MSP_ANALOG, MSP_IDENT, MSP_MISC, MSP_RC_TUNING };
-	// sendRequestMSP(requestMSP(requests));
-	// timer1 = 0;
-	//
-	// if (CHECKBOXITEMS == 0)
-	// timer2 = 0;
-	// return;
-	// }
-	//
-	// requests = new int[] { MSP_STATUS, MSP_RAW_IMU, MSP_SERVO, MSP_MOTOR,
-	// MSP_RC, MSP_RAW_GPS, MSP_COMP_GPS, MSP_ALTITUDE, MSP_ATTITUDE, MSP_DEBUG
-	// };
-	// sendRequestMSP(requestMSP(requests));
-	//
-	// } else {
-	// timer1 = 10;
-	// timer2 = 0;
-	// }
-	// }
-
 	// NEW Main requests///////////////////////////////////////////////
 
 	int timer3 = -1;
@@ -773,6 +733,12 @@ public class MultiWii230 extends MultirotorData {
 				timer3 = 0;
 
 		}
+
+	}
+
+	@Override
+	public void ZeroConnection() {
+		timer3 = -1;
 
 	}
 
@@ -920,6 +886,12 @@ public class MultiWii230 extends MultirotorData {
 	@Override
 	public void SendRequestMSP_NAV_CONFIG() {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void SendRequestMSP(int MSPCommand) {
+		sendRequestMSP(requestMSP(MSPCommand));
 
 	}
 

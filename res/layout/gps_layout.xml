@@ -15,17 +15,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/tittle"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="SHOWHIDDENOncLick"
-                android:text="@string/GPS"
-                android:textColor="@color/tittleText" />
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,74 +22,39 @@
                 android:background="@drawable/frame" >
 
                 <TableRow
-                    android:id="@+id/tableRow16"
+                    android:id="@+id/tableRow4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/TextView04"
+                        android:id="@+id/TextView06"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/frame"
-                        android:gravity="center"
-                        android:text="MultiWii" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                        android:text="@string/GPS_fix"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/TextView02"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GPS_distanceToHome"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/TextViewGPS_distanceToHome"
+                        android:id="@+id/TextViewGPS_fix"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="---"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRowGPS_directionToHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
 
                     <TextView
-                        android:id="@+id/TextView03"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GPS_directionToHome"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/TextViewGPS_directionToHome"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="---"
+                        android:id="@+id/TextViewGPS_update"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/red_light"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView05"
@@ -108,8 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_numSat"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_numSat"
@@ -121,22 +74,20 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@+id/tableRow4"
+                    android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/TextView06"
+                        android:id="@+id/TextView02"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/GPS_fix"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:text="@string/GPS_distanceToHome"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/TextViewGPS_fix"
+                        android:id="@+id/TextViewGPS_distanceToHome"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -145,33 +96,9 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
-
-                    <TextView
-                        android:id="@+id/TextView07"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GPS_update"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/TextViewGPS_update"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </TableRow>
-
-                <TableRow
                     android:id="@+id/tableRow5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -179,8 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_altitude"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_altitude"
@@ -194,8 +120,7 @@
                 <TableRow
                     android:id="@+id/tableRow6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -203,8 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_speed"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_speed"
@@ -218,8 +142,7 @@
                 <TableRow
                     android:id="@+id/tableRow7"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView08"
@@ -227,8 +150,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_latitude"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_latitude"
@@ -242,8 +164,7 @@
                 <TableRow
                     android:id="@+id/tableRow8"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView09"
@@ -251,8 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/GPS_longitude"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewGPS_longitude"
@@ -266,20 +186,40 @@
                 <TableRow
                     android:id="@+id/TableRow02"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/TextView12"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/HEAD"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="15dp" />
+                        android:text="@string/Heading"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/TextViewHeading"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="---"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRowGPS_directionToHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/GPS_directionToHome"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/TextViewGPS_directionToHome"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -315,13 +255,13 @@
                         android:background="@drawable/frame"
                         android:gravity="center"
                         android:text="Android" />
-
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow9"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/textView1"
@@ -341,7 +281,8 @@
                 <TableRow
                     android:id="@+id/tableRow10"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/textView3"
@@ -361,7 +302,8 @@
                 <TableRow
                     android:id="@+id/tableRow11"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
 
                     <TextView
                         android:id="@+id/TextView10"
@@ -497,7 +439,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/frame"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <CheckBox
                     android:id="@+id/checkBoxFollowMe"
@@ -525,7 +468,6 @@
                     android:layout_height="wrap_content"
                     android:onClick="FollowHeadingCheckBoxOnClick"
                     android:text="@string/Follow_Heading" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -534,7 +476,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/frame"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <TextView
                     android:id="@+id/textView7"
@@ -549,9 +492,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="StartMOCKLocationServiceOnClick"
                     android:text="@string/StartGpsEmulation" />
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

@@ -10,7 +10,6 @@
   <string name="title_other_devices">Andere verfügbare Geräte</string>
   <string name="button_scan">Nach Geräten suchen</string>
   <string name="Radio">Funksignal</string>
-  <string name="PitchRoll">Auswertung 1</string>
   <string name="Pitch">Nick</string>
   <string name="Roll">Roll</string>
   <string name="Mag">Kompass</string>
@@ -213,6 +212,7 @@
   <string name="BatCritical">Batterie kritisch</string>
   <string name="GreenValuesCanBeChanged">Grüne Werte können geändert werden</string>
   <string name="Locked">Diese Funktion ist gesperrt</string>
+  <string name="DoYouWantToUnlock">Mit dem Kauf des Unlockers unterstützen Sie die Entwicklung dieses Programms und ermutigen mich, härter zu arbeiten. Wollen Sie es entsperren?</string>
   <string name="TakeDeclinationFromPhone">Deklination von Android Gerät übernehmen</string>
   <string name="RateOrUpdate">Bewerten oder aktualisieren</string>
   <string name="ArmedCount">Motorlaufzeit</string>
@@ -264,15 +264,67 @@
   <string name="OverrideBy">Überschrieben von:</string>
   <string name="Searching">Suche</string>
   <string name="GPSFixOK">GPS Signal OK</string>
-  <string name="GPSnotAvailableInYourConfiguration">GPS ist nicht verfügbar in Ihrer Konfiguration</string>
+  <string name="NotAvailableInYourConfiguration">Nicht verfügbar in Ihrer Konfiguration</string>
+  <string name="NotConnected">Nicht verbunden</string>
+  <string name="ConnectionLost">Verbindung verloren</string>
+  <string name="Navigation">Navigation</string>
+  <string name="RemoveWP">Diesen Wegpunkt entfernen</string>
+  <string name="SelectAfile">Wählen Sie eine Datei:</string>
+  <string name="Open">Öffnen</string>
+  <string name="Options">Optionen</string>
+  <string name="MaxNumberOfWP">Maximale Anzahl an Wegpunkten:</string>
+  <string name="WPError">Wegpunkt-Fehler</string>
+  <string name="isNotCorrect">ist nicht korrekt</string>
+  <string name="CRCisNotCorrect">CRC ist nicht korrekt</string>
+  <string name="Downloading">Lade herunter ...</string>
+  <string name="PleaseWait">Bitte warten ...</string>
+  <string name="Uploading">Lade hoch …</string>
+  <string name="MaxNumberWPreached">Wegpunkt kann nicht hinzugefügt werden. Maximale Anzahl erreicht</string>
+  <string name="Info">Informationen</string>
+  <string name="FileVersionMismach">Version der Datei wird nicht unterstützt.</string>
+  <string name="CircleNumberOfPoints">Anzahl der Punkte (5 - Max. 30 min)</string>
+  <string name="CircleDirection">Richtung (1 oder-1)</string>
+  <string name="CircleRarius">RADIUS in Metern (min. 20)</string>
+  <string name="UseAsCircleCenter">Als Kreismittelpunkt verwenden</string>
+  <string name="Circle">Kreis</string>
+  <string name="Parameter1">"Parameter1"</string>
+  <string name="Parameter2">Parameter2</string>
+  <string name="Parameter3">Parameter3</string>
+  <string name="Altitude">Höhe</string>
+  <string name="Action">Aktion</string>
+  <string name="UploadMission">Mission hochladen</string>
+  <string name="DownloadMission">Download der Mission</string>
+  <string name="SaveMission">Mission speichern</string>
+  <string name="LoadMission">Mission laden</string>
+  <string name="ClearMap">Karte löschen</string>
+  <string name="ZoomIn">Ansicht vergrößern</string>
+  <string name="TimeSec">Zeit (Sek)</string>
+  <string name="WP">Wegpunkt Nr. </string>
+  <string name="Repetition">Wiederholung</string>
+  <string name="Heading">Überschrift</string>
+  <string name="PressOKToRestart">Drücken Sie OK, um die Anwendung neu zu starten</string>
+  <string name="Next">Nächste</string>
+  <string name="Connection">Verbindung</string>
+  <string name="Protocol">Protokoll</string>
+  <string name="SelectMultiWiiVersion">Wählen Sie Ihre MultiWii-Version</string>
+  <string name="BT_NEW_info">BT_NEW - Check nur wenn Bluetooth-Verbindung nicht funktioniert. Auf einigen Geräten löst es das Problem der BT-Verbindung. Aber auf anderen macht es die Verbindung sehr instabil und das Programm unbrauchbar.</string>
+  <string name="Land">Landen</string>
+  <string name="Dashboard1">Dashboard 1</string>
+  <string name="CycleTime">Zykluszeit</string>
+  <string name="Throttle">Gas/Throttle</string>
+  <string name="AUX1">AUX1</string>
+  <string name="AUX2">AUX2</string>
+  <string name="AUX3">AUX3</string>
+  <string name="AUX4">AUX4</string>
+  <string name="GPSInfo">GPS-Info</string>
   <string-array name="wp_actions">
-    <item>WayPoint</item>
-    <item>PosHold Unlimited</item>
-    <item>PosHold Time</item>
+    <item>Wegpunkt</item>
+    <item>PosHold unbegrenzt</item>
+    <item>PosHold Zeit</item>
     <item>RTH</item>
-    <item>Set POI</item>
-    <item>Jump</item>
-    <item>Set heading</item>
-    <item>Land</item>
+    <item>POI festlegen</item>
+    <item>Gehe zu</item>
+    <item>Richtung festlegen</item>
+    <item>Landen</item>
   </string-array>
 </resources>

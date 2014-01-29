@@ -319,9 +319,16 @@ public class MainMultiWiiActivity extends SherlockActivity {
 			t1 += "\n" + t + "\n";
 			t1 += getString(R.string.SelectedProfile) + ":" + String.valueOf(app.mw.confSetting) + "\n";
 
-			if (app.mw.ArmCount > 0)
-				t1 += getString(R.string.ArmedCount) + ":" + String.valueOf(app.mw.ArmCount) + " " + getString(R.string.LiveTime) + ":" + String.valueOf(app.mw.LifeTime);
+			if (app.mw.ArmCount > 0) {
 
+				int hours = app.mw.LifeTime / 3600;
+				int minutes = (app.mw.LifeTime % 3600) / 60;
+				int seconds = app.mw.LifeTime % 60;
+
+				String timeString = hours + ":" + minutes + ":" + seconds;
+
+				t1 += getString(R.string.ArmedCount) + ":" + String.valueOf(app.mw.ArmCount) + " " + getString(R.string.LiveTime) + ":" + timeString;
+			}
 			if (app.commMW.Connected)
 				TVInfo.setText(t1);
 			else
@@ -571,8 +578,11 @@ public class MainMultiWiiActivity extends SherlockActivity {
 		app.mw.CloseLoggingFile();
 		app.notifications.Cancel(99);
 
-		if (restart)
+		if (restart) {
+			if (app.commMW.Connected)
+				app.commMW.Disable();
 			app.RestartApp();
+		}
 		Close();
 		System.exit(0);
 	}
@@ -623,5 +633,25 @@ public class MainMultiWiiActivity extends SherlockActivity {
 	}
 
 	// ///menu end//////
+
+	boolean doubleBackToExitPressedOnce = false;
+
+	@Override
+	public void onBackPressed() {
+		if (doubleBackToExitPressedOnce) {
+			EXIT(false);
+			return;
+		}
+		this.doubleBackToExitPressedOnce = true;
+		Toast.makeText(this, getString(R.string.PressBackAgainToExit), Toast.LENGTH_SHORT).show();
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				doubleBackToExitPressedOnce = false;
+
+			}
+		}, 2000);
+	}
 
 }

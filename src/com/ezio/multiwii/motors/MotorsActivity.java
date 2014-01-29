@@ -21,6 +21,7 @@ import java.util.Random;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -127,6 +128,8 @@ public class MotorsActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		app = (App) getApplication();
 		setContentView(R.layout.motor_layout);
+		getSupportActionBar().setTitle(getString(R.string.Motors));
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// motorsView = (MotorView) findViewById(R.id.motorView1);
 		// motorsView.SetMotorsCount(4, true);

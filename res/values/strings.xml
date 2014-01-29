@@ -208,7 +208,9 @@
     <string name="FTDI">FTDI (FT232RL, FT232H, FT2232C/D/HL, FT4232HL FT230X, REX-USB60F/MI(FT232BL))</string>
     <string name="OtherSerialChips">Other (CDC/ACM)</string>
     <string name="ACCcalibrationInfo">Place frame on a level surface, press the AccCalibration button, ensure it is not moving during this period</string>
+    <string name="ACCcalibrationDialogInfo">Do not move your model</string>
     <string name="MagCalibrationInfo">Press the MagCalibration button, move multirotor atleast 360 degrees on all axis of rotation. You have 30 seconds to perform this task.</string>
+    <string name="MagCalibrationDialogInfo">Move multirotor atleast 360 degrees on all axis of rotation.</string>
     <string name="TTS_Volts">Volts</string>
     <string name="TTS_Meters">Meters</string>
     <string name="TTS_Altitude">Altitude</string>
@@ -341,5 +343,8 @@
     <string name="AUX2">AUX2</string>
     <string name="AUX3">AUX3</string>
     <string name="AUX4">AUX4</string>
+    <string name="GPSInfo">GPS Info</string>
+    <string name="PressBackAgainToExit">Please click BACK again to exit</string>
+    <string name="NoDataReceivedWarning">No Data Received warning</string>
 
 </resources>

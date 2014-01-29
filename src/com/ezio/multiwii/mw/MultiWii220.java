@@ -234,7 +234,7 @@ public class MultiWii220 extends MultirotorData {
 			head = read16();
 			break;
 		case MSP_ALTITUDE:
-			alt = ((float) read32() / 100) - AltCorrection;
+			alt = ((float) read32() / 100) ;
 			vario = read16();
 			break;
 		case MSP_ANALOG:
@@ -671,6 +671,12 @@ public class MultiWii220 extends MultirotorData {
 
 	}
 
+	@Override
+	public void ZeroConnection() {
+		timer3 = -1;
+
+	}
+
 	// /////////////////////////////END NEW requests\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	@Override
@@ -804,13 +810,19 @@ public class MultiWii220 extends MultirotorData {
 	@Override
 	public void SendRequestMSP_SET_WP_NAV(WaypointNav w) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void SendRequestMSP_NAV_CONFIG() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void SendRequestMSP(int MSPCommand) {
+		sendRequestMSP(requestMSP(MSPCommand));
+
 	}
 
 }

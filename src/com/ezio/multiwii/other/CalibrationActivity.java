@@ -17,8 +17,10 @@
 package com.ezio.multiwii.other;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
@@ -84,6 +86,8 @@ public class CalibrationActivity extends SherlockActivity {
 		if (!app.mw.multi_Capability.RXBind) {
 			((Button) findViewById(R.id.buttonRXBIND)).setEnabled(false);
 		}
+
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 
 	private void Read() {
@@ -126,11 +130,20 @@ public class CalibrationActivity extends SherlockActivity {
 	}
 
 	public void MagCalibrationOnClick(View v) {
-		app.mw.SendRequestMSP_MAG_CALIBRATION();
+
+		if (app.mw.communication.Connected) {
+			app.mw.SendRequestMSP_MAG_CALIBRATION();
+			ShowCountDown(getString(R.string.MagCalibration), getString(R.string.MagCalibrationDialogInfo), 30);
+		}
+
 	}
 
 	public void AccCalibrationOnClick(View v) {
-		app.mw.SendRequestMSP_ACC_CALIBRATION();
+		if (app.mw.communication.Connected) {
+			app.mw.SendRequestMSP_ACC_CALIBRATION();
+			ShowCountDown(getString(R.string.AccCalibration), getString(R.string.ACCcalibrationDialogInfo), 10);
+		}
+
 	}
 
 	public void RXBINDOnClick(View v) {
@@ -141,6 +154,29 @@ public class CalibrationActivity extends SherlockActivity {
 		app.mw.SendRequestMSP_ENABLE_FRSKY();
 		app.mw.SendRequestMSP_SET_SERIAL_BAUDRATE(9600);
 		app.commMW.Close();
+	}
+
+	private void ShowCountDown(String title, final String message, int time_s) {
+		final ProgressDialog alertDialog = new ProgressDialog(this);
+		alertDialog.setTitle(title);
+		alertDialog.setMessage(message + "(" + "30" + "s)");
+		alertDialog.setMax(time_s);
+		alertDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+		alertDialog.show(); //
+
+		new CountDownTimer(time_s * 1000, 1000) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+				alertDialog.setMessage(message + "(" + String.valueOf((millisUntilFinished / 1000) + "s)"));
+				alertDialog.setProgress((int) (millisUntilFinished / 1000));
+			}
+
+			@Override
+			public void onFinish() {
+				alertDialog.dismiss();
+			}
+		}.start();
 	}
 
 }

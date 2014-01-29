@@ -84,8 +84,7 @@ public class App extends Application implements Sensors.Listener {
 
 	public boolean FollowMeEnable = false;
 	public boolean FollowMeBlinkFlag = false;
-	public boolean InjectGPSEnable = false;
-	public boolean InjectGPSBlinkFlag = false;
+
 	public boolean FollowHeading = false;
 	public boolean FollowHeadingBlinkFlag = false;
 
@@ -152,9 +151,6 @@ public class App extends Application implements Sensors.Listener {
 	private static final String CONNECTONSTART = "CONNECTONSTART";
 	public boolean ConnectOnStart = false;
 
-	private static final String ALTCORRECTION = "ALTCORRECTION";
-	public boolean AltCorrection = false;
-
 	// private static final String ADVANCEDFUNCTIONS = "ADVANCEDFUNCTIONS";
 	public boolean AdvancedFunctions = false;
 
@@ -193,6 +189,9 @@ public class App extends Application implements Sensors.Listener {
 
 	private static final String FRSKY_SUPPORT = "FRSKY_SUPPORT";
 	public boolean FrskySupport = false;
+
+	private static final String NO_DATA_RECEIVED_WARNING = "NO_DATA_RECEIVED_WARNING";
+	public boolean NoDataReceievedWarning = true;
 
 	public boolean VarioSound = false;
 
@@ -325,7 +324,6 @@ public class App extends Application implements Sensors.Listener {
 		MacAddress = prefs.getString(MACADDERSS, "");
 		MacAddressFrsky = prefs.getString(MACADDERSSFRSKY, "");
 		ConnectOnStart = prefs.getBoolean(CONNECTONSTART, false);
-		AltCorrection = prefs.getBoolean(ALTCORRECTION, false);
 		// AdvancedFunctions = prefs.getBoolean(ADVANCEDFINCTIONS, false);
 
 		AdvancedFunctions = (Sec.VerifyDeveloperID(Sec.GetDeviceID(getApplicationContext()), Sec.TestersIDs));
@@ -352,6 +350,7 @@ public class App extends Application implements Sensors.Listener {
 		SerialPortBaudRateFrSky = prefs.getInt(SERIAL_PORT_BAUD_RATE_FRSKY, 9600);
 		// MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 2);
 		FrskySupport = prefs.getBoolean(FRSKY_SUPPORT, false);
+		NoDataReceievedWarning = prefs.getBoolean(NO_DATA_RECEIVED_WARNING, true);
 
 	}
 
@@ -363,14 +362,11 @@ public class App extends Application implements Sensors.Listener {
 		editor.putString(MACADDERSS, MacAddress);
 		editor.putString(MACADDERSSFRSKY, MacAddressFrsky);
 		editor.putBoolean(CONNECTONSTART, ConnectOnStart);
-		editor.putBoolean(ALTCORRECTION, AltCorrection);
-		// editor.putBoolean(ADVANCEDFINCTIONS, AdvancedFunctions);
 		editor.putBoolean(DISABLEBTONEXIT, DisableBTonExit);
 		editor.putString(FORCELANGUAGE, ForceLanguage);
 		editor.putInt(PERIODICSPEAKING, PeriodicSpeaking);
 		editor.putFloat(VOLTAGEALARM, VoltageAlarm);
 		editor.putString(GRAPHSTOSHOW, GraphsToShow);
-		// editor.putBoolean(USEOFFLINEMAPS, UseOfflineMaps);
 		editor.putInt(REFRESHRATE, RefreshRate);
 		editor.putBoolean(COPYFRSKYTOMW, CopyFrskyToMW);
 		editor.putInt(APPSTARTCOUNTER, AppStartCounter);
@@ -380,8 +376,8 @@ public class App extends Application implements Sensors.Listener {
 		editor.putInt(MAPCENTERPERIOD, MapCenterPeriod);
 		editor.putInt(COMMUNICATION_TYPE_MW, CommunicationTypeMW);
 		editor.putInt(SERIAL_PORT_BAUD_RATE_MW, SerialPortBaudRateMW);
-		// editor.putInt(MAINREQUESTMETHOD, MainRequestMethod);
 		editor.putBoolean(FRSKY_SUPPORT, FrskySupport);
+		editor.putBoolean(NO_DATA_RECEIVED_WARNING, NoDataReceievedWarning);
 		editor.commit();
 
 		if (!quiet) {
@@ -442,9 +438,8 @@ public class App extends Application implements Sensors.Listener {
 				tempLastI2CErrorCount = mw.i2cError;
 			}
 
-			if (mw.DataFlow < 0) {
+			if (mw.DataFlow < 0 && NoDataReceievedWarning) {
 				notifications.displayNotification(getString(R.string.Warning), getString(R.string.NoDataRecieved) + " " + String.valueOf(mw.DataFlow), true, 1, false);
-
 			}
 
 			// Checkboxes speaking; ON OFF
@@ -462,14 +457,9 @@ public class App extends Application implements Sensors.Listener {
 
 					if (mw.BoxNames[i].equals("ARM")) {
 						soundManager.playSound(1);
+						mw.ZeroConnection();
 					}
 
-					if (mw.BoxNames[i].equals("ARM") && AltCorrection) {
-						mw.AltCorrection = mw.alt;
-					}
-
-					if (!AltCorrection)
-						mw.AltCorrection = 0;
 				}
 				oldActiveModes[i] = mw.ActiveModes[i];
 			}
@@ -537,10 +527,8 @@ public class App extends Application implements Sensors.Listener {
 				t += getString(R.string.MockLocationIsWorking) + ";";
 			if (FollowMeEnable)
 				t += getString(R.string.Follow_Me) + ";";
-			if (InjectGPSEnable)
-				t += "InjectGPS" + ";";
 			if (FollowHeading)
-				t += getString(R.string.Follow_Heading);
+				t += "Follow Heading";
 
 			notifications.displayNotification("Status", t, false, 99, false);
 
@@ -607,12 +595,6 @@ public class App extends Application implements Sensors.Listener {
 
 			FollowMeBlinkFlag = !FollowMeBlinkFlag;
 		}
-
-		if (InjectGPSEnable) {
-			mw.SendRequestMSP_SET_RAW_GPS((byte) sensors.PhoneFix, (byte) sensors.PhoneNumSat, (int) (sensors.PhoneLatitude * 1e7), (int) (sensors.PhoneLongitude * 1e7), (int) sensors.PhoneAltitude, (int) sensors.PhoneSpeed);
-			InjectGPSBlinkFlag = !InjectGPSBlinkFlag;
-		}
-
 	}
 
 	@Override

@@ -18,15 +18,20 @@ package com.ezio.multiwii.advanced;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.ezio.multiwii.R;
 import com.ezio.multiwii.app.App;
+import com.ezio.multiwii.gps.MOCK_GPS_Service;
 
 public class AdvancedActivity extends Activity {
 
 	App app;
+	CheckBox CheckBoxFollowMe;
+	CheckBox CheckBoxFollowHeading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +39,71 @@ public class AdvancedActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.advanced_layout);
 		app = (App) getApplication();
-		// app.Say(getString(R.string.AdvancedWarning).toLowerCase());
+
+		CheckBoxFollowMe = (CheckBox) findViewById(R.id.checkBoxFollowMe);
+		CheckBoxFollowHeading = (CheckBox) findViewById(R.id.checkBoxFollowHeading);
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		CheckBoxFollowMe.setChecked(app.FollowMeEnable);
+		CheckBoxFollowHeading.setChecked(app.FollowHeading);
+		
+		try {
+			stopService(new Intent(getApplicationContext(), MOCK_GPS_Service.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		app.sensors.startMagACC();
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		app.sensors.stopMagACC();
 	}
 
 	public void ControlOnClick(View v) {
-
 		startActivity(new Intent(getApplicationContext(), ControlActivity.class));
-
 	}
 
 	public void AUXControlOnClick(View v) {
-		// killme = true;
-		// mHandler.removeCallbacksAndMessages(null);
 		startActivity(new Intent(getApplicationContext(), AUXControlActivity.class));
 	}
+
+	public void FollowMeCheckBoxOnClick(View v) {
+		app.FollowMeEnable = CheckBoxFollowMe.isChecked();
+	}
+
+	public void FollowHeadingCheckBoxOnClick(View v) {
+		app.FollowHeading = CheckBoxFollowHeading.isChecked();
+	}
+
+	public void StartMOCKLocationServiceOnClick(View v) {
+		Intent service = new Intent(getApplicationContext(), MOCK_GPS_Service.class);
+		startService(service);
+
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(startMain);
+	}
+
+	// TODO
+	/*
+	 * if (app.FollowMeBlinkFlag) {
+	 * CheckBoxFollowMe.setBackgroundColor(Color.GREEN); } else {
+	 * CheckBoxFollowMe.setBackgroundColor(Color.TRANSPARENT); } if
+	 * (app.InjectGPSBlinkFlag) {
+	 * CheckBoxInjectGPS.setBackgroundColor(Color.GREEN); } else {
+	 * CheckBoxInjectGPS.setBackgroundColor(Color.TRANSPARENT); } if
+	 * (app.FollowHeadingBlinkFlag) {
+	 * CheckBoxFollowHeading.setBackgroundColor(Color.GREEN); } else {
+	 * CheckBoxFollowHeading.setBackgroundColor(Color.TRANSPARENT); }
+	 */
 
 }

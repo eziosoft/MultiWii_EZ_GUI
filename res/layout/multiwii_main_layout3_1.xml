@@ -112,7 +112,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button_yellow"
                         android:onClick="GPSOnClick"
-                        android:text="@string/GPS" />
+                        android:text="@string/GPSInfo" />
 
                     <Button
                         android:id="@+id/button5"
@@ -164,10 +164,6 @@
                     android:layout_margin="5dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:shadowColor="#000"
-                    android:shadowDx="0"
-                    android:shadowDy="8"
-                    android:shadowRadius="3"
                     android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/White" />

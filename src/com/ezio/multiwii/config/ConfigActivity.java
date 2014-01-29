@@ -55,13 +55,14 @@ public class ConfigActivity extends SherlockActivity {
 	TextView MacAddressBTFrskyTV;
 
 	CheckBox CheckBoxTTS;
-	CheckBox CheckBoxAltCorrection;
+
 	CheckBox CheckBoxDisableBTonExit;
 	CheckBox CheckBoxCopyFrskyToMW;
 	CheckBox CheckBoxReverseRollDirection;
 	CheckBox CheckBoxUseFTDISerial;
 	CheckBox CheckBoxFrskySupport;
 	CheckBox CheckBoxBT_New;
+	CheckBox CheckBoxNoDataReceivedWarning;
 
 	RadioButton RadioNotForce;
 	RadioButton RadioForceEnglish;
@@ -117,7 +118,7 @@ public class ConfigActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.copy_config_layout);
+		setContentView(R.layout.config_layout);
 
 		app = (App) getApplication();
 
@@ -135,7 +136,6 @@ public class ConfigActivity extends SherlockActivity {
 		CheckBoxTTS = (CheckBox) findViewById(R.id.checkBoxTTS);
 		MacAddressBTTV = (TextView) findViewById(R.id.textViewMacAddress);
 		MacAddressBTFrskyTV = (TextView) findViewById(R.id.textViewMacAddressFrsky);
-		CheckBoxAltCorrection = (CheckBox) findViewById(R.id.checkBoxAltCorrection);
 		CheckBoxDisableBTonExit = (CheckBox) findViewById(R.id.checkBoxDisableBTonExit);
 		RadioNotForce = (RadioButton) findViewById(R.id.RadioDontForce);
 		RadioForceEnglish = (RadioButton) findViewById(R.id.radioForceEnglish);
@@ -155,6 +155,7 @@ public class ConfigActivity extends SherlockActivity {
 		RadioFTDI = (RadioButton) findViewById(R.id.radioFTDI);
 		RadioOtherChips = (RadioButton) findViewById(R.id.radioOtherChips);
 		CheckBoxBT_New = (CheckBox) findViewById(R.id.CheckBox_BT_New);
+		CheckBoxNoDataReceivedWarning = (CheckBox) findViewById(R.id.checkBoxNoDataReceivedWarning);
 
 		CheckBoxFrskySupport = (CheckBox) findViewById(R.id.checkBoxFrskySupport);
 		CheckBoxFrskySupport.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -226,7 +227,6 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		CheckBoxTTS.setChecked(app.TextToSpeach);
-		CheckBoxAltCorrection.setChecked(app.AltCorrection);
 		CheckBoxDisableBTonExit.setChecked(app.DisableBTonExit);
 		CheckBoxCopyFrskyToMW.setChecked(app.CopyFrskyToMW);
 		CheckBoxReverseRollDirection.setChecked(app.ReverseRoll);
@@ -265,6 +265,8 @@ public class ConfigActivity extends SherlockActivity {
 			CheckBoxBT_New.setChecked(false);
 		}
 
+		CheckBoxNoDataReceivedWarning.setChecked(app.NoDataReceievedWarning);
+
 		app.Say(getString(R.string.Config));
 
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -298,7 +300,6 @@ public class ConfigActivity extends SherlockActivity {
 		}
 
 		app.TextToSpeach = CheckBoxTTS.isChecked();
-		app.AltCorrection = CheckBoxAltCorrection.isChecked();
 		app.DisableBTonExit = CheckBoxDisableBTonExit.isChecked();
 		app.CopyFrskyToMW = CheckBoxCopyFrskyToMW.isChecked();
 		app.ReverseRoll = CheckBoxReverseRollDirection.isChecked();
@@ -341,6 +342,8 @@ public class ConfigActivity extends SherlockActivity {
 		app.SerialPortBaudRateMW = Integer.parseInt(EditTextSerialBaudRateMW.getText().toString());
 
 		app.FrskySupport = CheckBoxFrskySupport.isChecked();
+
+		app.NoDataReceievedWarning = CheckBoxNoDataReceivedWarning.isChecked();
 
 		app.SaveSettings(false);
 
