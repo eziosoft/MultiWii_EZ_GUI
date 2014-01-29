@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ezio.multiwii"
-    android:versionCode="127"
-    android:versionName="3.71" >
+    android:versionCode="128"
+    android:versionName="3.75" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -38,13 +38,12 @@
         </activity>
         <activity
             android:name=".radio.RadioActivity"
-            android:configChanges="orientation|screenSize"
             android:screenOrientation="unspecified" >
         </activity>
         <activity
             android:name=".dashboard.Dashboard1Activity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified" >
         </activity>
         <activity
             android:name=".dashboard.Dashboard2Activity"
@@ -171,11 +170,21 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name="nav.NavActivity"></activity>
-        <activity android:name="nav.WPEditorActivity" android:theme="@android:style/Theme.Dialog"></activity>
-        <activity android:name=".helpers.FilePickerActivity" android:theme="@android:style/Theme.Dialog"></activity>
-        <activity android:name=".about.WizardActivity"></activity>
-        <activity android:name=".dashboard.Dashboard11Activity"></activity>
+
+        <activity android:name="nav.NavActivity" >
+        </activity>
+        <activity
+            android:name="nav.WPEditorActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".helpers.FilePickerActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity android:name=".about.WizardActivity" >
+        </activity>
+        <activity android:name=".dashboard.Dashboard11Activity" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
